@@ -61,6 +61,7 @@ module.exports = function(server) {
             data.asidebarHook = data.asidebarHook.concat(packageObj.bodystructure.asidebarHook);
             data.sidebarHook  = data.sidebarHook.concat(packageObj.bodystructure.sidebarHook);
             data.headerHook  = data.headerHook.concat(packageObj.bodystructure.headerHook);
+            data.footerHook  = data.footerHook.concat(packageObj.bodystructure.footerHook);
           }
         }// if staticFiles..
       }//if activate
@@ -76,6 +77,7 @@ module.exports = function(server) {
     data.description = packageObj.description;
     data.author = packageObj.author;
     data.module = packageObj.angularModuleName;
+    data.version = packageObj.version
     return data;
   };
 
@@ -97,7 +99,8 @@ module.exports = function(server) {
       moduleDependencies:{},
       asidebarHook:[],
       sidebarHook:[],
-      headerHook:[]
+      headerHook:[],
+      footerHook:[]
     };
     data = loadPluginsData(data);
     data = loadAppData(data);

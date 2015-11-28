@@ -1,20 +1,17 @@
 {
-  "name": "login",
+  "name": "footer",
   "version": "1.0.0",
   "main": "backend",
-  "description": "Plugin for adding login functionality",
+  "description": "A plugin for generating footer",
   "author": "Robins Gupta",
   "authorEmail": "robinskumar73@gmail.com",
-  "routeExposure": "/login",
+  "routeExposure": "/footer",
   "staticFiles": {
     "css": {
-        "exampleCss" : "/login/style/login.css"
+      
       },
     "js": {
-      "loginRoute": "/login/scripts/routes/login.js",
-      "loginControl": "/login/scripts/controllers/login.js",
-      "forgotPassControl" : "/login/scripts/controllers/forgotPass.js",
-      "registerControl" : "/login/scripts/controllers/register.js"
+      
     },
     "moduleDependencies":{
 
@@ -24,7 +21,8 @@
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
-    "headerHook": []
+    "headerHook": [],
+    "footerHook":["/footer/views/footer.html"]
   },
   "databases": {
   },

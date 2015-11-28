@@ -190,14 +190,36 @@
 
           </div>
 
+
+          <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix" >
+            <!-- Footer hook -->
+            <% footerHook.forEach(function(footerLink) { %>
+            <!-- Custom Plugins headers.. -->
+            <div snaphy-load-template ng-include="'<%= footerLink %>'"></div>
+            <% }); %>
+          </footer>
+
         </div>
         <!-- END Page Container -->
 
         <!--ONLY load this template if the default template is not needed for-example for login plugin..-->
         <div ui-view ng-if="!templateEnabled()">
-            
+          
         </div>
 
+
+        <footer ng-if="!templateEnabled()">
+          <!-- Footer hook -->
+          <% footerHook.forEach(function(footerLink) { %>
+          <!-- Custom Plugins headers.. -->
+          <div snaphy-load-template ng-include="'<%= footerLink %>'"></div>
+          <% }); %>
+
+          <!-- Login Footer -->
+          <div class="push-10-t text-center animated fadeInUp">
+              <small class="text-muted font-w600"><span class="js-year-copy"></span> &copy; <%= module %> <%= version %> </small>
+          </div>
+        </footer>
 
 
 
