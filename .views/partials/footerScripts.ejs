@@ -1,0 +1,45 @@
+<script>
+  /**
+   * @ngdoc overview
+   * @name templateAdminApp
+   * @description
+   * # templateAdminApp
+   * Main module of the application.
+   */
+  angular
+    .module('<%= module %>', [
+      'ngAnimate',
+      'ngMessages',
+      'ngResource',
+      'ngSanitize',
+      'ui.router'
+
+      /*Adding the runtime modules added from plugins*/
+      <% for (var angularModules in moduleDependencies) {
+        if (moduleDependencies.hasOwnProperty(angularModules)) { %>
+          ,'<%= angularModules %>'
+        <%}
+      }%>
+    ]);
+
+
+
+  //Defining an object for getting the client side global objects...
+  /**
+   * Global object defined to be used in the plugins helper client files..
+   *
+   * */
+  var $snaphy = {
+
+    /**
+     * Return the name of main angularjs module name.
+     */
+    getModuleName : function(){
+      var moduleName = '<%= module %>';
+      return moduleName;
+    },
+    //Set true if default template is to be shown
+    template: true
+  }
+
+</script>

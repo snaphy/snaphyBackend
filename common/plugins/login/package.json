@@ -1,0 +1,40 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "Plugin for adding login functionality",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/login",
+  "staticFiles": {
+    "css": {
+        "exampleCss" : "/login/style/example.css"
+      },
+    "js": {
+      "exampleRoute": "/login/scripts/routes/exampleRoute.js",
+      "exampleController": "/login/scripts/controllers/exampleController.js"
+    },
+    "moduleDependencies":{
+
+    }
+  },
+  "defaultTemplate": "false",
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": []
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+   
+  }
+}

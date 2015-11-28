@@ -1,0 +1,40 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "A plugin for generating the dashboard ",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/dashboard",
+  "staticFiles": {
+    "css": {
+        "exampleCss" : "/dashboard/style/dashboard.css"
+      },
+    "js": {
+      "dashboardRoute": "/dashboard/scripts/routes/dashboard.js",
+      "dashboardController": "/dashboard/scripts/controllers/dashboard.js"
+    },
+    "moduleDependencies":{
+
+    }
+  },
+  "defaultTemplate": "true",
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": ["/dashboard/views/sidebarHook.html"],
+    "headerHook": []
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+   
+  }
+}
