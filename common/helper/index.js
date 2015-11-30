@@ -102,11 +102,22 @@ module.exports = function(server) {
 
       var databaseObj = getDatabase(server, packageObj.databases , pluginName);
       var pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper, packageObj );
+
       if(pluginValue){
         //Now load the corresponding plugins to the memory...
-        server.plugins[packageObj.name] = pluginValue;
-      }
+        /*try{
+          server.plugins[packageObj.name] = pluginValue;
+        }catch (err){
+          //TODO Check why error occurs here in this case..
+          console.error(chalk.red(">> Error: ") + "Error occured while adding plugin value to server variable.");
+        }*/
 
+        if(pluginValue.init){
+          //TODO check whether to show warning when init variable is not present inside the plugins.
+          //Now initialize the plugins..
+          pluginValue.init();
+        }
+      }//if pluginValue
     }
   }
 
@@ -115,7 +126,8 @@ module.exports = function(server) {
 
 
   //This function is called on function load.
-  var loadPlugins = function(){
+  //Initialize all the plugins and add it to the memory..
+  var initPlugins = function(){
     console.log("Loading this plugin");
     var pluginContainerPath = MAIN_PLUGIN_FOLDER;
     var pluginList = getDirectories(pluginContainerPath);
@@ -126,12 +138,29 @@ module.exports = function(server) {
   };
 
 
+  //Require by plugins..
+  //Act as a require for plugins..
+  var loadPlugin = function(pluginName){
+    var pluginValue = {};
+    var pluginPath = MAIN_PLUGIN_FOLDER + '/' + pluginName +  '/package.json';
+    var packageObj = readPackageJsonFile(pluginPath);
+    if( packageObj.activate ){
+      var databaseObj = getDatabase(server, packageObj.databases , pluginName);
+      pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper, packageObj );
+    }
+    return pluginValue;
+  };//loadPlugin
+
+
+
   //TODO ADD ALL THE REQUIRED METHOD TO HELPERS VARIABLE OBJ.
   helper =  {
-    loadPlugins: loadPlugins,
+    initPlugins: initPlugins,
     readPackageJsonFile: readPackageJsonFile,
     getDirectories: getDirectories,
-    getServerPath: getServerPath
+    getServerPath: getServerPath,
+    loadPlugin: loadPlugin
+
   };
 
   return helper;

@@ -20,7 +20,7 @@ boot(app, __dirname, function(err) {
 	if (err) throw err;
   //Now load the PLUGINS..
   var helper = require(__dirname + '/../common/helper')(app);
-  helper.loadPlugins();
+  helper.initPlugins();
 
 	// start the server if `$ node server.js`
 	if (require.main === module)
