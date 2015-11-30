@@ -2,11 +2,9 @@
   "name": "login",
   "version": "1.0.0",
   "dependencies": {
-  
+    "angular-permission": "~1.1.1"
   },
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "appPath": "client",
   "moduleName": "login"
 }

@@ -101,7 +101,7 @@ module.exports = function(server) {
 
 
       var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      var pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper );
+      var pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper, packageObj );
       if(pluginValue){
         //Now load the corresponding plugins to the memory...
         server.plugins[packageObj.name] = pluginValue;

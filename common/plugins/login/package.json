@@ -8,16 +8,16 @@
   "routeExposure": "/login",
   "staticFiles": {
     "css": {
-        "exampleCss" : "/login/style/login.css"
-      },
+      "exampleCss": "/login/style/login.css"
+    },
     "js": {
       "loginRoute": "/login/scripts/routes/login.js",
       "loginControl": "/login/scripts/controllers/login.js",
-      "forgotPassControl" : "/login/scripts/controllers/forgotPass.js",
-      "registerControl" : "/login/scripts/controllers/register.js"
+      "forgotPassControl": "/login/scripts/controllers/forgotPass.js",
+      "registerControl": "/login/scripts/controllers/register.js"
     },
-    "moduleDependencies":{
-
+    "moduleDependencies": {
+      "permission": "/login/style/bower_components/angular-permission/dist/angular-permission.js"
     }
   },
   "defaultTemplate": "false",
@@ -27,16 +27,25 @@
     "headerHook": []
   },
   "databases": {
+    "User": "Employee"
   },
+  "adminUserModel":[
+    {
+      "username":"RobinsGupta", "email":"robinskumar73@gmail.com", "password":"12345"
+    },
+    {
+      "username":"RaviGupta", "email":"ravigupta9363@gmail.com", "password":"12345"
+    }
+  ],
   "activate": true,
   "services": {},
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^0.8.5"
+  },
   "optionalDependencies": {},
   "repository": {
     "type": "",
     "url": ""
   },
-  "devDependencies": {
-   
-  }
+  "devDependencies": {}
 }
