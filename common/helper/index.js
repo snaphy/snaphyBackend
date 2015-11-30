@@ -160,7 +160,6 @@ module.exports = function(server) {
     getDirectories: getDirectories,
     getServerPath: getServerPath,
     loadPlugin: loadPlugin
-
   };
 
   return helper;
