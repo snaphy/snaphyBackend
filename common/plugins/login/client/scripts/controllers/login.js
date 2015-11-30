@@ -3,11 +3,11 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for loginControl ..
-.controller('loginControl', ['$scope', '$stateParams',
-    function($scope, $stateParams) {
+.controller('loginControl', ['$scope', '$stateParams','Database',
+    function($scope, $stateParams, Database) {
         //Controller defined here..
-         
-        	$snaphy.template = false;
+        $snaphy.template = false;
+
         
 
     }//controller function..

@@ -1,0 +1,45 @@
+/*Adding the runtime modules added from plugins*/
+<%
+    //Initialize i to check the loop.
+    var i=0;
+    for (var pluginName in databaseObj) {
+        if (databaseObj.hasOwnProperty(pluginName)) {
+            var db = databaseObj[pluginName];
+            var j=0;
+            if(i===0){
+%>
+                '<%= pluginName %>' : {
+                <% for (var databaseName in db) {
+                    if(j===0){%>
+                        '<%= databaseName %>' : '<%= db[databaseName] %>'
+                    <%}else{%>
+                        ,'<%= databaseName %>' : '<%= db[databaseName] %>'
+                    <%
+                    }//else
+                    j++;
+                } //for
+                %>
+                }
+            <%}//if
+            else{ %>
+                ,'<%= pluginName %>' : {
+                <% for (var databaseName in db) {
+                    if(j===0){%>
+                        '<%= databaseName %>' : '<%= db[databaseName] %>'
+                    <%}else{%>
+                        ,'<%= databaseName %>' : '<%= db[databaseName] %>'
+                    <%
+                    }
+                    j++;
+                } //for
+                %>
+                }
+
+            <%
+            }//else
+            %>
+        <%
+        i++;
+        }//if
+    }//for
+ %>

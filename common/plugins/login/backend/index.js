@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function( server, databaseObj, helper, packageObj) {
 
-    var adminUserModel = packageObj.adminUserModel;
+    var adminUserModel = packageObj.adminUser;
     var User = databaseObj.User;
     var Role = server.models.Role;
     var RoleMapping = server.models.RoleMapping;
@@ -40,6 +40,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
 
+
+    //TODO ADD GUEST AND CUSTOMER ROLE RESOLVER AND PROVIDE IT FOR CUSTOMER.
     //Method for resolving staff role by user..
     var addStaffResolver = function(){
         //Now registering an dynamic role for the user..
@@ -134,7 +136,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         init: init,
         hideRestMethods: hideRestMethods,
         addUserAdmin: addUserAdmin
-    }
+    };
 
 
 

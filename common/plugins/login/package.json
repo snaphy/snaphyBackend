@@ -29,7 +29,7 @@
   "databases": {
     "User": "Employee"
   },
-  "adminUserModel":[
+  "adminUser":[
     {
       "username":"RobinsGupta", "email":"robinskumar73@gmail.com", "password":"12345"
     },

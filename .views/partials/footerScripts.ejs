@@ -1,12 +1,12 @@
 <script>
-  /**
-   * @ngdoc overview
-   * @name templateAdminApp
-   * @description
-   * # templateAdminApp
-   * Main module of the application.
-   */
-  angular
+    /**
+    * @ngdoc overview
+    * @name templateAdminApp
+    * @description
+    * # templateAdminApp
+    * Main module of the application.
+    */
+    angular
     .module('<%= module %>', [
       'ngAnimate',
       'ngMessages',
@@ -24,22 +24,49 @@
 
 
 
-  //Defining an object for getting the client side global objects...
-  /**
-   * Global object defined to be used in the plugins helper client files..
-   *
-   * */
-  var $snaphy = {
+    //Defining an object for getting the client side global objects...
+    var $snaphy = {
+        /**
+         * Return the name of main Angularjs module name.
+         */
+        getModuleName : function(){
+            var moduleName = '<%= module %>';
+            return moduleName;
+        },
+        //Set true if default template is to be shown
+        template: true
+    };
 
-    /**
-     * Return the name of main angularjs module name.
-     */
-    getModuleName : function(){
-      var moduleName = '<%= module %>';
-      return moduleName;
-    },
-    //Set true if default template is to be shown
-    template: true
-  }
+    angular.module($snaphy.getModuleName())
+    //Define a service for fetching database..
+    .factory('Database', ['$injector', function($injector){
+        //Contain plugin name with the database object..
+        /**
+         * Object in the format of {pluginName: {DatabaseName: databaseRealMapName} }
+         * */
+        var mapDatabase = {
+            <% include ./mapDatabase %>
+        }; //mapDatabase
+
+
+
+
+        /**
+         * Get the defined database and returns the map database service.
+         * @param pluginName
+         * @param databaseName
+         * @returns {*} return the database REST defined service object.
+         */
+        var getDatabase = function(pluginName, databaseName){
+            var pluginObj = mapDatabase[pluginName];
+            var service = pluginObj[databaseName];
+            return $injector.get(service);
+        };
+
+        return{
+            getDb: getDatabase
+        };
+    }]);//factory database..
+
 
 </script>

@@ -38,22 +38,16 @@ module.exports = function(server) {
         if(packageObj.staticFiles) {
           if (packageObj.staticFiles.css) {
             data.pluginStyles = concatObject(packageObj.staticFiles.css, data.pluginStyles);
-            //OLD METHOD
-            //data.pluginStyles = data.pluginStyles.concat(packageObj.staticFiles.css);
           }
 
           if (packageObj.staticFiles.js) {
             data.pluginScripts = concatObject(packageObj.staticFiles.js, data.pluginScripts);
-            //OLD METHOD
-            //data.pluginScripts = data.pluginScripts.concat(packageObj.staticFiles.js);
           }
 
         
           //Load module dependencies..
           if(packageObj.staticFiles.moduleDependencies){
             data.moduleDependencies = concatObject(packageObj.staticFiles.moduleDependencies, data.moduleDependencies);
-            //OLD Method
-            //data.moduleDependencies = data.moduleDependencies.concat(packageObj.moduleDependencies);
           }
 
           //Now getting the html templates...hooks..
@@ -64,11 +58,30 @@ module.exports = function(server) {
             data.footerHook  = data.footerHook.concat(packageObj.bodystructure.footerHook);
           }
         }// if staticFiles..
+        //If databases is not undefined.
+        if(packageObj.databases){
+          data.databaseObj = getDatabaseObjFormat(packageObj.name, packageObj.databases, data.databaseObj);
+        }
       }//if activate
 
     }//for loop
     return data;
   };
+
+
+  /**
+   * Format the database object
+   * {                                          {
+   *   databases: {                                pluginName: {databaseName: databaseMappedName}
+   *     databaseName: DatabaseMappedName   ==>
+   *   }                                        }
+   * }
+   */
+  var getDatabaseObjFormat = function(pluginName, oldDatabaseObj, targetObjDatabase){
+      targetObjDatabase[pluginName] = oldDatabaseObj;
+      return targetObjDatabase;
+  };
+
 
   //Loads the title, desc of the app given in the package.json file.
   var loadAppData = function(data){
@@ -77,7 +90,7 @@ module.exports = function(server) {
     data.description = packageObj.description;
     data.author = packageObj.author;
     data.module = packageObj.angularModuleName;
-    data.version = packageObj.version
+    data.version = packageObj.version;
     return data;
   };
 
@@ -100,7 +113,9 @@ module.exports = function(server) {
       asidebarHook:[],
       sidebarHook:[],
       headerHook:[],
-      footerHook:[]
+      footerHook:[],
+      //For mapping the defined database in the plugins..
+      databaseObj:{}
     };
     data = loadPluginsData(data);
     data = loadAppData(data);
