@@ -55,6 +55,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     //Now registering an dynamic role for the user..
     //All user of the employee model  belong to the staff role.
+    /**
+     * Default User  ACLs.
+        DENY EVERYONE *
+        ALLOW admin create
+        ALLOW OWNER deleteById
+        ALLOW EVERYONE login
+        ALLOW EVERYONE logout
+        ALLOW staff findById
+        ALLOW OWNER updateAttributes
+
+    */
     Role.registerResolver('staff', function(role, context, cb) {
         function reject(err) {
             if(err) {
@@ -74,6 +85,33 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         //TODO Add further checks to check if the given user is employee or not.
 
     });
+
+
+    //Hiding all the rest endpoints except login/logout/create
+    //TODO CREATE A METHOD FOR EXPOSING THESE METHODS FROM package.json
+    //User.disableRemoteMethod("create", true);
+    //User.disableRemoteMethod("upsert", true);
+    User.disableRemoteMethod("updateAll", true);
+    User.disableRemoteMethod("updateAttributes", false);
+
+    User.disableRemoteMethod("find", true);
+    //User.disableRemoteMethod("findById", true);
+    //User.disableRemoteMethod("findOne", true);
+
+    User.disableRemoteMethod("deleteById", true);
+
+    User.disableRemoteMethod("confirm", true);
+    User.disableRemoteMethod("count", true);
+    User.disableRemoteMethod("exists", true);
+    //User.disableRemoteMethod("resetPassword", true);
+
+    User.disableRemoteMethod('__count__accessTokens', false);
+    User.disableRemoteMethod('__create__accessTokens', false);
+    User.disableRemoteMethod('__delete__accessTokens', false);
+    User.disableRemoteMethod('__destroyById__accessTokens', false);
+    User.disableRemoteMethod('__findById__accessTokens', false);
+    User.disableRemoteMethod('__get__accessTokens', false);
+    User.disableRemoteMethod('__updateById__accessTokens', false);
 
 
 }
