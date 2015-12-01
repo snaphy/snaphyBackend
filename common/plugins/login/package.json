@@ -11,8 +11,9 @@
       "exampleCss": "/login/style/login.css"
     },
     "js": {
-      "loginRoute": "/login/scripts/routes/login.js",
+      "Route": "/login/scripts/routes/login.js",
       "loginControl": "/login/scripts/controllers/login.js",
+      "loginService": "/login/scripts/services/login.js",
       "forgotPassControl": "/login/scripts/controllers/forgotPass.js",
       "registerControl": "/login/scripts/controllers/register.js"
     },
@@ -39,9 +40,7 @@
   ],
   "activate": true,
   "services": {},
-  "dependencies": {
-    "bcrypt": "^0.8.5"
-  },
+  "dependencies": {},
   "optionalDependencies": {},
   "repository": {
     "type": "",

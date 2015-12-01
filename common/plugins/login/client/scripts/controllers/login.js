@@ -1,13 +1,12 @@
 'use strict';
+/*global angular, $snaphy, $scope, $stateParams */
 
 angular.module($snaphy.getModuleName())
-
-//Controller for loginControl ..
-.controller('loginControl', ['$scope', '$stateParams','Database',
-    function($scope, $stateParams, Database) {
+.controller('loginControl', ['$scope', 'Database',
+    function($scope, Database) {
         //Controller defined here..
         $snaphy.template = false;
-
+        var userService = Database.getDb('login', 'User');
         
 
     }//controller function..

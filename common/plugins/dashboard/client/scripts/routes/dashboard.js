@@ -6,14 +6,19 @@ angular.module($snaphy.getModuleName())
   .config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     function ($locationProvider, $stateProvider, $urlRouterProvider) {
       $locationProvider.html5Mode(false);
-      $urlRouterProvider.otherwise('/');
 
       $stateProvider
         //Provide routes in this way..
         .state('dashboard', {
           url: '/',
           templateUrl: '/dashboard/views/dashboard.html',
-          controller: 'dashboardControl'
+          controller: 'dashboardControl',
+            data: {
+                permissions: {
+                    only: ['employee', 'admin'],
+                    redirectTo: 'login'
+                }
+            }
         });
 
     }]); //config

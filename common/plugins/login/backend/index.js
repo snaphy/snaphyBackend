@@ -1,20 +1,27 @@
 'use strict';
 module.exports = function( server, databaseObj, helper, packageObj) {
 
-    var adminUserModel = packageObj.adminUser;
-    var User = databaseObj.User;
-    var Role = server.models.Role;
-    var RoleMapping = server.models.RoleMapping;
+    var adminUserModel = packageObj.adminUser,
+    User = databaseObj.User,
+    Role = server.models.Role,
+    RoleMapping = server.models.RoleMapping,
 
     //Create an init method to be executed when the plugin get run for the first time..in memory..
-    var init = function(){
+    init = function(){
+        var i;
+        //Adding admin property in the model.
+        for(i = 0; i<adminUserModel.length; i++){
+            var adminUser = adminUserModel[i];
+            //Adding admin = true for all the given user.
+            adminUser.admin = true;
+        }
+
         /**
          * Permission levels
          * ADMIN -> STATIC ROLE DECLARATION.
          * STAFF -> DYNAMIC ROLE DECLARATION.
          */
-
-            //Now adding user to the method..
+        //Now adding user to the method..
         User.create(adminUserModel, function(err, users){
             if(err) throw err;
             var i;
@@ -32,18 +39,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             });
         });
 
+
         //TODO MODIFY THIS METHOD TO PROVIDE RUNTIME ACCESS AND MODIFICATION TO USER.
         addStaffResolver();
-    }; //Init..
-
-
+    }, //Init..
 
 
 
 
     //TODO ADD GUEST AND CUSTOMER ROLE RESOLVER AND PROVIDE IT FOR CUSTOMER.
     //Method for resolving staff role by user..
-    var addStaffResolver = function(){
+    addStaffResolver = function(){
         //Now registering an dynamic role for the user..
         //All user of the employee model  belong to the staff role.
         /**
@@ -77,7 +83,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
         });
 
-    };
+    },
 
 
 
@@ -86,7 +92,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param adminRoleInstance
      * @param userInstanceId
      */
-    var addUserAdmin = function(adminRoleInstance, userInstanceId ){
+    addUserAdmin = function(adminRoleInstance, userInstanceId ){
         //make users an admin
         adminRoleInstance.principals.create({
             principalType: RoleMapping.USER,
@@ -95,14 +101,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             if (err) throw err;
             console.log('Created principal:', principal);
         });
-    };
+    },
 
 
 
 
 
     //TODO MODIFY THIS METHOD TO CHANGE IT FROM THIS FUNCTION DYNAMICALLY
-    var hideRestMethods = function(){
+    hideRestMethods = function(){
         //Hiding all the rest endpoints except login/logout/create
 
         //User.disableRemoteMethod("create", true);
@@ -116,9 +122,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
         User.disableRemoteMethod("deleteById", true);
 
-        User.disableRemoteMethod("confirm", true);
+        //User.disableRemoteMethod("confirm", true);
         User.disableRemoteMethod("count", true);
-        User.disableRemoteMethod("exists", true);
+        //User.disableRemoteMethod("exists", true);
         //User.disableRemoteMethod("resetPassword", true);
 
         User.disableRemoteMethod('__count__accessTokens', false);
