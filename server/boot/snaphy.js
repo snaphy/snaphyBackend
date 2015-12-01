@@ -7,7 +7,7 @@ module.exports = function(server) {
 
 
   //Now setting up the static files..
-  server.use('/static', loopback.static(__dirname + '/../../.views/static'));
+  server.use(config.adminApiRoot + '/static', loopback.static(__dirname + '/../../.views/static'));
   // set the view engine to ejs
   server.set('view engine', 'ejs');
 
@@ -22,7 +22,7 @@ module.exports = function(server) {
         }
     }
     return containerObj;
-  }
+  };
 
   //Load the required plugins script and styles in the memory..
   var loadPluginsData = function(data){
@@ -99,8 +99,11 @@ module.exports = function(server) {
   server.set('views', __dirname + '/../../.views');
 
 
+  var apiRoot = config.adminApiRoot === '/' ? '/static' : config.adminApiRoot + '/static';
+
+
   //Now render the index page..
-  // index page
+  //index page
   server.get(config.adminApiRoot, function(req, res) {
     //Read the main package file..
     var data = {
@@ -115,7 +118,8 @@ module.exports = function(server) {
       headerHook:[],
       footerHook:[],
       //For mapping the defined database in the plugins..
-      databaseObj:{}
+      databaseObj:{},
+      staticRoute: apiRoot
     };
     data = loadPluginsData(data);
     data = loadAppData(data);
@@ -124,6 +128,7 @@ module.exports = function(server) {
     res.render('index', data);
 
   });
+
  server.once('started', function() {
     console.log("Explore admin console at " + chalk.cyan("http://" +  config.host + ':' + config.port + config.adminApiRoot));
   });

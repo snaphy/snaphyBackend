@@ -26,6 +26,7 @@ angular.module($snaphy.getModuleName())
                     //Store path info to Redirect back to it...
                     //$location.nextAfterLogin = globalServices.getNextAfterLoginPath();
                 } else {
+                    //Will send an 401  error..already..
                     getLoggedDetails(success, error);
                 }
 

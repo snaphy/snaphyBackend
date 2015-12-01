@@ -16,7 +16,7 @@ angular.module($snaphy.getModuleName())
                 console.log('Welcome authenticated successfully\n');
                 deferred.resolve();
             },function(){
-                console.log('Faliure getting authorization');
+                console.log('Faliure getting authorization in Employee role resolve');
                 deferred.reject();
             });
             return deferred.promise;
@@ -65,7 +65,7 @@ angular.module($snaphy.getModuleName())
                 //Only allow anonym users here
                 data: {
                     permissions: {
-                        except: ['employee', 'admin'],
+                        except: ['employee'],
                         redirectTo: '/'
                     }
                 }
@@ -80,7 +80,7 @@ angular.module($snaphy.getModuleName())
                 //Only allow anonym users here
                 data: {
                     permissions: {
-                        except: ['employee', 'admin'],
+                        except: ['employee'],
                         redirectTo: '/'
                     }
                 }
@@ -95,7 +95,7 @@ angular.module($snaphy.getModuleName())
                 //Only allow anonym users here
                 data: {
                     permissions: {
-                        except: ['employee', 'admin'],
+                        except: ['employee'],
                         redirectTo: '/'
                     }
                 }

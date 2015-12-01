@@ -11,12 +11,13 @@ angular.module($snaphy.getModuleName())
         $scope.credentials = {};
 
         $scope.login = function(credentials){
+            console.log(credentials);
             //Now login to the employee ..
             UserService.login($scope.credentials, function(values){
-                console.log("Loggenin Redirecting");
+                console.log(values);
                 //Redirect to dashboard otherwise..
                 var redirect = $location.nextAfterLogin || '/';
-                console.log()
+                console.log(redirect);
                 $location.path(redirect);
                 console.log("Successfully Logged in.");
             },function(respHeader){
