@@ -1,0 +1,38 @@
+{
+  "name": "JqueryValidate",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "Jquery-Validation to check validation ",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/jqueryValidate",
+  "staticFiles": {
+    "css": {},
+    "js": {
+        "jqueryValidation": "/jqueryValidate/style/bower_components/jquery-validation/dist/jquery.validate.min.js",
+        "validateDirectives": "/jqueryValidate/scripts/validateDirectives.js",
+        "validateServices": "/jqueryValidate/scripts/validateServices.js"
+    },
+    "moduleDependencies":{},
+    "settings": "/jqueryValidate/settings.js"
+  },
+  "defaultTemplate": "false",
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  },
+  "databases": {},
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+   
+  }
+}
