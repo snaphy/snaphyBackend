@@ -12,4 +12,4 @@ angular.module($snaphy.getModuleName())
 
         }
       };
-    }])
+    }]);

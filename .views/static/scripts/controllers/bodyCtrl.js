@@ -13,8 +13,8 @@ angular.module($snaphy.getModuleName())
     $scope.defaultTemplate = true;
 
     $scope.templateEnabled = function(){
-    	$scope.defaultTemplate = $window.$snaphy.template;
-    	return $scope.defaultTemplate ;
+    	$scope.defaultTemplate = $window.$snaphy.getDefaultTemplate();
+    	return $scope.defaultTemplate;
     }
 
   }]); //controller..

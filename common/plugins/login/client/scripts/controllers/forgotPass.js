@@ -6,6 +6,6 @@ angular.module($snaphy.getModuleName())
 .controller('forgotPassControl', ['$scope', '$stateParams', 'Database',
     function($scope, $stateParams, Database) {
         //Controller defined here..
-        $snaphy.template = false;
+        $snaphy.setDefaultTemplate(false);
     }//controller function..
 ]);

@@ -23,19 +23,69 @@
     ]);
 
 
+    //Defining a gloabl protected method for client side global objects and settings...
+    var $snaphy = function(){
 
-    //Defining an object for getting the client side global objects...
-    var $snaphy = {
+        var moduleName = '<%= module %>',
+        //Global objects for adding settings..
+        pluginSettings = {},
+
+        //Set true if default template is to be shown
+        template = true,
+
         /**
          * Return the name of main Angularjs module name.
          */
-        getModuleName : function(){
-            var moduleName = '<%= module %>';
+        getModuleName  = function(){
             return moduleName;
+        }
+
+        getDefaultTemplate = function(){
+            return template;
         },
-        //Set true if default template is to be shown
-        template: true
-    };
+
+        //Set the default template value..
+        setDefaultTemplate = function(templateValue){
+            template = templateValue;
+        },
+
+        //Add settings file..
+        addSettings = function(pluginName, settingsObj){
+            pluginSettings[pluginName] = settingsObj;
+        },
+
+        //For loading the whole plugin settings..
+        loadSettings = function(pluginName, propName){
+            if(arguments.length === 1){
+                //Return the whole plugin setting in this case..
+                return pluginSettings[pluginName];
+            }
+            else if(arguments.length === 2){
+                var pluginObj = pluginSettings[pluginName];
+                return pluginObj[propName];
+            }
+            else{
+                /*Do nothing*/
+                return null;
+            }
+
+        };
+
+
+        //Now exposing the required methods only..
+        return {
+            getModuleName: getModuleName,
+            getDefaultTemplate: getDefaultTemplate,
+            setDefaultTemplate: setDefaultTemplate,
+            addSettings: addSettings,
+            loadSettings : loadSettings
+        }
+
+    }//$snaphy function..
+
+    //Now set the value of the $snaphy..
+    $snaphy = $snaphy();
+
 
     angular.module($snaphy.getModuleName())
     //Define a service for fetching database..

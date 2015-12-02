@@ -5,7 +5,7 @@ angular.module($snaphy.getModuleName())
 .controller('loginControl', ['$scope', 'Database', '$location', 'LoginServices', '$injector',
     function($scope, Database, $location, LoginServices, $injector) {
         //Controller defined here..
-        $snaphy.template = false;
+        $snaphy.setDefaultTemplate(false);
         var UserService = Database.getDb('login', 'User');
         $scope.credentials = {};
 
@@ -26,8 +26,6 @@ angular.module($snaphy.getModuleName())
                 console.error("Error getting logged in.");
             });
         };
-
-        
 
     }//controller function..
 ]);
