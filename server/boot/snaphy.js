@@ -50,6 +50,11 @@ module.exports = function(server) {
             data.moduleDependencies = concatObject(packageObj.staticFiles.moduleDependencies, data.moduleDependencies);
           }
 
+          //Load plugin settings file....
+          if(packageObj.staticFiles.settings){
+            data.clientSettings = data.clientSettings.concat(packageObj.staticFiles.settings);
+          }
+
           //Now getting the html templates...hooks..
           if(packageObj.defaultTemplate && packageObj.bodystructure){
             data.asidebarHook = data.asidebarHook.concat(packageObj.bodystructure.asidebarHook);
@@ -58,6 +63,7 @@ module.exports = function(server) {
             data.footerHook  = data.footerHook.concat(packageObj.bodystructure.footerHook);
           }
         }// if staticFiles..
+
         //If databases is not undefined.
         if(packageObj.databases){
           data.databaseObj = getDatabaseObjFormat(packageObj.name, packageObj.databases, data.databaseObj);
@@ -119,7 +125,8 @@ module.exports = function(server) {
       footerHook:[],
       //For mapping the defined database in the plugins..
       databaseObj:{},
-      staticRoute: apiRoot
+      staticRoute: apiRoot,
+      clientSettings: []
     };
     data = loadPluginsData(data);
     data = loadAppData(data);

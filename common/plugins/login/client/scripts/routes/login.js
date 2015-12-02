@@ -6,7 +6,7 @@
  * JUST CHANGE THIS REDIRECT TO CHANGE THE DEFAULT REDIRECT.
  * @type {string}
  */
-var redirectOtherWise = 'dashboard';
+var redirectOtherWise = $snaphy.loadSettings('login', 'onLoginRedirectState');
 
 angular.module($snaphy.getModuleName())
 
@@ -27,7 +27,6 @@ angular.module($snaphy.getModuleName())
             });
             return deferred.promise;
         }); // END Permission
-
 
         //TODO Add admin role later..
 

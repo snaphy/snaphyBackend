@@ -225,6 +225,8 @@
         <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
         <script src="<%= staticRoute %>/assets/js/oneui.min.js"></script>
 
+
+
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
         <script src="<%= staticRoute %>/bower_components/angular/angular.js"></script>
@@ -240,7 +242,13 @@
 		      if (moduleDependencies.hasOwnProperty(angularModules)) { %>
 		        <script src="<%= moduleDependencies[angularModules] %>"></script>
 		      <%}
-		    }%>
+        }%>
+
+
+        <!--ADDING THE SETTINGS FILE.-->
+        <% clientSettings.forEach(function(settings) { %>
+            <script src="<%= settings %>"></script>
+        <% }); %>
 
         <!--Including the global script file. All global scripts file are defined in this file.-->
         <% include ./partials/footerScripts %>

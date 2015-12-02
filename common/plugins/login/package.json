@@ -19,7 +19,8 @@
     },
     "moduleDependencies": {
       "permission": "/login/style/bower_components/angular-permission/dist/angular-permission.js"
-    }
+    },
+    "settings": "/login/settings.js"
   },
   "defaultTemplate": "false",
   "bodystructure": {
