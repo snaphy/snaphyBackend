@@ -11,11 +11,11 @@
       "exampleCss": "/login/style/login.css"
     },
     "js": {
-      "Route": "/login/scripts/routes/login.js",
       "loginControl": "/login/scripts/controllers/login.js",
       "loginService": "/login/scripts/services/login.js",
       "forgotPassControl": "/login/scripts/controllers/forgotPass.js",
-      "registerControl": "/login/scripts/controllers/register.js"
+      "registerControl": "/login/scripts/controllers/register.js",
+      "Route": "/login/scripts/routes/login.js"
     },
     "moduleDependencies": {
       "permission": "/login/style/bower_components/angular-permission/dist/angular-permission.js"

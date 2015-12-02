@@ -1,12 +1,15 @@
 'use strict';
 /*jslint browser: true*/
-/*global $, jQuery, angular, $snaphy*/
+/*global $, jQuery, angular, $snaphy , redirectOtherWise*/
 
 angular.module($snaphy.getModuleName())
 //Define your services here..
     //Service for implementing login related functionality..
     .factory('LoginServices', ['Database', '$location', 'LoopBackAuth',
         function(Database, $location, LoopBackAuth) {
+            //Set redirect otherwise state name..
+            //First use the value from the route/login global routeOtherWise value ....
+            var redirectOtherWise_ = redirectOtherWise || 'dashboard';
 
             //get the user service..
             var UserService = Database.getDb('login', 'User'),
@@ -23,11 +26,11 @@ angular.module($snaphy.getModuleName())
                     //Calling the promise error..
                     $location.nextAfterLogin = $location.path();
                     error();
-                    //Store path info to Redirect back to it...
-                    //$location.nextAfterLogin = globalServices.getNextAfterLoginPath();
                 } else {
+                    success();
+                    console.log("Checking for logged confirmation.");
                     //Will send an 401  error..already..
-                    getLoggedDetails(success, error);
+                    getLoggedDetails();
                 }
 
             };
@@ -38,9 +41,16 @@ angular.module($snaphy.getModuleName())
              * @param success
              * @param error
              */
-            var getLoggedDetails = function(success, error) {
-                UserService.getCurrent(success, error);
+            var getLoggedDetails = function() {
+                UserService.getCurrent(function(user){
+                    //Adding user detail to userService..
+                    userDetail = user;
+                }, function(){
+                    console.error("401 error occured. User login expired!");
+                });
             };
+
+
 
             /**
              * For logging out
@@ -50,7 +60,7 @@ angular.module($snaphy.getModuleName())
                     //Successs
                     function() {
                         //Now redirect to login page..
-                        $location.path('/login');
+                        $location.path('login');
                     },
 
                     //Error..
@@ -65,7 +75,8 @@ angular.module($snaphy.getModuleName())
                 authenticatePage: authenticatePage,
                 getLoggedDetails: getLoggedDetails,
                 logout: logout,
-                userDetail: userDetail
+                userDetail: userDetail,
+                redirectOtherWise: redirectOtherWise_
             };
         }//LoginServices
     ]);
