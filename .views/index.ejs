@@ -244,19 +244,14 @@
 		      <%}
         }%>
 
-
-        <!--ADDING THE SETTINGS FILE.-->
-        <% clientSettings.forEach(function(settings) { %>
-            <script src="<%= settings %>"></script>
-        <% }); %>
-
         <!--Including the global script file. All global scripts file are defined in this file.-->
         <% include ./partials/footerScripts %>
 
-
-        <!--Now include the SETTINGS.JS file in the html file.-->
-
-
+        <!--Always put it below the footer script insertion-->
+        <!--ADDING THE SETTINGS FILE.-->
+        <% clientSettings.forEach(function(settings) { %>
+        <script src="<%= settings %>"></script>
+        <% }); %>
 
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
