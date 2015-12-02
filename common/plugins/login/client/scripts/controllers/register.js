@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module($snaphy().getModuleName())
+angular.module($snaphy.getModuleName())
 
 //Controller for registerControl ..
 .controller('registerControl', ['$scope', '$stateParams',
