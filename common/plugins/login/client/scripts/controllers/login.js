@@ -8,6 +8,9 @@ angular.module($snaphy.getModuleName())
         //Adding title and name..
         $scope.name = $snaphy.loadSettings('login', 'loginName');
         $scope.title = $snaphy.loadSettings('login', 'loginTitle');
+        $scope.loginState        = $snaphy.loadSettings('login', "loginState");
+        $scope.registerState     = $snaphy.loadSettings('login', "registerState");
+        $scope.forgotPassState   = $snaphy.loadSettings('login', "forgotPassState");
 
         //Controller defined here..
         $snaphy.setDefaultTemplate(false);
@@ -25,7 +28,7 @@ angular.module($snaphy.getModuleName())
                     LoginServices.addUserDetail(userDetail.user);
                     //If redirected from 401 error..
                     if($location.nextAfterLogin){
-                        $location.path('/');
+                        $location.path($location.nextAfterLogin);
                         $location.nextAfterLogin = null;
                     }else{
                         var $state = $injector.get('$state');

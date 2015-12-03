@@ -9,9 +9,14 @@ var settings = {
     "loginName": "Snaphy",
     "loginTitle": "Welcome, please login.",
     "registerTitle":"Please fill the following details to create an employee.",
+    "forgotPasswordTitle": "Please provide your account’s email and we will send you your password.",
     "onLoginRedirectState": 'dashboard',
     "403ErrorRouteState": "403Error",
-    "apiRootBase" : "/api"
+    "loginState": "login",
+    "registerState": "register",
+    "forgotPassState": "forgotPass",
+    "adminRole": 'admin',
+    "employeeRole": "employee"
 };
 
 

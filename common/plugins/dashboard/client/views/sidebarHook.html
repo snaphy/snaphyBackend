@@ -1,17 +1,5 @@
-<ul class="nav-main">
+<ul snaphy-load-template ng-controller="dashboardControl" class="nav-main">
   <li>
-    <a class="active" ui-sref="dashboard"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
-  </li>
-  <li class="nav-main-heading"><span class="sidebar-mini-hide">Header</span></li>
-  <li>
-    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
-    <ul>
-      <li>
-        <a href="start_backend.html">Link #1</a>
-      </li>
-      <li>
-        <a href="start_backend.html">Link #2</a>
-      </li>
-    </ul>
+    <a class="active" ui-sref="{{homeState}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
   </li>
 </ul>

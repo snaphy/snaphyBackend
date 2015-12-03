@@ -6,17 +6,22 @@ angular.module($snaphy.getModuleName())
   .config(['$locationProvider', '$stateProvider',
     function ($locationProvider, $stateProvider) {
       $locationProvider.html5Mode(false);
+        //Adding the login state from the login plugins..
+        var loginState    = $snaphy.loadSettings('login', "loginState"),
+        homeState         = $snaphy.loadSettings('dashboard', "homeState"),
+        adminRole         = $snaphy.loadSettings('login', "adminRole"),
+        employeeRole      = $snaphy.loadSettings('login', "employeeRole");
 
-      $stateProvider
+        $stateProvider
         //Provide routes in this way..
-        .state('dashboard', {
+        .state(homeState, {
           url: '/',
           templateUrl: '/dashboard/views/dashboard.html',
           controller: 'dashboardControl',
             data: {
                 permissions: {
-                    only: ['employee'],
-                    redirectTo: 'login'
+                    only: [employeeRole],
+                    redirectTo: loginState
                 }
             }
         });

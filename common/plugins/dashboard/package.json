@@ -16,7 +16,8 @@
     },
     "moduleDependencies":{
 
-    }
+    },
+    "settings": "/dashboard/settings.js"
   },
   "defaultTemplate": "true",
   "bodystructure": {

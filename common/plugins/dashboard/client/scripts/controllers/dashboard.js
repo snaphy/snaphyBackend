@@ -6,7 +6,8 @@ angular.module($snaphy.getModuleName())
     function($scope, $stateParams, Database) {
         //Set snaphy default template value to true..
         $snaphy.setDefaultTemplate(true);
-        //var employeeService = Database.getDb('login', 'User');
-        //console.log(employeeService);
+        //Adding the login state from the login plugins..
+        $scope.loginState  = $snaphy.loadSettings('login', "loginState");
+        $scope.homeState   = $snaphy.loadSettings('dashboard', "homeState");
     }//controller function..
 ]);

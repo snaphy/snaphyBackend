@@ -8,6 +8,11 @@
  */
 var redirectOtherWise = $snaphy.loadSettings('login', 'onLoginRedirectState');
 var notPermittedState = $snaphy.loadSettings('login', '403ErrorPageState');
+var loginState        = $snaphy.loadSettings('login', "loginState");
+var registerState     = $snaphy.loadSettings('login', "registerState");
+var forgotPassState   = $snaphy.loadSettings('login', "forgotPassState");
+var adminRole         = $snaphy.loadSettings('login', "adminRole");
+var employeeRole      = $snaphy.loadSettings('login', "employeeRole");
 
 angular.module($snaphy.getModuleName())
 
@@ -17,7 +22,7 @@ angular.module($snaphy.getModuleName())
     .run(['Permission', 'LoginServices', '$q',  function (Permission, LoginServices,  $q)  {
         //Define admin role with promise..
         //For more info https://github.com/Narzerus/angular-permission
-        Permission.defineRole('employee', function (stateParams) {
+        Permission.defineRole(employeeRole, function (stateParams) {
             //using promise..
             var deferred = $q.defer();
             LoginServices.authenticatePage(function(){
@@ -30,7 +35,7 @@ angular.module($snaphy.getModuleName())
         }); // END Permission
 
         //TODO Add admin role later..
-        Permission.defineRole('admin', function (stateParams) {
+        Permission.defineRole(adminRole, function (stateParams) {
             //using promise..
             var deferred = $q.defer();
             LoginServices.isAdmin(function(){
@@ -63,14 +68,14 @@ angular.module($snaphy.getModuleName())
 
         $stateProvider
             //Provide routes in this way..
-            .state('login', {
+            .state(loginState, {
                 url: '/login',
                 templateUrl: '/login/views/login.html',
                 controller: 'loginControl',
                 //Only allow anonym users here
                 data: {
                     permissions: {
-                        except: ['employee'],
+                        except: [employeeRole],
                         redirectTo: redirectOtherWise
                     }
                 }
@@ -78,14 +83,14 @@ angular.module($snaphy.getModuleName())
 
 
             //Provide routes in this way..
-            .state('register', {
+            .state(registerState, {
                 url: '/register',
                 templateUrl: '/login/views/register.html',
                 controller: 'registerControl',
                 //Only allow anonym users here
                 data: {
                     permissions: {
-                        only: ['admin'],
+                        only: [adminRole],
                         redirectTo: notPermittedState
                     }
                 }
@@ -93,14 +98,14 @@ angular.module($snaphy.getModuleName())
 
 
             //Provide routes in this way..
-            .state('forgotPass', {
+            .state(forgotPassState, {
                 url: '/forgotPass',
                 templateUrl: '/login/views/forgotPass.html',
                 controller: 'forgotPassControl',
                 //Only allow anonym users here
                 data: {
                     permissions: {
-                        except: ['employee'],
+                        except: [employeeRole],
                         redirectTo: redirectOtherWise
                     }
                 }
@@ -120,7 +125,7 @@ angular.module($snaphy.getModuleName())
                             LoopBackAuth.clearStorage();
                             $location.nextAfterLogin = $location.path();
                             var $state = $injector.get("$state");
-                            $state.go('login');
+                            $state.go(loginState);
                         }
                         return $q.reject(rejection);
                     }

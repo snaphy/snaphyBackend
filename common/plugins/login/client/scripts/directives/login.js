@@ -3,6 +3,7 @@
  */
 /*global angular, $snaphy, jQuery, $*/
 'use strict';
+var registerState     = $snaphy.loadSettings('login', "registerState");
 
 angular.module($snaphy.getModuleName())
 
@@ -27,7 +28,7 @@ angular.module($snaphy.getModuleName())
         return {
             restrict: 'E',
             replace: true,
-            template: '<a ui-sref="register" tabindex="-1"> <i class="si si-user-follow pull-right"></i>Add Employee</a>',
+            template: '<a ui-sref="' + registerState + '" tabindex="-1"> <i class="si si-user-follow pull-right"></i>Add Employee</a>',
             link: function (scope, iElement, iAttrs) {
 
             }//End of Link function...

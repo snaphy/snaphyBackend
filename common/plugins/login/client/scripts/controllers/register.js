@@ -7,10 +7,15 @@ angular.module($snaphy.getModuleName())
     function($scope, LoginServices, $state) {
         //Controller defined here..
         $snaphy.setDefaultTemplate(false);
-        //Adding title and name..
-        $scope.name = $snaphy.loadSettings('login', 'loginName');
-        $scope.title = $snaphy.loadSettings('login', 'registerTitle');
-        $scope.homeState = $snaphy.loadSettings('login', 'onLoginRedirectState');
+        //LOADING THE SETTINGS..
+        $scope.name              = $snaphy.loadSettings('login', 'loginName');
+        $scope.title             = $snaphy.loadSettings('login', 'registerTitle');
+        $scope.homeState         = $snaphy.loadSettings('login', 'onLoginRedirectState');
+        $scope.loginState        = $snaphy.loadSettings('login', "loginState");
+        $scope.registerState     = $snaphy.loadSettings('login', "registerState");
+        $scope.forgotPassState   = $snaphy.loadSettings('login', "forgotPassState");
+
+
         //Go back to home state..
         $scope.home = function(){
             $state.go($scope.homeState);

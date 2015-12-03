@@ -7,21 +7,21 @@
                 <div class="block-header bg-primary">
                     <ul class="block-options">
                         <li>
-                            <a ui-sref="login" data-toggle="tooltip" data-placement="left" title="Log In"><i class="si si-login"></i></a>
+                            <a ui-sref="{{loginState}}" data-toggle="tooltip" data-placement="left" title="Log In"><i class="si si-login"></i></a>
                         </li>
                     </ul>
                     <h3 class="block-title">Password Reminder</h3>
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
                     <!-- Reminder Title -->
-                    <h1 class="h2 font-w600 push-30-t push-5">OneUI</h1>
-                    <p>Please provide your account’s email and we will send you your password.</p>
+                    <h1 class="h2 font-w600 push-30-t push-5">{{name}}</h1>
+                    <p>{{title}}</p>
                     <!-- END Reminder Title -->
 
                     <!-- Reminder Form -->
                     <!-- jQuery Validation (.js-validation-reminder class is initialized in js/pages/base_pages_reminder.js) -->
                     <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                    <form class="js-validation-reminder form-horizontal push-30-t push-50" action="base_pages_reminder.html" method="post">
+                    <form class="js-validation-reminder form-horizontal push-30-t push-50">
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary floating">

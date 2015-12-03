@@ -2,8 +2,13 @@
 /*jslint browser: true*/
 /*global $, jQuery, angular, $snaphy , redirectOtherWise*/
 
+var loginState        = $snaphy.loadSettings('login', "loginState");
+var registerState     = $snaphy.loadSettings('login', "registerState");
+var forgotPassState   = $snaphy.loadSettings('login', "forgotPassState");
+
+
 angular.module($snaphy.getModuleName())
-//Define your services here..
+    //Define your services here..
     //Service for implementing login related functionality..
     .factory('LoginServices', ['Database', '$location', 'LoopBackAuth', '$injector',
         function(Database, $location, LoopBackAuth, $injector) {
@@ -96,7 +101,7 @@ angular.module($snaphy.getModuleName())
                     //Successs
                     function() {
                         var $state = $injector.get("$state");
-                        $state.go('login');
+                        $state.go(loginState);
                     },
 
                     //Error..
