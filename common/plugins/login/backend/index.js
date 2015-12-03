@@ -100,6 +100,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
                 cb(null, false);
             }
+            function accept(){
+                cb(null, true);
+            }
+
             if (context.modelName !== packageObj.databases.User) {
                 // the target model is not project
                 return reject();
@@ -108,6 +112,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             if (!userId) {
                 return reject(); // do not allow anonymous users
             }
+
+            //Now accept the current definition of the staff..
+            accept();
 
             //TODO Add further checks to check if the given user is employee or not.
 

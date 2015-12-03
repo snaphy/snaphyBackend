@@ -61,6 +61,17 @@ angular.module($snaphy.getModuleName())
             };
 
 
+
+            //For adding an employee..
+            var register = function(username, email, password, success, faliure){
+                UserService.create({}, {username: username, email: email, password: password}, function(value){
+                    success(value);
+                }, function(RespHeader){
+                    faliure(RespHeader);
+                });
+            };
+
+
             /**
              * For getting the current logged user details from the server.
              * @param success
@@ -105,7 +116,8 @@ angular.module($snaphy.getModuleName())
                 userDetail: userDetail,
                 redirectOtherWise: redirectOtherWise_,
                 isAdmin: isAdmin,
-                addUserDetail: addUserDetail
+                addUserDetail: addUserDetail,
+                register: register
             };
         }//LoginServices
     ]);
