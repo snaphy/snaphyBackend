@@ -5,8 +5,8 @@
 angular.module($snaphy.getModuleName())
 //Define your services here..
     //Service for implementing login related functionality..
-    .factory('LoginServices', ['Database', '$location', 'LoopBackAuth',
-        function(Database, $location, LoopBackAuth) {
+    .factory('LoginServices', ['Database', '$location', 'LoopBackAuth', '$injector',
+        function(Database, $location, LoopBackAuth, $injector) {
             //Set redirect otherwise state name..
             //First use the value from the route/login global routeOtherWise value ....
             var redirectOtherWise_ = redirectOtherWise || 'dashboard';
@@ -35,6 +35,24 @@ angular.module($snaphy.getModuleName())
 
             };
 
+            /**
+             * Method to check if the user is admin or not
+             * @param success
+             * @param error
+             */
+            var isAdmin = function(success, error){
+                if(userDetail.admin){
+                    success();
+                }else{
+                    error();
+                }
+            };
+
+
+            var addUserDetail = function(user){
+                userDetail = user;
+            };
+
 
             /**
              * For getting the current logged user details from the server.
@@ -59,8 +77,8 @@ angular.module($snaphy.getModuleName())
                 UserService.logout(
                     //Successs
                     function() {
-                        //Now redirect to login page..
-                        $location.path('login');
+                        var $state = $injector.get("$state");
+                        $state.go('login');
                     },
 
                     //Error..
@@ -76,7 +94,9 @@ angular.module($snaphy.getModuleName())
                 getLoggedDetails: getLoggedDetails,
                 logout: logout,
                 userDetail: userDetail,
-                redirectOtherWise: redirectOtherWise_
+                redirectOtherWise: redirectOtherWise_,
+                isAdmin: isAdmin,
+                addUserDetail: addUserDetail
             };
         }//LoginServices
     ]);

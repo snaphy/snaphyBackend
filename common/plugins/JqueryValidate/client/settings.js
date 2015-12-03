@@ -17,6 +17,22 @@ var settings = {
         'login-password': {
             required: true,
             minlength: 5
+        },
+        'register-username': {
+            required: true,
+            minlength: 3
+        },
+        'register-password': {
+            required: true,
+            minlength: 5
+        },
+        'register-password2': {
+            required: true,
+            equalTo: '#register-password'
+        },
+        'register-email': {
+            required: true,
+            email: true
         }
     },
     messages: {
@@ -27,6 +43,12 @@ var settings = {
         'login-password': {
             required: 'Please provide a password',
             minlength: 'Your password must be at least 5 characters long'
+        },
+        'register-email': 'Please enter a valid email address',
+        'register-password2': {
+            required: 'Please provide a password',
+            minlength: 'Your password must be at least 5 characters long',
+            equalTo: 'Please enter the same password as above'
         }
     }
 

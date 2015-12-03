@@ -4,6 +4,10 @@
 angular.module($snaphy.getModuleName())
 .controller('loginControl', ['$scope', 'Database', '$location', 'LoginServices', '$injector',
     function($scope, Database, $location, LoginServices, $injector) {
+        //Adding title and name..
+        $scope.name = $snaphy.loadSettings('login', 'loginName');
+        $scope.title = $snaphy.loadSettings('login', 'loginTitle');
+
         //Controller defined here..
         $snaphy.setDefaultTemplate(false);
         var UserService = Database.getDb('login', 'User');
@@ -13,8 +17,11 @@ angular.module($snaphy.getModuleName())
         $scope.login = function(loginForm){
             if(loginForm.$valid){
                 //Now login to the employee ..
-                UserService.login($scope.credentials, function(){
+                UserService.login($scope.credentials, function(userDetail){
                     $scope.loginError = false;
+                    console.log(userDetail.user);
+                    //Add user detail to the database..
+                    LoginServices.addUserDetail(userDetail.user);
                     //If redirected from 401 error..
                     if($location.nextAfterLogin){
                         $location.path('/');

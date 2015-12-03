@@ -7,6 +7,7 @@
  * @type {string}
  */
 var redirectOtherWise = $snaphy.loadSettings('login', 'onLoginRedirectState');
+var notPermittedState = $snaphy.loadSettings('login', '403ErrorPageState');
 
 angular.module($snaphy.getModuleName())
 
@@ -29,6 +30,17 @@ angular.module($snaphy.getModuleName())
         }); // END Permission
 
         //TODO Add admin role later..
+        Permission.defineRole('admin', function (stateParams) {
+            //using promise..
+            var deferred = $q.defer();
+            LoginServices.isAdmin(function(){
+                deferred.resolve();
+            },function(){
+                console.log('Failure getting authorization');
+                deferred.reject();
+            });
+            return deferred.promise;
+        }); // END Permission
 
     }]) //End Run
 
@@ -73,8 +85,8 @@ angular.module($snaphy.getModuleName())
                 //Only allow anonym users here
                 data: {
                     permissions: {
-                        except: ['employee'],
-                        redirectTo: redirectOtherWise
+                        only: ['admin'],
+                        redirectTo: notPermittedState
                     }
                 }
             })

@@ -15,7 +15,8 @@
       "loginService": "/login/scripts/services/login.js",
       "forgotPassControl": "/login/scripts/controllers/forgotPass.js",
       "registerControl": "/login/scripts/controllers/register.js",
-      "Route": "/login/scripts/routes/login.js"
+      "Route": "/login/scripts/routes/login.js",
+      "loginDirectives": "/login/scripts/directives/login.js"
     },
     "moduleDependencies": {
       "permission": "/login/style/bower_components/angular-permission/dist/angular-permission.js"
@@ -26,7 +27,8 @@
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
-    "headerHook": []
+    "headerHook": ["/login/views/headerHook.html"],
+    "footerHook":[]
   },
   "databases": {
     "User": "Employee"
