@@ -2,6 +2,7 @@
 /*global angular, $snaphy, $scope, $stateParams */
 
 angular.module($snaphy.getModuleName())
+
 .controller('loginControl', ['$scope', 'Database', '$location', 'LoginServices', '$injector',
     function($scope, Database, $location, LoginServices, $injector) {
         //Adding title and name..

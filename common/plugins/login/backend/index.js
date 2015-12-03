@@ -5,16 +5,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     User = databaseObj.User,
     Role = server.models.Role,
     RoleMapping = server.models.RoleMapping,
+    loopback = helper.getLoopbackObj(),
 
     //Create an init method to be executed when the plugin get run for the first time..in memory..
     init = function(){
-        var i;
-        //Adding admin property in the model.
-        for(i = 0; i<adminUserModel.length; i++){
-            var adminUser = adminUserModel[i];
-            //Adding admin = true for all the given user.
-            adminUser.admin = true;
-        }
 
         /**
          * Permission levels
@@ -37,12 +31,48 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     addUserAdmin(role, users[i].id);
                 }//for loop..
             });
+
         });
 
 
         //TODO MODIFY THIS METHOD TO PROVIDE RUNTIME ACCESS AND MODIFICATION TO USER.
         addStaffResolver();
+        hideRestMethods();
+
+        User.isAdmin = function(cb){
+            var currentContext = loopback.getCurrentContext();
+            //bad documentation loopback..
+            //http://stackoverflow.com/questions/28194961/is-it-possible-to-get-the-current-user-s-roles-accessible-in-a-remote-method-in
+            //https://github.com/strongloop/loopback/issues/332
+            var context;
+            try{
+                 context = {principalType: RoleMapping.USER, principalId: currentContext.active.accessToken.userId};
+            }catch (err){
+                console.error("Error >> User not logged in. ");
+                context = {principalType: RoleMapping.USER, principalId: null};
+            }
+
+            //Now check the role if the context is admin.
+            Role.isInRole('admin', context, function(err, InRole){
+                if(err) throw err;
+                var result = InRole;
+                //Now return the boolean value..
+                cb(null, result);
+            });
+        };
+
+
+        //Now defigning a method for checking if the user exist in the role.
+        User.remoteMethod(
+            'isAdmin',
+            {
+                returns: {arg: 'isAdmin', type: 'boolean'}
+            }
+        );
+
     }, //Init..
+
+
 
 
 

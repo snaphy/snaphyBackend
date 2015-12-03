@@ -41,11 +41,18 @@ angular.module($snaphy.getModuleName())
              * @param error
              */
             var isAdmin = function(success, error){
-                if(userDetail.admin){
-                    success();
-                }else{
+                UserService.isAdmin(function(value){
+                    if(value.isAdmin){
+                        //Current user is admin user..
+                        success();
+                    }else{
+                        //Current user is not admin user..
+                        error();
+                    }
+                }, function(){
+                    console.log("Error checking isAdmin method");
                     error();
-                }
+                });
             };
 
 
@@ -88,6 +95,8 @@ angular.module($snaphy.getModuleName())
                         LoopBackAuth.clearStorage();
                     });
             };
+
+
 
             return {
                 authenticatePage: authenticatePage,

@@ -68,6 +68,15 @@ module.exports = function(server) {
 
 
 
+  /**
+   * Method to getting the loopback object..
+   */
+  var getLoopbackObj = function(){
+    return loopback;
+  };
+
+
+
 
   //Add static routes for the database..
   var setStaticRoute = function(app, rootExposure, PluginName, pluginContainerPath){
@@ -159,7 +168,8 @@ module.exports = function(server) {
     readPackageJsonFile: readPackageJsonFile,
     getDirectories: getDirectories,
     getServerPath: getServerPath,
-    loadPlugin: loadPlugin
+    loadPlugin: loadPlugin,
+    getLoopbackObj: getLoopbackObj
   };
 
   return helper;

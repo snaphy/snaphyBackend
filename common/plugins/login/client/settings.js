@@ -10,7 +10,8 @@ var settings = {
     "loginTitle": "Welcome, please login.",
     "registerTitle":"Please fill the following details to create an employee.",
     "onLoginRedirectState": 'dashboard',
-    "403ErrorRouteState": "403Error"
+    "403ErrorRouteState": "403Error",
+    "apiRootBase" : "/api"
 };
 
 
