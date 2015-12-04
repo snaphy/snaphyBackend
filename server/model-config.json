@@ -35,5 +35,9 @@
   "Employee": {
     "dataSource": "db",
     "public": true
+  },
+  "adminEmail": {
+    "dataSource": "GoogleEmail",
+    "public": false
   }
 }

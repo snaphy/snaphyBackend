@@ -8,8 +8,7 @@ module.exports = function(server) {
   //Now getting the plugin path with respect to package.json
   var MAIN_PLUGIN_FOLDER = __dirname + "/../../" + mainPackageObj.pluginPath;
   var helper = {};
-  var fs = require('fs'),
-    path = require('path');
+  var fs = require('fs'), path = require('path');
 
   /**
     * Method for getting all the directores
@@ -20,6 +19,15 @@ module.exports = function(server) {
     return fs.readdirSync(srcpath).filter(function(file) {
       return fs.statSync(path.join(srcpath, file)).isDirectory();
     });
+  }
+
+    /**
+     * For getting the absolute plugin root path of a plugin.
+     * @param pluginName
+     * @returns {string}
+     */
+  function getPluginRootDir(pluginName){
+      return MAIN_PLUGIN_FOLDER + '/' + pluginName;
   }
 
 
@@ -39,13 +47,13 @@ module.exports = function(server) {
   }
 
 
-
-  /**
-   * Find the database from the model-config.json and return the database with it datasource attached.
-   * @param  {object} Application object of loopback.
-   * @param  {object} sampleDatabase Database object which needs to be searched
-   * @return {object}                Database object with datasource attached.
-   */
+    /**
+     * Find the database from the model-config.json and return the database with it datasource attached.
+     * @param app Application object of loopback.
+     * @param sampleDatabase Database object which needs to be searched
+     * @param pluginName Database object with datasource attached.
+     * @returns {{}}
+     */
   var getDatabase = function(app, sampleDatabase, pluginName){
     //var modelConfig = require('../../server/model-config.json');
     var requiredDatabase = {};
@@ -169,7 +177,9 @@ module.exports = function(server) {
     getDirectories: getDirectories,
     getServerPath: getServerPath,
     loadPlugin: loadPlugin,
-    getLoopbackObj: getLoopbackObj
+    getLoopbackObj: getLoopbackObj,
+    getPluginRootDir: getPluginRootDir
+
   };
 
   return helper;

@@ -1,0 +1,42 @@
+{
+  "name": "email",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "Plugin for simplyfying email sending.",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/email",
+  "staticFiles": {
+    "css": {},
+    "js": {},
+    "moduleDependencies": {}
+  },
+  "defaultTemplate": "false",
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook": []
+  },
+  "databases": {},
+  "mailConfig": [
+    {
+      "emailModel": "adminEmail",
+      "assosiatedUsers": [],
+      "templates": {
+        "sendNotice": "backend/views/notice.ejs"
+      }
+    }
+  ],
+  "activate": true,
+  "services": {},
+  "dependencies": {
+    "ejs": "^2.3.4"
+  },
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {}
+}
