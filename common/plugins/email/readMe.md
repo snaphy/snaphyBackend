@@ -23,7 +23,7 @@
   * `emailModel` if the property of the `loopback` email model name attached with a `email configured datasource`.
   * `assosiatedUsers` contains the list of users model name through which this emailModel will be exposed. 
      
-     >>For Example :-
+     >For Example :-
      
      
      `adminEmail` model can only send email to `employee` model.
