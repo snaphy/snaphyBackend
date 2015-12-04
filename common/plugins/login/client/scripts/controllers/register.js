@@ -29,11 +29,12 @@ angular.module($snaphy.getModuleName())
                     console.log("User created successfully");
                 }, function (respHeader) {
                     //Show the error message..
-                    $scope.errorMsg = 'Opps, please register by providing valid username and email!';
+                    $scope.errorMsg = 'Oops, please register by providing valid username and email!';
                     //Show error dialog..
                     $scope.registerError = true;
                     console.error(respHeader);
                 });
+
             }//if
         };
 

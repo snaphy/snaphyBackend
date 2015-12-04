@@ -23,7 +23,6 @@
     },
     "settings": "/login/settings.js"
   },
-  "defaultTemplate": "false",
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],

@@ -12,16 +12,28 @@ angular.module($snaphy.getModuleName())
         $scope.registerState     = $snaphy.loadSettings('login', "registerState");
         $scope.forgotPassState   = $snaphy.loadSettings('login', "forgotPassState");
 
-        //Controller defined here..
-        $snaphy.setDefaultTemplate(false);
+        var defaultTemplate = $snaphy.loadSettings('login', "defaultTemplate");
+        $snaphy.setDefaultTemplate(defaultTemplate);
+
         var UserService = Database.getDb('login', 'User');
         $scope.credentials = {};
         $scope.loginError = false;
 
+        function disableButton(){
+            $scope.isClickEnabled = false;
+        }
+
+        function enableButton(){
+            $scope.isClickEnabled = true;
+        }
+        //Enable the login button at first..
+        enableButton();
         $scope.login = function(loginForm){
             if(loginForm.$valid){
+                disableButton();
                 //Now login to the employee ..
                 UserService.login($scope.credentials, function(userDetail){
+                    enableButton();
                     $scope.loginError = false;
                     console.log(userDetail.user);
                     //Add user detail to the database..
@@ -36,10 +48,13 @@ angular.module($snaphy.getModuleName())
                         $state.go(LoginServices.redirectOtherWise);
                     }
                 },function(){
+                    enableButton();
+                    $scope.errorMsg = "Please login by providing correct username and password.";
                     //Display login error..
                     $scope.loginError = true;
                     console.error("Error getting logged in.");
                 });
+
             }//if valid
 
         }; //login function

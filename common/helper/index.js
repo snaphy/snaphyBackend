@@ -21,6 +21,9 @@ module.exports = function(server) {
     });
   }
 
+
+
+
     /**
      * For getting the absolute plugin root path of a plugin.
      * @param pluginName
