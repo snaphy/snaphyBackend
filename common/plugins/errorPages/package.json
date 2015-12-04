@@ -1,0 +1,42 @@
+{
+  "name": "errorPages",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "A plugin for generating error pages for backend and frontend",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/errorPages",
+  "staticFiles": {
+    "css": {
+        "exampleCss" : "/errorPages/style/example.css"
+      },
+    "js": {
+      "errorPagesRoute": "/errorPages/scripts/routes/errorPages.js",
+      "errorPagesController": "/errorPages/scripts/controllers/errorPages.js"
+    },
+    "moduleDependencies":{
+
+    },
+    "settings": "/errorPages/settings.js"
+  },
+  "defaultTemplate": "false",
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+   
+  }
+}
