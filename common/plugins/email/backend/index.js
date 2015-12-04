@@ -3,24 +3,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	var fs  = require('fs');
 	var ejs = require('ejs');
 
-	/**
-	 * Here server is the main app object
-	 * databaseObj is the mapped database from the package.json file
-	 * helper object contains all the helpers methods.
-	 * packegeObj contains the packageObj file of your plugin. 
-	 */
-
-	/**
-	 * Initialize the plugin at time of server start.
-	 * init method should never have any argument
-	 * It is a constructor and is populated once the server starts.
-	 * @return {object} [description]
-	 */
-	var init = function(){
-
-	};
-
-
 
 	//Main method for adding and sending the mail to the clients..
 	//Self calling the mail function
@@ -121,9 +103,55 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	})(); //mail function ends..
 
 
+	/**
+	 * Here server is the main app object
+	 * databaseObj is the mapped database from the package.json file
+	 * helper object contains all the helpers methods.
+	 * packegeObj contains the packageObj file of your plugin.
+	 */
+
+	/**
+	 * Initialize the plugin at time of server start.
+	 * init method should never have any argument
+	 * It is a constructor and is populated once the server starts.
+	 * @return {object} [description]
+	 */
+	var init = function(){
+		/*
+		//DEMO SHOWING USAGE..
+		var mailModel = packageObj.mailConfig[0].emailModel;
+		var adminModel = mail[mailModel];
+		adminModel.send(
+				{
+					from: " 'Rohit' <rohitbasu2050@gmail.com>",
+					to: 'robinskumar73@gmail.com',
+					subject: "hey this is a test",
+					text: "This is a body"},
+				function(err, send){
+					if (err) throw err;
+						console.log(send);
+				}
+		);
+
+		//Send the template message..
+		adminModel.sendNotice(
+				"'Rohit' <rohitbasu2050@gmail.com>",
+				'robinskumar73@gmail.com',
+				"hey this is a test",
+				{title:'title'},
+				function(err, send){
+					if (err) throw err;
+					console.log(send);
+				}
+		);*/
+	};
+
+
 	//ADD THE THE DEFINED METHOD TO THE MAIL OBJECT.
 	//Now add init method to the mail method..
 	mail.init = init;
+
+	console.log(mail);
 
 	//return all the methods that you wish to provide user to extend this plugin.
 	return mail;

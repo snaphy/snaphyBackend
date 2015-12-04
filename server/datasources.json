@@ -11,11 +11,14 @@
       {
         "type": "SMTP",
         "host": "smtp.gmail.com",
+        "aliases": [
+          "Google Mail"
+        ],
         "secure": true,
         "port": 465,
         "auth": {
-          "user": "rohitbase2050@gmail.com",
-          "pass": "9868371704"
+          "user": "rohitbasu2050@gmail.com",
+          "pass": ""
         }
       }
     ]
