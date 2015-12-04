@@ -44,10 +44,13 @@
      
      
 1. Now  To send any mail first configure this  helper.loadPlugin('pluginName') method AND call
-2. emailModel.send({from, to, subject, message}, callback) to send any message
-3. emailModel.TemplateName(from, to, subject, {}, callback) to send any templated message.
+2. `emailModel.send({from, to, subject, message}, callback)` to send any message
+3. `emailModel.TemplateName(from, to, subject, {}, callback)` to send any templated message.
 	 
-NOTE: USing gmail sometime gmail prevent login for less secure apps. You need to re-enable [Turn On for less secure Apps](https://www.google.com/settings/u/2/security/lesssecureapps)
+####NOTE:
+
+ When using `Google Mail` sometimes `gmail` prevent login for less secure apps. 
+ You need to re-enable [Turn On for less secure Apps](https://www.google.com/settings/u/2/security/lesssecureapps)
 
 
 
