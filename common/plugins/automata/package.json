@@ -9,13 +9,14 @@
   "staticFiles": {
     "css": {
         "automataCss" : "/automata/style/automata.css",
-        "jqueryDataTables": "/automata/style/bower_components/datatables.net-dt/css/jquery.dataTables.min.css"
+        "jqueryDataTables": "/automata/style/datatables/jquery.dataTables.min.css"
       },
     "js": {
       "automataRoute": "/automata/scripts/routes/automata.js",
       "automataController": "/automata/scripts/controllers/automata.js",
       "automataDirective": "/automata/scripts/directives/automata.js",
-      "jqueryDatatables": "/automata/style/bower_components/datatables.net/js/jquery.dataTables.min.js"
+      "jqueryDatatables": "/automata/style/datatables/jquery.dataTables.min.js",
+      "loadDatatables": "/automata/scripts/loadDatatables.js"
     },
     "moduleDependencies":{
 

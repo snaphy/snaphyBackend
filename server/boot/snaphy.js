@@ -4,10 +4,11 @@ module.exports = function(server) {
   var loopback = require('loopback');
   var helper   = require(__dirname + '/../../common/helper')(server);
   var config   = require(__dirname + '/../config.json');
-
+  var path     = require('path');
 
   //Now setting up the static files..
-  server.use(config.adminApiRoot + '/static', loopback.static(__dirname + '/../../.views/static'));
+  //TODO ADD CACHE TIME AFTER PRODUCTION MODE
+  server.use(path.join(config.adminApiRoot, '/static'), loopback.static(path.join(__dirname, '/../../.views/static') ));
   // set the view engine to ejs
   server.set('view engine', 'ejs');
 
@@ -28,10 +29,10 @@ module.exports = function(server) {
   var loadPluginsData = function(data){
     var i;
     //get the list of plugins..
-    var pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
+    var pluginList = helper.getDirectories(path.join(__dirname, '/../../common/plugins'));
     for(i=0; i<pluginList.length; i++){
       var pluginName = pluginList[i];
-      var pluginPath = __dirname + '/../../common/plugins/' + pluginName +  '/package.json';
+      var pluginPath = path.join(__dirname, '/../../common/plugins/', pluginName,  '/package.json');
       var packageObj = helper.readPackageJsonFile(pluginPath);
       if(packageObj.activate){
         //If the plugin has declared staticFiles
@@ -93,7 +94,7 @@ module.exports = function(server) {
 
   //Loads the title, desc of the app given in the package.json file.
   var loadAppData = function(data){
-    var packageObj = helper.readPackageJsonFile(__dirname + '/../../package.json');
+    var packageObj = helper.readPackageJsonFile(path.join(__dirname, '/../../package.json'));
     data.title = packageObj.title;
     data.description = packageObj.description;
     data.author = packageObj.author;
@@ -104,10 +105,10 @@ module.exports = function(server) {
 
 
   //Changing the view folder
-  server.set('views', __dirname + '/../../.views');
+  server.set('views', path.join(__dirname, '/../../.views'));
 
 
-  var apiRoot = config.adminApiRoot === '/' ? '/static' : config.adminApiRoot + '/static';
+  var apiRoot = config.adminApiRoot === '/' ? '/static' : path.join(config.adminApiRoot, '/static' );
 
 
   //Now render the index page..

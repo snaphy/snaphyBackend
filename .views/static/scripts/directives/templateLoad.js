@@ -1,5 +1,5 @@
 'use strict';
-
+/*global angular, $snaphy, $*/
 angular.module($snaphy.getModuleName())
 
 
@@ -13,4 +13,17 @@ angular.module($snaphy.getModuleName())
           },200);
         }
       };
+    }])
+
+
+  /*To hide the tooltip if somebody clickes it.*/
+    .directive('snaphyOnClickHideToolTip', [function(){
+        return{
+          link: function(scope, iElement, iAttrs){
+            //On click hide the  toolbar..
+            $(iElement).click(function(){
+                $(this).tooltip('hide');
+            });
+          }
+        };
     }]);

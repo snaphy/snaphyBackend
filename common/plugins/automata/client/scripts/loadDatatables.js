@@ -185,7 +185,7 @@ var BaseTableDatatables = function() {
         init: function() {
             // Init Datatables
             bsDataTables();
-            initDataTableSimple();
+            //initDataTableSimple();
             initDataTableFull();
         }
     };
