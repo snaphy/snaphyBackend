@@ -56,12 +56,14 @@ module.exports = function(server) {
           }
 
           //Now getting the html templates...hooks..
-          if(packageObj.defaultTemplate && packageObj.bodystructure){
+          if(packageObj.bodystructure){
             data.asidebarHook = data.asidebarHook.concat(packageObj.bodystructure.asidebarHook);
             data.sidebarHook  = data.sidebarHook.concat(packageObj.bodystructure.sidebarHook);
-            data.headerHook  = data.headerHook.concat(packageObj.bodystructure.headerHook);
-            data.footerHook  = data.footerHook.concat(packageObj.bodystructure.footerHook);
-          }
+            data.headerHook   = data.headerHook.concat(packageObj.bodystructure.headerHook);
+            if(packageObj.bodystructure.footerHook != undefined){
+              data.footerHook = data.footerHook.concat(packageObj.bodystructure.footerHook)
+            }
+          }//if
         }// if staticFiles..
 
         //If databases is not undefined.
