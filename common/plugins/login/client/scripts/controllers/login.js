@@ -3,8 +3,8 @@
 
 angular.module($snaphy.getModuleName())
 
-.controller('loginControl', ['$scope', 'Database', '$location', 'LoginServices', '$injector',
-    function($scope, Database, $location, LoginServices, $injector) {
+.controller('loginControl', ['$scope', 'Database', '$rootScope', 'LoginServices', '$injector',
+    function($scope, Database, $rootScope, LoginServices, $injector) {
         //Adding title and name..
         $scope.name = $snaphy.loadSettings('login', 'loginName');
         $scope.title = $snaphy.loadSettings('login', 'loginTitle');
@@ -38,15 +38,13 @@ angular.module($snaphy.getModuleName())
                     console.log(userDetail.user);
                     //Add user detail to the database..
                     LoginServices.addUserDetail(userDetail.user);
-                    //If redirected from 401 error..
-                    if($location.nextAfterLogin){
-                        $location.path($location.nextAfterLogin);
-                        $location.nextAfterLogin = null;
-                    }else{
-                        var $state = $injector.get('$state');
-                        //Redirect to the default State..
-                        $state.go(LoginServices.redirectOtherWise);
-                    }
+                    var $state = $injector.get('$state'),
+                    redirectTo =  $rootScope.previousState.name ?  $rootScope.previousState.name :  LoginServices.redirectOtherWise;
+                    console.log("State changed to " + redirectTo);
+                    console.log(redirectTo);
+                    //Redirect to the default State..
+                    $state.go(redirectTo);
+
                 },function(){
                     enableButton();
                     $scope.errorMsg = "Please login by providing correct username and password.";

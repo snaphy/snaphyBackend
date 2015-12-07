@@ -19,7 +19,7 @@ angular.module($snaphy.getModuleName())
     /**
      Employee Role
      */
-    .run(['Permission', 'LoginServices', '$q',  function (Permission, LoginServices,  $q)  {
+    .run(['Permission', 'LoginServices', '$q', '$rootScope', function (Permission, LoginServices,  $q, $rootScope)  {
         //Define admin role with promise..
         //For more info https://github.com/Narzerus/angular-permission
         Permission.defineRole(employeeRole, function (stateParams) {
@@ -46,6 +46,15 @@ angular.module($snaphy.getModuleName())
             });
             return deferred.promise;
         }); // END Permission
+
+
+        //Now storing previous state parameters..
+        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+            //assign the "from" parameter to something
+            console.log("Changing state from " + from.name);
+            //Now storing the previously accesed paths..
+            $rootScope.previousState = from;
+        });
 
     }]) //End Run
 
@@ -114,8 +123,8 @@ angular.module($snaphy.getModuleName())
 
         //interceptors area..
         //http://stackoverflow.com/questions/25876559/loopback-protected-routes-ensure-login
-        $httpProvider.interceptors.push(['$q', '$location', 'LoopBackAuth', '$injector',
-            function ($q, $location, LoopBackAuth, $injector) {
+        $httpProvider.interceptors.push(['$q', 'LoopBackAuth', '$injector',
+            function ($q, LoopBackAuth, $injector) {
                 return {
                     responseError: function (rejection) {
                         if (rejection.status === 401) {
@@ -123,7 +132,9 @@ angular.module($snaphy.getModuleName())
                             //Now clearing the loopback values..
                             LoopBackAuth.clearUser();
                             LoopBackAuth.clearStorage();
-                            $location.nextAfterLogin = $location.path();
+                            //$location.nextAfterLogin = $location.path();
+                            //Storing the state..
+
                             var $state = $injector.get("$state");
                             $state.go(loginState);
                         }

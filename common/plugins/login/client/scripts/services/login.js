@@ -29,7 +29,7 @@ angular.module($snaphy.getModuleName())
             var authenticatePage = function(success, error) {
                 if (!UserService.isAuthenticated()) {
                     //Calling the promise error..
-                    $location.nextAfterLogin = $location.path();
+                    //$location.nextAfterLogin = $location.path();
                     error();
                 } else {
                     success();
