@@ -30,7 +30,32 @@ module.exports = function(server) {
      * @returns {string}
      */
   function getPluginRootDir(pluginName){
-      return MAIN_PLUGIN_FOLDER + '/' + pluginName;
+      return path.join(MAIN_PLUGIN_FOLDER, pluginName);
+  }
+
+
+    /**
+     * Convert Camel case characters to dashed case characters.
+     * @param text
+     * @returns {*}
+     */
+  var camelToDashCase = function(text){
+    text = text.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();});
+    //Now replace first occurance of dash..
+    return text.replace(/^\-?/, '');
+  };
+
+
+    /**
+     * Retrives the path of the model.json file..
+      * @param modelName Model Name is the Original Model Name of the model
+     */
+  function getModelPath(modelName){
+      //convert to camel case..
+      modelName = camelToDashCase(modelName);
+      var modelJsonFile = modelName + '.json';
+      //Now get the model path..
+      return path.join(__dirname, '../models', modelJsonFile );
   }
 
 
@@ -46,7 +71,7 @@ module.exports = function(server) {
 
   //Return the path of the main server file
   function getServerPath(){
-    return __dirname + '/../../server/server.js';
+    return path.join(__dirname , '../../server/server.js');
   }
 
 
@@ -181,7 +206,8 @@ module.exports = function(server) {
     getServerPath: getServerPath,
     loadPlugin: loadPlugin,
     getLoopbackObj: getLoopbackObj,
-    getPluginRootDir: getPluginRootDir
+    getPluginRootDir: getPluginRootDir,
+    getModelPath: getModelPath
 
   };
 

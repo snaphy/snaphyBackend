@@ -1,5 +1,5 @@
 'use strict';
-
+/*global $snaphy, angular*/
 angular.module($snaphy.getModuleName())
 
 //Controller for automataControl ..
@@ -8,6 +8,7 @@ angular.module($snaphy.getModuleName())
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('automata', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
-        //Use Database.getDb(pluginName, PluginDatabaseName) to get the Database Resource.
+
+
     }//controller function..
 ]);

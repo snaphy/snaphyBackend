@@ -18,6 +18,8 @@
       "automataRoute"            : "/automata/scripts/routes/automata.js",
       "automataController"       : "/automata/scripts/controllers/automata.js",
       "automataDirective"        : "/automata/scripts/directives/automata.js",
+      "automataFilter"           : "/automata/scripts/filters/automata.js",
+
       "jqueryDatatables"         : "/automata/style/datatables/jquery.dataTables.min.js",
       "loadDatatables"           : "/automata/scripts/loadDatatables.js",
       "bootstrap3Datapicker"     : "/automata/style/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",

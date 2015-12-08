@@ -96,15 +96,70 @@
                     <div class="table-responsive" style="overflow-x: hidden;">
                         <table class="table table-bordered table-striped js-dataTable-full" >
                             <thead>
-                                <tr>
-                                    <!--Adding :: for one way binding -->
-                                    <th ng-repeat="header in ::tableValueSettings.header">{{header}}</th>
-                                </tr>
+                            <tr>
+                                <th class="text-center"></th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th style="width: 15%;">Access</th>
+                                <th class="text-center" style="width: 10%;">Actions</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="rowObject in rowListValues">
-                                    <!--Populating the table values and binding header with columnVal-->
-                                    <td automata-map-value model-prop="tableValueSettings.properties" row-object="rowObject" column-header="header" ng-repeat="header in ::tableValueSettings.header" ></td>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td class="font-w600">Denise Watson</td>
+                                    <td>client1@example.com</td>
+                                    <td>
+                                        <span class="label label-primary">Personal</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Client"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Remove Client"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">26</td>
+                                    <td class="font-w600">Craig Stone</td>
+                                    <td>client26@example.com</td>
+                                    <td>
+                                        <span class="label label-info">Business</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Client"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Remove Client"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">27</td>
+                                    <td class="font-w600">Adam Hall</td>
+                                    <td>client27@example.com</td>
+                                    <td>
+                                        <span class="label label-info">Business</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Client"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Remove Client"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">40</td>
+                                    <td class="font-w600">Eugene Burke</td>
+                                    <td>client40@example.com</td>
+                                    <td>
+                                        <span class="label label-success">VIP</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Client"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Remove Client"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
