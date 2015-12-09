@@ -10,5 +10,147 @@ angular.module($snaphy.getModuleName())
         $snaphy.setDefaultTemplate(defaultTemplate);
 
 
+
+
+        $scope.checkType = function(rowObject, columnHeader){
+            var colValue = $scope.getColValue(rowObject, columnHeader);
+            return Object.prototype.toString.call(colValue);
+        };
+
+
+        $scope.getColValue  = function(rowObject, columnHeader){
+            var key = $scope.getKey(rowObject, columnHeader);
+            return rowObject[key];
+        };
+
+
+        $scope.getKey = function(rowObject, columnHeader){
+            var keyName;
+            if(rowObject[columnHeader] !== undefined){
+                keyName = columnHeader;
+            }else{
+                //Its a relational header properties name... map the header.. replace `customer_name` to name
+                var patt = /\_[A-Z0-9a-z]+$/;
+                keyName = columnHeader.replace(patt, '');
+            }
+            return keyName;
+        };
+
+
+        /**
+         * Find model property for the table configuration from the config file
+         */
+        $scope.findModelPropertyTableConfig = function(configModelTableObj, propertyName){
+            //get the property parameters..
+            var ModalpropertyObj = configModelTableObj;
+            if(ModalpropertyObj === undefined){
+                return null;
+            }
+            if(ModalpropertyObj[propertyName] !== undefined){
+                return ModalpropertyObj[propertyName];
+            }
+            return null;
+        };
+
+
+        /**
+         * Return the params for ui-sref for onClick
+         * @param params
+         * @param rowObject
+         * @returns {*}
+         */
+        $scope.getParams = function(params, rowObject){
+            for(var key in params){
+                if(params.hasOwnProperty(key)){
+                    params[key] = rowObject[key];
+                }
+            }
+            return params;
+        };
+
+
+
+
+        /**
+         * INITIALIZING SOME DUMMY DATA..
+         */
+
+        $scope.tableTitle = "Testing";
+        $scope.currentState = "automata";
+        $scope.title = "Automata Plugin";
+        $scope.description = "Automata Plugin for auto generating CRUD methods.";
+
+        //Its a model properties for customer..
+        $scope.customerModelSettings = {
+            "header":['name', 'email', 'access_level', 'phoneNumber'],
+            "properties":{
+                "name":{
+                    type:"string",
+                    required: true
+                },
+                "email":{
+                    type:"string",
+                    required: true
+                },
+                "access":{
+                    "level":{
+                        type:"object",
+                        required: true
+                    }
+
+                }
+            },
+            "tables":{
+                name:{
+                    onClick:{
+                        state:"dashboard",
+                        params:{
+                            name:"name"
+                        }
+                    }
+
+                },
+                email:{
+                    tag:{
+                        "robinskumar73@gmail.com": "label-warning"
+                    }
+                }
+
+            }
+        };
+
+
+        $scope.rowListValues = [
+            {
+                name:"Robins Gupta",
+                email:"robinskumar73@gmail.com",
+                access:{
+                    level:{
+                        type:1,
+                        height:1
+                    },
+                    others:{
+                        email:"rohitbasu2030@gmail.com",
+                        height:1
+                    }
+
+                },
+                "phoneNumber": 9953242338
+            },
+            {
+                name:"Ravi Gupta",
+                email:"ravikumar73@gmail.com",
+                access:{
+                    level:{
+                        type:2,
+                        height:0
+                    }
+                },
+                "phoneNumber": 9953242338
+            }
+        ];
+
+
+
     }//controller function..
 ]);

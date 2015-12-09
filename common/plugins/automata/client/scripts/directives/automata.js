@@ -25,38 +25,90 @@ angular.module($snaphy.getModuleName())
         scope:{
             modelProp    : "=modelProp",
             rowObject    : "=rowObject",
-            columnHeader : "=columnHeader"
+            columnHeader : "=columnHeader",
+            rowId        : "=rowId"
         },
         link: function (scope, element, attrs) {
-            var colValue, keyName;
-            if(scope.rowObject[scope.columnHeader] !== undefined){
-                keyName = scope.columnHeader;
-            }else{
-                //Its a relational header properties name... map the header.. replace `customer_name` to name
-                var patt = /^[A-Z0-9a-z]*\_/;
-                keyName = scope.columnHeader.replace(patt, '');
-            }
-            colValue = scope.rowObject[keyName];
 
-            //Now checking cheking the type of the value and returning the value according to it..
-            var type = Object.prototype.toString.call(colValue);
+            var processData = function(propConfig, rowObject, propertyName, rootTag, value){
+                //Getting the root tag..
+                rootTag = $(rootTag);
+                //For tracking current assosiated tags..
+                var currentTag = $(rootTag);
 
-            if(type === '[object String]'){
-                //Do the string processing..
-            }
-            else if(type === '[object Number]'){
-                //Do the number processing..
-            }
-            else if(type === '[object Array]'){
-                //Do the number processing..
-            }
-            else {
-                //The value is object..
-            }
+                //If table info not present..
+                if(!propConfig){
+                    console.log(value);
+                    console.log(rootTag);
+                    return rootTag.html(value);
+                }
 
-            var htmlFormat = function(){
+                if(propConfig.onClick !== undefined){
+                    //get the params values..
+                    var params = {},
+                        definedParams = propConfig.onClick.params;
+                    if(definedParams !== undefined){
+                        for (var key_ in definedParams) {
+                            if (definedParams.hasOwnProperty(key_)) {
+                                var value_ = definedParams[key_];
+                                //Now create a params object..
+                                params[key_] = rowObject[value_];
+                            }
+                        }
+                    }//if
 
+                    //Now exposing the state and params over scope
+                    scope.propConfig = {};
+                    scope.propConfig.onClick = {};
+                    scope.propConfig.onClick.state = propConfig.onClick.state;
+                    //Now adding params to the scope..
+                    scope.propConfig.onClick[scope.rowId] = params;
+
+                    //manage onclick here..
+                    //Add the anchor tag
+                    currentTag = $('<a></a>');
+                    var attrValue = propConfig.onClick.state + '(' + JSON.stringify(params) + ')';
+                    console.log(attrValue);
+                    currentTag.attr("ui-sref", attrValue);
+                    //Now add rootTag to currentTag
+                    rootTag.append(currentTag);
+                }
+                else if(propConfig.tag !== undefined){
+                    var value = rowObject[propertyName];
+                    //Then add tag to the properties..
+                    //Now get the label type tag to be used by the value used..
+                    var labelType = propConfig.tag[value];
+                    currentTag = $('<span class="label" ></span>');
+                    currentTag.addClass(labelType);
+                    //Now add rootTag to currentTag
+                    rootTag.append(currentTag);
+                }
+                else{
+                    /*Do nothing*/
+                }
+
+                //Now add value to the current tag
+                currentTag.html(value);
+                console.log(rootTag);
+                return rootTag;
+            }; //processOnClick
+
+
+            /**
+             * Find model property from the config file
+             */
+            var findModelPropertyConfig = function(configModelObj, propertyName){
+                //get the property parameters..
+                var ModalpropertyObj = configModelObj.properties;
+                if(ModalpropertyObj === undefined){
+                    return null;
+                }
+                if(ModalpropertyObj[propertyName] !== undefined){
+                    return ModalpropertyObj[propertyName];
+                }
+                return null;
             };
+
 
 
 

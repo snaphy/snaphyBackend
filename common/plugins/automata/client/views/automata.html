@@ -20,66 +20,7 @@
 <!--ADD WIDGETS -->
 <!-- Page Content -->
 <div class="content">
-    <!-- User Widgets -->
-    <h2 class="content-heading">{{widgetsTitle}}</h2>
 
-    <!-- User Simple Widgets -->
-    <div class="row">
-        <div class="col-sm-6 col-lg-3">
-            <a class="block block-rounded block-link-hover3" href="javascript:void(0)">
-                <div class="block-content block-content-full clearfix">
-                    <div class="pull-right">
-                        <img class="img-avatar" src="assets/img/avatars/avatar7.jpg" alt="">
-                    </div>
-                    <div class="pull-left push-10-t">
-                        <div class="font-w600 push-5">12</div>
-                        <div class="text-muted">Recipe added </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a class="block block-rounded block-link-hover3" href="javascript:void(0)">
-                <div class="block-content block-content-full clearfix">
-                    <div class="pull-right">
-                        <img class="img-avatar" src="assets/img/avatars/avatar7.jpg" alt="">
-                    </div>
-                    <div class="pull-left push-10-t">
-                        <div class="font-w600 push-5">5</div>
-                        <div class="text-muted">Recipe published today</div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a class="block block-rounded block-link-hover3" href="javascript:void(0)">
-                <div class="block-content block-content-full clearfix">
-                    <div class="text-right pull-right push-10-t">
-                        <div class="font-w600 push-5">4</div>
-                        <div class="text-muted">Pending recipe</div>
-                    </div>
-                    <div class="pull-left">
-                        <img class="img-avatar" src="assets/img/avatars/avatar15.jpg" alt="">
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a class="block block-rounded block-link-hover3" data-toggle="modal" data-target="#modal-fadein" href="javascript:void(0)">
-                <div class="block-content block-content-full clearfix">
-                    <div class="text-right pull-right push-10-t">
-                        <div class="font-w600 push-5">+</div>
-                        <div class="text-muted">Add recipe</div>
-                    </div>
-                    <div class="pull-left">
-                        <img class="img-avatar" src="assets/img/avatars/avatar15.jpg" alt="">
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- END User Simple Widgets -->
-</div>
 
 
 
@@ -93,18 +34,64 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div class="block-content">
+
                     <div class="table-responsive" style="overflow-x: hidden;">
                         <table class="table table-bordered table-striped js-dataTable-full" >
                             <thead>
                                 <tr>
                                     <!--Adding :: for one way binding -->
-                                    <th ng-repeat="header in ::tableValueSettings.header">{{header}}</th>
+                                    <th  ng-repeat="header in ::customerModelSettings.header">{{header}}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="rowObject in rowListValues">
+                                <tr ng-repeat="(rowId, rowObject) in rowListValues">
                                     <!--Populating the table values and binding header with columnVal-->
-                                    <td automata-map-value model-prop="tableValueSettings.properties" row-object="rowObject" column-header="header" ng-repeat="header in ::tableValueSettings.header" ></td>
+                                    <td ng-init="colType     = checkType(rowObject, header);
+                                                 colValue    = getColValue(rowObject, header);
+                                                 colKey      = getKey(rowObject, header);
+                                                 tableConfig = findModelPropertyTableConfig(customerModelSettings.tables, colKey);"  ng-repeat="header in ::customerModelSettings.header" >
+                                        <span  ng-if="colType === '[object String]'">
+                                            <span ng-if="tableConfig.onClick !== undefined">
+                                                <!--Display link here..-->
+                                                <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{colValue}}</a>
+                                            </span>
+
+                                            <span ng-init="labelType = tableConfig.tag[colValue]" ng-if="tableConfig.tag !== undefined">
+                                                <span ng-if="labelType !== undefined" class="label" ng-class="labelType" >{{colValue}}</span>
+                                                <span ng-if="labelType === undefined" class="label label-default">{{colValue}}</span>
+                                            </span>
+                                            <span ng-if="tableConfig.tag === undefined && tableConfig.onClick === undefined">
+                                                {{colValue}}
+                                            </span>
+                                        </span>
+                                        <span ng-if="colType === '[object Number]'">
+                                            <!--Do string populated work here...-->
+                                            {{colValue}}
+                                        </span>
+                                        <span ng-if="colType === '[object Array]'">
+                                            <!--Do string populated work here...-->
+                                            {{colValue}}
+                                        </span>
+                                        <span ng-if="colType === '[object Object]'">
+                                            <!--Do string populated work here...-->
+                                            <ul>
+                                                <li style="margin-top: 10px;" ng-init="objColType = checkType(colValue, key);" ng-repeat="(key, value) in colValue">
+                                                    <span  ng-if="checkType(colValue, key) === '[object Object]'">
+                                                        <ul>
+                                                            <li ng-repeat="(nestedKey, nestedValue) in getColValue(colValue, key)">
+                                                                <small><strong>{{nestedKey | capitalize}}</strong></small>: <span>{{nestedValue}}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </span>
+                                                    <span ng-if="objColType !== '[object Object]'">
+                                                        {{getColValue(colValue, key)}}
+                                                    </span>
+
+                                                </li>
+                                            </ul>
+                                        </span>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -113,6 +100,10 @@
             </div><!--div.block-->
             <!-- END Dynamic Table Full -->
         </div>
+
+
+
+
 
         <!--Adding Filters-->
         <div snaphy-load-filters class="col-lg-4 col-sm-12" >
