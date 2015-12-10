@@ -46,11 +46,11 @@
                             <tbody>
                                 <tr ng-repeat="(rowId, rowObject) in rowListValues">
                                     <!--Populating the table values and binding header with columnVal-->
-                                    <td ng-init="colType     = checkType(rowObject, header);
+                                    <td  ng-init="colType     = checkType(rowObject, header);
                                                  colValue    = getColValue(rowObject, header);
                                                  colKey      = getKey(rowObject, header);
                                                  tableConfig = findModelPropertyTableConfig(customerModelSettings.tables, colKey);"  ng-repeat="header in ::customerModelSettings.header" >
-                                        <span  ng-if="colType === '[object String]'">
+                                        <span   data-sort="{{colValue}}"  data-filter="{{colValue}}" ng-if="colType === '[object String]'">
                                             <span ng-if="tableConfig.onClick !== undefined">
                                                 <!--Display link here..-->
                                                 <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{colValue}}</a>
@@ -122,21 +122,20 @@
                     <form class="form-horizontal" >
                         <filter-date model-settings="customerModelSettings" table-id="automataTable" column-name="date" label="Select Date"></filter-date>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="example-select2">From Chef</label>
-                            <div class="col-md-8">
-                                <select class="js-select2 form-control" id="example-select2" name="example-select2" style="width: 100%;" data-placeholder="Choose one..">
-                                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                                    <option value="1">Sanjeev Kapoor</option>
-                                    <option value="2">Nisha Madhulika</option>
-                                    <option value="2">Tarla Dalal</option>
-                                </select>
-                            </div>
-                        </div>
+                        <filter-select
+                                options="{{customerModelSettings.filters.chef_name.options}}"
+                                model-settings="customerModelSettings"
+                                table-id="automataTable"
+                                column-name="chef_name"
+                                get="/api/chefs"
+                                label="Select Chefs">
+
+                        </filter-select>
+
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="example-select2-multiple">Recipes Categories</label>
                             <div class="col-md-8">
-                                <select class="js-select2 form-control" id="example-select2-multiple" name="example-select2-multiple" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                                <select data-allow-clear="true" class="js-select2 form-control"  style="width: 100%;" data-placeholder="Choose many.." multiple>
                                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                                     <option value="1">Breakfast</option>
                                     <option value="2">Dinner</option>

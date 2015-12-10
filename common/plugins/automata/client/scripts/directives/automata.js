@@ -75,11 +75,13 @@ angular.module($snaphy.getModuleName())
             });
 
 
+
             //Now add a Reset method to the filter..
             scope.$parent.addResetMethod(function(){
-                var datePickerObj = $($(iElement).find('.input-daterange')).datepicker();
-                $.datepicker._clearDate(datePickerObj);
+                $($(iElement).find('input')).val('');
             });
+
+
 
             var allowFilter = [scope.id];
 
@@ -134,16 +136,13 @@ angular.module($snaphy.getModuleName())
 
                         if ( from <= columnDate   && columnDate <= to )
                         {
-                            console.log("Value found true");
                             return true; //Show that row..
 
                         }
-                        console.log("Value found false");
                         return false;
 
                     }
                     else{
-                        console.log("Value found true...");
                         return true; //Show all rows..
                     }
                 }
@@ -153,6 +152,289 @@ angular.module($snaphy.getModuleName())
     }; //return
 }]) //filterDate directive
 
+
+
+
+
+
+
+/**
+ *Directive for defining filters $date
+ * */
+    .directive('filterSelect', ['$http', function($http){
+        //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
+        return {
+            restrict:'E',
+            scope:{
+                "modelSettings"     : "=modelSettings",
+                "id"                : "@tableId",
+                "columnName"        : "@columnName",
+                "label"             : "@label",
+                "data"              : "=data",
+                "getOptions"        : "@get",
+                "staticOptions"     : "@options",
+            },
+            replace: true,
+            template:
+            '<div class="form-group">'+
+                '<label class="col-md-4 control-label" for="example-select2">{{label}}</label>'+
+                '<div class="col-md-8">'+
+                    '<select class="js-select2 form-control" ng-model="data.value" style="width: 100%;" data-placeholder="Choose one..">'+
+                        '<option value="" >All</option>'+
+                        '<option ng-repeat="option in data.options" value="{{option.id}}">{{option.name}}</option>'+
+                    '</select>'+
+                '</div>'+
+            '</div>',
+            link: function(scope, iElement, iAttrs){
+                //First get the table id.
+                if(scope.id === ""){
+                    console.error("An table Id value is needed for filters to operate.");
+                    return null;
+                }
+
+
+                scope.data = {};
+                //initializing options..
+
+
+                //Removing the # tag from id if placed. to avoid duplicity of #
+                scope.id  = scope.id.replace(/^\#/, '');
+                scope.tableId  = '#' + scope.id;
+
+
+                //Now applying date change event of the table..
+                $($(iElement).find('.js-select2')).change(function(){
+                    var table = $(scope.tableId).DataTable();
+                    //Now redraw the tables..
+                    table.draw();
+                });
+
+
+                if(scope.staticOptions != undefined){
+                    //Load static options..
+                    scope.data.options = JSON.parse(scope.staticOptions);
+                    //scope.data.options = scope.staticOptions;
+                }
+
+
+                //Now load options..
+                if(scope.getOptions != undefined){
+                    $http({
+                        method: 'GET',
+                        url: scope.getOptions
+                    }).then(function successCallback(response) {
+                        //Select options downloaded successfully..
+                        //Loading options..
+                        scope.data.options = response;
+                    }, function errorCallback(response) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        console.error(response);
+                    });
+                }
+
+
+
+                //Now add a Reset method to the filter..
+                scope.$parent.addResetMethod(function(){
+                    scope.data.value = "";
+                    //Now reinitialize the
+                    setTimeout(function(){
+                        $($(iElement).find('select')).select2('val', 'All');
+                    },0);
+                });
+
+
+                //Now load search filters..
+                var allowFilter = [scope.id];
+
+                //Now setting the retailer added filter...
+                $.fn.DataTable.ext.search.push(
+                    function( settings, data, dataIndex ) {
+                        // check if current table is part of the allow list
+                        if ( $.inArray( settings.nTable.getAttribute('id'), allowFilter ) == -1 )
+                        {
+                            // if not table should be ignored
+                            return true;
+                        }
+                        var columnDataId;
+                        var selectValue = "";
+                        //Now get the column id where the wanted data is placed..
+                        for(var i=0; i<scope.modelSettings.header.length; i++){
+                            if(scope.modelSettings.header[i] === scope.columnName){
+                                columnDataId = i;
+                                break;
+                            }
+                        }
+                        //Getting the orderMin value..
+                        if(scope.data.value){
+                            //Parsing value for column Retailers added date..
+                            var columnValue = data[columnDataId];
+                            for(var j=0; j<scope.data.options.length; j++){
+                                if(scope.data.options[j].name.toLowerCase().trim() === columnValue.toLowerCase().trim()){
+                                    //Gettting the id of the table value..
+                                    selectValue = scope.data.options[j].id;
+                                }
+                            }
+
+                            console.log(scope.data.value);
+                            console.log(selectValue);
+                            if ( parseInt(scope.data.value) === parseInt(selectValue) )
+                            {
+                                return true; //Show that row..
+                            }
+                            return false;
+                        }
+                        else{
+                            return true; //Show all rows..
+                        }
+                    }
+                );//End of dataTable function for retailer added filter.....
+            }//link function..
+        }; //return
+    }]) //filterDate directive
+
+
+
+    /**
+     *Directive for defining filters $date
+     * */
+    .directive('filterMultiSelect', ['$http', function($http){
+        //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
+        return {
+            restrict:'E',
+            scope:{
+                "modelSettings"     : "=modelSettings",
+                "id"                : "@tableId",
+                "columnName"        : "@columnName",
+                "label"             : "@label",
+                "data"              : "=data",
+                "getOptions"        : "@get",
+                "staticOptions"     : "@options",
+            },
+            replace: true,
+            template:
+            '<div class="form-group">'+
+            '<label class="col-md-4 control-label" for="example-select2">{{label}}</label>'+
+            '<div class="col-md-8">'+
+            '<select data-allow-clear="true" class="js-select2 form-control" ng-model="data.value" style="width: 100%;" data-placeholder="Choose many.." multiple>'+
+            '<option value="" >All</option>'+
+            '<option ng-repeat="option in data.options" value="{{option.id}}">{{option.name}}</option>'+
+            '</select>'+
+            '</div>'+
+            '</div>',
+            link: function(scope, iElement, iAttrs){
+                //First get the table id.
+                if(scope.id === ""){
+                    console.error("An table Id value is needed for filters to operate.");
+                    return null;
+                }
+
+
+                scope.data = {};
+                //initializing options..
+
+
+                //Removing the # tag from id if placed. to avoid duplicity of #
+                scope.id  = scope.id.replace(/^\#/, '');
+                scope.tableId  = '#' + scope.id;
+
+
+                //Now applying date change event of the table..
+                $($(iElement).find('.js-select2')).change(function(){
+                    var table = $(scope.tableId).DataTable();
+                    //Now redraw the tables..
+                    table.draw();
+                });
+
+
+                if(scope.staticOptions != undefined){
+                    //Load static options..
+                    scope.data.options = JSON.parse(scope.staticOptions);
+                    //scope.data.options = scope.staticOptions;
+                }
+
+
+                //Now load options..
+                if(scope.getOptions != undefined){
+                    $http({
+                        method: 'GET',
+                        url: scope.getOptions
+                    }).then(function successCallback(response) {
+                        //Select options downloaded successfully..
+                        //Loading options..
+                        scope.data.options = response;
+                    }, function errorCallback(response) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        console.error(response);
+                    });
+                }
+
+
+
+                //Now add a Reset method to the filter..
+                scope.$parent.addResetMethod(function(){
+                    scope.data.value = "";
+                    //Now reinitialize the
+                    setTimeout(function(){
+                        $($(iElement).find('select')).select2('val', 'All');
+                    },0);
+                });
+
+
+                //Now load search filters..
+                var allowFilter = [scope.id];
+
+                //Now setting the retailer added filter...
+                $.fn.DataTable.ext.search.push(
+                    function( settings, data, dataIndex ) {
+                        // check if current table is part of the allow list
+                        if ( $.inArray( settings.nTable.getAttribute('id'), allowFilter ) == -1 )
+                        {
+                            // if not table should be ignored
+                            return true;
+                        }
+                        var columnDataId;
+                        var selectValue = "";
+                        //Now get the column id where the wanted data is placed..
+                        for(var i=0; i<scope.modelSettings.header.length; i++){
+                            if(scope.modelSettings.header[i] === scope.columnName){
+                                columnDataId = i;
+                                break;
+                            }
+                        }
+
+                        console.log(scope.data.value);
+                        //Getting the orderMin value..
+                        if(scope.data.value){
+                            //Parsing value for column Retailers added date..
+                            var columnValue = data[columnDataId];
+                            
+                            //Gettting the id of the table column first..
+                            for(var j=0; j<scope.data.options.length; j++){
+                                if(scope.data.options[j].name.toLowerCase().trim() === columnValue.toLowerCase().trim()){
+                                    //Gettting the id of the table value..
+                                    selectValue = scope.data.options[j].id;
+                                }
+                            }
+
+                            console.log(scope.data.value);
+                            console.log(selectValue);
+                            if ( parseInt(scope.data.value) === parseInt(selectValue) )
+                            {
+                                return true; //Show that row..
+                            }
+                            return false;
+                        }
+                        else{
+                            return true; //Show all rows..
+                        }
+                    }
+                );//End of dataTable function for retailer added filter.....
+            }//link function..
+        }; //return
+    }]) //filterDate directive
 
 
 

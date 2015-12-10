@@ -108,7 +108,7 @@ angular.module($snaphy.getModuleName())
             tableId      = '#' + tableId;
             for(var i=0; i<resetFilterList.length; i++){
                 //Now call each method..
-                $timeout(resetFilterList[i]);
+                resetFilterList[i]();
             }
 
             //Now redraw the table..
@@ -200,6 +200,16 @@ angular.module($snaphy.getModuleName())
               "chef_name":{
                   "type": "$select",
                   "get" : "/api/chefs",
+                  "options":[
+                      {
+                          id:1,
+                          name:"Sanjeev Kapoor"
+                      },
+                      {
+                          id:2,
+                          name:"Tarla Dalal"
+                      }
+                  ]
               },
               "status":{
                   "type":"$typeSelect",
