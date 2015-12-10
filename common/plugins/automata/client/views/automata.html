@@ -132,18 +132,18 @@
 
                         </filter-select>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="example-select2-multiple">Recipes Categories</label>
-                            <div class="col-md-8">
-                                <select data-allow-clear="true" class="js-select2 form-control"  style="width: 100%;" data-placeholder="Choose many.." multiple>
-                                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                                    <option value="1">Breakfast</option>
-                                    <option value="2">Dinner</option>
-                                    <option value="3">South Indian</option>
-                                    <option value="4">North Indian</option>
-                                </select>
-                            </div>
-                        </div>
+                        <filter-multi-select
+                                options="{{customerModelSettings.filters.email.options}}"
+                                model-settings="customerModelSettings"
+                                table-id="automataTable"
+                                column-name="email"
+                                get="/api/email"
+                                label="Select multiple columns">
+
+                        </filter-multi-select>
+
+
+
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="radio-group12">Recipes Type</label>
                             <div class="col-xs-8">

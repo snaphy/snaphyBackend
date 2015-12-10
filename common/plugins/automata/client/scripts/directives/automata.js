@@ -318,7 +318,6 @@ angular.module($snaphy.getModuleName())
             '<label class="col-md-4 control-label" for="example-select2">{{label}}</label>'+
             '<div class="col-md-8">'+
             '<select data-allow-clear="true" class="js-select2 form-control" ng-model="data.value" style="width: 100%;" data-placeholder="Choose many.." multiple>'+
-            '<option value="" >All</option>'+
             '<option ng-repeat="option in data.options" value="{{option.id}}">{{option.name}}</option>'+
             '</select>'+
             '</div>'+
@@ -343,8 +342,18 @@ angular.module($snaphy.getModuleName())
                 //Now applying date change event of the table..
                 $($(iElement).find('.js-select2')).change(function(){
                     var table = $(scope.tableId).DataTable();
-                    //Now redraw the tables..
-                    table.draw();
+
+                    //only draw if value is legitimate..
+                    if(scope.data.value){
+                        if(scope.data.value.length){
+                            //Now redraw the tables..
+                            table.draw();
+                        }
+                        else{
+                            scope.data.value = null;
+                            table.draw();
+                        }
+                    }
                 });
 
 
@@ -375,10 +384,10 @@ angular.module($snaphy.getModuleName())
 
                 //Now add a Reset method to the filter..
                 scope.$parent.addResetMethod(function(){
-                    scope.data.value = "";
+                    scope.data.value = null;
                     //Now reinitialize the
                     setTimeout(function(){
-                        $($(iElement).find('select')).select2('val', 'All');
+                       $($(iElement).find('select')).select2();
                     },0);
                 });
 
@@ -405,12 +414,11 @@ angular.module($snaphy.getModuleName())
                             }
                         }
 
-                        console.log(scope.data.value);
                         //Getting the orderMin value..
                         if(scope.data.value){
                             //Parsing value for column Retailers added date..
                             var columnValue = data[columnDataId];
-                            
+
                             //Gettting the id of the table column first..
                             for(var j=0; j<scope.data.options.length; j++){
                                 if(scope.data.options[j].name.toLowerCase().trim() === columnValue.toLowerCase().trim()){
@@ -419,13 +427,18 @@ angular.module($snaphy.getModuleName())
                                 }
                             }
 
-                            console.log(scope.data.value);
-                            console.log(selectValue);
-                            if ( parseInt(scope.data.value) === parseInt(selectValue) )
-                            {
-                                return true; //Show that row..
-                            }
-                            return false;
+                            var matchFound = false;
+                            //If the value is present in the multi select then return true else false..
+                            scope.data.value.forEach(function(data){
+                                if ( parseInt(data) === parseInt(selectValue) )
+                                {
+                                    matchFound = true;
+                                    return false;
+                                }
+                            });
+
+                            return matchFound;
+
                         }
                         else{
                             return true; //Show all rows..

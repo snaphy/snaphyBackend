@@ -194,9 +194,20 @@ angular.module($snaphy.getModuleName())
               },
               "email":{
                   "type"  : "$multiSelect",
-                  "get"   : "/api/chefs",
-                  "label" : "Select multiple columns"
+                  "get"   : "/api/email",
+                  "label" : "Select multiple columns",
+                  "options":[
+                      {
+                          id:1,
+                          name:"robinskumar73@gmail.com"
+                      },
+                      {
+                          id:2,
+                          name:"ravigupta9363@gmail.com"
+                      }
+                  ]
               },
+
               "chef_name":{
                   "type": "$select",
                   "get" : "/api/chefs",
