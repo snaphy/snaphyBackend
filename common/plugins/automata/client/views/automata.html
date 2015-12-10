@@ -36,7 +36,7 @@
                 <div class="block-content">
 
                     <div class="table-responsive" style="overflow-x: hidden;">
-                        <table class="table table-bordered table-striped js-dataTable-full" >
+                        <table id="automataTable" class="table table-bordered table-striped js-dataTable-full" >
                             <thead>
                                 <tr>
                                     <!--Adding :: for one way binding -->
@@ -120,16 +120,8 @@
                 </div>
                 <div class="block-content block-content-narrow">
                     <form class="form-horizontal" >
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="example-daterange1">Recipe added</label>
-                            <div class="col-md-8">
-                                <div class="input-daterange input-group" data-date-format="mm/dd/yyyy">
-                                    <input class="form-control" type="text" id="example-daterange1" name="example-daterange1" placeholder="From">
-                                    <span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-                                    <input class="form-control" type="text" id="example-daterange2" name="example-daterange2" placeholder="To">
-                                </div>
-                            </div>
-                        </div>
+                        <filter-date model-settings="customerModelSettings" table-id="automataTable" column-name="date" label="Select Date"></filter-date>
+
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="example-select2">From Chef</label>
                             <div class="col-md-8">
@@ -166,7 +158,7 @@
                         </div><!--form-group-->
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button class="btn btn-minw btn-default pull-right" type="button">Reset</button>
+                                <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
                             </div>
                         </div>
                     </form>

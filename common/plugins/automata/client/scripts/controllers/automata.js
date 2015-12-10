@@ -3,8 +3,8 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for automataControl ..
-.controller('automataControl', ['$scope', '$stateParams', 'Database',
-    function($scope, $stateParams, Database) {
+.controller('automataControl', ['$scope', '$stateParams', 'Database', '$timeout',
+    function($scope, $stateParams, Database, $timeout) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('automata', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
@@ -90,6 +90,33 @@ angular.module($snaphy.getModuleName())
         };
 
 
+        /**
+         * Event listener for adding reset button to the filters. To be called when reset button is called..
+         */
+        var resetFilterList = [];
+        $scope.addResetMethod = function(func){
+            resetFilterList.push(func);
+        };
+
+
+        /**
+         * For resetting all filter on reset button click..
+         */
+        $scope.resetAll = function(tableId){
+            //Removing the # tag from id if placed. to avoid duplicity of #
+            var tableId  = tableId.replace(/^\#/, '');
+            tableId      = '#' + tableId;
+            for(var i=0; i<resetFilterList.length; i++){
+                //Now call each method..
+                $timeout(resetFilterList[i]);
+            }
+
+            //Now redraw the table..
+            //Getting the instance of the table..
+            var table = $(tableId).DataTable();
+            //Now redraw the tables..
+            table.draw();
+        };
 
 
 
@@ -106,7 +133,7 @@ angular.module($snaphy.getModuleName())
 
         //Its a model properties for customer..
         $scope.customerModelSettings = {
-            "header":['name', 'email', 'access_level', 'access_name',  'phoneNumber'],
+            "header":['name', 'email', 'access_level', 'access_name',  'phoneNumber', "date", "status", "chef_name"],
             "properties":{
                 "name":{
                     type:"string",
@@ -122,7 +149,22 @@ angular.module($snaphy.getModuleName())
                         required: true
                     }
 
+                },
+                "date":{
+                    type:"date",
+                    required: true
+                },
+                "status":{
+                    type:"string",
+                    "required":true
+                },
+                "chef":{
+                    "name":{
+                        type:"string",
+                        required:true
+                    }
                 }
+
             },
             "tables":{
                 name:{
@@ -134,12 +176,35 @@ angular.module($snaphy.getModuleName())
                     }
 
                 },
-                email:{
+                "status":{
                     tag:{
-                        "robinskumar73@gmail.com": "label-warning"
+                        "Pending": "label-warning"
                     }
                 }
 
+            },
+            "filters":{
+              "date":{
+                  "type":"$date",
+                  "default":{
+                      "from":"",
+                      "to":""
+                  },
+                  "label": "Recipe added between"
+              },
+              "email":{
+                  "type"  : "$multiSelect",
+                  "get"   : "/api/chefs",
+                  "label" : "Select multiple columns"
+              },
+              "chef_name":{
+                  "type": "$select",
+                  "get" : "/api/chefs",
+              },
+              "status":{
+                  "type":"$typeSelect",
+                  "types":['Pending', "Approved", "Rejected"]
+              }
             }
         };
 
@@ -160,7 +225,10 @@ angular.module($snaphy.getModuleName())
                     "name": "Robins"
 
                 },
-                "phoneNumber": 9953242338
+                "phoneNumber": 9953242338,
+                "date": "Thu Dec 10 2015 17:34:50 GMT+0530 (IST)",
+                "status": "Pending",
+                "chef_name": "Sanjeev Kapoor"
             },
             {
                 name:"Ravi Gupta",
@@ -169,9 +237,13 @@ angular.module($snaphy.getModuleName())
                     level:{
                         type:2,
                         height:0
-                    }
+                    },
+                    "name": "Ravi"
                 },
-                "phoneNumber": 9953242338
+                "phoneNumber": 9953242338,
+                "date": "Thu Dec 11 2015 17:34:50 GMT+0530 (IST)",
+                "status": "Approved",
+                "chef_name": "Tarla Dalal"
             }
         ];
 
