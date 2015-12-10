@@ -72,9 +72,13 @@
                                             <!--Do string populated work here...-->
                                             {{colValue}}
                                         </span>
-                                        <span ng-if="colType === '[object Object]'">
+                                        <span ng-init="belongToReln = header !== colKey;
+                                              hasOneRelationPropName = getColumnKey(header);
+                                              colType = (belongToReln)? checkType(colValue, hasOneRelationPropName): colType;
+                                              colValue = (belongToReln)? colValue[hasOneRelationPropName] : colValue;"
+                                              ng-if="colType === '[object Object]'">
                                             <!--Do string populated work here...-->
-                                            <ul>
+                                            <ul ng-if="colType === '[object Object]'">
                                                 <li style="margin-top: 10px;" ng-init="objColType = checkType(colValue, key);" ng-repeat="(key, value) in colValue">
                                                     <span  ng-if="checkType(colValue, key) === '[object Object]'">
                                                         <ul>
@@ -84,11 +88,14 @@
                                                         </ul>
                                                     </span>
                                                     <span ng-if="objColType !== '[object Object]'">
-                                                        {{getColValue(colValue, key)}}
+                                                       <small><strong>{{key | capitalize }}</strong></small>: {{getColValue(colValue, key)}}
                                                     </span>
 
                                                 </li>
                                             </ul>
+                                            <span ng-if="colType !== '[object Object]'">
+                                                    {{colValue}}
+                                            </span>
                                         </span>
 
                                     </td>

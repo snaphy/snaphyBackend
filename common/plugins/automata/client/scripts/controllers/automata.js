@@ -23,7 +23,13 @@ angular.module($snaphy.getModuleName())
             return rowObject[key];
         };
 
-
+        /**
+         * change prop like access_level to access only
+         * Get the key or the relationship name.
+         * @param rowObject
+         * @param columnHeader
+         * @returns {*}
+         */
         $scope.getKey = function(rowObject, columnHeader){
             var keyName;
             if(rowObject[columnHeader] !== undefined){
@@ -35,6 +41,21 @@ angular.module($snaphy.getModuleName())
             }
             return keyName;
         };
+
+        /**
+         * change prop like access-level to level only
+         * Get the model properties name on the case of belongsTo or hasOne relationships..
+         * @param columnHeader
+         */
+        $scope.getColumnKey = function(columnHeader){
+            var keyName;
+            var patt = /^[A-Z0-9a-z-]+\_/;
+            return columnHeader.replace(patt, '');
+        };
+
+
+
+
 
 
         /**
@@ -71,6 +92,9 @@ angular.module($snaphy.getModuleName())
 
 
 
+
+
+
         /**
          * INITIALIZING SOME DUMMY DATA..
          */
@@ -82,7 +106,7 @@ angular.module($snaphy.getModuleName())
 
         //Its a model properties for customer..
         $scope.customerModelSettings = {
-            "header":['name', 'email', 'access_level', 'phoneNumber'],
+            "header":['name', 'email', 'access_level', 'access_name',  'phoneNumber'],
             "properties":{
                 "name":{
                     type:"string",
@@ -132,7 +156,8 @@ angular.module($snaphy.getModuleName())
                     others:{
                         email:"rohitbasu2030@gmail.com",
                         height:1
-                    }
+                    },
+                    "name": "Robins"
 
                 },
                 "phoneNumber": 9953242338
