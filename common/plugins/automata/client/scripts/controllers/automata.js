@@ -119,6 +119,51 @@ angular.module($snaphy.getModuleName())
         };
 
 
+        $scope.vm = {};
+
+        $scope.vm.user = {};
+
+        // note, these field types will need to be
+        // pre-defined. See the pre-built and custom templates
+        // http://docs.angular-formly.com/v6.4.0/docs/custom-templates
+        $scope.vm.userFields = [
+            {
+                key: 'email',
+                type: 'input',
+                templateOptions: {
+                    type: 'email',
+                    label: 'Email address'
+                }
+            },
+            {
+                key: 'password',
+                type: 'input',
+                templateOptions: {
+                    type: 'password',
+                    label: 'Enter Password'
+                }
+            },
+            {
+                key: 'text',
+                type: 'textarea',
+                templateOptions: {
+                    label: 'Enter value'
+                }
+            },
+            {
+                key: 'select',
+                type: 'select',
+                templateOptions: {
+                    label: 'Enter value',
+                    options: [
+                        {id:1, name:"Robins Gupta"}
+                    ]
+                }
+            }
+
+        ];
+
+
 
 
 

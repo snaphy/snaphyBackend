@@ -231,7 +231,9 @@
 
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="<%= staticRoute %>/bower_components/api-check/dist/api-check.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular/angular.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-formly/dist/formly.min.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular-animate/angular-animate.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular-messages/angular-messages.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular-resource/angular-resource.js"></script>
@@ -259,6 +261,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="<%= staticRoute %>/scripts/controllers/bodyCtrl.js"></script>
         <script src="<%= staticRoute %>/scripts/directives/templateLoad.js"></script>
+        <script src="<%= staticRoute %>/scripts/config/config.js"></script>
         <% for (var script in pluginScripts) {
     		  if (pluginScripts.hasOwnProperty(script)) { %>
     		    <script src="<%= pluginScripts[script] %>"></script>
