@@ -120,7 +120,12 @@
                 </div>
                 <div class="block-content block-content-narrow">
                     <form class="form-horizontal" >
-                        <filter-date model-settings="customerModelSettings" table-id="automataTable" column-name="date" label="Select Date"></filter-date>
+                        <filter-date
+                                model-settings="customerModelSettings"
+                                table-id="automataTable"
+                                column-name="date"
+                                label="Select Date">
+                        </filter-date>
 
                         <filter-select
                                 options="{{customerModelSettings.filters.chef_name.options}}"
@@ -142,19 +147,14 @@
 
                         </filter-multi-select>
 
+                        <filter-radio
+                                options="{{customerModelSettings.filters.status.options}}"
+                                table-id="automataTable"
+                                column-name="status"
+                                label="Choose status"
+                                model-settings="customerModelSettings">
+                        </filter-radio>
 
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="radio-group12">Recipes Type</label>
-                            <div class="col-xs-8">
-                                <label class="css-input css-radio css-radio-lg css-radio-primary push-10-r">
-                                    <input type="radio" name="radio-group12" checked><span></span> Veg
-                                </label>
-                                <label class="css-input css-radio css-radio-lg css-radio-primary">
-                                    <input type="radio" name="radio-group12"><span></span> Non Veg
-                                </label>
-                            </div>
-                        </div><!--form-group-->
                         <div class="form-group">
                             <div class="col-md-12">
                                 <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>

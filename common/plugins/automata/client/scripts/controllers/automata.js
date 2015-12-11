@@ -220,11 +220,26 @@ angular.module($snaphy.getModuleName())
                           id:2,
                           name:"Tarla Dalal"
                       }
-                  ]
+                  ],
+                  "label": "Select chefs"
               },
               "status":{
                   "type":"$typeSelect",
-                  "types":['Pending', "Approved", "Rejected"]
+                  "options":[
+                      {
+                        name: "Pending",
+                        checked: false
+                      },
+                      {
+                        name: "Approved",
+                        checked: true
+                      },
+                      {
+                          name:"Rejected",
+                          checked: false
+                      }
+                  ],
+                  "label": "Choose types.."
               }
             }
         };

@@ -13,8 +13,13 @@ angular.module($snaphy.getModuleName())
                 post: function postLink( ) {
                     // Post-link code goes here
                     $timeout(function(){
-                        // Initialize when page loads
-                        jQuery(function(){ BaseTableDatatables.init(); });
+                        try{
+                            // Initialize when page loads
+                            jQuery(function(){ BaseTableDatatables.init(); });
+                        }catch (err){
+                            /*Do nothing error occured due to multiple table initialization.. */
+                        }
+
                     }); //timeout method..
                 }
             };
@@ -277,8 +282,7 @@ angular.module($snaphy.getModuleName())
                                 }
                             }
 
-                            console.log(scope.data.value);
-                            console.log(selectValue);
+
                             if ( parseInt(scope.data.value) === parseInt(selectValue) )
                             {
                                 return true; //Show that row..
@@ -439,6 +443,106 @@ angular.module($snaphy.getModuleName())
 
                             return matchFound;
 
+                        }
+                        else{
+                            return true; //Show all rows..
+                        }
+                    }
+                );//End of dataTable function for retailer added filter.....
+            }//link function..
+        }; //return
+    }]) //filterDate directive
+
+
+
+
+    /**
+     *Directive for defining filters $date
+     * */
+    .directive('filterRadio', [function(){
+        //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
+        return {
+            restrict:'E',
+            scope:{
+                "id"                : "@tableId",
+                "columnName"        : "@columnName",
+                "label"             : "@label",
+                "data"              : "=data",
+                "options"           : "@options",
+                "modelSettings"     : "=modelSettings"
+            },
+            replace: true,
+            template:
+            '<div class="form-group">'+
+                '<label class="col-md-4 control-label" for="radio-group12">{{label}}</label>'+
+                '<div class="col-xs-8">'+
+                    '<label ng-repeat="option in data.options" class="css-input css-radio css-radio-lg css-radio-primary push-10-r">'+
+                        '<input class="radio-filter" ng-change="valueChanged()" type="radio" name="radio-group" ng-model="data.value" ng-value="option.name" ng-checked="option.checked" ><span></span>{{option.name}}'+
+                    '</label>'+
+                '</div>'+
+            '</div>',
+            link: function(scope, iElement, iAttrs){
+                //First get the table id.
+                if(scope.id === ""){
+                    console.error("An table Id value is needed for filters to operate.");
+                    return null;
+                }
+
+                scope.data = {};
+                scope.data.options = JSON.parse(scope.options);
+
+                //initializing options..
+                //Removing the # tag from id if placed. to avoid duplicity of #
+                scope.id  = scope.id.replace(/^\#/, '');
+                scope.tableId  = '#' + scope.id;
+
+
+                scope.valueChanged = function(){
+                    var table = $(scope.tableId).DataTable();
+                    //only draw if value is legitimate..
+                    if(scope.data.value){
+                        table.draw();
+                    }
+                };
+
+
+                //Now add a Reset method to the filter..
+                scope.$parent.addResetMethod(function(){
+                    scope.data.value = null;
+                });
+
+
+                //Now load search filters..
+                var allowFilter = [scope.id];
+
+                //Now setting the retailer added filter...
+                $.fn.DataTable.ext.search.push(
+                    function( settings, data, dataIndex ) {
+                        // check if current table is part of the allow list
+                        if ( $.inArray( settings.nTable.getAttribute('id'), allowFilter ) == -1 )
+                        {
+                            // if not table should be ignored
+                            return true;
+                        }
+                        var columnDataId;
+                        //Now get the column id where the wanted data is placed..
+                        for(var i=0; i<scope.modelSettings.header.length; i++){
+                            if(scope.modelSettings.header[i] === scope.columnName){
+                                columnDataId = i;
+                                break;
+                            }
+                        }
+
+
+                        //Getting the orderMin value..
+                        if(scope.data.value){
+                            //Parsing value for column Retailers added date..
+                            var columnValue = data[columnDataId];
+                            if(scope.data.value.toLowerCase().trim() === columnValue.toLowerCase().trim()){
+                                return true;
+                            }else{
+                                return false;
+                            }
                         }
                         else{
                             return true; //Show all rows..
