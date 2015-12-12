@@ -44,7 +44,8 @@
     "recipes": {
       "type": "hasMany",
       "model": "Recipe",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateEnabled": true
     }
   },
   "tables":{

@@ -34,8 +34,8 @@
     "headerHook": [],
     "footerHook":[]
   },
-  "databases": {
-  },
+  "databases": {},
+  "loadModels":["Employee"],
   "activate": true,
   "services": {},
   "dependencies": {},
