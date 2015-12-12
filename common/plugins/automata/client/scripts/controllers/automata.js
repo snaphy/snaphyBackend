@@ -99,6 +99,7 @@ angular.module($snaphy.getModuleName())
         };
 
 
+
         /**
          * For resetting all filter on reset button click..
          */
@@ -116,6 +117,155 @@ angular.module($snaphy.getModuleName())
             var table = $(tableId).DataTable();
             //Now redraw the tables..
             table.draw();
+        };
+
+
+
+
+        /**
+         * Model for storing the model structure..
+         * @param formStructure
+         * @param formModel
+         */
+        $scope.saveForm =  function(formStructure, formModel){
+            /**
+             * Validate the model here..
+             */
+            //Now save the model..
+            var baseDatabase = Database.loadDb(formStructure.model);
+            var relatedData = {
+                hasMany:[]
+                //belongsTo:[],
+                //hasManyThrough:[],
+                //hasAndBelongToMany:[]
+            };
+
+
+
+            //Now first prepare object..
+            formStructure.relations.hasMany.forEach(function(relationName, index){
+                if(formModel[relationName]){
+                    relatedData.hasMany.push(formModel[relationName]);
+                    //Now removing the relation from the model.
+                    delete formModel[relationName];
+                }
+            });
+
+
+
+
+            //Now save the base model..
+            /**
+             * Creting baseModel..
+             */
+            baseDatabase.create({}, formModel, function(baseModel){
+                //Now save the related model..
+                formStructure.relations.hasMany.forEach(function(relationName, index){
+                    addRelatedModel(baseDatabase, relationName, relatedData, index );
+                });
+            }, function(respHeader){
+                console.error(respHeader);
+            });
+
+
+            /**
+             * Local method for adding related model..
+             * @param baseDatabase
+             * @param relationName
+             * @param relatedData
+             * @param index
+             */
+            var addRelatedModel= function(baseDatabase, relationName, relatedData, index ){
+                baseDatabase[relationName].createMany({}, relatedData.hasMany[index], function(modelArr){
+                    console.log("Successfully saved related model data");
+                }, function(respHeader){
+                    console.error(respHeader);
+                });
+            };
+
+
+
+
+            /**
+             * Other related model to be implemented later.
+             */
+
+
+
+/*
+
+ //Now first prepare object..
+            formStructure.belongsTo.forEach(function(relationName, index){
+                if(formModel[relationName]){
+                    relatedData.belongsTo.push(formModel[relationName]);
+                    //Now removing the relation from the model.
+                    delete formModel[relationName];
+                }
+            });
+
+
+
+            //Now first prepare object..
+            formStructure.hasManyThrough.forEach(function(relationName, index){
+                if(formModel[relationName]){
+                    relatedData.hasManyThrough.push(formModel[relationName]);
+                    //Now removing the relation from the model.
+                    delete formModel[relationName];
+                }
+            });
+
+
+
+            //Now first prepare object..
+            formStructure.hasAndBelongToMany.forEach(function(relationName, index){
+                if(formModel[relationName]){
+                    relatedData.hasAndBelongToMany.push(formModel[relationName]);
+                    //Now removing the relation from the model.
+                    delete formModel[relationName];
+                }
+            });
+*/
+
+
+        };
+
+
+
+
+        $scope.addFormJSON = {
+            model: "Employee",
+            relations:{
+                hasMany:[],
+                belongsTo:[],
+                hasManyThrough:[],
+                hasAndBelongToMany:[]
+            },
+            fields:[
+                {
+                    key: 'email',
+                    type: 'input',
+                    templateOptions: {
+                        type: 'email',
+                        label: 'Email address'
+                    }
+                },
+                {
+                    key: 'username',
+                    type: 'input',
+                    templateOptions: {
+                        type: 'text',
+                        label: 'Enter Username'
+                    }
+                },
+                {
+                    key: 'password',
+                    type: 'input',
+                    templateOptions: {
+                        type: 'password',
+                        label: 'Enter Password'
+                    }
+                }
+            ]
         };
 
 
@@ -147,7 +297,8 @@ angular.module($snaphy.getModuleName())
                 key: 'text',
                 type: 'textarea',
                 templateOptions: {
-                    label: 'Enter value'
+                    label: 'Enter value',
+                    id:"test"
                 }
             },
             {
@@ -159,8 +310,49 @@ angular.module($snaphy.getModuleName())
                         {id:1, name:"Robins Gupta"}
                     ]
                 }
+            },
+            {
+                type: 'repeatSection',
+                key: 'investments',
+                templateOptions: {
+                    btnText:'Add another investment',
+                    fields: [
+                        {
+                            className: 'row',
+                            fieldGroup: [
+                                {
+                                    key: 'email',
+                                    type: 'input',
+                                    templateOptions: {
+                                        type: 'email',
+                                        label: 'Email address'
+                                    }
+                                },
+                                {
+                                    key: 'sel',
+                                    type: 'select',
+                                    templateOptions: {
+                                        label: 'Enter inline',
+                                        options: [
+                                            {id:1, name:"Robins"}
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            key: 'select',
+                            type: 'select',
+                            templateOptions: {
+                                label: 'Enter value',
+                                options: [
+                                    {id:1, name:"Robins Gupta"}
+                                ]
+                            }
+                        }
+                    ]
+                }
             }
-
         ];
 
 

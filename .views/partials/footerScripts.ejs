@@ -112,8 +112,14 @@
             return $injector.get(service);
         };
 
+
+        var loadDatabase = function(databaseName){
+            return $injector.get(databaseName);
+        };
+
         return{
-            getDb: getDatabase
+            getDb: getDatabase,
+            loadDb: loadDatabase
         };
     }]);//factory database..
 

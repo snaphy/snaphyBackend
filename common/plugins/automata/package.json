@@ -25,10 +25,7 @@
       "bootstrap3Datapicker"     : "/automata/style/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
       "select2Full"              : "/automata/style/bower_components/select2/dist/js/select2.full.min.js"
     },
-    "moduleDependencies":{
-
-
-    },
+    "moduleDependencies":{},
     "settings": "/automata/settings.js"
   },
   "bodystructure": {

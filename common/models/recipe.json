@@ -1,0 +1,52 @@
+{
+  "name": "Recipe",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "setpsImage": {
+      "type": [
+        "string"
+      ],
+      "required": true
+    },
+    "recipeType": {
+      "type": "string",
+      "required": true
+    },
+    "servings": {
+      "type": "number",
+      "required": true
+    },
+    "added": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string"
+    },
+    "mainImage": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "employee": {
+      "type": "belongsTo",
+      "model": "Employee",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
