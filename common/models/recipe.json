@@ -14,9 +14,9 @@
       "type": "string",
       "required": true
     },
-    "setpsImage": {
+    "stepsImage": {
       "type": [
-        "string"
+        "object"
       ],
       "required": true
     },

@@ -161,7 +161,7 @@ angular.module($snaphy.getModuleName())
             baseDatabase.create({}, formModel, function(baseModel){
                 //Now save the related model..
                 formStructure.relations.hasMany.forEach(function(relationName, index){
-                    addRelatedModel(baseDatabase, relationName, relatedData, index );
+                    addRelatedModel(baseDatabase, relationName, relatedData, index , baseModel.id  );
                 });
             }, function(respHeader){
                 console.error(respHeader);
@@ -175,8 +175,8 @@ angular.module($snaphy.getModuleName())
              * @param relatedData
              * @param index
              */
-            var addRelatedModel= function(baseDatabase, relationName, relatedData, index ){
-                baseDatabase[relationName].createMany({}, relatedData.hasMany[index], function(modelArr){
+            var addRelatedModel= function(baseDatabase, relationName, relatedData, index, parentId ){
+                baseDatabase[relationName].createMany({id:parentId}, relatedData.hasMany[index], function(modelArr){
                     console.log("Successfully saved related model data");
                 }, function(respHeader){
                     console.error(respHeader);
@@ -191,42 +191,6 @@ angular.module($snaphy.getModuleName())
              */
 
 
-
-/*
-
- //Now first prepare object..
-            formStructure.belongsTo.forEach(function(relationName, index){
-                if(formModel[relationName]){
-                    relatedData.belongsTo.push(formModel[relationName]);
-                    //Now removing the relation from the model.
-                    delete formModel[relationName];
-                }
-            });
-
-
-
-            //Now first prepare object..
-            formStructure.hasManyThrough.forEach(function(relationName, index){
-                if(formModel[relationName]){
-                    relatedData.hasManyThrough.push(formModel[relationName]);
-                    //Now removing the relation from the model.
-                    delete formModel[relationName];
-                }
-            });
-
-
-
-            //Now first prepare object..
-            formStructure.hasAndBelongToMany.forEach(function(relationName, index){
-                if(formModel[relationName]){
-                    relatedData.hasAndBelongToMany.push(formModel[relationName]);
-                    //Now removing the relation from the model.
-                    delete formModel[relationName];
-                }
-            });
-*/
-
-
         };
 
 
@@ -235,7 +199,7 @@ angular.module($snaphy.getModuleName())
         $scope.addFormJSON = {
             model: "Employee",
             relations:{
-                hasMany:[],
+                hasMany:['recipes'],
                 belongsTo:[],
                 hasManyThrough:[],
                 hasAndBelongToMany:[]
@@ -250,22 +214,104 @@ angular.module($snaphy.getModuleName())
                     }
                 },
                 {
-                    key: 'username',
-                    type: 'input',
-                    templateOptions: {
-                        type: 'text',
-                        label: 'Enter Username'
-                    }
-                },
-                {
                     key: 'password',
                     type: 'input',
                     templateOptions: {
                         type: 'password',
                         label: 'Enter Password'
                     }
+                },
+                {
+                    key: 'username',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Enter username',
+                        type:'text'
+                    }
+                },
+                {
+                    type: 'repeatSection',
+                    key: 'recipes',
+                    templateOptions: {
+                        btnText:'Add Recipes',
+                        fields:[
+                            {
+                                key: 'name',
+                                type: 'input',
+                                templateOptions: {
+                                    type: 'text',
+                                    label: 'Enter Recipe'
+                                }
+                            },
+                            {
+                                key: 'description',
+                                type: 'input',
+                                templateOptions: {
+                                    type: 'text',
+                                    label: 'Enter Description'
+                                }
+                            },
+                            {
+                                type: 'repeatSection',
+                                key: 'stepsImage',
+                                templateOptions: {
+                                    btnText:'Upload another image steps',
+                                    fields: [
+                                        {
+                                            className: 'row',
+                                            fieldGroup: [
+                                                {
+                                                    key: 'imageId',
+                                                    type: 'input',
+                                                    templateOptions: {
+                                                        type: 'text',
+                                                        label: 'Enter Image Id'
+                                                    }
+                                                },
+                                                {
+                                                    key: 'containerId',
+                                                    type: 'input',
+                                                    templateOptions: {
+                                                        type: 'text',
+                                                        label: 'Enter Container Id'
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                key: 'recipeType',
+                                type: 'input',
+                                templateOptions: {
+                                    type: 'text',
+                                    label: 'Enter Recipe Type'
+                                }
+                            },
+                            {
+                                key: 'servings',
+                                type: 'input',
+                                templateOptions: {
+                                    type: 'number',
+                                    label: 'Enter Servings'
+                                }
+                            },
+                            {
+                                key: 'mainImage',
+                                type: 'input',
+                                templateOptions: {
+                                    type: 'text',
+                                    label: 'Enter Main Image Id'
+                                }
+                            }
+                        ]
+                    }
                 }
             ]
+
+
+
         };
 
 
@@ -385,7 +431,6 @@ angular.module($snaphy.getModuleName())
                         type:"object",
                         required: true
                     }
-
                 },
                 "date":{
                     type:"date",
@@ -401,7 +446,6 @@ angular.module($snaphy.getModuleName())
                         required:true
                     }
                 }
-
             },
             "tables":{
                 name:{

@@ -5,7 +5,40 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "username":{
+      "type":"string",
+      "template":{
+        "type":"input",
+        "templateOptions":{
+          "type": "text",
+          "label": "Enter Username"
+        }
+      }
+    },
+
+    "email":{
+      "type":"string",
+      "template":{
+          "type": "input",
+          "templateOptions": {
+            "type": "email",
+            "label": "Email address"
+          }
+      }
+    },
+
+    "password":{
+      "type":"string",
+      "template":{
+        "type": "input",
+        "templateOptions": {
+          "type": "password",
+          "label": "Enter Password"
+        }
+      }
+    }
+  },
   "validations": [],
   "relations": {
     "recipes": {
@@ -14,6 +47,82 @@
       "foreignKey": ""
     }
   },
+  "tables":{
+    "name":{
+      "onClick":{
+        "state":"dashboard",
+        "params":{
+          "name":"name"
+        }
+      }
+    },
+    "status":{
+      "tag":{
+        "Pending": "label-warning"
+      }
+    }
+
+  },
+  "filters":{
+    "date":{
+      "type":"$date",
+      "default":{
+        "from":"",
+        "to":""
+      },
+      "label": "Recipe added between"
+    },
+    "email":{
+      "type"  : "$multiSelect",
+      "get"   : "/api/email",
+      "label" : "Select multiple columns",
+      "options":[
+        {
+          "id":1,
+          "name":"robinskumar73@gmail.com"
+        },
+        {
+          "id":2,
+          "name":"ravigupta9363@gmail.com"
+        }
+      ]
+    },
+
+    "chef_name":{
+      "type": "$select",
+      "get" : "/api/chefs",
+      "options":[
+        {
+          "id":1,
+          "name":"Sanjeev Kapoor"
+        },
+        {
+          "id":2,
+          "name":"Tarla Dalal"
+        }
+      ],
+      "label": "Select chefs"
+    },
+    "status":{
+      "type":"$typeSelect",
+      "options":[
+        {
+          "name": "Pending",
+          "checked": false
+        },
+        {
+          "name": "Approved",
+          "checked": true
+        },
+        {
+          "name":"Rejected",
+          "checked": false
+        }
+      ],
+      "label": "Choose types.."
+    }
+  },
+
   "acls": [
     {
       "accessType": "*",

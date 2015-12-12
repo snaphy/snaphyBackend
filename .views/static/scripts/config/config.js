@@ -14,8 +14,8 @@ angular.module($snaphy.getModuleName())
             template:
                     '<div class="form-group">'+
                     '<div ng-class="options.templateOptions.colSize" ng-class="options.templateOptions.color">'+
-                    '<div class="form-material floating" ng-class="options.templateOptions.color">'+
-                        '<input class="form-control" type="{{options.type}}"  ng-class="options.templateOptions.class"   name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
+                    '<div class="form-material" ng-class="options.templateOptions.color">'+
+                        '<input class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class"   name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
                         '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
                     '</div>'+
                     '</div>'+
@@ -30,7 +30,7 @@ angular.module($snaphy.getModuleName())
             '<div class="form-group">'+
             '<div ng-class="options.templateOptions.colSize">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
-                '<textarea type="{{options.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" rows="{{options.templateOptions.row}}"></textarea>'+
+                '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" rows="{{options.templateOptions.row}}"></textarea>'+
                 '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
             '</div>'+
             '</div>'+
@@ -54,7 +54,7 @@ angular.module($snaphy.getModuleName())
             '<div class="form-group">'+
             '<div ng-class="options.templateOptions.colSize">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
-                '<select type="{{options.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">'+
+                '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">'+
                     '<option value="{{option.id}}" ng-repeat="option in options.templateOptions.options">{{option.name}}</option>'+
                 '</select>'+
                 '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
