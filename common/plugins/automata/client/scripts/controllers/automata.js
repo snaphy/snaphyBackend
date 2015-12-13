@@ -3,13 +3,12 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for automataControl ..
-.controller('automataControl', ['$scope', '$stateParams', 'Database', '$timeout',
-    function($scope, $stateParams, Database, $timeout) {
+.controller('automataControl', ['$scope', '$stateParams', 'Database',
+    function($scope, $stateParams, Database) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('automata', "defaultTemplate");
+        var databasesList = $snaphy.loadSettings('automata', "loadDatabases");
         $snaphy.setDefaultTemplate(defaultTemplate);
-
-
 
 
         $scope.checkType = function(rowObject, columnHeader){
@@ -121,7 +120,6 @@ angular.module($snaphy.getModuleName())
 
 
 
-
         /**
          * Model for storing the model structure..
          * @param formStructure
@@ -183,20 +181,34 @@ angular.module($snaphy.getModuleName())
                 });
             };
 
-
-
-
             /**
              * Other related model to be implemented later.
              */
 
-
         };
 
 
+        var populateData = function(databaseName){
+            var dbService = Database.loadDb(databaseName);
+
+            dbService.getSchema({}, {}, function(values){
+                console.log(values.schema);
+                $scope.customerModelSettings = values.schema;
+                $scope.vm.userFields = values.schema;
+                $scope.addFormJSON = values.schema;
+            }, function(respHeader){
+                console.error(respHeader);
+            });
+        };
 
 
-        $scope.addFormJSON = {
+        for(var i=0; i<databasesList.length; i++){
+            //Now populate the database one by one..
+            populateData(databasesList[i]);
+        }
+
+
+   /*     $scope.addFormJSON = {
             model: "Employee",
             relations:{
                 hasMany:['recipes'],
@@ -312,7 +324,7 @@ angular.module($snaphy.getModuleName())
 
 
 
-        };
+        };*/
 
 
         $scope.vm = {};
@@ -322,7 +334,7 @@ angular.module($snaphy.getModuleName())
         // note, these field types will need to be
         // pre-defined. See the pre-built and custom templates
         // http://docs.angular-formly.com/v6.4.0/docs/custom-templates
-        $scope.vm.userFields = [
+       /* $scope.vm.userFields = [
             {
                 key: 'email',
                 type: 'input',
@@ -402,7 +414,7 @@ angular.module($snaphy.getModuleName())
         ];
 
 
-
+*/
 
 
         /**
@@ -415,7 +427,7 @@ angular.module($snaphy.getModuleName())
         $scope.description = "Automata Plugin for auto generating CRUD methods.";
 
         //Its a model properties for customer..
-        $scope.customerModelSettings = {
+        /*$scope.customerModelSettings = {
             "header":['name', 'email', 'access_level', 'access_name',  'phoneNumber', "date", "status", "chef_name"],
             "tables":{
                 name:{
@@ -427,7 +439,7 @@ angular.module($snaphy.getModuleName())
                     }
 
                 },
-                "status":{
+                "email":{
                     tag:{
                         "Pending": "label-warning"
                     }
@@ -495,12 +507,13 @@ angular.module($snaphy.getModuleName())
             }
         };
 
-
+*/
         $scope.rowListValues = [
             {
                 name:"Robins Gupta",
-                email:"robinskumar73@gmail.com",
-                access:{
+                "username":"robinskumar73",
+                email:"robinskumar73@gmail.com"
+                /*access:{
                     level:{
                         type:1,
                         height:1
@@ -515,8 +528,8 @@ angular.module($snaphy.getModuleName())
                 "phoneNumber": 9953242338,
                 "date": "Thu Dec 10 2015 17:34:50 GMT+0530 (IST)",
                 "status": "Pending",
-                "chef_name": "Sanjeev Kapoor"
-            },
+                "chef_name": "Sanjeev Kapoor"*/
+            }/*,
             {
                 name:"Ravi Gupta",
                 email:"ravikumar73@gmail.com",
@@ -531,7 +544,7 @@ angular.module($snaphy.getModuleName())
                 "date": "Thu Dec 11 2015 17:34:50 GMT+0530 (IST)",
                 "status": "Approved",
                 "chef_name": "Tarla Dalal"
-            }
+            }*/
         ];
 
 

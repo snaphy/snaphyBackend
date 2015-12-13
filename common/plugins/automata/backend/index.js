@@ -19,11 +19,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		//For loading the settings..
 		//console.log(server.models.Employee.definition.settings);
 		//Just Introduce a remote method in all the given method..
-		var loadModelList = packageObj["loadModels"];
 		//run each models in the loop and add a remote method to it.
-		loadModelList.forEach(function(modelName, index){
-			addRemoteMethod(server, modelName);
+		var models = server.models();
+
+		models.forEach(function(Model) {
+			//refer to https://apidocs.strongloop.com/loopback/#app-models
+			addRemoteMethod(server, Model.modelName);
 		});
+
 	};
 
 
@@ -34,7 +37,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @param index
      */
 	var addRemoteMethod = function(app, modelName){
-		console.log("Adding remote method " + modelName);
 		var modelObj = app.models[modelName];
 		/**
 		 * ModelObj getSchema remote method..
@@ -89,15 +91,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			if(relations.hasOwnProperty(relationName)){
 				var relationObj = relations[relationName];
 				var modelName       = relationObj.model;
-
 				//Only add relation if template option in the template option is present..
 				if(relationObj.type === 'hasMany' && relationObj.templateOptions !== undefined){
 					var nestedSchema = {};
 					nestedSchema.type = 'repeatSection';
 					nestedSchema.key = relationName;
 					nestedSchema.templateOptions = relationObj.templateOptions;
+					console.log(nestedSchema);
 					//Now get nested schema str for the relational models..
-					nestedSchema = generateTemplateStr(app, relationObj.model, nestedSchema);
+					generateTemplateStr(app, relationObj.model, nestedSchema.templateOptions);
+
 					//Now add nestedSchema to the schema object.
 					schema.relations.hasMany.push(relationName);
 					schema.fields.push(nestedSchema);
@@ -107,15 +110,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					header = addPropToHeader(app, relationObj.model, relationName,  header);
 				}
 
-				//TODO THESE LINES OF CODE IS NOT NEEDED AND SHOULD BE REMOVED
-				//Now checking if the nested relation still has any relations..
-				/*var relationPresent = checkModelRelation(app, modelName);
-				if(relationPresent){
-					var modelObj          = app.models[modelName];
-					var nestedRelationObj = modelObj.definition.settings.relations;
-					//recursive call the function..and add nested methods..
-					addNestedModelRelation(app, header, schema, nestedRelationObj );
-				}*/
 			}
 		}//for in loop..
 	};
@@ -191,7 +185,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @returns {*}
      */
 	var generateTemplateStr = function(app, modelName, schema){
-		console.log(modelName);
 		if(schema === undefined){
 			schema = {};
 			schema.model = modelName;
@@ -202,7 +195,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				//hasAndBelongToMany:[]
 			};
 		}
-		schema.fields = schema.fields || [];
+		schema.fields   = [];
 		var modelObj    = app.models[modelName],
 		modelProperties = modelObj.definition.rawProperties;
 		for(var propertyName in modelProperties){

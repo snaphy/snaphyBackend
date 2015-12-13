@@ -12,14 +12,14 @@ angular.module($snaphy.getModuleName())
         formlyConfig.setType({
             name: 'input',
             template:
-                    '<div class="form-group">'+
-                    '<div ng-class="options.templateOptions.colSize" ng-class="options.templateOptions.color">'+
-                    '<div class="form-material" ng-class="options.templateOptions.color">'+
-                        '<input class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class"   name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
-                        '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
-                    '</div>'+
-                    '</div>'+
-                    '</div>'
+            '<div class="form-group">'+
+            '<div ng-class="options.templateOptions.colSize" ng-class="options.templateOptions.color">'+
+            '<div class="form-material" ng-class="options.templateOptions.color">'+
+            '<input class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class"   name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
+            '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
+            '</div>'+
+            '</div>'+
+            '</div>'
         });
 
 
@@ -30,8 +30,8 @@ angular.module($snaphy.getModuleName())
             '<div class="form-group">'+
             '<div ng-class="options.templateOptions.colSize">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
-                '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" rows="{{options.templateOptions.row}}"></textarea>'+
-                '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
+            '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" rows="{{options.templateOptions.row}}"></textarea>'+
+            '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
             '</div>'+
             '</div>'+
             '</div>',
@@ -54,10 +54,10 @@ angular.module($snaphy.getModuleName())
             '<div class="form-group">'+
             '<div ng-class="options.templateOptions.colSize">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
-                '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">'+
-                    '<option value="{{option.id}}" ng-repeat="option in options.templateOptions.options">{{option.name}}</option>'+
-                '</select>'+
-                '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
+            '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">'+
+            '<option value="{{option.id}}" ng-repeat="option in options.templateOptions.options">{{option.name}}</option>'+
+            '</select>'+
+            '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
             '</div>'+
             '</div>'+
             '</div>',
