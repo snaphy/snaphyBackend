@@ -417,36 +417,6 @@ angular.module($snaphy.getModuleName())
         //Its a model properties for customer..
         $scope.customerModelSettings = {
             "header":['name', 'email', 'access_level', 'access_name',  'phoneNumber', "date", "status", "chef_name"],
-            "properties":{
-                "name":{
-                    type:"string",
-                    required: true
-                },
-                "email":{
-                    type:"string",
-                    required: true
-                },
-                "access":{
-                    "level":{
-                        type:"object",
-                        required: true
-                    }
-                },
-                "date":{
-                    type:"date",
-                    required: true
-                },
-                "status":{
-                    type:"string",
-                    "required":true
-                },
-                "chef":{
-                    "name":{
-                        type:"string",
-                        required:true
-                    }
-                }
-            },
             "tables":{
                 name:{
                     onClick:{

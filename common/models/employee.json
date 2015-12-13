@@ -45,7 +45,9 @@
       "type": "hasMany",
       "model": "Recipe",
       "foreignKey": "",
-      "templateEnabled": true
+      "templateOptions": {
+        "btnText": "Add Recipes"
+      }
     }
   },
   "tables":{
