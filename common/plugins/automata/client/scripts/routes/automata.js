@@ -1,30 +1,31 @@
-'use strict';
 /*jslint browser: true*/
 /*global $, jQuery, $snaphy, angular*/
-var employeeRole      = $snaphy.loadSettings('login', "employeeRole");
-var redirectOtherWise = $snaphy.loadSettings('login', 'onLoginRedirectState');
+'use strict';
 angular.module($snaphy.getModuleName())
 
 
-  //Routes are defined using ui.routes 
-  .config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
-    function ($locationProvider, $stateProvider, $urlRouterProvider) {
-      $locationProvider.html5Mode(false);
+//Create state to generate at runTime..
+.run(['runtimeStates', function(runtimeStates) {
+  var employeeRole = $snaphy.loadSettings('login', "employeeRole");
+  var redirectOtherWise = $snaphy.loadSettings('login', 'onLoginRedirectState');
+  var databasesList = $snaphy.loadSettings('automata', "loadDatabases");
 
-      $stateProvider
-        //Provide routes in this way..
-        .state('automata', {
-          url: '/automata',
-          templateUrl: '/automata/views/automata.html',
-          controller: 'automataControl',
-            //Only allow anonym users here
-            data: {
-                permissions: {
-                    only: [employeeRole],
-                    redirectTo: redirectOtherWise
-                }
-            }
-        });
+  //Loading states at run time.
+  databasesList.forEach(function(stateName, index){
+    //Add states at run time..
+    runtimeStates.addState(stateName,{
+        url: '/' + stateName.toLowerCase().trim(),
+        templateUrl: '/automata/views/automata.html',
+        controller: 'automataControl',
 
-    }]); //config
-
+        //Only allow authenticated users here
+        data: {
+          permissions: {
+            only: [employeeRole],
+            redirectTo: redirectOtherWise
+          }
+        }
+    });
+  });
+    
+}])

@@ -3,12 +3,16 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for automataControl ..
-.controller('automataControl', ['$scope', '$stateParams', 'Database',
-    function($scope, $stateParams, Database) {
+.controller('automataControl', ['$scope', '$state', 'Database',
+    function($scope, $state, Database) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('automata', "defaultTemplate");
-        var databasesList = $snaphy.loadSettings('automata', "loadDatabases");
+        $scope.databasesList = $snaphy.loadSettings('automata', "loadDatabases");
         $snaphy.setDefaultTemplate(defaultTemplate);
+
+
+        //get the current state name..
+        var currentState = $state.current.name; 
 
 
         $scope.checkType = function(rowObject, columnHeader){
@@ -192,7 +196,6 @@ angular.module($snaphy.getModuleName())
             var dbService = Database.loadDb(databaseName);
 
             dbService.getSchema({}, {}, function(values){
-                console.log(values.schema);
                 $scope.customerModelSettings = values.schema;
                 $scope.vm.userFields = values.schema;
                 $scope.addFormJSON = values.schema;
@@ -202,9 +205,15 @@ angular.module($snaphy.getModuleName())
         };
 
 
-        for(var i=0; i<databasesList.length; i++){
+        for(var i=0; i< $scope.databasesList.length; i++){
+            if(currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim())
             //Now populate the database one by one..
-            populateData(databasesList[i]);
+            populateData( $scope.databasesList[i]);
+            $scope.tableTitle = currentState + ' ' + 'Data';
+            $scope.currentState = currentState;
+            $scope.title = currentState + ' Console';
+            $scope.description = " data management console.";
+            break;
         }
 
 
@@ -421,10 +430,7 @@ angular.module($snaphy.getModuleName())
          * INITIALIZING SOME DUMMY DATA..
          */
 
-        $scope.tableTitle = "Testing";
-        $scope.currentState = "automata";
-        $scope.title = "Automata Plugin";
-        $scope.description = "Automata Plugin for auto generating CRUD methods.";
+        
 
         //Its a model properties for customer..
         /*$scope.customerModelSettings = {

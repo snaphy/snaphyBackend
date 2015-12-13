@@ -97,7 +97,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					nestedSchema.type = 'repeatSection';
 					nestedSchema.key = relationName;
 					nestedSchema.templateOptions = relationObj.templateOptions;
-					console.log(nestedSchema);
+					//console.log(nestedSchema);
 					//Now get nested schema str for the relational models..
 					generateTemplateStr(app, relationObj.model, nestedSchema.templateOptions);
 

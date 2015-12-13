@@ -19,6 +19,7 @@
       "automataController"       : "/automata/scripts/controllers/automata.js",
       "automataDirective"        : "/automata/scripts/directives/automata.js",
       "automataFilter"           : "/automata/scripts/filters/automata.js",
+      "automataServices"           : "/automata/scripts/services/automata.js",
 
       "jqueryDatatables"         : "/automata/style/datatables/jquery.dataTables.min.js",
       "loadDatatables"           : "/automata/scripts/loadDatatables.js",
@@ -30,7 +31,7 @@
   },
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": [],
+    "sidebarHook": ["/automata/views/sidebarHook.html"],
     "headerHook": [],
     "footerHook":[]
   },

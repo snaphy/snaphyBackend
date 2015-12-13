@@ -1,0 +1,5 @@
+<ul snaphy-load-template ng-controller="automataControl" class="nav-main">
+  <li ng-repeat="state in databasesList">
+    <a class="active" ui-sref="{{state}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">{{state | capitalize}}</span></a>
+  </li>
+</ul>
