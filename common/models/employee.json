@@ -172,6 +172,12 @@
       "principalId": "staff",
       "permission": "ALLOW",
       "property": "isAdmin"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getSchema"
     }
   ],
   "methods": []

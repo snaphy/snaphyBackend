@@ -8,7 +8,14 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template":{
+        "type":"input",
+        "templateOptions":{
+          "type": "text",
+          "label": "Enter Recipe Name"
+        }
+      }
     },
     "description": {
       "type": "string",
