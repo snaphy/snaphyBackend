@@ -35,6 +35,7 @@ angular.module($snaphy.getModuleName())
 /**
  *Directive for defining filters $date
  * */
+ //$date
 .directive('filterDate', [function(){
     //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
     return {
@@ -164,7 +165,7 @@ angular.module($snaphy.getModuleName())
 
 
 /**
- *Directive for defining filters $date
+ *Directive for defining filters $select
  * */
     .directive('filterSelect', ['$http', function($http){
         //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
@@ -301,7 +302,7 @@ angular.module($snaphy.getModuleName())
 
 
     /**
-     *Directive for defining filters $date
+     *Directive for defining filters $multiSelect
      * */
     .directive('filterMultiSelect', ['$http', function($http){
         //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
@@ -457,7 +458,7 @@ angular.module($snaphy.getModuleName())
 
 
     /**
-     *Directive for defining filters $date
+     *Directive for defining filters $radio
      * */
     .directive('filterRadio', [function(){
         //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..

@@ -204,40 +204,44 @@
                     <h3 class="block-title">Filters</h3>
                 </div>
                 <div class="block-content block-content-narrow">
-                   <!--  <form class="form-horizontal" >
+                    <form class="form-horizontal" ng-repeat="(columnName, filter) in schema.filters" >
                         <filter-date
                                 model-settings="schema"
                                 table-id="automataTable"
-                                column-name="date"
-                                label="Select Date">
+                                column-name="{{columnName}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$date'">
                         </filter-date>
 
                         <filter-select
                                 options="{{schema.filters.chef_name.options}}"
                                 model-settings="schema"
                                 table-id="automataTable"
-                                column-name="chef_name"
-                                get="/api/chefs"
-                                label="Select Chefs">
+                                column-name="{{columnName}}"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$select'">
 
                         </filter-select>
 
                         <filter-multi-select
-                                options="{{schema.filters.email.options}}"
+                                options="{{filter.options}}"
                                 model-settings="schema"
                                 table-id="automataTable"
-                                column-name="email"
-                                get="/api/email"
-                                label="Select multiple columns">
+                                column-name="{{columnName}}"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$multiSelect'">
 
                         </filter-multi-select>
 
                         <filter-radio
-                                options="{{schema.filters.status.options}}"
+                                options="{{filter.options}}"
                                 table-id="automataTable"
-                                column-name="status"
-                                label="Choose status"
-                                model-settings="schema">
+                                column-name="{{columnName}}"
+                                label="{{filter.label}}"
+                                model-settings="schema"
+                                ng-if="filter.type==='$radio'">
                         </filter-radio>
 
                         <div class="form-group">
@@ -245,7 +249,7 @@
                                 <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
                             </div>
                         </div>
-                    </form> -->
+                    </form>
                     
                 </div>
             </div><!--block-->

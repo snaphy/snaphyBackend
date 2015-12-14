@@ -206,7 +206,6 @@ angular.module($snaphy.getModuleName())
 
         var populateData = function(databaseName){
             var dbService = Database.loadDb(databaseName);
-
             dbService.getSchema({}, {}, function(values){
                 $scope.schema = values.schema;
                 fetchDataSever($scope.schema, dbService);    
@@ -214,6 +213,7 @@ angular.module($snaphy.getModuleName())
                 console.error(respHeader);
             });
         };
+
 
 
 
@@ -230,6 +230,7 @@ angular.module($snaphy.getModuleName())
 
 
 
+
         var fetchDataSever = function(dataSchema, dbService){
                 var filterObj = {};
                 if(dataSchema.relations.belongsTo){
@@ -243,6 +244,7 @@ angular.module($snaphy.getModuleName())
                     console.log(respHeader);
                 });
         }
+
 
 
         //Constructor for automata cuntroller..
