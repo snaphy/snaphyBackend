@@ -3,8 +3,8 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for automataControl ..
-.controller('automataControl', ['$scope', '$state', 'Database',
-    function($scope, $state, Database) {
+.controller('automataControl', ['$scope', '$state', 'Database', 'DTColumnBuilder', 
+    function($scope, $state, Database, DTColumnBuilder) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('automata', "defaultTemplate");
         $scope.databasesList = $snaphy.loadSettings('automata', "loadDatabases");
@@ -16,6 +16,7 @@ angular.module($snaphy.getModuleName())
         $scope.rowListValues = [];
         //Schema of the database
         $scope.schema = {};
+
         
 
         $scope.checkType = function(rowObject, columnHeader){
@@ -28,6 +29,9 @@ angular.module($snaphy.getModuleName())
             var key = $scope.getKey(rowObject, columnHeader);
             return rowObject[key];
         };
+
+
+
 
         /**
          * change prop like access_level to access only
@@ -136,7 +140,6 @@ angular.module($snaphy.getModuleName())
             /**
              * Validate the model here..
              */
-            console.log(formStructure);
             
             //Now save the model..
             var baseDatabase = Database.loadDb(formStructure.model);
@@ -175,6 +178,9 @@ angular.module($snaphy.getModuleName())
             });
 
 
+
+
+
             /**
              * Local method for adding related model..
              * @param baseDatabase
@@ -211,6 +217,19 @@ angular.module($snaphy.getModuleName())
 
 
 
+        /**
+         * Checking if the data is fetched return a boolean
+         * @return {Boolean} [description]
+         */
+        $scope.isDataFetched = function(){ 
+            if($scope.dataValues && $scope.schema.header){
+                return true;
+            }
+            return false;
+        }
+
+
+
         var fetchDataSever = function(dataSchema, dbService){
                 var filterObj = {};
                 if(dataSchema.relations.belongsTo){
@@ -219,6 +238,7 @@ angular.module($snaphy.getModuleName())
                 dbService.find({ filter: filterObj}, function(values){
                     console.log(values);
                     $scope.dataValues = values;
+
                 }, function(respHeader){
                     console.log(respHeader);
                 });
@@ -239,6 +259,8 @@ angular.module($snaphy.getModuleName())
             }
         }
 
+
+        //Only load if the current scope is
         $scope.init();
             
 

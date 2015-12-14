@@ -4,6 +4,34 @@
 angular.module($snaphy.getModuleName())
 
 
+.directive('snaphyLoadDatatable', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'A',
+        compile: function(){
+            // Compile code goes here.
+            return {
+                post: function postLink( ) {
+                    // Post-link code goes here
+                    $timeout(function(){
+                        try{
+                            // Initialize when page loads
+                            jQuery(function(){ BaseTableDatatables.init(); });
+                        }catch (err){
+                            /*Do nothing error occured due to multiple table initialization.. */
+                        }
+
+                    }); //timeout method..
+                }
+            };
+        },
+        link: function () {
+            /*Methods moved to compile for one time call only..*/
+        }//End of Link function...
+    }; // End of return
+}])
+
+
+
 /**
  *Directive for defining filters $date
  * */

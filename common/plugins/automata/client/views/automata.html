@@ -115,26 +115,31 @@
                 </div>
                 <div class="block-content">
 
-                    <div class="table-responsive" style="overflow-x: hidden;">
+                    <div snaphy-load-datatable class="table-responsive" style="overflow-x: hidden;">
                         <table 
                             id="automataTable" 
                             class="table table-bordered table-striped js-dataTable-full" 
                             dt-instance="dtInstance" 
-                            datatable="ng">
+                            datatable="ng"
+                            ng-if="isDataFetched()"
+                        >
                             <thead>
-                                <tr>
+                                <tr >
                                     <!--Adding :: for one way binding -->
-                                    <th  ng-repeat="header in ::schema.header">{{header}}</th>
+                                    <th  ng-repeat="header in schema.header">{{header}}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="(rowId, rowObject) in ::dataValues">
+                                <tr ng-repeat="(rowId, rowObject) in dataValues">
                                     <!--Populating the table values and binding header with columnVal-->
+
                                     <td  ng-init="colType     = checkType(rowObject, header);
-                                                 colValue    = getColValue(rowObject, header);
-                                                 colKey      = getKey(rowObject, header);
-                                                 tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"  ng-repeat="header in ::schema.header" >
-                                        <span   data-sort="{{colValue}}"  data-filter="{{colValue}}" ng-if="colType === '[object String]'">
+                                                  colValue    = getColValue(rowObject, header);
+                                                  colKey      = getKey(rowObject, header);
+                                                  tableConfig = findModelPropertyTableConfig(schema.tables, colKey);" 
+                                        ng-repeat="header in schema.header" >
+
+                                        <span data-sort="{{colValue}}"  data-filter="{{colValue}}" ng-if="colType === '[object String]'">
                                             <span ng-if="tableConfig.onClick !== undefined">
                                                 <!--Display link here..-->
                                                 <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{colValue}}</a>
