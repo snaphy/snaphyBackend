@@ -108,6 +108,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				if(relationObj.type === 'hasOne' || relationObj.type === 'belongsTo'){
 					//Now add its properties to the header..
 					header = addPropToHeader(app, relationObj.model, relationName,  header);
+					//Add this relation to the schema..
+					schema.relations.belongsTo.push(relationName);
 				}
 
 			}

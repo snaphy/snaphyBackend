@@ -25,7 +25,7 @@
     <!-- Simple Vertical Tiles -->
     <div class="row">
         <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" href="javascript:void(0)">
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" >
                 <table class="block-table text-center">
                     <tbody>
                         <tr>
@@ -44,7 +44,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" href="javascript:void(0)">
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" >
                 <table class="block-table text-center">
                     <tbody>
                         <tr>
@@ -63,7 +63,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" href="javascript:void(0)">
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" >
                 <table class="block-table text-center">
                     <tbody>
                         <tr>
@@ -82,7 +82,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" data-toggle="modal" data-target="#modal-large" href="javascript:void(0)">
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" data-toggle="modal" data-target="#modal-large" >
                 <table class="block-table text-center">
                     <tbody>
                         <tr>
@@ -105,7 +105,7 @@
 
 
 
-<div  snaphy-load-datatable class="content">
+<div  class="content">
     <div class="row">
         <div class="col-lg-8 col-sm-12">
             <!-- Dynamic Table Full -->
@@ -116,20 +116,24 @@
                 <div class="block-content">
 
                     <div class="table-responsive" style="overflow-x: hidden;">
-                        <table id="automataTable" class="table table-bordered table-striped js-dataTable-full" >
+                        <table 
+                            id="automataTable" 
+                            class="table table-bordered table-striped js-dataTable-full" 
+                            dt-instance="dtInstance" 
+                            datatable="ng">
                             <thead>
                                 <tr>
                                     <!--Adding :: for one way binding -->
-                                    <th  ng-repeat="header in ::customerModelSettings.header">{{header}}</th>
+                                    <th  ng-repeat="header in ::schema.header">{{header}}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="(rowId, rowObject) in rowListValues">
+                                <tr ng-repeat="(rowId, rowObject) in ::dataValues">
                                     <!--Populating the table values and binding header with columnVal-->
                                     <td  ng-init="colType     = checkType(rowObject, header);
                                                  colValue    = getColValue(rowObject, header);
                                                  colKey      = getKey(rowObject, header);
-                                                 tableConfig = findModelPropertyTableConfig(customerModelSettings.tables, colKey);"  ng-repeat="header in ::customerModelSettings.header" >
+                                                 tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"  ng-repeat="header in ::schema.header" >
                                         <span   data-sort="{{colValue}}"  data-filter="{{colValue}}" ng-if="colType === '[object String]'">
                                             <span ng-if="tableConfig.onClick !== undefined">
                                                 <!--Display link here..-->
@@ -195,17 +199,17 @@
                     <h3 class="block-title">Filters</h3>
                 </div>
                 <div class="block-content block-content-narrow">
-                    <form class="form-horizontal" >
+                   <!--  <form class="form-horizontal" >
                         <filter-date
-                                model-settings="customerModelSettings"
+                                model-settings="schema"
                                 table-id="automataTable"
                                 column-name="date"
                                 label="Select Date">
                         </filter-date>
 
                         <filter-select
-                                options="{{customerModelSettings.filters.chef_name.options}}"
-                                model-settings="customerModelSettings"
+                                options="{{schema.filters.chef_name.options}}"
+                                model-settings="schema"
                                 table-id="automataTable"
                                 column-name="chef_name"
                                 get="/api/chefs"
@@ -214,8 +218,8 @@
                         </filter-select>
 
                         <filter-multi-select
-                                options="{{customerModelSettings.filters.email.options}}"
-                                model-settings="customerModelSettings"
+                                options="{{schema.filters.email.options}}"
+                                model-settings="schema"
                                 table-id="automataTable"
                                 column-name="email"
                                 get="/api/email"
@@ -224,11 +228,11 @@
                         </filter-multi-select>
 
                         <filter-radio
-                                options="{{customerModelSettings.filters.status.options}}"
+                                options="{{schema.filters.status.options}}"
                                 table-id="automataTable"
                                 column-name="status"
                                 label="Choose status"
-                                model-settings="customerModelSettings">
+                                model-settings="schema">
                         </filter-radio>
 
                         <div class="form-group">
@@ -236,8 +240,8 @@
                                 <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
                             </div>
                         </div>
-                    </form>
-                    <!-- END Datepicker (Default forms) -->
+                    </form> -->
+                    
                 </div>
             </div><!--block-->
         </div><!--col-md-4-->
@@ -257,21 +261,19 @@
                                     <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
                                 </li>
                             </ul>
-                            <h3 class="block-title">Add Recipes</h3>
+                            <h3 class="block-title">{{tableTitle}}</h3>
                         </div>
                         <div class="block-content block-content-narrow">
                             <form class="form-horizontal" >
-                                <formly-form model="vm.user" fields="addFormJSON.fields">
-                                    <button  type="submit" class="btn btn-sm btn-primary" ng-click="saveForm(addFormJSON, vm.user)" type="button" ><i class="fa fa-check"></i> Save</button>
+                                <formly-form model="vm.user" fields="schema.fields">
+                                   
                                 </formly-form>
                             </form>
-                            <!-- END Datepicker (Default forms) -->
-                            {{vm.user}}
                         </div><!--block-content-->
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                        <button  class="btn btn-sm btn-primary" type="button" data-dismiss="modal"><i class="fa fa-check"></i> Save</button>
+                        <button  class="btn btn-sm btn-primary" ng-click="saveForm(schema, vm.user)" type="button" data-dismiss="modal"><i class="fa fa-check"></i> Save</button>
                     </div>
                 </div>
             </div>

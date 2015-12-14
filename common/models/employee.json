@@ -51,11 +51,11 @@
     }
   },
   "tables":{
-    "name":{
+    "username":{
       "onClick":{
         "state":"dashboard",
         "params":{
-          "name":"name"
+          "username":"username"
         }
       }
     },
