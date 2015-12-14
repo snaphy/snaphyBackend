@@ -316,6 +316,8 @@ angular.module($snaphy.getModuleName())
                 "data"              : "=data",
                 "getOptions"        : "@get",
                 "staticOptions"     : "@options",
+                "tableData"         : "=tableData",
+                "filterOptions"     : "=filterOptions"
             },
             replace: true,
             template:
@@ -323,7 +325,7 @@ angular.module($snaphy.getModuleName())
             '<label class="col-md-4 control-label" for="example-select2">{{label}}</label>'+
             '<div class="col-md-8">'+
             '<select data-allow-clear="true" class="js-select2 form-control" ng-model="data.value" style="width: 100%;" data-placeholder="Choose many.." multiple>'+
-            '<option ng-repeat="option in data.options" value="{{option.id}}">{{option.name}}</option>'+
+            '<option ng-repeat="option in data.options | unique:\'id\'" value="{{option.id}}">{{option.name}}</option>'+
             '</select>'+
             '</div>'+
             '</div>',
@@ -362,15 +364,17 @@ angular.module($snaphy.getModuleName())
                 });
 
 
-                if(scope.staticOptions != undefined){
-                    //Load static options..
-                    scope.data.options = JSON.parse(scope.staticOptions);
+                if(scope.staticOptions){
+                    if(scope.staticOptions.length){
+                        //Load static options..
+                        scope.data.options = JSON.parse(scope.staticOptions);    
+                    }
                     //scope.data.options = scope.staticOptions;
                 }
 
 
                 //Now load options..
-                if(scope.getOptions != undefined){
+                if(scope.getOptions){
                     $http({
                         method: 'GET',
                         url: scope.getOptions
@@ -384,6 +388,45 @@ angular.module($snaphy.getModuleName())
                         console.error(response);
                     });
                 }
+
+                //If data is to be fetched from some table column.
+                if(scope.filterOptions.getOptionsFromColumn){
+                    var relatedColumnName;
+                    //If the column is a key name from a related model.
+                    var isRelationModel;
+                    
+                    //ForEach loop for each table object..
+                    scope.tableData.forEach(function(rowObject, index){
+                        var rowKey  = scope.$parent.getKey(rowObject, scope.columnName);
+                        
+                        if(rowObject[rowKey] === undefined){
+                            isRelationModel = true;    
+                        }else{
+                            isRelationModel = false;
+                        }
+                        
+                        //options format will be {id:1, name: foo}
+                        var rowValue = rowObject[rowKey];
+
+                        //The the column is a related column..
+                        if(isRelationModel){
+                            relatedColumnName = scope.$parent.getColumnKey(scope.columnName);
+                            rowValue = rowObject[relatedColumnName];    
+                        }
+                        
+                        //Now prepare the object..
+                        var option = {
+                            id : rowObject.id,
+                            name: rowValue
+                        }
+
+                        scope.data.options = scope.data.options || [];
+                        //Now push the options to populate finally...
+                        scope.data.options.push(option);
+                    });
+                
+                } //if 
+                
 
 
 

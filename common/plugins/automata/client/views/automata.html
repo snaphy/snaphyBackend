@@ -24,7 +24,7 @@
 <div class="content">
     <!-- Simple Vertical Tiles -->
     <div class="row">
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-3" >
             <a class="block block-bordered block-link-hover3" style="cursor:pointer" >
                 <table class="block-table text-center">
                     <tbody>
@@ -107,7 +107,7 @@
 
 <div  class="content">
     <div class="row">
-        <div class="col-lg-8 col-sm-12">
+        <div class="col-sm-12" ng-class="{'col-lg-8': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
             <!-- Dynamic Table Full -->
             <div class="block">
                 <div class="block-header">
@@ -198,7 +198,8 @@
         </div>
 
         <!--Adding Filters-->
-        <div snaphy-load-filters class="col-lg-4 col-sm-12" >
+        <!-- Don't load the filters until the data isn't loaded -->
+        <div snaphy-load-filters class="col-lg-4 col-sm-12" ng-if="isFilterPresent() && isDataFetched()">
             <div class="block">
                 <div class="block-header">
                     <h3 class="block-title">Filters</h3>
@@ -214,7 +215,7 @@
                         </filter-date>
 
                         <filter-select
-                                options="{{schema.filters.chef_name.options}}"
+                                options="{{filter.options}}"
                                 model-settings="schema"
                                 table-id="automataTable"
                                 column-name="{{columnName}}"
@@ -227,6 +228,8 @@
                         <filter-multi-select
                                 options="{{filter.options}}"
                                 model-settings="schema"
+                                table-data="dataValues"
+                                filter-options="filter"
                                 table-id="automataTable"
                                 column-name="{{columnName}}"
                                 get="{{filter.get}}"

@@ -17,3 +17,5 @@ angular.module($snaphy.getModuleName())
     }
   }
 });
+
+

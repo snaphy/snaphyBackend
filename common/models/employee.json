@@ -44,10 +44,7 @@
     "recipes": {
       "type": "hasMany",
       "model": "Recipe",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Recipes"
-      }
+      "foreignKey": ""
     }
   },
   "tables":{
@@ -71,16 +68,11 @@
       "type"  : "$multiSelect",
       "get"   : "/api/email",
       "label" : "Select multiple columns",
-      "options":[
-        {
-          "id":1,
-          "name":"robinskumar73@gmail.com"
-        },
-        {
-          "id":2,
-          "name":"ravigupta9363@gmail.com"
-        }
-      ]
+      "options":[{
+        "id":5,
+        "name":"sinu@gmail.com"
+        }],
+      "getOptionsFromColumn": true
     }
   },
 

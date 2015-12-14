@@ -229,6 +229,19 @@ angular.module($snaphy.getModuleName())
         }
 
 
+        //checking if the filters is present in the data..
+        $scope.isFilterPresent = function(){
+            if($scope.schema.filters){
+                for(var filterName in $scope.schema.filters){
+                    if($scope.schema.filters.hasOwnProperty(filterName)){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
 
 
         var fetchDataSever = function(dataSchema, dbService){
