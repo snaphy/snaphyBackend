@@ -82,7 +82,7 @@
             </a>
         </div>
         <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" style="cursor:pointer" data-toggle="modal" data-target="#modal-large" >
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" data-toggle="modal" data-target="#addDataModal" >
                 <table class="block-table text-center">
                     <tbody>
                         <tr>
@@ -127,6 +127,7 @@
                                 <tr >
                                     <!--Adding :: for one way binding -->
                                     <th  ng-repeat="header in schema.header">{{header}}</th>
+                                    <th class="text-center" style="width: 10%;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -187,6 +188,13 @@
                                             </span>
                                         </span>
 
+                                    </td>
+                                    <!-- For adding table edit and delete options. -->
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject)"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Remove Data"><i class="fa fa-times"></i></button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -263,7 +271,7 @@
 
 
         <!-- Fade In Modal -->
-        <div class="modal fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="block block-themed block-transparent remove-margin-b">
@@ -277,7 +285,7 @@
                         </div>
                         <div class="block-content block-content-narrow">
                             <form class="form-horizontal" >
-                                <formly-form model="vm.user" fields="schema.fields">
+                                <formly-form model="saveFormData" fields="schema.fields">
                                    
                                 </formly-form>
                             </form>
@@ -285,7 +293,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                        <button  class="btn btn-sm btn-primary" ng-click="saveForm(schema, vm.user)" type="button" data-dismiss="modal"><i class="fa fa-check"></i> Save</button>
+                        <button  class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)" type="button" data-dismiss="modal"><i class="fa fa-check"></i> Save</button>
                     </div>
                 </div>
             </div>

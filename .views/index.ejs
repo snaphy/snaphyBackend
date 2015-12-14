@@ -250,6 +250,9 @@
 
         <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
         <script src="<%= staticRoute %>/assets/js/oneui.min.js"></script>
+        <!-- Adding notifications -->
+        <script src="<%= staticRoute %>/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
+
 
 
 
@@ -285,6 +288,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="<%= staticRoute %>/scripts/controllers/bodyCtrl.js"></script>
         <script src="<%= staticRoute %>/scripts/directives/templateLoad.js"></script>
+        <script src="<%= staticRoute %>/scripts/services/templateService.js"></script>
         <script src="<%= staticRoute %>/scripts/config/config.js"></script>
         <% for (var script in pluginScripts) {
     		  if (pluginScripts.hasOwnProperty(script)) { %>

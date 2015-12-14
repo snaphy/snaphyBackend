@@ -3,8 +3,9 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for automataControl ..
-.controller('automataControl', ['$scope', '$state', 'Database', 'DTColumnBuilder', 
-    function($scope, $state, Database, DTColumnBuilder) {
+.controller('automataControl', ['$scope', '$state', 'Database', 'SnaphyTemplate', 
+    function($scope, $state, Database, SnaphyTemplate) {
+
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('automata', "defaultTemplate");
         $scope.databasesList = $snaphy.loadSettings('automata', "loadDatabases");
@@ -16,6 +17,8 @@ angular.module($snaphy.getModuleName())
         $scope.rowListValues = [];
         //Schema of the database
         $scope.schema = {};
+        /*Data for save form modal*/
+        $scope.saveFormData = {};
 
         
 
@@ -130,6 +133,17 @@ angular.module($snaphy.getModuleName())
         };
 
 
+               /**
+         * Initialize the edit form data from editing the form.
+         * @param  {[type]} data [description]
+         * @return {[type]}           [description]
+         */
+        $scope.prepareDataForEdit = function(data){
+            $scope.saveFormData = data;
+        };
+
+
+
 
         /**
          * Model for storing the model structure..
@@ -137,70 +151,130 @@ angular.module($snaphy.getModuleName())
          * @param formModel
          */
         $scope.saveForm =  function(formStructure, formModel){
-            /**
-             * Validate the model here..
-             */
-            
             //Now save the model..
             var baseDatabase = Database.loadDb(formStructure.model);
             var relatedData = {
-                hasMany:[]
-                //belongsTo:[],
-                //hasManyThrough:[],
-                //hasAndBelongToMany:[]
+                    hasMany:[],
+                    belongsTo:[]
+                    //hasManyThrough:[],
+                    //hasAndBelongToMany:[]
             };
 
-
-
-            //Now first prepare object..
-            formStructure.relations.hasMany.forEach(function(relationName, index){
-                if(formModel[relationName]){
-                    relatedData.hasMany.push(formModel[relationName]);
-                    //Now removing the relation from the model.
-                    delete formModel[relationName];
+            /**
+             * Validate the model here..
+             */
+            if(formModel.id){
+                if(formStructure.relations.belongsTo){
+                    //Remove all the hasOne, belongs to relations values..
+                    formStructure.relations.belongsTo.forEach(function(relationName, index){
+                        formStructure.header.forEach(function(headerName, index){
+                            var re = new RegExp("^" + relationName + "_");
+                            //if the headerName is the name of related models..
+                            if(re.test(headerName)){
+                                 //Now removing the relation from the model.
+                                delete formModel[headerName];         
+                            }
+                        });
+                    });
                 }
-            });
 
+                //Now update the base model..
+                /**
+                 * Creting baseModel..
+                 */
+                baseDatabase.update({where:{id: formModel.id}}, formModel, function(baseModel){
+                    console.log("Data updated successfully..");
+                    SnaphyTemplate.notify({
+                        message: "Data successfully updated.",
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        align: 'right'
+                    });
 
-
-
-            //Now save the base model..
-            /**
-             * Creting baseModel..
-             */
-            baseDatabase.create({}, formModel, function(baseModel){
-                //Now save the related model..
-                formStructure.relations.hasMany.forEach(function(relationName, index){
-                    addRelatedModel(baseDatabase, relationName, relatedData, index , baseModel.id  );
-                });
-            }, function(respHeader){
-                console.error(respHeader);
-            });
-
-
-
-
-
-            /**
-             * Local method for adding related model..
-             * @param baseDatabase
-             * @param relationName
-             * @param relatedData
-             * @param index
-             */
-            var addRelatedModel= function(baseDatabase, relationName, relatedData, index, parentId ){
-                baseDatabase[relationName].createMany({id:parentId}, relatedData.hasMany[index], function(modelArr){
-                    console.log("Successfully saved related model data");
                 }, function(respHeader){
                     console.error(respHeader);
+                    SnaphyTemplate.notify({
+                        message: "Error updating data.",
+                        type: 'danger',
+                        icon: 'fa fa-times',
+                        align: 'right'
+                    });
                 });
-            };
 
-            /**
-             * Other related model to be implemented later.
-             */
+            }else{
+                //Now first prepare object..
+                formStructure.relations.hasMany.forEach(function(relationName, index){
+                    if(formModel[relationName]){
+                        relatedData.hasMany.push(formModel[relationName]);
+                        //Now removing the relation from the model.
+                        delete formModel[relationName];
+                    }
+                });
 
-        };
+                //Now save the base model..
+                /**
+                 * Creting baseModel..
+                 */
+                baseDatabase.create({}, formModel, function(baseModel){
+                    if(formStructure.relations.hasMany){
+                        //Now save the related model..
+                        formStructure.relations.hasMany.forEach(function(relationName, index){
+                            addRelatedModel(baseDatabase, relationName, relatedData, index , baseModel.id  );
+                        });
+                    }else{
+                        SnaphyTemplate.notify({
+                            message: "Data successfully saved.",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
+                    }//else
+                        
+                }, function(respHeader){
+                    console.error(respHeader);
+                    SnaphyTemplate.notify({
+                        message: "Error saving data.",
+                        type: 'danger',
+                        icon: 'fa fa-times',
+                        align: 'right'
+                    });
+                });
+
+                /**
+                 * Local method for adding related model..
+                 * @param baseDatabase
+                 * @param relationName
+                 * @param relatedData
+                 * @param index
+                 */
+                var addRelatedModel= function(baseDatabase, relationName, relatedData, index, parentId ){
+                    baseDatabase[relationName].createMany({id:parentId}, relatedData.hasMany[index], function(modelArr){
+                        console.log("Successfully saved related model data");
+                        SnaphyTemplate.notify({
+                            message: "Data successfully saved.",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
+                    }, function(respHeader){
+                        console.error(respHeader);
+                        SnaphyTemplate.notify({
+                            message: "Error saving data.",
+                            type: 'danger',
+                            icon: 'fa fa-times',
+                            align: 'right'
+                        });
+                    });
+                };
+
+                /**
+                 * Other related model to be implemented later.
+                 */
+
+            }//else
+                
+        }; //saveForm
+
 
 
 
@@ -269,10 +343,11 @@ angular.module($snaphy.getModuleName())
                 $scope.tableTitle = currentState + ' ' + 'Data';
                 $scope.currentState = currentState;
                 $scope.title = currentState + ' Console';
-                $scope.description = " data management console.";
+                $scope.description = "Data management console.";
                 break;
             }
         }
+
 
 
         //Only load if the current scope is

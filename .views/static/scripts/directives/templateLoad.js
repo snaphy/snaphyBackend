@@ -17,13 +17,18 @@ angular.module($snaphy.getModuleName())
 
 
   /*To hide the tooltip if somebody clickes it.*/
-    .directive('snaphyOnClickHideToolTip', [function(){
-        return{
-          link: function(scope, iElement, iAttrs){
-            //On click hide the  toolbar..
-            $(iElement).click(function(){
-                $(this).tooltip('hide');
-            });
-          }
-        };
-    }]);
+  .directive('snaphyOnClickHideToolTip', [function(){
+      return{
+        link: function(scope, iElement, iAttrs){
+          //On click hide the  toolbar..
+          $(iElement).click(function(){
+              $(this).tooltip('hide');
+          });
+        }
+      };
+  }]);
+
+
+ 
+
+            
