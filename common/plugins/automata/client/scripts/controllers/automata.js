@@ -403,7 +403,7 @@ angular.module($snaphy.getModuleName())
          * @return {Boolean} [description]
          */
         $scope.isDataFetched = function() {
-            if ($scope.dataValues && $scope.schema.header) {
+            if ($scope.dataValues.length && $scope.schema.header) {
                 return true;
             }
             return false;
