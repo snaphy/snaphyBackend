@@ -131,7 +131,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="(rowId, rowObject) in dataValues">
+                                <tr ng-if="rowObject" ng-repeat="(rowId, rowObject) in dataValues">
                                     <!--Populating the table values and binding header with columnVal-->
 
                                     <td  ng-init="colType     = checkType(rowObject, header);
@@ -190,7 +190,7 @@
 
                                     </td>
                                     <!-- For adding table edit and delete options. -->
-                                    <td class="text-center">
+                                    <td  class="text-center">
                                         <div class="btn-group">
                                             <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject)"><i class="fa fa-pencil"></i></button>
                                             <button 
