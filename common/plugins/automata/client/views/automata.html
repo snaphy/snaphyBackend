@@ -140,27 +140,27 @@
                                                   tableConfig = findModelPropertyTableConfig(schema.tables, colKey);" 
                                         ng-repeat="header in schema.header" >
 
-                                        <span data-sort="{{colValue}}"  data-filter="{{colValue}}" ng-if="colType === '[object String]'">
+                                        <span data-sort="{{getColValue(rowObject, header)}}"  data-filter="{{getColValue(rowObject, header)}}" ng-if="colType === '[object String]'">
                                             <span ng-if="tableConfig.onClick !== undefined">
                                                 <!--Display link here..-->
-                                                <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{colValue}}</a>
+                                                <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{getColValue(rowObject, header)}}</a>
                                             </span>
 
-                                            <span ng-init="labelType = tableConfig.tag[colValue]" ng-if="tableConfig.tag !== undefined">
-                                                <span ng-if="labelType !== undefined" class="label" ng-class="labelType" >{{colValue}}</span>
-                                                <span ng-if="labelType === undefined" class="label label-default">{{colValue}}</span>
+                                            <span ng-init="labelType = tableConfig.tag[getColValue(rowObject, header)]" ng-if="tableConfig.tag !== undefined">
+                                                <span ng-if="labelType !== undefined" class="label" ng-class="labelType" >{{getColValue(rowObject, header)}}</span>
+                                                <span ng-if="labelType === undefined" class="label label-default">{{getColValue(rowObject, header)}}</span>
                                             </span>
                                             <span ng-if="tableConfig.tag === undefined && tableConfig.onClick === undefined">
-                                                {{colValue}}
+                                                {{getColValue(rowObject, header)}}
                                             </span>
                                         </span>
                                         <span ng-if="colType === '[object Number]'">
                                             <!--Do string populated work here...-->
-                                            {{colValue}}
+                                            {{getColValue(rowObject, header)}}
                                         </span>
                                         <span ng-if="colType === '[object Array]'">
                                             <!--Do string populated work here...-->
-                                            {{colValue}}
+                                            {{getColValue(rowObject, header)}}
                                         </span>
                                         <span ng-init="belongToReln = header !== colKey;
                                               hasOneRelationPropName = getColumnKey(header);

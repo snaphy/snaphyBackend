@@ -19,6 +19,8 @@ angular.module($snaphy.getModuleName())
         $scope.schema = {};
         /*Data for save form modal*/
         $scope.saveFormData = {};
+        //Initializing scope //for array..
+        $scope.dataValues = [];
 
 
 
@@ -157,6 +159,10 @@ angular.module($snaphy.getModuleName())
                     console.log("Go clicked");
                 },
                 onConfirm: function(){
+                    var mainArrayIndex = getArrayIndex($scope.dataValues, data.id);
+                    var oldDeletedData = $scope.dataValues[mainArrayIndex];
+                    
+                    
                     //Reset the disloag bar..
                     $scope.dialog.show = false;
                     baseDatabase.deleteById({
@@ -170,6 +176,9 @@ angular.module($snaphy.getModuleName())
                             align: 'right'
                         });
                     }, function(respHeader){
+                        //Attach the data again..
+                        $scope.dataValues.push(oldDeletedData);
+
                         console.error(respHeader);
                         SnaphyTemplate.notify({
                             message: "Error deleting data.",
@@ -178,12 +187,32 @@ angular.module($snaphy.getModuleName())
                             align: 'right'
                         });
                     });
+
+                    //Now delete the data..
+                    delete $scope.dataValues[mainArrayIndex];
                     
                 },
                 show:true
             };
 
         }
+
+        /**
+         * For finding array index of the data of array of objects with properties id..
+         * @return {[type]} [description]
+         */
+        var getArrayIndex = function(arrayData, id){
+            for(var i=0; i<arrayData.length; i++){
+                var element= arrayData[i];
+                if(parseInt(element.id) === parseInt(id) ){
+                    return i;
+                }
+                
+            }
+            return null;  
+        };
+
+
 
 
         /**
@@ -192,6 +221,7 @@ angular.module($snaphy.getModuleName())
          * @param formModel
          */
         $scope.saveForm = function(formStructure, formModel) {
+            setTimeout(function(){$scope.$apply();});
             //Now save the model..
             var baseDatabase = Database.loadDb(formStructure.model);
             var relatedData = {
@@ -200,6 +230,8 @@ angular.module($snaphy.getModuleName())
                     //hasManyThrough:[],
                     //hasAndBelongToMany:[]
             };
+
+            //var mainDataArray = $scope.dataValues;
 
             /**
              * Validate the model here..
@@ -238,6 +270,9 @@ angular.module($snaphy.getModuleName())
 
                 }, function(respHeader) {
                     console.error(respHeader);
+                    //Change it back to original data..
+                    getArrayIndex[dataIndex] = oldData;
+                    
                     SnaphyTemplate.notify({
                         message: "Error updating data.",
                         type: 'danger',
@@ -256,11 +291,18 @@ angular.module($snaphy.getModuleName())
                     }
                 });
 
+                var positionNewData = $scope.dataValues.length;
+                //First add to the table..
+                $scope.dataValues.push(formModel);
+
                 //Now save the base model..
                 /**
                  * Creting baseModel..
                  */
                 baseDatabase.create({}, formModel, function(baseModel) {
+                    //Now update the form with id.
+                    $scope.dataValues[positionNewData] = baseModel;
+                    
                     if (formStructure.relations.hasMany) {
                         //Now save the related model..
                         formStructure.relations.hasMany.forEach(function(relationName, index) {
@@ -275,7 +317,14 @@ angular.module($snaphy.getModuleName())
                         });
                     } //else
 
+                    
+
                 }, function(respHeader) {
+                    //remove the form added data..
+                    if (positionNewData > -1) {
+                        $scope.dataValues.splice(positionNewData, 1);
+                    }
+
                     console.error(respHeader);
                     SnaphyTemplate.notify({
                         message: "Error saving data.",
@@ -323,11 +372,25 @@ angular.module($snaphy.getModuleName())
         }; //saveForm
 
 
+        //Copying one object to another..
+        var extend = function (original, context, key) {
+          for (key in context)
+            if (context.hasOwnProperty(key))
+              if (Object.prototype.toString.call(context[key]) === '[object Object]')
+                original[key] = extend(original[key] || {}, context[key]);
+              else
+                original[key] = context[key];
+          return original;
+        };
+
+
+
 
         var populateData = function(databaseName) {
             var dbService = Database.loadDb(databaseName);
             dbService.getSchema({}, {}, function(values) {
-                $scope.schema = values.schema;
+                extend($scope.schema, values.schema);
+                //$scope.schema = values.schema;
                 fetchDataSever($scope.schema, dbService);
             }, function(respHeader) {
                 console.error(respHeader);
@@ -371,7 +434,10 @@ angular.module($snaphy.getModuleName())
                 filter: filterObj
             }, function(values) {
                 console.log(values);
-                $scope.dataValues = values;
+                //$scope.dataValues.length = 0;
+                values.forEach(function(element, index){
+                    $scope.dataValues.push(element);
+                })
 
             }, function(respHeader) {
                 console.log(respHeader);
