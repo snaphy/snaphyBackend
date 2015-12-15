@@ -366,6 +366,7 @@ angular.module($snaphy.getModuleName())
 
                 if(scope.staticOptions){
                     if(scope.staticOptions.length){
+
                         //Load static options..
                         scope.data.options = JSON.parse(scope.staticOptions);    
                     }
@@ -381,7 +382,10 @@ angular.module($snaphy.getModuleName())
                     }).then(function successCallback(response) {
                         //Select options downloaded successfully..
                         //Loading options..
-                        scope.data.options = response;
+                        response.forEach(function(element, index){
+                            scope.data.options.push(element);    
+                        });
+                        
                     }, function errorCallback(response) {
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
@@ -394,8 +398,10 @@ angular.module($snaphy.getModuleName())
                     var relatedColumnName;
                     //If the column is a key name from a related model.
                     var isRelationModel;
-                    
-                    //ForEach loop for each table object..
+                  
+                    console.log(scope.tableData);
+                    console.log(scope.$parent.dataValues);
+                   //ForEach loop for each table object..
                     scope.tableData.forEach(function(rowObject, index){
                         var rowKey  = scope.$parent.getKey(rowObject, scope.columnName);
                         
@@ -424,6 +430,8 @@ angular.module($snaphy.getModuleName())
                         //Now push the options to populate finally...
                         scope.data.options.push(option);
                     });
+                    
+                        
                 
                 } //if 
                 

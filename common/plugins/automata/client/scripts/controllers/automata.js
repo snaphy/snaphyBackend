@@ -221,7 +221,6 @@ angular.module($snaphy.getModuleName())
          * @param formModel
          */
         $scope.saveForm = function(formStructure, formModel) {
-            setTimeout(function(){$scope.$apply();});
             //Now save the model..
             var baseDatabase = Database.loadDb(formStructure.model);
             var relatedData = {
@@ -302,7 +301,7 @@ angular.module($snaphy.getModuleName())
                 baseDatabase.create({}, formModel, function(baseModel) {
                     //Now update the form with id.
                     $scope.dataValues[positionNewData] = baseModel;
-                    
+
                     if (formStructure.relations.hasMany) {
                         //Now save the related model..
                         formStructure.relations.hasMany.forEach(function(relationName, index) {
