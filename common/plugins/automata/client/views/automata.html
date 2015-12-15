@@ -193,7 +193,14 @@
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject)"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Remove Data"><i class="fa fa-times"></i></button>
+                                            <button 
+                                            class="btn btn-xs btn-default" 
+                                            type="button" 
+                                            data-toggle="tooltip" 
+                                            title="Remove Data"
+                                            ng-click="deleteData(schema, rowObject)">
+                                            <i class="fa fa-times"></i>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -299,4 +306,14 @@
             </div>
         </div>
         <!-- END Fade In Modal -->
+
+        <!-- For showing dialog box -->
+        <snaphy-dialog 
+            message="{{dialog.message}}" 
+            table-title="{{dialog.title}}" 
+            on-cancel="dialog.onCancel()" 
+            on-confirm="dialog.onConfirm()" 
+            show-dialog="dialog.show">
+        </snaphy-dialog>
+
 </div>

@@ -164,9 +164,9 @@ angular.module($snaphy.getModuleName())
 
 
 
-/**
- *Directive for defining filters $select
- * */
+    /**
+     *Directive for defining filters $select
+     * */
     .directive('filterSelect', ['$http', function($http){
         //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
         return {
