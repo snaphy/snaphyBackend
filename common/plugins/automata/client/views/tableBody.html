@@ -1,0 +1,74 @@
+<tbody>
+  <tr ng-if="rowObject" ng-repeat="(rowId, rowObject) in dataValues">
+      <!--Populating the table values and binding header with columnVal-->
+      <td  ng-init="colType     = checkType(rowObject, header);
+                    colValue    = getColValue(rowObject, header);
+                    colKey      = getKey(rowObject, header);
+                    tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"
+          ng-repeat="header in schema.header" >
+
+          <span data-sort="{{getColValue(rowObject, header)}}"  data-filter="{{getColValue(rowObject, header)}}" ng-if="colType === '[object String]'">
+              <span ng-if="tableConfig.onClick !== undefined">
+                  <!--Display link here..-->
+                  <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{getColValue(rowObject, header)}}</a>
+              </span>
+
+              <span ng-init="labelType = tableConfig.tag[getColValue(rowObject, header)]" ng-if="tableConfig.tag !== undefined">
+                  <span ng-if="labelType !== undefined" class="label" ng-class="labelType" >{{getColValue(rowObject, header)}}</span>
+                  <span ng-if="labelType === undefined" class="label label-default">{{getColValue(rowObject, header)}}</span>
+              </span>
+              <span ng-if="tableConfig.tag === undefined && tableConfig.onClick === undefined">
+                  {{getColValue(rowObject, header)}}
+              </span>
+          </span>
+          <span ng-if="colType === '[object Number]'">
+              <!--Do string populated work here...-->
+              {{getColValue(rowObject, header)}}
+          </span>
+          <span ng-if="colType === '[object Array]'">
+              <!--Do string populated work here...-->
+              {{getColValue(rowObject, header)}}
+          </span>
+          <span ng-init="belongToReln = header !== colKey;
+                hasOneRelationPropName = getColumnKey(header);
+                colType = (belongToReln)? checkType(colValue, hasOneRelationPropName): colType;
+                colValue = (belongToReln)? colValue[hasOneRelationPropName] : colValue;"
+                ng-if="colType === '[object Object]'">
+              <!--Do string populated work here...-->
+              <ul ng-if="colType === '[object Object]'">
+                  <li style="margin-top: 10px;" ng-init="objColType = checkType(colValue, key);" ng-repeat="(key, value) in colValue">
+                      <span  ng-if="checkType(colValue, key) === '[object Object]'">
+                          <ul>
+                              <li ng-repeat="(nestedKey, nestedValue) in getColValue(colValue, key)">
+                                  <small><strong>{{nestedKey | capitalize}}</strong></small>: <span>{{nestedValue}}</span>
+                              </li>
+                          </ul>
+                      </span>
+                      <span ng-if="objColType !== '[object Object]'">
+                         <small><strong>{{key | capitalize }}</strong></small>: {{getColValue(colValue, key)}}
+                      </span>
+
+                  </li>
+              </ul>
+              <span ng-if="colType !== '[object Object]'">
+                      {{colValue}}
+              </span>
+          </span>
+
+      </td>
+      <!-- For adding table edit and delete options. -->
+      <td  class="text-center">
+          <div class="btn-group">
+              <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject)"><i class="fa fa-pencil"></i></button>
+              <button
+              class="btn btn-xs btn-default"
+              type="button"
+              data-toggle="tooltip"
+              title="Remove Data"
+              ng-click="deleteData(schema, rowObject)">
+              <i class="fa fa-times"></i>
+              </button>
+          </div>
+      </td>
+  </tr>
+</tbody>

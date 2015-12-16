@@ -1,8 +1,6 @@
-/**
- * Created by robins on 12/12/15.
- */
-'use strict';
-/*global angular, $snaphy*/
+(function(){'use strict';})();
+/*global angular, $snaphy, $*/
+
 angular.module($snaphy.getModuleName())
 
     /**

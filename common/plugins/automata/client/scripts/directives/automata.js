@@ -1,5 +1,5 @@
-'use strict';
-/*global angular, $snaphy, jQuery, $,  BaseTableDatatables*/
+(function(){'use strict';})();
+/*global angular, $snaphy, jQuery, $,  BaseTableDatatables, browser, console*/
 
 angular.module($snaphy.getModuleName())
 
@@ -117,8 +117,8 @@ angular.module($snaphy.getModuleName())
 
                     //Getting the orderMin value..
                     if( from && to){
-                        var from =  new Date( from );
-                        var to   =  new Date( to );
+                        from =  new Date( from );
+                        to   =  new Date( to );
 
                         //Convert to format mm/dd/yyyy
                         var convertDateFormat = function(date){
@@ -128,10 +128,10 @@ angular.module($snaphy.getModuleName())
 
                             var yyyy = givenDate.getFullYear();
                             if(dd<10){
-                                dd='0'+dd
+                                dd='0'+dd;
                             }
                             if(mm<10){
-                                mm='0'+mm
+                                mm='0'+mm;
                             }
                             var formatDate = mm+'/'+dd+'/'+yyyy;
                             return new Date(formatDate);
@@ -216,7 +216,7 @@ angular.module($snaphy.getModuleName())
                 });
 
 
-                if(scope.staticOptions != undefined){
+                if(scope.staticOptions !== undefined){
                     //Load static options..
                     scope.data.options = JSON.parse(scope.staticOptions);
                     //scope.data.options = scope.staticOptions;
@@ -224,7 +224,7 @@ angular.module($snaphy.getModuleName())
 
 
                 //Now load options..
-                if(scope.getOptions != undefined){
+                if(scope.getOptions !== undefined){
                     $http({
                         method: 'GET',
                         url: scope.getOptions
@@ -368,7 +368,7 @@ angular.module($snaphy.getModuleName())
                     if(scope.staticOptions.length){
 
                         //Load static options..
-                        scope.data.options = JSON.parse(scope.staticOptions);    
+                        scope.data.options = JSON.parse(scope.staticOptions);
                     }
                     //scope.data.options = scope.staticOptions;
                 }
@@ -383,9 +383,9 @@ angular.module($snaphy.getModuleName())
                         //Select options downloaded successfully..
                         //Loading options..
                         response.forEach(function(element, index){
-                            scope.data.options.push(element);    
+                            scope.data.options.push(element);
                         });
-                        
+
                     }, function errorCallback(response) {
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
@@ -398,45 +398,38 @@ angular.module($snaphy.getModuleName())
                     var relatedColumnName;
                     //If the column is a key name from a related model.
                     var isRelationModel;
-                  
+
                     console.log(scope.tableData);
                     console.log(scope.$parent.dataValues);
                    //ForEach loop for each table object..
                     scope.tableData.forEach(function(rowObject, index){
                         var rowKey  = scope.$parent.getKey(rowObject, scope.columnName);
-                        
+
                         if(rowObject[rowKey] === undefined){
-                            isRelationModel = true;    
+                            isRelationModel = true;
                         }else{
                             isRelationModel = false;
                         }
-                        
+
                         //options format will be {id:1, name: foo}
                         var rowValue = rowObject[rowKey];
 
                         //The the column is a related column..
                         if(isRelationModel){
                             relatedColumnName = scope.$parent.getColumnKey(scope.columnName);
-                            rowValue = rowObject[relatedColumnName];    
+                            rowValue = rowObject[relatedColumnName];
                         }
-                        
+
                         //Now prepare the object..
                         var option = {
                             id : rowObject.id,
                             name: rowValue
-                        }
-
+                        };
                         scope.data.options = scope.data.options || [];
                         //Now push the options to populate finally...
                         scope.data.options.push(option);
                     });
-                    
-                        
-                
-                } //if 
-                
-
-
+                } //if
 
                 //Now add a Reset method to the filter..
                 scope.$parent.addResetMethod(function(){
@@ -607,17 +600,181 @@ angular.module($snaphy.getModuleName())
 
 
 
-.directive('snaphyLoadFilters', ['$timeout', function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function () {
+    .directive('snaphyWidgetAdded', ['Database', function(Database){
+      return {
+        restrict: 'E',
+        replace: true,
+        scope:{
+          'label'       : '@label',
+          'model'       : '@model',
+          'icon'        : '@icon',
+          'propObj'     : '=propObj',
+          'modelValues' : '=modelValues'
+        },
+        template:
+        '<div>'+
+            '<a class="block block-bordered block-link-hover3" style="cursor:pointer" >'+
+                '<table class="block-table text-center">'+
+                    '<tbody>'+
+                        '<tr>'+
+                            '<td class="bg-gray-lighter border-r" style="width: 50%;">'+
+                                '<div class="push-30 push-30-t">'+
+                                    '<i ng-class="icon" class="fa-3x text-black-op"></i>'+
+                                '</div>'+
+                            '</td>'+
+                            '<td style="width: 50%;">'+
+                                '<div class="h1 font-w700"><span class="h2 text-muted">+</span> {{value}}</div>'+
+                                '<div class="h5 text-muted text-uppercase push-5-t">{{label}}</div>'+
+                            '</td>'+
+                        '</tr>'+
+                    '</tbody>'+
+                '</table>'+
+            '</a>'+
+        '</div>',
+        link: function(scope, iElement, iAttrs){
+          /**
+           * Format of the propObj should be
+           * {
+           * 		type: '$today'|| '$week' || '$allTime',
+           * 		where:{
+           * 			'email': 'robinskumar73'
+           * 		},
+           * 		dateProp: 'date'
+           * }
+           */
 
-            $timeout(function(){
-                $(function () {
-                    // Init page helpers (BS Datepicker + BS Colorpicker + Select2 + Masked Input + Tags Inputs plugins)
-                    App.initHelpers(['datepicker',  'select2']);
-                });
-            }); //timeout method..
-        }//End of Link function...
-    }; // End of return
-}]);
+           var prepareWhereObj = function(propObj){
+             var today, tomorrow, weekStartDate;
+             today = moment().startOf('day');
+             if(propObj.type.trim() === "$today"){
+               tomorrow = moment(today).add(1, 'days');
+               if(propObj.dateProp){
+                  propObj.where[propObj.dateProp] = {
+                    between: [today, tomorrow]
+                  };
+                }//if
+                else{
+                  console.error("Error:  `dateProp` property name is needed in  the widget filter.");
+                }
+             }
+             else if (propObj.type.trim()=== "$week") {
+               weekStartDate = today.subtract(7, 'days');
+               if(propObj.dateProp){
+                  propObj.where[propObj.dateProp] = {
+                    between: [today, weekStartDate]
+                  };
+                }//if
+                else{
+                  console.error("Error:  `dateProp` property name is needed in  the widget filter.");
+                }
+             }//else if
+             else{
+              //  Do nothing
+             }
+             return propObj.where;
+           };
+
+           if(scope.model){
+              var where = prepareWhereObj(scope.propObj);
+              var modelService = Database.loadDb(model);
+              //Now fetch the data from the server..
+              modelService.count({
+                where: where
+              }, function(value, responseHeaders){
+                //Now populate the value..
+                scope.value = value.number;
+              }, function(respHeader){
+                console.error("Error fetching widget data from the server.");
+              }); //modelService
+           }else{
+             if(!scope.modelValues){
+               console.error("modelValue attribute is needed for data to populate in the widgets.");
+             }
+             else{
+               var startDate, endDate;
+               startDate = moment().startOf('day');
+               //type: '$today'|| '$week' || '$allTime'
+               if(scope.propObj.type === '$today'){
+                 endDate = moment(startDate).add(1, 'days');
+               }
+               else if (scope.propObj.type === '$week') {
+                 endDate = startDate.subtract(7, 'days');
+               }
+               else {
+                //  do nothing..
+               }
+
+               var dateFilterGiven = false;
+               if(endDate){
+                 dateFilterGiven = true;
+               }
+
+               var totalCount = 0;
+
+               //Now run loop for the values ..
+               scope.modelValues.forEach(function(element, index){
+                 if(dateFilterGiven){
+                   var dateValue = element[scope.propObj.dateProp];
+                   //Checking is the date is beteern the start and end date..
+                   var checkValue = moment(dateValue).isBetween(startDate, endDate, 'day');
+                   if(checkValue){
+                     if(scope.propObj.where){
+                       //Now check for the where prop.
+                       for(var key in scope.propObj.where){
+                         if(scope.propObj.where.hasOwnProperty(key)){
+                           //Checking the value of the where object..
+                           if(scope.propObj.where[key] === element[key]){
+                             //increment the value..
+                             totalCount++;
+                           }
+                         }
+                       }//for
+                     }//if
+                     else{
+                       //increment the value..
+                       totalCount++;
+                     }
+                   }//if checkValue
+                 }else{
+                   //if the date properties is not given
+                   if(scope.propObj.where){
+                     //Now check for the where prop.
+                     for(var key_ in scope.propObj.where){
+                       if(scope.propObj.where.hasOwnProperty(key_)){
+                         //Checking the value of the where object..
+                         if(scope.propObj.where[key_] === element[key_]){
+                           //increment the value..
+                           totalCount++;
+                         }
+                       }
+                     }//for
+                    }//if
+                    else{
+                      totalCount++;
+                    }
+                 }
+               });  //scope.modelValues loop
+               //populate the value..
+               scope.value = totalCount;
+             }//else
+           }//else
+        } //link..
+      }; //return ..
+    }])
+
+
+
+    .directive('snaphyLoadFilters', ['$timeout', function ($timeout) {
+        return {
+            restrict: 'A',
+            link: function () {
+
+                $timeout(function(){
+                    $(function () {
+                        // Init page helpers (BS Datepicker + BS Colorpicker + Select2 + Masked Input + Tags Inputs plugins)
+                        App.initHelpers(['datepicker',  'select2']);
+                    });
+                }); //timeout method..
+            }//End of Link function...
+        }; // End of return
+    }]);

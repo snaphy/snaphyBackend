@@ -10,12 +10,12 @@
             <ol class="breadcrumb push-10-t">
                 <li>Tables</li>
                 <li><a class="link-effect" ui-sref="{{currentState}}">{{title}}</a></li>
+
             </ol>
         </div>
     </div>
 </div>
 <!-- END Page Header -->
-
 
 
 
@@ -116,10 +116,10 @@
                 <div class="block-content">
 
                     <div snaphy-load-datatable class="table-responsive" style="overflow-x: hidden;">
-                        <table 
-                            id="automataTable" 
-                            class="table table-bordered table-striped js-dataTable-full" 
-                            dt-instance="dtInstance" 
+                        <table
+                            id="automataTable"
+                            class="table table-bordered table-striped js-dataTable-full"
+                            dt-instance="dtInstance"
                             datatable="ng"
                             ng-if="isDataFetched()"
                         >
@@ -137,7 +137,7 @@
                                     <td  ng-init="colType     = checkType(rowObject, header);
                                                   colValue    = getColValue(rowObject, header);
                                                   colKey      = getKey(rowObject, header);
-                                                  tableConfig = findModelPropertyTableConfig(schema.tables, colKey);" 
+                                                  tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"
                                         ng-repeat="header in schema.header" >
 
                                         <span data-sort="{{getColValue(rowObject, header)}}"  data-filter="{{getColValue(rowObject, header)}}" ng-if="colType === '[object String]'">
@@ -193,10 +193,10 @@
                                     <td  class="text-center">
                                         <div class="btn-group">
                                             <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject)"><i class="fa fa-pencil"></i></button>
-                                            <button 
-                                            class="btn btn-xs btn-default" 
-                                            type="button" 
-                                            data-toggle="tooltip" 
+                                            <button
+                                            class="btn btn-xs btn-default"
+                                            type="button"
+                                            data-toggle="tooltip"
                                             title="Remove Data"
                                             ng-click="deleteData(schema, rowObject)">
                                             <i class="fa fa-times"></i>
@@ -267,7 +267,7 @@
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
             </div><!--block-->
         </div><!--col-md-4-->
@@ -292,7 +292,7 @@
                         <div class="block-content block-content-narrow">
                             <form class="form-horizontal" >
                                 <formly-form model="saveFormData" fields="schema.fields">
-                                   
+
                                 </formly-form>
                             </form>
                         </div><!--block-content-->
@@ -307,11 +307,11 @@
         <!-- END Fade In Modal -->
 
         <!-- For showing dialog box -->
-        <snaphy-dialog 
-            message="{{dialog.message}}" 
-            table-title="{{dialog.title}}" 
-            on-cancel="dialog.onCancel()" 
-            on-confirm="dialog.onConfirm()" 
+        <snaphy-dialog
+            message="{{dialog.message}}"
+            table-title="{{dialog.title}}"
+            on-cancel="dialog.onCancel()"
+            on-confirm="dialog.onConfirm()"
             show-dialog="dialog.show">
         </snaphy-dialog>
 

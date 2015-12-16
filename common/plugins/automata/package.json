@@ -24,7 +24,8 @@
       "jqueryDatatables"         : "/automata/style/datatables/jquery.dataTables.min.js",
       "loadDatatables"           : "/automata/scripts/loadDatatables.js",
       "bootstrap3Datapicker"     : "/automata/style/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
-      "select2Full"              : "/automata/style/bower_components/select2/dist/js/select2.full.min.js"
+      "select2Full"              : "/automata/style/bower_components/select2/dist/js/select2.full.min.js",
+      "moment"                   : "/automata/style/bower_components/moment/min/moment.min.js"
     },
     "moduleDependencies":{
       "datatables": "/automata/style/bower_components/angular-datatables/dist/angular-datatables.min.js"
@@ -47,6 +48,6 @@
     "url": ""
   },
   "devDependencies": {
-   
+
   }
 }

@@ -1,8 +1,8 @@
-'use strict';
-/*global $snaphy, angular*/
+( function( ){'use strict';} )( );
+/* global $snaphy, angular, $*/
 angular.module($snaphy.getModuleName())
 
-//Controller for automataControl ..
+// Controller for automataControl ..
 .controller('automataControl', ['$scope', '$state', 'Database', 'SnaphyTemplate',
     function($scope, $state, Database, SnaphyTemplate) {
 
@@ -68,9 +68,11 @@ angular.module($snaphy.getModuleName())
         };
 
 
-
         /**
          * Find model property for the table configuration from the config file
+         * @param  {object} configModelTableObj [description]
+         * @param  {string} propertyName        [description]
+         * @return {object}                     [description]
          */
         $scope.findModelPropertyTableConfig = function(configModelTableObj, propertyName) {
             //get the property parameters..
@@ -116,7 +118,7 @@ angular.module($snaphy.getModuleName())
          */
         $scope.resetAll = function(tableId) {
             //Removing the # tag from id if placed. to avoid duplicity of #
-            var tableId = tableId.replace(/^\#/, '');
+            tableId = tableId.replace(/^\#/, '');
             tableId = '#' + tableId;
             for (var i = 0; i < resetFilterList.length; i++) {
                 //Now call each method..
@@ -146,7 +148,7 @@ angular.module($snaphy.getModuleName())
          * @param  {[type]} rowObject [description]
          * @return {[type]}           [description]
          */
-        $scope.deleteData = function(formStructure, data){ 
+        $scope.deleteData = function(formStructure, data){
             //get the model service..
             var baseDatabase = Database.loadDb(formStructure.model);
             $scope.dialog = {
@@ -161,8 +163,8 @@ angular.module($snaphy.getModuleName())
                 onConfirm: function(){
                     var mainArrayIndex = getArrayIndex($scope.dataValues, data.id);
                     var oldDeletedData = $scope.dataValues[mainArrayIndex];
-                    
-                    
+
+
                     //Reset the disloag bar..
                     $scope.dialog.show = false;
                     baseDatabase.deleteById({
@@ -190,12 +192,12 @@ angular.module($snaphy.getModuleName())
 
                     //Now delete the data..
                     delete $scope.dataValues[mainArrayIndex];
-                    
+
                 },
                 show:true
             };
 
-        }
+        };
 
         /**
          * For finding array index of the data of array of objects with properties id..
@@ -207,9 +209,9 @@ angular.module($snaphy.getModuleName())
                 if(parseInt(element.id) === parseInt(id) ){
                     return i;
                 }
-                
+
             }
-            return null;  
+            return null;
         };
 
 
@@ -271,7 +273,7 @@ angular.module($snaphy.getModuleName())
                     console.error(respHeader);
                     //Change it back to original data..
                     getArrayIndex[dataIndex] = oldData;
-                    
+
                     SnaphyTemplate.notify({
                         message: "Error updating data.",
                         type: 'danger',
@@ -316,7 +318,7 @@ angular.module($snaphy.getModuleName())
                         });
                     } //else
 
-                    
+
 
                 }, function(respHeader) {
                     //remove the form added data..
@@ -407,7 +409,7 @@ angular.module($snaphy.getModuleName())
                 return true;
             }
             return false;
-        }
+        };
 
 
         //checking if the filters is present in the data..
@@ -420,7 +422,7 @@ angular.module($snaphy.getModuleName())
                 }
             }
             return false;
-        }
+        };
 
 
 
@@ -436,12 +438,12 @@ angular.module($snaphy.getModuleName())
                 //$scope.dataValues.length = 0;
                 values.forEach(function(element, index){
                     $scope.dataValues.push(element);
-                })
+                });
 
             }, function(respHeader) {
                 console.log(respHeader);
             });
-        }
+        };
 
 
 
@@ -457,7 +459,7 @@ angular.module($snaphy.getModuleName())
                 $scope.description = "Data management console.";
                 break;
             }
-        }
+        };
 
 
 
