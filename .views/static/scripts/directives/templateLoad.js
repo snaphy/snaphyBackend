@@ -1,5 +1,5 @@
 'use strict';
-/*global angular, $snaphy, $*/
+/*global angular, $snaphy, $, setTimeout, jQuery, App*/
 angular.module($snaphy.getModuleName())
 
 
@@ -74,16 +74,10 @@ angular.module($snaphy.getModuleName())
                 $(iElement).modal('show');
               }
               else{
-                $(iElement).modal('hide'); 
+                $(iElement).modal('hide');
               }
           });
-          
+
         }//link function..
-    }
+    };
 }]);
-
-
-
- 
-
-            

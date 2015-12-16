@@ -1,10 +1,10 @@
-'use strict';
+(function(){'use strict';})();
 module.exports = function( server, databaseObj, helper, packageObj) {
 	/**
 	 * Here server is the main app object
 	 * databaseObj is the mapped database from the package.json file
 	 * helper object contains all the helpers methods.
-	 * packegeObj contains the packageObj file of your plugin. 
+	 * packegeObj contains the packageObj file of your plugin.
 	 */
 
 	/**
@@ -45,8 +45,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		modelObj.getSchema = function(callback) {
 			//Now form the schema and send it to the client..
 			var relations = modelObj.definition.settings.relations;
-			var filters = modelObj.definition.settings.filters;
-			var tables = modelObj.definition.settings.tables;
+			var filters   = modelObj.definition.settings.filters;
+			var tables    = modelObj.definition.settings.tables;
+			var widgets   = modelObj.definition.settings.widgets;
 
 			/**
 			 * Now form the desired schema and return it.
@@ -61,6 +62,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			schema.header  = header;
 			schema.filters = filters;
 			schema.tables  = tables;
+			schema.widgets  = widgets;
 
 			callback(null, schema);
 		};

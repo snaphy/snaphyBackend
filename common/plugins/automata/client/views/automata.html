@@ -23,64 +23,19 @@
 <!-- Page Content -->
 <div class="content">
     <!-- Simple Vertical Tiles -->
-    <div class="row">
-        <div class="col-sm-6 col-lg-3" >
-            <a class="block block-bordered block-link-hover3" style="cursor:pointer" >
-                <table class="block-table text-center">
-                    <tbody>
-                        <tr>
-                            <td class="bg-gray-lighter border-r" style="width: 50%;">
-                                <div class="push-30 push-30-t">
-                                    <i class="si si-users fa-3x text-black-op"></i>
-                                </div>
-                            </td>
-                            <td style="width: 50%;">
-                                <div class="h1 font-w700"><span class="h2 text-muted">+</span> 750</div>
-                                <div class="h5 text-muted text-uppercase push-5-t">Users Added</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" style="cursor:pointer" >
-                <table class="block-table text-center">
-                    <tbody>
-                        <tr>
-                            <td class="bg-gray-lighter border-r" style="width: 50%;">
-                                <div class="push-30 push-30-t">
-                                    <i class="si si-speedometer fa-3x text-black-op"></i>
-                                </div>
-                            </td>
-                            <td style="width: 50%;">
-                                <div class="h1 font-w700"><span class="h2 text-muted">+</span> 3</div>
-                                <div class="h5 text-muted text-uppercase push-5-t">Added Today</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" style="cursor:pointer" >
-                <table class="block-table text-center">
-                    <tbody>
-                        <tr>
-                            <td style="width: 50%;">
-                                <div class="h1 font-w700"><span class="h2 text-muted">+</span> 3</div>
-                                <div class="h5 text-muted text-uppercase push-5-t">Rejected Users</div>
-                            </td>
-                            <td class="bg-gray-lighter border-l" style="width: 50%;">
-                                <div class="push-30 push-30-t">
-                                    <i class="si si-user-unfollow fa-3x text-black-op"></i>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </a>
-        </div>
+    <div class="row" ng-if="isDataFetched()">
+
+      <snaphy-widget-added class="col-sm-6 col-lg-3"
+        ng-repeat="widget in schema.widgets"
+        label="{{widget.label}}"
+        model="{{schema.model}}"
+        icon="{{widget.icon}}"
+        prop-obj="widget.propObj"
+        model-values="dataValues"
+        >
+      </snaphy-widget-added>
+
+
         <div class="col-sm-6 col-lg-3">
             <a class="block block-bordered block-link-hover3" style="cursor:pointer" data-toggle="modal" data-target="#addDataModal" >
                 <table class="block-table text-center">
@@ -102,6 +57,7 @@
         </div>
     </div>
     <!-- END Simple Vertical Tiles -->
+</div>
 
 
 

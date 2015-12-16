@@ -112,6 +112,11 @@ angular.module($snaphy.getModuleName())
         };
 
 
+        var resetSavedForm = function(){
+          $scope.saveFormData = {};
+        };
+
+
 
         /**
          * For resetting all filter on reset button click..
@@ -179,7 +184,7 @@ angular.module($snaphy.getModuleName())
                         });
                     }, function(respHeader){
                         //Attach the data again..
-                        $scope.dataValues.push(oldDeletedData);
+                        // $scope.dataValues.push(oldDeletedData);
 
                         console.error(respHeader);
                         SnaphyTemplate.notify({
@@ -189,9 +194,10 @@ angular.module($snaphy.getModuleName())
                             align: 'right'
                         });
                     });
-
                     //Now delete the data..
-                    delete $scope.dataValues[mainArrayIndex];
+                    $scope.dataValues.splice(mainArrayIndex, 1);
+                    //Now delete the data..
+                    console.log($scope.dataValues);
 
                 },
                 show:true
@@ -282,6 +288,9 @@ angular.module($snaphy.getModuleName())
                     });
                 });
 
+                //Now reset the form..
+                resetSavedForm();
+
             } else {
                 //Now first prepare object..
                 formStructure.relations.hasMany.forEach(function(relationName, index) {
@@ -305,10 +314,20 @@ angular.module($snaphy.getModuleName())
                     $scope.dataValues[positionNewData] = baseModel;
 
                     if (formStructure.relations.hasMany) {
+                      if(formStructure.relations.hasMany.length){
                         //Now save the related model..
                         formStructure.relations.hasMany.forEach(function(relationName, index) {
                             addRelatedModel(baseDatabase, relationName, relatedData, index, baseModel.id);
                         });
+                      }else{
+                        SnaphyTemplate.notify({
+                            message: "Data successfully saved.",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
+                      }
+
                     } else {
                         SnaphyTemplate.notify({
                             message: "Data successfully saved.",
@@ -367,6 +386,9 @@ angular.module($snaphy.getModuleName())
                 /**
                  * Other related model to be implemented later.
                  */
+
+                 //Now reset the form finally..
+                 resetSavedForm();
 
             } //else
 

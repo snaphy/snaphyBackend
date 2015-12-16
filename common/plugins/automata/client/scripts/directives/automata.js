@@ -160,10 +160,6 @@ angular.module($snaphy.getModuleName())
 
 
 
-
-
-
-
     /**
      *Directive for defining filters $select
      * */
@@ -619,7 +615,7 @@ angular.module($snaphy.getModuleName())
                         '<tr>'+
                             '<td class="bg-gray-lighter border-r" style="width: 50%;">'+
                                 '<div class="push-30 push-30-t">'+
-                                    '<i ng-class="icon" class="fa-3x text-black-op"></i>'+
+                                    '<i ng-class="icon" class="fa-3x text-black-op si"></i>'+
                                 '</div>'+
                             '</td>'+
                             '<td style="width: 50%;">'+
@@ -642,6 +638,7 @@ angular.module($snaphy.getModuleName())
            * 		dateProp: 'date'
            * }
            */
+
 
            var prepareWhereObj = function(propObj){
              var today, tomorrow, weekStartDate;
@@ -674,90 +671,114 @@ angular.module($snaphy.getModuleName())
              return propObj.where;
            };
 
-           if(scope.model){
-              var where = prepareWhereObj(scope.propObj);
-              var modelService = Database.loadDb(model);
-              //Now fetch the data from the server..
-              modelService.count({
-                where: where
-              }, function(value, responseHeaders){
-                //Now populate the value..
-                scope.value = value.number;
-              }, function(respHeader){
-                console.error("Error fetching widget data from the server.");
-              }); //modelService
-           }else{
-             if(!scope.modelValues){
-               console.error("modelValue attribute is needed for data to populate in the widgets.");
+
+           var performDataLocally = function(){
+             var startDate, endDate;
+             startDate = moment().startOf('day');
+             //type: '$today'|| '$week' || '$allTime'
+             if(scope.propObj.type === '$today'){
+               endDate = moment(startDate).add(1, 'days');
              }
-             else{
-               var startDate, endDate;
-               startDate = moment().startOf('day');
-               //type: '$today'|| '$week' || '$allTime'
-               if(scope.propObj.type === '$today'){
-                 endDate = moment(startDate).add(1, 'days');
-               }
-               else if (scope.propObj.type === '$week') {
-                 endDate = startDate.subtract(7, 'days');
-               }
-               else {
-                //  do nothing..
-               }
+             else if (scope.propObj.type === '$week') {
+               endDate = startDate.subtract(7, 'days');
+             }
+             else {
+                //do nothing..
+             }
 
-               var dateFilterGiven = false;
-               if(endDate){
-                 dateFilterGiven = true;
-               }
+             var dateFilterGiven = false;
+             if(endDate){
+               dateFilterGiven = true;
+             }
 
-               var totalCount = 0;
+             var totalCount = 0;
 
-               //Now run loop for the values ..
-               scope.modelValues.forEach(function(element, index){
-                 if(dateFilterGiven){
-                   var dateValue = element[scope.propObj.dateProp];
-                   //Checking is the date is beteern the start and end date..
-                   var checkValue = moment(dateValue).isBetween(startDate, endDate, 'day');
-                   if(checkValue){
-                     if(scope.propObj.where){
-                       //Now check for the where prop.
-                       for(var key in scope.propObj.where){
-                         if(scope.propObj.where.hasOwnProperty(key)){
-                           //Checking the value of the where object..
-                           if(scope.propObj.where[key] === element[key]){
-                             //increment the value..
-                             totalCount++;
-                           }
-                         }
-                       }//for
-                     }//if
-                     else{
-                       //increment the value..
-                       totalCount++;
-                     }
-                   }//if checkValue
-                 }else{
-                   //if the date properties is not given
+             //Now run loop for the values ..
+             scope.modelValues.forEach(function(element, index){
+               if(dateFilterGiven){
+                 var dateValue = element[scope.propObj.dateProp];
+                 //Checking is the date is beteern the start and end date..
+                 var checkValue = moment(dateValue).isBetween(startDate, endDate, 'day');
+                 if(checkValue){
                    if(scope.propObj.where){
                      //Now check for the where prop.
-                     for(var key_ in scope.propObj.where){
-                       if(scope.propObj.where.hasOwnProperty(key_)){
+                     for(var key in scope.propObj.where){
+                       if(scope.propObj.where.hasOwnProperty(key)){
                          //Checking the value of the where object..
-                         if(scope.propObj.where[key_] === element[key_]){
+                         if(scope.propObj.where[key] === element[key]){
                            //increment the value..
                            totalCount++;
                          }
                        }
                      }//for
-                    }//if
-                    else{
-                      totalCount++;
-                    }
-                 }
-               });  //scope.modelValues loop
-               //populate the value..
-               scope.value = totalCount;
-             }//else
-           }//else
+                   }//if
+                   else{
+                     //increment the value..
+                     totalCount++;
+                   }
+                 }//if checkValue
+               }else{
+                 //if the date properties is not given
+                 if(scope.propObj.where){
+                   var wherePropertyPresent = false;
+                   //Now check for the where prop.
+                   for(var key_ in scope.propObj.where){
+                     if(scope.propObj.where.hasOwnProperty(key_)){
+                       wherePropertyPresent = true;
+                       //Checking the value of the where object..
+                       if(scope.propObj.where[key_] === element[key_]){
+                         //increment the value..
+                         totalCount++;
+                       }
+                     }
+                   }//for
+                   if(!wherePropertyPresent){
+                     totalCount++;
+                   }
+                  }//if
+                  else{
+                    totalCount++;
+                  }
+               }
+             });  //scope.modelValues loop
+             //populate the value..
+             scope.value = totalCount;
+           }; //performDataLocally function
+
+
+             try{
+               //If modelValue is not given then fetch data from the server.
+               if(!scope.modelValues.length){
+                  var where = prepareWhereObj(scope.propObj);
+                  var modelService = Database.loadDb(model);
+                  //Now fetch the data from the server..
+                  modelService.count({
+                    where: where
+                  }, function(value, responseHeaders){
+                    //Now populate the value..
+                    scope.value = value.number;
+                  }, function(respHeader){
+                    console.error("Error fetching widget data from the server.");
+                  }); //modelService
+               }
+               else
+               {
+                 scope.$watch('modelValues.length', function() {
+                   console.log('got changed');
+                    performDataLocally();
+                 });
+                 //performDataLocally();
+               }//else
+             }
+             catch(err)
+             {
+               scope.$watch('modelValues.length', function() {
+                 console.log('got changed');
+                  performDataLocally();
+               });
+             }
+
+
         } //link..
       }; //return ..
     }])
