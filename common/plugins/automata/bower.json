@@ -7,7 +7,8 @@
     "select2-bootstrap-css": "https://github.com/t0m/select2-bootstrap-css.git#~1.4.6",
     "moment": "~2.10.6",
     "angular": "~1.4.8",
-    "angular-datatables": "~0.5.1"
+    "angular-datatables": "~0.5.1",
+    "moment-range": "https://github.com/gf3/moment-range.git#~2.0.3"
   },
   "devDependencies": {},
   "appPath": "client",

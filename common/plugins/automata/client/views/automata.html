@@ -32,6 +32,7 @@
         icon="{{widget.icon}}"
         prop-obj="widget.propObj"
         model-values="dataValues"
+        fetch-locally="widget.fetchLocally"
         >
       </snaphy-widget-added>
 
@@ -229,46 +230,47 @@
         </div><!--col-md-4-->
 
     </div><!--row-->
+</div>
 
 
-
-        <!-- Fade In Modal -->
-        <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="block block-themed block-transparent remove-margin-b">
-                        <div class="block-header bg-primary-dark">
-                            <ul class="block-options">
-                                <li>
-                                    <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
-                                </li>
-                            </ul>
-                            <h3 class="block-title">{{tableTitle}}</h3>
-                        </div>
-                        <div class="block-content block-content-narrow">
-                            <form class="form-horizontal" >
-                                <formly-form model="saveFormData" fields="schema.fields">
-
-                                </formly-form>
-                            </form>
-                        </div><!--block-content-->
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                        <button  class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)" type="button" data-dismiss="modal"><i class="fa fa-check"></i> Save</button>
-                    </div>
+<!-- Fade In Modal -->
+<div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent remove-margin-b">
+                <div class="block-header bg-primary-dark">
+                    <ul class="block-options">
+                        <li>
+                            <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                        </li>
+                    </ul>
+                    <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
+                <div class="block-content block-content-narrow">
+                    <form class="form-horizontal" >
+                        <formly-form model="saveFormData" fields="schema.fields">
+
+                        </formly-form>
+                    </form>
+                </div><!--block-content-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                <button  class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)" type="button" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
+                <button  class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" type="button" >
+                  <i class="fa fa-save"></i> Save and add another
+                </button>
             </div>
         </div>
-        <!-- END Fade In Modal -->
-
-        <!-- For showing dialog box -->
-        <snaphy-dialog
-            message="{{dialog.message}}"
-            table-title="{{dialog.title}}"
-            on-cancel="dialog.onCancel()"
-            on-confirm="dialog.onConfirm()"
-            show-dialog="dialog.show">
-        </snaphy-dialog>
-
+    </div>
 </div>
+<!-- END Fade In Modal -->
+
+<!-- For showing dialog box -->
+<snaphy-dialog
+    message="{{dialog.message}}"
+    table-title="{{dialog.title}}"
+    on-cancel="dialog.onCancel()"
+    on-confirm="dialog.onConfirm()"
+    show-dialog="dialog.show">
+</snaphy-dialog>

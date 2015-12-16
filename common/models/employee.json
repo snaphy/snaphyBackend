@@ -86,7 +86,7 @@
     {
       "label":"User Added",
       "icon": "si-users",
-
+      "fetchLocally":true,
       "propObj":{
         "type": "$allTime",
         "where":{
@@ -96,6 +96,7 @@
     },
     {
       "label":"User Added In A Week",
+      "fetchLocally":true,
       "icon": "si-users",
       "propObj":{
         "type": "$week",
@@ -107,6 +108,7 @@
     {
       "label":"User Added Today",
       "icon": "si-speedometer",
+      "fetchLocally":true,
       "propObj":{
         "type": "$today",
         "where":{
