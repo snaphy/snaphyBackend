@@ -43,7 +43,7 @@
         "templateOptions": {
           "type": "password",
           "label": "Enter Password",
-          "id": "password"
+          "id": "password_"
         }
       }
     }
@@ -58,6 +58,9 @@
             "password":{
                 "required": true,
                 "minlength": "5"
+            },
+            "email":{
+                "required": true
             }
         },
         "messages":{
@@ -68,6 +71,9 @@
             "password":{
                     "required": "Password is required",
                     "minlength": "Password must be of atleast 5 characters"
+            },
+            "email":{
+                "required":"Email is required."
             }
         }
     },

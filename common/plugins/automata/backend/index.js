@@ -48,7 +48,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			var filters   = modelObj.definition.settings.filters;
 			var tables    = modelObj.definition.settings.tables;
 			var widgets   = modelObj.definition.settings.widgets;
-			var validations   = modelObj.definition.settings.validations;
+			//var validations   = modelObj.definition.settings.validations;
 
 			/**
 			 * Now form the desired schema and return it.
@@ -64,7 +64,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			schema.filters = filters;
 			schema.tables  = tables;
 			schema.widgets  = widgets;
-			schema.validations  = validations;
+			//schema.validations  = validations;
 
 			callback(null, schema);
 		};
@@ -205,6 +205,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		var modelObj    = app.models[modelName],
 		modelProperties = modelObj.definition.rawProperties,
 		validationObj  = modelObj.definition.settings.validations;
+		var newValidationObj = {
+			rules:{},
+			messages:{}
+		};
 		for(var propertyName in modelProperties){
 			if(modelProperties.hasOwnProperty(propertyName)){
 				var propObj = modelProperties[propertyName].template;
@@ -212,18 +216,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				if(propObj !== undefined){
 					propObj.key = propertyName;
 					//also add the validation to the object..
-					var validationRules = validationObj[propertyName];
-/*
-					if(validationRules){
-						if(propObj.templateOptions){
-							propObj.templateOptions.validation = validationRules;
+					var validationRules = validationObj.rules[propertyName];
+					var validationMessages = validationObj.messages[propertyName];
+
+					if(propObj.templateOptions && validationRules){
+						if(propObj.templateOptions.id){
+							var validationName = propObj.templateOptions.id;
+							//Get the validation object..
+							newValidationObj.rules[validationName] = validationRules;
+							newValidationObj.messages[validationName] = validationMessages;
 						}
 					}
-					*/
+
 					schema.fields.push(propObj);
 				}
 			}
 		}//for-in
+		//Now adding validation obj..
+		schema.validations = newValidationObj;
 		return schema;
 	};
 
