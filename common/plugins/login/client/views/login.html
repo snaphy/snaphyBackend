@@ -19,11 +19,10 @@
 
                     <!-- END Danger Alert -->
                     <!-- END Login Title -->
-
                     <!-- Login Form -->
                     <!-- jQuery Validation (.js-validation-login class is initialized in js/pages/base_pages_login.js) -->
                     <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                    <form snaphy-validate-all name="loginForm" class="js-validation-login form-horizontal push-30-t push-50" >
+                    <form ng-validate="validateForm" name="loginForm" class="js-validation-login form-horizontal push-30-t push-50" >
                         <!-- Danger Alert -->
                         <div ng-show="loginError" class="alert alert-danger alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -68,6 +67,3 @@
     </div>
 </div>
 <!-- END Login Content -->
-
-
-
