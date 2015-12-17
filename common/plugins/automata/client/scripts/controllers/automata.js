@@ -112,8 +112,25 @@ angular.module($snaphy.getModuleName())
         };
 
 
-        var resetSavedForm = function(){
-          $scope.saveFormData = {};
+        var resetSavedForm = function(form){
+            $scope.saveFormData = {};
+            form.$setPristine();
+        };
+
+
+        $scope.enableButton = function(form){
+            try{
+                if(form.$dirty){
+                    if($.isEmptyObject(form.$error) ){
+                        return true;
+                    }
+                }else{
+                    return false;
+                }
+            }catch(err){
+                //disable button
+                return true;
+            }
         };
 
 
@@ -225,29 +242,19 @@ angular.module($snaphy.getModuleName())
          * @param  {[type]} schema template schema object with property fields showing all the fields.
          * @return {[type]}        [description]
          */
-        $scope.isValid = function(schema){
-            var valid = true;
+        $scope.isValid = function(form){
             try{
-                var fields = schema.fields;
-                //Looping each fields..
-                fields.forEach(function(template, index){
-                    if(template.templateOptions){
-                        if(template.templateOptions.id){
-                            var id = '#' + template.templateOptions.id.replace(/^\#/, '');
-                            console.log(id);
-                            //Now check the valid for each element..
-                            if(!$(id).valid()){
-                                valid = false;
 
-                            }
-                        }//if
-                    }//if
-                });
-
-                return valid;
+                if(form.validate() && form.$dirty){
+                    if($.isEmptyObject(form.$error) ){
+                        return true;
+                    }
+                }
             }catch(err){
                 return false;
             }
+
+            return false;
         };
 
 
@@ -258,26 +265,16 @@ angular.module($snaphy.getModuleName())
          * @param formID refrencing to the id attribute of the  form.
          */
         $scope.saveForm = function(formStructure, formModel) {
-            // if(!$scope.isValid(formStructure)){
-            //     return null;
-            // }
-            // //return if form is empty.
-            // if(jQuery.isEmptyObject(formModel)){
-            //     return null;
-            // }
 
-
-            //
-            // if(!formStructure.form.$valid){
-            //     SnaphyTemplate.notify({
-            //         message: "Data is not valid.",
-            //         type: 'danger',
-            //         icon: 'fa fa-times',
-            //         align: 'right'
-            //     });
-            //     return null;
-            // }
-
+            if(!$scope.isValid(formStructure.form)){
+                SnaphyTemplate.notify({
+                    message: "Error data is Invalid.",
+                    type: 'danger',
+                    icon: 'fa fa-times',
+                    align: 'right'
+                });
+                return null;
+            }
 
             //Now save the model..
             var baseDatabase = Database.loadDb(formStructure.model);
@@ -337,7 +334,7 @@ angular.module($snaphy.getModuleName())
                 });
 
                 //Now reset the form..
-                resetSavedForm();
+                resetSavedForm(formStructure.form);
 
             } else {
                 //Now first prepare object..
@@ -436,10 +433,9 @@ angular.module($snaphy.getModuleName())
                  */
 
                  //Now reset the form finally..
-                 resetSavedForm();
+                 resetSavedForm(formStructure.form);
 
             } //else
-
         }; //saveForm
 
 

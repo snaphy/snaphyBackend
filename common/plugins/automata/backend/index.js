@@ -48,6 +48,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			var filters   = modelObj.definition.settings.filters;
 			var tables    = modelObj.definition.settings.tables;
 			var widgets   = modelObj.definition.settings.widgets;
+			var validations   = modelObj.definition.settings.validations;
 
 			/**
 			 * Now form the desired schema and return it.
@@ -63,6 +64,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			schema.filters = filters;
 			schema.tables  = tables;
 			schema.widgets  = widgets;
+			schema.validations  = validations;
 
 			callback(null, schema);
 		};
@@ -211,11 +213,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					propObj.key = propertyName;
 					//also add the validation to the object..
 					var validationRules = validationObj[propertyName];
+/*
 					if(validationRules){
 						if(propObj.templateOptions){
 							propObj.templateOptions.validation = validationRules;
 						}
 					}
+					*/
 					schema.fields.push(propObj);
 				}
 			}

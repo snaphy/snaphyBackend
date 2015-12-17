@@ -48,38 +48,30 @@
       }
     }
   },
+
   "validations": {
-      "username":{
-          "rules":{
-              "required" : true,
-              "minlength": "3",
-              "regex"    : "dasd"
-          },
-          "messages":{
-            "required": "Username is required",
-            "minlength": "Minimum permitted length is atleast 3",
-            "regex": "please enter a valid data."
-          }
-    },
-       "password":{
         "rules":{
-            "required": true,
-            "minlength": "5"
+            "username":{
+                "required" : true,
+                "minlength": "3"
+            },
+            "password":{
+                "required": true,
+                "minlength": "5"
+            }
         },
         "messages":{
-            "required": "Password is required",
-            "minlength": "Password must be of atleast 5 characters"
+            "username":{
+                "required": "Username is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            },
+            "password":{
+                    "required": "Password is required",
+                    "minlength": "Password must be of atleast 5 characters"
+            }
         }
     },
-    "email":{
-        "rules":{
-            "required": true
-        },
-        "messages":{
-          "required": "Email Address is required"
-        }
-    }
-  },
+
   "relations": {
     "recipes": {
       "type": "hasMany",

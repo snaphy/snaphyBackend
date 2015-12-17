@@ -10,10 +10,11 @@
     "css": {},
     "js": {
         "jqueryValidation": "/jqueryValidate/style/bower_components/jquery-validation/dist/jquery.validate.min.js",
-        "validateDirectives": "/jqueryValidate/scripts/validateDirectives.js",
-        "validateServices": "/jqueryValidate/scripts/validateServices.js"
+        "validateDirectives": "/jqueryValidate/scripts/validateDirectives.js"
     },
-    "moduleDependencies":{},
+    "moduleDependencies":{
+        "ngValidate": "/jqueryValidate/style/bower_components/jpkleemans-angular-validate/dist/angular-validate.min.js"
+    },
     "settings": "/jqueryValidate/settings.js"
   },
   "defaultTemplate": "false",
@@ -33,6 +34,6 @@
     "url": ""
   },
   "devDependencies": {
-   
+
   }
 }

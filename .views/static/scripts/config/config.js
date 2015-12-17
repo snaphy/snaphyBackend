@@ -6,14 +6,14 @@ angular.module($snaphy.getModuleName())
     /**
      Defigning templated for angular-formly.
      */
-    .run(['formlyConfig',  'SnaphyValidate', function (formlyConfig, SnaphyValidate)  {
+    .run(['formlyConfig', function (formlyConfig, SnaphyValidate)  {
         formlyConfig.setType({
             name: 'input',
             template:
             '<div  class="form-group">'+
             '<div  ng-class="[options.templateOptions.colSize, options.templateOptions.color]">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
-            '<input  class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class"   name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
+            '<input  class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class"   name="{{options.key}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
             '</div>'+
             '</div>'+
@@ -21,86 +21,6 @@ angular.module($snaphy.getModuleName())
 
             link: function(scope, element, attrs) {
                 if(scope.options.templateOptions){
-                    /**
-                     *
-                     * Validation depends on the snaphy Validation plugin
-                     * id of the element is needed.
-                     * format of the validation element will be like.
-                     * 'login-username': {
-                         required: true,
-                         minlength: 3
-                     }
-
-                     {
-                       "type": "input",
-                       "templateOptions": {
-                         "type": "text",
-                         "label": "Enter Username",
-                         "validation":{
-                            rules:{
-                                required: true,
-                                minlength:4
-                            },
-                            messages:{
-                                required: 'Please enter a username',
-                                minlength: 'Your username must consist of at least 3 characters'
-                            }
-
-                        }
-                       },
-                       "key": "username"
-                     }
-                     */
-                     //Method for escaping string characters in the stringRegex
-                    if(scope.options.templateOptions.validation){
-                        if(!scope.options.templateOptions.id){
-                            console.error("`id` property is required in templateOptions for the input type angular-formly for validation");
-                        }
-                        //First get the form element. class name.
-                        var formElement =  $(element).parents('form');
-
-                        if(!formElement){
-                            console.error("Cannot find form element as parent of the element.\n Formly must be enclosed inside a form element for validation to be done.");
-                        }
-                        //Now get the name property of the input.
-                        var name = scope.options.templateOptions.id;
-                        var options = SnaphyValidate.options;
-                        options.rules = {};
-                        options.messages = {};
-                        //If regex is defined then first convert regex to regexObject
-                        if(scope.options.templateOptions.validation.rules.regex){
-                            scope.options.templateOptions.validation.rules.regex = new RegExp(scope.options.templateOptions.validation.rules.regex);
-                        }
-                        options.rules[name] = scope.options.templateOptions.validation.rules;
-                        options.messages[name] = scope.options.templateOptions.validation.messages;
-                        //Validating event on focusout..
-                        options.onfocusout = function(element, event){
-                            this.element(element);
-                        };
-                        //validating of keyup..
-                        options.onkeyup =  function (element, event) {
-                            if (event.which === 9 && this.elementValue(element) === "") {
-                                return;
-                            } else {
-                                this.element(element);
-                            }
-                        };
-
-                        setTimeout(function(){
-                            console.log(options);
-                            try{
-
-                            }
-                            catch(err){
-                                //If validation has not been called..
-                                //Now load the result..
-                                jQuery(formElement[0]).validate(options);
-                            }
-                        },0);
-
-
-                    }
-
                     if(!scope.options.templateOptions.colSize){
                         scope.options.templateOptions.colSize = 'col-xs-12';
                     }

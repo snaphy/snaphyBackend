@@ -7,11 +7,44 @@
 
 
 ### How to use
-######Either
-1. Either pass `snaphyValidateAll` directive to the form. and then define rules and messages with class name in the settings.js file.
-2. Use `pre defined` directive to the elements that you want to use.
+```
+<form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
+    <formly-form   model="saveFormData" fields="schema.fields">
+
+    </formly-form>
+</form>
 
 
+<script>
+
+app.controller('test', function(){
+    schema.validations = {
+        "rules":{
+            "username":{
+                "required" : true,
+                "minlength": "3"
+            },
+            "password":{
+                "required": true,
+                "minlength": "5"
+            }
+        },
+        "messages":{
+            "username":{
+                "required": "Username is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            },
+            "password":{
+                    "required": "Password is required",
+                    "minlength": "Password must be of atleast 5 characters"
+            }
+        }
+    }
+});
+
+</script>
+
+```
 
 
 ####Written by Robins Gupta

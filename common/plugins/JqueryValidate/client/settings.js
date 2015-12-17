@@ -1,14 +1,16 @@
 /**
  * Created by robins on 2/12/15.
  */
-'use strict';
+(function(){'use strict';})();
 /*jslint browser: true*/
-/*$snaphy*/
+/**
+ * Now just use angular jqueryValidation instead
+ * https://github.com/jpkleemans/angular-validate
+ */
 //This is the setting file of the plugin..TO be configured according to the user needs..
 //For more rules check jqueryValidation docs.
 var settings = {
    //Validation Class name of the forms
-   "formClass" : 'js-validation-login',
     rules: {
         'login-username': {
             required: true,

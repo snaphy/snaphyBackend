@@ -233,9 +233,8 @@
 </div>
 
 
-
 <!-- Fade In Modal -->
-<div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div  class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="block block-themed block-transparent remove-margin-b">
@@ -247,18 +246,20 @@
                     </ul>
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
-                <div class="block-content block-content-narrow">
-                    <form class="form-horizontal" >
+
+                <div ng-if="schema.validations" class="block-content block-content-narrow">
+                    <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
 
                         </formly-form>
                     </form>
                 </div><!--block-content-->
             </div>
+            {{disableButton(schema.form)}}
             <div class="modal-footer">
                 <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                <button  class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)" type="button" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
-                <button type="submit"  class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
+                <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
+                <button ng-disabled="!enableButton(schema.form)" type="submit" class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
                   <i class="fa fa-save"></i> Save and add another
                 </button>
             </div>

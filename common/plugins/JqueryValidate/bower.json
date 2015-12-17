@@ -2,7 +2,8 @@
   "name": "JqueryValidate",
   "version": "1.0.0",
   "dependencies": {
-    "jquery-validation": "https://github.com/jzaefferer/jquery-validation.git#~1.14.0"
+    "jquery-validation": "https://github.com/jzaefferer/jquery-validation.git#~1.14.0",
+    "jpkleemans-angular-validate": "~1.0.0"
   },
   "devDependencies": {},
   "appPath": "client",
