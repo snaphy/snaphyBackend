@@ -221,19 +221,42 @@ angular.module($snaphy.getModuleName())
         };
 
 
+        //Method for checking if the form entered is valid.
+
+        $scope.isFormValid = function(formClass){
+            //formId = formId.replace(/^\#/, '');
+            //console.log($('#' + formId).valid());
+            //now return the valid identity..
+            console.log($(formClass).valid());
+            return $(formClass).valid();
+        };
+
 
 
         /**
          * Model for storing the model structure..
          * @param formStructure
          * @param formModel
+         * @param formID refrencing to the id attribute of the  form.
          */
-        $scope.saveForm = function(formStructure, formModel) {
-            console.log(formStructure);
+        $scope.saveForm = function(formStructure, formModel, formID) {
             //return if form is empty.
             if(jQuery.isEmptyObject(formModel)){
                 return null;
             }
+
+            console.log($scope.isFormValid(formID));
+
+            if(!formStructure.form.$valid){
+                SnaphyTemplate.notify({
+                    message: "Data is not valid.",
+                    type: 'danger',
+                    icon: 'fa fa-times',
+                    align: 'right'
+                });
+                return null;
+            }
+
 
             //Now save the model..
             var baseDatabase = Database.loadDb(formStructure.model);

@@ -232,7 +232,6 @@
     </div><!--row-->
 </div>
 
-
 <!-- Fade In Modal -->
 <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -247,8 +246,8 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div class="block-content block-content-narrow">
-                    <form  class="form-horizontal js-validation-login" >
-                        <formly-form form="schema.form" model="saveFormData" fields="schema.fields">
+                    <form class="form-horizontal" >
+                        <formly-form  form="schema.form" model="saveFormData" fields="schema.fields">
 
                         </formly-form>
                     </form>
@@ -257,14 +256,14 @@
             <div class="modal-footer">
                 <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
                 <button ng-disabled="!schema.form.$valid" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)" type="button" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
-                <button ng-disabled="!schema.form.$valid"  class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" type="button" >
+                <button ng-disabled="!schema.form.$valid" type="submit"  class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData, '.form-horizontal')" >
                   <i class="fa fa-save"></i> Save and add another
                 </button>
             </div>
         </div>
     </div>
 </div>
-<!-- END Fade In Modal -->
+
 
 <!-- For showing dialog box -->
 <snaphy-dialog

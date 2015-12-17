@@ -12,7 +12,8 @@
         "type":"input",
         "templateOptions":{
           "type": "text",
-          "label": "Enter Username"
+          "label": "Enter Username",
+          "id":"Username"
         }
       }
     },

@@ -176,7 +176,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					}
 				}//if
 			}
-		};
+		}
 		return header;
 	};
 
@@ -201,12 +201,21 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		}
 		schema.fields   = [];
 		var modelObj    = app.models[modelName],
-		modelProperties = modelObj.definition.rawProperties;
+		modelProperties = modelObj.definition.rawProperties,
+		validationObj  = modelObj.definition.settings.validations;
 		for(var propertyName in modelProperties){
 			if(modelProperties.hasOwnProperty(propertyName)){
 				var propObj = modelProperties[propertyName].template;
+
 				if(propObj !== undefined){
 					propObj.key = propertyName;
+					//also add the validation to the object..
+					var validationRules = validationObj[propertyName];
+					if(validationRules){
+						if(propObj.templateOptions){
+							propObj.templateOptions.validation = validationRules;
+						}
+					}
 					schema.fields.push(propObj);
 				}
 			}

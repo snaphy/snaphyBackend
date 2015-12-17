@@ -6,7 +6,7 @@ angular.module($snaphy.getModuleName())
     /**
      Defigning templated for angular-formly.
      */
-    .run(['formlyConfig',  'SnaphyValidate', function (formlyConfig)  {
+    .run(['formlyConfig',  'SnaphyValidate', function (formlyConfig, SnaphyValidate)  {
         formlyConfig.setType({
             name: 'input',
             template:
@@ -23,9 +23,8 @@ angular.module($snaphy.getModuleName())
                 /**
                  *
                  * Validation depends on the snaphy Validation plugin
-                 *
+                 * id of the element is needed.
                  * format of the validation element will be like.
-                 * there must be and templateOptions.class defined
                  * 'login-username': {
                      required: true,
                      minlength: 3
@@ -51,25 +50,35 @@ angular.module($snaphy.getModuleName())
                    "key": "username"
                  }
                  */
+                 //Method for escaping string characters in the stringRegex
+                if(scope.options.templateOptions.validation){
+                    if(!scope.options.templateOptions.id){
+                        console.error("`id` property is required in templateOptions for the input type angular-formly for validation");
+                    }
+                    //First get the form element. class name.
+                    var formElement =  $(element).parents('form');
 
-                //First get the form element. class name.
-                var formElement =  $(element).parents('form');
-                if(!formElement){
-                    console.error("Cannot find form element as parent of the element.\n Formly must be enclosed inside a form element for validation to be done.");
-                }
-                //Now get the name property of the input.
-                var name = $($(iElement).find('input')).attr('name');
-                var options = SnaphyValidate.options;
-                options.rules = {};
-                options.messages = {};
-
-                options.rules[name] = scope.options.templateOptions.validation.rules;
-                options.messages[name] = scope.options.templateOptions.validation.messages;
-                setTimeout(function(){
-                    //Now load the result..
-                    jQuery(formElement).validate(options);
-                },0);
-            },
+                    if(!formElement){
+                        console.error("Cannot find form element as parent of the element.\n Formly must be enclosed inside a form element for validation to be done.");
+                    }
+                    //Now get the name property of the input.
+                    var name = scope.options.templateOptions.id;
+                    var options = SnaphyValidate.options;
+                    options.rules = {};
+                    options.messages = {};
+                    //If regex is defined then first convert regex to regexObject
+                    if(scope.options.templateOptions.validation.rules.regex){
+                        scope.options.templateOptions.validation.rules.regex = new RegExp(scope.options.templateOptions.validation.rules.regex);
+                    }
+                    options.rules[name] = scope.options.templateOptions.validation.rules;
+                    options.messages[name] = scope.options.templateOptions.validation.messages;
+                    setTimeout(function(){
+                        console.log(options);
+                        //Now load the result..
+                        jQuery(formElement[0]).validate(options);
+                    },0);
+                }//if
+            }//link function..
         });
 
 
