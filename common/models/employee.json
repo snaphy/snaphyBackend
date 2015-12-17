@@ -30,7 +30,8 @@
           "type": "input",
           "templateOptions": {
             "type": "email",
-            "label": "Email address"
+            "label": "Email address",
+            "id":"email_"
           }
       }
     },
@@ -41,7 +42,8 @@
         "type": "input",
         "templateOptions": {
           "type": "password",
-          "label": "Enter Password"
+          "label": "Enter Password",
+          "id": "password"
         }
       }
     }
@@ -58,7 +60,25 @@
             "minlength": "Minimum permitted length is atleast 3",
             "regex": "please enter a valid data."
           }
-      }
+    },
+       "password":{
+        "rules":{
+            "required": true,
+            "minlength": "5"
+        },
+        "messages":{
+            "required": "Password is required",
+            "minlength": "Password must be of atleast 5 characters"
+        }
+    },
+    "email":{
+        "rules":{
+            "required": true
+        },
+        "messages":{
+          "required": "Email Address is required"
+        }
+    }
   },
   "relations": {
     "recipes": {
