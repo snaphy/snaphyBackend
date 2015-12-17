@@ -247,8 +247,8 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div class="block-content block-content-narrow">
-                    <form class="form-horizontal" >
-                        <formly-form model="saveFormData" fields="schema.fields">
+                    <form  class="form-horizontal js-validation-login" >
+                        <formly-form form="schema.form" model="saveFormData" fields="schema.fields">
 
                         </formly-form>
                     </form>
@@ -256,8 +256,8 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                <button  class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)" type="button" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
-                <button  class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" type="button" >
+                <button ng-disabled="!schema.form.$valid" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)" type="button" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
+                <button ng-disabled="!schema.form.$valid"  class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" type="button" >
                   <i class="fa fa-save"></i> Save and add another
                 </button>
             </div>

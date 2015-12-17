@@ -240,8 +240,8 @@ angular.module($snaphy.getModuleName())
             var relatedData = {
                 hasMany: [],
                 belongsTo: []
-                    //hasManyThrough:[],
-                    //hasAndBelongToMany:[]
+                //hasManyThrough:[],
+                //hasAndBelongToMany:[]
             };
 
             /**

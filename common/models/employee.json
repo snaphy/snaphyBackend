@@ -19,7 +19,8 @@
 
     "date":{
       "type":"date",
-      "required":false
+      "required":false,
+      "defaultFn": "now"
     },
 
     "email":{
@@ -44,7 +45,20 @@
       }
     }
   },
-  "validations": [],
+  "validations": {
+      "username":{
+          "rules":{
+              "required" : true,
+              "minlength": "3",
+              "regex"    : "dasd"
+          },
+          "messages":{
+            "required": "Username is required",
+            "minlength": "Minimum permitted length is atleast 3",
+            "regex": "please enter a valid data."
+          }
+      }
+  },
   "relations": {
     "recipes": {
       "type": "hasMany",

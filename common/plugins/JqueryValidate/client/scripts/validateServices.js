@@ -1,7 +1,7 @@
 /**
  * Created by robins on 3/12/15.
  */
-'use strict';
+ (function(){'use strict';})();
 /*jslint browser: true*/
 /*global $, jQuery, angular, $snaphy , redirectOtherWise*/
 

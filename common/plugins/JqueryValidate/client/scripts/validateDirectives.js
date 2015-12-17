@@ -1,10 +1,17 @@
 /**
  * Created by robins on 2/12/15.
  */
-/*global angular, $snaphy, jQuery*/
-'use strict';
+/*global angular, $snaphy, jQuery, setTimeout*/
+ (function(){'use strict';})();
 
 angular.module($snaphy.getModuleName())
+
+    //Add a regex method to the jquery validate method.
+    .run([function(){
+        $.validator.addMethod("regex", function(value, element, regexpr) {
+            return regexpr.test(value);
+        }, "Please enter a valid data.");
+    }])
 
 
     /**
@@ -46,12 +53,13 @@ angular.module($snaphy.getModuleName())
                     minlength: 3
                 };
 
+
                 options.messages = {};
                 options.messages[formName] =  {
                     required: 'Please enter a username',
                     minlength: 'Your username must consist of at least 3 characters'
                 };
-
+                //console.log(formClassName);
                 setTimeout(function(){
                     jQuery(formClassName).validate(options);
                 }, 0);

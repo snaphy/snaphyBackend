@@ -6,18 +6,70 @@ angular.module($snaphy.getModuleName())
     /**
      Defigning templated for angular-formly.
      */
-    .run(['formlyConfig', function (formlyConfig)  {
+    .run(['formlyConfig',  'SnaphyValidate', function (formlyConfig)  {
         formlyConfig.setType({
             name: 'input',
             template:
-            '<div class="form-group">'+
-            '<div ng-class="options.templateOptions.colSize" ng-class="options.templateOptions.color">'+
+            '<div  class="form-group">'+
+            '<div  ng-class="options.templateOptions.colSize" ng-class="options.templateOptions.color">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
-            '<input class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class"   name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
+            '<input  class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class"   name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
             '</div>'+
             '</div>'+
-            '</div>'
+            '</div>',
+
+            link: function(scope, element, attrs) {
+                /**
+                 *
+                 * Validation depends on the snaphy Validation plugin
+                 *
+                 * format of the validation element will be like.
+                 * there must be and templateOptions.class defined
+                 * 'login-username': {
+                     required: true,
+                     minlength: 3
+                 }
+
+                 {
+                   "type": "input",
+                   "templateOptions": {
+                     "type": "text",
+                     "label": "Enter Username",
+                     "validation":{
+                        rules:{
+                            required: true,
+                            minlength:4
+                        },
+                        messages:{
+                            required: 'Please enter a username',
+                            minlength: 'Your username must consist of at least 3 characters'
+                        }
+
+                    }
+                   },
+                   "key": "username"
+                 }
+                 */
+
+                //First get the form element. class name.
+                var formElement =  $(element).parents('form');
+                if(!formElement){
+                    console.error("Cannot find form element as parent of the element.\n Formly must be enclosed inside a form element for validation to be done.");
+                }
+                //Now get the name property of the input.
+                var name = $($(iElement).find('input')).attr('name');
+                var options = SnaphyValidate.options;
+                options.rules = {};
+                options.messages = {};
+
+                options.rules[name] = scope.options.templateOptions.validation.rules;
+                options.messages[name] = scope.options.templateOptions.validation.messages;
+                setTimeout(function(){
+                    //Now load the result..
+                    jQuery(formElement).validate(options);
+                },0);
+            },
         });
 
 
