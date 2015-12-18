@@ -23,6 +23,7 @@ angular.module($snaphy.getModuleName())
         $scope.dataValues = [];
         //contains backup of the data..
         var backupData = {};
+        var dataFetched = false;
 
 
 
@@ -264,7 +265,7 @@ angular.module($snaphy.getModuleName())
         };
 
         //Method for rollbackchanges is eror occured..
-        var rollBackChanges = function(){
+        $scope.rollBackChanges = function(){
             $scope.dataValues.forEach(function(data, index){
                 if(data.id === backupData.id && !$.isEmptyObject(backupData)){
                     //rollback changes..
@@ -283,7 +284,6 @@ angular.module($snaphy.getModuleName())
          * @param formID refrencing to the id attribute of the  form.
          */
         $scope.saveForm = function(formStructure, formModel) {
-
             if(!$scope.isValid(formStructure.form)){
                 SnaphyTemplate.notify({
                     message: "Error data is Invalid.",
@@ -294,7 +294,7 @@ angular.module($snaphy.getModuleName())
 
                 //If edit was going on revert back..
                 if(formModel.id){
-                    rollBackChanges();
+                    $scope.rollBackChanges();
                 }
             }
             else{
@@ -358,7 +358,7 @@ angular.module($snaphy.getModuleName())
                         //backup prevoius data/rollback..
                         //If edit was going on revert back..
                         if(formModel.id){
-                            rollBackChanges(); 
+                            $scope.rollBackChanges();
                         }
                     });
 
@@ -374,19 +374,20 @@ angular.module($snaphy.getModuleName())
                             delete formModel[relationName];
                         }
                     });
+                    //create a copy of the data..
+                    var savedData = angular.copy(formModel);
 
                     var positionNewData = $scope.dataValues.length;
                     //First add to the table..
-                    $scope.dataValues.push(formModel);
+                    $scope.dataValues.push(savedData);
 
                     //Now save the base model..
                     /**
-                     * Creting baseModel..
+                     * Creating baseModel..
                      */
-                    baseDatabase.create({}, formModel, function(baseModel) {
+                    baseDatabase.create({}, savedData, function(baseModel) {
                         //Now update the form with id.
-                        $scope.dataValues[positionNewData] = baseModel;
-
+                        $scope.dataValues[positionNewData].id = baseModel.id;
                         if (formStructure.relations.hasMany) {
                           if(formStructure.relations.hasMany.length){
                             //Now save the related model..
@@ -501,7 +502,7 @@ angular.module($snaphy.getModuleName())
          * @return {Boolean} [description]
          */
         $scope.isDataFetched = function() {
-            if ($scope.dataValues.length && $scope.schema.header) {
+            if (dataFetched && $scope.schema.header) {
                 return true;
             }
             return false;
@@ -530,9 +531,10 @@ angular.module($snaphy.getModuleName())
             dbService.find({
                 filter: filterObj
             }, function(values) {
-                console.log(values);
+                dataFetched = true;
                 //$scope.dataValues.length = 0;
                 values.forEach(function(element, index){
+                    //setting the value of the data successfully fetched..
                     $scope.dataValues.push(element);
                 });
 
@@ -546,14 +548,15 @@ angular.module($snaphy.getModuleName())
         //Constructor for automata cuntroller..
         $scope.init = function() {
             for (var i = 0; i < $scope.databasesList.length; i++) {
-                if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim())
-                //Now populate the database one by one..
+                if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim()){
+                    //Now populate the database one by one..
                     populateData($scope.databasesList[i]);
-                $scope.tableTitle = currentState + ' ' + 'Data';
-                $scope.currentState = currentState;
-                $scope.title = currentState + ' Console';
-                $scope.description = "Data management console.";
-                break;
+                    $scope.tableTitle = currentState + ' ' + 'Data';
+                    $scope.currentState = currentState;
+                    $scope.title = currentState + ' Console';
+                    $scope.description = "Data management console.";
+                    break;
+                }
             }
         };
 

@@ -1,0 +1,42 @@
+{
+  "name": "EmployeeDetails",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "address": {
+      "type": "string",
+      "template": {
+        "type": "textarea",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter Address",
+          "id": "address"
+        }
+      }
+    },
+    "contactNumber": {
+      "type": "number",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter Contact Number",
+          "id": "number"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "employee": {
+      "type": "belongsTo",
+      "model": "Employee",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

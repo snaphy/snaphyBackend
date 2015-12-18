@@ -9,9 +9,9 @@
     "name": {
       "type": "string",
       "required": true,
-      "template":{
-        "type":"input",
-        "templateOptions":{
+      "template": {
+        "type": "input",
+        "templateOptions": {
           "type": "text",
           "label": "Enter Recipe Name"
         }

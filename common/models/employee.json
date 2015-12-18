@@ -5,62 +5,164 @@
   "options": {
     "validateUpsert": true
   },
+  "tables": {
+    "username": {
+      "onClick": {
+        "state": "dashboard",
+        "params": {
+          "username": "username"
+        }
+      }
+    },
+    "email": {
+      "tag": {
+        "Pending": "label-warning"
+      }
+    }
+  },
+  "filters": {
+    "email": {
+      "type": "$multiSelect",
+      "get": "/api/email",
+      "label": "Select multiple columns",
+      "options": [
+        {
+          "id": 5,
+          "name": "sinu@gmail.com"
+        }
+      ],
+      "getOptionsFromColumn": true
+    }
+  },
+  "widgets": [
+    {
+      "label": "User Added",
+      "icon": "si-users",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "date"
+      }
+    },
+    {
+      "label": "User Added In A Week",
+      "fetchLocally": true,
+      "icon": "si-users",
+      "propObj": {
+        "type": "$week",
+        "where": {},
+        "dateProp": "date"
+      }
+    },
+    {
+      "label": "User Added Today",
+      "icon": "si-speedometer",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$today",
+        "where": {},
+        "dateProp": "date"
+      }
+    }
+  ],
+  "validationsBackend": {
+    "rules": {
+      "username": {
+        "required": true,
+        "minlength": "3"
+      },
+      "firstName": {
+        "required": true,
+        "minlength": "3"
+      },
+      "LastName": {
+        "required": true,
+        "minlength": "3"
+      },
+      "password": {
+        "required": true,
+        "minlength": "5"
+      },
+      "email": {
+        "required": true
+      }
+    },
+    "messages": {
+      "username": {
+        "required": "Username is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      },
+      "password": {
+        "required": "Password is required",
+        "minlength": "Password must be of atleast 5 characters"
+      },
+      "email": {
+        "required": "Email is required."
+      },
+      "firstName": {
+        "required": "First Name is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      },
+      "LastName": {
+        "required": "Last Name is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      }
+    }
+  },
   "properties": {
-    "username":{
-      "type":"string",
-      "template":{
-        "type":"input",
-        "templateOptions":{
+    "username": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
           "type": "text",
           "label": "Enter Username",
-          "id":"Username"
+          "id": "Username"
         }
       }
     },
-    "firstName":{
-      "type":"string",
-      "template":{
-        "type":"input",
-        "templateOptions":{
+    "firstName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
           "type": "text",
           "label": "Enter First Name",
-          "id":"firstName"
+          "id": "firstName"
         }
       }
     },
-    "lastName":{
-      "type":"string",
-      "template":{
-        "type":"input",
-        "templateOptions":{
+    "lastName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
           "type": "text",
           "label": "Enter Last Name",
-          "id":"LastName"
+          "id": "LastName"
         }
       }
     },
-
-    "date":{
-      "type":"date",
-      "required":false,
+    "date": {
+      "type": "date",
+      "required": false,
       "defaultFn": "now"
     },
-
-    "email":{
-      "type":"string",
-      "template":{
-          "type": "input",
-          "templateOptions": {
-            "type": "email",
-            "label": "Email address",
-            "id":"email_"
-          }
+    "email": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "email",
+          "label": "Email address",
+          "id": "email_"
+        }
       }
     },
-
-    "password":{
-      "type":"string",
-      "template":{
+    "password": {
+      "type": "string",
+      "template": {
         "type": "input",
         "templateOptions": {
           "type": "password",
@@ -70,125 +172,19 @@
       }
     }
   },
-
-  "validations": {
-        "rules":{
-            "username":{
-                "required" : true,
-                "minlength": "3"
-            },
-            "firstName":{
-                "required" : true,
-                "minlength": "3"
-            },
-            "LastName":{
-                "required" : true,
-                "minlength": "3"
-            },
-            "password":{
-                "required": true,
-                "minlength": "5"
-            },
-            "email":{
-                "required": true
-            }
-        },
-        "messages":{
-            "username":{
-                "required": "Username is required",
-                "minlength": "Minimum permitted length is atleast 3"
-            },
-            "password":{
-                    "required": "Password is required",
-                    "minlength": "Password must be of atleast 5 characters"
-            },
-            "email":{
-                "required":"Email is required."
-            },
-            "firstName":{
-                "required": "First Name is required",
-                "minlength": "Minimum permitted length is atleast 3"
-            },
-            "LastName":{
-                "required": "Last Name is required",
-                "minlength": "Minimum permitted length is atleast 3"
-            }
-        }
-    },
-
+  "validations": [],
   "relations": {
     "recipes": {
       "type": "hasMany",
       "model": "Recipe",
       "foreignKey": ""
+    },
+    "employeeDetails": {
+      "type": "belongsTo",
+      "model": "EmployeeDetails",
+      "foreignKey": ""
     }
   },
-  "tables":{
-    "username":{
-      "onClick":{
-        "state":"dashboard",
-        "params":{
-          "username":"username"
-        }
-      }
-    },
-    "email":{
-      "tag":{
-        "Pending": "label-warning"
-      }
-    }
-
-  },
-  "filters":{
-    "email":{
-      "type"  : "$multiSelect",
-      "get"   : "/api/email",
-      "label" : "Select multiple columns",
-      "options":[{
-        "id":5,
-        "name":"sinu@gmail.com"
-        }],
-      "getOptionsFromColumn": true
-    }
-  },
-
-
-  "widgets":[
-    {
-      "label":"User Added",
-      "icon": "si-users",
-      "fetchLocally":true,
-      "propObj":{
-        "type": "$allTime",
-        "where":{
-        },
-        "dateProp": "date"
-      }
-    },
-    {
-      "label":"User Added In A Week",
-      "fetchLocally":true,
-      "icon": "si-users",
-      "propObj":{
-        "type": "$week",
-        "where":{
-        },
-        "dateProp": "date"
-      }
-    },
-    {
-      "label":"User Added Today",
-      "icon": "si-speedometer",
-      "fetchLocally":true,
-      "propObj":{
-        "type": "$today",
-        "where":{
-        },
-        "dateProp": "date"
-      }
-    }
-  ],
-
   "acls": [
     {
       "accessType": "*",

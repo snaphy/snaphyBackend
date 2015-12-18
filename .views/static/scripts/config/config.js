@@ -37,7 +37,7 @@ angular.module($snaphy.getModuleName())
             '<div class="form-group">'+
             '<div ng-class="options.templateOptions.colSize">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
-            '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" rows="{{options.templateOptions.row}}"></textarea>'+
+            '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" ng-model="model[options.key]" rows="{{options.templateOptions.row}}"></textarea>'+
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
             '</div>'+
             '</div>'+

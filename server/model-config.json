@@ -43,5 +43,9 @@
   "Recipe": {
     "dataSource": "db",
     "public": true
+  },
+  "EmployeeDetails": {
+    "dataSource": "db",
+    "public": true
   }
 }

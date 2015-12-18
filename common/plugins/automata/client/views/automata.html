@@ -18,7 +18,6 @@
 <!-- END Page Header -->
 
 
-
 <!--ADD WIDGETS -->
 <!-- Page Content -->
 <div class="content">
@@ -72,7 +71,7 @@
                 </div>
                 <div class="block-content">
 
-                    <div snaphy-load-datatable class="table-responsive" style="overflow-x: hidden;">
+                    <div snaphy-load-datatable style="overflow-x: hidden;">
                         <table
                             id="automataTable"
                             class="table table-bordered table-striped js-dataTable-full"
@@ -232,7 +231,6 @@
     </div><!--row-->
 </div>
 
-
 <!-- Fade In Modal -->
 <div  class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -257,7 +255,7 @@
             </div>
             {{disableButton(schema.form)}}
             <div class="modal-footer">
-                <button data-target="#addDataModal" class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                <button data-target="#addDataModal" ng-click="rollBackChanges()" class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
                 <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal" data-target="#addDataModal"><i class="fa fa-save"></i> Save</button>
                 <button ng-disabled="!enableButton(schema.form)" type="submit" class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
                   <i class="fa fa-save"></i> Save and add another

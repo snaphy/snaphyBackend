@@ -48,7 +48,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			var filters   = modelObj.definition.settings.filters;
 			var tables    = modelObj.definition.settings.tables;
 			var widgets   = modelObj.definition.settings.widgets;
-			//var validations   = modelObj.definition.settings.validations;
 
 			/**
 			 * Now form the desired schema and return it.
@@ -64,7 +63,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			schema.filters = filters;
 			schema.tables  = tables;
 			schema.widgets  = widgets;
-			//schema.validations  = validations;
 
 			callback(null, schema);
 		};
@@ -159,12 +157,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				//Add only if template is defined.
 				if(modelProperties[key].template !== undefined){
 					var propIsHidden = false;
-					//Now checkingif the value is a hidden prop.
-					for(var i=0; i<hiddenProperties.length; i++){
-						var prop = hiddenProperties[i];
-						if(prop ===  key){
-							propIsHidden = true;
-							break;
+					if(hiddenProperties){
+						//Now checkingif the value is a hidden prop.
+						for(var i=0; i<hiddenProperties.length; i++){
+							var prop = hiddenProperties[i];
+							if(prop ===  key){
+								propIsHidden = true;
+								break;
+							}
 						}
 					}
 					if(!propIsHidden){
@@ -195,8 +195,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			schema = {};
 			schema.model = modelName;
 			schema.relations = {
-				hasMany:[]
-				//belongsTo:[],
+				hasMany:[],
+				belongsTo:[]
 				//hasManyThrough:[],
 				//hasAndBelongToMany:[]
 			};
@@ -204,7 +204,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		schema.fields   = [];
 		var modelObj    = app.models[modelName],
 		modelProperties = modelObj.definition.rawProperties,
-		validationObj  = modelObj.definition.settings.validations;
+		validationObj  = modelObj.definition.settings.validationsBackend;
 		var newValidationObj = {
 			rules:{},
 			messages:{}
@@ -216,16 +216,22 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				if(propObj !== undefined){
 					propObj.key = propertyName;
 					//also add the validation to the object..
-					var validationRules = validationObj.rules[propertyName];
-					var validationMessages = validationObj.messages[propertyName];
+					try{
+						var validationRules = validationObj.rules[propertyName];
+						var validationMessages = validationObj.messages[propertyName];
 
-					if(propObj.templateOptions && validationRules){
-						if(propObj.templateOptions.id){
-							var validationName = propObj.templateOptions.id;
-							//Get the validation object..
-							newValidationObj.rules[validationName] = validationRules;
-							newValidationObj.messages[validationName] = validationMessages;
+						if(propObj.templateOptions && validationRules){
+							if(propObj.templateOptions.id){
+								var validationName = propObj.templateOptions.id;
+								//Get the validation object..
+								newValidationObj.rules[validationName] = validationRules;
+								newValidationObj.messages[validationName] = validationMessages;
+							}
 						}
+
+					}catch(err){
+						// Do nothing
+						// Validation is not defined in the model definition
 					}
 
 					schema.fields.push(propObj);

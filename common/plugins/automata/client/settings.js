@@ -1,13 +1,14 @@
 /**
  * Created by robins on 2/12/15.
  */
-'use strict';
-/*jslint browser: true*/
-/*$snaphy*/
+(function(){
+    'use strict';
+})();
+/*global jslint browser: true, $snaphy*/
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
    "defaultTemplate": true,
-   loadDatabases:["Employee"]
+   loadDatabases:["Employee", "EmployeeDetails"]
 };
 
 
