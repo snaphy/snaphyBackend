@@ -18,6 +18,9 @@
       "tag": {
         "Pending": "label-warning"
       }
+    },
+    "employeeDetailsId":{
+        "display": false
     }
   },
   "filters": {

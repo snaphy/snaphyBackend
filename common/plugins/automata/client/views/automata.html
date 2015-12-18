@@ -43,7 +43,7 @@
                         <tr>
                             <td style="width: 50%;">
                                 <div class="h1 font-w700"><span class="h2 text-muted">+</span></div>
-                                <div class="h5 text-muted text-uppercase push-5-t">Add User</div>
+                                <div class="h5 text-muted text-uppercase push-5-t">Add {{schema.model}}</div>
                             </td>
                             <td class="bg-gray-lighter border-l" style="width: 50%;">
                                 <div class="push-30 push-30-t">
@@ -253,7 +253,6 @@
                     </form>
                 </div><!--block-content-->
             </div>
-            {{disableButton(schema.form)}}
             <div class="modal-footer">
                 <button data-target="#addDataModal" ng-click="rollBackChanges()" class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
                 <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal" data-target="#addDataModal"><i class="fa fa-save"></i> Save</button>
