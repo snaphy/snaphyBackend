@@ -107,11 +107,22 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					schema.relations.hasMany.push(relationName);
 					schema.fields.push(nestedSchema);
 				}
-				if(relationObj.type === 'hasOne' || relationObj.type === 'belongsTo'){
+				if((relationObj.type === 'hasOne' || relationObj.type === 'belongsTo') && relationObj.templateOptions !== undefined){
 					//Now add its properties to the header..
 					header = addPropToHeader(app, relationObj.model, relationName,  header);
 					//Add this relation to the schema..
 					schema.relations.belongsTo.push(relationName);
+					var belongsToSchema = {
+						type           : 'belongsTo',
+						key            : relationName,
+						templateOptions: relationObj.templateOptions
+					};
+					belongsToSchema.templateOptions.model      = relationObj.model;
+					belongsToSchema.templateOptions.foreignKey = relationObj.foreignKey === "" ? relationName + 'Id' : relationObj.foreignKey;
+					//Now add nested schema to the relational model.
+					generateTemplateStr(app, relationObj.model, belongsToSchema.templateOptions);
+					//Now add this to the schema..
+					schema.fields.push(belongsToSchema);
 				}
 
 			}

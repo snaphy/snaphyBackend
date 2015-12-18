@@ -47,7 +47,7 @@ angular.module($snaphy.getModuleName())
                     exit: 'animated fadeOutDown'
                 }
         });
-    }//notify
+    };//notify
 
     return{
        notify: notify

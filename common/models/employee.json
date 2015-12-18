@@ -180,7 +180,11 @@
     "recipes": {
       "type": "hasMany",
       "model": "Recipe",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions":{
+            "btnText": "Add recipes"
+      }
+
     },
     "employeeDetails": {
       "type": "belongsTo",

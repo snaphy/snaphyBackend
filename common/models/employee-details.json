@@ -35,7 +35,11 @@
     "employee": {
       "type": "belongsTo",
       "model": "Employee",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions":{
+          "searchProp": "username",
+          "create" : true
+      }
     }
   },
   "acls": [],
