@@ -1,4 +1,7 @@
-'use strict';
+(function(){
+    'use strict';
+})();
+
 
 module.exports = function(server) {
   var loopback = require('loopback');
@@ -8,7 +11,8 @@ module.exports = function(server) {
   //Now getting the plugin path with respect to package.json
   var MAIN_PLUGIN_FOLDER = __dirname + "/../../" + mainPackageObj.pluginPath;
   var helper = {};
-  var fs = require('fs'), path = require('path');
+  var fs = require('fs'),
+  path = require('path');
 
   /**
     * Method for getting all the directores
@@ -30,7 +34,7 @@ module.exports = function(server) {
      * @returns {string}
      */
   function getPluginRootDir(pluginName){
-      return path.join(MAIN_PLUGIN_FOLDER, pluginName);
+      return path.join(MAIN_PLUGIN_FOLDER, pluginName.trim());
   }
 
 
@@ -94,7 +98,7 @@ module.exports = function(server) {
           requiredDatabase[key] = app.models[databaseVal];
           //var modelProp = modelConfig[databaseVal];
         }else{
-          throw 'Please provide a value to the '+ key + ' model property. in Plugin ' + pluginName + ' model';
+          throw 'Please provide a value to the '+ key + ' model property. in Plugin ' + pluginName.trim() + ' model';
         }
 
       }//if
@@ -121,7 +125,7 @@ module.exports = function(server) {
     rootExposure = '/' + rootExposure;
     //cache control
     var oneDay = 86400000;
-    app.use(rootExposure, loopback.static(pluginContainerPath + '/' + PluginName + '/client', { maxAge: oneDay }));
+    app.use(rootExposure, loopback.static( path.join(pluginContainerPath, PluginName.trim(), '/client'), { maxAge: oneDay }));
     console.log("Static Routes " + rootExposure);
   };
 
@@ -130,7 +134,8 @@ module.exports = function(server) {
   function loadPluginsInMemory(pluginName, pluginContainerPath){
     console.log("Loading plugin " + pluginName + " in memory");
     //Now read the package  files...
-    var pluginPath = pluginContainerPath + '/' + pluginName +  '/package.json';
+    var pluginPath = path.join(pluginContainerPath, pluginName.trim(), '/package.json');
+    console.log(pluginPath);
     var packageObj = readPackageJsonFile(pluginPath);
     if( packageObj.activate ){
       try{
@@ -146,7 +151,7 @@ module.exports = function(server) {
 
 
       var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      var pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper, packageObj );
+      var pluginValue = require( path.join(pluginContainerPath, pluginName.trim()))(server, databaseObj, helper, packageObj );
 
       if(pluginValue){
         //Now load the corresponding plugins to the memory...
@@ -178,7 +183,7 @@ module.exports = function(server) {
     var pluginList = getDirectories(pluginContainerPath);
     var i;
     for(i=0; i<pluginList.length; i++){
-      loadPluginsInMemory(pluginList[i], pluginContainerPath);
+      loadPluginsInMemory(pluginList[i].trim(), pluginContainerPath);
     }//for loop
   };
 
@@ -187,11 +192,11 @@ module.exports = function(server) {
   //Act as a require for plugins..
   var loadPlugin = function(pluginName){
     var pluginValue = {};
-    var pluginPath = MAIN_PLUGIN_FOLDER + '/' + pluginName +  '/package.json';
+    var pluginPath = path.join(MAIN_PLUGIN_FOLDER, pluginName.trim() , '/package.json');
     var packageObj = readPackageJsonFile(pluginPath);
     if( packageObj.activate ){
       var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper, packageObj );
+      pluginValue = require(path.join(pluginContainerPath, pluginName.trim()) )(server, databaseObj, helper, packageObj );
     }
     return pluginValue;
   };//loadPlugin

@@ -17,6 +17,28 @@
         }
       }
     },
+    "firstName":{
+      "type":"string",
+      "template":{
+        "type":"input",
+        "templateOptions":{
+          "type": "text",
+          "label": "Enter First Name",
+          "id":"firstName"
+        }
+      }
+    },
+    "lastName":{
+      "type":"string",
+      "template":{
+        "type":"input",
+        "templateOptions":{
+          "type": "text",
+          "label": "Enter Last Name",
+          "id":"LastName"
+        }
+      }
+    },
 
     "date":{
       "type":"date",
@@ -55,6 +77,14 @@
                 "required" : true,
                 "minlength": "3"
             },
+            "firstName":{
+                "required" : true,
+                "minlength": "3"
+            },
+            "LastName":{
+                "required" : true,
+                "minlength": "3"
+            },
             "password":{
                 "required": true,
                 "minlength": "5"
@@ -74,6 +104,14 @@
             },
             "email":{
                 "required":"Email is required."
+            },
+            "firstName":{
+                "required": "First Name is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            },
+            "LastName":{
+                "required": "Last Name is required",
+                "minlength": "Minimum permitted length is atleast 3"
             }
         }
     },

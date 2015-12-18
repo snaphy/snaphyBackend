@@ -34,10 +34,10 @@
   },
   "adminUser":[
     {
-      "username":"robinskumar73", "email":"robinskumar73@gmail.com", "password":"12345"
+      "username":"robinskumar73", "email":"robinskumar73@gmail.com", "password":"12345", "firstName": "Robins", "lastName": "Gupta"
     },
     {
-      "username":"RaviGupta", "email":"ravigupta9363@gmail.com", "password":"12345"
+      "username":"RaviGupta", "email":"ravigupta9363@gmail.com", "password":"12345", "firstName": "Ravi", "lastName": "Gupta"
     }
   ],
   "activate": true,

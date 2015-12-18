@@ -1,4 +1,7 @@
-'use strict';
+(function(){
+    'use strict';
+})();
+/*global, __dirname */
 module.exports = function(server) {
   var chalk = require('chalk');
   var loopback = require('loopback');
@@ -32,7 +35,7 @@ module.exports = function(server) {
     var pluginList = helper.getDirectories(path.join(__dirname, '/../../common/plugins'));
     for(i=0; i<pluginList.length; i++){
       var pluginName = pluginList[i];
-      var pluginPath = path.join(__dirname, '/../../common/plugins/', pluginName,  '/package.json');
+      var pluginPath = path.join(__dirname, '/../../common/plugins/', pluginName.trim(),  '/package.json');
       var packageObj = helper.readPackageJsonFile(pluginPath);
       if(packageObj.activate){
         //If the plugin has declared staticFiles
@@ -45,7 +48,7 @@ module.exports = function(server) {
             data.pluginScripts = concatObject(packageObj.staticFiles.js, data.pluginScripts);
           }
 
-        
+
           //Load module dependencies..
           if(packageObj.staticFiles.moduleDependencies){
             data.moduleDependencies = concatObject(packageObj.staticFiles.moduleDependencies, data.moduleDependencies);
@@ -61,15 +64,15 @@ module.exports = function(server) {
             data.asidebarHook = data.asidebarHook.concat(packageObj.bodystructure.asidebarHook);
             data.sidebarHook  = data.sidebarHook.concat(packageObj.bodystructure.sidebarHook);
             data.headerHook   = data.headerHook.concat(packageObj.bodystructure.headerHook);
-            if(packageObj.bodystructure.footerHook != undefined){
-              data.footerHook = data.footerHook.concat(packageObj.bodystructure.footerHook)
+            if(packageObj.bodystructure.footerHook !== undefined){
+              data.footerHook = data.footerHook.concat(packageObj.bodystructure.footerHook);
             }
           }//if
         }// if staticFiles..
 
         //If databases is not undefined.
         if(packageObj.databases){
-          data.databaseObj = getDatabaseObjFormat(packageObj.name, packageObj.databases, data.databaseObj);
+          data.databaseObj = getDatabaseObjFormat(packageObj.name.trim(), packageObj.databases, data.databaseObj);
         }
       }//if activate
 
@@ -142,6 +145,6 @@ module.exports = function(server) {
  server.once('started', function() {
     console.log("Explore admin console at " + chalk.cyan("http://" +  config.host + ':' + config.port + config.adminApiRoot));
   });
- 
+
 
 };

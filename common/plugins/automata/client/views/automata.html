@@ -257,8 +257,8 @@
             </div>
             {{disableButton(schema.form)}}
             <div class="modal-footer">
-                <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
+                <button data-target="#addDataModal" class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal" data-target="#addDataModal"><i class="fa fa-save"></i> Save</button>
                 <button ng-disabled="!enableButton(schema.form)" type="submit" class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
                   <i class="fa fa-save"></i> Save and add another
                 </button>

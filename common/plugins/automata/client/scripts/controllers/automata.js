@@ -21,6 +21,8 @@ angular.module($snaphy.getModuleName())
         $scope.saveFormData = {};
         //Initializing scope //for array..
         $scope.dataValues = [];
+        //contains backup of the data..
+        var backupData = {};
 
 
 
@@ -155,12 +157,16 @@ angular.module($snaphy.getModuleName())
         };
 
 
+
+
         /**
          * Initialize the edit form data from editing the form.
          * @param  {[type]} data [description]
          * @return {[type]}           [description]
          */
         $scope.prepareDataForEdit = function(data) {
+            //Firsst create a backup of the the data in case of rollback changes/cancel
+            backupData = angular.copy(data);
             $scope.saveFormData = data;
         };
 
@@ -257,6 +263,18 @@ angular.module($snaphy.getModuleName())
             return false;
         };
 
+        //Method for rollbackchanges is eror occured..
+        var rollBackChanges = function(){
+            $scope.dataValues.forEach(function(data, index){
+                if(data.id === backupData.id && !$.isEmptyObject(backupData)){
+                    //rollback changes..
+                    $scope.dataValues[index] = backupData;
+                    //Reset backup data..
+                    backupData = {};
+                    return false;
+                }
+            });
+        };
 
         /**
          * Model for storing the model structure..
@@ -273,151 +291,134 @@ angular.module($snaphy.getModuleName())
                     icon: 'fa fa-times',
                     align: 'right'
                 });
-                return null;
-            }
 
-            //Now save the model..
-            var baseDatabase = Database.loadDb(formStructure.model);
-            var relatedData = {
-                hasMany: [],
-                belongsTo: []
-                //hasManyThrough:[],
-                //hasAndBelongToMany:[]
-            };
-
-            /**
-             * Validate the model here..
-             */
-            if (formModel.id) {
-                if (formStructure.relations.belongsTo) {
-                    //Remove all the hasOne, belongs to relations values..
-                    formStructure.relations.belongsTo.forEach(function(relationName, index) {
-                        formStructure.header.forEach(function(headerName, index) {
-                            var re = new RegExp("^" + relationName + "_");
-                            //if the headerName is the name of related models..
-                            if (re.test(headerName)) {
-                                //Now removing the relation from the model.
-                                delete formModel[headerName];
-                            }
-                        });
-                    });
+                //If edit was going on revert back..
+                if(formModel.id){
+                    rollBackChanges();
                 }
+            }
+            else{
 
-                //Now update the base model..
+                //Now save the model..
+                var baseDatabase = Database.loadDb(formStructure.model);
+                var relatedData = {
+                    hasMany: [],
+                    belongsTo: []
+                    //hasManyThrough:[],
+                    //hasAndBelongToMany:[]
+                };
+
                 /**
-                 * Creting baseModel..
+                 * Validate the model here..
                  */
-                baseDatabase.update({
-                    where: {
-                        id: formModel.id
-                    }
-                }, formModel, function(baseModel) {
-                    console.log("Data updated successfully..");
-                    SnaphyTemplate.notify({
-                        message: "Data successfully updated.",
-                        type: 'success',
-                        icon: 'fa fa-check',
-                        align: 'right'
-                    });
-
-                }, function(respHeader) {
-                    console.error(respHeader);
-                    //Change it back to original data..
-                    getArrayIndex[dataIndex] = oldData;
-
-                    SnaphyTemplate.notify({
-                        message: "Error updating data.",
-                        type: 'danger',
-                        icon: 'fa fa-times',
-                        align: 'right'
-                    });
-                });
-
-                //Now reset the form..
-                resetSavedForm(formStructure.form);
-
-            } else {
-                //Now first prepare object..
-                formStructure.relations.hasMany.forEach(function(relationName, index) {
-                    if (formModel[relationName]) {
-                        relatedData.hasMany.push(formModel[relationName]);
-                        //Now removing the relation from the model.
-                        delete formModel[relationName];
-                    }
-                });
-
-                var positionNewData = $scope.dataValues.length;
-                //First add to the table..
-                $scope.dataValues.push(formModel);
-
-                //Now save the base model..
-                /**
-                 * Creting baseModel..
-                 */
-                baseDatabase.create({}, formModel, function(baseModel) {
-                    //Now update the form with id.
-                    $scope.dataValues[positionNewData] = baseModel;
-
-                    if (formStructure.relations.hasMany) {
-                      if(formStructure.relations.hasMany.length){
-                        //Now save the related model..
-                        formStructure.relations.hasMany.forEach(function(relationName, index) {
-                            addRelatedModel(baseDatabase, relationName, relatedData, index, baseModel.id);
+                if (formModel.id) {
+                    if (formStructure.relations.belongsTo) {
+                        //Remove all the hasOne, belongs to relations values..
+                        formStructure.relations.belongsTo.forEach(function(relationName, index) {
+                            formStructure.header.forEach(function(headerName, index) {
+                                var re = new RegExp("^" + relationName + "_");
+                                //if the headerName is the name of related models..
+                                if (re.test(headerName)) {
+                                    //Now removing the relation from the model.
+                                    delete formModel[headerName];
+                                }
+                            });
                         });
-                      }else{
+                    }
+
+                    //Now update the base model..
+                    /**
+                     * Creting baseModel..
+                     */
+                    baseDatabase.update({
+                        where: {
+                            id: formModel.id
+                        }
+                    }, formModel, function(baseModel) {
+                        console.log("Data updated successfully..");
                         SnaphyTemplate.notify({
-                            message: "Data successfully saved.",
+                            message: "Data successfully updated.",
                             type: 'success',
                             icon: 'fa fa-check',
                             align: 'right'
                         });
-                      }
 
-                    } else {
-                        SnaphyTemplate.notify({
-                            message: "Data successfully saved.",
-                            type: 'success',
-                            icon: 'fa fa-check',
-                            align: 'right'
-                        });
-                    } //else
-
-
-
-                }, function(respHeader) {
-                    //remove the form added data..
-                    if (positionNewData > -1) {
-                        $scope.dataValues.splice(positionNewData, 1);
-                    }
-
-                    console.error(respHeader);
-                    SnaphyTemplate.notify({
-                        message: "Error saving data.",
-                        type: 'danger',
-                        icon: 'fa fa-times',
-                        align: 'right'
-                    });
-                });
-
-                /**
-                 * Local method for adding related model..
-                 * @param baseDatabase
-                 * @param relationName
-                 * @param relatedData
-                 * @param index
-                 */
-                var addRelatedModel = function(baseDatabase, relationName, relatedData, index, parentId) {
-                    baseDatabase[relationName].createMany({
-                        id: parentId
-                    }, relatedData.hasMany[index], function(modelArr) {
-                        console.log("Successfully saved related model data");
-                        SnaphyTemplate.notify({
-                            message: "Data successfully saved.",
-                            type: 'success',
-                            icon: 'fa fa-check',
-                            align: 'right'
-                        });
                     }, function(respHeader) {
+                        console.error(respHeader);
+                        //Change it back to original data..
+                        getArrayIndex[dataIndex] = oldData;
+
+                        SnaphyTemplate.notify({
+                            message: "Error updating data.",
+                            type: 'danger',
+                            icon: 'fa fa-times',
+                            align: 'right'
+                        });
+
+                        //backup prevoius data/rollback..
+                        //If edit was going on revert back..
+                        if(formModel.id){
+                            rollBackChanges(); 
+                        }
+                    });
+
+                    //Now reset the form..
+                    resetSavedForm(formStructure.form);
+
+                } else {
+                    //Now first prepare object..
+                    formStructure.relations.hasMany.forEach(function(relationName, index) {
+                        if (formModel[relationName]) {
+                            relatedData.hasMany.push(formModel[relationName]);
+                            //Now removing the relation from the model.
+                            delete formModel[relationName];
+                        }
+                    });
+
+                    var positionNewData = $scope.dataValues.length;
+                    //First add to the table..
+                    $scope.dataValues.push(formModel);
+
+                    //Now save the base model..
+                    /**
+                     * Creting baseModel..
+                     */
+                    baseDatabase.create({}, formModel, function(baseModel) {
+                        //Now update the form with id.
+                        $scope.dataValues[positionNewData] = baseModel;
+
+                        if (formStructure.relations.hasMany) {
+                          if(formStructure.relations.hasMany.length){
+                            //Now save the related model..
+                            formStructure.relations.hasMany.forEach(function(relationName, index) {
+                                addRelatedModel(baseDatabase, relationName, relatedData, index, baseModel.id);
+                            });
+                          }else{
+                            SnaphyTemplate.notify({
+                                message: "Data successfully saved.",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
+                          }
+
+                        } else {
+                            SnaphyTemplate.notify({
+                                message: "Data successfully saved.",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
+                        } //else
+
+
+
+                    }, function(respHeader) {
+                        //remove the form added data..
+                        if (positionNewData > -1) {
+                            $scope.dataValues.splice(positionNewData, 1);
+                        }
+
                         console.error(respHeader);
                         SnaphyTemplate.notify({
                             message: "Error saving data.",
@@ -426,16 +427,45 @@ angular.module($snaphy.getModuleName())
                             align: 'right'
                         });
                     });
-                };
 
-                /**
-                 * Other related model to be implemented later.
-                 */
+                    /**
+                     * Local method for adding related model..
+                     * @param baseDatabase
+                     * @param relationName
+                     * @param relatedData
+                     * @param index
+                     */
+                    var addRelatedModel = function(baseDatabase, relationName, relatedData, index, parentId) {
+                        baseDatabase[relationName].createMany({
+                            id: parentId
+                        }, relatedData.hasMany[index], function(modelArr) {
+                            console.log("Successfully saved related model data");
+                            SnaphyTemplate.notify({
+                                message: "Data successfully saved.",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
+                        }, function(respHeader) {
+                            console.error(respHeader);
+                            SnaphyTemplate.notify({
+                                message: "Error saving data.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
+                        });
+                    };
 
-                 //Now reset the form finally..
-                 resetSavedForm(formStructure.form);
+                    /**
+                     * Other related model to be implemented later.
+                     */
 
-            } //else
+                     //Now reset the form finally..
+                     resetSavedForm(formStructure.form);
+
+                } //else
+            }
         }; //saveForm
 
 
