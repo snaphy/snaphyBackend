@@ -1,7 +1,7 @@
 (function(){'use strict';})();
 
 var Promise = require('bluebird');
-
+var _       = require('lodash');
 
 /**
  * Method for adding save method
@@ -123,14 +123,22 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
     //Now run a loop of the model schema..
     for(var relationsType in relations){
         if(relations.hasOwnProperty(relationsType)){
-            saveOrUpdate(app, dataInstance, relationsType, relations[relationsType], modelRelationSchema, promises, callback);
+            var relationData = relations[relationsType];
+            //Now check if the modelData is empty or not.
+            if(!_.isEmpty(relationData)){
+                //Now save/update the current relation type.
+                saveOrUpdate(app, dataInstance, relationsType, relationData, modelRelationSchema, promises, callback);
+            }
         }//if
     }//for loop..
 
-
+    /**
+     * Return promise after all the callback has finished.
+     */
     Promise.all(promises).then(function(){
         var modelObj = app.models[modelName];
         modelObj.findById(dataInstance.id, {include:include}, function(err, value){
+            //Return callback.
             callback(null, value);
         });
     }).catch(function(err){
@@ -182,7 +190,7 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
             }//if
             else if(relationsType === 'hasOne'){
                 //Upsert belongs to relations and attach the relation to the
-                promises.push(upsertHasOne (relationData, dataInstance, relationName, callback) );
+                promises.push(upsertHasOne (modelObj, relationData, dataInstance, relationName, callback) );
             }//if
             else if (relationsType === 'hasMany') {
                 console.log(relationData);
@@ -204,9 +212,9 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
 
 
 
-var upsertHasOne = function(relationData, dataInstance, relationName, callback){
+var upsertHasOne = function(modelObj, relationData, dataInstance, relationName, callback){
     var mainModel = dataInstance[relationName].build(relationData);
-    mainModel.save()
+    modelObj.upsert(mainModel)
     .then(function(result){
         //Now add the result to the dataInstance
         console.log("Successfully saved hasOne data");
@@ -228,8 +236,7 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
 
         dataInstance.save()
         .then(function(value){
-            console.log(value);
-            console.log("Successfully saved data.");
+            console.log("Successfully saved belongsTo data.");
         })
         .catch(function(err){
             console.log("Error saving belongsTo data relationship.");
@@ -269,7 +276,7 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
             relationDataArr.forEach(function(relationData, index){
                 if(manyType === 'hasMany'){
                     //relationData[foriegnKey] = dataInstance.id;
-                    upsertHasManyFinal(relationData, dataInstance, relationName,  callback);
+                    upsertHasManyFinal(relatedModelClass, relationData, dataInstance, relationName,  callback);
                 }
                 if(manyType === 'hasAndBelongToMany'){
                     upsertHasAndBelongToManyFinal(dataInstance, relationName, relationData, relatedModelClass, callback);
@@ -283,11 +290,11 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
 
 };
 
-var upsertHasManyFinal = function(relationData, dataInstance, relationName,  callback){
+var upsertHasManyFinal = function(relatedModelClass, relationData, dataInstance, relationName,  callback){
     //Now update the data and add the data to the main data instance..
     var data = dataInstance[relationName].build(relationData);
-    data.save()
-    .then(function(data){
+    relatedModelClass.upsert(data)
+    .then(function(data_){
         console.log("Has many data added to server.");
     })
     .catch(function(err){
