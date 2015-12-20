@@ -1,7 +1,6 @@
 (function(){'use strict';})();
 
 var Promise = require('bluebird');
-var _       = require('lodash');
 
 
 /**
@@ -53,6 +52,7 @@ var addSaveMethod = function(app, modelName){
         };
 
         var include = addRelation(data, schema.relation, relations);
+
         //Now save/update the data..
         modelObj.upsert(data)
         .then(function(dataInstance){
@@ -127,13 +127,12 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
         }//if
     }//for loop..
 
+
     Promise.all(promises).then(function(){
-        console.log("All done.");
         var modelObj = app.models[modelName];
         modelObj.findById(dataInstance.id, {include:include}, function(err, value){
             callback(null, value);
         });
-
     }).catch(function(err){
         callback(err);
     });
@@ -186,6 +185,7 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
                 promises.push(upsertHasOne (relationData, dataInstance, relationName, callback) );
             }//if
             else if (relationsType === 'hasMany') {
+                console.log(relationData);
                 promises.push( upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasMany', callback));
             }//else if
             else if('hasAndBelongToMany'){
@@ -248,40 +248,45 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
 
 //Upsert for hasMany and hasAndBelongToMany common preprocess steps..
 var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, relationName, foriegnKey, manyType, callback){
-    //first get the old data and check if any old data is deleted from new data..
-    dataInstance[relationName]({}, function(err, oldDataArr){
-        var deletedDataId = [];
-        console.log(oldDataArr);
-        oldDataArr.forEach(function(dataObj, index){
-            var idFound = false;
-            //Now loop over relationDataArr
-            for(var i=0; i< relationDataArr.length; i++){
-                if(dataObj.id === relationDataArr[i].id){
-                    idFound = true;
+    try{
+        //first get the old data and check if any old data is deleted from new data..
+        dataInstance[relationName]({}, function(err, oldDataArr){
+            var deletedDataId = [];
+            oldDataArr.forEach(function(dataObj, index){
+                var idFound = false;
+                //Now loop over relationDataArr
+                for(var i=0; i< relationDataArr.length; i++){
+                    if(dataObj.id === relationDataArr[i].id){
+                        idFound = true;
+                    }
                 }
-            }
-            if(!idFound){
-                destroyHasManyRel(dataInstance, relationName, dataObj, callback);
-            }
-        });
+                if(!idFound){
+                    destroyHasManyRel(dataInstance, relationName, dataObj, callback);
+                }
+            });
 
-        //add foriegnKey
-        relationDataArr.forEach(function(relationData, index){
-            if(manyType === 'manyType'){
-                relationData[foriegnKey] = dataInstance.id;
-                upsertHasManyFinal(relatedModelClass, relationData, callback);
-            }
-            if(manyType === 'hasAndBelongToMany'){
-                upsertHasAndBelongToManyFinal(dataInstance, relationName, relationData, relatedModelClass, callback);
-            }
+            //add foriegnKey
+            relationDataArr.forEach(function(relationData, index){
+                if(manyType === 'hasMany'){
+                    //relationData[foriegnKey] = dataInstance.id;
+                    upsertHasManyFinal(relationData, dataInstance, relationName,  callback);
+                }
+                if(manyType === 'hasAndBelongToMany'){
+                    upsertHasAndBelongToManyFinal(dataInstance, relationName, relationData, relatedModelClass, callback);
+                }
+            });
         });
-    });
+    }
+    catch(err){
+        callback(err);
+    }
+
 };
 
-var upsertHasManyFinal = function(relatedModelClass, relationData, callback){
+var upsertHasManyFinal = function(relationData, dataInstance, relationName,  callback){
     //Now update the data and add the data to the main data instance..
-
-    relatedModelClass.upsert(relationData)
+    var data = dataInstance[relationName].build(relationData);
+    data.save()
     .then(function(data){
         console.log("Has many data added to server.");
     })
