@@ -1,6 +1,8 @@
 (function(){'use strict';})();
 
 var Promise = require('bluebird');
+var _       = require('lodash');
+
 
 /**
  * Method for adding save method
@@ -50,17 +52,21 @@ var addSaveMethod = function(app, modelName){
             hasOne:{}
         };
 
-        addRelation(data, schema.relation, relations);
+        var include = addRelation(data, schema.relation, relations);
         //Now save/update the data..
         modelObj.upsert(data)
         .then(function(dataInstance){
+
             console.log("Main data successfully updated");
-            saveDataRelations(app, dataInstance, relations, modelRelationSchema, callback);
+            saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include,  callback);
         })
         .catch(function(err){
             console.log("Error saving data");
             callback(err);
         });
+
+
+
     };
     //Now registering the method `getSchema`
     modelObj.remoteMethod(
@@ -70,8 +76,9 @@ var addSaveMethod = function(app, modelName){
                     {arg: 'data',  type: 'object'},
                     {arg:'schema', type: 'object'}
                 ],
-                returns: {arg: 'schema', type: 'object'},
-                description: "Remote method for saving data with its depedencies"
+                returns: {arg: 'data', type: 'object'},
+                description: "Remote method for saving data with its depedencies",
+                http: {status: 201}
             }
     );
 }; //addSaveMethod
@@ -79,7 +86,9 @@ var addSaveMethod = function(app, modelName){
 
 
 //And remove those relation obj from the data obj..
+//Also return the include filter
 var addRelation = function(dataObj, relationSchema, localRelationObj){
+    var include = [];
     for(var property in relationSchema){
         if(relationSchema.hasOwnProperty(property)){
             var objValue = relationSchema[property];
@@ -87,6 +96,7 @@ var addRelation = function(dataObj, relationSchema, localRelationObj){
                 var relationName = objValue[i];
                 //console.log(relationName);
                 if(dataObj[relationName]){
+                    include.push(relationName);
                     localRelationObj[property][relationName] = dataObj[relationName];
                     delete dataObj[relationName];
                 }
@@ -95,7 +105,7 @@ var addRelation = function(dataObj, relationSchema, localRelationObj){
         }//if
     }//for in loop.
 
-    return localRelationObj;
+    return include;
 }; //addRelation method
 
 
@@ -108,14 +118,28 @@ var addRelation = function(dataObj, relationSchema, localRelationObj){
  * @param  {object} modelRelationSchema Containts the schema relation object.
  * @return {[type]}                     [description]
  */
-var saveDataRelations = function(app, dataInstance, relations, modelRelationSchema, callback){
+var saveDataRelations = function(app, dataInstance, relations, modelRelationSchema, modelName, include, callback){
+    var promises = [];
     //Now run a loop of the model schema..
     for(var relationsType in relations){
         if(relations.hasOwnProperty(relationsType)){
-            saveOrUpdate(app, dataInstance, relationsType, relations[relationsType], modelRelationSchema, callback);
+            saveOrUpdate(app, dataInstance, relationsType, relations[relationsType], modelRelationSchema, promises, callback);
         }//if
     }//for loop..
+
+    Promise.all(promises).then(function(){
+        console.log("All done.");
+        var modelObj = app.models[modelName];
+        modelObj.findById(dataInstance.id, {include:include}, function(err, value){
+            callback(null, value);
+        });
+
+    }).catch(function(err){
+        callback(err);
+    });
+
 };
+
 
 
 
@@ -138,7 +162,7 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
  * @param  {[type]} modelRelationSchema [description]
  * @return {[type]}                     [description]
  */
-var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, modelRelationSchema, callback){
+var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, modelRelationSchema, promises, callback){
     for(var relationName in relationDataObj ){
         if(relationDataObj.hasOwnProperty(relationName)){
             var relationData = relationDataObj[relationName];
@@ -153,26 +177,28 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
                 foriegnKey = relationName + 'Id';
             }
 
-
             if(relationsType === 'belongsTo'){
                 //Upsert belongs to relations and attach the relation to the
-                upsertBelongsTo (modelObj, relationData, dataInstance, relationName, foriegnKey, callback);
+                promises.push(upsertBelongsTo (modelObj, relationData, dataInstance, relationName, foriegnKey, callback) );
             }//if
-            if(relationsType === 'hasOne'){
+            else if(relationsType === 'hasOne'){
                 //Upsert belongs to relations and attach the relation to the
-                upsertHasOne (relationData, dataInstance, relationName, callback);
+                promises.push(upsertHasOne (relationData, dataInstance, relationName, callback) );
             }//if
             else if (relationsType === 'hasMany') {
-                upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasMany', callback);
+                promises.push( upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasMany', callback));
             }//else if
             else if('hasAndBelongToMany'){
-                upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasAndBelongToMany', callback);
+                promises.push(upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasAndBelongToMany', callback) );
             }else{
                 //Do nothing
                 console.log('I am inside do nothing case. I dont know what to do.');
             }
         } //if
     }//for in loop.
+
+
+
 };
 
 
@@ -182,6 +208,7 @@ var upsertHasOne = function(relationData, dataInstance, relationName, callback){
     var mainModel = dataInstance[relationName].build(relationData);
     mainModel.save()
     .then(function(result){
+        //Now add the result to the dataInstance
         console.log("Successfully saved hasOne data");
     })
     .catch(function(err){
@@ -201,6 +228,7 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
 
         dataInstance.save()
         .then(function(value){
+            console.log(value);
             console.log("Successfully saved data.");
         })
         .catch(function(err){
