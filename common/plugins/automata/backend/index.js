@@ -1,5 +1,6 @@
 (function(){'use strict';})();
 module.exports = function( server, databaseObj, helper, packageObj) {
+	var saveRemoteMethod = require('./saveDb');
 	/**
 	 * Here server is the main app object
 	 * databaseObj is the mapped database from the package.json file
@@ -25,6 +26,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		models.forEach(function(Model) {
 			//refer to https://apidocs.strongloop.com/loopback/#app-models
 			addRemoteMethod(server, Model.modelName);
+			//Also add save method to each models..
+			saveRemoteMethod.addSaveMethod(server, Model.modelName);
 		});
 
 	};
@@ -99,6 +102,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					nestedSchema.type = 'repeatSection';
 					nestedSchema.key = relationName;
 					nestedSchema.templateOptions = relationObj.templateOptions;
+					nestedSchema.templateOptions.model = relationObj.model;
 					//console.log(nestedSchema);
 					//Now get nested schema str for the relational models..
 					generateTemplateStr(app, relationObj.model, nestedSchema.templateOptions);

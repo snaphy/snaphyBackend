@@ -8,47 +8,50 @@
   "routeExposure": "/automata",
   "staticFiles": {
     "css": {
-        "automataCss"          : "/automata/style/automata.css",
-        "bootstrap3Datepicker" : "/automata/style/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css",
-        "jqueryDataTables"     : "/automata/style/datatables/jquery.dataTables.min.css",
-        "select2css"           : "/automata/style/bower_components/select2/dist/css/select2.min.css",
-        "select2Bootstrap"     : "/automata/style/bower_components/select2-bootstrap-css/select2-bootstrap.min.css"
-      },
-    "js": {
-      "automataRoute"            : "/automata/scripts/routes/automata.js",
-      "automataController"       : "/automata/scripts/controllers/automata.js",
-      "automataDirective"        : "/automata/scripts/directives/automata.js",
-      "automataFilter"           : "/automata/scripts/filters/automata.js",
-      "automataServices"           : "/automata/scripts/services/automata.js",
-
-      "jqueryDatatables"         : "/automata/style/datatables/jquery.dataTables.min.js",
-      "loadDatatables"           : "/automata/scripts/loadDatatables.js",
-      "bootstrap3Datapicker"     : "/automata/style/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
-      "select2Full"              : "/automata/style/bower_components/select2/dist/js/select2.full.min.js",
-      "moment"                   : "/automata/style/bower_components/moment/min/moment.min.js",
-      "momentRange"              : "/automata/style/bower_components/moment-range/dist/moment-range.min.js"
+      "automataCss": "/automata/style/automata.css",
+      "bootstrap3Datepicker": "/automata/style/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css",
+      "jqueryDataTables": "/automata/style/datatables/jquery.dataTables.min.css",
+      "select2css": "/automata/style/bower_components/select2/dist/css/select2.min.css",
+      "select2Bootstrap": "/automata/style/bower_components/select2-bootstrap-css/select2-bootstrap.min.css"
     },
-    "moduleDependencies":{
+    "js": {
+      "automataRoute": "/automata/scripts/routes/automata.js",
+      "automataController": "/automata/scripts/controllers/automata.js",
+      "automataDirective": "/automata/scripts/directives/automata.js",
+      "automataFilter": "/automata/scripts/filters/automata.js",
+      "automataServices": "/automata/scripts/services/automata.js",
+      "jqueryDatatables": "/automata/style/datatables/jquery.dataTables.min.js",
+      "loadDatatables": "/automata/scripts/loadDatatables.js",
+      "bootstrap3Datapicker": "/automata/style/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
+      "select2Full": "/automata/style/bower_components/select2/dist/js/select2.full.min.js",
+      "moment": "/automata/style/bower_components/moment/min/moment.min.js",
+      "momentRange": "/automata/style/bower_components/moment-range/dist/moment-range.min.js"
+    },
+    "moduleDependencies": {
       "datatables": "/automata/style/bower_components/angular-datatables/dist/angular-datatables.min.js"
     },
     "settings": "/automata/settings.js"
   },
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": ["/automata/views/sidebarHook.html"],
+    "sidebarHook": [
+      "/automata/views/sidebarHook.html"
+    ],
     "headerHook": [],
-    "footerHook":[]
+    "footerHook": []
   },
   "databases": {},
   "activate": true,
   "services": {},
-  "dependencies": {},
+  "dependencies": {
+    "async": "^1.5.0",
+    "bluebird": "^3.1.1",
+    "lodash": "^3.10.1"
+  },
   "optionalDependencies": {},
   "repository": {
     "type": "",
     "url": ""
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

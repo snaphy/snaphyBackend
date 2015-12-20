@@ -25,15 +25,15 @@
       "type": [
         "object"
       ],
-      "required": true
+      "required": false
     },
     "recipeType": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "servings": {
       "type": "number",
-      "required": true
+      "required": false
     },
     "added": {
       "type": "date"
@@ -43,7 +43,7 @@
     },
     "mainImage": {
       "type": "string",
-      "required": true
+      "required": false
     }
   },
   "validations": [],

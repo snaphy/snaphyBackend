@@ -29,19 +29,25 @@
       }
     }
   },
-
   "validations": [],
   "relations": {
-    "employee": {
-      "type": "belongsTo",
+    "employees": {
+      "type": "hasOne",
       "model": "Employee",
       "foreignKey": "",
-      "templateOptions":{
-          "searchProp": "username",
-          "create" : true
+      "templateOptions": {
+        "searchProp": "username",
+        "create": true
       }
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "save"
+    }
+  ],
   "methods": []
 }

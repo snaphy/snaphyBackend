@@ -239,7 +239,6 @@ angular.module($snaphy.getModuleName())
                 if(parseInt(element.id) === parseInt(id) ){
                     return i;
                 }
-
             }
             return null;
         };
@@ -319,6 +318,29 @@ angular.module($snaphy.getModuleName())
                     icon: 'fa fa-check',
                     align: 'right'
                 });
+                if (formStructure.relations.hasMany) {
+                  if(formStructure.relations.hasMany.length){
+                    //Now save the related model..
+                    formStructure.relations.hasMany.forEach(function(relationName, index) {
+                        addRelatedModel(baseDatabase, relationName, relatedData, index, baseModel.id, formStructure);
+                    });
+                  }else{
+                    SnaphyTemplate.notify({
+                        message: "Data successfully saved.",
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        align: 'right'
+                    });
+                  }
+
+                } else {
+                    SnaphyTemplate.notify({
+                        message: "Data successfully saved.",
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        align: 'right'
+                    });
+                } //else
 
             }, function(respHeader) {
                 console.error(respHeader);
@@ -347,7 +369,7 @@ angular.module($snaphy.getModuleName())
                   if(formStructure.relations.hasMany.length){
                     //Now save the related model..
                     formStructure.relations.hasMany.forEach(function(relationName, index) {
-                        addRelatedModel(baseDatabase, relationName, relatedData, index, baseModel.id);
+                        addRelatedModel(baseDatabase, relationName, relatedData, index, baseModel.id, formStructure);
                     });
                   }else{
                     SnaphyTemplate.notify({
@@ -386,32 +408,59 @@ angular.module($snaphy.getModuleName())
         };
 
         /**
+         * TODO UNDER CONSTRUCTION
          * Local method for adding related model..
          * @param baseDatabase
          * @param relationName
          * @param relatedData
          * @param index
          */
-        var addRelatedModel = function(baseDatabase, relationName, relatedData, index, parentId) {
-            baseDatabase[relationName].createMany({
-                id: parentId
-            }, relatedData.hasMany[index], function(modelArr) {
-                console.log("Successfully saved related model data");
-                SnaphyTemplate.notify({
-                    message: "Data successfully saved.",
-                    type: 'success',
-                    icon: 'fa fa-check',
-                    align: 'right'
-                });
-            }, function(respHeader) {
-                console.error(respHeader);
-                SnaphyTemplate.notify({
-                    message: "Error saving data.",
-                    type: 'danger',
-                    icon: 'fa fa-times',
-                    align: 'right'
-                });
+        var addRelatedModel = function(baseDatabase, relationName, relatedData, index, parentId, formStructure) {
+            var hasMany = {
+                update:[],
+                create:[]
+            };
+
+            var relatedModelName;
+            for(var i=0; formStructure.fields.length; i++){
+                var element = formStructure.fields[i];
+                if(element.key.trim() === relationName.trim()){
+                    relatedModelName = element.templateOptions.model;
+                    break;
+                }
+            }
+
+            //First seperate out the models with update and create.
+            relatedData.hasMany[index].forEach(function(dataObj, index){
+                if(dataObj.id){
+                    update.push(dataObj);
+                }else{
+                    create.push(dataObj);
+                }
             });
+
+            if(hasMany.create.length){
+                baseDatabase[relationName].createMany({
+                    id: parentId
+                }, hasMany.create, function(modelArr) {
+                    console.log("Successfully saved related model data");
+                    SnaphyTemplate.notify({
+                        message: "Data successfully saved.",
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        align: 'right'
+                    });
+                }, function(respHeader) {
+                    console.error(respHeader);
+                    SnaphyTemplate.notify({
+                        message: "Error saving data.",
+                        type: 'danger',
+                        icon: 'fa fa-times',
+                        align: 'right'
+                    });
+                });
+            }
+
         };
 
 
@@ -531,8 +580,16 @@ angular.module($snaphy.getModuleName())
 
         var fetchDataSever = function(dataSchema, dbService) {
             var filterObj = {};
+            filterObj.include = [];
             if (dataSchema.relations.belongsTo) {
-                filterObj.include = dataSchema.relations.belongsTo;
+                if(dataSchema.relations.belongsTo.length){
+                    filterObj.include.concat(dataSchema.relations.belongsTo);
+                }
+            }
+            if(dataSchema.relations.hasMany) {
+                if(dataSchema.relations.hasMany.length){
+                    filterObj.include.concat(dataSchema.relations.hasMany);
+                }
             }
             dbService.find({
                 filter: filterObj

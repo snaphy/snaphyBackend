@@ -19,8 +19,8 @@
         "Pending": "label-warning"
       }
     },
-    "employeeDetailsId":{
-        "display": false
+    "employeeDetailsId": {
+      "display": false
     }
   },
   "filters": {
@@ -181,13 +181,12 @@
       "type": "hasMany",
       "model": "Recipe",
       "foreignKey": "",
-      "templateOptions":{
-            "btnText": "Add recipes"
+      "templateOptions": {
+        "btnText": "Add recipes"
       }
-
     },
     "employeeDetails": {
-      "type": "belongsTo",
+      "type": "hasOne",
       "model": "EmployeeDetails",
       "foreignKey": ""
     }
@@ -244,6 +243,12 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getSchema"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "save"
     }
   ],
   "methods": []
