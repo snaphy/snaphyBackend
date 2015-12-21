@@ -15,7 +15,7 @@
       "formlyTemplateDirectives": "/formlyTemplate/scripts/directives/formlyTemplate.js",
        "formlyTemplateServices" : "/formlyTemplate/scripts/services/formlyTemplate.js",
        "selectize"              : "/formlyTemplate/style/bower_components/selectize/dist/js/standalone/selectize.min.js",
-       "formlyTemplateConfig"   : "/formlyTemplate/scripts/config/formlyTemplate.js"
+       "formlyTemplateConfig"   : "/formlyTemplate/config/formlyTemplate.js"
     },
     "moduleDependencies":{
 

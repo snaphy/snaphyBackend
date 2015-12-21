@@ -1,22 +1,25 @@
-<div>
-    <autocomplete class="autocompleteSelect" model-name="" search-property="" value="model[options.key]" ></autocomplete>
-    <button type="button" class="btn btn-minw btn-primary" ng-click="addNew()" >Create {{to.btnText}}</button>
-    <!--loop through each element in model array-->
-    <div class="{{hideRepeat}}">
-        <div class="repeatsection" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
-            <formly-form fields="fields"
-                         model="element"
-                         form="form">
-            </formly-form>
-            <div style="margin-bottom:20px;">
-                <button type="button" class="btn btn-minw btn-danger" ng-click="model[options.key].splice($index, 1)">
-                    Remove
-                </button>
-            </div>
-            <hr>
+<div class="row" ng-if="!showCreate()" >
+    <autocomplete
+        class="col-md-9 col-xs-12"
+        model-name="{{to.model}}"
+        search-property="{{to.searchProp}}"
+        value="model[options.key]" >
+    </autocomplete>
+    <p class="AddNewButton col-md-9 col-xs-12">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="forceDisplay()" >{{to.btnText}}</button>
+    </p>
+</div>
+<div ng-if="showCreate()">
+    <div class="repeatsection" >
+        <formly-form fields="to.fields"
+                     model="model[options.key]"
+                     form="form">
+        </formly-form>
+        <div style="margin-bottom:20px;">
+            <button type="button" class="btn btn-sm btn-danger" ng-click="resetCreate()">
+                Remove {{to.model}}
+            </button>
         </div>
-        <p class="AddNewButton">
-            <button type="button" class="btn btn-minw btn-primary" ng-click="addNew()" >{{to.btnText}}</button>
-        </p>
     </div>
+
 </div>

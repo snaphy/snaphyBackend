@@ -12,16 +12,38 @@ angular.module($snaphy.getModuleName())
         name: 'belongsTo',
         templateUrl: '/formlyTemplate/views/autocomplete.html',
         link: function(scope, element, attrs) {
-            // ID PROPERTY IS NEEDED FOR VALIDATE TO WORK
-            if(scope.options.templateOptions){
-                if(!scope.options.templateOptions.colSize){
-                    scope.options.templateOptions.colSize = 'col-xs-12';
+
+
+        },//link function..
+        controller: function($scope) {
+            $scope.resetCreate   = resetCreate;
+            $scope.showCreate = function(){
+                //model has value then put create == true
+                var containValue = $.isEmptyObject($scope.model[$scope.options.key]);
+                if(containValue){
+                    //put $scope.create == false;
+                    $scope.create = false;
                 }
-            }//if
+                else{
+                    $scope.create = true;
+                }
+                return $scope.create;
+            };
 
-        
+            function resetCreate(){
+                //Clear the model value..
+                $scope.model[$scope.options.key] = {};
+            }
 
-        }//link function..
+            $scope.forceDisplay = function(){
+                //Just add a dummy property.
+                if($scope.to.fields.length){
+                    $scope.model[$scope.options.key] = {};
+                    $scope.model[$scope.options.key][$scope.to.fields[0].key] = "";
+                }
+            };
+
+        }
     });
 
 

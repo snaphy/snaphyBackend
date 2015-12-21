@@ -248,9 +248,8 @@
                 <div ng-if="schema.validations" class="block-content block-content-narrow">
                     <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
-
+                            {{saveFormData}}
                         </formly-form>
-                        <autocomplete model-name="EmployeeDetails" value="schema.x" search-property="address" ></autocomplete>
                     </form>
                 </div><!--block-content-->
             </div>

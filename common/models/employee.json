@@ -190,8 +190,9 @@
       "model": "EmployeeDetails",
       "foreignKey": "",
       "templateOptions": {
-        "searchProp": "username",
-        "create": true
+        "searchProp": "address",
+        "create": true,
+        "btnText": "Add Employee Details"
       }
     }
   },

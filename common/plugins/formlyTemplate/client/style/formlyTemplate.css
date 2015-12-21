@@ -9,3 +9,14 @@
     font-weight: normal !important;
     line-height: normal !important;
 }
+
+
+.hide{
+    display: none;
+}
+
+
+
+.show{
+    display: block;
+}
