@@ -34,7 +34,7 @@ angular.module($snaphy.getModuleName())
 
         $scope.getColValue = function(rowObject, columnHeader) {
             var key = $scope.getKey(rowObject, columnHeader);
-            return rowObject[key];
+            return key? rowObject[key]: null ;
         };
 
 
@@ -48,12 +48,14 @@ angular.module($snaphy.getModuleName())
          */
         $scope.getKey = function(rowObject, columnHeader) {
             var keyName;
-            if (rowObject[columnHeader] !== undefined) {
-                keyName = columnHeader;
-            } else {
-                //Its a relational header properties name... map the header.. replace `customer_name` to name
-                var patt = /\_[A-Z0-9a-z]+$/;
-                keyName = columnHeader.replace(patt, '');
+            if(rowObject){
+                if (rowObject[columnHeader] !== undefined) {
+                    keyName = columnHeader;
+                } else {
+                    //Its a relational header properties name... map the header.. replace `customer_name` to name
+                    var patt = /\_[A-Z0-9a-z]+$/;
+                    keyName = columnHeader.replace(patt, '');
+                }
             }
             return keyName;
         };
@@ -67,6 +69,21 @@ angular.module($snaphy.getModuleName())
             var keyName;
             var patt = /^[A-Z0-9a-z-]+\_/;
             return columnHeader.replace(patt, '');
+        };
+
+        //TO be used in tables..
+        $scope.getRelationColumnValue = function(rowObject, header, colKey){
+            var colValue                = $scope.getColValue(rowObject, header);
+            var isBelongToRelation      = header !== colKey;
+            var hasOneRelationPropName  = $scope.getColumnKey(header);
+            return (isBelongToRelation)? colValue[hasOneRelationPropName] : colValue;
+        };
+
+        $scope.getRelationColumnType = function(rowObject, header, colKey, initialColumnType){
+            var colValue                = $scope.getRelationColumnValue(rowObject, header, colKey);
+            var hasOneRelationPropName  = $scope.getColumnKey(header);
+            var isBelongToRelation      = header !== colKey;
+            return (isBelongToRelation)? $scope.checkType(colValue, hasOneRelationPropName): initialColumnType;
         };
 
 
@@ -264,15 +281,23 @@ angular.module($snaphy.getModuleName())
 
         //Method for rollbackchanges is eror occured..
         $scope.rollBackChanges = function(){
-            $scope.dataValues.forEach(function(data, index){
-                if(data.id === backupData.id && !$.isEmptyObject(backupData)){
-                    //rollback changes..
-                    $scope.dataValues[index] = backupData;
-                    //Reset backup data..
-                    backupData = {};
-                    return false;
-                }
-            });
+            if(!$.isEmptyObject(backupData)){
+                $scope.dataValues.forEach(function(data, index){
+                    if(data.id === backupData.id && !$.isEmptyObject(backupData)){
+                        //rollback changes..
+                        $scope.dataValues[index] = backupData;
+                        //Reset backup data..
+                        backupData = {};
+                        return false;
+                    }
+                });
+            }
+        };
+
+
+        $scope.resetBackup = function(){
+            backupData = {};
+            $scope.saveFormData = {};
         };
 
 
@@ -323,6 +348,7 @@ angular.module($snaphy.getModuleName())
                 var update;
                 if(formModel.id){
                     update = true;
+
                 }
                 else{
                     var positionNewData = $scope.dataValues.length;
@@ -438,9 +464,25 @@ angular.module($snaphy.getModuleName())
                 }
             }
 
+            if(dataSchema.relations.hasAndBelongToMany) {
+                if(dataSchema.relations.hasAndBelongToMany.length){
+                    dataSchema.relations.hasAndBelongToMany.forEach(function(relationName){
+                        filterObj.include.push(relationName);
+                    });
+                }
+            }
+
             if(dataSchema.relations.hasMany) {
                 if(dataSchema.relations.hasMany.length){
                     dataSchema.relations.hasMany.forEach(function(relationName){
+                        filterObj.include.push(relationName);
+                    });
+                }
+            }
+
+            if(dataSchema.relations.hasOne) {
+                if(dataSchema.relations.hasOne.length){
+                    dataSchema.relations.hasOne.forEach(function(relationName){
                         filterObj.include.push(relationName);
                     });
                 }
@@ -452,13 +494,39 @@ angular.module($snaphy.getModuleName())
                 dataFetched = true;
                 //$scope.dataValues.length = 0;
                 values.forEach(function(element, index){
+                    //Set element value initial relationship value for two way COMMUNICATION..
+                    for(var relationType in dataSchema.relations){
+                        if(dataSchema.relations.hasOwnProperty(relationType)){
+                            var value;
+                            if(relationType === "belongsTo" || relationType === "hasOne"){
+                                value = {};
+                            }
+                            else{
+                                value = [];
+                            }
+
+                            var relationArr = dataSchema.relations[relationType];
+                            element = addRelationDummyValue (relationArr, element, value);
+                        }
+                    }
                     //setting the value of the data successfully fetched..
                     $scope.dataValues.push(element);
                 });
 
+                console.log($scope.dataValues);
+
             }, function(respHeader) {
                 console.log(respHeader);
             });
+        };
+
+        var addRelationDummyValue = function(relationArr, element, value){
+            relationArr.forEach(function(rel, index){
+                if(!element[rel]){
+                    element[rel] = value;
+                }
+            });
+            return element;
         };
 
 

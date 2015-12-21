@@ -97,7 +97,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				var relationObj = relations[relationName];
 				var modelName       = relationObj.model;
 				//Only add relation if template option in the template option is present..
-				if(relationObj.type === 'hasMany' && relationObj.templateOptions !== undefined){
+				if((relationObj.type === 'hasMany' ||  relationObj.type === 'hasAndBelongToMany' ) && relationObj.templateOptions !== undefined){
 					var nestedSchema = {};
 					nestedSchema.type = 'repeatSection';
 					nestedSchema.key = relationName;
@@ -106,18 +106,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					//console.log(nestedSchema);
 					//Now get nested schema str for the relational models..
 					generateTemplateStr(app, relationObj.model, nestedSchema.templateOptions);
+					if(relationObj.type === "hasMany"){
+						//Now add nestedSchema to the schema object.
+						schema.relations.hasMany.push(relationName);
+					}
+					else{
+						//Now add nestedSchema to the schema object.
+						schema.relations.hasAndBelongToMany.push(relationName);
+					}
 
-					//Now add nestedSchema to the schema object.
-					schema.relations.hasMany.push(relationName);
 					schema.fields.push(nestedSchema);
 				}
 				if((relationObj.type === 'hasOne' || relationObj.type === 'belongsTo') && relationObj.templateOptions !== undefined){
 					//Now add its properties to the header..
 					header = addPropToHeader(app, relationObj.model, relationName,  header);
-					//Add this relation to the schema..
-					schema.relations.belongsTo.push(relationName);
+					if(relationObj.type === "hasOne"){
+						schema.relations.hasOne.push(relationName);
+					}else{
+						//Add this relation to the schema..
+						schema.relations.belongsTo.push(relationName);
+					}
+
 					var belongsToSchema = {
-						type           : 'belongsTo',
+						type           : "belongsTo",
 						key            : relationName,
 						templateOptions: relationObj.templateOptions
 					};
@@ -211,9 +222,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			schema.model = modelName;
 			schema.relations = {
 				hasMany:[],
-				belongsTo:[]
+				belongsTo:[],
 				//hasManyThrough:[],
-				//hasAndBelongToMany:[]
+				hasAndBelongToMany:[],
+				hasOne:[]
 			};
 		}
 		schema.fields   = [];

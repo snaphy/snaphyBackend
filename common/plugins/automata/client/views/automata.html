@@ -118,10 +118,8 @@
                                             <!--Do string populated work here...-->
                                             {{getColValue(rowObject, header)}}
                                         </span>
-                                        <span ng-init="belongToReln = header !== colKey;
-                                              hasOneRelationPropName = getColumnKey(header);
-                                              colType = (belongToReln)? checkType(colValue, hasOneRelationPropName): colType;
-                                              colValue = (belongToReln)? colValue[hasOneRelationPropName] : colValue;"
+                                        <span ng-init="colType = getRelationColumnType (rowObject, header, colKey, colType);
+                                              colValue = getRelationColumnValue(rowObject, header, colKey);"
                                               ng-if="colType === '[object Object]'">
                                             <!--Do string populated work here...-->
                                             <ul ng-if="colType === '[object Object]'">
@@ -140,7 +138,7 @@
                                                 </li>
                                             </ul>
                                             <span ng-if="colType !== '[object Object]'">
-                                                    {{colValue}}
+                                                    {{getRelationColumnValue(rowObject, header, colKey)}}
                                             </span>
                                         </span>
 
@@ -239,7 +237,7 @@
                 <div class="block-header bg-primary-dark">
                     <ul class="block-options">
                         <li>
-                            <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                            <button  data-dismiss="modal" type="button"><i class="si si-close"></i></button>
                         </li>
                     </ul>
                     <h3 class="block-title">{{tableTitle}}</h3>
@@ -254,7 +252,7 @@
                 </div><!--block-content-->
             </div>
             <div class="modal-footer">
-                <button data-target="#addDataModal" ng-click="rollBackChanges()" class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                <button data-target="#addDataModal"  class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
                 <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal" data-target="#addDataModal"><i class="fa fa-save"></i> Save</button>
                 <button ng-disabled="!enableButton(schema.form)" type="submit" class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
                   <i class="fa fa-save"></i> Save and add another

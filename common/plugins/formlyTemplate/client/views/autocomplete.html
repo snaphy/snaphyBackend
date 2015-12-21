@@ -1,13 +1,15 @@
 <div class="row" ng-if="!showCreate()" >
-    <autocomplete
-        class="col-md-9 col-xs-12"
-        model-name="{{to.model}}"
-        search-property="{{to.searchProp}}"
-        value="model[options.key]" >
-    </autocomplete>
-    <p class="AddNewButton col-md-9 col-xs-12">
-        <button type="button" class="btn btn-sm btn-primary" ng-click="forceDisplay()" >{{to.btnText}}</button>
-    </p>
+    <hr>
+    <div class="col-md-9 col-xs-12">
+        <autocomplete
+            model-name="{{to.model}}"
+            search-property="{{to.searchProp}}"
+            value="model[options.key]">
+        </autocomplete>
+    </div>
+    <div class="AddNewButton col-md-3 col-xs-12">
+        <button type="button"  style="height:36px;"  class="btn btn-md btn-primary" ng-click="forceDisplay()" >{{to.btnText}}</button>
+    </div>
 </div>
 <div ng-if="showCreate()">
     <div class="repeatsection" >
@@ -16,7 +18,7 @@
                      form="form">
         </formly-form>
         <div style="margin-bottom:20px;">
-            <button type="button" class="btn btn-sm btn-danger" ng-click="resetCreate()">
+            <button type="button" class="btn btn-sm btn-danger pull-right" ng-click="resetCreate()">
                 Remove {{to.model}}
             </button>
         </div>

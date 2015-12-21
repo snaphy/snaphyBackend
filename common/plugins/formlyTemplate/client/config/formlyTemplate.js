@@ -6,7 +6,7 @@ angular.module($snaphy.getModuleName())
 /**
  Defigning custom templates for angular-formly.
  */
-.run(['formlyConfig', function (formlyConfig)  {
+.run(['formlyConfig', '$timeout', function (formlyConfig, $timeout)  {
 
     formlyConfig.setType({
         name: 'belongsTo',
@@ -31,15 +31,19 @@ angular.module($snaphy.getModuleName())
             };
 
             function resetCreate(){
-                //Clear the model value..
-                $scope.model[$scope.options.key] = {};
+                $timeout(function(){
+                    $scope.model[$scope.options.key] = {};
+                },0);
             }
 
             $scope.forceDisplay = function(){
                 //Just add a dummy property.
                 if($scope.to.fields.length){
-                    $scope.model[$scope.options.key] = {};
-                    $scope.model[$scope.options.key][$scope.to.fields[0].key] = "";
+                    $timeout(function(){
+                        $scope.model[$scope.options.key] = {};
+                        $scope.model[$scope.options.key][$scope.to.fields[0].key] = "";
+                    },0);
+
                 }
             };
 
