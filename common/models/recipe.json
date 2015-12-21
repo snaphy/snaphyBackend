@@ -19,7 +19,14 @@
     },
     "description": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter Description Name"
+        }
+      }
     },
     "stepsImage": {
       "type": [

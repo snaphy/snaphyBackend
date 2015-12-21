@@ -34,20 +34,23 @@
     "employees": {
       "type": "hasOne",
       "model": "Employee",
-      "foreignKey": "",
-      "templateOptions": {
-        "searchProp": "username",
-        "create": true
-      }
+      "foreignKey": ""
     }
   },
   "acls": [
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "save"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "save"
     }
+
   ],
   "methods": []
 }

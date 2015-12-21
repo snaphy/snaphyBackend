@@ -188,7 +188,11 @@
     "employeeDetails": {
       "type": "hasOne",
       "model": "EmployeeDetails",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "searchProp": "username",
+        "create": true
+      }
     }
   },
   "acls": [

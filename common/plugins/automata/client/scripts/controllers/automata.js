@@ -488,39 +488,60 @@ angular.module($snaphy.getModuleName())
                 //Now save the model..
                 var baseDatabase = Database.loadDb(formStructure.model);
                 var relatedData = {
+                    hasOne:[],
                     hasMany: [],
-                    belongsTo: []
-                    //hasManyThrough:[],
-                    //hasAndBelongToMany:[]
+                    belongsTo: [],
+                    hasManyThrough:[],
+                    hasAndBelongToMany:[]
                 };
 
-                /**
-                 * Validate the model here..
-                 */
-                if (formModel.id) {
-                    // Editing the form
-                    saveFormRemoveRelations(formStructure, formModel, relatedData);
-                    updateData (baseDatabase, formModel);
-                    //Now reset the form..
-                    resetSavedForm(formStructure.form);
-                } else {
-                    saveFormRemoveRelations(formStructure, formModel, relatedData);
-                    //create a copy of the data..
-                    var savedData = angular.copy(formModel);
-                    var positionNewData = $scope.dataValues.length;
-                    //First add to the table..
-                    $scope.dataValues.push(savedData);
-                    //Now save to server..
-                    saveDataToDatabase (baseDatabase, savedData, formStructure, positionNewData);
+                var schema = {
+                    "relation": $scope.schema.relations
+                };
 
-                    /**
-                     * TODO other related model to be implemented later.
-                     */
+                var requestData = {
+                    data: formModel,
+                    schema: schema
+                };
 
-                     //Now reset the form finally..
-                     resetSavedForm(formStructure.form);
+                console.log(requestData);
+                //Now save the database with baseDatabase method.
+                baseDatabase.save({}, requestData, function(savedData){
+                    console.log("data saved to the server");
+                    console.log(savedData);
+                }, function(respHeader){
+                    console.log("Error saving data to server");
+                    console.error(respHeader);
+                });
 
-                } //else
+
+                // /**
+                //  * Validate the model here..
+                //  */
+                // if (formModel.id) {
+                //     // Editing the form
+                //     saveFormRemoveRelations(formStructure, formModel, relatedData);
+                //     updateData (baseDatabase, formModel);
+                //     //Now reset the form..
+                //     resetSavedForm(formStructure.form);
+                // } else {
+                //     saveFormRemoveRelations(formStructure, formModel, relatedData);
+                //     //create a copy of the data..
+                //     var savedData = angular.copy(formModel);
+                //     var positionNewData = $scope.dataValues.length;
+                //     //First add to the table..
+                //     $scope.dataValues.push(savedData);
+                //     //Now save to server..
+                //     saveDataToDatabase (baseDatabase, savedData, formStructure, positionNewData);
+                //
+                //     /**
+                //      * TODO other related model to be implemented later.
+                //      */
+                //
+                //      //Now reset the form finally..
+                //      resetSavedForm(formStructure.form);
+                //
+                // } //else
             }
         }; //saveForm
 
@@ -578,19 +599,26 @@ angular.module($snaphy.getModuleName())
 
 
 
+
         var fetchDataSever = function(dataSchema, dbService) {
             var filterObj = {};
             filterObj.include = [];
             if (dataSchema.relations.belongsTo) {
                 if(dataSchema.relations.belongsTo.length){
-                    filterObj.include.concat(dataSchema.relations.belongsTo);
+                    dataSchema.relations.belongsTo.forEach(function(relationName){
+                        filterObj.include.push(relationName);
+                    });
                 }
             }
+
             if(dataSchema.relations.hasMany) {
                 if(dataSchema.relations.hasMany.length){
-                    filterObj.include.concat(dataSchema.relations.hasMany);
+                    dataSchema.relations.hasMany.forEach(function(relationName){
+                        filterObj.include.push(relationName);
+                    });
                 }
             }
+
             dbService.find({
                 filter: filterObj
             }, function(values) {

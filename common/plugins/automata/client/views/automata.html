@@ -71,7 +71,7 @@
                 </div>
                 <div class="block-content">
 
-                    <div snaphy-load-datatable style="overflow-x: hidden;">
+                    <div snaphy-load-datatable class="table-responsive" style="overflow-x: hidden;">
                         <table
                             id="automataTable"
                             class="table table-bordered table-striped js-dataTable-full"
@@ -82,7 +82,7 @@
                             <thead>
                                 <tr >
                                     <!--Adding :: for one way binding -->
-                                    <th  ng-repeat="header in schema.header">{{header}}</th>
+                                    <th  ng-repeat="header in schema.header">{{header | underscoreless}}</th>
                                     <th class="text-center" style="width: 10%;">Actions</th>
                                 </tr>
                             </thead>

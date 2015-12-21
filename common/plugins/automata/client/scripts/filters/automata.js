@@ -12,6 +12,25 @@ angular.module($snaphy.getModuleName())
     };
 })
 
+/**
+ * For replacing underscope to spaces
+ * @param  {[type]} 'underscoreless'
+ * @param  {[type]} function         (             [description]
+ * @return {[type]}                  [description]
+ */
+.filter('underscoreless', function () {
+  return function (input) {
+      return input.replace(/_/g, ' ');
+  };
+})
+
+.filter('removeSpaces', function () {
+    return function (text) {
+        var str = text.replace(/\s+/g, '');
+        return str;
+    };
+})
+
 
 /**
  * Filters out all duplicate items from an array by checking the specified key
