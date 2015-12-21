@@ -321,15 +321,25 @@ angular.module($snaphy.getModuleName())
 
                 //create a copy of the data..
                 var savedData = angular.copy(formModel);
-                var positionNewData = $scope.dataValues.length;
-                //First add to the table..
-                $scope.dataValues.push(savedData);
+                var update;
+                if(formModel.id){
+                    update = true;
+                }
+                else{
+                    var positionNewData = $scope.dataValues.length;
+                    //First add to the table..
+                    $scope.dataValues.push(savedData);
+                    update = false;
+                }
+
 
                 //Now save||update the database with baseDatabase method.
                 baseDatabase.save({}, requestData, function(baseModel){
                     console.log(baseModel);
-                    //Now update the form with id.
-                    $scope.dataValues[positionNewData].id = baseModel.id;
+                    if(!update){
+                        //Now update the form with id.
+                        $scope.dataValues[positionNewData].id = baseModel.id;
+                    }
                     SnaphyTemplate.notify({
                         message: "Data successfully saved.",
                         type: 'success',
@@ -339,9 +349,14 @@ angular.module($snaphy.getModuleName())
                 }, function(respHeader){
                     console.log("Error saving data to server");
                     console.error(respHeader);
-                    //remove the form added data..
-                    if (positionNewData > -1) {
-                        $scope.dataValues.splice(positionNewData, 1);
+                    if(update){
+                        $scope.rollBackChanges();
+                    }
+                    else{
+                        //remove the form added data..
+                        if (positionNewData > -1) {
+                            $scope.dataValues.splice(positionNewData, 1);
+                        }
                     }
 
                     console.error(respHeader);
