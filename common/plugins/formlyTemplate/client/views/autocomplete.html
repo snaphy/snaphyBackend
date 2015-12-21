@@ -1,7 +1,8 @@
+<hr >
 <div class="row" ng-if="!showCreate()" >
-    <hr>
     <div class="col-md-9 col-xs-12">
         <autocomplete
+            placeholder="{{placeholder}}"
             model-name="{{to.model}}"
             search-property="{{to.searchProp}}"
             value="model[options.key]">

@@ -97,7 +97,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				var relationObj = relations[relationName];
 				var modelName       = relationObj.model;
 				//Only add relation if template option in the template option is present..
-				if((relationObj.type === 'hasMany' ||  relationObj.type === 'hasAndBelongToMany' ) && relationObj.templateOptions !== undefined){
+				if((relationObj.type === 'hasMany' ||  relationObj.type === 'hasAndBelongsToMany' ) && relationObj.templateOptions !== undefined){
 					var nestedSchema = {};
 					nestedSchema.type = 'repeatSection';
 					nestedSchema.key = relationName;
@@ -112,7 +112,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					}
 					else{
 						//Now add nestedSchema to the schema object.
-						schema.relations.hasAndBelongToMany.push(relationName);
+						schema.relations.hasAndBelongsToMany.push(relationName);
 					}
 
 					schema.fields.push(nestedSchema);
@@ -224,7 +224,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				hasMany:[],
 				belongsTo:[],
 				//hasManyThrough:[],
-				hasAndBelongToMany:[],
+				hasAndBelongsToMany:[],
 				hasOne:[]
 			};
 		}

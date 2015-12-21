@@ -47,7 +47,7 @@ var addSaveMethod = function(app, modelName){
         var relations={
             hasMany:{},
             belongsTo:{},
-            hasAndBelongToMany:{},
+            hasAndBelongsToMany:{},
             hasOne:{}
         };
 
@@ -196,8 +196,8 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
                 console.log(relationData);
                 promises.push( upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasMany', callback));
             }//else if
-            else if('hasAndBelongToMany'){
-                promises.push(upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasAndBelongToMany', callback) );
+            else if('hasAndBelongsToMany'){
+                promises.push(upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasAndBelongsToMany', callback) );
             }else{
                 //Do nothing
                 console.log('I am inside do nothing case. I dont know what to do.');
@@ -253,7 +253,7 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
 
 
 
-//Upsert for hasMany and hasAndBelongToMany common preprocess steps..
+//Upsert for hasMany and hasAndBelongsToMany common preprocess steps..
 var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, relationName, foriegnKey, manyType, callback){
     try{
         //first get the old data and check if any old data is deleted from new data..
@@ -278,8 +278,8 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                     //relationData[foriegnKey] = dataInstance.id;
                     upsertHasManyFinal(relatedModelClass, relationData, dataInstance, relationName,  callback);
                 }
-                if(manyType === 'hasAndBelongToMany'){
-                    upsertHasAndBelongToManyFinal(dataInstance, relationName, relationData, relatedModelClass, callback);
+                if(manyType === 'hasAndBelongsToMany'){
+                    upserthasAndBelongsToManyFinal(dataInstance, relationName, relationData, relatedModelClass, callback);
                 }
             });
         });
@@ -303,13 +303,13 @@ var upsertHasManyFinal = function(relatedModelClass, relationData, dataInstance,
 };
 
 
-var upsertHasAndBelongToManyFinal = function(dataInstance, relationName, relationData, relatedModelClass, callback){
+var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relationData, relatedModelClass, callback){
     relatedModelClass.upsert(relationData, function(err, data){
         if (err) throw err;
 
         dataInstance[relationName].add(data)
         .then(function(){
-            console.log("Link successfully added to hasAndBelongToMany relationship.");
+            console.log("Link successfully added to hasAndBelongsToMany relationship.");
         })
         .catch(function(err){
             callback(err);

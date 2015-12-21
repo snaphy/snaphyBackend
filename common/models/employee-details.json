@@ -32,7 +32,7 @@
   "validations": [],
   "relations": {
     "employees": {
-      "type": "hasOne",
+      "type": "hasMany",
       "model": "Employee",
       "foreignKey": ""
     }

@@ -23,6 +23,9 @@ angular.module($snaphy.getModuleName())
                 return false;
             }
 
+            scope.placeholder = "Search ".toUpperCase() + scope.modelName.toUpperCase() + " " + scope.searchProperty.toUpperCase();
+            $(iElm).attr("placeholder", scope.placeholder);
+
             var selectize_ = $(iElm).selectize({
                 maxItems: 1,
                 valueField: 'id',

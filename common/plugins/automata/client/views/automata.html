@@ -82,18 +82,22 @@
                             <thead>
                                 <tr >
                                     <!--Adding :: for one way binding -->
-                                    <th  ng-repeat="header in schema.header">{{header | underscoreless}}</th>
+                                    <th
+                                        ng-if   = "displayProperties(schema, header)"
+                                        ng-repeat="header in schema.header">
+                                        {{header | underscoreless}}
+                                    </th>
                                     <th class="text-center" style="width: 10%;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-if="rowObject" ng-repeat="(rowId, rowObject) in dataValues">
                                     <!--Populating the table values and binding header with columnVal-->
-
-                                    <td  ng-init="colType     = checkType(rowObject, header);
-                                                  colValue    = getColValue(rowObject, header);
-                                                  colKey      = getKey(rowObject, header);
-                                                  tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"
+                                    <td ng-if   = "displayProperties(schema, header)"
+                                        ng-init = "colType = checkType(rowObject, header);
+                                                   colValue    = getColValue(rowObject, header);
+                                                   colKey      = getKey(rowObject, header);
+                                                   tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"
                                         ng-repeat="header in schema.header" >
 
                                         <span data-sort="{{getColValue(rowObject, header)}}"  data-filter="{{getColValue(rowObject, header)}}" ng-if="colType === '[object String]'">

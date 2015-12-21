@@ -294,6 +294,29 @@ angular.module($snaphy.getModuleName())
             }
         };
 
+        /**
+         * Check if to display the properties of the table or not.
+         * schema {
+         * 	tables:{
+         * 		username:{
+         * 			"display": false
+         * 		}
+         * 	}
+         * }
+         */
+        $scope.displayProperties = function(schema, header){
+            if(schema.tables){
+                if(schema.tables[header]){
+                    if(schema.tables[header].display !== undefined){
+                        if(!schema.tables[header].display){
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        };
+
 
         $scope.resetBackup = function(){
             backupData = {};
@@ -331,7 +354,7 @@ angular.module($snaphy.getModuleName())
                     hasMany: [],
                     belongsTo: [],
                     hasManyThrough:[],
-                    hasAndBelongToMany:[]
+                    hasAndBelongsToMany:[]
                 };
 
                 var schema = {
@@ -464,9 +487,9 @@ angular.module($snaphy.getModuleName())
                 }
             }
 
-            if(dataSchema.relations.hasAndBelongToMany) {
-                if(dataSchema.relations.hasAndBelongToMany.length){
-                    dataSchema.relations.hasAndBelongToMany.forEach(function(relationName){
+            if(dataSchema.relations.hasAndBelongsToMany) {
+                if(dataSchema.relations.hasAndBelongsToMany.length){
+                    dataSchema.relations.hasAndBelongsToMany.forEach(function(relationName){
                         filterObj.include.push(relationName);
                     });
                 }

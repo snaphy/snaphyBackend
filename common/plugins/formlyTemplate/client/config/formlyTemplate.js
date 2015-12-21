@@ -30,6 +30,8 @@ angular.module($snaphy.getModuleName())
                 return $scope.create;
             };
 
+        
+
             function resetCreate(){
                 $timeout(function(){
                     $scope.model[$scope.options.key] = {};
