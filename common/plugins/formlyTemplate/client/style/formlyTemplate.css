@@ -1,0 +1,11 @@
+/*Template designed by Robins Gupta*/
+
+.item {
+    display: inline-block;
+    width: auto !important;
+    height: auto !important;
+    text-align:center;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    line-height: normal !important;
+}

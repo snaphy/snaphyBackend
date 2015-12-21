@@ -57,6 +57,8 @@
     </head>
 
     <body ng-app="<%= module %>" ng-controller="bodyCtrl" >
+        <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
+        
         <!--Load Page Container only if `defaultTemplate` variable is true-->
         <!-- Page Container -->
         <div ng-if="templateEnabled()" id="page-container"  snaphy-load-template class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
@@ -118,7 +120,7 @@
 
                 <!-- Side Content -->
                 <div class="side-content">
-                  
+
                   <!-- SIDEBAR HOOK -->
                   <% sidebarHook.forEach(function(sidebarLink) { %>
                   <!-- Custom Plugins headers.. -->
@@ -206,7 +208,7 @@
 
         <!--ONLY load this template if the default template is not needed for-example for login plugin..-->
         <div ui-view ng-if="!templateEnabled()">
-          
+
         </div>
 
 

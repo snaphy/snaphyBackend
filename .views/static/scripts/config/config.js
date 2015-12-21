@@ -3,6 +3,8 @@
 
 angular.module($snaphy.getModuleName())
 
+
+
     /**
      Defigning templated for angular-formly.
      */
@@ -28,6 +30,10 @@ angular.module($snaphy.getModuleName())
                 }//if
             }//link function..
         });
+
+
+
+
 
 
 
@@ -99,11 +105,12 @@ angular.module($snaphy.getModuleName())
         });
 
 
-        var unique = 1;
+
         formlyConfig.setType({
             name: 'repeatSection',
             templateUrl: 'repeatSection.html',
             controller: function($scope) {
+                var unique = 1;
                 $scope.formOptions = {formState: $scope.formState};
                 $scope.addNew = addNew;
                 $scope.copyFields = copyFields;

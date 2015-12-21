@@ -26,7 +26,6 @@ angular.module($snaphy.getModuleName())
         var dataFetched = false;
 
 
-
         $scope.checkType = function(rowObject, columnHeader) {
             var colValue = $scope.getColValue(rowObject, columnHeader);
             return Object.prototype.toString.call(colValue);

@@ -29,6 +29,8 @@ angular.module($snaphy.getModuleName())
   }])
 
 
+
+
 /**
  *Directive for defining filters $multiSelect
  * */

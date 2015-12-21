@@ -1,0 +1,44 @@
+{
+  "name": "formlyTemplate",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "Plugin for adding different template support for formly",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/formlyTemplate",
+  "staticFiles": {
+    "css": {
+        "selectize"          : "/formlyTemplate/style/bower_components/selectize/dist/css/selectize.default.css",
+        "formlyTemplatesCss" : "/formlyTemplate/style/formlyTemplate.css"
+      },
+    "js": {
+      "formlyTemplateDirectives": "/formlyTemplate/scripts/directives/formlyTemplate.js",
+       "formlyTemplateServices" : "/formlyTemplate/scripts/services/formlyTemplate.js",
+       "selectize"              : "/formlyTemplate/style/bower_components/selectize/dist/js/standalone/selectize.min.js",
+       "formlyTemplateConfig"   : "/formlyTemplate/scripts/config/formlyTemplate.js"
+    },
+    "moduleDependencies":{
+
+    },
+    "settings": "/formlyTemplate/settings.js"
+  },
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+
+  }
+}
