@@ -11,10 +11,6 @@ angular.module($snaphy.getModuleName())
     formlyConfig.setType({
         name: 'belongsTo',
         templateUrl: '/formlyTemplate/views/autocomplete.html',
-        link: function(scope, element, attrs) {
-
-
-        },//link function..
         controller: function($scope) {
             $scope.resetCreate   = resetCreate;
             $scope.showCreate = function(){
@@ -51,8 +47,6 @@ angular.module($snaphy.getModuleName())
 
         }
     });
-
-
 
     formlyConfig.setType({
         name: 'repeatSection',
@@ -125,6 +119,84 @@ angular.module($snaphy.getModuleName())
         }
     });
 
+    formlyConfig.setType({
+        name: 'arrayValue',
+        templateUrl: '/formlyTemplate/views/arrayTemplate.html',
+        link: function(scope, element, attrs){
+        },
+        controller: function($scope) {
+            var unique = 1;
+            $scope.formOptions = {formState: $scope.formState};
 
+            var methods = (function(){
+                function init(){
+                    //Initialize the methods..
+                    if($scope.model[$scope.options.key] === undefined){
+                        addNew();
+                    }else{
+                        if($scope.model[$scope.options.key].length === 0){
+                            //Add one data to the begining ..
+                            addNew();
+                        }
+                    }
+                }
+
+                function copyFields(fields) {
+                    fields = angular.copy(fields);
+                    addRandomIds(fields);
+                    return fields;
+                }
+
+                function addNew() {
+                    $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
+                    var repeatsection = $scope.model[$scope.options.key];
+                    var lastSection = repeatsection[repeatsection.length - 1];
+                    var newsection = {};
+                    if (lastSection) {
+                        newsection = angular.copy(lastSection);
+                    }
+                    repeatsection.push(newsection);
+                }
+
+                function addRandomIds(fields) {
+                    unique++;
+                    angular.forEach(fields, function(field, index) {
+                        if (field.fieldGroup) {
+                            addRandomIds(field.fieldGroup);
+                            return; // fieldGroups don't need an ID
+                        }
+                        if (field.templateOptions && field.templateOptions.fields) {
+                            addRandomIds(field.templateOptions.fields);
+                        }
+                        field.id = field.id || (field.key + '_' + index + '_' + unique + getRandomInt(0, 9999));
+                    });
+                }
+
+                function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min)) + min;
+                }
+
+                //call the constructor method..
+                init();
+
+                return{
+                    copyFields: copyFields,
+                    addNew: addNew
+                };
+
+            })();
+
+            $scope.addNew = methods.addNew;
+            $scope.copyFields = methods.copyFields;
+        }
+    });
+
+    formlyConfig.setType({
+        name: 'objectValue',
+        templateUrl: '/formlyTemplate/views/objectTemplate.html',
+        controller: function($scope) {
+
+        }
+    });
 
 }]);

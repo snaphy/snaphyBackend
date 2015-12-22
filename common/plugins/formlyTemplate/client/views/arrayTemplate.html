@@ -1,0 +1,24 @@
+<div style="margin-top:5px">
+    <!--ADDING A REPEATER FOR THE TEMPLATE SECTION-->
+    <!--http://angular-formly.com/#/example/advanced/repeating-section-->
+    <hr style="margin-top:10px; border-color:#ddd;">
+    <!--loop through each element in model array-->
+    <div style="margin-top:10px;" >
+        <div class="repeatsection" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
+            <formly-form fields="fields"
+                         model="element"
+                         form="form">
+            </formly-form>
+            <div style="margin-bottom:20px;">
+                <button type="button" class="btn btn-sm btn-danger" ng-click="model[options.key].splice($index, 1)">
+                    Remove {{to.model}}
+                </button>
+            </div>
+            <hr>
+        </div>
+        <div class="AddNewButton">
+            <button type="button"   class="btn btn-md btn-primary" ng-click="addNew()" >{{to.btnText}}</button>
+        </div>
+    </div>
+
+</div>
