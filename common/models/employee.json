@@ -177,14 +177,6 @@
   },
   "validations": [],
   "relations": {
-    "recipes": {
-      "type": "hasMany",
-      "model": "Recipe",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add recipes"
-      }
-    },
     "employeeDetails": {
       "type": "hasOne",
       "model": "EmployeeDetails",
@@ -193,6 +185,16 @@
         "searchProp": "address",
         "create": true,
         "btnText": "Add Employee Details"
+      }
+    },
+    "recipes": {
+      "type": "hasMany",
+      "model": "Recipe",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add recipes",
+        "searchProp": "name",
+        "create": true
       }
     }
   },

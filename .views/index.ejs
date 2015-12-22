@@ -225,31 +225,6 @@
           </div>
         </footer>
 
-        <!--ADDING A REPEATER FOR THE TEMPLATE SECTION-->
-        <!--http://angular-formly.com/#/example/advanced/repeating-section-->
-        <script type="text/ng-template" id="repeatSection.html">
-            <div>
-                <!--loop through each element in model array-->
-                <div class="{{hideRepeat}}">
-                    <div class="repeatsection" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
-                        <formly-form fields="fields"
-                                     model="element"
-                                     form="form">
-                        </formly-form>
-                        <div style="margin-bottom:20px;">
-                            <button type="button" class="btn btn-minw btn-danger" ng-click="model[options.key].splice($index, 1)">
-                                Remove
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-                    <p class="AddNewButton">
-                        <button type="button" class="btn btn-minw btn-primary" ng-click="addNew()" >{{to.btnText}}</button>
-                    </p>
-                </div>
-            </div>
-        </script>
-
 
 
         <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->

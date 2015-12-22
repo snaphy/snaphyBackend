@@ -30,7 +30,7 @@ angular.module($snaphy.getModuleName())
                 return $scope.create;
             };
 
-        
+
 
             function resetCreate(){
                 $timeout(function(){
@@ -51,6 +51,80 @@ angular.module($snaphy.getModuleName())
 
         }
     });
+
+
+
+    formlyConfig.setType({
+        name: 'repeatSection',
+        templateUrl: '/formlyTemplate/views/hasManyTemplate.html',
+        link: function(scope, element, attrs){
+            // var select = $(element).find('select.selectize');
+            // select = $(select[0]);
+            // var selectize = select.selectize;
+            // scope.addValue = function(obj, searchProp){
+            //     console.log(obj, searchProp);
+            //     selectize.addOption(obj);
+            //     selectize.addItem(searchProp);
+            // };
+        },
+        controller: function($scope) {
+
+            // $scope.$watch('model[$scope.options.key]', function() {
+            //     console.log("got changed");
+            //     if($scope.model[$scope.options.key]){
+            //         //On initialize add values to selectize forms..
+            //         if($scope.model[$scope.options.key].length){
+            //             //Add values to selectize forms.
+            //             $scope.model[$scope.options.key].forEach(function(obj, index){
+            //                 if(obj[$scope.to.searchProp]){
+            //                     $scope.addValue(obj, $scope.to.searchProp);
+            //                 }
+            //             });
+            //         }
+            //     }
+            // });
+
+            var unique = 1;
+            $scope.formOptions = {formState: $scope.formState};
+            $scope.addNew = addNew;
+            $scope.copyFields = copyFields;
+            function copyFields(fields) {
+                fields = angular.copy(fields);
+                addRandomIds(fields);
+                return fields;
+            }
+
+            function addNew() {
+                $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
+                var repeatsection = $scope.model[$scope.options.key];
+                var lastSection = repeatsection[repeatsection.length - 1];
+                var newsection = {};
+                if (lastSection) {
+                    newsection = angular.copy(lastSection);
+                }
+                repeatsection.push(newsection);
+            }
+
+            function addRandomIds(fields) {
+                unique++;
+                angular.forEach(fields, function(field, index) {
+                    if (field.fieldGroup) {
+                        addRandomIds(field.fieldGroup);
+                        return; // fieldGroups don't need an ID
+                    }
+                    if (field.templateOptions && field.templateOptions.fields) {
+                        addRandomIds(field.templateOptions.fields);
+                    }
+                    field.id = field.id || (field.key + '_' + index + '_' + unique + getRandomInt(0, 9999));
+                });
+            }
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+        }
+    });
+
 
 
 }]);

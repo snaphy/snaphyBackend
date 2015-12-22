@@ -1,28 +1,32 @@
-<hr >
-<div class="row" ng-if="!showCreate()" >
-    <div class="col-md-9 col-xs-12">
-        <autocomplete
-            placeholder="{{placeholder}}"
-            model-name="{{to.model}}"
-            search-property="{{to.searchProp}}"
-            value="model[options.key]">
-        </autocomplete>
-    </div>
-    <div class="AddNewButton col-md-3 col-xs-12">
-        <button type="button"  style="height:36px;"  class="btn btn-md btn-primary" ng-click="forceDisplay()" >{{to.btnText}}</button>
-    </div>
-</div>
-<div ng-if="showCreate()">
-    <div class="repeatsection" >
-        <formly-form fields="to.fields"
-                     model="model[options.key]"
-                     form="form">
-        </formly-form>
-        <div style="margin-bottom:20px;">
-            <button type="button" class="btn btn-sm btn-danger pull-right" ng-click="resetCreate()">
-                Remove {{to.model}}
-            </button>
+<hr style="border-color:#ddd;">
+<strong style="margin-left:2px; margin-top:5px;"><small>Add related data</small></strong>
+<div style="margin-top:10px;">
+    <div class="row" ng-if="!showCreate()" >
+        <div class="col-md-9 col-xs-12">
+            <autocomplete
+                placeholder="{{placeholder}}"
+                model-name="{{to.model}}"
+                search-property="{{to.searchProp}}"
+                value="model[options.key]">
+            </autocomplete>
         </div>
+        <div class="AddNewButton col-md-3 col-xs-12">
+            <button type="button"  style="height:36px;"  class="btn btn-md btn-primary" ng-click="forceDisplay()" >{{to.btnText}}</button>
+        </div>
+    </div>
+    <div ng-if="showCreate()">
+        <div class="repeatsection" >
+            <formly-form fields="to.fields"
+                         model="model[options.key]"
+                         form="form">
+            </formly-form>
+            <div style="margin-bottom:20px;">
+                <button type="button" class="btn btn-sm btn-danger " ng-click="resetCreate()">
+                    Remove {{to.model}}
+                </button>
+            </div>
+        </div>
+
     </div>
 
 </div>
