@@ -41,25 +41,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
         User.isAdmin = function(cb){
             var currentContext = loopback.getCurrentContext();
-            //bad documentation loopback..
-            //http://stackoverflow.com/questions/28194961/is-it-possible-to-get-the-current-user-s-roles-accessible-in-a-remote-method-in
-            //https://github.com/strongloop/loopback/issues/332
-            var context;
-            try{
-                 context = {principalType: RoleMapping.USER, principalId: currentContext.active.accessToken.userId};
-            }catch (err){
-                console.error("Error >> User not logged in. ");
-                context = {principalType: RoleMapping.USER, principalId: null};
-            }
-
-            //Now check the role if the context is admin.
-            Role.isInRole('admin', context, function(err, InRole){
-                if(err) throw err;
-                var result = InRole;
-                //Now return the boolean value..
-                cb(null, result);
-            });
+            isAdmin(server, currentContext, cb);
         };
+
 
 
         //Now defigning a method for checking if the user exist in the role.
@@ -73,6 +57,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     }, //Init..
 
 
+    isAdmin = function(app, currentContext, cb){
+        Role = app.models.Role;
+        RoleMapping = app.models.RoleMapping;
+        //bad documentation loopback..
+        //http://stackoverflow.com/questions/28194961/is-it-possible-to-get-the-current-user-s-roles-accessible-in-a-remote-method-in
+        //https://github.com/strongloop/loopback/issues/332
+        var context;
+        try{
+             context = {principalType: RoleMapping.USER, principalId: currentContext.active.accessToken.userId};
+        }catch (err){
+            console.error("Error >> User not logged in. ");
+            context = {principalType: RoleMapping.USER, principalId: null};
+        }
+
+        //Now check the role if the context is admin.
+        Role.isInRole('admin', context, function(err, InRole){
+            if(err) throw err;
+            var result = InRole;
+            //Now return the boolean value..
+            cb(null, result);
+        });
+    },
 
 
 
@@ -178,7 +184,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     return  {
         init: init,
         hideRestMethods: hideRestMethods,
-        addUserAdmin: addUserAdmin
+        addUserAdmin: addUserAdmin,
+        isAdmin: isAdmin
     };
 
 
