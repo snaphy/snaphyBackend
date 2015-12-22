@@ -318,6 +318,7 @@ angular.module($snaphy.getModuleName())
         };
 
 
+
         $scope.resetBackup = function(){
             backupData = {};
             $scope.saveFormData = {};

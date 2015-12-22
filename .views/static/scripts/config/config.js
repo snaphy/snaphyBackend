@@ -3,8 +3,6 @@
 
 angular.module($snaphy.getModuleName())
 
-
-
     /**
      Defigning templated for angular-formly.
      */
@@ -33,10 +31,6 @@ angular.module($snaphy.getModuleName())
 
 
 
-
-
-
-
         formlyConfig.setType({
             name: 'textarea',
             template:
@@ -59,6 +53,8 @@ angular.module($snaphy.getModuleName())
                 }
             }
         });
+
+
 
 
         formlyConfig.setType({
@@ -103,7 +99,5 @@ angular.module($snaphy.getModuleName())
 
             }
         });
-
-
 
     }]);//End Run

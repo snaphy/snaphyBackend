@@ -47,5 +47,9 @@
   "EmployeeDetails": {
     "dataSource": "db",
     "public": true
+  },
+  "container": {
+    "dataSource": "Image",
+    "public": true
   }
 }

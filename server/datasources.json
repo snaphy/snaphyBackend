@@ -22,5 +22,12 @@
         }
       }
     ]
+  },
+  "Image": {
+    "name": "Image",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/storage",
+    "maxFileSize": "10485760"
   }
 }

@@ -2,7 +2,9 @@
   "name": "formlyTemplate",
   "version": "1.0.0",
   "dependencies": {
-    "selectize": "https://github.com/brianreavis/selectize.js.git#~0.12.1"
+    "selectize": "https://github.com/brianreavis/selectize.js.git#~0.12.1",
+    "ng-file-upload-shim": "~10.1.11",
+    "ng-file-upload": "~10.1.11"
   },
   "devDependencies": {},
   "appPath": "client",
