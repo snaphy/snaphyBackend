@@ -27,7 +27,7 @@
     "name": "Image",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
-    "root": "./server/storage",
+    "root": "/home/robins/.storage",
     "maxFileSize": "10485760"
   }
 }

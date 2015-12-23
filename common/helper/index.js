@@ -79,6 +79,11 @@ module.exports = function(server) {
   }
 
 
+  function getServerFolder(){
+      return path.join(__dirname, '../../server/');
+  }
+
+
     /**
      * Find the database from the model-config.json and return the database with it datasource attached.
      * @param app Application object of loopback.
@@ -196,7 +201,7 @@ module.exports = function(server) {
     var packageObj = readPackageJsonFile(pluginPath);
     if( packageObj.activate ){
       var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      pluginValue = require(path.join(pluginContainerPath, pluginName.trim()) )(server, databaseObj, helper, packageObj );
+      pluginValue = require(path.join(MAIN_PLUGIN_FOLDER, pluginName.trim()) )(server, databaseObj, helper, packageObj );
     }
     return pluginValue;
   };//loadPlugin
@@ -212,7 +217,8 @@ module.exports = function(server) {
     loadPlugin: loadPlugin,
     getLoopbackObj: getLoopbackObj,
     getPluginRootDir: getPluginRootDir,
-    getModelPath: getModelPath
+    getModelPath: getModelPath,
+    getServerFolder: getServerFolder
 
   };
 

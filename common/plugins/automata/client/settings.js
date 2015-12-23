@@ -8,7 +8,7 @@
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
    "defaultTemplate": true,
-   loadDatabases:["Employee", "EmployeeDetails"]
+   loadDatabases:["Employee", "EmployeeDetails", "Recipe"]
 };
 
 

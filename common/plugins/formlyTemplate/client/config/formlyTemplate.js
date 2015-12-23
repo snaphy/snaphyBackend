@@ -52,31 +52,8 @@ angular.module($snaphy.getModuleName())
         name: 'repeatSection',
         templateUrl: '/formlyTemplate/views/hasManyTemplate.html',
         link: function(scope, element, attrs){
-            // var select = $(element).find('select.selectize');
-            // select = $(select[0]);
-            // var selectize = select.selectize;
-            // scope.addValue = function(obj, searchProp){
-            //     console.log(obj, searchProp);
-            //     selectize.addOption(obj);
-            //     selectize.addItem(searchProp);
-            // };
         },
         controller: function($scope) {
-
-            // $scope.$watch('model[$scope.options.key]', function() {
-            //     console.log("got changed");
-            //     if($scope.model[$scope.options.key]){
-            //         //On initialize add values to selectize forms..
-            //         if($scope.model[$scope.options.key].length){
-            //             //Add values to selectize forms.
-            //             $scope.model[$scope.options.key].forEach(function(obj, index){
-            //                 if(obj[$scope.to.searchProp]){
-            //                     $scope.addValue(obj, $scope.to.searchProp);
-            //                 }
-            //             });
-            //         }
-            //     }
-            // });
 
             var unique = 1;
             $scope.formOptions = {formState: $scope.formState};
@@ -194,9 +171,79 @@ angular.module($snaphy.getModuleName())
     formlyConfig.setType({
         name: 'objectValue',
         templateUrl: '/formlyTemplate/views/objectTemplate.html',
-        controller: function($scope) {
-
-        }
+        controller: ['$scope', function($scope) {} ]
     });
+
+
+    formlyConfig.setType({
+        name: 'singleFileUpload',
+        templateUrl: '/formlyTemplate/views/singleFileUpload.html',
+        link: function(scope, element, attrs){
+            // Randomize progress bars values
+            scope.addValue = function(value){
+                $(element)
+                    .find('.progress-bar')
+                    .each(function() {
+                        var $this   = jQuery(this);
+                        var $random =  value  + '%';
+                        $this.css('width', $random);
+                    });
+
+            };
+        },
+        controller: ['$scope', 'Upload',  '$timeout', function ($scope, Upload) {
+            var uploadUrl = "/api/containers/"  + $scope.options.templateOptions.containerName + "/upload";
+            // upload later on form submit or something similar
+            $scope.submit = function(form) {
+              if (form.file.$valid && $scope.file) {
+                $scope.upload($scope.file);
+              }
+            };
+
+            $scope.uploadFiles = function(file, errFiles) {
+                $scope.f = file;
+                $scope.errFile = errFiles && errFiles[0];
+                if (file) {
+                    file.upload = Upload.upload({
+                        url: uploadUrl,
+                        data: {file: file}
+                    });
+
+                    file.upload.then(function (response) {
+                        $timeout(function () {
+                            file.result = response.data;
+                        });
+                    }, function (response) {
+                        if (response.status > 0)
+                            $scope.errorMsg = response.status + ': ' + response.data;
+                    }, function (evt) {
+                        file.progress = Math.min(100, parseInt(100.0 *
+                                                 evt.loaded / evt.total));
+                        $scope.addValue(file.progress);
+                    });
+                }
+            };
+
+            // upload on file select or drop
+            $scope.upload = function (file) {
+                Upload.upload({
+                    url: "/api/containers/"  + $scope.options.templateOptions.containerName + "/upload",
+                    data: {file: file}
+                }).then(function (resp) {
+                    console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                    resp.data.result.files.file.forEach(function(fileName, index){
+                        console.log(fileName);
+                    });
+                }, function (resp) {
+                    console.log('Error status: ' + resp.status);
+                }, function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    $scope.addValue(progressPercentage);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                });
+            };
+        }]
+    });
+
 
 }]);

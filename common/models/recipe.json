@@ -50,7 +50,14 @@
     },
     "mainImage": {
       "type": "string",
-      "required": false
+      "required": false,
+      "template":{
+          "type": "singleFileUpload",
+          "templateOptions":{
+            "label": "Add recipe cover image",
+            "containerName": "recipes"
+          }
+      }
     }
   },
   "validations": [],
