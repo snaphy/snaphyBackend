@@ -176,7 +176,7 @@ angular.module($snaphy.getModuleName())
 
 
     formlyConfig.setType({
-        name: 'singleFileUpload',
+        name: 'multipleFileUpload',
         templateUrl: '/formlyTemplate/views/singleFileUpload.html',
         link: function(scope, element, attrs){
             // Randomize progress bars values
@@ -191,8 +191,31 @@ angular.module($snaphy.getModuleName())
 
             };
         },
-        controller: ['$scope', 'Upload',  '$timeout', function ($scope, Upload) {
-            var uploadUrl = "/api/containers/"  + $scope.options.templateOptions.containerName + "/upload";
+        controller: ['$scope', 'Upload',  '$timeout', '$http', 'Database', function ($scope, Upload, $timeout, $http, Database) {
+            //Initialize the model..
+            $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
+
+            var dbService;
+            var url;
+            if($scope.options.templateOptions.containerModel){
+                console.log($scope.options.templateOptions.containerModel);
+                dbService = Database.loadDb($scope.options.templateOptions.containerModel);
+            }
+            else if($scope.options.templateOptions.url){
+                url = $scope.options.templateOptions.url;
+            }
+            else{
+                console.error("Either url property of containerModel is required in formly templateOptions for image uploading");
+            }
+            var uploadUrl;
+            if(dbService){
+                uploadUrl = "/api/containers/"  + $scope.options.templateOptions.containerName + "/upload";
+
+            }else{
+                uploadUrl = url.upload;
+            }
+
+
             // upload later on form submit or something similar
             $scope.submit = function(form) {
               if (form.file.$valid && $scope.file) {
@@ -200,10 +223,15 @@ angular.module($snaphy.getModuleName())
               }
             };
 
-            $scope.uploadFiles = function(file, errFiles) {
+            $scope.uploadFiles = function($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event) {
+                //First initialize progress bar to zero..
+                $scope.addValue(0);
+                var file = $newFiles[0];
                 $scope.f = file;
+                var errFiles = $invalidFiles;
                 $scope.errFile = errFiles && errFiles[0];
-                if (file) {
+                //Only upload file if it is not a duplicate file..
+                if (file && $duplicateFiles.length === 0 && errFiles.length === 0) {
                     file.upload = Upload.upload({
                         url: uploadUrl,
                         data: {file: file}
@@ -212,36 +240,70 @@ angular.module($snaphy.getModuleName())
                     file.upload.then(function (response) {
                         $timeout(function () {
                             file.result = response.data;
+                            //Adding data to the model.
+                            $scope.model[$scope.options.key].push(file.result.result.files.file[0]);
                         });
                     }, function (response) {
                         if (response.status > 0)
                             $scope.errorMsg = response.status + ': ' + response.data;
                     }, function (evt) {
-                        file.progress = Math.min(100, parseInt(100.0 *
-                                                 evt.loaded / evt.total));
-                        $scope.addValue(file.progress);
+                        $timeout(function () {
+                            file.progress = Math.min(100, parseInt(100.0 *
+                                                     evt.loaded / evt.total));
+                            $scope.addValue(file.progress);
+                        }, 10);
                     });
                 }
             };
 
-            // upload on file select or drop
-            $scope.upload = function (file) {
-                Upload.upload({
-                    url: "/api/containers/"  + $scope.options.templateOptions.containerName + "/upload",
-                    data: {file: file}
-                }).then(function (resp) {
-                    console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-                    resp.data.result.files.file.forEach(function(fileName, index){
-                        console.log(fileName);
-                    });
-                }, function (resp) {
-                    console.log('Error status: ' + resp.status);
-                }, function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    $scope.addValue(progressPercentage);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                });
+            //Delete the given image...
+            $scope.deleteImage = function(files, index){
+                var backUpFile = files[index];
+                if(backUpFile.result){
+                    var fileName      = backUpFile.result.result.files.file[0].name;
+                    var containerName = $scope.options.templateOptions.containerName;
+                    var filePath      = '/api/containers/'+  containerName +  '/files/' + fileName;
+                    //Now remove the file
+                    files.splice(index, 1);
+                    $scope.model[$scope.options.key].splice(index, 1);
+                    console.log(backUpFile);
+                    // Simple DELETE request example:
+                    console.log(filePath);
+
+                    if(dbService){
+                        dbService.removeFile({
+                            container:containerName,
+                            file: fileName
+                        }, function(values){
+                            console.log("file successfully deleted");
+                        }, function(err){
+                            console.error("error deleting file." );
+                            console.error(err);
+                            //Add backup file ..
+                            files.push(backUpFile);
+                            $scope.model[$scope.options.key].push(backUpFile.result.result.files.file[0]);
+                        });
+                    }else{
+                        $http({
+                          method: 'DELETE',
+                          url: url.delete,
+                        }).then(function successCallback(response) {
+                            console.log("File successfully deleted.");
+                          }, function errorCallback(response) {
+                            console.log(response);
+                            //Add backup file ..
+                            files.push(backUpFile);
+                        });
+                    }
+
+                }
+                else{
+                    //simply remove the file
+                    files.splice(index, 1);
+                    $scope.model[$scope.options.key].splice(index, 1);
+                }
             };
+
         }]
     });
 

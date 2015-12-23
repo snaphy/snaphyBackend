@@ -49,16 +49,27 @@
       "type": "string"
     },
     "mainImage": {
-      "type": "string",
+      "type": "object",
       "required": false,
       "template":{
-          "type": "singleFileUpload",
+          "type": "multipleFileUpload",
           "templateOptions":{
             "label": "Add recipe cover image",
-            "containerName": "recipes"
+            "containerName": "recipes",
+            "containerModel":"Container",
+            "url":{
+                "upload":"",
+                "delete":""
+            },
+            "bind":true
           }
       }
     }
+  },
+  "tables":{
+      "mainImage":{
+          "display" : false
+      }
   },
   "validations": [],
   "relations": {

@@ -246,11 +246,11 @@
                     </ul>
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
-
+                {{saveFormData}}
                 <div ng-if="schema.validations" class="block-content block-content-narrow">
                     <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
-                            
+
                         </formly-form>
                     </form>
                 </div><!--block-content-->

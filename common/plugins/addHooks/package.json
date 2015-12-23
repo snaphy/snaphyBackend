@@ -1,0 +1,34 @@
+{
+  "name": "addHooks",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "Plugin for adding different hooks to models based on some property.",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/addHooks",
+  "staticFiles": {
+    "css": {},
+    "js": { },
+    "moduleDependencies":{},
+    "settings": ""
+  },
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+
+  }
+}
