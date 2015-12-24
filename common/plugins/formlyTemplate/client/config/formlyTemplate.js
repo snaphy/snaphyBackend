@@ -177,7 +177,7 @@ angular.module($snaphy.getModuleName())
 
     formlyConfig.setType({
         name: 'multipleFileUpload',
-        templateUrl: '/formlyTemplate/views/singleFileUpload.html',
+        templateUrl: '/formlyTemplate/views/multiFileUpload.html',
         link: function(scope, element, attrs){
             // Randomize progress bars values
             scope.addValue = function(value){
@@ -190,15 +190,17 @@ angular.module($snaphy.getModuleName())
                     });
 
             };
+
         },
         controller: ['$scope', 'Upload',  '$timeout', '$http', 'Database', function ($scope, Upload, $timeout, $http, Database) {
             //Initialize the model..
-            $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
+            $scope.model[$scope.options.key] =  $scope.model[$scope.options.key] || [];
+            $scope.files = [];
+
 
             var dbService;
             var url;
             if($scope.options.templateOptions.containerModel){
-                console.log($scope.options.templateOptions.containerModel);
                 dbService = Database.loadDb($scope.options.templateOptions.containerModel);
             }
             else if($scope.options.templateOptions.url){
@@ -214,6 +216,104 @@ angular.module($snaphy.getModuleName())
             }else{
                 uploadUrl = url.upload;
             }
+
+
+            $scope.checkData = function(){
+                if($scope.files.length){
+                    if($scope.model[$scope.options.key]=== undefined){
+                        $scope.model[$scope.options.key] = [];
+                    }
+                    
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            };
+
+            var sync = function(files, modelArr){
+                $timeout(function(){
+                    if(files.length !== modelArr.length){
+                        //Now start sync.
+                        //remove from file if not present in the model..
+                        files.forEach(function(file, index){
+                            for(var key in file){
+                                if(file.hasOwnProperty(key)){
+                                    console.log(key);
+                                }
+                            }
+                            if(file.result){
+                                console.log("i am also here");
+                                var fileFound = false;
+                                for(var i=0; i<modelArr.length; i++){
+                                    var model = modelArr[i];
+                                    if(model.name === file.result.name){
+                                        fileFound = true;
+                                        break;
+                                    }
+                                }//for
+                                if(!fileFound){
+                                    //remove the file..
+                                    files.splice(index, 1);
+                                }
+                            }
+                        });
+                    }
+                }, 20);
+            };
+
+
+            $scope.prepareUrl = function(file){
+                if(file.result){
+                    //Check if file really has one params..
+                    var count = 0;
+                    for(var key in file){
+                        if(file.hasOwnProperty(key)){
+                            count++;
+                        }
+                    }
+                    if(count === 2){
+                        url = "/api/containers/" + file.result.container + "/download/" + file.result.name;
+                        console.log(url);
+                        return url;
+                    }
+
+                }
+                return ;
+
+            };
+
+            $scope.$watch('model[options.key].length', function(value){
+                if($scope.model[$scope.options.key]){
+                    $scope.model[$scope.options.key].forEach(function(modelData, index){
+                        if($scope.files.length !== 0){
+                            var matchFound = false;
+                            $scope.files.forEach(function(dataObj, index){
+                                if(dataObj.result.name === modelData.name){
+                                    matchFound = true;
+                                }
+                            });
+                            if(!matchFound){
+                                $scope.files.push({
+                                    result: modelData
+                                });
+                            }
+                        }else{
+                            $scope.files.push({
+                                result: modelData
+                            });
+                        }
+                    }); //model loop
+                }else{
+                    //Clean files data too..
+                    $scope.files = [];
+                }
+            });//$watch
+
+
+
+
+
 
 
             // upload later on form submit or something similar
@@ -239,9 +339,12 @@ angular.module($snaphy.getModuleName())
 
                     file.upload.then(function (response) {
                         $timeout(function () {
-                            file.result = response.data;
+                            file.result = response.data.result.files.file[0];
+                            if($scope.model[$scope.options.key] === undefined){
+                                $scope.model[$scope.options.key] = [];
+                            }
                             //Adding data to the model.
-                            $scope.model[$scope.options.key].push(file.result.result.files.file[0]);
+                            $scope.model[$scope.options.key].push(file.result);
                         });
                     }, function (response) {
                         if (response.status > 0)
@@ -260,7 +363,7 @@ angular.module($snaphy.getModuleName())
             $scope.deleteImage = function(files, index){
                 var backUpFile = files[index];
                 if(backUpFile.result){
-                    var fileName      = backUpFile.result.result.files.file[0].name;
+                    var fileName      = backUpFile.result.name;
                     var containerName = $scope.options.templateOptions.containerName;
                     var filePath      = '/api/containers/'+  containerName +  '/files/' + fileName;
                     //Now remove the file
@@ -281,7 +384,7 @@ angular.module($snaphy.getModuleName())
                             console.error(err);
                             //Add backup file ..
                             files.push(backUpFile);
-                            $scope.model[$scope.options.key].push(backUpFile.result.result.files.file[0]);
+                            $scope.model[$scope.options.key].push(backUpFile.result);
                         });
                     }else{
                         $http({

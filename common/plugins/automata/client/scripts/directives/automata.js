@@ -36,6 +36,25 @@ angular.module($snaphy.getModuleName())
 
 
 
+//On save modal close..reset the form..
+.directive('onModalClose', ['$timeout', function($timeout) {
+  return {
+    restrict: 'A',
+    link: function(scope, iElement, iAttrs) {
+        $(iElement).on('hidden.bs.modal', function () {
+            //Reset the data..
+            if(scope.resetSavedForm){
+                $timeout(function(){
+                    scope.resetSavedForm(scope.schema.form);
+                }, 10);
+            }
+        });
+    } //End of Link function...
+  }; // End of return
+}])
+
+
+
 /**
  *Directive for defining filters $date
  * */

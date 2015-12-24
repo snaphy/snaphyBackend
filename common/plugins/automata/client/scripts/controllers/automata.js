@@ -132,9 +132,14 @@ angular.module($snaphy.getModuleName())
 
 
         var resetSavedForm = function(form){
+
             $scope.saveFormData = {};
-            form.$setPristine();
+            if(form){
+                form.$setPristine();
+            }
         };
+
+        $scope.resetSavedForm = resetSavedForm;
 
 
         $scope.enableButton = function(form){
@@ -181,7 +186,10 @@ angular.module($snaphy.getModuleName())
          * @param  {[type]} data [description]
          * @return {[type]}           [description]
          */
-        $scope.prepareDataForEdit = function(data) {
+        $scope.prepareDataForEdit = function(data, form) {
+            //console.log(form);
+            //First reset the previous data..
+            resetSavedForm(form);
             //Firsst create a backup of the the data in case of rollback changes/cancel
             backupData = angular.copy(data);
             $scope.saveFormData = data;

@@ -37,7 +37,7 @@
 
 
         <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" style="cursor:pointer" data-toggle="modal" data-target="#addDataModal" >
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" ng-click="resetSavedForm(schema.form)"  data-toggle="modal" data-target="#addDataModal" >
                 <table class="block-table text-center">
                     <tbody>
                         <tr>
@@ -150,7 +150,7 @@
                                     <!-- For adding table edit and delete options. -->
                                     <td  class="text-center">
                                         <div class="btn-group">
-                                            <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject)"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject, schema.form)"><i class="fa fa-pencil"></i></button>
                                             <button
                                             class="btn btn-xs btn-default"
                                             type="button"
@@ -234,7 +234,7 @@
 </div>
 
 <!-- Fade In Modal -->
-<div  class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div on-modal-close class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="block block-themed block-transparent remove-margin-b">
@@ -256,7 +256,8 @@
                 </div><!--block-content-->
             </div>
             <div class="modal-footer">
-                <button data-target="#addDataModal"  class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                <button data-target="#addDataModal"  class="btn btn-sm btn-default"  type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-sm btn-default" type="button" ng-click="resetSavedForm(schema.form)">Reset data</button>
                 <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal" data-target="#addDataModal"><i class="fa fa-save"></i> Save</button>
                 <button ng-disabled="!enableButton(schema.form)" type="submit" class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
                   <i class="fa fa-save"></i> Save and add another

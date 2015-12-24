@@ -1,6 +1,5 @@
 <div>
     <form  name="form">
-
         <button
             style="width:100%"
             class="btn btn-md btn-primary"
@@ -12,7 +11,7 @@
             ng-model="files"
             ngf-max-size="10MB"
             ngf-keep="'distinct'">
-        {{to.label}}
+            {{to.label}}
         </button>
         <br><br>
         <div ng-if="errFile.$error" class="alert alert-danger alert-dismissable">
@@ -25,11 +24,11 @@
             </div>
         </div>
         <!-- Image Zoom In -->
-
-        <div ng-if="files.length" class="row items-push">
+        {{files}}
+        <div ng-if="checkData()" class="row items-push">
             <div class="col-lg-6 animated fadeIn" ng-repeat="file in files" >
                 <div class="img-container fx-img-zoom-in">
-                    <img ngf-thumbnail="file" class="img-responsive"  alt="">
+                    <img ngf-src="file" class="img-responsive"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">
                             <a ng-click="deleteImage(files, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>
