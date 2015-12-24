@@ -3,8 +3,8 @@
 angular.module($snaphy.getModuleName())
 
 // Controller for automataControl ..
-.controller('automataControl', ['$scope', '$state', 'Database', 'SnaphyTemplate',
-    function($scope, $state, Database, SnaphyTemplate) {
+.controller('automataControl', ['$scope', '$state', 'Database', 'SnaphyTemplate', '$timeout',
+    function($scope, $state, Database, SnaphyTemplate, $timeout) {
 
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('automata', "defaultTemplate");
@@ -203,12 +203,11 @@ angular.module($snaphy.getModuleName())
                     /*Do nothing..*/
                     //Reset the disloag bar..
                     $scope.dialog.show = false;
-                    console.log("Go clicked");
                 },
                 onConfirm: function(){
                     var mainArrayIndex = getArrayIndex($scope.dataValues, data.id);
                     var oldDeletedData = $scope.dataValues[mainArrayIndex];
-
+                    //console.log(data);
 
                     //Reset the disloag bar..
                     $scope.dialog.show = false;
@@ -223,8 +222,10 @@ angular.module($snaphy.getModuleName())
                             align: 'right'
                         });
                     }, function(respHeader){
-                        //Attach the data again..
-                        // $scope.dataValues.push(oldDeletedData);
+                        $timeout(function () {
+                            //Attach the data again..
+                            $scope.dataValues.push(oldDeletedData);
+                        }, 10);
 
                         console.error(respHeader);
                         SnaphyTemplate.notify({
@@ -236,8 +237,6 @@ angular.module($snaphy.getModuleName())
                     });
                     //Now delete the data..
                     $scope.dataValues.splice(mainArrayIndex, 1);
-                    //Now delete the data..
-                    console.log($scope.dataValues);
 
                 },
                 show:true
@@ -369,13 +368,14 @@ angular.module($snaphy.getModuleName())
 
                 //create a copy of the data..
                 var savedData = angular.copy(formModel);
+                var positionNewData;
                 var update;
                 if(formModel.id){
                     update = true;
 
                 }
                 else{
-                    var positionNewData = $scope.dataValues.length;
+                    positionNewData = $scope.dataValues.length;
                     //First add to the table..
                     $scope.dataValues.push(savedData);
                     update = false;
@@ -384,10 +384,9 @@ angular.module($snaphy.getModuleName())
 
                 //Now save||update the database with baseDatabase method.
                 baseDatabase.save({}, requestData, function(baseModel){
-                    console.log(baseModel);
                     if(!update){
                         //Now update the form with id.
-                        $scope.dataValues[positionNewData].id = baseModel.id;
+                        $scope.dataValues[positionNewData].id = baseModel.data.id;
                     }
                     SnaphyTemplate.notify({
                         message: "Data successfully saved.",
