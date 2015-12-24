@@ -223,7 +223,7 @@ angular.module($snaphy.getModuleName())
                     if($scope.model[$scope.options.key]=== undefined){
                         $scope.model[$scope.options.key] = [];
                     }
-                    
+
                     return true;
                 }
                 else{
@@ -231,39 +231,8 @@ angular.module($snaphy.getModuleName())
                 }
             };
 
-            var sync = function(files, modelArr){
-                $timeout(function(){
-                    if(files.length !== modelArr.length){
-                        //Now start sync.
-                        //remove from file if not present in the model..
-                        files.forEach(function(file, index){
-                            for(var key in file){
-                                if(file.hasOwnProperty(key)){
-                                    console.log(key);
-                                }
-                            }
-                            if(file.result){
-                                console.log("i am also here");
-                                var fileFound = false;
-                                for(var i=0; i<modelArr.length; i++){
-                                    var model = modelArr[i];
-                                    if(model.name === file.result.name){
-                                        fileFound = true;
-                                        break;
-                                    }
-                                }//for
-                                if(!fileFound){
-                                    //remove the file..
-                                    files.splice(index, 1);
-                                }
-                            }
-                        });
-                    }
-                }, 20);
-            };
 
-
-            $scope.prepareUrl = function(file){
+            $scope.loadFromServer = function(file){
                 if(file.result){
                     //Check if file really has one params..
                     var count = 0;
@@ -273,15 +242,20 @@ angular.module($snaphy.getModuleName())
                         }
                     }
                     if(count === 2){
-                        url = "/api/containers/" + file.result.container + "/download/" + file.result.name;
-                        console.log(url);
-                        return url;
+                        return true;
+                    }else{
+                        return false;
                     }
 
                 }
-                return ;
-
+                return false;
             };
+
+            $scope.loadUrl = function(file){
+                var url = "/api/containers/" + file.result.container +  "/download/" + file.result.name ;
+                return url;
+            };
+
 
             $scope.$watch('model[options.key].length', function(value){
                 if($scope.model[$scope.options.key]){
