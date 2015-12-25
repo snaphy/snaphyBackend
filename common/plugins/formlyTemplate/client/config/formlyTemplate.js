@@ -241,18 +241,19 @@ angular.module($snaphy.getModuleName())
                             count++;
                         }
                     }
-                    if(count === 2){
+
+                    
+                    if(count <= 4){
                         return true;
                     }else{
                         return false;
                     }
-
                 }
                 return false;
             };
 
             $scope.loadUrl = function(file){
-                var url = "/api/containers/" + file.result.container +  "/download/" + file.result.name ;
+                var url = "/api/containers/" + file.result.container +  "/download/" + file.result.name;
                 return url;
             };
 
@@ -378,6 +379,209 @@ angular.module($snaphy.getModuleName())
                     //simply remove the file
                     files.splice(index, 1);
                     $scope.model[$scope.options.key].splice(index, 1);
+                }
+            };
+
+        }]
+    });
+
+
+
+    formlyConfig.setType({
+        name: 'singleFileUpload',
+        templateUrl: '/formlyTemplate/views/singleFileUpload.html',
+        link: function(scope, element, attrs){
+            // Randomize progress bars values
+            scope.addValue = function(value){
+                $(element)
+                    .find('.progress-bar')
+                    .each(function() {
+                        var $this   = jQuery(this);
+                        var $random =  value  + '%';
+                        $this.css('width', $random);
+                    });
+
+            };
+
+        },
+
+
+        controller: ['$scope', 'Upload',  '$timeout', '$http', 'Database', function ($scope, Upload, $timeout, $http, Database) {
+            //Initialize the model..
+            $scope.model[$scope.options.key] =  $scope.model[$scope.options.key] || {};
+            $scope.file = {};
+
+            var dbService;
+            var url;
+            if($scope.options.templateOptions.containerModel){
+                dbService = Database.loadDb($scope.options.templateOptions.containerModel);
+            }
+            else if($scope.options.templateOptions.url){
+                url = $scope.options.templateOptions.url;
+            }
+            else{
+                console.error("Either url property of containerModel is required in formly templateOptions for image uploading");
+            }
+            var uploadUrl;
+            if(dbService){
+                uploadUrl = "/api/containers/"  + $scope.options.templateOptions.containerName + "/upload";
+            }else{
+                uploadUrl = url.upload;
+            }
+
+
+            $scope.checkData = function(){
+                if($scope.file){
+                    if($scope.model[$scope.options.key]=== undefined){
+                        $scope.model[$scope.options.key] = {};
+                    }
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            };
+
+
+            $scope.loadFromServer = function(file){
+                if(file.result){
+                    //Check if file really has one params..
+                    var count = 0;
+                    for(var key in file){
+                        if(file.hasOwnProperty(key)){
+                            count++;
+                        }
+                    }
+                    if(count === 3){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+                return false;
+            };
+
+            $scope.loadUrl = function(file){
+                var url = "/api/containers/" + file.result.container +  "/download/" + file.result.name;
+                return url;
+            };
+
+
+            $scope.$watch('model[options.key]', function(value){
+                if(!$.isEmptyObject($scope.model[$scope.options.key])){
+                    var modelData = $scope.model[$scope.options.key];
+                    if($.isEmptyObject($scope.file)){
+                        //Just add the data..
+                        $scope.file = $scope.file || {};
+                        $scope.file.result = modelData;
+                    }
+                    else{
+                        if($scope.file.result){
+                            if($scope.file.result.name !== modelData.name){
+                                $scope.file = {};
+                                $scope.file.result = modelData;
+                            }
+                        }else{
+                            $scope.file = $scope.file || {};
+                            $scope.file.result = modelData;
+                        }
+                    }
+                }else{
+                    //Clean files data too..
+                    $scope.file = {};
+                }
+            });//$watch
+
+
+
+            $scope.uploadFiles = function($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event) {
+                if($newFiles === null){
+                    return false;
+                }
+                console.log($files);
+
+                //First initialize progress bar to zero..
+                $scope.addValue(0);
+                var file = $newFiles[0];
+                $scope.file = file;
+                var errFiles = $invalidFiles;
+                $scope.errFile = errFiles && errFiles[0];
+                //Only upload file if it is not a duplicate file..
+                if (file && $duplicateFiles.length === 0 && errFiles.length === 0) {
+                    file.upload = Upload.upload({
+                        url: uploadUrl,
+                        data: {file: file}
+                    });
+
+                    file.upload.then(function (response) {
+                        $timeout(function () {
+                            file.result = response.data.result.files.file[0];
+                            if($scope.model[$scope.options.key] === undefined){
+                                $scope.model[$scope.options.key] = {};
+                            }
+                            //Adding data to the model.
+                            $scope.model[$scope.options.key] = file.result;
+                        });
+                    }, function (response) {
+                        if (response.status > 0)
+                            $scope.errorMsg = response.status + ': ' + response.data;
+                    }, function (evt) {
+                        $timeout(function () {
+                            file.progress = Math.min(100, parseInt(100.0 *
+                                                     evt.loaded / evt.total));
+                            $scope.addValue(file.progress);
+                        }, 10);
+                    });
+                }
+            };
+
+            //Delete the given image...
+            $scope.deleteImage = function(file){
+                var backUpFile = angular.copy(file);
+                if(backUpFile.result){
+                    var fileName      = backUpFile.result.name;
+                    var containerName = $scope.options.templateOptions.containerName;
+                    var filePath      = '/api/containers/'+  containerName +  '/files/' + fileName;
+                    //Now remove the file
+                    file = {};
+                    $scope.model[$scope.options.key] = {};
+                    console.log(backUpFile);
+                    // Simple DELETE request example:
+                    console.log(filePath);
+
+                    if(dbService){
+                        dbService.removeFile({
+                            container:containerName,
+                            file: fileName
+                        }, function(values){
+                            console.log("file successfully deleted");
+                        }, function(err){
+                            console.error("error deleting file." );
+                            console.error(err);
+                            $timeout(function(){
+                                //Add backup file ..
+                                $scope.file = backUpFile;
+                                $scope.model[$scope.options.key] = backUpFile.result;
+                            }, 0);
+                        });
+                    }else{
+                        $http({
+                          method: 'DELETE',
+                          url: url.delete,
+                        }).then(function successCallback(response) {
+                            console.log("File successfully deleted.");
+                          }, function errorCallback(response) {
+                            console.log(response);
+                            //Add backup file ..
+                            $scope.file = backUpFile;
+                        });
+                    }
+
+                }
+                else{
+                    //simply remove the file
+                    files = {};
+                    $scope.model[$scope.options.key] = {};
                 }
             };
 

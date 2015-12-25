@@ -8,9 +8,8 @@
             accept="image/*"
             ngf-pattern="'image/*'"
             ngf-min-height="300"
-            ng-model="files"
-            ngf-max-size="10MB"
-            ngf-keep="'distinct'">
+            ng-model="file"
+            ngf-max-size="10MB">
             {{to.label}}
         </button>
         <br><br>
@@ -25,21 +24,20 @@
         </div>
         <!-- Image Zoom In -->
         <div ng-if="checkData()" class="row items-push">
-            <div class="col-lg-6 animated fadeIn" ng-repeat="file in files" >
+            <div class="col-lg-12 animated fadeIn" >
                 <div ng-if="!loadFromServer(file)" class="img-container fx-img-zoom-in">
                     <img ngf-src="file" class="img-responsive"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">
-                            <a ng-click="deleteImage(files, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>
+                            <a ng-click="deleteImage(file, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>
                         </div>
                     </div>
                 </div>
-
                 <div ng-if="loadFromServer(file)" class="img-container fx-img-zoom-in">
                     <img ngf-src="loadUrl(file)" class="img-responsive"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">
-                            <a ng-click="deleteImage(files, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>
+                            <a ng-click="deleteImage(file, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>
                         </div>
                     </div>
                 </div>

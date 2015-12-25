@@ -8,18 +8,18 @@
   "routeExposure": "/formlyTemplate",
   "staticFiles": {
     "css": {
-        "selectize"          : "/formlyTemplate/style/bower_components/selectize/dist/css/selectize.default.css",
-        "formlyTemplatesCss" : "/formlyTemplate/style/formlyTemplate.css"
-      },
+      "selectize": "/formlyTemplate/style/bower_components/selectize/dist/css/selectize.default.css",
+      "formlyTemplatesCss": "/formlyTemplate/style/formlyTemplate.css"
+    },
     "js": {
       "formlyTemplateDirectives": "/formlyTemplate/scripts/directives/formlyTemplate.js",
-       "formlyTemplateServices" : "/formlyTemplate/scripts/services/formlyTemplate.js",
-       "selectize"              : "/formlyTemplate/style/bower_components/selectize/dist/js/standalone/selectize.min.js",
-       "formlyTemplateConfig"   : "/formlyTemplate/config/formlyTemplate.js",
-       "ng-file-upload-shim"    : "/formlyTemplate/style/bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"
+      "formlyTemplateServices": "/formlyTemplate/scripts/services/formlyTemplate.js",
+      "selectize": "/formlyTemplate/style/bower_components/selectize/dist/js/standalone/selectize.min.js",
+      "formlyTemplateConfig": "/formlyTemplate/config/formlyTemplate.js",
+      "ng-file-upload-shim": "/formlyTemplate/style/bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"
     },
-    "moduleDependencies":{
-        "ngFileUpload" : "/formlyTemplate/style/bower_components/ng-file-upload/ng-file-upload.min.js" 
+    "moduleDependencies": {
+      "ngFileUpload": "/formlyTemplate/style/bower_components/ng-file-upload/ng-file-upload.min.js"
     },
     "settings": "/formlyTemplate/settings.js"
   },
@@ -27,19 +27,17 @@
     "asidebarHook": [],
     "sidebarHook": [],
     "headerHook": [],
-    "footerHook":[]
+    "footerHook": []
   },
-  "databases": {
-  },
+  "databases": {},
   "activate": true,
   "services": {},
-  "dependencies": {},
+  "dependencies": {
+  },
   "optionalDependencies": {},
   "repository": {
     "type": "",
     "url": ""
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
