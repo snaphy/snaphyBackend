@@ -241,8 +241,6 @@ angular.module($snaphy.getModuleName())
                             count++;
                         }
                     }
-
-                    
                     if(count <= 4){
                         return true;
                     }else{
@@ -251,6 +249,7 @@ angular.module($snaphy.getModuleName())
                 }
                 return false;
             };
+
 
             $scope.loadUrl = function(file){
                 var url = "/api/containers/" + file.result.container +  "/download/" + file.result.name;
@@ -287,17 +286,6 @@ angular.module($snaphy.getModuleName())
 
 
 
-
-
-
-
-            // upload later on form submit or something similar
-            $scope.submit = function(form) {
-              if (form.file.$valid && $scope.file) {
-                $scope.upload($scope.file);
-              }
-            };
-
             $scope.uploadFiles = function($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event) {
                 //First initialize progress bar to zero..
                 $scope.addValue(0);
@@ -318,12 +306,28 @@ angular.module($snaphy.getModuleName())
                             if($scope.model[$scope.options.key] === undefined){
                                 $scope.model[$scope.options.key] = [];
                             }
+
                             //Adding data to the model.
                             $scope.model[$scope.options.key].push(file.result);
                         });
+                        SnaphyTemplate.notify({
+                            message: "Image successfully saved to server.",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
+
                     }, function (response) {
-                        if (response.status > 0)
+                        if (response.status > 0){
+                            SnaphyTemplate.notify({
+                                message: "Error saving image to server. Please remove that image and try again.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
                             $scope.errorMsg = response.status + ': ' + response.data;
+                        }
+
                     }, function (evt) {
                         $timeout(function () {
                             file.progress = Math.min(100, parseInt(100.0 *
@@ -354,8 +358,21 @@ angular.module($snaphy.getModuleName())
                             file: fileName
                         }, function(values){
                             console.log("file successfully deleted");
+                            SnaphyTemplate.notify({
+                                message: "Image successfully deleted from server.",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
+
                         }, function(err){
                             console.error("error deleting file." );
+                            SnaphyTemplate.notify({
+                                message: "Error deleting image from server. Please try again.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
                             console.error(err);
                             //Add backup file ..
                             files.push(backUpFile);
@@ -367,8 +384,20 @@ angular.module($snaphy.getModuleName())
                           url: url.delete,
                         }).then(function successCallback(response) {
                             console.log("File successfully deleted.");
+                            SnaphyTemplate.notify({
+                                message: "Image successfully deleted from server.",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
                           }, function errorCallback(response) {
                             console.log(response);
+                            SnaphyTemplate.notify({
+                                message: "Error deleting image from server. Please try again.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
                             //Add backup file ..
                             files.push(backUpFile);
                         });
@@ -522,9 +551,23 @@ angular.module($snaphy.getModuleName())
                             //Adding data to the model.
                             $scope.model[$scope.options.key] = file.result;
                         });
+                        SnaphyTemplate.notify({
+                            message: "Image successfully saved to server.",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
                     }, function (response) {
-                        if (response.status > 0)
+                        if (response.status > 0){
+                            SnaphyTemplate.notify({
+                                message: "Error saving image to server. Please remove the image and try again.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
                             $scope.errorMsg = response.status + ': ' + response.data;
+                        }
+
                     }, function (evt) {
                         $timeout(function () {
                             file.progress = Math.min(100, parseInt(100.0 *
@@ -555,6 +598,12 @@ angular.module($snaphy.getModuleName())
                             file: fileName
                         }, function(values){
                             console.log("file successfully deleted");
+                            SnaphyTemplate.notify({
+                                message: "Image successfully deleted from server.",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
                         }, function(err){
                             console.error("error deleting file." );
                             console.error(err);
@@ -563,6 +612,13 @@ angular.module($snaphy.getModuleName())
                                 $scope.file = backUpFile;
                                 $scope.model[$scope.options.key] = backUpFile.result;
                             }, 0);
+
+                            SnaphyTemplate.notify({
+                                message: "Error deleting image from server. Please try again.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
                         });
                     }else{
                         $http({
@@ -570,10 +626,22 @@ angular.module($snaphy.getModuleName())
                           url: url.delete,
                         }).then(function successCallback(response) {
                             console.log("File successfully deleted.");
+                            SnaphyTemplate.notify({
+                                message: "Image successfully deleted from server.",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
                           }, function errorCallback(response) {
                             console.log(response);
                             //Add backup file ..
                             $scope.file = backUpFile;
+                            SnaphyTemplate.notify({
+                                message: "Error deleting image from server. Please try again.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
                         });
                     }
 
