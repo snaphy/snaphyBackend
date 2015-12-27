@@ -186,12 +186,13 @@
                                 label="{{filter.label}}"
                                 ng-if="filter.type==='$date'">
                         </filter-date>
-
                         <filter-select
                                 options="{{filter.options}}"
                                 model-settings="schema"
                                 table-id="automataTable"
                                 column-name="{{columnName}}"
+                                table-data="dataValues"
+                                filter-options="filter"
                                 get="{{filter.get}}"
                                 label="{{filter.label}}"
                                 ng-if="filter.type==='$select'">
@@ -219,14 +220,16 @@
                                 ng-if="filter.type==='$radio'">
                         </filter-radio>
 
+                    </form>
+                    <form class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-12">
                                 <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
                             </div>
                         </div>
                     </form>
-
                 </div>
+
             </div><!--block-->
         </div><!--col-md-4-->
 

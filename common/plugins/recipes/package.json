@@ -1,0 +1,41 @@
+{
+  "name": "recipes",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "A plugins for adding recipes for Gruberr",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/recipes",
+  "staticFiles": {
+    "css": {
+        "exampleCss" : "/recipes/style/example.css"
+      },
+    "js": {
+      "recipesRoute": "/recipes/scripts/routes/recipes.js",
+      "recipesController": "/recipes/scripts/controllers/recipes.js"
+    },
+    "moduleDependencies":{
+
+    },
+    "settings": "/recipes/settings.js"
+  },
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+   
+  }
+}

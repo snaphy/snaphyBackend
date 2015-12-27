@@ -194,6 +194,8 @@ angular.module($snaphy.getModuleName())
         "data": "=data",
         "getOptions": "@get",
         "staticOptions": "@options",
+        "tableData": "=tableData",
+        "filterOptions": "=filterOptions"
       },
       replace: true,
       template: '<div class="form-group">' +
@@ -206,6 +208,7 @@ angular.module($snaphy.getModuleName())
         '</div>' +
         '</div>',
       link: function(scope, iElement, iAttrs) {
+          console.log(scope.staticOptions);
           //First get the table id.
           if (scope.id === "") {
             console.error("An table Id value is needed for filters to operate.");
@@ -215,7 +218,7 @@ angular.module($snaphy.getModuleName())
 
           scope.data = {};
           //initializing options..
-
+          scope.data.options = [];
 
           //Removing the # tag from id if placed. to avoid duplicity of #
           scope.id = scope.id.replace(/^\#/, '');
@@ -230,21 +233,22 @@ angular.module($snaphy.getModuleName())
           });
 
 
-          if (scope.staticOptions !== undefined) {
-            //Load static options..
-            scope.data.options = JSON.parse(scope.staticOptions);
-            //scope.data.options = scope.staticOptions;
-          }
+        if (scope.staticOptions !== undefined) {
+            if (scope.staticOptions.length) {
+                console.log(JSON.parse(scope.staticOptions));
+                scope.data.options = JSON.parse(scope.staticOptions);
+                //scope.data.options = scope.staticOptions;
+            }
+        }
 
 
           //Now load options..
-          if (scope.getOptions !== undefined) {
+          if (scope.getOptions) {
             $http({
               method: 'GET',
               url: scope.getOptions
             }).then(function successCallback(response) {
               //Select options downloaded successfully..
-              //Loading options..
               scope.data.options = response;
             }, function errorCallback(response) {
               // called asynchronously if an error occurs
@@ -252,6 +256,45 @@ angular.module($snaphy.getModuleName())
               console.error(response);
             });
           }
+
+
+          //If data is to be fetched from some table column.
+          if (scope.filterOptions.getOptionsFromColumn) {
+            var relatedColumnName;
+            //If the column is a key name from a related model.
+            var isRelationModel;
+
+            console.log(scope.tableData);
+            console.log(scope.$parent.dataValues);
+            //ForEach loop for each table object..
+            scope.tableData.forEach(function(rowObject, index) {
+              var rowKey = scope.$parent.getKey(rowObject, scope.columnName);
+
+              if (rowObject[rowKey] === undefined) {
+                isRelationModel = true;
+              } else {
+                isRelationModel = false;
+              }
+
+              //options format will be {id:1, name: foo}
+              var rowValue = rowObject[rowKey];
+
+              //The the column is a related column..
+              if (isRelationModel) {
+                relatedColumnName = scope.$parent.getColumnKey(scope.columnName);
+                rowValue = rowObject[relatedColumnName];
+              }
+
+              //Now prepare the object..
+              var option = {
+                id: rowObject.id,
+                name: rowValue
+              };
+              scope.data.options = scope.data.options || [];
+              //Now push the options to populate finally...
+              scope.data.options.push(option);
+            });
+          } //if
 
 
 
