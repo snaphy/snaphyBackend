@@ -38,7 +38,7 @@ angular.module($snaphy.getModuleName())
         };
 
 
-
+        
         /**
          * change prop like access_level to access only
          * Get the key or the relationship name.
