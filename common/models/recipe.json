@@ -32,21 +32,20 @@
       "type": [
         "object"
       ],
+      "template":{
+          "type": "multipleFileUpload",
+          "templateOptions":{
+            "label": "Add recipe image steps",
+            "containerName": "recipes",
+            "containerModel":"Container",
+            "url":{
+                "upload":"",
+                "delete":""
+            },
+            "bind":true
+          }
+      },
       "required": false
-    },
-    "recipeType": {
-      "type": "string",
-      "required": false
-    },
-    "servings": {
-      "type": "number",
-      "required": false
-    },
-    "added": {
-      "type": "date"
-    },
-    "status": {
-      "type": "string"
     },
     "mainImage": {
       "type": "object",
@@ -63,24 +62,38 @@
             },
             "bind":true
           }
-      }
-    },
-    "recipeSteps": {
-      "type": "array",
+       }
+   },
+    "recipeType": {
+      "type": "object",
       "required": false,
       "template":{
-          "type": "multipleFileUpload",
-          "templateOptions":{
-            "label": "Add recipe image steps",
-            "containerName": "recipes",
-            "containerModel":"Container",
-            "url":{
-                "upload":"",
-                "delete":""
-            },
-            "bind":true
-          }
+            "type":"selectString",
+            "templateOptions":{
+                "label": "Select recipe type",
+                "id": "recipeType",
+                "options": ["veg", "nonveg"]
+            }
       }
+    },
+    "servings": {
+      "type": "number",
+      "required": false,
+      "template":{
+            "type":"selectString",
+            "templateOptions":{
+                "label": "Select recipe servings",
+                "id": "recipeServings",
+                "options": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            }
+      }
+    },
+    "added": {
+      "type": "date",
+       "defaultFn": "now"
+    },
+    "status": {
+      "type": "string"
     }
   },
   "tables":{
@@ -96,7 +109,12 @@
     "employee": {
       "type": "belongsTo",
       "model": "Employee",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Employee",
+        "searchProp": "username",
+        "create": true
+      }
     }
   },
   "acls": [],

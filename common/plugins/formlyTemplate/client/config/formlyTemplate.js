@@ -192,7 +192,8 @@ angular.module($snaphy.getModuleName())
             };
 
         },
-        controller: ['$scope', 'Upload',  '$timeout', '$http', 'Database', function ($scope, Upload, $timeout, $http, Database) {
+        controller: ['$scope', 'Upload',  '$timeout', '$http', 'Database', 'SnaphyTemplate',
+        function ($scope, Upload, $timeout, $http, Database, SnaphyTemplate) {
             //Initialize the model..
             $scope.model[$scope.options.key] =  $scope.model[$scope.options.key] || [];
             $scope.files = [];
@@ -435,7 +436,8 @@ angular.module($snaphy.getModuleName())
         },
 
 
-        controller: ['$scope', 'Upload',  '$timeout', '$http', 'Database', function ($scope, Upload, $timeout, $http, Database) {
+        controller: ['$scope', 'Upload',  '$timeout', '$http', 'Database', 'SnaphyTemplate',
+         function ($scope, Upload, $timeout, $http, Database, SnaphyTemplate) {
             //Initialize the model..
             $scope.model[$scope.options.key] =  $scope.model[$scope.options.key] || {};
             $scope.file = {};
