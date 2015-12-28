@@ -1,0 +1,24 @@
+<div class="col-xs-12 col-md-7 col-md-offset-2 ">
+    <div class="block block-themed">
+        <div class="block-header bg-primary">
+            <h3 class="block-title">Save Data</h3>
+        </div>
+        <div class="block-content block-content-full text-center">
+            <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
+                <formly-form   model="saveFormData" fields="schema.fields">
+                </formly-form>
+            </form>
+        </div>
+        <hr>
+        <div class="block-content col-xs-12" style="height:70px;">
+            <div class="pull-right form-horizontal">
+                <button data-target="#addDataModal"  class="btn btn-sm btn-default "  type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-sm btn-default "   type="button" ng-click="resetSavedForm(schema.form)">Reset data</button>
+                <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal" data-target="#addDataModal"><i class="fa fa-save"></i> Save</button>
+                <button ng-disabled="!enableButton(schema.form)" type="submit" class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
+                  <i class="fa fa-save"></i> Save and add another
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

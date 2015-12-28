@@ -1,5 +1,5 @@
 ( function( ){'use strict';} )( );
-/* global $snaphy, angular, $*/
+/* global $snaphy, angular, $, console*/
 angular.module($snaphy.getModuleName())
 
 // Controller for automataControl ..
@@ -13,17 +13,34 @@ angular.module($snaphy.getModuleName())
 
         //get the current state name..
         var currentState = $state.current.name;
+
+
+        $scope.currentState = currentState;
+
         //Storing an instance of table values..
-        $scope.rowListValues = [];
+        $scope.rowListValues = $scope.rowListValues || [] ;
         //Schema of the database
-        $scope.schema = {};
+        $scope.schema = $scope.schema || {};
         /*Data for save form modal*/
-        $scope.saveFormData = {};
+        $scope.saveFormData = $scope.saveFormData || {};
         //Initializing scope //for array..
-        $scope.dataValues = [];
+        $scope.dataValues =  $scope.dataValues || [];
         //contains backup of the data..
-        var backupData = {};
-        var dataFetched = false;
+        var backupData = backupData ||  {};
+        var dataFetched = dataFetched || false;
+
+
+        $scope.checkIfParentState = function(){
+            if($scope.databasesList){
+                for(var i=0; i<$scope.databasesList.length; i++){
+                    var state = $scope.databasesList[i];
+                    if(state.toLowerCase().trim() === $state.current.name.toLowerCase().trim()){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
 
 
         $scope.checkType = function(rowObject, columnHeader) {
@@ -32,13 +49,15 @@ angular.module($snaphy.getModuleName())
         };
 
 
+
+
         $scope.getColValue = function(rowObject, columnHeader) {
             var key = $scope.getKey(rowObject, columnHeader);
             return key? rowObject[key]: null ;
         };
 
 
-        
+
         /**
          * change prop like access_level to access only
          * Get the key or the relationship name.
@@ -60,16 +79,21 @@ angular.module($snaphy.getModuleName())
             return keyName;
         };
 
+
+
+
         /**
          * change prop like access-level to level only
          * Get the model properties name on the case of belongsTo or hasOne relationships..
          * @param columnHeader
          */
         $scope.getColumnKey = function(columnHeader) {
-            var keyName;
+            //var keyName;
             var patt = /^[A-Z0-9a-z-]+\_/;
             return columnHeader.replace(patt, '');
         };
+
+
 
         //TO be used in tables..
         $scope.getRelationColumnValue = function(rowObject, header, colKey){
@@ -78,6 +102,9 @@ angular.module($snaphy.getModuleName())
             var hasOneRelationPropName  = $scope.getColumnKey(header);
             return (isBelongToRelation)? colValue[hasOneRelationPropName] : colValue;
         };
+
+
+
 
         $scope.getRelationColumnType = function(rowObject, header, colKey, initialColumnType){
             var colValue                = $scope.getRelationColumnValue(rowObject, header, colKey);
@@ -122,6 +149,8 @@ angular.module($snaphy.getModuleName())
         };
 
 
+
+
         /**
          * Event listener for adding reset button to the filters. To be called when reset button is called..
          */
@@ -129,6 +158,9 @@ angular.module($snaphy.getModuleName())
         $scope.addResetMethod = function(func) {
             resetFilterList.push(func);
         };
+
+
+
 
 
         var resetSavedForm = function(form){
@@ -139,7 +171,11 @@ angular.module($snaphy.getModuleName())
             }
         };
 
+
+
         $scope.resetSavedForm = resetSavedForm;
+
+
 
 
         $scope.enableButton = function(form){
@@ -221,7 +257,7 @@ angular.module($snaphy.getModuleName())
                     $scope.dialog.show = false;
                     baseDatabase.deleteById({
                         id: data.id
-                    }, function(value){
+                    }, function(){
                         /*Delete the data from the database..*/
                         SnaphyTemplate.notify({
                             message: "Data successfully deleted.",
@@ -229,13 +265,13 @@ angular.module($snaphy.getModuleName())
                             icon: 'fa fa-check',
                             align: 'right'
                         });
-                    }, function(respHeader){
+                    }, function(){
                         $timeout(function () {
                             //Attach the data again..
                             $scope.dataValues.push(oldDeletedData);
                         }, 10);
 
-                        console.error(respHeader);
+                        //console.error(respHeader);
                         SnaphyTemplate.notify({
                             message: "Error deleting data.",
                             type: 'danger',
@@ -251,6 +287,8 @@ angular.module($snaphy.getModuleName())
             };
 
         };
+
+
 
         /**
          * For finding array index of the data of array of objects with properties id..
@@ -286,6 +324,8 @@ angular.module($snaphy.getModuleName())
             return false;
         };
 
+
+
         //Method for rollbackchanges is eror occured..
         $scope.rollBackChanges = function(){
             if(!$.isEmptyObject(backupData)){
@@ -300,6 +340,9 @@ angular.module($snaphy.getModuleName())
                 });
             }
         };
+
+
+
 
         /**
          * Check if to display the properties of the table or not.
@@ -357,13 +400,13 @@ angular.module($snaphy.getModuleName())
             else{
                 //Now save the model..
                 var baseDatabase = Database.loadDb(formStructure.model);
-                var relatedData = {
-                    hasOne:[],
-                    hasMany: [],
-                    belongsTo: [],
-                    hasManyThrough:[],
-                    hasAndBelongsToMany:[]
-                };
+                // var relatedData = {
+                //     hasOne:[],
+                //     hasMany: [],
+                //     belongsTo: [],
+                //     hasManyThrough:[],
+                //     hasAndBelongsToMany:[]
+                // };
 
                 var schema = {
                     "relation": $scope.schema.relations
@@ -402,9 +445,9 @@ angular.module($snaphy.getModuleName())
                         icon: 'fa fa-check',
                         align: 'right'
                     });
-                }, function(respHeader){
-                    console.log("Error saving data to server");
-                    console.error(respHeader);
+                }, function(){
+                    //console.log("Error saving data to server");
+                    //console.error(respHeader);
                     if(update){
                         $scope.rollBackChanges();
                     }
@@ -415,7 +458,7 @@ angular.module($snaphy.getModuleName())
                         }
                     }
 
-                    console.error(respHeader);
+                    //console.error(respHeader);
                     SnaphyTemplate.notify({
                         message: "Error saving data.",
                         type: 'danger',
@@ -450,8 +493,8 @@ angular.module($snaphy.getModuleName())
                 extend($scope.schema, values.schema);
                 //$scope.schema = values.schema;
                 fetchDataSever($scope.schema, dbService);
-            }, function(respHeader) {
-                console.error(respHeader);
+            }, function() {
+                //console.error(respHeader);
             });
         };
 
@@ -524,7 +567,7 @@ angular.module($snaphy.getModuleName())
             }, function(values) {
                 dataFetched = true;
                 //$scope.dataValues.length = 0;
-                values.forEach(function(element, index){
+                values.forEach(function(element){
                     //Set element value initial relationship value for two way COMMUNICATION..
                     for(var relationType in dataSchema.relations){
                         if(dataSchema.relations.hasOwnProperty(relationType)){
@@ -544,15 +587,15 @@ angular.module($snaphy.getModuleName())
                     $scope.dataValues.push(element);
                 });
 
-                console.log($scope.dataValues);
+                //console.log($scope.dataValues);
 
-            }, function(respHeader) {
-                console.log(respHeader);
+            }, function() {
+                //console.log(respHeader);
             });
         };
 
         var addRelationDummyValue = function(relationArr, element, value){
-            relationArr.forEach(function(rel, index){
+            relationArr.forEach(function(rel){
                 if(!element[rel]){
                     element[rel] = value;
                 }

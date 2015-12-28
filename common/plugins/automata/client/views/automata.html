@@ -20,7 +20,7 @@
 
 <!--ADD WIDGETS -->
 <!-- Page Content -->
-<div class="content">
+<div ng-if="checkIfParentState()" class="content">
     <!-- Simple Vertical Tiles -->
     <div class="row" ng-if="isDataFetched()">
 
@@ -36,16 +36,17 @@
       </snaphy-widget-added>
 
 
+
         <div class="col-sm-6 col-lg-3">
-            <a class="block block-bordered block-link-hover3" style="cursor:pointer" ng-click="resetSavedForm(schema.form)"  data-toggle="modal" data-target="#addDataModal" >
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" ng-click="resetSavedForm(schema.form)"   >
                 <table class="block-table text-center">
                     <tbody>
                         <tr>
-                            <td style="width: 50%;">
+                            <td data-toggle="modal" data-target="#addDataModal" style="width: 50%;">
                                 <div class="h1 font-w700"><span class="h2 text-muted">+</span></div>
                                 <div class="h5 text-muted text-uppercase push-5-t">Add {{schema.model}}</div>
                             </td>
-                            <td class="bg-gray-lighter border-l" style="width: 50%;">
+                            <td ui-sref="{{currentState}}.save" class="bg-gray-lighter border-l" style="width: 50%;">
                                 <div class="push-30 push-30-t">
                                     <i class="si si-note fa-3x text-black-op"></i>
                                 </div>
@@ -62,7 +63,7 @@
 
 
 <div  class="content">
-    <div class="row">
+    <div ui-view class="row">
         <div class="col-sm-12" ng-class="{'col-lg-8': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
             <!-- Dynamic Table Full -->
             <div class="block">

@@ -1,6 +1,6 @@
-'use strict';
+(function(){'use strict';})();
 /*jslint browser: true*/
-/*global $, jQuery, $snaphy, angular*/
+/*global $, jQuery, $snaphy, angular, browser, console*/
 
 /**
  * JUST CHANGE THIS REDIRECT TO CHANGE THE DEFAULT REDIRECT.
@@ -54,6 +54,7 @@ angular.module($snaphy.getModuleName())
             console.log("Changing state from " + from.name);
             //Now storing the previously accesed paths..
             $rootScope.previousState = from;
+            $rootScope.currentState = to;
         });
 
     }]) //End Run
