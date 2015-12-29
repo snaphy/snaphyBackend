@@ -1,0 +1,27 @@
+{
+  "name": "Priority",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "priority": {
+      "type": "string",
+      "required": true
+    },
+    "totalViews": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "recipes": {
+      "type": "hasOne",
+      "model": "Recipe",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

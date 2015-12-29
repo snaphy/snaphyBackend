@@ -51,5 +51,41 @@
   "container": {
     "dataSource": "Image",
     "public": true
+  },
+  "Customer": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Cuisines": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Priority": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Comments": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RecipeTag": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Ingredients": {
+    "dataSource": "db",
+    "public": true
+  },
+  "IngredientCategory": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RecipeIngredients": {
+    "dataSource": "db",
+    "public": true
   }
 }

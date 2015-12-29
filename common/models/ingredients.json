@@ -1,0 +1,47 @@
+{
+  "name": "Ingredients",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sellingMetrics": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "minimumQuantity": {
+      "type": "number",
+      "required": true
+    },
+    "tags": {
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "validations": [],
+  "relations": {
+    "ingredientCategory": {
+      "type": "belongsTo",
+      "model": "IngredientCategory",
+      "foreignKey": ""
+    },
+    "recipes": {
+      "type": "hasMany",
+      "model": "Recipe",
+      "foreignKey": "",
+      "through": "RecipeIngredients"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

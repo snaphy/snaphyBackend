@@ -1,0 +1,215 @@
+{
+    "name": "Comments",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "date": {
+            "type": "date",
+            "defaultFn": "now",
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Add date"
+                }
+            }
+        },
+        "status": {
+            "type": "string",
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "add comment status",
+                    "id": "commentStatus",
+                    "options": [
+                        "publish",
+                        "onhold",
+                        "rejected"
+                    ]
+                }
+            }
+        },
+        "comment": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Add comment",
+                    "id" : "recipeComment"
+                }
+            }
+        },
+        "rating": {
+            "type": "number",
+            "required": true,
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "Select rating for recipe",
+                    "id": "recipeRating",
+                    "options": [1, 2, 3, 4, 5]
+                }
+            }
+        }
+    },
+    "widgets": [{
+        "label": "Total Comments",
+        "icon": "si-bar-chart",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$allTime",
+            "where": {},
+            "dateProp": "date"
+        }
+    }, {
+        "label": "Comment added today",
+        "fetchLocally": true,
+        "icon": "si-calendar",
+        "propObj": {
+            "type": "$today",
+            "where": {},
+            "dateProp": "date"
+        }
+    }, {
+        "label": "Comment with rating 4 or 5",
+        "icon": "si-graph",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$allTime",
+            "where": {
+                "rating": {
+                    "gt": 3
+                }
+            },
+            "dateProp": "date"
+        }
+    }],
+    "validations": [],
+    "relations": {
+        "customer": {
+            "type": "belongsTo",
+            "model": "Customer",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Customer",
+                "searchProp": "email",
+                "create": true
+            }
+        },
+        "recipe": {
+            "type": "belongsTo",
+            "model": "Recipe",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Recipe",
+                "searchProp": "name",
+                "create": false
+            }
+        }
+    },
+    "filters": {
+        "date": {
+            "type": "$date",
+            "label": "Recipe added between"
+        },
+        "status": {
+            "type": "$select",
+            "label": "Select comment status",
+            "options": [{
+                "id": 1,
+                "name": "publish"
+            }, {
+                "id": 2,
+                "name": "onhold"
+            }, {
+                "id": 3,
+                "name": "rejected"
+            }]
+        },
+        "rating": {
+            "type": "$multiSelect",
+            "label": "Select rating",
+            "getOptionsFromColumn": false,
+            "options": [{
+                    "id": "1",
+                    "name": "1"
+                }, {
+                    "id": "2",
+                    "name": "2"
+                }, {
+                    "id": "3",
+                    "name": "3"
+                }, {
+                    "id": "4",
+                    "name": "4"
+                }, {
+                    "id": "5",
+                    "name": "5"
+                }
+
+            ]
+        },
+        "customer_email": {
+            "type": "$select",
+            "label": "Select customer by email",
+            "getOptionsFromColumn": true
+        },
+        "recipe_name":{
+            "type":"$select",
+            "label": "Select recipe by name",
+            "getOptionsFromColumn": true
+        }
+
+    },
+    "tables":{
+        "customer_username":{
+            "display": false
+        },
+        "customer_firstName":{
+            "display": false
+        },
+        "customer_lastName":{
+            "display": false
+        },
+        "customer_profilePic":{
+            "display": false
+        },
+
+        "recipe_description":{
+            "display": false
+        },
+        "recipe_mainImage":{
+            "display": false
+        },
+        "recipe_recipeType":{
+            "display": false
+        },
+        "recipe_servings":{
+            "display": false
+        },
+        "recipe_status":{
+            "display": false
+        }
+    },
+    "validationsBackend": {
+      "rules": {
+        "comment": {
+          "required": true,
+          "minlength": "5"
+        }
+      },
+      "messages": {
+        "comment": {
+          "required": "comment is required",
+          "minlength": "Minimum permitted length is atleast 3"
+        }
+      }
+    },
+    "acls": [],
+    "methods": []
+}
