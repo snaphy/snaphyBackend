@@ -87,7 +87,14 @@
     },
     "youtubeVideoId":{
         "type":"string",
-        "required":false
+        "required":false,
+        "template":{
+            "type":"youTubeVideo",
+            "templateOptions":{
+                "label": "Add recipe youtube video url",
+                "id": "youTubeVideo"
+            }
+        }
     },
     "stepsImage": {
         "type": [
@@ -221,6 +228,9 @@
         },
         "employee_lastName":{
             "display":false
+        },
+        "youtubeVideoId":{
+            "display": false
         }
     },
     "relations": {

@@ -16,10 +16,12 @@
       "formlyTemplateServices": "/formlyTemplate/scripts/services/formlyTemplate.js",
       "selectize": "/formlyTemplate/style/bower_components/selectize/dist/js/standalone/selectize.min.js",
       "formlyTemplateConfig": "/formlyTemplate/config/formlyTemplate.js",
-      "ng-file-upload-shim": "/formlyTemplate/style/bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"
+      "ng-file-upload-shim": "/formlyTemplate/style/bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js",
+      "youtube_iframe_api": "/formlyTemplate/scripts/youtube_iframe_api.js"
     },
     "moduleDependencies": {
-      "ngFileUpload": "/formlyTemplate/style/bower_components/ng-file-upload/ng-file-upload.min.js"
+      "ngFileUpload": "/formlyTemplate/style/bower_components/ng-file-upload/ng-file-upload.min.js",
+      "youtube-embed": "/formlyTemplate/style/bower_components/angular-youtube-mb/dist/angular-youtube-embed.min.js"
     },
     "settings": "/formlyTemplate/settings.js"
   },

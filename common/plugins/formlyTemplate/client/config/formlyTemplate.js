@@ -706,4 +706,50 @@ angular.module($snaphy.getModuleName())
     });
 
 
+
+    formlyConfig.setType({
+        name: 'youTubeVideo',
+        templateUrl: '/formlyTemplate/views/loadYouTubeVideo.html',
+        link: function(scope) {
+            // ID PROPERTY IS NEEDED FOR VALIDATE TO WORK
+            if(scope.options.templateOptions){
+                if(!scope.options.templateOptions.colSize){
+                    scope.options.templateOptions.colSize = 'col-xs-12';
+                }
+            }//if
+
+
+            scope.trackModelValue = function(){
+                if(scope.youTubeUrl){
+                    //Now the video id.
+                    var video_id = scope.youTubeUrl.split('v=')[1];
+                    if(!video_id){
+                        console.log(scope.model[scope.options.key]);
+                        scope.model[scope.options.key] = "";
+                        return false;
+                    }
+                    scope.model[scope.options.key] = video_id;
+                }
+            };
+
+
+            scope.parseUrl = function(){
+                if(scope.youTubeUrl){
+                    scope.trackModelValue();
+                }
+            };
+
+
+
+            scope.$watch('model[options.key]', function(){
+                if(!scope.model[scope.options.key]){
+                    //Clear the value..
+                    scope.youTubeUrl = "";
+                }
+            });
+
+        }//link function..
+    });
+
+
 }]);
