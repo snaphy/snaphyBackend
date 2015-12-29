@@ -26,6 +26,7 @@
             <!--loop through each element in model array-->
             <div style="margin-top:10px;" >
                 <div class="repeatsection" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
+                    <strong class="col-xs-12 " style="text-align:right;" ><small>{{$index + 1}}</small></strong>
                     <formly-form fields="fields"
                                  model="element"
                                  form="form">
