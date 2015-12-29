@@ -1,39 +1,46 @@
-<div style="margin-top:20px">
+<div class="relatedData">
     <!--ADDING A REPEATER FOR THE TEMPLATE SECTION-->
     <!--http://angular-formly.com/#/example/advanced/repeating-section-->
     <!-- <hr style="margin-top:10px; border-color:#ddd;"> -->
-    <strong style="margin-left:2px;"><small>Add related data</small></strong>
-    <div style="margin-top:10px;">
-        <div class="row">
-            <div class="col-md-9 col-xs-12">
-                <multi-search
-                    placeholder="{{placeholder}}"
-                    model-name="{{to.model}}"
-                    search-property="{{to.searchProp}}"
-                    value="model[options.key]">
-                </multi-search>
-            </div>
-            <div class="AddNewButton col-md-3 col-xs-12">
-                <button type="button"  style="height:36px;"  class="btn btn-md btn-primary" ng-click="addNew()" >{{to.btnText}}</button>
-            </div>
-        </div>
-        <!--loop through each element in model array-->
-        <div style="margin-top:10px;" >
-            <div class="repeatsection" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
-                <formly-form fields="fields"
-                             model="element"
-                             form="form">
-                </formly-form>
-                <div style="margin-bottom:20px;">
-                    <button type="button" class="btn btn-sm btn-danger" ng-click="model[options.key].splice($index, 1)">
-                        Remove {{to.model}}
-                    </button>
-                </div>
-                <hr>
-            </div>
-
-        </div>
-
+    <div class="row">
+        <strong  class="col-xs-12 col-md-12 showRelatedData"><small><a ng-click="toggleShow()">{{showOrHide()}} related data</a></small></strong>
     </div>
+    <div>
+        <div class="row">
+            <strong style="margin-left:2px;" class="col-xs-12 col-md-12"><small>Add {{to.model}}</small></strong>
+        </div>
+        <div ng-if="!hide" style="margin-top:10px;">
+            <div class="row">
+                <div class="col-md-9 col-xs-12">
+                    <multi-search
+                        placeholder="{{placeholder}}"
+                        model-name="{{to.model}}"
+                        search-property="{{to.searchProp}}"
+                        value="model[options.key]">
+                    </multi-search>
+                </div>
+                <div class="AddNewButton col-md-3 col-xs-12">
+                    <button type="button"  style="height:36px;"  class="btn btn-md btn-default" ng-click="addNew()" >{{to.btnText}}</button>
+                </div>
+            </div>
+            <!--loop through each element in model array-->
+            <div style="margin-top:10px;" >
+                <div class="repeatsection" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
+                    <formly-form fields="fields"
+                                 model="element"
+                                 form="form">
+                    </formly-form>
+                    <div class="form-group">
+                        <div class="col-xs-12 text-right" >
+                            <button type="button" class="btn btn-sm btn-danger" ng-click="model[options.key].splice($index, 1)">
+                                Remove {{to.model}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+
+        </div>
+    </div>
 </div>

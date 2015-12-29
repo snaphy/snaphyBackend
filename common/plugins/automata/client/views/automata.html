@@ -7,10 +7,14 @@
             </h1>
         </div>
         <div class="col-sm-5 text-right hidden-xs">
-            <ol class="breadcrumb push-10-t">
-                <li>Tables</li>
-                <li><a class="link-effect" ui-sref="{{currentState}}">{{title}}</a></li>
-
+            <ol ng-if="!checkIfParentState()" class="breadcrumb push-10-t">
+                <li>Manage Data</li>
+                <li ><a class="link-effect" ui-sref="{{$parent.currentState}}">{{title}}</a></li>
+                <li>Save Data</a></li>
+            </ol>
+            <ol ng-if="checkIfParentState()" class="breadcrumb push-10-t">
+                <li>Manage Data</li>
+                <li ><a class="link-effect" ui-sref="{{currentState}}">{{title}}</a></li>
             </ol>
         </div>
     </div>
@@ -36,7 +40,6 @@
       </snaphy-widget-added>
 
 
-
         <div class="col-sm-6 col-lg-3">
             <a class="block block-bordered block-link-hover3" style="cursor:pointer" ng-click="resetSavedForm(schema.form)"   >
                 <table class="block-table text-center">
@@ -57,7 +60,6 @@
             </a>
         </div>
     </div>
-    <!-- END Simple Vertical Tiles -->
 </div>
 
 
@@ -256,7 +258,7 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div ng-if="schema.validations" class="block-content block-content-narrow">
-
+                    {{saveFormData}}
                     <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
 
@@ -269,7 +271,7 @@
                 <button class="btn btn-sm btn-default "  style="margin-right:20px;" type="button" ng-click="resetSavedForm(schema.form)">Reset data</button>
                 <button
                     ng-disabled="!enableButton(schema.form)"
-                    class="btn btn-sm btn-primary"
+                    class="btn btn-sm btn-default"
                     ng-click="saveForm(schema, schema.form,  saveFormData, true, '#addDataModal')">
                         <i class="fa fa-save"></i>
                         Save
@@ -277,7 +279,8 @@
                 <button
                     ng-disabled="!enableButton(schema.form)"
                     type="submit"
-                    class="btn btn-sm btn-danger"
+                    class="btn btn-sm bg-primary-dark"
+                    style="color:#fff;"
                     ng-click="saveForm(schema, schema.form, saveFormData, false)" >
                         <i class="fa fa-save"></i>
                         Save and add another

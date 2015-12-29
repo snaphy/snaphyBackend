@@ -14,8 +14,14 @@ angular.module($snaphy.getModuleName())
         //get the current state name..
         var currentState = $state.current.name;
 
+        
+
 
         $scope.currentState = currentState;
+
+        $scope.getCurrentState = function(){
+            return $state.current.name;
+        };
 
         //Storing an instance of table values..
         $scope.rowListValues = $scope.rowListValues || [] ;

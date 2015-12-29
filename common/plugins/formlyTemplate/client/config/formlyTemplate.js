@@ -14,6 +14,28 @@ angular.module($snaphy.getModuleName())
         name: 'belongsTo',
         templateUrl: '/formlyTemplate/views/autocomplete.html',
         controller: function($scope) {
+            //Set the value initially to hide position..
+            $scope.hide = true;
+            $scope.showOrHide = function(){
+                if($scope.hide){
+                    //Show opposite
+                    return "show";
+                }else{
+                    return "hide";
+                }
+            };
+
+            $scope.isHidden = function(){
+                return $scope.hide;
+            };
+
+
+            $scope.toggleShow = function(){
+                $scope.hide = !$scope.hide;
+                return $scope.hide;
+            };
+
+
             $scope.resetCreate = resetCreate;
             $scope.showCreate = function() {
                 //model has value then put create == true
@@ -52,8 +74,29 @@ angular.module($snaphy.getModuleName())
     formlyConfig.setType({
         name: 'repeatSection',
         templateUrl: '/formlyTemplate/views/hasManyTemplate.html',
-        link: function(scope, element, attrs) {},
         controller: function($scope) {
+            //Set the value initially to hide position..
+            $scope.hide = true;
+            $scope.showOrHide = function(){
+                if($scope.hide){
+                    //Show opposite
+                    return "show";
+                }else{
+                    return "hide";
+                }
+            };
+
+            $scope.isHidden = function(){
+                return $scope.hide;
+            };
+
+
+            $scope.toggleShow = function(){
+                $scope.hide = !$scope.hide;
+                console.log($scope.hide);
+                return $scope.hide;
+            };
+
 
             var unique = 1;
             $scope.formOptions = {
@@ -71,11 +114,12 @@ angular.module($snaphy.getModuleName())
             function addNew() {
                 $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
                 var repeatsection = $scope.model[$scope.options.key];
-                var lastSection = repeatsection[repeatsection.length - 1];
+                //var lastSection = repeatsection[repeatsection.length - 1];
                 var newsection = {};
-                if (lastSection) {
-                    newsection = angular.copy(lastSection);
-                }
+                // if (lastSection) {
+                //     newsection = angular.copy(lastSection);
+                // }
+
                 repeatsection.push(newsection);
             }
 
@@ -133,9 +177,11 @@ angular.module($snaphy.getModuleName())
                     var repeatsection = $scope.model[$scope.options.key];
                     var lastSection = repeatsection[repeatsection.length - 1];
                     var newsection = {};
-                    if (lastSection) {
-                        newsection = angular.copy(lastSection);
-                    }
+                    // if (lastSection) {
+                    //     newsection = angular.copy(lastSection);
+                    // }
+
+                    //console.log(newsection);
                     repeatsection.push(newsection);
                 }
 
@@ -182,7 +228,7 @@ angular.module($snaphy.getModuleName())
     formlyConfig.setType({
         name: 'multipleFileUpload',
         templateUrl: '/formlyTemplate/views/multiFileUpload.html',
-        link: function(scope, element, attrs) {
+        link: function(scope, element) {
             // Randomize progress bars values
             scope.addValue = function(value) {
                 $(element)

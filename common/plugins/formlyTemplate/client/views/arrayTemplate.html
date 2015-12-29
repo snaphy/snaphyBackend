@@ -1,4 +1,4 @@
-<div style="margin-top:5px;margin-bottom:10px;">
+<div class="relatedData">
     <!--ADDING A REPEATER FOR THE TEMPLATE SECTION-->
     <!--http://angular-formly.com/#/example/advanced/repeating-section-->
     <!-- <hr style="margin-top:10px; border-color:#ddd;"> -->
@@ -9,15 +9,17 @@
                          model="element"
                          form="form">
             </formly-form>
-            <div style="margin-bottom:20px;">
-                <button type="button" class="btn btn-sm btn-danger" ng-click="model[options.key].splice($index, 1)">
-                    Remove {{to.model}}
-                </button>
+            <div class="form-group">
+                <div class="col-xs-12 text-right" >
+                    <button type="button" class="btn btn-sm btn-danger" ng-click="model[options.key].splice($index, 1)">
+                        Remove {{to.model}}
+                    </button>
+                </div>
             </div>
             <hr>
         </div>
         <div class="AddNewButton">
-            <button type="button"   class="btn btn-md btn-primary" ng-click="addNew()" >{{to.btnText}}</button>
+            <button type="button"   class="btn btn-md btn-primary-dark" ng-click="addNew()" >{{to.btnText}}</button>
         </div>
     </div>
 

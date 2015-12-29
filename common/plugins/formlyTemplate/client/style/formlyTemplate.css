@@ -15,6 +15,37 @@
     display: none;
 }
 
+.relatedData {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: 1px solid #ededed;
+    padding: 15px;
+}
+
+.selectize-input {
+    border-radius: 0px;
+    border-color: #eeeeee;
+}
+
+.cleanBtnCornerRight{
+    padding-right: 0px !important;
+    border-radius: 0px;
+}
+
+.cleanBtnCornerLeft{
+    padding-left: 0px !important;
+    border-radius: 0px;
+}
+
+.selectize-input{
+    text-align: left;
+}
+
+.showRelatedData {
+    text-align:right;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 
 .show{
