@@ -66,8 +66,13 @@
     <div ui-view class="row">
         <div class="col-sm-12" ng-class="{'col-lg-8': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
             <!-- Dynamic Table Full -->
-            <div class="block">
+            <div id="automataWidget" class="block">
                 <div class="block-header">
+                    <ul class="block-options">
+                        <li>
+                            <button ng-click="init('#automataWidget')" type="button" data-toggle="block-option" data-action="refresh_toggle" ><i class="si si-refresh"></i></button>
+                        </li>
+                    </ul>
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div class="block-content">
@@ -239,7 +244,6 @@
 
 <!-- Fade In Modal -->
 <div on-modal-close class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
-    {{saveFormData}}
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="block block-themed block-transparent remove-margin-b">
@@ -252,7 +256,7 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div ng-if="schema.validations" class="block-content block-content-narrow">
-                
+
                     <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
 

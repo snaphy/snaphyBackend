@@ -36,6 +36,7 @@ angular.module($snaphy.getModuleName())
 
 
 
+
 //On save modal close..reset the form..
 .directive('onModalClose', ['$timeout', function($timeout) {
     return {

@@ -512,13 +512,19 @@ angular.module($snaphy.getModuleName())
 
 
 
-        var populateData = function(databaseName) {
+        var populateData = function(databaseName, widgetId) {
             var dbService = Database.loadDb(databaseName);
             dbService.getSchema({}, {}, function(values) {
                 extend($scope.schema, values.schema);
                 //$scope.schema = values.schema;
-                fetchDataSever($scope.schema, dbService);
+                fetchDataSever($scope.schema, dbService, widgetId);
             }, function() {
+                if(widgetId){
+                    $timeout(function(){
+                        //Now hide remove the refresh widget..
+                        $(widgetId).removeClass('block-opt-refresh');
+                    }, 200);
+                }
                 //console.error(respHeader);
             });
         };
@@ -552,7 +558,7 @@ angular.module($snaphy.getModuleName())
 
 
 
-        var fetchDataSever = function(dataSchema, dbService) {
+        var fetchDataSever = function(dataSchema, dbService, widgetId) {
             var filterObj = {};
             filterObj.include = [];
             if (dataSchema.relations.belongsTo) {
@@ -592,6 +598,7 @@ angular.module($snaphy.getModuleName())
             }, function(values) {
                 dataFetched = true;
                 //$scope.dataValues.length = 0;
+                $scope.dataValues = [];
                 values.forEach(function(element){
                     //Set element value initial relationship value for two way COMMUNICATION..
                     for(var relationType in dataSchema.relations){
@@ -608,13 +615,26 @@ angular.module($snaphy.getModuleName())
                             element = addRelationDummyValue (relationArr, element, value);
                         }
                     }
+
                     //setting the value of the data successfully fetched..
                     $scope.dataValues.push(element);
                 });
+                //Now hide the refresh bar..
 
                 //console.log($scope.dataValues);
-
+                if(widgetId){
+                    $timeout(function(){
+                        //Now hide remove the refresh widget..
+                        $(widgetId).removeClass('block-opt-refresh');
+                    }, 200);
+                }
             }, function() {
+                if(widgetId){
+                    $timeout(function(){
+                        //Now hide remove the refresh widget..
+                        $(widgetId).removeClass('block-opt-refresh');
+                    }, 200);
+                }
                 //console.log(respHeader);
             });
         };
@@ -631,11 +651,12 @@ angular.module($snaphy.getModuleName())
 
 
         //Constructor for automata cuntroller..
-        $scope.init = function() {
+        $scope.init = function(widgetId) {
+            //Now display the refresh widget
             for (var i = 0; i < $scope.databasesList.length; i++) {
                 if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim()){
                     //Now populate the database one by one..
-                    populateData($scope.databasesList[i]);
+                    populateData($scope.databasesList[i], widgetId);
                     $scope.tableTitle = currentState + ' ' + 'Data';
                     $scope.currentState = currentState;
                     $scope.title = currentState + ' Console';
