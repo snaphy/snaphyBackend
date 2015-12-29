@@ -185,6 +185,7 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
             }
 
             if(relationsType === 'belongsTo'){
+                console.log(relationData);
                 //Upsert belongs to relations and attach the relation to the
                 promises.push(upsertBelongsTo (modelObj, relationData, dataInstance, relationName, foriegnKey, callback) );
             }//if
@@ -193,7 +194,6 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
                 promises.push(upsertHasOne (modelObj, relationData, dataInstance, relationName, callback) );
             }//if
             else if (relationsType === 'hasMany') {
-                console.log(relationData);
                 promises.push( upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasMany', callback));
             }//else if
             else if('hasAndBelongsToMany'){
@@ -213,40 +213,43 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
 
 
 var upsertHasOne = function(modelObj, relationData, dataInstance, relationName, callback){
-    var mainModel = dataInstance[relationName].build(relationData);
-    modelObj.upsert(mainModel)
-    .then(function(result){
-        //Now add the result to the dataInstance
-        console.log("Successfully saved hasOne data");
-    })
-    .catch(function(err){
-        console.log("Error saving data");
-        callback(err);
-    });
+    if(!_.isEmpty(relationData)){
+        var mainModel = dataInstance[relationName].build(relationData);
+        modelObj.upsert(mainModel)
+        .then(function(result){
+            //Now add the result to the dataInstance
+            console.log("Successfully saved hasOne data");
+        })
+        .catch(function(err){
+            console.log("Error saving data");
+            callback(err);
+        });
+    }
 };
 
 
 var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationName, foriegnKey, callback){
-    //TODO ADD TWO WAY COMMUNICATION FOR BELONGS TO METHOD HERE..
-    modelObj.upsert(relationData)
-    .then(function(data){
-        //Now attach data to the parent dataInstance..
-        dataInstance[relationName](data);
-        dataInstance[foriegnKey] = data.id;
+    if(!_.isEmpty(relationData)){
+        modelObj.upsert(relationData)
+        .then(function(data){
+            //Now attach data to the parent dataInstance..
+            dataInstance[relationName](data);
+            dataInstance[foriegnKey] = data.id;
 
-        dataInstance.save()
-        .then(function(value){
-            console.log("Successfully saved belongsTo data.");
+            dataInstance.save()
+            .then(function(value){
+                console.log("Successfully saved belongsTo data.");
+            })
+            .catch(function(err){
+                console.log("Error saving belongsTo data relationship.");
+                callback(err);
+            });
         })
         .catch(function(err){
-            console.log("Error saving belongsTo data relationship.");
+            console.log("Error updating belongsTo data relationship.");
             callback(err);
         });
-    })
-    .catch(function(err){
-        console.log("Error updating belongsTo data relationship.");
-        callback(err);
-    });
+    }
 };
 
 

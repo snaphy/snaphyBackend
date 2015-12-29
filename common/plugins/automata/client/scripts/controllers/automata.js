@@ -20,7 +20,7 @@ angular.module($snaphy.getModuleName())
         //Storing an instance of table values..
         $scope.rowListValues = $scope.rowListValues || [] ;
         //Schema of the database
-        $scope.schema = $scope.schema || {};
+        $scope.schema       = $scope.schema || {};
         /*Data for save form modal*/
         $scope.saveFormData = $scope.saveFormData || {};
         //Initializing scope //for array..
@@ -28,6 +28,13 @@ angular.module($snaphy.getModuleName())
         //contains backup of the data..
         var backupData = backupData ||  {};
         var dataFetched = dataFetched || false;
+
+
+        $scope.goToParentState = function(){
+            if($scope.$parent.currentState){
+                $state.go($scope.$parent.currentState);
+            }
+        };
 
 
         $scope.checkIfParentState = function(){
@@ -383,8 +390,8 @@ angular.module($snaphy.getModuleName())
          * @param formModel
          * @param formID refrencing to the id attribute of the  form.
          */
-        $scope.saveForm = function(formStructure, formModel) {
-            if(!$scope.isValid(formStructure.form)){
+        $scope.saveForm = function(formStructure, formData,  formModel, goBack, modelInstance) {
+            if(!$scope.isValid(formData)){
                 SnaphyTemplate.notify({
                     message: "Error data is Invalid.",
                     type: 'danger',
@@ -400,13 +407,6 @@ angular.module($snaphy.getModuleName())
             else{
                 //Now save the model..
                 var baseDatabase = Database.loadDb(formStructure.model);
-                // var relatedData = {
-                //     hasOne:[],
-                //     hasMany: [],
-                //     belongsTo: [],
-                //     hasManyThrough:[],
-                //     hasAndBelongsToMany:[]
-                // };
 
                 var schema = {
                     "relation": $scope.schema.relations
@@ -468,9 +468,34 @@ angular.module($snaphy.getModuleName())
                 });
 
                 //Now reset the form..
-                resetSavedForm(formStructure.form);
+                resetSavedForm(formData);
+                closeModel(goBack, modelInstance);
+
             }
         }; //saveForm
+
+
+        // Used in  the automata to get the table values..
+        $scope.getTagInfo = function(tableSchema, colKey, rowObject, header){
+            var tableConfig = $scope.findModelPropertyTableConfig(tableSchema, colKey);
+            var colValue = $scope.getColValue(rowObject, header);
+            return tableConfig.tag[colValue];
+        };
+
+
+
+        //Goback or close the model..
+        var closeModel = function(goBack, modelInstance){
+            if(goBack){
+                if(modelInstance){
+                    //close the model..
+                    $(modelInstance).modal('hide');
+                }else{
+                    //go back to parent state..
+                    $scope.goToParentState();
+                }
+            }
+        };
 
 
         //Copying one object to another..

@@ -14,7 +14,6 @@ angular.module($snaphy.getModuleName())
             for(var i=0; i<databasesList.length; i++){
                 var stateName = databasesList[i];
                 if($rootScope.currentState.name === stateName ){
-                    console.log("getting accepted");
                     deferred.resolve();
                     stateFound = true;
                     break;
@@ -23,7 +22,6 @@ angular.module($snaphy.getModuleName())
         }
 
         if(!stateFound){
-            console.log("I am rejecting");
             deferred.reject();
         }
         return deferred.promise;

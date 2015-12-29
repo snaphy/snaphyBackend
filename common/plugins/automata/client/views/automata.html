@@ -108,8 +108,8 @@
                                             </span>
 
                                             <span ng-init="labelType = tableConfig.tag[getColValue(rowObject, header)]" ng-if="tableConfig.tag !== undefined">
-                                                <span ng-if="labelType !== undefined" class="label" ng-class="labelType" >{{getColValue(rowObject, header)}}</span>
-                                                <span ng-if="labelType === undefined" class="label label-default">{{getColValue(rowObject, header)}}</span>
+                                                <span ng-if="getTagInfo(schema.tables, colKey, rowObject, header) !== undefined" class="label" ng-class="getTagInfo(schema.tables, colKey, rowObject, header)" >{{getColValue(rowObject, header)}}</span>
+                                                <span ng-if="getTagInfo(schema.tables, colKey, rowObject, header) === undefined" class="label label-default">{{getColValue(rowObject, header)}}</span>
                                             </span>
                                             <span ng-if="tableConfig.tag === undefined && tableConfig.onClick === undefined">
                                                 {{getColValue(rowObject, header)}}
@@ -239,6 +239,7 @@
 
 <!-- Fade In Modal -->
 <div on-modal-close class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
+    {{saveFormData}}
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="block block-themed block-transparent remove-margin-b">
@@ -251,6 +252,7 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div ng-if="schema.validations" class="block-content block-content-narrow">
+                
                     <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
 
@@ -261,9 +263,20 @@
             <div class="modal-footer">
                 <button data-target="#addDataModal"  class="btn btn-sm btn-default "  type="button" data-dismiss="modal">Close</button>
                 <button class="btn btn-sm btn-default "  style="margin-right:20px;" type="button" ng-click="resetSavedForm(schema.form)">Reset data</button>
-                <button ng-disabled="!enableButton(schema.form)" class="btn btn-sm btn-primary" ng-click="saveForm(schema, saveFormData)"  data-dismiss="modal" data-target="#addDataModal"><i class="fa fa-save"></i> Save</button>
-                <button ng-disabled="!enableButton(schema.form)" type="submit" class="btn btn-sm btn-danger" ng-click="saveForm(schema, saveFormData)" >
-                  <i class="fa fa-save"></i> Save and add another
+                <button
+                    ng-disabled="!enableButton(schema.form)"
+                    class="btn btn-sm btn-primary"
+                    ng-click="saveForm(schema, schema.form,  saveFormData, true, '#addDataModal')">
+                        <i class="fa fa-save"></i>
+                        Save
+                </button>
+                <button
+                    ng-disabled="!enableButton(schema.form)"
+                    type="submit"
+                    class="btn btn-sm btn-danger"
+                    ng-click="saveForm(schema, schema.form, saveFormData, false)" >
+                        <i class="fa fa-save"></i>
+                        Save and add another
                 </button>
             </div>
         </div>
