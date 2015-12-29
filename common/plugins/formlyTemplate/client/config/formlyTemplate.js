@@ -38,15 +38,22 @@ angular.module($snaphy.getModuleName())
 
             $scope.resetCreate = resetCreate;
             $scope.showCreate = function() {
-                //model has value then put create == true
-                var containValue = $.isEmptyObject($scope.model[$scope.options.key]);
-                if (containValue) {
-                    //put $scope.create == false;
-                    $scope.create = false;
-                } else {
-                    $scope.create = true;
+                //if create is true then show only
+                if($scope.to.create || $scope.to.create === undefined){
+                    //model has value then put create == true
+                    var containValue = $.isEmptyObject($scope.model[$scope.options.key]);
+                    if (containValue) {
+                        //put $scope.create == false;
+                        $scope.create = false;
+                    } else {
+                        $scope.create = true;
+                    }
+                    return $scope.create;
                 }
-                return $scope.create;
+                else{
+                    return false;
+                }
+
             };
 
 

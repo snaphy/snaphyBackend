@@ -14,8 +14,8 @@
                     value="model[options.key]">
                 </autocomplete>
             </div>
-            <div class="AddNewButton col-md-3 col-xs-12 cleanBtnCornerLeft">
-                <button type="button"  style="height:36px;"  class="btn btn-md btn-default" ng-click="forceDisplay()" >{{to.btnText}}</button>
+            <div ng-if="to.create" class="AddNewButton col-md-3 col-xs-12 cleanBtnCornerLeft">
+                <button type="button"  style="height:36px;"   class="btn btn-md btn-default" ng-click="forceDisplay()" >{{to.btnText}}</button>
             </div>
         </div>
         <div ng-if="showCreate()">

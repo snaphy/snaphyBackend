@@ -856,7 +856,7 @@ angular.module($snaphy.getModuleName())
                                     totalCount = countData(totalCount);
                                 } //if checkValue
                             } else {
-                                totalCount = countData(totalCount);
+                                totalCount = countData(totalCount, element);
                             }
                         }); //scope.modelValues loop
 
@@ -864,7 +864,7 @@ angular.module($snaphy.getModuleName())
                         scope.value = totalCount;
                     }; //performDataLocally function
 
-                    var countData = function(totalCount) {
+                    var countData = function(totalCount, element) {
                         //if the date properties is not given
                         if (scope.propObj.where) {
                             var wherePropertyPresent = false;
@@ -873,7 +873,7 @@ angular.module($snaphy.getModuleName())
                                 if (scope.propObj.where.hasOwnProperty(key)) {
                                     wherePropertyPresent = true;
                                     //Checking the value of the where object..
-                                    if (scope.propObj.where[key] === element[key]) {
+                                    if (scope.propObj.where[key].toString().trim() === element[key].toString().trim()) {
                                         //increment the value..
                                         totalCount++;
 

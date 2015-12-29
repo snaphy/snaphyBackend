@@ -52,7 +52,7 @@
                 "templateOptions": {
                     "label": "Select rating for recipe",
                     "id": "recipeRating",
-                    "options": [1, 2, 3, 4, 5]
+                    "options": ["1", "2", "3", "4", "5"]
                 }
             }
         }
@@ -76,15 +76,13 @@
             "dateProp": "date"
         }
     }, {
-        "label": "Comment with rating 4 or 5",
+        "label": "Comment with rating  5",
         "icon": "si-graph",
         "fetchLocally": true,
         "propObj": {
             "type": "$allTime",
             "where": {
-                "rating": {
-                    "gt": 3
-                }
+                "rating": 5
             },
             "dateProp": "date"
         }
@@ -194,6 +192,15 @@
         },
         "recipe_status":{
             "display": false
+        },
+        "recipe_youtubeVideoId":{
+            "display": false
+        },
+        "recipe_stepsImage":{
+            "display": false
+        },
+        "recipe_stepsDescription":{
+            "display": false
         }
     },
     "validationsBackend": {
@@ -206,7 +213,7 @@
       "messages": {
         "comment": {
           "required": "comment is required",
-          "minlength": "Minimum permitted length is atleast 3"
+          "minlength": "Minimum permitted length is atleast 5"
         }
       }
     },
