@@ -188,9 +188,12 @@ angular.module($snaphy.getModuleName())
                                     return new Date(formatDate);
                                 };
 
-                                //Parsing value for column Retailers added date..
-                                var columnDate = convertDateFormat(data[columnDataId]);
+                                if(data[columnDataId] === undefined){
+                                    return true;
+                                }
 
+                                //Parsing value for column Retailers added date..
+                                var columnDate = convertDateFormat(data[columnDataId].trim());
                                 if (from <= columnDate && columnDate <= to) {
                                     return true; //Show that row..
 

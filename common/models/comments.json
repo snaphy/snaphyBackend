@@ -161,7 +161,7 @@
 
     },
     "tables":{
-        "customer_username":{
+        "customer_phoneNumber":{
             "display": false
         },
         "customer_firstName":{

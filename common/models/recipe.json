@@ -211,7 +211,10 @@
     },
     "added": {
       "type": "date",
-      "defaultFn": "now"
+      "defaultFn": "now",
+      "template": {
+          "type": "dummy"
+      }
     },
     "status": {
       "type": "string",
