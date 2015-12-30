@@ -14,7 +14,7 @@ angular.module($snaphy.getModuleName())
         //get the current state name..
         var currentState = $state.current.name;
 
-        
+
 
 
         $scope.currentState = currentState;
@@ -324,8 +324,8 @@ angular.module($snaphy.getModuleName())
          */
         $scope.isValid = function(form){
             try{
-
-                if(form.validate() && form.$dirty){
+                //TODO Removing find alternate for  form.$dirty
+                if(form.validate() ){
                     if($.isEmptyObject(form.$error) ){
                         return true;
                     }

@@ -61,7 +61,20 @@
     },
     "recipe_stepsDescription": {
       "display": false
+    },
+    "ingredients_sellingMetrics":{
+        "display": false
+    },
+    "ingredients_tags":{
+        "display": false
+    },
+    "ingredients_minimumQuantity":{
+        "display": false
+    },
+    "ingredients_price":{
+        "display": false
     }
+
   },
   "properties": {
     "quantity": {

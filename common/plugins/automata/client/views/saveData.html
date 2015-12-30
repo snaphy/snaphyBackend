@@ -23,17 +23,18 @@
                     <button class="btn btn-sm btn-default "   type="button" ng-click="resetSavedForm(formInfo)">Reset data</button>
                 </div>
                 <div class="col-xs-6 text-right">
+                    <!-- ng-disabled removed as of now  ng-disabled="!enableButton(formInfo)"-->
                     <button
 
                         type="submit"
-                        ng-disabled="!enableButton(formInfo)"
+
                         class="btn btn-sm btn-default"
                         ng-click="saveForm(schema, formInfo, saveFormData, true)">
                             <i class="fa fa-save"></i>
                             Save
                     </button>
                     <button
-                        ng-disabled="!enableButton(formInfo)"
+                    
                         type="submit"
                         class="btn btn-sm bg-primary-dark"
                         style="color:#fff;"

@@ -101,7 +101,7 @@
   },
   "properties": {
     "date": {
-      "type": "date",
+      "type": "string",
       "defaultFn": "now",
       "template": {
         "type": "dummy"
@@ -201,6 +201,7 @@
       "foreignKey": ""
     }
   },
+  "hidden":["password"],
   "acls": [],
   "methods": []
 }

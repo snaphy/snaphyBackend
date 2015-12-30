@@ -473,7 +473,29 @@ angular.module($snaphy.getModuleName())
 
     formlyConfig.setType({
         name: 'dummy',
-        template: '<div></div>'
+        template:
+        '<div style="display:none" class="form-group">'+
+        '<div  ng-class="[options.templateOptions.colSize, options.templateOptions.color]">'+
+        '<div class="form-material" ng-class="options.templateOptions.color">'+
+        '<input  class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">'+
+        '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
+        '</div>'+
+        '</div>'+
+        '</div>',
+
+        link: function(scope, element, attrs) {
+            // ID PROPERTY IS NEEDED FOR VALIDATE TO WORK
+            if(scope.options.templateOptions){
+                if(!scope.options.templateOptions.colSize){
+                    scope.options.templateOptions.colSize = 'col-xs-12';
+                }
+            }//if
+
+            if(scope.model[scope.options.key] === ""){
+                //remove the option..
+                delete scope.model[scope.options.key];
+            }
+        }//link function..
     });
 
 

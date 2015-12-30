@@ -166,6 +166,10 @@ angular.module($snaphy.getModuleName())
 
                             } //for loop.
 
+                            if(columnDataId !== undefined){
+                                return true;
+                            }
+
 
 
                             var valuesList = $(iElement).find("input");

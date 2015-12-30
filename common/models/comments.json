@@ -116,6 +116,12 @@
     "customer_profilePic": {
       "display": false
     },
+    "customer_password": {
+      "display": false
+    },
+    "customer_date": {
+      "display": false
+    },
     "recipe_description": {
       "display": false
     },
@@ -135,6 +141,9 @@
       "display": false
     },
     "recipe_stepsImage": {
+      "display": false
+    },
+    "recipe_added": {
       "display": false
     },
     "recipe_stepsDescription": {
@@ -218,7 +227,7 @@
       "templateOptions": {
         "btnText": "Add Customer",
         "searchProp": "email",
-        "create": true
+        "create": false
       }
     },
     "recipe": {

@@ -19,7 +19,7 @@
             </div>
         </div>
         <div ng-if="showCreate()">
-            <div class="repeatsection" >
+            <div ng-if="to.create" class="repeatsection" >
                 <formly-form fields="to.fields"
                              model="model[options.key]"
                              form="form">

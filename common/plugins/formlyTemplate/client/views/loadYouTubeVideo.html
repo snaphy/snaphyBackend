@@ -1,6 +1,4 @@
 <div class="form-group">
-    {{youTubeUrl}}
-    {{scope.model[scope.options.key]}}
     <div  ng-class="[options.templateOptions.colSize, options.templateOptions.color]">
         <div class="form-material" ng-class="options.templateOptions.color">
             <input  class="form-control" ng-change="parseUrl()" type="text"  ng-class="options.templateOptions.class" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="youTubeUrl">

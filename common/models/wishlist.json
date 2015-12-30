@@ -12,6 +12,23 @@
             }
         }
     },
+    "tables": {
+        "customers_phoneNumber": {
+          "display": false
+        },
+        "customers_firstName": {
+          "display": false
+        },
+        "customers_lastName": {
+          "display": false
+        },
+        "customers_profilePic": {
+          "display": false
+        },
+        "customers_password": {
+          "display": false
+        }
+    },
     "validations": [],
     "relations": {
         "customers": {
