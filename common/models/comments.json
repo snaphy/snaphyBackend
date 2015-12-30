@@ -10,11 +10,7 @@
             "type": "date",
             "defaultFn": "now",
             "template": {
-                "type": "input",
-                "templateOptions": {
-                    "type": "text",
-                    "label": "Add date"
-                }
+                "type": "dummy"
             }
         },
         "status": {

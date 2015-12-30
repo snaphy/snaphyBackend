@@ -472,6 +472,11 @@ angular.module($snaphy.getModuleName())
     });
 
 
+    formlyConfig.setType({
+        name: 'dummy',
+        template: '<div></div>'
+    });
+
 
     formlyConfig.setType({
         name: 'singleFileUpload',

@@ -1,43 +1,192 @@
 {
-  "name": "Customer",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "username": {
-      "type": "string",
-      "required": false
+    "name": "Customer",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "email": {
-      "type": "string",
-      "required": false
+    "properties": {
+        "date": {
+            "type": "date",
+            "defaultFn": "now",
+            "template": {
+                "type": "dummy"
+            }
+        },
+        "phoneNumber": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "number",
+                    "label": "Enter  contact number",
+                    "id": "customerContact"
+                }
+            }
+        },
+        "email": {
+            "type": "string",
+            "required": false,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "email",
+                    "label": "Enter  email",
+                    "id": "customerEmail"
+                }
+            }
+        },
+        "firstName": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter first name",
+                    "id": "customerFirstName"
+                }
+            }
+        },
+        "lastName": {
+            "type": "string",
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter last name",
+                    "id": "customerLastName"
+                }
+            }
+        },
+        "password": {
+            "type": "string",
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "password",
+                    "label": "Enter password",
+                    "id": "customerPassword"
+                }
+            }
+        },
+        "profilePic": {
+            "type": "object",
+            "template": {
+              "type": "singleFileUpload",
+              "templateOptions": {
+                "label": "Add customer profile image",
+                "containerName": "profile",
+                "containerModel": "Container",
+                "bind": true
+              }
+            }
+        }
     },
-    "firstName": {
-      "type": "string",
-      "required": true
+    "widgets": [{
+        "label": "Total customers added",
+        "icon": "si-bar-chart",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$allTime",
+            "where": {},
+            "dateProp": "date"
+        }
+    }, {
+        "label": "Customers added today",
+        "fetchLocally": true,
+        "icon": "si-calendar",
+        "propObj": {
+            "type": "$today",
+            "where": {},
+            "dateProp": "date"
+        }
+    }, {
+        "label": "Customers added this week",
+        "icon": "si-graph",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$week",
+            "where":{},
+            "dateProp": "date"
+        }
+    }],
+    "filters": {
+        "date": {
+            "type": "$date",
+            "label": "Customer added between"
+        },
+        "email": {
+            "type": "$select",
+            "label": "Select customer by emailId",
+            "getOptionsFromColumn": true
+        }
+
     },
-    "lastName": {
-      "type": "string"
+    "tables":{
+        "profilePic":{
+            "display": false
+        }
     },
-    "profilePic": {
-      "type": "object"
-    }
-  },
-  "validations": [],
-  "relations": {
-    "recipes": {
-      "type": "hasMany",
-      "model": "Recipe",
-      "foreignKey": ""
+    "validations": [],
+    "validationsBackend": {
+      "rules": {
+        "phoneNumber": {
+          "required": true,
+          "minlength": "10",
+          "maxlength": "10",
+          "number": true
+        },
+        "email": {
+          "required": true,
+          "email": true
+        },
+        "firstName": {
+          "required": true,
+          "minlength": 5
+        },
+        "password": {
+          "required": true,
+          "minlength": 5
+        }
+      },
+      "messages": {
+        "phoneNumber": {
+          "required": "contact number is required",
+          "minlength": "Minimum permitted length is atleast 10",
+          "number": "Contact number must be a number"
+        },
+        "email": {
+          "required": "email is required"
+        },
+        "firstName": {
+          "required": "first name is required",
+          "minlength": "Minimum permitted length is atleast 5"
+        },
+        "password": {
+          "required": "password is required",
+          "minlength": "Minimum permitted length is atleast 5"
+        }
+      }
     },
-    "comments": {
-      "type": "hasMany",
-      "model": "Comments",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": []
+    "relations": {
+        "recipes": {
+            "type": "hasMany",
+            "model": "Recipe",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Recipe",
+                "searchProp": "name",
+                "create": false
+            }
+        },
+        "comments": {
+            "type": "hasMany",
+            "model": "Comments",
+            "foreignKey": ""
+        }
+    },
+    "acls": [],
+    "methods": []
 }
