@@ -271,6 +271,7 @@
         "type": "arrayValue",
         "templateOptions": {
           "btnText": "Add recipe steps",
+          "name": "step",
           "fields": [
             {
               "type": "input",

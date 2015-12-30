@@ -219,6 +219,20 @@
 
                         </filter-multi-select>
 
+                        <filter-array-objects
+                                options="{{filter.options}}"
+                                model-settings="schema"
+                                table-data="dataValues"
+                                filter-options="filter"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$arrayOfObjects'"
+                                search-prop="{{filter.searchProp}}">
+
+                        </filter-array-objects>
+
                         <filter-radio
                                 options="{{filter.options}}"
                                 table-id="automataTable"

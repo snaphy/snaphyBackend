@@ -100,7 +100,6 @@ angular.module($snaphy.getModuleName())
 
             $scope.toggleShow = function(){
                 $scope.hide = !$scope.hide;
-                console.log($scope.hide);
                 return $scope.hide;
             };
 
@@ -182,7 +181,7 @@ angular.module($snaphy.getModuleName())
                 function addNew() {
                     $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
                     var repeatsection = $scope.model[$scope.options.key];
-                    var lastSection = repeatsection[repeatsection.length - 1];
+                    //var lastSection = repeatsection[repeatsection.length - 1];
                     var newsection = {};
                     // if (lastSection) {
                     //     newsection = angular.copy(lastSection);
@@ -405,9 +404,9 @@ angular.module($snaphy.getModuleName())
                         //Now remove the file
                         files.splice(index, 1);
                         $scope.model[$scope.options.key].splice(index, 1);
-                        console.log(backUpFile);
+                        //console.log(backUpFile);
                         // Simple DELETE request example:
-                        console.log(filePath);
+                        //console.log(filePath);
 
                         if (dbService) {
                             dbService.removeFile({
@@ -556,7 +555,7 @@ angular.module($snaphy.getModuleName())
                 };
 
 
-                $scope.$watch('model[options.key]', function(value) {
+                $scope.$watch('model[options.key]', function() {
                     if (!$.isEmptyObject($scope.model[$scope.options.key])) {
                         var modelData = $scope.model[$scope.options.key];
                         if ($.isEmptyObject($scope.file)) {
@@ -586,7 +585,7 @@ angular.module($snaphy.getModuleName())
                     if ($newFiles === null) {
                         return false;
                     }
-                    console.log($files);
+                    //console.log($files);
 
                     //First initialize progress bar to zero..
                     $scope.addValue(0);
@@ -645,29 +644,29 @@ angular.module($snaphy.getModuleName())
                     if (backUpFile.result) {
                         var fileName = backUpFile.result.name;
                         var containerName = $scope.options.templateOptions.containerName;
-                        var filePath = '/api/containers/' + containerName + '/files/' + fileName;
+                        //var filePath = '/api/containers/' + containerName + '/files/' + fileName;
                         //Now remove the file
                         file = {};
                         $scope.model[$scope.options.key] = {};
-                        console.log(backUpFile);
+                        //console.log(backUpFile);
                         // Simple DELETE request example:
-                        console.log(filePath);
+                        //console.log(filePath);
 
                         if (dbService) {
                             dbService.removeFile({
                                 container: containerName,
                                 file: fileName
-                            }, function(values) {
-                                console.log("file successfully deleted");
+                            }, function() {
+                                //console.log("file successfully deleted");
                                 SnaphyTemplate.notify({
                                     message: "Image successfully deleted from server.",
                                     type: 'success',
                                     icon: 'fa fa-check',
                                     align: 'right'
                                 });
-                            }, function(err) {
-                                console.error("error deleting file.");
-                                console.error(err);
+                            }, function() {
+                                //console.error("error deleting file.");
+                                //console.error(err);
                                 $timeout(function() {
                                     //Add backup file ..
                                     $scope.file = backUpFile;
@@ -685,8 +684,8 @@ angular.module($snaphy.getModuleName())
                             $http({
                                 method: 'DELETE',
                                 url: url.delete,
-                            }).then(function successCallback(response) {
-                                console.log("File successfully deleted.");
+                            }).then(function successCallback() {
+                                // console.log("File successfully deleted.");
                                 SnaphyTemplate.notify({
                                     message: "Image successfully deleted from server.",
                                     type: 'success',
@@ -694,7 +693,7 @@ angular.module($snaphy.getModuleName())
                                     align: 'right'
                                 });
                             }, function errorCallback(response) {
-                                console.log(response);
+                                //console.log(response);
                                 //Add backup file ..
                                 $scope.file = backUpFile;
                                 SnaphyTemplate.notify({
@@ -708,7 +707,7 @@ angular.module($snaphy.getModuleName())
 
                     } else {
                         //simply remove the file
-                        files = {};
+                        $scope.files = {};
                         $scope.model[$scope.options.key] = {};
                     }
                 };
@@ -736,7 +735,6 @@ angular.module($snaphy.getModuleName())
                     //Now the video id.
                     var video_id = scope.youTubeUrl.split('v=')[1];
                     if(!video_id){
-                        console.log(scope.model[scope.options.key]);
                         scope.model[scope.options.key] = "";
                         return false;
                     }

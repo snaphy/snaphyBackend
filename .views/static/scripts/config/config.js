@@ -139,11 +139,22 @@ angular.module($snaphy.getModuleName())
                     }, function errorCallback(response) {
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
-                        console.error(response);
+                        //console.error(response);
                     });
                 }
 
+            },
+
+            link: function(scope, element, attrs){
+                //Add many select..
+                if(scope.option.templateOptions.multiple === true){
+                    //add multiple attrs..
+                    var selectElem = $(element).find('select');
+                    //Now add attrs.
+                    $(selectElem).attr('multiple', '');
+                }
             }
+
         });
 
     }]);//End Run

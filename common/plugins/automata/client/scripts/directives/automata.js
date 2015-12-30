@@ -632,6 +632,249 @@ angular.module($snaphy.getModuleName())
 
 
 
+    /**
+     *Directive for defining filters $multiSelect
+     * */
+    .directive('filterArrayObjects', ['$http', function($http) {
+            //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
+            return {
+                restrict: 'E',
+                scope: {
+                    "modelSettings" : "=modelSettings",
+                    "id"            : "@tableId",
+                    "columnName"    : "@columnName",
+                    "label"         : "@label",
+                    "data"          : "=data",
+                    "getOptions"    : "@get",
+                    "staticOptions" : "@options",
+                    "tableData"     : "=tableData",
+                    "filterOptions" : "=filterOptions",
+                    "searchProp"    : "@searchProp"
+                },
+                replace: true,
+                template: '<div class="form-group">' +
+                    '<label class="col-md-4 control-label" for="example-select2">{{label}}</label>' +
+                    '<div class="col-md-8">' +
+                    '<select data-allow-clear="true" class="js-select2 form-control" ng-model="data.value" style="width: 100%;" data-placeholder="Choose many.." multiple>' +
+                    '<option ng-repeat="option in data.options | unique:\'name\'" value="{{option.name}}">{{option.name}}</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '</div>',
+                link: function(scope, iElement, iAttrs) {
+                        //First get the table id.
+                        if (scope.id === "") {
+                            console.error("An table Id value is needed for filters to operate.");
+                            return null;
+                        }
+
+
+                        scope.data = {};
+                        //initializing options..
+
+
+                        //Removing the # tag from id if placed. to avoid duplicity of #
+                        scope.id = scope.id.replace(/^\#/, '');
+                        scope.tableId = '#' + scope.id;
+
+
+                        //Now applying date change event of the table..
+                        $($(iElement).find('.js-select2')).change(function() {
+                            var table = $(scope.tableId).DataTable();
+
+                            //only draw if value is legitimate..
+                            if (scope.data.value) {
+                                if (scope.data.value.length) {
+                                    //Now redraw the tables..
+                                    table.draw();
+                                } else {
+                                    scope.data.value = null;
+                                    table.draw();
+                                }
+                            }
+                        });
+
+
+                        if (scope.staticOptions) {
+                            if (scope.staticOptions.length) {
+
+                                //Load static options..
+                                scope.data.options = JSON.parse(scope.staticOptions);
+                            }
+                            //scope.data.options = scope.staticOptions;
+                        }
+
+
+                        //Now load options..
+                        if (scope.getOptions) {
+                            $http({
+                                method: 'GET',
+                                url: scope.getOptions
+                            }).then(function successCallback(response) {
+                                //Select options downloaded successfully..
+                                //Loading options..
+                                response.forEach(function(element, index) {
+                                    scope.data.options.push(element);
+                                });
+
+                            }, function errorCallback(response) {
+                                // called asynchronously if an error occurs
+                                // or server returns response with an error status.
+                                console.error(response);
+                            });
+                        }
+
+                        //If data is to be fetched from some table column.
+                        if (scope.filterOptions.getOptionsFromColumn) {
+                            var relatedColumnName;
+                            //If the column is a key name from a related model.
+                            var isRelationModel;
+
+                            //ForEach loop for each table object..
+                            scope.tableData.forEach(function(rowObject, index) {
+                                var rowKey = scope.$parent.getKey(rowObject, scope.columnName);
+
+                                if (rowObject[rowKey] === undefined) {
+                                    isRelationModel = true;
+                                } else {
+                                    isRelationModel = false;
+                                }
+
+                                //options format will be {id:1, name: foo}
+                                var rowValue = rowObject[rowKey];
+
+                                //The the column is a related column..
+                                if (isRelationModel) {
+                                    relatedColumnName = scope.$parent.getColumnKey(scope.columnName);
+                                    rowValue = rowObject[relatedColumnName];
+                                }
+
+                                if(rowValue !== undefined){
+                                    //Since rowValue is array of objects.
+                                    rowValue.forEach(function(element){
+                                        if(!element){
+                                            return false;
+                                        }
+
+                                        var value = element[scope.searchProp];
+                                        //Now prepare the object..
+                                        var option = {
+                                            name: value
+                                        };
+                                        if(rowValue){
+                                            scope.data.options = scope.data.options || [];
+                                            //Now push the options to populate finally...
+                                            scope.data.options.push(option);
+                                        }
+                                    });
+                                }
+
+
+                            });
+                        } //if
+
+                        //Now add a Reset method to the filter..
+                        scope.$parent.addResetMethod(function() {
+                            scope.data.value = null;
+                            //Now reinitialize the
+                            setTimeout(function() {
+                                $($(iElement).find('select')).select2();
+                            }, 0);
+                        });
+
+
+                        //Now load search filters..
+                        var allowFilter = [scope.id];
+
+                        //Now setting the retailer added filter...
+                        $.fn.DataTable.ext.search.push(
+                            function(settings, data, dataIndex) {
+                                // check if current table is part of the allow list
+                                if ($.inArray(settings.nTable.getAttribute('id'), allowFilter) == -1) {
+                                    // if not table should be ignored
+                                    return true;
+                                }
+                                var columnDataId;
+                                var selectValue = "";
+
+                                var index = 0;
+                                //Now get the column id where the wanted data is placed..
+                                for (var i = 0; i < scope.modelSettings.header.length; i++) {
+
+                                    var skip = false;
+                                    //Skip the column where table display == false..
+                                    if (scope.modelSettings.tables) {
+                                        var tableProperties = scope.modelSettings.tables;
+                                        var header = scope.modelSettings.header[i];
+                                        if (tableProperties[header]) {
+                                            var tableProp = tableProperties[header];
+
+                                            if (tableProp) {
+                                                if (tableProp.display === undefined || tableProp.display === true) {
+
+                                                    skip = false;
+                                                } else {
+
+                                                    skip = true;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (skip) {
+                                        //Do nothing here..
+                                    } else {
+                                        if (scope.modelSettings.header[i] === scope.columnName) {
+                                            columnDataId = index;
+                                            break;
+                                        }
+                                        index++;
+                                    }
+
+                                } //for loop.
+
+                                //Parsing value for column Retailers added date..
+                                var columnValue = data[columnDataId];
+
+                                //Getting the orderMin value..
+                                if (scope.data.value && columnValue) {
+                                    var matchFound = false;
+                                    console.log(selectValue, scope.data.value);
+
+                                    for(var j=0; j<scope.data.value.length; j++ ){
+                                        var selectedData = scope.data.value[j];
+                                        //Now run a loop getting column array value of objects..
+                                        for(var x = 0; x< columnValue.length; x){
+                                            var searchObj = columnValue[x];
+                                            if(searchObj){
+                                                var searchVal = searchObj[scope.searchProp];
+                                                if(selectedData.toString().toLowerCase().trim() === searchVal.toString().toLowerCase().trim()){
+                                                    matchFound = true;
+                                                    break;
+                                                }
+                                            }
+
+                                        }
+
+                                        if(matchFound){
+                                            break;
+                                        }
+                                    }
+
+                                    return matchFound;
+
+                                } else {
+                                    return true; //Show all rows..
+                                }
+                            }
+                        ); //End of dataTable function for retailer added filter.....
+                    } //link function..
+            }; //return
+        }]) //filterDate directive
+
+
+
+
+
 /**
  *Directive for defining filters $radio
  * */

@@ -1,47 +1,100 @@
 {
-  "name": "Ingredients",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true
+    "name": "Ingredients",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "sellingMetrics": {
-      "type": "string",
-      "required": true
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter Ingredient name",
+                    "id": "recipeIngredient"
+                }
+            }
+        },
+        "sellingMetrics": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter selling metrics like kg/gm/litre",
+                    "id": "sellingMetrics"
+                }
+            }
+        },
+        "minimumQuantity": {
+            "type": "number",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "number",
+                    "label": "Enter the minimum quantity of ingredient availaible at your selling store",
+                    "id": "ingredientMinimumQuantity"
+                }
+            }
+        },
+        "price": {
+            "type": "number",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "number",
+                    "label": "Enter the price of the minimum quantity ingredient",
+                    "id": "ingredientPrice"
+                }
+            }
+        },
+        "tags": {
+            "type": [
+                "object"
+            ],
+            "template": {
+                "type": "arrayValue",
+                "templateOptions": {
+                    "name": "tags",
+                    "btnText": "Add Tags",
+                    "id": "ingredientPrice",
+                    "fields": [{
+                        "type": "input",
+                        "key": "name",
+                        "templateOptions": {
+                            "type": "text",
+                            "label": "Enter ingredient other local name."
+                        }
+                    }]
+                }
+            }
+        }
     },
-    "price": {
-      "type": "number",
-      "required": true
+    "validations": [],
+    "relations": {
+        "ingredientCategory": {
+            "type": "belongsTo",
+            "model": "IngredientCategory",
+            "foreignKey": "",
+            "templateOptions": {
+              "btnText": "Add Ingredient Category",
+              "searchProp": "name",
+              "create": true
+            }
+        },
+        "recipes": {
+            "type": "hasMany",
+            "model": "Recipe",
+            "foreignKey": "",
+            "through": "RecipeIngredients"
+        }
     },
-    "minimumQuantity": {
-      "type": "number",
-      "required": true
-    },
-    "tags": {
-      "type": [
-        "string"
-      ]
-    }
-  },
-  "validations": [],
-  "relations": {
-    "ingredientCategory": {
-      "type": "belongsTo",
-      "model": "IngredientCategory",
-      "foreignKey": ""
-    },
-    "recipes": {
-      "type": "hasMany",
-      "model": "Recipe",
-      "foreignKey": "",
-      "through": "RecipeIngredients"
-    }
-  },
-  "acls": [],
-  "methods": []
+    "acls": [],
+    "methods": []
 }
