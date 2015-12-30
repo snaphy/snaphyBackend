@@ -1,27 +1,100 @@
 {
-  "name": "Priority",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "priority": {
-      "type": "string",
-      "required": true
+    "name": "Priority",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "totalViews": {
-      "type": "number"
-    }
-  },
-  "validations": [],
-  "relations": {
-    "recipes": {
-      "type": "hasOne",
-      "model": "Recipe",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": []
+    "properties": {
+        "priority": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "Select priority for a recipe",
+                    "id": "recipePriorityType",
+                    "options": [
+                        "normal",
+                        "medium",
+                        "high"
+                    ]
+                }
+            }
+        },
+        "totalViews": {
+            "type": "number"
+        }
+    },
+    "validationsBackend": {
+      "rules": {
+        "priority": {
+          "required": true
+        }
+      },
+      "messages": {
+        "priority": {
+          "required": "Priority is required"
+        }
+      }
+    },
+    "validations": [],
+    "relations": {
+        "recipes": {
+            "type": "hasOne",
+            "model": "Recipe",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Recipe",
+                "searchProp": "name",
+                "create": false
+            }
+        }
+    },
+    "tables":{
+        "recipes_description":{
+            "display": false
+        },
+        "recipes_mainImage":{
+            "display": false
+        },
+        "recipes_recipeType":{
+            "display": false
+        },
+        "recipes_servings":{
+            "display": false
+        },
+        "recipes_status":{
+            "display": false
+        },
+        "recipes_youtubeVideoId":{
+            "display": false
+        },
+        "recipes_stepsImage":{
+            "display": false
+        },
+        "recipes_stepsDescription":{
+            "display": false
+        }
+    },
+    "filters": {
+        "rating": {
+            "type": "$select",
+            "label": "Select recipes by priority",
+            "getOptionsFromColumn": false,
+            "options": [{
+                    "id": "1",
+                    "name": "normal"
+                }, {
+                    "id": "2",
+                    "name": "medium"
+                }, {
+                    "id": "3",
+                    "name": "high"
+                }
+            ]
+        }
+    },
+    "acls": [],
+    "methods": []
 }

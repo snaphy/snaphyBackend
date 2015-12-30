@@ -77,6 +77,82 @@
         }
     },
     "validations": [],
+    "validationsBackend": {
+      "rules": {
+        "price": {
+          "required": true,
+          "minlength": "1",
+          "maxlength": "5",
+          "number": true
+        },
+        "minimumQuantity": {
+          "required": true,
+          "minlength": "1",
+          "maxlength": "5",
+          "number": true
+        },
+        "name": {
+          "required": true,
+          "minlength": 3
+        },
+        "sellingMetrics": {
+          "required": true,
+          "minlength": 2
+        }
+      },
+      "messages": {
+        "price": {
+          "required": "Ingredient price  is required",
+          "minlength": "Minimum permitted length is atleast 1",
+          "number": "Price must be a number"
+        },
+        "minimumQuantity": {
+          "required": "Ingredient minimum quantity  is required",
+          "minlength": "Minimum permitted length is atleast 1",
+          "number": "minimum quantity must be a number"
+        },
+        "name": {
+          "required": "Ingredient name is required",
+          "minlength": "Minimum permitted length is atleast 3"
+        },
+        "sellingMetrics": {
+          "required": "Selling Metrics is required",
+          "minlength": "Minimum permitted length is atleast 2"
+        }
+      }
+    },
+
+    "filters": {
+        "tags": {
+            "type": "$arrayOfObjects",
+            "label": "Search Ingredient by Tags",
+            "searchProp": "name",
+            "getOptionsFromColumn": true
+        },
+        "sellingMetrics":{
+            "type": "$select",
+            "label": "Select Ingredient by Selling metrics",
+            "getOptionsFromColumn": true,
+            "options": [
+              {
+                "id": "1",
+                "name": "kg"
+              },
+              {
+                "id": "2",
+                "name": "gm"
+              },
+              {
+                "id": "3",
+                "name": "litre"
+              },
+              {
+                "id": "4",
+                "name": "ml"
+              }
+            ]
+        }
+    },
     "relations": {
         "ingredientCategory": {
             "type": "belongsTo",
