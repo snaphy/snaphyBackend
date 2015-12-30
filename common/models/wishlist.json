@@ -1,0 +1,40 @@
+{
+    "name": "Wishlist",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "id": {
+            "template": {
+                "type": "dummy"
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "customers": {
+            "type": "hasOne",
+            "model": "Customer",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Customer",
+                "searchProp": "email",
+                "create": false
+            }
+        },
+        "recipes": {
+            "type": "hasAndBelongsToMany",
+            "model": "Recipe",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Recipe",
+                "searchProp": "name",
+                "create": false
+            }
+        }
+    },
+    "acls": [],
+    "methods": []
+}

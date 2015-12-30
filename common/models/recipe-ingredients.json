@@ -5,18 +5,113 @@
   "options": {
     "validateUpsert": true
   },
+  "filters": {
+    "recipeMetric": {
+      "type": "$select",
+      "label": "Select the recipe metric",
+      "getOptionsFromColumn": true
+    }
+  },
+  "validationsBackend": {
+    "rules": {
+      "quantity": {
+        "required": true,
+        "minlength": "1",
+        "maxlength": "5",
+        "number": true
+      },
+      "recipeMetric": {
+        "required": true,
+        "minlength": 2
+      }
+    },
+    "messages": {
+      "quantity": {
+        "required": "Ingredient quantity  is required",
+        "minlength": "Minimum permitted length is atleast 1",
+        "number": "quantity must be a number"
+      },
+      "recipeMetric": {
+        "required": "Recipe Metrics is required",
+        "minlength": "Minimum permitted length is atleast 2"
+      }
+    }
+  },
+  "tables": {
+    "recipe_description": {
+      "display": false
+    },
+    "recipe_mainImage": {
+      "display": false
+    },
+    "recipe_recipeType": {
+      "display": false
+    },
+    "recipe_servings": {
+      "display": false
+    },
+    "recipe_status": {
+      "display": false
+    },
+    "recipe_youtubeVideoId": {
+      "display": false
+    },
+    "recipe_stepsImage": {
+      "display": false
+    },
+    "recipe_stepsDescription": {
+      "display": false
+    }
+  },
   "properties": {
     "quantity": {
       "type": "number",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "label": "Enter the quantity of recipe ingredient",
+          "id": "quantity"
+        }
+      }
     },
     "recipeMetric": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter the recipe metric like tablespoon, pinch, bowl etc",
+          "id": "recipeMetric"
+        }
+      }
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "recipe": {
+      "type": "belongsTo",
+      "model": "Recipe",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Recipe",
+        "searchProp": "name",
+        "create": false
+      }
+    },
+    "ingredients": {
+      "type": "belongsTo",
+      "model": "Ingredients",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Ingredient",
+        "searchProp": "name",
+        "create": true
+      }
+    }
+  },
   "acls": [],
   "methods": []
 }

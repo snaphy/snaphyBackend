@@ -1,54 +1,54 @@
 {
-    "name": "Category",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "Category",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "tables": {
+    "name": {
+      "tag": {
+        "breakfast": "label-warning",
+        "dinner": "label-primary",
+        "lunch": "label-danger"
+      }
+    }
+  },
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "3"
+      }
     },
-    "properties": {
-        "name": {
-            "type": "string",
-            "required": true,
-            "template": {
-              "type": "input",
-              "templateOptions": {
-                "type": "text",
-                "label": "Enter recipe category name"
-              }
-            }
+    "messages": {
+      "name": {
+        "required": "Category is required",
+        "minlength": "minimum required length is 3"
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter recipe category name"
         }
-    },
-    "tables": {
-        "name": {
-            "tag": {
-                "breakfast": "label-warning",
-                "dinner": "label-primary",
-                "lunch": "label-danger"
-            }
-        }
-    },
-    "validations": [],
-    "validationsBackend":{
-        "rules": {
-          "name": {
-            "required": true,
-            "minlength": "3"
-          }
-        },
-        "messages": {
-          "name": {
-            "required": "Category is required",
-            "minlength": "minimum required length is 3"
-          }
-        }
-    },
-    "relations": {
-        "recipes": {
-            "type": "hasMany",
-            "model": "Recipe",
-            "foreignKey": ""
-        }
-    },
-    "acls": [],
-    "methods": []
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "recipes": {
+      "type": "hasMany",
+      "model": "Recipe",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
 }

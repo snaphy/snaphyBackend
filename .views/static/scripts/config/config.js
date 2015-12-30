@@ -143,16 +143,6 @@ angular.module($snaphy.getModuleName())
                     });
                 }
 
-            },
-
-            link: function(scope, element, attrs){
-                //Add many select..
-                if(scope.option.templateOptions.multiple === true){
-                    //add multiple attrs..
-                    var selectElem = $(element).find('select');
-                    //Now add attrs.
-                    $(selectElem).attr('multiple', '');
-                }
             }
 
         });

@@ -42,63 +42,86 @@
         }
       ]
     },
-    "servings": {
+    "priorities_priority": {
       "type": "$multiSelect",
-      "label": "Select servings",
-      "getOptionsFromColumn": true,
+      "label": "Select recipe by priority",
+      "getOptionsFromColumn": false,
       "options": [
         {
           "id": "1",
-          "name": "1"
+          "name": "normal"
         },
         {
           "id": "2",
-          "name": "2"
+          "name": "medium"
         },
         {
           "id": "3",
-          "name": "3"
-        },
-        {
-          "id": "4",
-          "name": "4"
+          "name": "high"
         }
       ]
     }
   },
-    "tables": {
-        "mainImage": {
-          "display": false
-        },
-        "recipeSteps": {
-          "display": false
-        },
-        "stepsImage": {
-          "display": false
-        },
-        "stepsDescription": {
-          "display": false
-        },
-        "status": {
-            "tag": {
-                "rejected": "label-warning",
-                "publish": "label-primary",
-                "onhold": "label-danger"
-            }
-        },
-        "employee_firstName": {
-          "display": false
-        },
-        "employee_email": {
-          "display": false
-        },
-        "employee_lastName": {
-          "display": false
-        },
-        "youtubeVideoId": {
-          "display": false
-        }
+  "tables": {
+    "mainImage": {
+      "display": false
     },
+    "recipeSteps": {
+      "display": false
+    },
+    "stepsImage": {
+      "display": false
+    },
+    "stepsDescription": {
+      "display": false
+    },
+    "description":{
+        "display": false
+    },
+    "status": {
+      "tag": {
+        "rejected": "label-warning",
+        "publish": "label-primary",
+        "onhold": "label-danger"
+      }
+    },
+    "employee_firstName": {
+      "display": false
+    },
+    "employee_email": {
+      "display": false
+    },
+    "employee_lastName": {
+      "display": false
+    },
+    "youtubeVideoId": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "customer_firstName": {
+      "display": false
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_profilePic": {
+      "display": false
+    },
+    "customer_password": {
+      "display": false
+    },
+    "customer_date": {
+      "display": false
+    },
+    "added":{
+        "date":true
+    },
+    "servings":{
+        "display": false
+    }
+  },
   "widgets": [
     {
       "label": "Total Recipes Added",
@@ -213,7 +236,7 @@
       "type": "date",
       "defaultFn": "now",
       "template": {
-          "type": "dummy"
+        "type": "dummy"
       }
     },
     "status": {
@@ -288,51 +311,76 @@
   },
   "validations": [],
   "relations": {
-    "employee": {
-      "type": "belongsTo",
-      "model": "Employee",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Employee",
-        "searchProp": "username",
-        "create": true
-      }
-    },
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "create": true
+      }
     },
     "cuisines": {
       "type": "hasAndBelongsToMany",
       "model": "Cuisines",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Cuisines",
+        "searchProp": "name",
+        "create": true
+      }
     },
     "priorities": {
       "type": "hasOne",
       "model": "Priority",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Priority",
+        "searchProp": "priority",
+        "create": true
+      }
     },
     "category": {
       "type": "belongsTo",
       "model": "Category",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Category",
+        "searchProp": "name",
+        "create": true
+      }
     },
     "comments": {
       "type": "hasMany",
       "model": "Comments",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Comment",
+        "searchProp": "comment",
+        "create": true
+      }
     },
     "recipeTags": {
       "type": "hasAndBelongsToMany",
       "model": "RecipeTag",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Tags",
+        "searchProp": "name",
+        "create": true
+      }
     },
     "ingredients": {
       "type": "hasMany",
       "model": "Ingredients",
       "foreignKey": "",
       "through": "RecipeIngredients"
+    },
+    "wishlists": {
+      "type": "hasAndBelongsToMany",
+      "model": "Wishlist",
+      "foreignKey": ""
     }
   },
   "acls": [],

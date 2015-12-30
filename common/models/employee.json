@@ -186,16 +186,6 @@
         "create": true,
         "btnText": "Add Employee Details"
       }
-    },
-    "recipes": {
-      "type": "hasMany",
-      "model": "Recipe",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add recipes",
-        "searchProp": "name",
-        "create": true
-      }
     }
   },
   "acls": [

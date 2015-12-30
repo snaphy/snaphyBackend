@@ -107,18 +107,27 @@
                                                    colKey      = getKey(rowObject, header);
                                                    tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"
                                         ng-repeat="header in schema.header" >
-
+                                    
                                         <span data-sort="{{getColValue(rowObject, header)}}"  data-filter="{{getColValue(rowObject, header)}}" ng-if="colType === '[object String]'">
                                             <span ng-if="tableConfig.onClick !== undefined">
                                                 <!--Display link here..-->
                                                 <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{getColValue(rowObject, header)}}</a>
                                             </span>
 
+                                            <span ng-if="tableConfig.date">
+                                                <!--Display link here..-->
+                                                <span
+                                                    data-order="{{getColValue(rowObject, header)}}"
+                                                    data-search="{{getColValue(rowObject, header)}}" >
+                                                    {{getColValue(rowObject, header)| date:'MM/dd/yyyy'}}
+                                                </span>
+                                            </span>
+
                                             <span ng-init="labelType = tableConfig.tag[getColValue(rowObject, header)]" ng-if="tableConfig.tag !== undefined">
                                                 <span ng-if="getTagInfo(schema.tables, colKey, rowObject, header) !== undefined" class="label" ng-class="getTagInfo(schema.tables, colKey, rowObject, header)" >{{getColValue(rowObject, header)}}</span>
                                                 <span ng-if="getTagInfo(schema.tables, colKey, rowObject, header) === undefined" class="label label-default">{{getColValue(rowObject, header)}}</span>
                                             </span>
-                                            <span ng-if="tableConfig.tag === undefined && tableConfig.onClick === undefined">
+                                            <span ng-if="tableConfig.tag === undefined && tableConfig.onClick === undefined && !tableConfig.date">
                                                 {{getColValue(rowObject, header)}}
                                             </span>
                                         </span>
@@ -272,7 +281,7 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div ng-if="schema.validations" class="block-content block-content-narrow">
-                    {{saveFormData}}
+                    <!-- {{saveFormData}} -->
                     <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
 

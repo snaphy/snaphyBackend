@@ -61,7 +61,7 @@ angular.module($snaphy.getModuleName())
  * */
 //$date
 .directive('filterDate', [function() {
-        //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
+
         return {
             restrict: 'E',
             scope: {
@@ -139,11 +139,17 @@ angular.module($snaphy.getModuleName())
                                         var tableProp = tableProperties[header];
 
                                         if (tableProp) {
-                                            if (tableProp.display) {
-                                                skip = false;
-                                            } else {
-                                                skip = true;
+                                            if(tableProp.display !== undefined){
+                                                if (tableProp.display) {
+                                                    skip = false;
+                                                } else {
+                                                    skip = true;
+                                                }
                                             }
+                                            else{
+                                                skip = false;
+                                            }
+
                                         }
                                     }
                                 }
@@ -667,15 +673,11 @@ angular.module($snaphy.getModuleName())
                             return null;
                         }
 
-
                         scope.data = {};
-                        //initializing options..
-
 
                         //Removing the # tag from id if placed. to avoid duplicity of #
                         scope.id = scope.id.replace(/^\#/, '');
                         scope.tableId = '#' + scope.id;
-
 
                         //Now applying date change event of the table..
                         $($(iElement).find('.js-select2')).change(function() {
@@ -693,14 +695,11 @@ angular.module($snaphy.getModuleName())
                             }
                         });
 
-
                         if (scope.staticOptions) {
                             if (scope.staticOptions.length) {
-
                                 //Load static options..
                                 scope.data.options = JSON.parse(scope.staticOptions);
                             }
-                            //scope.data.options = scope.staticOptions;
                         }
 
 
@@ -794,7 +793,6 @@ angular.module($snaphy.getModuleName())
                                     return true;
                                 }
                                 var columnDataId;
-                                var selectValue = "";
 
                                 var index = 0;
                                 //Now get the column id where the wanted data is placed..
@@ -834,16 +832,16 @@ angular.module($snaphy.getModuleName())
 
                                 //Parsing value for column Retailers added date..
                                 var columnValue = data[columnDataId];
-
+                                columnValue = JSON.parse(columnValue);
                                 //Getting the orderMin value..
                                 if (scope.data.value && columnValue) {
                                     var matchFound = false;
-                                    console.log(selectValue, scope.data.value);
 
                                     for(var j=0; j<scope.data.value.length; j++ ){
                                         var selectedData = scope.data.value[j];
+
                                         //Now run a loop getting column array value of objects..
-                                        for(var x = 0; x< columnValue.length; x){
+                                        for(var x = 0; x< columnValue.length; x++){
                                             var searchObj = columnValue[x];
                                             if(searchObj){
                                                 var searchVal = searchObj[scope.searchProp];

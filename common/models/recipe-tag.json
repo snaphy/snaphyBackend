@@ -5,10 +5,32 @@
   "options": {
     "validateUpsert": true
   },
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": 3
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Ingredient name is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      }
+    }
+  },
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter recipe search tags",
+          "id": "recipeTag"
+        }
+      }
     }
   },
   "validations": [],
@@ -16,7 +38,12 @@
     "recipes": {
       "type": "hasAndBelongsToMany",
       "model": "Recipe",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Recipe",
+        "searchProp": "name",
+        "create": false
+      }
     }
   },
   "acls": [],

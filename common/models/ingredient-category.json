@@ -1,50 +1,51 @@
 {
-    "name": "IngredientCategory",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "IngredientCategory",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": 3
+      }
     },
-    "properties": {
-        "name": {
-            "type": "string",
-            "required": true,
-            "template": {
-                "type": "input",
-                "templateOptions": {
-                    "type": "text",
-                    "label": "Enter ingredients category",
-                    "id": "categoryName"
-                }
-            }
+    "messages": {
+      "name": {
+        "required": "Catrgory name is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter ingredients category",
+          "id": "categoryName"
         }
-    },
-    "validations": [],
-    "relations": {
-        "ingredients": {
-            "type": "hasMany",
-            "model": "Ingredients",
-            "foreignKey": "",
-            "templateOptions": {
-              "btnText": "Add Ingredients to category",
-              "searchProp": "name",
-              "create": true
-            }
-        }
-    },
-    "validationsBackend": {
-      "rules": {
-        "name": {
-          "required": true,
-          "minlength": 3
-        }
-      },
-      "messages": {
-        "name": {
-          "required": "Catrgory name is required",
-          "minlength": "Minimum permitted length is atleast 3"
-        }
-    },
-    "acls": [],
-    "methods": []
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "ingredients": {
+      "type": "hasMany",
+      "model": "Ingredients",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Ingredients to category",
+        "searchProp": "name",
+        "create": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": []
 }

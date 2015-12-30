@@ -4,7 +4,7 @@
 (function() {
     'use strict';
 })();
-/*global jslint browser: true, $snaphy*/
+/*global $snaphy*/
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
     "defaultTemplate": true,
@@ -18,7 +18,10 @@ var settings = {
         "Cuisines",
         "IngredientCategory",
         "Ingredients",
-        "Priority"
+        "Priority",
+        "RecipeIngredients",
+        "RecipeTag",
+        "Wishlist"
     ]
 };
 
