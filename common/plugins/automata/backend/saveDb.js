@@ -56,7 +56,8 @@ var addSaveMethod = function(app, modelName){
         //Now save/update the data..
         modelObj.upsert(data)
         .then(function(dataInstance){
-
+            console.log(dataInstance);
+            console.log("\n\n\n");
             console.log("Main data successfully updated");
             saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include,  callback);
         })

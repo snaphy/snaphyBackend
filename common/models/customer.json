@@ -46,7 +46,13 @@
       "type": "$select",
       "label": "Select customer by emailId",
       "getOptionsFromColumn": true
+    },
+    "phoneNumber": {
+      "type": "$select",
+      "label": "Select customer by phone number",
+      "getOptionsFromColumn": true
     }
+
   },
   "tables": {
     "profilePic": {

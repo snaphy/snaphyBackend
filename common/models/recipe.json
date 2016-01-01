@@ -195,7 +195,7 @@
       }
     },
     "recipeType": {
-      "type": "object",
+      "type": "string",
       "required": false,
       "template": {
         "type": "selectString",

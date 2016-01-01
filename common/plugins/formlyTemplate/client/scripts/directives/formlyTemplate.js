@@ -64,7 +64,6 @@ angular.module($snaphy.getModuleName())
                 }, //load function..
 
                 onItemAdd: function(value, $item){
-                    console.log("i am getting add");
                     var select = $(iElm).selectize();
                     var selectize = select[0].selectize;
                     //Add this value to the scope.
@@ -189,8 +188,7 @@ angular.module($snaphy.getModuleName())
                     });
                 }, //load function..
 
-                onItemAdd: function(value, $item){
-                    console.log($item[0]);
+                onItemAdd: function(value){
                     var select = $(iElm).selectize();
                     var selectize = select[0].selectize;
                     //Add this value to the scope.
