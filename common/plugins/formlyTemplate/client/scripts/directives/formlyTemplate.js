@@ -64,6 +64,7 @@ angular.module($snaphy.getModuleName())
                 }, //load function..
 
                 onItemAdd: function(value, $item){
+                    console.log("i am getting add");
                     var select = $(iElm).selectize();
                     var selectize = select[0].selectize;
                     //Add this value to the scope.
@@ -80,6 +81,46 @@ angular.module($snaphy.getModuleName())
 
                 }
             }); //END OF Selectize function..
+
+            //adding items programatically..
+            function addValue(item){
+                var select = $(iElm).selectize();
+                var selectize = select[0].selectize;
+                var obj = {};
+                obj.id = item.id;
+                obj[scope.searchProperty] = item[scope.searchProperty];
+
+                selectize.addOption(obj);
+                selectize.addItem(item.id);
+            }
+
+
+            scope.$watch('value', function(){
+                if(!$.isEmptyObject(scope.value)){
+                    //check if the selectize has that value in options if not then load it..
+                    var select = $(iElm).selectize();
+                    var selectize = select[0].selectize;
+                    //Add this value to the scope.
+                    var val = $.map(selectize.items, function(value) {
+                        return selectize.options[value];
+                    });
+                    if(val.length === 0){
+                        //Now check if the model has value or not..
+                        if(!$.isEmptyObject(scope.value)){
+                            //Now add data
+                            addValue(scope.value);
+                        }
+                    }
+                }
+                else{
+                    $timeout(function(){
+                        var select = $(iElm).selectize();
+                        var selectize = select[0].selectize;
+                        selectize.clear();
+                    }, 0);
+                }
+
+            });
 
         } //LInk  function
     }; //END Return

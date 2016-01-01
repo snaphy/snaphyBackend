@@ -238,6 +238,7 @@ angular.module($snaphy.getModuleName())
                 "getOptions": "@get",
                 "staticOptions": "@options",
                 "tableData": "=tableData",
+                "dataType": "=dataType",
                 "filterOptions": "=filterOptions"
             },
             replace: true,
@@ -250,14 +251,14 @@ angular.module($snaphy.getModuleName())
                 '</select>' +
                 '</div>' +
                 '</div>',
-            link: function(scope, iElement, iAttrs) {
-                    console.log(scope.staticOptions);
+            link: function(scope, iElement) {
                     //First get the table id.
                     if (scope.id === "") {
                         console.error("An table Id value is needed for filters to operate.");
                         return null;
                     }
 
+                    console.log(scope.filterOptions);
 
                     scope.data = {};
                     //initializing options..
@@ -278,7 +279,7 @@ angular.module($snaphy.getModuleName())
 
                     if (scope.staticOptions !== undefined) {
                         if (scope.staticOptions.length) {
-                            console.log(JSON.parse(scope.staticOptions));
+                            //console.log(JSON.parse(scope.staticOptions));
                             scope.data.options = JSON.parse(scope.staticOptions);
                             //scope.data.options = scope.staticOptions;
                         }
@@ -326,6 +327,19 @@ angular.module($snaphy.getModuleName())
                             if (isRelationModel) {
                                 relatedColumnName = scope.$parent.getColumnKey(scope.columnName);
                                 rowValue = rowObject[relatedColumnName];
+                            }
+                            var searchProp;
+                            //If the column is of object type
+                            var dataType = scope.filterOptions.dataType;
+                            if(dataType){
+                                if(dataType.type === "object"){
+                                    searchProp = dataType.searchProp;
+                                    rowValue = rowValue[searchProp];
+                                }
+                            }
+
+                            if(rowValue === undefined){
+                                return true;
                             }
 
                             //Now prepare the object..
@@ -438,6 +452,7 @@ angular.module($snaphy.getModuleName())
                 "getOptions": "@get",
                 "staticOptions": "@options",
                 "tableData": "=tableData",
+                "dataType": "=dataType",
                 "filterOptions": "=filterOptions"
             },
             replace: true,
@@ -518,8 +533,7 @@ angular.module($snaphy.getModuleName())
                         //If the column is a key name from a related model.
                         var isRelationModel;
 
-                        console.log(scope.tableData);
-                        console.log(scope.$parent.dataValues);
+
                         //ForEach loop for each table object..
                         scope.tableData.forEach(function(rowObject, index) {
                             var rowKey = scope.$parent.getKey(rowObject, scope.columnName);
@@ -537,6 +551,21 @@ angular.module($snaphy.getModuleName())
                             if (isRelationModel) {
                                 relatedColumnName = scope.$parent.getColumnKey(scope.columnName);
                                 rowValue = rowObject[relatedColumnName];
+                            }
+
+                            var searchProp;
+                            //If the column is of object type
+                            var dataType = scope.filterOptions.dataType;
+                            if(dataType){
+                                if(dataType.type === "object"){
+                                    searchProp = dataType.searchProp;
+                                    rowValue = rowValue[searchProp];
+                                }
+                            }
+
+
+                            if(rowValue === undefined){
+                                return true;
                             }
 
                             //Now prepare the object..

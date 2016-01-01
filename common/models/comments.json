@@ -92,12 +92,20 @@
     "customer_email": {
       "type": "$select",
       "label": "Select customer by email",
-      "getOptionsFromColumn": true
+      "getOptionsFromColumn": true,
+      "dataType":{
+          "type":"object",
+          "searchProp":"email"
+      }
     },
     "recipe_name": {
       "type": "$select",
       "label": "Select recipe by name",
-      "getOptionsFromColumn": true
+      "getOptionsFromColumn": true,
+      "dataType":{
+          "type":"object",
+          "searchProp":"name"
+      }
     }
   },
   "tables": {

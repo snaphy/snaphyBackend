@@ -16,7 +16,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
          * STAFF -> DYNAMIC ROLE DECLARATION.
          */
         //Now adding user to the method..
-        User.create(adminUserModel, function(err, users){
+        User.create(adminUserModel)
+        .then(function(err, users){
             if(err) throw err;
             var i;
             console.log('\n\nCreated users:', users);
@@ -31,8 +32,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     addUserAdmin(role, users[i].id);
                 }//for loop..
             });
-
+        })
+        .catch(function(err){
+            console.error("Got error");
+            console.log(err);
         });
+        // User.create(adminUserModel, function(err, users){
+        //
+        //
+        // });
 
 
         //TODO MODIFY THIS METHOD TO PROVIDE RUNTIME ACCESS AND MODIFICATION TO USER.

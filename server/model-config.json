@@ -14,26 +14,26 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mongodb"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "Employee": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "adminEmail": {
@@ -41,11 +41,11 @@
     "public": false
   },
   "Recipe": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "EmployeeDetails": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "container": {
@@ -53,43 +53,43 @@
     "public": true
   },
   "Customer": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Cuisines": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Priority": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Category": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Comments": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "RecipeTag": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Ingredients": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "IngredientCategory": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "RecipeIngredients": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Wishlist": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   }
 }
