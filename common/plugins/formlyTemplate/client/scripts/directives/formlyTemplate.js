@@ -220,6 +220,54 @@ angular.module($snaphy.getModuleName())
                 }
             }); //END OF Selectize function..
 
+
+            //adding items programatically..
+            function addValue(item){
+                var select = $(iElm).selectize();
+                var selectize = select[0].selectize;
+                var obj = {};
+                obj.id = item.id;
+                obj[scope.searchProperty] = item[scope.searchProperty];
+
+                selectize.addOption(obj);
+                selectize.addItem(item.id);
+            }
+
+
+            scope.$watch('value', function(){
+                var select = $(iElm).selectize();
+                var selectize = select[0].selectize;
+                //Add this value to the scope.
+                var val = $.map(selectize.items, function(value) {
+                    return selectize.options[value];
+                });
+                if(scope.value !== undefined){
+                    if(scope.value.length && val.length === 0){
+                        scope.value.forEach(function(columnValue){
+                            //Now check if the model has value or not..
+                            if(!$.isEmptyObject(columnValue)){
+                                //Now add data
+                                addValue(columnValue);
+                            }
+                        });
+                    }else{
+                        $timeout(function(){
+                            var select = $(iElm).selectize();
+                            var selectize = select[0].selectize;
+                            selectize.clear();
+                        }, 0);
+                    }
+                }
+                else{
+                    $timeout(function(){
+                        var select = $(iElm).selectize();
+                        var selectize = select[0].selectize;
+                        selectize.clear();
+                    }, 0);
+                }
+
+            });
+
         } //LInk  function
     }; //END Return
 }]);
