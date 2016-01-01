@@ -27,7 +27,11 @@
         },
         "customers_password": {
           "display": false
+        },
+        "customers_date": {
+          "display": false
         }
+
     },
     "validations": [],
     "relations": {

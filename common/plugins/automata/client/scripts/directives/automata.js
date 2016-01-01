@@ -166,7 +166,7 @@ angular.module($snaphy.getModuleName())
 
                             } //for loop.
 
-                            if(columnDataId !== undefined){
+                            if(columnDataId === undefined){
                                 return true;
                             }
 
@@ -1118,13 +1118,15 @@ angular.module($snaphy.getModuleName())
                             var wherePropertyPresent = false;
                             //Now check for the where prop.
                             for (var key in scope.propObj.where) {
-                                if (scope.propObj.where.hasOwnProperty(key)) {
-                                    wherePropertyPresent = true;
-                                    //Checking the value of the where object..
-                                    if (scope.propObj.where[key].toString().trim() === element[key].toString().trim()) {
-                                        //increment the value..
-                                        totalCount++;
+                                if(element[key]){
+                                    if (scope.propObj.where.hasOwnProperty(key)) {
+                                        wherePropertyPresent = true;
+                                        //Checking the value of the where object..
+                                        if (scope.propObj.where[key].toString().trim() === element[key].toString().trim()) {
+                                            //increment the value..
+                                            totalCount++;
 
+                                        }
                                     }
                                 }
                             } //for
