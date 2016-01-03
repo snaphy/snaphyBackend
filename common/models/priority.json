@@ -48,7 +48,11 @@
     },
     "recipes_stepsDescription": {
       "display": false
+    },
+    "recipes_added":{
+        "date": true
     }
+
   },
   "filters": {
     "priority": {

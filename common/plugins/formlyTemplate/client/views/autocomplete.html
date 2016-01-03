@@ -6,7 +6,7 @@
     <strong style="margin-left:2px; margin-top:3px;"><small>Add {{to.model}}</small></strong>
     <div ng-if="!hide" style="margin-top:10px;">
         <div class="row" ng-if="!showCreate()"  style="text-align:center">
-            <div class="col-md-9 col-xs-12 cleanBtnCornerRight">
+            <div ng-if="showSearch()" class="col-md-9 col-xs-12 cleanBtnCornerRight">
                 <autocomplete
                     placeholder="{{placeholder}}"
                     model-name="{{to.model}}"

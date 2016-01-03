@@ -35,6 +35,20 @@ angular.module($snaphy.getModuleName())
                 return $scope.hide;
             };
 
+            $scope.showSearch = function(){
+                if($scope.to.search !== undefined){
+                    if($scope.to.search ){
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }else{
+                    return true;
+                }
+
+            };
+
 
             $scope.resetCreate = resetCreate;
             $scope.showCreate = function() {
@@ -101,6 +115,20 @@ angular.module($snaphy.getModuleName())
             $scope.toggleShow = function(){
                 $scope.hide = !$scope.hide;
                 return $scope.hide;
+            };
+
+            $scope.showSearch = function(){
+                if($scope.to.search !== undefined){
+                    if($scope.to.search ){
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }else{
+                    return true;
+                }
+
             };
 
 

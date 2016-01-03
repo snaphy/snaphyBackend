@@ -162,7 +162,7 @@
         "type": "input",
         "templateOptions": {
           "type": "text",
-          "label": "Enter Recipe Name"
+          "label": "Enter name of recipe"
         }
       }
     },
@@ -173,7 +173,7 @@
         "type": "input",
         "templateOptions": {
           "type": "text",
-          "label": "Enter Description Name"
+          "label": "Enter description"
         }
       }
     },
@@ -217,18 +217,7 @@
         "templateOptions": {
           "label": "Select recipe servings",
           "id": "recipeServings",
-          "options": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10
-          ]
+          "options": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         }
       }
     },
@@ -318,7 +307,7 @@
       "templateOptions": {
         "btnText": "Add Customer",
         "searchProp": "email",
-        "create": true
+        "create": false
       }
     },
     "cuisines": {
@@ -338,27 +327,30 @@
       "templateOptions": {
         "btnText": "Add Priority",
         "searchProp": "priority",
-        "create": true
+        "create": true,
+        "search":false
       }
     },
     "category": {
-      "type": "belongsTo",
+      "type": "hasAndBelongsToMany",
       "model": "Category",
       "foreignKey": "",
       "templateOptions": {
         "btnText": "Add Category",
         "searchProp": "name",
-        "create": true
+        "create": false
       }
     },
     "comments": {
       "type": "hasMany",
       "model": "Comments",
       "foreignKey": "",
+      "onCascadeDelete": true,
       "templateOptions": {
         "btnText": "Add Comment",
         "searchProp": "comment",
-        "create": true
+        "create": true,
+        "search":false
       }
     },
     "recipeTags": {
@@ -375,7 +367,12 @@
       "type": "hasMany",
       "model": "Ingredients",
       "foreignKey": "",
-      "through": "RecipeIngredients"
+      "through": "RecipeIngredients",
+      "templateOptions": {
+        "btnText": "Add Recipe Ingredients",
+        "searchProp": "name",
+        "create": false
+      }
     },
     "wishlists": {
       "type": "hasAndBelongsToMany",

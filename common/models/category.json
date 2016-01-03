@@ -17,14 +17,12 @@
   "validationsBackend": {
     "rules": {
       "name": {
-        "required": true,
-        "minlength": "3"
+        "required": true
       }
     },
     "messages": {
       "name": {
-        "required": "Category is required",
-        "minlength": "minimum required length is 3"
+        "required": "Category is required"
       }
     }
   },
@@ -33,10 +31,11 @@
       "type": "string",
       "required": true,
       "template": {
-        "type": "input",
+        "type": "selectString",
         "templateOptions": {
-          "type": "text",
-          "label": "Enter recipe category name"
+          "label": "Enter recipe category name",
+          "id": "recipeServings",
+          "options": ["breakfast", "lunch", "dinner"]
         }
       }
     }
@@ -44,7 +43,7 @@
   "validations": [],
   "relations": {
     "recipes": {
-      "type": "hasMany",
+      "type": "hasAndBelongsToMany",
       "model": "Recipe",
       "foreignKey": ""
     }

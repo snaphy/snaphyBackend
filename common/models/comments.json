@@ -215,13 +215,7 @@
         "templateOptions": {
           "label": "Select rating for recipe",
           "id": "recipeRating",
-          "options": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
-          ]
+          "options": [1, 2, 3, 4, 5 ]
         }
       }
     }

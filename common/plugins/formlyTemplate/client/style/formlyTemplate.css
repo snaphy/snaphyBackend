@@ -10,6 +10,13 @@
     line-height: normal !important;
 }
 
+.imageStyle{
+    max-height: 300px;
+    width: auto !important;
+    display: block !important;
+    margin: 0 auto;
+}
+
 
 .hide{
     display: none;

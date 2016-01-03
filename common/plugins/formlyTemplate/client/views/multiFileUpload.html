@@ -7,7 +7,7 @@
             ngf-select="uploadFiles($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event)"
             accept="image/*"
             ngf-pattern="'image/*'"
-            ngf-min-height="300"
+            ngf-min-height="100"
             ng-model="files"
             ngf-max-size="10MB"
             ngf-keep="'distinct'">
@@ -27,7 +27,7 @@
         <div ng-if="checkData()" class="row items-push">
             <div class="col-lg-6 animated fadeIn" ng-repeat="file in files" >
                 <div ng-if="!loadFromServer(file)" class="img-container fx-img-zoom-in">
-                    <img ngf-src="file" class="img-responsive"  alt="">
+                    <img ngf-src="file" class="img-responsive imageStyle"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">
                             <a ng-click="deleteImage(files, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div ng-if="loadFromServer(file)" class="img-container fx-img-zoom-in">
-                    <img ngf-src="loadUrl(file)" class="img-responsive"  alt="">
+                    <img ngf-src="loadUrl(file)" class="img-responsive imageStyle"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">
                             <a ng-click="deleteImage(files, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>

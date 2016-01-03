@@ -71,7 +71,8 @@ angular.module($snaphy.getModuleName())
 
         $scope.getColValue = function(rowObject, columnHeader) {
             var key = $scope.getKey(rowObject, columnHeader);
-            return key? rowObject[key]: null ;
+
+            return key !== undefined? rowObject[key]: null ;
         };
 
 

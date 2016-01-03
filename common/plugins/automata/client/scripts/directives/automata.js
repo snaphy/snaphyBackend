@@ -865,7 +865,17 @@ angular.module($snaphy.getModuleName())
 
                                 //Parsing value for column Retailers added date..
                                 var columnValue = data[columnDataId];
-                                columnValue = JSON.parse(columnValue);
+
+                                try{
+                                    columnValue = JSON.parse(columnValue);
+                                    if(columnValue === undefined){
+                                        return true; //return all rows..
+                                    }
+                                }
+                                catch(err){
+                                    console.error("Bad column datatype");
+                                }
+
                                 //Getting the orderMin value..
                                 if (scope.data.value && columnValue) {
                                     var matchFound = false;

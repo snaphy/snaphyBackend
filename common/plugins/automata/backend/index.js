@@ -1,6 +1,7 @@
 (function(){'use strict';})();
 module.exports = function( server, databaseObj, helper, packageObj) {
 	var saveRemoteMethod = require('./saveDb');
+	var onDelete = require('./cascadingDelete');
 	/**
 	 * Here server is the main app object
 	 * databaseObj is the mapped database from the package.json file
@@ -30,6 +31,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			//Also add save method to each models..
 			saveRemoteMethod.addSaveMethod(server, Model.modelName);
 			addCaseSensitiveSearch (server, Model.modelName);
+			onDelete.onCascadeDelete(server, Model.modelName);
 		});
 
 	};
