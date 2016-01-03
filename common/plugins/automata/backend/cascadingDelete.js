@@ -60,7 +60,7 @@ function deCapitalizeFirstLetter(string) {
 
 
 var handleHasOne = function(app, modelObj, foreignKey, relationProp, relationName){
-    return (function(app, modelObj, foreignKey, relationProp, relationName){
+    return (function(app, modelObj, foreignKey, relationProp){
         var relatedModel = relationProp.model;
         var relatedModelObj = app.models[relatedModel];
         modelObj.observe("before delete", function(ctx, next){
@@ -69,8 +69,8 @@ var handleHasOne = function(app, modelObj, foreignKey, relationProp, relationNam
                 where: where
             })
             .then(function(modelInstanceArr){
-                console.log(modelInstanceArr);
-                console.log(foreignKey);
+                //console.log(modelInstanceArr);
+                //console.log(foreignKey);
                 modelInstanceArr.forEach(function(modelInstance){
                     //Remove the related model..
 
@@ -115,24 +115,7 @@ var deleteHasOneFinally = function(modelInstance, foreignKey, relatedModelObj, n
         });
     }
 
-    //
-    // console.log(modelInstance[relationName]);
-    // if(modelInstance[relationName]){
-    //     modelInstance[relationName](function(err, relatedModel){
-    //         if(err){
-    //             console.error(err);
-    //         }
-    //         console.log(relatedModel);
-    //         if(relatedModel){
-    //             relatedModel.destroy(function(err){
-    //                 if(err){
-    //                     console.error(err);
-    //                 }
-    //                 console.log("hasOne data successfully destroyed");
-    //             });
-    //         }
-    //     });
-    // }
+
 };
 
 
