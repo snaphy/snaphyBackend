@@ -119,7 +119,7 @@
                                                 <span
                                                     data-order="{{getColValue(rowObject, header)}}"
                                                     data-search="{{getColValue(rowObject, header)}}" >
-                                                    {{getColValue(rowObject, header)| date:'MM/dd/yyyy'}}
+                                                    {{toJsDate(getColValue(rowObject, header) )| date:'MM/dd/yyyy'}}
                                                 </span>
                                             </span>
 
@@ -281,7 +281,7 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div ng-if="schema.validations" class="block-content block-content-narrow">
-                    {{saveFormData}} 
+                    {{saveFormData}}
                     <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
                         <formly-form   model="saveFormData" fields="schema.fields">
 

@@ -1128,7 +1128,7 @@ angular.module($snaphy.getModuleName())
                             if (dateFilterGiven) {
                                 var dateValue = element[scope.propObj.dateProp];
                                 var range = moment().range(startDate, endDate);
-                                var checkValue = range.contains(moment(dateValue));
+                                var checkValue = range.contains(moment(new Date(dateValue)));
                                 if (checkValue) {
                                     totalCount = countData(totalCount);
                                 } //if checkValue

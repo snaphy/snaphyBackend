@@ -29,6 +29,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			addRemoteMethod(server, Model.modelName);
 			//Also add save method to each models..
 			saveRemoteMethod.addSaveMethod(server, Model.modelName);
+			addCaseSensitiveSearch (server, Model.modelName);
 		});
 
 	};
@@ -81,6 +82,32 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		);
 	};
 
+
+	var addCaseSensitiveSearch = function(server, modelName){
+		var modelObj = server.models[modelName];
+		modelObj.observe("access", function (ctx, next) {
+			if(ctx.query.where){
+				for(var whereProp in ctx.query.where){
+					//console.log("\n\n\n");
+					//console.log(whereProp);
+					if(ctx.query.where.hasOwnProperty(whereProp)){
+						var like = ctx.query.where[whereProp].like;
+					//	console.log(like);
+						if(like){
+					//		console.log("I am here\n\n\n");
+							var pattern = new RegExp('.*'+like+'.*', "i"); /* case-insensitive RegExp search */
+							//Now modifying the like property..
+							ctx.query.where[whereProp].like = pattern;
+						}
+					}//if
+				}//for
+			}//if
+
+			//console.log(ctx.query.where);
+
+			next();
+		});//observe..
+	};
 
 
 	//TODO ADD ENTRY FOR NESTED DATA RELATED MODELS NOT DONE AT CLIENT SIDE IN ANGULAR FORMLY.

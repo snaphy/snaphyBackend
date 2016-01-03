@@ -16,6 +16,11 @@ angular.module($snaphy.getModuleName())
 
 
 
+        $scope.toJsDate = function(str){
+          if(!str)return null;
+          return new Date(str);
+        }
+
 
         $scope.currentState = currentState;
 
