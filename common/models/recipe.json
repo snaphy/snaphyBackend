@@ -323,6 +323,7 @@
     "priorities": {
       "type": "hasOne",
       "model": "Priority",
+      "onCascadeDelete": true,
       "foreignKey": "",
       "templateOptions": {
         "btnText": "Add Priority",

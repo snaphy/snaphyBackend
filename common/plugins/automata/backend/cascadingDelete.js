@@ -13,7 +13,8 @@ var onCascadeDelete = function(server, modelName){
                     var relationProp = relations[relationName];
                     var foreignKey   = relationProp.foreignKey;
                     if(foreignKey === ""){
-                        foreignKey = relationName + "Id";
+                        var lowercaseModelName = deCapitalizeFirstLetter(relationProp.model);
+                        foreignKey = lowercaseModelName + "Id";
                     }
                     deleteRelations (app, modelObj, foreignKey, relationProp, relationName);
 
@@ -34,11 +35,13 @@ var deleteRelations = function(app, modelObj, foreignKey, relationProp, relation
         handleBelongsTo(app, modelObj, foreignKey, relationProp, relationName);
     }
     else if(relationType === "hasMany"){
+
         handleHasMany(app, modelObj, foreignKey, relationProp, relationName);
     }
     else if(relationType === "hasManyThrough"){
         //handleHasManyThrough();
         //TODO NOT FULLY implemented though
+
         handleHasMany(app, modelObj, foreignKey, relationProp, relationName);
     }
     else if(relationType === "hasAndBelongsToMany"){
@@ -50,26 +53,36 @@ var deleteRelations = function(app, modelObj, foreignKey, relationProp, relation
 };
 
 
+function deCapitalizeFirstLetter(string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
 
 
 var handleHasOne = function(app, modelObj, foreignKey, relationProp, relationName){
     return (function(app, modelObj, foreignKey, relationProp, relationName){
+        var relatedModel = relationProp.model;
+        var relatedModelObj = app.models[relatedModel];
         modelObj.observe("before delete", function(ctx, next){
             var where = ctx.where;
             modelObj.find({
                 where: where
             })
             .then(function(modelInstanceArr){
+                console.log(modelInstanceArr);
+                console.log(foreignKey);
                 modelInstanceArr.forEach(function(modelInstance){
-                    modelInstance[relationName].destroy(function(err) {
-                        if(err) {
-                            throw err;
-                        }
-                        console.log("related data hasOne" + relationName + " deleted too");
-                    });
+                    //Remove the related model..
+
+                    deleteHasOneFinally(modelInstance, foreignKey, relatedModelObj, next);
+                    // modelInstance[relationName].destroy(function(err) {
+                    //     if(err) {
+                    //         throw err;
+                    //     }
+                    //     console.log("related data hasOne " + relationName + " deleted too");
+                    // });
                 });
-                //Move to next middleware
-                next();
+
             })
             .catch(function(err){
                 console.error(err);
@@ -78,11 +91,54 @@ var handleHasOne = function(app, modelObj, foreignKey, relationProp, relationNam
             });
         });
     })(app, modelObj, foreignKey, relationProp, relationName);
+};
+
+
+
+var deleteHasOneFinally = function(modelInstance, foreignKey, relatedModelObj, next){
+    if(modelInstance){
+        //Find the element..
+        relatedModelObj.findById(modelInstance[foreignKey], {}, function(err, instance){
+            if(instance){
+                instance.destroy(function(err){
+                    if(err){
+                        console.error(err);
+                        next(err);
+                    }
+                    console.log("hasOne data successfully destroyed");
+                    next();
+                });
+            }
+            else{
+                next();
+            }
+        });
+    }
+
+    //
+    // console.log(modelInstance[relationName]);
+    // if(modelInstance[relationName]){
+    //     modelInstance[relationName](function(err, relatedModel){
+    //         if(err){
+    //             console.error(err);
+    //         }
+    //         console.log(relatedModel);
+    //         if(relatedModel){
+    //             relatedModel.destroy(function(err){
+    //                 if(err){
+    //                     console.error(err);
+    //                 }
+    //                 console.log("hasOne data successfully destroyed");
+    //             });
+    //         }
+    //     });
+    // }
 };
 
 
 var handleBelongsTo = function(app, modelObj, foreignKey, relationProp, relationName){
     return (function(app, modelObj, foreignKey, relationProp, relationName){
+        console.log("Inside belongsTo remove");
         modelObj.observe("before delete", function(ctx, next){
             var where = ctx.where;
             modelObj.find({
@@ -90,17 +146,7 @@ var handleBelongsTo = function(app, modelObj, foreignKey, relationProp, relation
             })
             .then(function(modelInstanceArr){
                 modelInstanceArr.forEach(function(modelInstance){
-                    var relatedDataId = modelInstance[foreignKey];
-                    if(relatedDataId){
-                        var relatedModel = relationProp.model;
-                        var relatedModelObj = app.models[relatedModel];
-                        relatedModelObj.destroyById(relatedDataId, function(err){
-                            if(err){
-                                throw err;
-                            }
-                            console.log("belongsTo cascadeDelete removed successfully");
-                        });
-                    }
+                    removeBelongsToFinally(app, modelInstance, relationProp, foreignKey);
                 });
                 //Move to next middleware
                 next();
@@ -113,6 +159,23 @@ var handleBelongsTo = function(app, modelObj, foreignKey, relationProp, relation
         });
     })(app, modelObj, foreignKey, relationProp, relationName);
 };
+
+
+var removeBelongsToFinally = function(app, modelInstance, relationProp, foreignKey){
+    var relatedDataId = modelInstance[foreignKey];
+    if(relatedDataId){
+        var relatedModel = relationProp.model;
+        var relatedModelObj = app.models[relatedModel];
+        relatedModelObj.destroyById(relatedDataId, function(err){
+            if(err){
+                throw err;
+            }
+            console.log("belongsTo cascadeDelete removed successfully");
+        });
+    }
+};
+
+
 
 var handleHasMany = function(app, modelObj, foreignKey, relationProp, relationName){
     return (function(app, modelObj, foreignKey, relationProp, relationName){
@@ -123,11 +186,7 @@ var handleHasMany = function(app, modelObj, foreignKey, relationProp, relationNa
             })
             .then(function(modelInstanceArr){
                 modelInstanceArr.forEach(function(modelInstance){
-                    modelInstance[relationName].destroyAll(function(err) {
-                        if(err){
-                            throw err;
-                        }
-                    });
+                    removeHasManyFinally(modelInstance, relationName);
                 });
                 next();
             })
@@ -140,14 +199,28 @@ var handleHasMany = function(app, modelObj, foreignKey, relationProp, relationNa
     })(app, modelObj, foreignKey, relationProp, relationName);
 };
 
+
+
+var removeHasManyFinally = function(modelInstance, relationName){
+    modelInstance[relationName].destroyAll(function(err) {
+        if(err){
+            throw err;
+        }
+        console.log("HasMany data successfully deleted");
+    });
+};
+
+
+
 //HasMany still not implemented fully..
 var handleHasManyThrough = function(){
-
+    console.log("Inside hasManyThrough remove");
 };
 
 
 var handleHasAndBelongsToMany = function(app, modelObj, foreignKey, relationProp, relationName){
     return (function(app, modelObj, foreignKey, relationProp, relationName){
+        console.log("Inside hasAndBelongsToMany remove");
         modelObj.observe("before delete", function(ctx, next){
             var where = ctx.where;
             modelObj.find({
@@ -155,16 +228,7 @@ var handleHasAndBelongsToMany = function(app, modelObj, foreignKey, relationProp
             })
             .then(function(modelInstanceArr){
                 modelInstanceArr.forEach(function(modelInstance){
-                    //Find all related data of the modelInstance..
-                    modelInstance[relationName](function(err, relatedDataArr){
-                        if(err){
-                            console.error("cannot find related data parts for hasAndBelongToMany before delete");
-                            throw err;
-                        }
-                        relatedDataArr.forEach(function(relatedDataInstance){
-                            removeRelated(modelInstance, relationName, relatedDataInstance);
-                        });
-                    });
+                    removeHasAndBelongToFinally (modelInstance, relationName);
                 });
                 next();
             })
@@ -175,6 +239,20 @@ var handleHasAndBelongsToMany = function(app, modelObj, foreignKey, relationProp
             });
         });
     })(app, modelObj, foreignKey, relationProp, relationName);
+};
+
+
+var removeHasAndBelongToFinally = function(modelInstance, relationName){
+    //Find all related data of the modelInstance..
+    modelInstance[relationName](function(err, relatedDataArr){
+        if(err){
+            console.error("cannot find related data parts for hasAndBelongToMany before delete");
+            throw err;
+        }
+        relatedDataArr.forEach(function(relatedDataInstance){
+            removeRelated(modelInstance, relationName, relatedDataInstance);
+        });
+    });
 };
 
 

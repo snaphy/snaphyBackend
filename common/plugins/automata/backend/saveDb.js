@@ -278,6 +278,7 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
 
             //add foriegnKey
             relationDataArr.forEach(function(relationData, index){
+
                 if(manyType === 'hasMany'){
                     //relationData[foriegnKey] = dataInstance.id;
                     upsertHasManyFinal(relatedModelClass, relationData, dataInstance, relationName,  callback);
@@ -309,7 +310,10 @@ var upsertHasManyFinal = function(relatedModelClass, relationData, dataInstance,
 
 var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relationData, relatedModelClass, callback){
     relatedModelClass.upsert(relationData, function(err, data){
-        if (err) throw err;
+        if (err) {
+            console.log("\n\n\nGot error");
+            throw err;
+        }
 
         dataInstance[relationName].add(data)
         .then(function(){

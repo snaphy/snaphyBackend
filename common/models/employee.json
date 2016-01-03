@@ -180,6 +180,7 @@
     "employeeDetails": {
       "type": "hasOne",
       "model": "EmployeeDetails",
+      "onCascadeDelete": true,
       "foreignKey": "",
       "templateOptions": {
         "searchProp": "address",

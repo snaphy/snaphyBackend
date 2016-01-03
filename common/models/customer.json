@@ -190,6 +190,7 @@
       "type": "hasMany",
       "model": "Recipe",
       "foreignKey": "",
+      "onCascadeDelete": true,
       "templateOptions": {
         "btnText": "Add Recipe",
         "searchProp": "name",
@@ -203,6 +204,7 @@
     },
     "wishlists": {
       "type": "hasOne",
+      "onCascadeDelete": true,
       "model": "Wishlist",
       "foreignKey": ""
     }
