@@ -597,6 +597,15 @@ angular.module($snaphy.getModuleName())
                 }
             }
 
+            // if(dataSchema.relations.hasManyThrough) {
+            //     if(dataSchema.relations.hasManyThrough.length){
+            //         // dataSchema.relations.hasManyThrough.forEach(function(relationObj){
+            //         //     filterObj.include.push(relationName);
+            //         // });
+            //
+            //     }
+            // }
+
             if(dataSchema.relations.hasOne) {
                 if(dataSchema.relations.hasOne.length){
                     dataSchema.relations.hasOne.forEach(function(relationName){
@@ -628,6 +637,10 @@ angular.module($snaphy.getModuleName())
                         }
                     }
 
+
+                    //Now fetch the data of hasManyThrough from server..
+                    fetchHasManyThrough(element, dataSchema.relations.hasManyThrough);
+
                     //setting the value of the data successfully fetched..
                     $scope.dataValues.push(element);
                 });
@@ -649,6 +662,15 @@ angular.module($snaphy.getModuleName())
                 }
                 //console.log(respHeader);
             });
+        };
+
+
+        var fetchHasManyThrough = function(element, hasManyThrough){
+            if(hasManyThrough){
+                hasManyThrough.forEach(function(relationObj){
+                    //TODO TO BE IMPLEMENTED
+                });
+            }
         };
 
         var addRelationDummyValue = function(relationArr, element, value){

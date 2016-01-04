@@ -63,7 +63,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			//Get template structure..
 			schema = generateTemplateStr(app, modelName);
 			//Now recursively add relations to the models...
-			addNestedModelRelation(app, header, schema, relations);
+			addNestedModelRelation(app, header, schema, relations, modelName);
 
 			//Now add filters and tables and headers to the model
 			schema.header  = header;
@@ -120,7 +120,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @param schema
 	 * @param relations
      */
-	var addNestedModelRelation = function(app, header, schema, relations){
+	var addNestedModelRelation = function(app, header, schema, relations, rootModelName){
 		//Now adding  prop of belongTo and hasMany method to the header and schema respectfully...
 		for(var relationName in relations){
 			if(relations.hasOwnProperty(relationName)){
@@ -132,18 +132,44 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 					if(relationObj.type === "hasMany"){
 						if(relationObj.through){
+
 							nestedSchema.type = 'arrayValue';
-							nestedSchema.key = relationObj.through;
+							nestedSchema.key = relationName;
 							nestedSchema.templateOptions = {};
-							nestedSchema.templateOptions.btnText = relationObj.label;
+							nestedSchema.templateOptions.btnText = relationObj.templateOptions.btnText;
 							nestedSchema.templateOptions.model = relationObj.through;
+
+							var throughRelationName;
+							var throughSearchId;
+							var throughModelObj = app.models[relationObj.through];
+							var relatedModelRelationObj = throughModelObj.definition.settings.relations;
+							for(var relatedModelRelation in relatedModelRelationObj){
+								if(relatedModelRelationObj.hasOwnProperty(relatedModelRelation)){
+									var relatedModel = relatedModelRelationObj[relatedModelRelation];
+									if(modelName === relatedModel.model){
+										throughRelationName = relatedModelRelation;
+									}
+									else if(rootModelName === relatedModel.model){
+										if(relatedModel.foreignKey){
+											throughSearchId = relatedModel.foreignKey;
+										}else{
+											throughSearchId = rootModelName.toLowerCase() + "Id";
+										}
+									}
+									else{
+										// Do nothing..
+									}
+								}
+							}
+
+
 							//console.log(nestedSchema);
 							//Now get nested schema str for the relational models..
 							generateTemplateStr(app, relationObj.through, nestedSchema.templateOptions);
 
 							var belongsToSchemaThrough = {
 								type           : "belongsTo",
-								key            : relationName,
+								key            : throughRelationName,
 								templateOptions: relationObj.templateOptions
 							};
 
@@ -161,7 +187,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
 							/**
-							 * HAsmanyThrough structure
+							 * HasManyThrough structure
 							 * {
 							 * 		relation: 'ingredients',
 							 * 		through: 'RecipeIngredient'
@@ -169,8 +195,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 							 */
 							//Push data to hasManyThrough array..
 							schema.relations.hasManyThrough.push({
-								relation: relationName,
-								through: relationObj.through
+								//Relation of related model in though Model property name
+								throughModelRelation: throughRelationName,
+								through: relationObj.through,
+								whereId:  throughSearchId,
+								relationName: relationName
 							});
 						}else{
 							nestedSchema.type = 'repeatSection';

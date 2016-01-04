@@ -370,7 +370,6 @@
       "model": "Ingredients",
       "foreignKey": "",
       "through": "RecipeIngredients",
-      "label": "Add Recipe Ingredients",
       "templateOptions": {
         "btnText": "Add Ingredients",
         "searchProp": "name",
