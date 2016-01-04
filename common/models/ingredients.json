@@ -53,7 +53,7 @@
         "sellingMetrics": {
             "type": "$select",
             "label": "Select Ingredient by Selling metrics",
-            "getOptionsFromColumn": true,
+            "getOptionsFromColumn": false,
             "options": [{
                 "id": "1",
                 "name": "kg"

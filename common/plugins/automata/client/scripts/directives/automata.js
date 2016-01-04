@@ -867,7 +867,7 @@ angular.module($snaphy.getModuleName())
                                 var columnValue = data[columnDataId];
 
                                 try{
-                                    columnValue = JSON.parse(columnValue);
+                                    //columnValue = JSON.parse(columnValue);
                                     if(columnValue === undefined){
                                         return true; //return all rows..
                                     }
@@ -875,6 +875,10 @@ angular.module($snaphy.getModuleName())
                                 catch(err){
                                     console.error("Bad column datatype");
                                 }
+
+                                //The value are in the form of strings like " palak   saag paneer "
+                                columnValue = columnValue.trim();
+                                columnValue = columnValue.split(/\s+/);
 
                                 //Getting the orderMin value..
                                 if (scope.data.value && columnValue) {
@@ -887,8 +891,8 @@ angular.module($snaphy.getModuleName())
                                         for(var x = 0; x< columnValue.length; x++){
                                             var searchObj = columnValue[x];
                                             if(searchObj){
-                                                var searchVal = searchObj[scope.searchProp];
-                                                if(selectedData.toString().toLowerCase().trim() === searchVal.toString().toLowerCase().trim()){
+                                                //var searchVal = searchObj[scope.searchProp];
+                                                if(selectedData.toString().toLowerCase().trim() === searchObj.toString().toLowerCase().trim()){
                                                     matchFound = true;
                                                     break;
                                                 }
