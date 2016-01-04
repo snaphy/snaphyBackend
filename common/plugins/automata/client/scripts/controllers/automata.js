@@ -668,7 +668,25 @@ angular.module($snaphy.getModuleName())
         var fetchHasManyThrough = function(element, hasManyThrough){
             if(hasManyThrough){
                 hasManyThrough.forEach(function(relationObj){
-                    //TODO TO BE IMPLEMENTED
+                    //Fetch the data from the server..
+                    var throughModelName = relationObj.through;
+                    var throughModelService = Database.loadDb(throughModelName);
+                    var filter = {};
+
+                    filter.include =  filter.include || [];
+                    filter.include.push(relationObj.throughModelRelation);
+                    filter.where = {};
+                    filter.where[relationObj.whereId] = element.id;
+
+                    //Now fetch..
+                    throughModelService.find({
+                        filter: filter
+                    }, function(relatedDataValue){
+                        console.log("Related hasManyThrough data fetched successfully.");
+                        element[relationObj.relationName] = relatedDataValue;
+                    }, function(){
+                        console.error("error fetching hasManyThrough data");
+                    });
                 });
             }
         };
