@@ -32,9 +32,15 @@
   "validations": [],
   "relations": {
     "employees": {
-      "type": "hasMany",
+      "type": "hasOne",
       "model": "Employee",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "searchProp": "email",
+        "create": false,
+        "search": true,
+        "btnText": "Add Employee "
+      }
     }
   },
   "acls": [

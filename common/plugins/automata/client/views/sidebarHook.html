@@ -1,7 +1,7 @@
 <ul snaphy-load-template ng-controller="automataControl" class="nav-main">
     <li class="nav-main-heading"><span class="sidebar-mini-hide">Data Console</span></li>
     <li>
-        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Manage Data</span></a>
+        <a class="nav-submenu" data-toggle="nav-submenu" style="cursor:pointer;"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Manage Data</span></a>
         <ul>
             <li ng-repeat="state in databasesList">
                 <a ui-sref="{{state}}">{{state | capitalize}}</a>

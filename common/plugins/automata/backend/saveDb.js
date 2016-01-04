@@ -128,7 +128,7 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
             //Now check if the modelData is empty or not.
             if(!_.isEmpty(relationData)){
                 //Now save/update the current relation type.
-                saveOrUpdate(app, dataInstance, relationsType, relationData, modelRelationSchema, promises, callback);
+                saveOrUpdate(app, dataInstance, relationsType, relationData, modelRelationSchema, promises, modelName, callback);
             }
         }//if
     }//for loop..
@@ -170,7 +170,7 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
  * @param  {[type]} modelRelationSchema [description]
  * @return {[type]}                     [description]
  */
-var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, modelRelationSchema, promises, callback){
+var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, modelRelationSchema, promises, modelName, callback){
     for(var relationName in relationDataObj ){
         if(relationDataObj.hasOwnProperty(relationName)){
             var relationData = relationDataObj[relationName];
@@ -192,7 +192,7 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
             }//if
             else if(relationsType === 'hasOne'){
                 //Upsert belongs to relations and attach the relation to the
-                promises.push(upsertHasOne (modelObj, relationData, dataInstance, relationName, callback) );
+                promises.push(upsertHasOne (app, modelObj, relationData, dataInstance, relationName, modelName,  callback) );
             }//if
             else if (relationsType === 'hasMany') {
                 promises.push( upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasMany', callback));
@@ -205,21 +205,46 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
             }
         } //if
     }//for in loop.
-
-
-
 };
 
 
 
 
-var upsertHasOne = function(modelObj, relationData, dataInstance, relationName, callback){
+var upsertHasOne = function(app, modelObj, relationData, dataInstance, relationName, parentModel, callback){
+    //Adding two way communication ..
+    //Now get the relataion name at parent model.
+    var childRelationsObj = modelObj.definition.settings.relations;
+    var parentObj         = app.models[parentModel];
+    var parentRelationName;
+    for(var relationObj in childRelationsObj){
+        if(childRelationsObj.hasOwnProperty(relationObj)){
+            var modelName = childRelationsObj[relationObj].model;
+            if(modelName === parentModel && childRelationsObj[relationObj].type === "hasOne"){
+                parentRelationName = relationObj;
+            }
+        }
+    }
+
+
+
     if(!_.isEmpty(relationData)){
         var mainModel = dataInstance[relationName].build(relationData);
         modelObj.upsert(mainModel)
         .then(function(result){
             //Now add the result to the dataInstance
-            console.log("Successfully saved hasOne data");
+            //Now add this relation to the parent as well..
+            if(result){
+                var parentData = result[parentRelationName].build(dataInstance);
+                //Now update the parent data..
+                parentObj.upsert(parentData)
+                .then(function(){
+                    console.log("Data Successfully updated in parent hasOne");
+                })
+                .catch(function(err){
+                    console.log("error occured in hasOne parent upsert");
+                    console.error(err);
+                });
+            }
         })
         .catch(function(err){
             console.log("Error saving data");
