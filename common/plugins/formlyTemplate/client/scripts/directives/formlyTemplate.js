@@ -141,7 +141,7 @@ angular.module($snaphy.getModuleName())
             //Contains the value of the data.. that needs to be updated.
             "value"          : "=value"
         },
-        template: '<select class="selectize"  ng-transclude></select>' ,
+        template: '<select  class="selectize"  ng-transclude></select>' ,
         link: function(scope, iElm, iAttrs, controller) {
             if(!scope.modelName || !scope.searchProperty){
                 console.error("Error >>> searchProperty and modelName attributes are required");
@@ -219,6 +219,7 @@ angular.module($snaphy.getModuleName())
             }); //END OF Selectize function..
 
 
+
             //adding items programatically..
             function addValue(item){
                 var select = $(iElm).selectize();
@@ -231,8 +232,15 @@ angular.module($snaphy.getModuleName())
                 selectize.addItem(item.id);
             }
 
+            scope.watchModel = function(){
+                if(scope.value){
+                    return scope.value.length;
+                }
 
-            scope.$watch('value', function(){
+            };
+
+
+            scope.$watch('watchModel()', function(){
                 var select = $(iElm).selectize();
                 var selectize = select[0].selectize;
                 //Add this value to the scope.
@@ -249,11 +257,13 @@ angular.module($snaphy.getModuleName())
                             }
                         });
                     }else{
-                        $timeout(function(){
-                            var select = $(iElm).selectize();
-                            var selectize = select[0].selectize;
-                            selectize.clear();
-                        }, 0);
+                        if(scope.value.length === 0 && val.length){
+                            $timeout(function(){
+                                var select = $(iElm).selectize();
+                                var selectize = select[0].selectize;
+                                selectize.clear();
+                            }, 0);
+                        }
                     }
                 }
                 else{
