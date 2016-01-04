@@ -26,15 +26,15 @@
         <div ng-if="checkData()" class="row items-push">
             <div class="col-lg-12 animated fadeIn" >
                 <div ng-if="!loadFromServer(file)" class="img-container fx-img-zoom-in">
-                    <img ngf-src="file" class="img-responsive imageStyle"  alt="">
+                    <img ngf-src="file" class="img-responsive photoFrame" ng-class="{'imageStyle': !to.fullWidth}"   alt="">
                     <div class="img-options">
                         <div class="img-options-content">
                             <a ng-click="deleteImage(file, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>
                         </div>
                     </div>
                 </div>
-                <div ng-if="loadFromServer(file)" class="img-container fx-img-zoom-in">
-                    <img ngf-src="loadUrl(file)" class="img-responsive imageStyle"  alt="">
+                <div ng-if="loadFromServer(file) && file" class="img-container fx-img-zoom-in photoFrame">
+                    <img ngf-src="loadUrl(file)" class="img-responsive" ng-class="{'imageStyle': !to.fullWidth}"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">
                             <a ng-click="deleteImage(file, $index)" class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-times"></i> Remove</a>

@@ -26,7 +26,7 @@
         <!-- Image Zoom In -->
         <div ng-if="checkData()" class="row items-push">
             <div class="col-lg-6 animated fadeIn" ng-repeat="file in files" >
-                <div ng-if="!loadFromServer(file)" class="img-container fx-img-zoom-in">
+                <div ng-if="!loadFromServer(file)" class="img-container fx-img-zoom-in photoFrame">
                     <img ngf-src="file" class="img-responsive imageStyle"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div ng-if="loadFromServer(file)" class="img-container fx-img-zoom-in">
+                <div ng-if="loadFromServer(file)" class="img-container fx-img-zoom-in photoFrame">
                     <img ngf-src="loadUrl(file)" class="img-responsive imageStyle"  alt="">
                     <div class="img-options">
                         <div class="img-options-content">

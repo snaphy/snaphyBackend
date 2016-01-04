@@ -17,6 +17,11 @@
     margin: 0 auto;
 }
 
+.photoFrame{
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
 
 .hide{
     display: none;

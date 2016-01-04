@@ -190,7 +190,8 @@
             "upload": "",
             "delete": ""
           },
-          "bind": true
+          "bind": true,
+          "fullWidth":true
         }
       }
     },
@@ -369,8 +370,9 @@
       "model": "Ingredients",
       "foreignKey": "",
       "through": "RecipeIngredients",
+      "label": "Add Recipe Ingredients",
       "templateOptions": {
-        "btnText": "Add Recipe Ingredients",
+        "btnText": "Add Ingredients",
         "searchProp": "name",
         "create": false
       }

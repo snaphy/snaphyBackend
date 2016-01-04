@@ -129,18 +129,72 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				//Only add relation if template option in the template option is present..
 				if((relationObj.type === 'hasMany' ||  relationObj.type === 'hasAndBelongsToMany' ) && relationObj.templateOptions !== undefined){
 					var nestedSchema = {};
-					nestedSchema.type = 'repeatSection';
-					nestedSchema.key = relationName;
-					nestedSchema.templateOptions = relationObj.templateOptions;
-					nestedSchema.templateOptions.model = relationObj.model;
-					//console.log(nestedSchema);
-					//Now get nested schema str for the relational models..
-					generateTemplateStr(app, relationObj.model, nestedSchema.templateOptions);
+
 					if(relationObj.type === "hasMany"){
-						//Now add nestedSchema to the schema object.
-						schema.relations.hasMany.push(relationName);
+						if(relationObj.through){
+							nestedSchema.type = 'arrayValue';
+							nestedSchema.key = relationObj.through;
+							nestedSchema.templateOptions = {};
+							nestedSchema.templateOptions.btnText = relationObj.label;
+							nestedSchema.templateOptions.model = relationObj.through;
+							//console.log(nestedSchema);
+							//Now get nested schema str for the relational models..
+							generateTemplateStr(app, relationObj.through, nestedSchema.templateOptions);
+
+							var belongsToSchemaThrough = {
+								type           : "belongsTo",
+								key            : relationName,
+								templateOptions: relationObj.templateOptions
+							};
+
+							//Model name of relational data..
+							belongsToSchemaThrough.templateOptions.model = relationObj.model;
+
+							if(nestedSchema.templateOptions.fields === undefined){
+								nestedSchema.templateOptions.fields = [];
+							}
+
+							nestedSchema.templateOptions.fields.push(belongsToSchemaThrough);
+
+							//Also add templateStr for related model of HasManyThrough
+							generateTemplateStr(app, relationObj.model, belongsToSchemaThrough.templateOptions);
+
+
+							/**
+							 * HAsmanyThrough structure
+							 * {
+							 * 		relation: 'ingredients',
+							 * 		through: 'RecipeIngredient'
+							 * }
+							 */
+							//Push data to hasManyThrough array..
+							schema.relations.hasManyThrough.push({
+								relation: relationName,
+								through: relationObj.through
+							});
+						}else{
+							nestedSchema.type = 'repeatSection';
+							nestedSchema.key = relationName;
+							nestedSchema.templateOptions = relationObj.templateOptions;
+							nestedSchema.templateOptions.model = relationObj.model;
+							//console.log(nestedSchema);
+							//Now get nested schema str for the relational models..
+							generateTemplateStr(app, relationObj.model, nestedSchema.templateOptions);
+
+							//Now add nestedSchema to the schema object.
+							schema.relations.hasMany.push(relationName);
+
+						}
 					}
 					else{
+						nestedSchema.type = 'repeatSection';
+						nestedSchema.key = relationName;
+						nestedSchema.templateOptions = relationObj.templateOptions;
+						nestedSchema.templateOptions.model = relationObj.model;
+						//console.log(nestedSchema);
+						//Now get nested schema str for the relational models..
+						generateTemplateStr(app, relationObj.model, nestedSchema.templateOptions);
+
 						//Now add nestedSchema to the schema object.
 						schema.relations.hasAndBelongsToMany.push(relationName);
 					}
@@ -253,7 +307,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			schema.relations = {
 				hasMany:[],
 				belongsTo:[],
-				//hasManyThrough:[],
+				hasManyThrough:[],
 				hasAndBelongsToMany:[],
 				hasOne:[]
 			};

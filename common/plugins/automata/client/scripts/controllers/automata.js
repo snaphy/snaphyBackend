@@ -19,7 +19,7 @@ angular.module($snaphy.getModuleName())
         $scope.toJsDate = function(str){
           if(!str)return null;
           return new Date(str);
-        }
+        };
 
 
         $scope.currentState = currentState;
@@ -316,7 +316,7 @@ angular.module($snaphy.getModuleName())
         var getArrayIndex = function(arrayData, id){
             for(var i=0; i<arrayData.length; i++){
                 var element= arrayData[i];
-                if(parseInt(element.id) === parseInt(id) ){
+                if(element.id.toString().trim() === id.toString().trim() ){
                     return i;
                 }
             }
@@ -624,7 +624,7 @@ angular.module($snaphy.getModuleName())
                             }
 
                             var relationArr = dataSchema.relations[relationType];
-                            element = addRelationDummyValue (relationArr, element, value);
+                            element = addRelationDummyValue(relationArr, element, value);
                         }
                     }
 
