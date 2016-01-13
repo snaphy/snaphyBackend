@@ -141,19 +141,73 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
         }//if
     }//for loop..
 
+
+
     /**
      * Return promise after all the callback has finished.
      */
     Promise.all(promises).then(function(){
         var modelObj = app.models[modelName];
-        modelObj.findById(dataInstance.id, {include:include}, function(err, value){
-            //Return callback.
-            callback(null, value);
+        //check if data contains hasManyThrough relations..
+        var hasManyThrough = relationSchema.hasManyThrough;
+        //Object which contains all hasMany data..
+        var hasManyData = {};
+        var throughPromises = [];
+        if(hasManyThrough.length){
+            hasManyThrough.forEach(function(hasManySchema){
+                findAllHasManyRelationsData(app, hasManySchema, hasManyData, dataInstance, throughPromises);
+            });
+        }
+        console.log("All data fetched");
+        //when all the data related to hasManyThrough hasbeen fetched..
+        Promise.all(throughPromises).then(function(){
+            modelObj.findById(dataInstance.id, {include:include}, function(err, value){
+                //prepare values..
+                for(var relation in hasManyData){
+                    if(hasManyData.hasOwnProperty(relation)){
+                        if(hasManyData[relation]){
+                            value[relation] = hasManyData[relation];
+                        }
+                    }
+                }//for loop
+                console.log(hasManyData);
+                console.log("All done");
+                console.log(value);
+
+                //Return callback.
+                callback(null, value);
+            });
+        })
+        .catch(function(err){
+            callback(err);
         });
+
     }).catch(function(err){
         callback(err);
     });
 
+};
+
+
+
+var findAllHasManyRelationsData  = function(app, hasManySchema, hasManyData, dataInstance, throughPromises){
+    //console.log(hasManySchema);
+    var modelName = hasManySchema.through;
+    var modelObj = app.models[modelName];
+    var filter = {};
+    filter.where = {};
+    filter.where[hasManySchema.whereId] = dataInstance.id;
+    filter.include = [hasManySchema.throughModelRelation];
+    //console.log(filter);
+    throughPromises.push(modelObj.find(filter) );
+    // .then(function(values){
+    //     console.log("fetched ");
+    //     console.log(values);
+    //     hasManyData[hasManySchema.relationName] = values;
+    // })
+    // .catch(function(err){
+    //     callback(err);
+    // });
 };
 
 
@@ -357,8 +411,6 @@ var deleteRepeatedData = function(throughModelObj, dataInstanceForeignKey, dataI
     //Now check for any repeated data.. and remove it..
     throughModelObj.find(filter)
     .then(function(values){
-        console.log("value found");
-        console.log(values);
         //Now loop each relation data and check if data present..
         values.forEach(function(element){
             var matchFound = false;
