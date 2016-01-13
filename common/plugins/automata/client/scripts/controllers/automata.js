@@ -618,6 +618,8 @@ angular.module($snaphy.getModuleName())
                 filter: filterObj
             }, function(values) {
                 dataFetched = true;
+                console.log(values);
+
                 //$scope.dataValues.length = 0;
                 $scope.dataValues = [];
                 values.forEach(function(element){
@@ -693,8 +695,15 @@ angular.module($snaphy.getModuleName())
 
         var addRelationDummyValue = function(relationArr, element, value){
             relationArr.forEach(function(rel){
-                if(!element[rel]){
-                    element[rel] = value;
+                //if relationtype is hasManyThrough
+                if(Object.prototype.toString.call(rel) === "[object Object]"){
+                    if(rel.relationName){
+                        element[rel.relationName] = value;
+                    }
+                }else{
+                    if(!element[rel]){
+                        element[rel] = value;
+                    }
                 }
             });
             return element;
