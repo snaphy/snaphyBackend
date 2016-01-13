@@ -14,8 +14,10 @@ angular.module($snaphy.getModuleName())
         name: 'belongsTo',
         templateUrl: '/formlyTemplate/views/autocomplete.html',
         controller: function($scope) {
+            //set initial view..
+            $scope.to.hide = $scope.to.hide || false;
             //Set the value initially to hide position..
-            $scope.hide = true;
+            $scope.hide = $scope.to.hide;
             $scope.showOrHide = function(){
                 if($scope.hide){
                     //Show opposite
@@ -24,6 +26,8 @@ angular.module($snaphy.getModuleName())
                     return "hide";
                 }
             };
+
+
 
             $scope.isHidden = function(){
                 return $scope.hide;
@@ -96,8 +100,9 @@ angular.module($snaphy.getModuleName())
         name: 'repeatSection',
         templateUrl: '/formlyTemplate/views/hasManyTemplate.html',
         controller: function($scope) {
+            $scope.to.hide = $scope.to.hide || false;
             //Set the value initially to hide position..
-            $scope.hide = true;
+            $scope.hide = $scope.to.hide;
             $scope.showOrHide = function(){
                 if($scope.hide){
                     //Show opposite
