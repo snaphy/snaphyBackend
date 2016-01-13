@@ -529,7 +529,7 @@ angular.module($snaphy.getModuleName())
             dbService.getSchema({}, {}, function(values) {
                 extend($scope.schema, values.schema);
                 //$scope.schema = values.schema;
-                fetchDataSever($scope.schema, dbService, widgetId);
+                fetchDataServer($scope.schema, dbService, widgetId);
             }, function() {
                 if(widgetId){
                     $timeout(function(){
@@ -570,7 +570,7 @@ angular.module($snaphy.getModuleName())
 
 
 
-        var fetchDataSever = function(dataSchema, dbService, widgetId) {
+        var fetchDataServer = function(dataSchema, dbService, widgetId) {
             var filterObj = {};
             filterObj.include = [];
             if (dataSchema.relations.belongsTo) {
@@ -643,10 +643,10 @@ angular.module($snaphy.getModuleName())
 
                     //setting the value of the data successfully fetched..
                     $scope.dataValues.push(element);
+
                 });
                 //Now hide the refresh bar..
 
-                //console.log($scope.dataValues);
                 if(widgetId){
                     $timeout(function(){
                         //Now hide remove the refresh widget..

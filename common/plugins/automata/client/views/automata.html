@@ -78,7 +78,6 @@
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div class="block-content">
-
                     <div snaphy-load-datatable class="table-responsive" style="overflow-x: hidden;">
                         <table
                             id="automataTable"
@@ -88,7 +87,7 @@
                             ng-if="isDataFetched()"
                         >
                             <thead>
-                                <tr >
+                                <tr>
                                     <!--Adding :: for one way binding -->
                                     <th
                                         ng-if   = "displayProperties(schema, header)"
