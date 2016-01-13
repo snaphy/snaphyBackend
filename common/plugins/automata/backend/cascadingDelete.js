@@ -26,7 +26,7 @@ var onCascadeDelete = function(server, modelName){
 
 
 
-var deleteRelations = function(app, modelObj, foreignKey, relationProp, relationName){
+var deleteRelations = function(app, modelObj, foreignKey, relationProp, relationName, modelName){
     var relationType = relationProp.type;
     if(relationType === "hasOne"){
         handleHasOne(app, modelObj, foreignKey, relationProp, relationName);
@@ -39,10 +39,7 @@ var deleteRelations = function(app, modelObj, foreignKey, relationProp, relation
         handleHasMany(app, modelObj, foreignKey, relationProp, relationName);
     }
     else if(relationType === "hasManyThrough"){
-        //handleHasManyThrough();
-        //TODO NOT FULLY implemented though
-
-        handleHasMany(app, modelObj, foreignKey, relationProp, relationName);
+        handleHasManyThrough(app, modelObj, foreignKey, relationProp, relationName, modelName);
     }
     else if(relationType === "hasAndBelongsToMany"){
         handleHasAndBelongsToMany(app, modelObj, foreignKey, relationProp, relationName);
@@ -159,6 +156,69 @@ var removeBelongsToFinally = function(app, modelInstance, relationProp, foreignK
 };
 
 
+var handleHasManyThrough = function(app, modelObj, foreignKey, relationProp, relationName, modelName){
+    return (function(app, modelObj, foreignKey, relationProp, relationName, modelName){
+        modelObj.observe("before delete", function(ctx, next){
+            var where = ctx.where;
+            modelObj.find({
+                where: where
+            })
+            .then(function(modelInstanceArr){
+                modelInstanceArr.forEach(function(modelInstance){
+                    removeHasManyThroughFinally(app, modelInstance, relationName, relationProp, modelName);
+                });
+                next();
+            })
+            .catch(function(err){
+                console.error(err);
+                next();
+                return false;
+            });
+        });
+    })(app, modelObj, foreignKey, relationProp, relationName, modelName);
+};
+
+
+var removeHasManyThroughFinally = function(app, modelInstance, relationName, relationProp, modelName){
+    var throughModel    = relationProp.through;
+    var throughModelObj = app.models[throughModel];
+    var throughModelRelations = throughModelObj.definition.settings.relations;
+    var foreignKey;
+    //getting the foreignkey..
+    for(var throughRelationName in throughModelRelations){
+        if(throughModelRelations.hasOwnProperty(throughRelationName)){
+            var throughRelationProp = throughModelRelations[throughRelationName];
+            if(throughRelationProp.model === modelName){
+                if(throughRelationProp.foreignKey !== ""){
+                    foreignKey = throughRelationProp.model.toLowerCase() + "Id";
+                }else{
+                    foreignKey = throughRelationProp.foreignKey;
+                }
+                break;
+            }
+        }
+    }
+
+    if(!foreignKey || modelInstance.id === undefined ){
+        return false;
+    }
+
+    var where = {};
+    where[foreignKey] = modelInstance.id;
+    console.log("I am  deleting hasManyThrough");
+
+    //Now destroy the related data..
+    //PersistedModel.destroyAll([where], callback)
+    throughModelObj.destroyAll(where, function(err){
+        if(err){
+            console.error(err);
+            return false;
+        }
+        console.log("hasManyThrough data destroyed successfully");
+    });
+};
+
+
 
 var handleHasMany = function(app, modelObj, foreignKey, relationProp, relationName){
     return (function(app, modelObj, foreignKey, relationProp, relationName){
@@ -193,12 +253,6 @@ var removeHasManyFinally = function(modelInstance, relationName){
     });
 };
 
-
-
-//HasMany still not implemented fully..
-var handleHasManyThrough = function(){
-    console.log("Inside hasManyThrough remove");
-};
 
 
 var handleHasAndBelongsToMany = function(app, modelObj, foreignKey, relationProp, relationName){

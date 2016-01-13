@@ -369,6 +369,7 @@
     "ingredients": {
       "type": "hasMany",
       "model": "Ingredients",
+      "onCascadeDelete": true,
       "foreignKey": "",
       "through": "RecipeIngredients",
       "templateOptions": {
