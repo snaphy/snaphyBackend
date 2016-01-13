@@ -59,7 +59,7 @@ var addSaveMethod = function(app, modelName){
             console.log(dataInstance);
             console.log("\n\n\n");
             console.log("Main data successfully updated");
-            saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include,  callback);
+            saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation,  callback);
         })
         .catch(function(err){
             console.log("Error saving data");
@@ -99,7 +99,7 @@ var addRelation = function(dataObj, relationSchema, localRelationObj){
                 if(Object.prototype.toString.call(relationName) === "[object Object]"){
                     //relation type is hasManyThrough
                     if(dataObj[relationName.relationName]){
-                        include.push(relationName.relationName);
+                        //include.push(relationName.relationName);
                         localRelationObj[property][relationName.relationName] = dataObj[relationName.relationName];
                         delete dataObj[relationName.relationName];
                     }
@@ -127,7 +127,7 @@ var addRelation = function(dataObj, relationSchema, localRelationObj){
  * @param  {object} modelRelationSchema Containts the schema relation object.
  * @return {[type]}                     [description]
  */
-var saveDataRelations = function(app, dataInstance, relations, modelRelationSchema, modelName, include, callback){
+var saveDataRelations = function(app, dataInstance, relations, modelRelationSchema, modelName, include, relationSchema, callback){
     var promises = [];
     //Now run a loop of the model schema..
     for(var relationsType in relations){
@@ -136,7 +136,7 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
             //Now check if the modelData is empty or not.
             if(!_.isEmpty(relationData)){
                 //Now save/update the current relation type.
-                saveOrUpdate(app, dataInstance, relationsType, relationData, modelRelationSchema, promises, modelName, callback);
+                saveOrUpdate(app, dataInstance, relationsType, relationData, modelRelationSchema, promises, modelName, relationSchema,  callback);
             }
         }//if
     }//for loop..
@@ -147,7 +147,6 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
     Promise.all(promises).then(function(){
         var modelObj = app.models[modelName];
         modelObj.findById(dataInstance.id, {include:include}, function(err, value){
-            console.log(value);
             //Return callback.
             callback(null, value);
         });
@@ -179,7 +178,7 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
  * @param  {[type]} modelRelationSchema [description]
  * @return {[type]}                     [description]
  */
-var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, modelRelationSchema, promises, modelName, callback){
+var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, modelRelationSchema, promises, modelName, relationSchema,  callback){
     for(var relationName in relationDataObj ){
         if(relationDataObj.hasOwnProperty(relationName)){
             var relationData = relationDataObj[relationName];
@@ -190,9 +189,8 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
 
             //get the foriegnKey.
             var foriegnKey = modelRelationSchema[relationName].foriegnKey;
-            //TODO FOREIGN KEY MAY BE DIFFERENT..
             if(!foriegnKey){
-                foriegnKey = relationName + 'Id';
+                foriegnKey = modelRelationSchema[relationName].model.toLowerCase() + 'Id';
             }
 
             if(relationsType === 'belongsTo'){
@@ -211,7 +209,7 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
                 promises.push(upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasAndBelongsToMany', callback) );
             }
             else if(relationsType === 'hasManyThrough'){
-                promises.push(upsertManyThrough(app, modelObj, relationData, dataInstance, relationName, foriegnKey,  callback) );
+                promises.push(upsertManyThrough(app, modelObj, relationData, dataInstance, relationName, foriegnKey, relationSchema,  callback) );
             }else{
                 //Do nothing
                 //console.log('I am inside do nothing case. I dont know what to do.');
@@ -294,22 +292,126 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
 };
 
 
-var upsertManyThrough = function(app, modelObj, relationData, dataInstance, relationName, foriegnKey, callback){
-    console.log("----------------------------");
-    //console.log(relationData);
-    //console.log(dataInstance);
-    //console.log(relationName);
-    //console.log(foriegnKey);
-    //First upsert the related data .
-    var relatedDataObj = relationData[relationName];
-    if(relatedDataObj){
-        modelObj.upsert(relatedDataObj)
+var upsertManyThrough = function(app, modelObj, relationData, dataInstance, relationName, foriegnKey, relationSchema, callback){
+    //now find the current relation schema..
+    var hasManyThrough = relationSchema.hasManyThrough;
+    var index = null;
+    for(var i=0; i< hasManyThrough.length; i++){
+        var relation = hasManyThrough[i];
+        if(relation.relationName === relationName){
+            index = i;
+            break;
+        }
+    }
+
+    var throughModelName;
+    var throughModelForeignKey;
+    var throughModelSchema;
+    var throughModelObj;
+    var dataInstanceForeignKey;
+
+    if(index === null){
+        return false;
+    }
+    else{
+        throughModelSchema = hasManyThrough[index];
+        throughModelName   = throughModelSchema.through;
+        throughModelObj    = app.models[throughModelName];
+        dataInstanceForeignKey = throughModelSchema.whereId;
+        var relationObj    = throughModelObj.definition.settings.relations;
+        var relationData_   = relationObj[throughModelSchema.throughModelRelation];
+        if(relationData_.foreignKey === ""){
+            throughModelForeignKey = relationData_.model.toLowerCase() + "Id";
+        }else{
+            throughModelForeignKey = relationData_.foreignKey;
+        }
+    }
+
+    var throughObj = {
+        throughModelForeignKey: throughModelForeignKey,
+        dataInstanceForeignKey: dataInstanceForeignKey,
+        throughModelObj       : throughModelObj
+    };
+
+    deleteRepeatedData(throughModelObj, dataInstanceForeignKey, dataInstance, relationData, callback);
+
+    relationData.forEach(function(relationDataObj){
+        upsertHasManyThroughFinal(app, modelObj, relationDataObj, dataInstance, relationName, foriegnKey, relationSchema,  throughObj, callback);
+    });
+};
+
+
+/**
+ * Delete repeated data of hasManyThrough
+ * @param  {[type]}   throughModelObj        [description]
+ * @param  {[type]}   dataInstanceForeignKey [description]
+ * @param  {[type]}   dataInstance           [description]
+ * @param  {Function} callback               [description]
+ * @return {[type]}                          [description]
+ */
+var deleteRepeatedData = function(throughModelObj, dataInstanceForeignKey, dataInstance, relationData,  callback){
+    var filter = {};
+    filter.where = {};
+    filter.where[dataInstanceForeignKey] = dataInstance.id;
+
+    //Now check for any repeated data.. and remove it..
+    throughModelObj.find(filter)
+    .then(function(values){
+        console.log("value found");
+        console.log(values);
+        //Now loop each relation data and check if data present..
+        values.forEach(function(element){
+            var matchFound = false;
+            //Now loop through relationData as well..
+            for(var i=0; i<relationData.length; i++){
+                var relatedDataObj = relationData[i];
+                if(relatedDataObj.id === element.id){
+                    matchFound = true;
+                    break;
+                }
+            }
+
+            if(!matchFound){
+                //destroy data..
+                element.destroy(function(err){
+                    if(err){
+                        callback(err);
+                        return null;
+                    }
+                    console.log("unused hasManyThrough data destroyed.");
+                });
+            }
+        });
+    })
+    .catch(function(err){
+        callback(err);
+    });
+};
+
+
+
+var upsertHasManyThroughFinal = function(app, modelObj, relationDataObj, dataInstance, relationName, foriegnKey, relationSchema, throughObj, callback){
+    var relatedData = relationDataObj[relationName];
+
+
+    if(relatedData){
+        modelObj.upsert(relatedData)
         .then(function(savedRelatedData){
-            console.log(savedRelatedData);
             //Now save the related through data..
-            delete relationData[relationName];
-            var relatedHasManyThroughData = relationData;
-            relatedData
+            delete relationDataObj[relationName];
+            var relatedHasManyThroughData = relationDataObj;
+            relatedHasManyThroughData[throughObj.throughModelForeignKey] = savedRelatedData.id;
+            //Add main datainstance id..
+            relatedHasManyThroughData[throughObj.dataInstanceForeignKey] = dataInstance.id;
+            //Now save hasManyThrough Data...
+            throughObj.throughModelObj.upsert(relatedHasManyThroughData)
+            .then(function(savedData){
+                console.log("HasMany through Data saved..");
+                console.log(savedData);
+            })
+            .catch(function(err){
+                callback(err);
+            });
         })
         .catch(function(err){
             callback(err);
