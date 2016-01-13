@@ -146,68 +146,19 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
     /**
      * Return promise after all the callback has finished.
      */
+    //TODO PROMISE NOT CALLING AFTER THE RELATED DATA SAVED IS CALLING BEFORE RELATED DATA SAVED.
+    //TODO HasManyThrough data not fetched during promise. Must be fetched.
     Promise.all(promises).then(function(){
         var modelObj = app.models[modelName];
-        //check if data contains hasManyThrough relations..
-        var hasManyThrough = relationSchema.hasManyThrough;
-        //Object which contains all hasMany data..
-        var hasManyData = {};
-        var throughPromises = [];
-        if(hasManyThrough.length){
-            hasManyThrough.forEach(function(hasManySchema){
-                findAllHasManyRelationsData(app, hasManySchema, hasManyData, dataInstance, throughPromises);
-            });
-        }
-        console.log("All data fetched");
-        //when all the data related to hasManyThrough hasbeen fetched..
-        Promise.all(throughPromises).then(function(){
-            modelObj.findById(dataInstance.id, {include:include}, function(err, value){
-                //prepare values..
-                for(var relation in hasManyData){
-                    if(hasManyData.hasOwnProperty(relation)){
-                        if(hasManyData[relation]){
-                            value[relation] = hasManyData[relation];
-                        }
-                    }
-                }//for loop
-                console.log(hasManyData);
-                console.log("All done");
-                console.log(value);
-
-                //Return callback.
-                callback(null, value);
-            });
-        })
-        .catch(function(err){
-            callback(err);
+        //console.log("All done");
+        modelObj.findById(dataInstance.id, {include:include}, function(err, value){
+            //Return callback.
+            callback(null, value);
         });
-
     }).catch(function(err){
         callback(err);
     });
 
-};
-
-
-
-var findAllHasManyRelationsData  = function(app, hasManySchema, hasManyData, dataInstance, throughPromises){
-    //console.log(hasManySchema);
-    var modelName = hasManySchema.through;
-    var modelObj = app.models[modelName];
-    var filter = {};
-    filter.where = {};
-    filter.where[hasManySchema.whereId] = dataInstance.id;
-    filter.include = [hasManySchema.throughModelRelation];
-    //console.log(filter);
-    throughPromises.push(modelObj.find(filter) );
-    // .then(function(values){
-    //     console.log("fetched ");
-    //     console.log(values);
-    //     hasManyData[hasManySchema.relationName] = values;
-    // })
-    // .catch(function(err){
-    //     callback(err);
-    // });
 };
 
 
