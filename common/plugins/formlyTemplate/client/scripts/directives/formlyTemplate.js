@@ -86,6 +86,7 @@ angular.module($snaphy.getModuleName())
                 var select = $(iElm).selectize();
                 var selectize = select[0].selectize;
                 var obj = {};
+                obj = item;
                 obj.id = item.id;
                 obj[scope.searchProperty] = item[scope.searchProperty];
 
@@ -225,6 +226,7 @@ angular.module($snaphy.getModuleName())
                 var select = $(iElm).selectize();
                 var selectize = select[0].selectize;
                 var obj = {};
+                obj = item;
                 obj.id = item.id;
                 obj[scope.searchProperty] = item[scope.searchProperty];
 
@@ -249,13 +251,17 @@ angular.module($snaphy.getModuleName())
                 });
                 if(scope.value !== undefined){
                     if(scope.value.length && val.length === 0){
-                        scope.value.forEach(function(columnValue){
+                        var data = angular.copy(scope.value);
+                        //reset scope.value
+                        //scope.value = [];
+                        data.forEach(function(columnValue){
                             //Now check if the model has value or not..
                             if(!$.isEmptyObject(columnValue)){
                                 //Now add data
                                 addValue(columnValue);
                             }
                         });
+                        //scope.value = data;
                     }else{
                         if(scope.value.length === 0 && val.length){
                             $timeout(function(){
