@@ -440,13 +440,14 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                 var idFound = false;
                 //Now loop over relationDataArr
                 for(var i=0; i< relationDataArr.length; i++){
-                    if(dataObj.id === relationDataArr[i].id){
-                        idFound = true;
+                    if(relationDataArr[i].id){
+                        if(dataObj.id.toString().trim() === relationDataArr[i].id.toString().trim()){
+                            idFound = true;
+                            break;
+                        }
                     }
                 }
                 if(!idFound){
-
-                    //console.log(relationDataArr);
                     destroyHasManyRel(dataInstance, relationName, dataObj, manyType,  callback);
                 }
             });

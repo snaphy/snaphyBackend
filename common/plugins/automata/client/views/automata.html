@@ -28,7 +28,7 @@
     <!-- Simple Vertical Tiles -->
     <div class="row" ng-if="isDataFetched()">
 
-      <snaphy-widget-added class="col-sm-6 col-lg-3"
+      <snaphy-widget-added  ng-cloak class="col-sm-6 col-lg-3"
         ng-repeat="widget in schema.widgets"
         label="{{widget.label}}"
         model="{{schema.model}}"
@@ -68,7 +68,7 @@
     <div ui-view class="row">
         <div class="col-sm-12" ng-class="{'col-lg-8': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
             <!-- Dynamic Table Full -->
-            <div id="automataWidget" class="block">
+            <div ng-cloak id="automataWidget" class="block">
                 <div class="block-header">
                     <ul class="block-options">
                         <li>
