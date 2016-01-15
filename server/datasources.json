@@ -30,11 +30,19 @@
         "connector": "mongodb",
         "user": "robins"
     },
-    "Image": {
-        "name": "Image",
+    "FileSystem": {
+        "name": "FileSystem",
         "connector": "loopback-component-storage",
         "provider": "filesystem",
         "root": "/home/robins/.storage",
+        "maxFileSize": "10485760"
+    },
+    "Image": {
+        "name": "Image",
+        "connector": "loopback-component-storage",
+        "provider": "amazon",
+        "key": "YkS4C7TOjaPbzq98fYyLX9Qra7rReNdh31mt76MB",
+        "keyId": "AKIAIONIZOZN6REIYVSQ",
         "maxFileSize": "10485760"
     }
 }

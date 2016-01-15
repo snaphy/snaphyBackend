@@ -184,7 +184,7 @@
         "type": "singleFileUpload",
         "templateOptions": {
           "label": "Add recipe cover image",
-          "containerName": "recipes",
+          "containerName": "gruberr-recipes",
           "containerModel": "Container",
           "url": {
             "upload": "",
@@ -265,7 +265,7 @@
         "type": "multipleFileUpload",
         "templateOptions": {
           "label": "Add recipe image steps",
-          "containerName": "recipes",
+          "containerName": "gruberr-recipes",
           "containerModel": "Container",
           "url": {
             "upload": "",
