@@ -1,5 +1,8 @@
-'use strict';
-/*global angular, $snaphy, $, CKEDITOR */
+(function(){
+    'use strict';
+})();
+
+/*global angular, $, CKEDITOR, App */
 angular.module($snaphy.getModuleName())
 
 
@@ -21,4 +24,17 @@ angular.module($snaphy.getModuleName())
 
             } //End of Link function...
     }; // End of return
+}])
+
+
+.directive('snaphyCheckedList', ['$timeout', function($timeout){
+    return {
+        restrict: 'A',
+        link: function(scope, iElement, iAttrs){
+            $timeout(function(){
+                // Init page helpers (Table Tools helper)
+                App.initHelpers('table-tools');
+            });
+        }//End of the link function..
+    };
 }]);

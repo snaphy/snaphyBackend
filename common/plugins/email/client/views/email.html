@@ -1,25 +1,70 @@
-<div class="content content-narrow">
-    <h2 class="content-heading">Send Email</h2>
-    <div  class="block">
-        <div class="block-header">
-            <ul class="block-options">
-                <li>
-                    <button type="button"><i class="si si-settings"></i></button>
-                </li>
-            </ul>
-            <h3 class="block-title">Email Editor</h3>
-        </div>
-        <div  class="block-content">
-            <form action="page_forms_editors.html" method="post" class="form-horizontal" onsubmit="return false;">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <!-- CKEditor Container -->
-                        <textarea snaphy-ck-editor id="js-ckeditor" name="ckeditor">Hello CKEditor!</textarea>
-                    </div>
+<div class="content">
+    <h2 class="content-heading col-md-12">Send Email</h2>
+    <div ui-view class="row">
+        <div class="col-md-8 col-md-12">
+            <div  class="block">
+                <div class="block-header">
+                    <h3 class="block-title">Email Editor</h3>
                 </div>
-            </form>
-            <!-- <button ng-click="getHtmlData()"></button> -->
+                <div  class="block-content">
+                    <form action="page_forms_editors.html" method="post" class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <!-- CKEditor Container -->
+                                <textarea snaphy-ck-editor id="js-ckeditor" name="ckeditor">Hello CKEditor!</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-primary pull-right" type="button">Send Mail</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- <button ng-click="getHtmlData()"></button> -->
+                </div>
+            </div>
+            <!-- END CKEditor -->
+        </div>
+
+        <div class="col-md-4 col-md-12">
+            <!-- Checkable Table-->
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">Select Users</h3>
+
+                </div>
+                <div class="block-content">
+                    <!-- If you put a checkbox in thead section, it will automatically toggle all tbody section checkboxes -->
+                    <table snaphy-checked-list class="js-table-checkable table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 70px;">
+                                    <label class="css-input css-checkbox css-checkbox-primary remove-margin-t remove-margin-b">
+                                        <input type="checkbox" id="check-all" name="check-all"><span></span>
+                                    </label>
+                                </th>
+                                <th>Customers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="user in users">
+                                <td class="text-center">
+                                    <label class="css-input css-checkbox css-checkbox-primary">
+                                        <input type="checkbox" id="row_1" name="row_1"><span></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <p class="font-w600 push-10">{{user.firstName}} {{user.lastName}}</p>
+                                    <p class="text-muted remove-margin-b">{{user.email}}</p>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END Checkable Table -->
         </div>
     </div>
-    <!-- END CKEditor -->
+    <!-- div row -->
 </div>
