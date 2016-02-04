@@ -117,10 +117,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @return {object} [description]
 	 */
 	var init = function(){
-		/*//DEMO SHOWING USAGE..
+		//DEMO SHOWING USAGE..
 		var mailModel = packageObj.mailConfig[0].emailModel;
+		//console.log(mail);
 		var adminModel = mail[mailModel];
-		adminModel.send(
+		/*adminModel.send(
 				{
 					from: " 'Rohit Basu' <rohitbasu2050@gmail.com>",
 					to: 'robinskumar73@gmail.com',

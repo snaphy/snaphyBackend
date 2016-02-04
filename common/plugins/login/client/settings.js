@@ -17,7 +17,7 @@ var settings = {
     "registerState": "register",
     "forgotPassState": "forgotPass",
     "adminRole": 'admin',
-    "employeeRole": "employee",
+    "employeeRole": "employee"
 
 };
 

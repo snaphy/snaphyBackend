@@ -1,4 +1,25 @@
-<div>
-<!-- Example html file for plugin -->	
-This is a demo plugin of Snaphy
+<div class="content content-narrow">
+    <h2 class="content-heading">Send Email</h2>
+    <div  class="block">
+        <div class="block-header">
+            <ul class="block-options">
+                <li>
+                    <button type="button"><i class="si si-settings"></i></button>
+                </li>
+            </ul>
+            <h3 class="block-title">Email Editor</h3>
+        </div>
+        <div  class="block-content">
+            <form action="page_forms_editors.html" method="post" class="form-horizontal" onsubmit="return false;">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <!-- CKEditor Container -->
+                        <textarea snaphy-ck-editor id="js-ckeditor" name="ckeditor">Hello CKEditor!</textarea>
+                    </div>
+                </div>
+            </form>
+            <!-- <button ng-click="getHtmlData()"></button> -->
+        </div>
+    </div>
+    <!-- END CKEditor -->
 </div>

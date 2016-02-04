@@ -8,34 +8,31 @@
   "routeExposure": "/multiLogin",
   "staticFiles": {
     "css": {
-        "exampleCss" : "/multiLogin/style/example.css"
-      },
+      "exampleCss": "/multiLogin/style/example.css"
+    },
     "js": {
       "multiLoginRoute": "/multiLogin/scripts/routes/multiLogin.js",
       "multiLoginController": "/multiLogin/scripts/controllers/multiLogin.js"
     },
-    "moduleDependencies":{
-
-    },
+    "moduleDependencies": {},
     "settings": "/multiLogin/settings.js"
   },
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
     "headerHook": [],
-    "footerHook":[]
+    "footerHook": []
   },
-  "databases": {
-  },
+  "databases": {},
   "activate": true,
   "services": {},
-  "dependencies": {},
+  "dependencies": {
+    "loopback-component-passport": "^2.0.0"
+  },
   "optionalDependencies": {},
   "repository": {
     "type": "",
     "url": ""
   },
-  "devDependencies": {
-   
-  }
+  "devDependencies": {}
 }
