@@ -26,23 +26,34 @@
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
-    "headerHook": ["/login/views/headerHook.html"],
-    "footerHook":[]
+    "headerHook": [
+      "/login/views/headerHook.html"
+    ],
+    "footerHook": []
   },
   "databases": {
     "User": "Employee"
   },
-  "adminUser":[
+  "adminUser": [
     {
-      "username":"robinskumar73", "email":"robinskumar73@gmail.com", "password":"12345", "firstName": "Robins", "lastName": "Gupta"
+      "username": "robinskumar73",
+      "email": "robinskumar73@gmail.com",
+      "password": "12345",
+      "firstName": "Robins",
+      "lastName": "Gupta"
     },
     {
-      "username":"RaviGupta", "email":"ravigupta9363@gmail.com", "password":"12345", "firstName": "Ravi", "lastName": "Gupta"
+      "username": "RaviGupta",
+      "email": "ravigupta9363@gmail.com",
+      "password": "12345",
+      "firstName": "Ravi",
+      "lastName": "Gupta"
     }
   ],
   "activate": true,
   "services": {},
-  "dependencies": {},
+  "dependencies": {
+  },
   "optionalDependencies": {},
   "repository": {
     "type": "",
