@@ -77,7 +77,7 @@
                             <tr>
                                 <th class="text-center" style="width: 70px;">
                                     <label class="css-input css-checkbox css-checkbox-primary remove-margin-t remove-margin-b">
-                                        <input ng-click="selectAllUser(users)" type="checkbox" id="check-all" name="check-all"><span></span>
+                                        <input ng-click="selectAllUser(users)"  type="checkbox" id="check-all" name="check-all"><span></span>
                                     </label>
                                 </th>
                                 <th>Select all </th>
@@ -87,7 +87,7 @@
                             <tr ng-repeat="user in users">
                                 <td class="text-center">
                                     <label class="css-input css-checkbox css-checkbox-primary">
-                                        <input ng-model="user.selected" type="checkbox" id="row_1" name="row_1"><span></span>
+                                        <input ng-click="toggleChecked(user)"  type="checkbox" id="row_1" name="row_1"><span></span>
                                     </label>
                                 </td>
                                 <td>

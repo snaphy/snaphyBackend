@@ -23,7 +23,7 @@ angular.module($snaphy.getModuleName())
                 SnaphyTemplate.notify({
                     message: "Invalid Url.",
                     type: 'danger',
-                    icon: 'fa fa-times',
+                    icon: 'fa fa-check',
                     align: 'right'
                 });
                 return false;
@@ -62,7 +62,7 @@ angular.module($snaphy.getModuleName())
                 SnaphyTemplate.notify({
                     message: "Unable to fetching data from the server.Check netwok connection!!",
                     type: 'danger',
-                    icon: 'fa fa-times',
+                    icon: 'fa fa-check',
                     align: 'right'
                 });
                 console.log("Error fetching data from the server");
@@ -72,7 +72,7 @@ angular.module($snaphy.getModuleName())
                 SnaphyTemplate.notify({
                     message: msg,
                     type: 'danger',
-                    icon: 'fa fa-times',
+                    icon: 'fa fa-check',
                     align: 'right'
                 });
             };
@@ -153,7 +153,7 @@ angular.module($snaphy.getModuleName())
                                         SnaphyTemplate.notify({
                                             message: "Email send successfully.",
                                             type: 'success',
-                                            icon: 'fa fa-times',
+                                            icon: 'fa fa-check',
                                             align: 'right'
                                         });
                                     }, function(httpResponse){
@@ -172,7 +172,7 @@ angular.module($snaphy.getModuleName())
                                         SnaphyTemplate.notify({
                                             message: "Email send successfully.",
                                             type: 'success',
-                                            icon: 'fa fa-times',
+                                            icon: 'fa fa-check',
                                             align: 'right'
                                         });
                                     }, function(httpResponse){
@@ -189,13 +189,35 @@ angular.module($snaphy.getModuleName())
 
             //Select all users to send email..
             $scope.selectAllUser = function(users){
+                //Toggle values..
+                $scope.selectAll  = !$scope.selectAll;
+
                 if(!users){
                     return false;
                 }
-                users.forEach(function(user){
-                    user.selected = true;
-                });
+
+                if($scope.selectAll)
+                {
+                    //if user is checked..
+                    users.forEach(function(user){
+                        user.selected = true;
+                    });
+                }else{
+                    //if user is checked..
+                    users.forEach(function(user){
+                        user.selected = false;
+                    });
+                }
             }
+
+            //Checkbox onclick box method..
+            $scope.toggleChecked = function(user){
+                if(user.selected === undefined){
+                    user.selected = true;
+                    return null;
+                }
+                user.selected = !user.selected;
+            };
 
 
             var fetchEmailSchema = function(){
@@ -220,6 +242,7 @@ angular.module($snaphy.getModuleName())
         //Only run init if state is not undefined.
         if($state.current.name){
             $scope.schema = {};
+            $scope.selectAll = false;
             //Now call the init method...
             init();
         }else{

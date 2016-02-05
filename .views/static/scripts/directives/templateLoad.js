@@ -34,7 +34,7 @@ angular.module($snaphy.getModuleName())
 /**
  *Directive for defining filters $multiSelect
  * */
-.directive('snaphyDialog', [function(){
+.directive('snaphyDialog', ['$timeout', function($timeout){
     //TODO table header data initialization bugs.. this filter must not proceed before table header initialization..
     return {
         restrict:'E',
@@ -47,7 +47,7 @@ angular.module($snaphy.getModuleName())
         },
         replace: true,
         template:
-          '<div class="modal fade" tabindex="-1"  role="dialog" aria-hidden="true">'+
+          '<div  class="modal fade" tabindex="-1"  role="dialog" aria-hidden="true">'+
               '<div class="modal-dialog modal-sm">'+
                   '<div class="modal-content">'+
                       '<div class="block block-themed block-transparent remove-margin-b">'+
@@ -64,7 +64,7 @@ angular.module($snaphy.getModuleName())
                           '</div>'+
                       '</div>'+
                       '<div class="modal-footer">'+
-                          '<button ng-click="onNo()" class="btn btn-sm btn-default" type="button" >Cancel</button>'+
+                          '<button data-dismiss="modal" class="btn btn-sm btn-default" type="button" >Cancel</button>'+
                           '<button ng-click="onYes()"  class="btn btn-sm btn-danger" type="button"><i class="fa fa-check"></i> Confirm</button>'+
                       '</div>'+
                   '</div>'+
@@ -78,6 +78,17 @@ angular.module($snaphy.getModuleName())
               else{
                 $(iElement).modal('hide');
               }
+
+
+            //call this on close..
+            $(iElement).on('hide.bs.modal', function () {
+                //TODO IMPROVE PERFORMANCE DOUBLE TIME REPEATING..
+                $timeout(function(){
+                    scope.showDialog = false;
+                });
+                // do something…
+                scope.onNo();
+            });
           });
 
         }//link function..
