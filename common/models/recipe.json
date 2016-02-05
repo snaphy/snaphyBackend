@@ -75,8 +75,8 @@
     "stepsDescription": {
       "display": false
     },
-    "description":{
-        "display": false
+    "description": {
+      "display": false
     },
     "status": {
       "tag": {
@@ -115,11 +115,11 @@
     "customer_date": {
       "display": false
     },
-    "added":{
-        "date":true
+    "added": {
+      "date": true
     },
-    "servings":{
-        "display": false
+    "servings": {
+      "display": false
     }
   },
   "widgets": [
@@ -191,7 +191,7 @@
             "delete": ""
           },
           "bind": true,
-          "fullWidth":true
+          "fullWidth": true
         }
       }
     },
@@ -218,7 +218,18 @@
         "templateOptions": {
           "label": "Select recipe servings",
           "id": "recipeServings",
-          "options": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+          "options": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
         }
       }
     },
@@ -324,13 +335,13 @@
     "priorities": {
       "type": "hasOne",
       "model": "Priority",
-      "onCascadeDelete": true,
       "foreignKey": "",
+      "onCascadeDelete": true,
       "templateOptions": {
         "btnText": "Add Priority",
         "searchProp": "priority",
         "create": true,
-        "search":false,
+        "search": false,
         "hide": true
       }
     },
@@ -353,7 +364,7 @@
         "btnText": "Add Comment",
         "searchProp": "comment",
         "create": true,
-        "search":false
+        "search": false
       }
     },
     "recipeTags": {
@@ -369,8 +380,8 @@
     "ingredients": {
       "type": "hasMany",
       "model": "Ingredients",
-      "onCascadeDelete": true,
       "foreignKey": "",
+      "onCascadeDelete": true,
       "through": "RecipeIngredients",
       "templateOptions": {
         "btnText": "Add Ingredients",

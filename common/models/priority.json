@@ -19,11 +19,11 @@
   },
   "tables": {
     "priority": {
-        "tag": {
-          "medium": "label-warning",
-          "normal": "label-primary",
-          "high": "label-danger"
-        }
+      "tag": {
+        "medium": "label-warning",
+        "normal": "label-primary",
+        "high": "label-danger"
+      }
     },
     "recipes_description": {
       "display": false
@@ -49,10 +49,9 @@
     "recipes_stepsDescription": {
       "display": false
     },
-    "recipes_added":{
-        "date": true
+    "recipes_added": {
+      "date": true
     }
-
   },
   "filters": {
     "priority": {

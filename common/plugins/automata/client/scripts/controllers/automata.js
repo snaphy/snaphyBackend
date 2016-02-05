@@ -513,12 +513,15 @@ angular.module($snaphy.getModuleName())
 
         //Copying one object to another..
         var extend = function(original, context, key) {
-            for (key in context)
-                if (context.hasOwnProperty(key))
-                    if (Object.prototype.toString.call(context[key]) === '[object Object]')
+            for (key in context){
+                if (context.hasOwnProperty(key)){
+                    if (Object.prototype.toString.call(context[key]) === '[object Object]'){
                         original[key] = extend(original[key] || {}, context[key]);
-                    else
+                    }else{
                         original[key] = context[key];
+                    }
+                }
+            }
             return original;
         };
 
@@ -729,7 +732,7 @@ angular.module($snaphy.getModuleName())
 
 
 
-        //Only load if the current scope is
+        //Only load if the current scope is automata
         $scope.init();
 
 

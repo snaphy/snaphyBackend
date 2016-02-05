@@ -1,5 +1,5 @@
-/*  global  $snaphy, angular, console */
 (function(){"use strict";})();
+/*global  $snaphy, angular, console */
 angular.module($snaphy.getModuleName())
 
 .run(['Permission', '$q', '$rootScope', function (Permission, $q, $rootScope)  {

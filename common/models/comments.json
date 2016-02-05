@@ -93,24 +93,24 @@
       "type": "$select",
       "label": "Select customer by email",
       "getOptionsFromColumn": true,
-      "dataType":{
-          "type":"object",
-          "searchProp":"email"
+      "dataType": {
+        "type": "object",
+        "searchProp": "email"
       }
     },
     "recipe_name": {
       "type": "$select",
       "label": "Select recipe by name",
       "getOptionsFromColumn": true,
-      "dataType":{
-          "type":"object",
-          "searchProp":"name"
+      "dataType": {
+        "type": "object",
+        "searchProp": "name"
       }
     }
   },
   "tables": {
-    "date":{
-        "date":true
+    "date": {
+      "date": true
     },
     "customer_phoneNumber": {
       "display": false
@@ -215,7 +215,13 @@
         "templateOptions": {
           "label": "Select rating for recipe",
           "id": "recipeRating",
-          "options": [1, 2, 3, 4, 5 ]
+          "options": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
         }
       }
     }

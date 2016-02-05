@@ -35,7 +35,11 @@
         "templateOptions": {
           "label": "Enter recipe category name",
           "id": "recipeServings",
-          "options": ["breakfast", "lunch", "dinner"]
+          "options": [
+            "breakfast",
+            "lunch",
+            "dinner"
+          ]
         }
       }
     }

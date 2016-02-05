@@ -1,61 +1,62 @@
 {
-    "name": "Wishlist",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "Wishlist",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "tables": {
+    "customers_phoneNumber": {
+      "display": false
     },
-    "properties": {
-        "id": {
-            "template": {
-                "type": "dummy"
-            }
+    "customers_firstName": {
+      "display": false
+    },
+    "customers_lastName": {
+      "display": false
+    },
+    "customers_profilePic": {
+      "display": false
+    },
+    "customers_password": {
+      "display": false
+    },
+    "customers_date": {
+      "display": false
+    }
+  },
+  "properties": {
+    "id": {
+      "type": {
+        "template": {
+          "type": "dummy"
         }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customers": {
+      "type": "hasOne",
+      "model": "Customer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "create": false
+      }
     },
-    "tables": {
-        "customers_phoneNumber": {
-          "display": false
-        },
-        "customers_firstName": {
-          "display": false
-        },
-        "customers_lastName": {
-          "display": false
-        },
-        "customers_profilePic": {
-          "display": false
-        },
-        "customers_password": {
-          "display": false
-        },
-        "customers_date": {
-          "display": false
-        }
-
-    },
-    "validations": [],
-    "relations": {
-        "customers": {
-            "type": "hasOne",
-            "model": "Customer",
-            "foreignKey": "",
-            "templateOptions": {
-                "btnText": "Add Customer",
-                "searchProp": "email",
-                "create": false
-            }
-        },
-        "recipes": {
-            "type": "hasAndBelongsToMany",
-            "model": "Recipe",
-            "foreignKey": "",
-            "templateOptions": {
-                "btnText": "Add Recipe",
-                "searchProp": "name",
-                "create": false
-            }
-        }
-    },
-    "acls": [],
-    "methods": []
+    "recipes": {
+      "type": "hasAndBelongsToMany",
+      "model": "Recipe",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Recipe",
+        "searchProp": "name",
+        "create": false
+      }
+    }
+  },
+  "acls": [],
+  "methods": []
 }

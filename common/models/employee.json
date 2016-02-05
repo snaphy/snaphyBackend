@@ -113,6 +113,9 @@
       }
     }
   },
+  "hidden": [
+    "password"
+  ],
   "properties": {
     "username": {
       "type": "string",
@@ -180,8 +183,8 @@
     "employeeDetails": {
       "type": "hasOne",
       "model": "EmployeeDetails",
-      "onCascadeDelete": true,
       "foreignKey": "",
+      "onCascadeDelete": true,
       "templateOptions": {
         "searchProp": "address",
         "create": true,
@@ -250,6 +253,5 @@
       "property": "save"
     }
   ],
-  "methods": [],
-  "hidden":["password"]
+  "methods": []
 }

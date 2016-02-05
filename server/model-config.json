@@ -38,7 +38,7 @@
   },
   "adminEmail": {
     "dataSource": "GoogleEmail",
-    "public": false
+    "public": true
   },
   "Recipe": {
     "dataSource": "mongodb",
@@ -89,6 +89,10 @@
     "public": true
   },
   "Wishlist": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "EmailInfo": {
     "dataSource": "mongodb",
     "public": true
   }

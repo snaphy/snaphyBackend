@@ -1,5 +1,13 @@
 <ul snaphy-load-template ng-controller="emailControl" class="nav-main">
-  <li>
-    <a  ui-sref="{{emailState}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Email</span></a>
-  </li>
+    <li class="nav-main-heading"><span class="sidebar-mini-hide">Email Management</span></li>
+    <li ng-repeat="emailModelObj in emailModelList">
+        <a class="nav-submenu" data-toggle="nav-submenu" style="cursor:pointer;"><i class="si si-bar-chart"></i>
+            <span class="sidebar-mini-hide">{{emailModelObj.label}}</span>
+        </a>
+        <ul>
+            <li ng-repeat="userModel in emailModelObj.assosiatedUsers">
+                <a ng-init="state = getStateName(emailModelObj.model, userModel);" ui-sref="{{state}}">{{userModel | capitalize}}</a>
+            </li>
+        </ul>
+    </li>
 </ul>

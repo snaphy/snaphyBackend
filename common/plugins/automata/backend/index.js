@@ -24,7 +24,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		//run each models in the loop and add a remote method to it.
 		var models = server.models();
 
-
 		models.forEach(function(Model) {
 			//refer to https://apidocs.strongloop.com/loopback/#app-models
 			addRemoteMethod(server, Model.modelName);

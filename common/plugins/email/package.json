@@ -20,7 +20,6 @@
         "moduleDependencies": {},
         "settings": "/email/settings.js"
     },
-    "defaultTemplate": "false",
     "bodystructure": {
         "asidebarHook": [],
         "sidebarHook": ["/email/views/sidebarHook.html"],
@@ -28,13 +27,39 @@
         "footerHook": []
     },
     "databases": {
-        "EmailUsersModel": "Customer" 
+        "EmailUsersModel": "Customer"
     },
     "mailConfig": [{
         "emailModel": "adminEmail",
-        "assosiatedUsers": [],
+        "emailLabel":"Send Info",
+        "label":"Send Mail To Users",
+        "from": "'Rohit Basu' <rohitbasu2050@gmail.com>",
+        "assosiatedUsers": ["Customer"],
         "templates": {
-            "sendNotice": "backend/views/notice.ejs"
+            "sendNotice": {
+                "label": "Send notice to users",
+                "templatePath": "backend/views/notice.ejs",
+                "properties":[
+                    {
+                        "key": "title",
+                        "type": "input",
+                        "templateOptions": {
+                          "type": "text",
+                          "label": "Enter notice title",
+                          "id": "noticeTitle"
+                        }
+                    },
+                    {
+                        "key": "subject",
+                        "type": "input",
+                        "templateOptions": {
+                          "type": "text",
+                          "label": "Enter subject for notice",
+                          "id": "noticeSubject"
+                        }
+                    }
+                ]
+            }
         }
     }],
     "activate": true,

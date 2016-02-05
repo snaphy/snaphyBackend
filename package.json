@@ -1,6 +1,6 @@
 {
   "name": "snaphyBackend",
-  "service":"snaphy",
+  "service": "snaphy",
   "title": "Snaphy backend for testing and generating plugins ",
   "angularModuleName": "snaphyBackend",
   "author": "Robins Gupta",

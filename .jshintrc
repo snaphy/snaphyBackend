@@ -6,7 +6,7 @@
 
     "browser"       : true,
 
-    "node"          : false,
+    "node"          : true,
     "rhino"         : false,
     "couch"         : false,
     "wsh"           : true,
@@ -15,6 +15,7 @@
     "prototypejs"   : false,
     "mootools"      : false,
     "dojo"          : false,
+
 
     "predef"        : [
         "$snaphy"

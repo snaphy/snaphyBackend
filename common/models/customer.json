@@ -52,17 +52,16 @@
       "label": "Select customer by phone number",
       "getOptionsFromColumn": true
     }
-
   },
   "tables": {
     "profilePic": {
       "display": false
     },
-    "password":{
-        "display":false
+    "password": {
+      "display": false
     },
-    "date":{
-        "date":true
+    "date": {
+      "date": true
     }
   },
   "validationsBackend": {
@@ -105,6 +104,9 @@
       }
     }
   },
+  "hidden": [
+    "password"
+  ],
   "properties": {
     "date": {
       "type": "string",
@@ -204,12 +206,11 @@
     },
     "wishlists": {
       "type": "hasOne",
-      "onCascadeDelete": true,
       "model": "Wishlist",
-      "foreignKey": ""
+      "foreignKey": "",
+      "onCascadeDelete": true
     }
   },
-  "hidden":["password"],
   "acls": [],
   "methods": []
 }
