@@ -1,4 +1,6 @@
-( function( ){'use strict';} )( );
+(function() {
+    'use strict';
+})();
 /* global $snaphy, angular, $, console*/
 angular.module($snaphy.getModuleName())
 
@@ -16,43 +18,45 @@ angular.module($snaphy.getModuleName())
 
 
 
-        $scope.toJsDate = function(str){
-          if(!str)return null;
-          return new Date(str);
+        $scope.toJsDate = function(str) {
+            if (!str) {
+                return null;
+            }
+            return new Date(str);
         };
 
 
         $scope.currentState = currentState;
 
-        $scope.getCurrentState = function(){
+        $scope.getCurrentState = function() {
             return $state.current.name;
         };
 
         //Storing an instance of table values..
-        $scope.rowListValues = $scope.rowListValues || [] ;
+        $scope.rowListValues = $scope.rowListValues || [];
         //Schema of the database
-        $scope.schema       = $scope.schema || {};
+        $scope.schema = $scope.schema || {};
         /*Data for save form modal*/
         $scope.saveFormData = $scope.saveFormData || {};
         //Initializing scope //for array..
-        $scope.dataValues =  $scope.dataValues || [];
+        $scope.dataValues = $scope.dataValues || [];
         //contains backup of the data..
-        var backupData = backupData ||  {};
+        var backupData = backupData || {};
         var dataFetched = dataFetched || false;
 
 
-        $scope.goToParentState = function(){
-            if($scope.$parent.currentState){
+        $scope.goToParentState = function() {
+            if ($scope.$parent.currentState) {
                 $state.go($scope.$parent.currentState);
             }
         };
 
 
-        $scope.checkIfParentState = function(){
-            if($scope.databasesList){
-                for(var i=0; i<$scope.databasesList.length; i++){
+        $scope.checkIfParentState = function() {
+            if ($scope.databasesList) {
+                for (var i = 0; i < $scope.databasesList.length; i++) {
                     var state = $scope.databasesList[i];
-                    if(state.toLowerCase().trim() === $state.current.name.toLowerCase().trim()){
+                    if (state.toLowerCase().trim() === $state.current.name.toLowerCase().trim()) {
                         return true;
                     }
                 }
@@ -72,7 +76,7 @@ angular.module($snaphy.getModuleName())
         $scope.getColValue = function(rowObject, columnHeader) {
             var key = $scope.getKey(rowObject, columnHeader);
 
-            return key !== undefined? rowObject[key]: null ;
+            return key !== undefined ? rowObject[key] : null;
         };
 
 
@@ -86,7 +90,7 @@ angular.module($snaphy.getModuleName())
          */
         $scope.getKey = function(rowObject, columnHeader) {
             var keyName;
-            if(rowObject){
+            if (rowObject) {
                 if (rowObject[columnHeader] !== undefined) {
                     keyName = columnHeader;
                 } else {
@@ -115,21 +119,21 @@ angular.module($snaphy.getModuleName())
 
 
         //TO be used in tables..
-        $scope.getRelationColumnValue = function(rowObject, header, colKey){
-            var colValue                = $scope.getColValue(rowObject, header);
-            var isBelongToRelation      = header !== colKey;
-            var hasOneRelationPropName  = $scope.getColumnKey(header);
-            return (isBelongToRelation)? colValue[hasOneRelationPropName] : colValue;
+        $scope.getRelationColumnValue = function(rowObject, header, colKey) {
+            var colValue = $scope.getColValue(rowObject, header);
+            var isBelongToRelation = header !== colKey;
+            var hasOneRelationPropName = $scope.getColumnKey(header);
+            return (isBelongToRelation) ? colValue[hasOneRelationPropName] : colValue;
         };
 
 
 
 
-        $scope.getRelationColumnType = function(rowObject, header, colKey, initialColumnType){
-            var colValue                = $scope.getRelationColumnValue(rowObject, header, colKey);
-            var hasOneRelationPropName  = $scope.getColumnKey(header);
-            var isBelongToRelation      = header !== colKey;
-            return (isBelongToRelation)? $scope.checkType(colValue, hasOneRelationPropName): initialColumnType;
+        $scope.getRelationColumnType = function(rowObject, header, colKey, initialColumnType) {
+            var colValue = $scope.getRelationColumnValue(rowObject, header, colKey);
+            var hasOneRelationPropName = $scope.getColumnKey(header);
+            var isBelongToRelation = header !== colKey;
+            return (isBelongToRelation) ? $scope.checkType(colValue, hasOneRelationPropName) : initialColumnType;
         };
 
 
@@ -182,10 +186,10 @@ angular.module($snaphy.getModuleName())
 
 
 
-        var resetSavedForm = function(form){
+        var resetSavedForm = function(form) {
 
             $scope.saveFormData = {};
-            if(form){
+            if (form) {
                 form.$setPristine();
             }
         };
@@ -197,16 +201,16 @@ angular.module($snaphy.getModuleName())
 
 
 
-        $scope.enableButton = function(form){
-            try{
-                if(form.$dirty){
-                    if($.isEmptyObject(form.$error) ){
+        $scope.enableButton = function(form) {
+            try {
+                if (form.$dirty) {
+                    if ($.isEmptyObject(form.$error)) {
                         return true;
                     }
-                }else{
+                } else {
                     return false;
                 }
-            }catch(err){
+            } catch (err) {
                 //disable button
                 return true;
             }
@@ -256,18 +260,18 @@ angular.module($snaphy.getModuleName())
          * @param  {[type]} rowObject [description]
          * @return {[type]}           [description]
          */
-        $scope.deleteData = function(formStructure, data){
+        $scope.deleteData = function(formStructure, data) {
             //get the model service..
             var baseDatabase = Database.loadDb(formStructure.model);
             $scope.dialog = {
                 message: "Do you want to delete the data?",
                 title: "Confirm Delete",
-                onCancel: function(){
+                onCancel: function() {
                     /*Do nothing..*/
                     //Reset the disloag bar..
                     $scope.dialog.show = false;
                 },
-                onConfirm: function(){
+                onConfirm: function() {
                     var mainArrayIndex = getArrayIndex($scope.dataValues, data.id);
                     var oldDeletedData = $scope.dataValues[mainArrayIndex];
                     //console.log(data);
@@ -276,7 +280,7 @@ angular.module($snaphy.getModuleName())
                     $scope.dialog.show = false;
                     baseDatabase.deleteById({
                         id: data.id
-                    }, function(){
+                    }, function() {
                         /*Delete the data from the database..*/
                         SnaphyTemplate.notify({
                             message: "Data successfully deleted.",
@@ -284,8 +288,8 @@ angular.module($snaphy.getModuleName())
                             icon: 'fa fa-check',
                             align: 'right'
                         });
-                    }, function(){
-                        $timeout(function () {
+                    }, function() {
+                        $timeout(function() {
                             //Attach the data again..
                             $scope.dataValues.push(oldDeletedData);
                         }, 10);
@@ -302,7 +306,7 @@ angular.module($snaphy.getModuleName())
                     $scope.dataValues.splice(mainArrayIndex, 1);
 
                 },
-                show:true
+                show: true
             };
 
         };
@@ -313,10 +317,10 @@ angular.module($snaphy.getModuleName())
          * For finding array index of the data of array of objects with properties id..
          * @return {[type]} [description]
          */
-        var getArrayIndex = function(arrayData, id){
-            for(var i=0; i<arrayData.length; i++){
-                var element= arrayData[i];
-                if(element.id.toString().trim() === id.toString().trim() ){
+        var getArrayIndex = function(arrayData, id) {
+            for (var i = 0; i < arrayData.length; i++) {
+                var element = arrayData[i];
+                if (element.id.toString().trim() === id.toString().trim()) {
                     return i;
                 }
             }
@@ -328,15 +332,15 @@ angular.module($snaphy.getModuleName())
          * @param  {[type]} schema template schema object with property fields showing all the fields.
          * @return {[type]}        [description]
          */
-        $scope.isValid = function(form){
-            try{
+        $scope.isValid = function(form) {
+            try {
                 //TODO Removing find alternate for  form.$dirty
-                if(form.validate() ){
-                    if($.isEmptyObject(form.$error) ){
+                if (form.validate()) {
+                    if ($.isEmptyObject(form.$error)) {
                         return true;
                     }
                 }
-            }catch(err){
+            } catch (err) {
                 return false;
             }
 
@@ -346,10 +350,10 @@ angular.module($snaphy.getModuleName())
 
 
         //Method for rollbackchanges is eror occured..
-        $scope.rollBackChanges = function(){
-            if(!$.isEmptyObject(backupData)){
-                $scope.dataValues.forEach(function(data, index){
-                    if(data.id === backupData.id && !$.isEmptyObject(backupData)){
+        $scope.rollBackChanges = function() {
+            if (!$.isEmptyObject(backupData)) {
+                $scope.dataValues.forEach(function(data, index) {
+                    if (data.id === backupData.id && !$.isEmptyObject(backupData)) {
                         //rollback changes..
                         $scope.dataValues[index] = backupData;
                         //Reset backup data..
@@ -373,11 +377,11 @@ angular.module($snaphy.getModuleName())
          * 	}
          * }
          */
-        $scope.displayProperties = function(schema, header){
-            if(schema.tables){
-                if(schema.tables[header]){
-                    if(schema.tables[header].display !== undefined){
-                        if(!schema.tables[header].display){
+        $scope.displayProperties = function(schema, header) {
+            if (schema.tables) {
+                if (schema.tables[header]) {
+                    if (schema.tables[header].display !== undefined) {
+                        if (!schema.tables[header].display) {
                             return false;
                         }
                     }
@@ -388,7 +392,7 @@ angular.module($snaphy.getModuleName())
 
 
 
-        $scope.resetBackup = function(){
+        $scope.resetBackup = function() {
             backupData = {};
             $scope.saveFormData = {};
         };
@@ -402,8 +406,8 @@ angular.module($snaphy.getModuleName())
          * @param formModel
          * @param formID refrencing to the id attribute of the  form.
          */
-        $scope.saveForm = function(formStructure, formData,  formModel, goBack, modelInstance) {
-            if(!$scope.isValid(formData)){
+        $scope.saveForm = function(formStructure, formData, formModel, goBack, modelInstance) {
+            if (!$scope.isValid(formData)) {
                 SnaphyTemplate.notify({
                     message: "Error data is Invalid.",
                     type: 'danger',
@@ -412,11 +416,10 @@ angular.module($snaphy.getModuleName())
                 });
 
                 //If edit was going on revert back..
-                if(formModel.id){
+                if (formModel.id) {
                     $scope.rollBackChanges();
                 }
-            }
-            else{
+            } else {
                 //Now save the model..
                 var baseDatabase = Database.loadDb(formStructure.model);
 
@@ -433,11 +436,10 @@ angular.module($snaphy.getModuleName())
                 var savedData = angular.copy(formModel);
                 var positionNewData;
                 var update;
-                if(formModel.id){
+                if (formModel.id) {
                     update = true;
 
-                }
-                else{
+                } else {
                     positionNewData = $scope.dataValues.length;
                     //First add to the table..
                     $scope.dataValues.push(savedData);
@@ -446,8 +448,8 @@ angular.module($snaphy.getModuleName())
 
 
                 //Now save||update the database with baseDatabase method.
-                baseDatabase.save({}, requestData, function(baseModel){
-                    if(!update){
+                baseDatabase.save({}, requestData, function(baseModel) {
+                    if (!update) {
                         //Now update the form with id.
                         $scope.dataValues[positionNewData].id = baseModel.data.id;
                     }
@@ -457,13 +459,12 @@ angular.module($snaphy.getModuleName())
                         icon: 'fa fa-check',
                         align: 'right'
                     });
-                }, function(){
+                }, function() {
                     //console.log("Error saving data to server");
                     //console.error(respHeader);
-                    if(update){
+                    if (update) {
                         $scope.rollBackChanges();
-                    }
-                    else{
+                    } else {
                         //remove the form added data..
                         if (positionNewData > -1) {
                             $scope.dataValues.splice(positionNewData, 1);
@@ -488,7 +489,7 @@ angular.module($snaphy.getModuleName())
 
 
         // Used in  the automata to get the table values..
-        $scope.getTagInfo = function(tableSchema, colKey, rowObject, header){
+        $scope.getTagInfo = function(tableSchema, colKey, rowObject, header) {
             var tableConfig = $scope.findModelPropertyTableConfig(tableSchema, colKey);
             var colValue = $scope.getColValue(rowObject, header);
             return tableConfig.tag[colValue];
@@ -497,12 +498,12 @@ angular.module($snaphy.getModuleName())
 
 
         //Goback or close the model..
-        var closeModel = function(goBack, modelInstance){
-            if(goBack){
-                if(modelInstance){
+        var closeModel = function(goBack, modelInstance) {
+            if (goBack) {
+                if (modelInstance) {
                     //close the model..
                     $(modelInstance).modal('hide');
-                }else{
+                } else {
                     //go back to parent state..
                     $scope.goToParentState();
                 }
@@ -511,14 +512,14 @@ angular.module($snaphy.getModuleName())
 
 
         //Copying one object to another..
-        var extend = function (original, context, key) {
-          for (key in context)
-            if (context.hasOwnProperty(key))
-              if (Object.prototype.toString.call(context[key]) === '[object Object]')
-                original[key] = extend(original[key] || {}, context[key]);
-              else
-                original[key] = context[key];
-          return original;
+        var extend = function(original, context, key) {
+            for (key in context)
+                if (context.hasOwnProperty(key))
+                    if (Object.prototype.toString.call(context[key]) === '[object Object]')
+                        original[key] = extend(original[key] || {}, context[key]);
+                    else
+                        original[key] = context[key];
+            return original;
         };
 
 
@@ -531,8 +532,8 @@ angular.module($snaphy.getModuleName())
                 //$scope.schema = values.schema;
                 fetchDataServer($scope.schema, dbService, widgetId);
             }, function() {
-                if(widgetId){
-                    $timeout(function(){
+                if (widgetId) {
+                    $timeout(function() {
                         //Now hide remove the refresh widget..
                         $(widgetId).removeClass('block-opt-refresh');
                     }, 200);
@@ -574,24 +575,24 @@ angular.module($snaphy.getModuleName())
             var filterObj = {};
             filterObj.include = [];
             if (dataSchema.relations.belongsTo) {
-                if(dataSchema.relations.belongsTo.length){
-                    dataSchema.relations.belongsTo.forEach(function(relationName){
+                if (dataSchema.relations.belongsTo.length) {
+                    dataSchema.relations.belongsTo.forEach(function(relationName) {
                         filterObj.include.push(relationName);
                     });
                 }
             }
 
-            if(dataSchema.relations.hasAndBelongsToMany) {
-                if(dataSchema.relations.hasAndBelongsToMany.length){
-                    dataSchema.relations.hasAndBelongsToMany.forEach(function(relationName){
+            if (dataSchema.relations.hasAndBelongsToMany) {
+                if (dataSchema.relations.hasAndBelongsToMany.length) {
+                    dataSchema.relations.hasAndBelongsToMany.forEach(function(relationName) {
                         filterObj.include.push(relationName);
                     });
                 }
             }
 
-            if(dataSchema.relations.hasMany) {
-                if(dataSchema.relations.hasMany.length){
-                    dataSchema.relations.hasMany.forEach(function(relationName){
+            if (dataSchema.relations.hasMany) {
+                if (dataSchema.relations.hasMany.length) {
+                    dataSchema.relations.hasMany.forEach(function(relationName) {
                         filterObj.include.push(relationName);
                     });
                 }
@@ -606,9 +607,9 @@ angular.module($snaphy.getModuleName())
             //     }
             // }
 
-            if(dataSchema.relations.hasOne) {
-                if(dataSchema.relations.hasOne.length){
-                    dataSchema.relations.hasOne.forEach(function(relationName){
+            if (dataSchema.relations.hasOne) {
+                if (dataSchema.relations.hasOne.length) {
+                    dataSchema.relations.hasOne.forEach(function(relationName) {
                         filterObj.include.push(relationName);
                     });
                 }
@@ -622,15 +623,14 @@ angular.module($snaphy.getModuleName())
 
                 //$scope.dataValues.length = 0;
                 $scope.dataValues = [];
-                values.forEach(function(element){
+                values.forEach(function(element) {
                     //Set element value initial relationship value for two way COMMUNICATION..
-                    for(var relationType in dataSchema.relations){
-                        if(dataSchema.relations.hasOwnProperty(relationType)){
+                    for (var relationType in dataSchema.relations) {
+                        if (dataSchema.relations.hasOwnProperty(relationType)) {
                             var value;
-                            if(relationType === "belongsTo" || relationType === "hasOne"){
+                            if (relationType === "belongsTo" || relationType === "hasOne") {
                                 value = {};
-                            }
-                            else{
+                            } else {
                                 value = [];
                             }
 
@@ -649,15 +649,15 @@ angular.module($snaphy.getModuleName())
                 });
                 //Now hide the refresh bar..
 
-                if(widgetId){
-                    $timeout(function(){
+                if (widgetId) {
+                    $timeout(function() {
                         //Now hide remove the refresh widget..
                         $(widgetId).removeClass('block-opt-refresh');
                     }, 200);
                 }
             }, function() {
-                if(widgetId){
-                    $timeout(function(){
+                if (widgetId) {
+                    $timeout(function() {
                         //Now hide remove the refresh widget..
                         $(widgetId).removeClass('block-opt-refresh');
                     }, 200);
@@ -667,15 +667,15 @@ angular.module($snaphy.getModuleName())
         };
 
 
-        var fetchHasManyThrough = function(element, hasManyThrough){
-            if(hasManyThrough){
-                hasManyThrough.forEach(function(relationObj){
+        var fetchHasManyThrough = function(element, hasManyThrough) {
+            if (hasManyThrough) {
+                hasManyThrough.forEach(function(relationObj) {
                     //Fetch the data from the server..
                     var throughModelName = relationObj.through;
                     var throughModelService = Database.loadDb(throughModelName);
                     var filter = {};
 
-                    filter.include =  filter.include || [];
+                    filter.include = filter.include || [];
                     filter.include.push(relationObj.throughModelRelation);
                     filter.where = {};
                     filter.where[relationObj.whereId] = element.id;
@@ -683,25 +683,25 @@ angular.module($snaphy.getModuleName())
                     //Now fetch..
                     throughModelService.find({
                         filter: filter
-                    }, function(relatedDataValue){
+                    }, function(relatedDataValue) {
                         console.log("Related hasManyThrough data fetched successfully.");
                         element[relationObj.relationName] = relatedDataValue;
-                    }, function(){
+                    }, function() {
                         console.error("error fetching hasManyThrough data");
                     });
                 });
             }
         };
 
-        var addRelationDummyValue = function(relationArr, element, value){
-            relationArr.forEach(function(rel){
+        var addRelationDummyValue = function(relationArr, element, value) {
+            relationArr.forEach(function(rel) {
                 //if relationtype is hasManyThrough
-                if(Object.prototype.toString.call(rel) === "[object Object]"){
-                    if(rel.relationName){
+                if (Object.prototype.toString.call(rel) === "[object Object]") {
+                    if (rel.relationName) {
                         element[rel.relationName] = value;
                     }
-                }else{
-                    if(!element[rel]){
+                } else {
+                    if (!element[rel]) {
                         element[rel] = value;
                     }
                 }
@@ -715,7 +715,7 @@ angular.module($snaphy.getModuleName())
         $scope.init = function(widgetId) {
             //Now display the refresh widget
             for (var i = 0; i < $scope.databasesList.length; i++) {
-                if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim()){
+                if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim()) {
                     //Now populate the database one by one..
                     populateData($scope.databasesList[i], widgetId);
                     $scope.tableTitle = currentState + ' ' + 'Data';

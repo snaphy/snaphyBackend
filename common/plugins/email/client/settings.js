@@ -6,7 +6,9 @@
 /*$snaphy*/
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
-   "emailState": "email"
+   "emailState": "email",
+   //Name of the users whom we are seding an email this is just a label..
+   "userLabel" : "Users"
 
 };
 
