@@ -203,7 +203,7 @@ angular.module($snaphy.getModuleName())
 
                 //Now call the getschema method..
                 emailModel.getMailSchema({}, {}, function(value){
-                    console.log(value);
+                    //console.log(value);
                     $scope.mailSchema = value.schema;
                 }, function(httpResponse){
                     //error

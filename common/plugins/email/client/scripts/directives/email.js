@@ -16,7 +16,7 @@ angular.module($snaphy.getModuleName())
                     return CKEDITOR.instances[iAttrs.id].getData();
                 };
 
-                console.log(scope);
+                //console.log(scope);
 
                 $timeout(function(){
                     CKEDITOR.disableAutoInline = true;

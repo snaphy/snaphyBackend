@@ -56,6 +56,15 @@
                           "label": "Enter subject for notice",
                           "id": "noticeSubject"
                         }
+                    },
+                    {
+                        "key": "website",
+                        "type": "input",
+                        "templateOptions": {
+                          "type": "text",
+                          "label": "Enter company website",
+                          "id": "noticeWebsite"
+                        }
                     }
                 ]
             }
