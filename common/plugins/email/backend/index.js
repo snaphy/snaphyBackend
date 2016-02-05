@@ -43,15 +43,53 @@ module.exports = function(server, databaseObj, helper, packageObj) {
                 description: "Remote method for sending mail from the frontend."
             }
         );
+	};
 
-	}
+
+    var addSendRemoteMethod = function(mailModel, from){
+        mailModel.sendMail = function( to, subject, html, callback){
+            mailModel.send({
+                from : from,
+                to: to,
+                subject: subject,
+                html: html
+            }, function(err, result) {
+                if (err) {
+                    console.error(err);
+                    return null;
+                }
+                console.log(result);
+				//Dont wait for callback..
+				////We dont need to do anything in calse email sending fails..
+            });
+
+            //Just send fast callback..
+            callback(null, "Successfully send email.");
+
+        };
+
+		//Now registering the method `getSchema`
+        mailModel.remoteMethod(
+            'sendMail', {
+				accepts: [
+					{arg: 'to', type: 'array'},
+					{arg: 'subject', type: 'string'},
+					{arg: 'html', type: 'string'}
+				],
+                returns: {
+                    arg: 'info',
+                    type: 'string'
+                },
+                description: "Remote method for sending text mail from the frontend."
+            }
+        );
+    };
 
 
 
     //Main method for adding and sending the mail to the clients..
     //Self calling the mail function
     /**
-     *
      * @return {object} Object with the mail method with send and templateName method attached.
      */
     var mail = (function() {
@@ -83,7 +121,8 @@ module.exports = function(server, databaseObj, helper, packageObj) {
                 if (!emailModelInstance) {
                     throw "Error >> Given EmailModel " + emailModel + " is not valid." + "Please provide a valid email model in the mailConfig";
                 }
-                //define a send method.
+
+                //Define a send method.
                 var send = function(options, callback) {
                     emailModelInstance.send(options, function(err, result) {
                         if (err) {
@@ -92,6 +131,9 @@ module.exports = function(server, databaseObj, helper, packageObj) {
                         callback(null, result);
                     });
                 };
+
+                //Now add a remote send mail method for sending text mail..
+                addSendRemoteMethod(emailModelInstance, mailConfig.from);
 
                 //Now iterate each template method..
                 for (var templateName in templatesObj) {

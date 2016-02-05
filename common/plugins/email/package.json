@@ -27,7 +27,6 @@
         "footerHook": []
     },
     "databases": {
-        "EmailUsersModel": "Customer"
     },
     "mailConfig": [{
         "emailModel": "adminEmail",

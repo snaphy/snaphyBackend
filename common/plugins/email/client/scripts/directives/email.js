@@ -12,9 +12,11 @@ angular.module($snaphy.getModuleName())
         restrict: 'A',
         link: function(scope, iElement, iAttrs) {
 
-                scope.getHtmlData = function(){
+                scope.$parent.getHtmlData = function(){
                     return CKEDITOR.instances[iAttrs.id].getData();
                 };
+
+                console.log(scope);
 
                 $timeout(function(){
                     CKEDITOR.disableAutoInline = true;

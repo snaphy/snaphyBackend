@@ -14,7 +14,7 @@ var settings = {
        {
             "model": "AdminEmail",
             "label": "Users",
-            "assosiatedUsers": ["Customer"]
+            "assosiatedUsers": ["Customer", "Employee"]
        }
 
    ]
