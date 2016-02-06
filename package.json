@@ -15,6 +15,7 @@
     "cors": "^2.5.2",
     "ejs": "^2.3.4",
     "errorhandler": "^1.1.1",
+    "latest-version": "^2.0.0",
     "loopback": "^2.14.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-storage": "^1.6.1",
