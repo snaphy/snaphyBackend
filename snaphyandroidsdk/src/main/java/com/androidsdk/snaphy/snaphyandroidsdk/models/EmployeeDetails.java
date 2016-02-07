@@ -2,19 +2,37 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
+
 import com.strongloop.android.loopback.Model;
+
+
+import com.strongloop.android.loopback.Model;
+import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.loopback.callbacks.ListCallback;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
+import com.strongloop.android.loopback.callbacks.VoidCallback;
+
+//Now import repository of related models..
+
+    
+        import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+
+    
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-    
-
 
 public class EmployeeDetails extends Model {
 
 
+    private EmployeeDetails that ;
+
+    public EmployeeDetails (){
+        that = this;
+    }
 
     
         
@@ -73,4 +91,234 @@ public class EmployeeDetails extends Model {
 
         
     
+
+
+    
+
+
+
+    //Now adding relations between related models
+    
+        
+            
+                //Define belongsTo relation method here..
+                private Employee  employee ;
+
+                public Employee getEmployee() {
+                    return employee;
+                }
+
+                public void setEmployee(Employee employee) {
+                    this.employee = employee;
+                }
+
+                //Adding related model automatically in case of include statement from server..
+                public void setEmployee(HashMap<String, Object> employee) {
+                    //First create a dummy Repo class object for customer.
+                    EmployeeRepository employeeRepository = new EmployeeRepository();
+                    Employee employee1 = employeeRepository.createObject(employee);
+                    setEmployee(employee1);
+                }
+
+                //Adding relation method..
+                public void addRelation(Employee employee) {
+                    this.setCustomer(employee);
+                }
+
+
+                //Now add instance methods to fetch the related belongsTo Model..
+                
+
+                
+
+                //Write the method here..
+                public void get__employees( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                    //Define methods here..
+                    final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                    
+
+
+                    
+
+                    
+
+                    employeeDetailsRepo.get__employees(that.id, refresh,  new ObjectCallback<Employee> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Employee object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
+                            
+                        
+                    
+
+                //Write the method here..
+                public void create__employees( Employee data,  RestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                    //Define methods here..
+                    final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                    
+
+
+                    
+
+                    
+
+                    employeeDetailsRepo.create__employees(that.id, data,  new ObjectCallback<Employee> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Employee object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
+                            
+                        
+                    
+
+                //Write the method here..
+                public void update__employees( Employee data,  RestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                    //Define methods here..
+                    final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                    
+
+
+                    
+
+                    
+
+                    employeeDetailsRepo.update__employees(that.id, data,  new ObjectCallback<Employee> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Employee object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
+                            
+                        
+                    
+
+                //Write the method here..
+                public void destroy__employees( RestAdapter restAdapter, final VoidCallback callback) {
+                    //Define methods here..
+                    final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                    
+
+
+                    
+
+                    
+
+                    employeeDetailsRepo.destroy__employees(that.id,  new VoidCallback (){
+                        
+                            @Override
+                            public void onSuccess() {
+                                callback.onSuccess();
+                            }
+                        
+
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
+                            
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+
+            
+            
+            
+        
+    
+
 }
