@@ -1,0 +1,41 @@
+{
+  "name": "recipeManagement",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "This is a test plugin",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumargupta73@gmul.com",
+  "routeExposure": "/recipe",
+  "staticFiles": {
+    "css": {
+        "exampleCss" : "/recipe/style/example.css"
+      },
+    "js": {
+      "recipeManagementRoute": "/recipe/scripts/routes/recipeManagement.js",
+      "recipeManagementController": "/recipe/scripts/controllers/recipeManagement.js"
+    },
+    "moduleDependencies":{
+
+    },
+    "settings": "/recipe/settings.js"
+  },
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+   
+  }
+}
