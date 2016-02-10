@@ -10,6 +10,7 @@
     "pretest": "jshint ."
   },
   "dependencies": {
+    "bluebird": "^3.2.2",
     "chalk": "^1.0.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
