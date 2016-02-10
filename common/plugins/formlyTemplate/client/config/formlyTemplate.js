@@ -257,6 +257,10 @@ angular.module($snaphy.getModuleName())
         }
     });
 
+
+    /*
+    For adding object type values..
+     */
     formlyConfig.setType({
         name: 'objectValue',
         templateUrl: '/formlyTemplate/views/objectTemplate.html',

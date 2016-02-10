@@ -1,43 +1,180 @@
 {
-  "name": "Chef",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "address": {
-      "type": "string",
-      "required": true
+    "name": "Chef",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "geolocation": {
-      "type": "geopoint",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "customers": {
-      "type": "hasOne",
-      "model": "Customer",
-      "foreignKey": ""
+    "filters": {
+        "added": {
+          "type": "$date",
+          "label": "Chef added between"
+        },
+        "customers_email": {
+            "type": "$select",
+            "label": "Search chef by customer email.",
+            "getOptionsFromColumn": true,
+            "options": []
+        },
+        "status": {
+            "type": "$select",
+            "label": "Filter chef by status",
+            "getOptionsFromColumn": false,
+            "options": [
+              {
+                "id": 1,
+                "name": "allow"
+              },
+              {
+                "id": 2,
+                "name": "onhold"
+              },
+              {
+                "id": 3,
+                "name": "rejected"
+              }
+            ]
+        }
     },
-    "courses": {
-      "type": "hasMany",
-      "model": "Course",
-      "foreignKey": ""
+    "tables":{
+        "customer_phoneNumber": {
+          "display": false
+        },
+        "customer_firstName": {
+          "display": true
+        },
+        "customer_lastName": {
+          "display": true
+        },
+        "customer_profilePic": {
+          "display": false
+        },
+        "customer_password": {
+          "display": false
+        },
+        "customer_date": {
+          "display": false
+        },
+        "geolocation":{
+            "display":false
+        },
+        "status": {
+          "tag": {
+            "rejected": "label-warning",
+            "allow": "label-primary",
+            "onhold": "label-danger"
+          }
+        },
+
     },
-    "contactChefs": {
-      "type": "hasMany",
-      "model": "ContactChef",
-      "foreignKey": ""
+
+    "properties": {
+        "address": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter chefs address"
+                }
+            }
+        },
+        "geolocation": {
+            "type": "geopoint",
+            "required": true,
+            "template": {
+                "type": "objectValue",
+                "templateOptions": {
+                    "fields": [{
+                        "type": "input",
+                        "key": "lat",
+                        "templateOptions": {
+                            "type": "text",
+                            "label": "Enter latitude"
+                        }
+                    }, {
+                        "type": "input",
+                        "key": "lng",
+                        "templateOptions": {
+                            "type": "text",
+                            "label": "Enter longitude"
+                        }
+                    }]
+                }
+            }
+        },
+        "status": {
+            "type": "string",
+            "required": false,
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "Add a current status to allow/restrict a chef.",
+                    "id": "recipeStatus",
+                    "options": [
+                        "allow",
+                        "onhold",
+                        "rejected"
+                    ]
+                }
+            }
+        },
+        "added": {
+          "type": "date",
+          "defaultFn": "now",
+          "template": {
+            "type": "dummy"
+          }
+        }
     },
-    "popularities": {
-      "type": "hasOne",
-      "model": "Popularity",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": []
+    "validations": [],
+    "relations": {
+        "customers": {
+            "type": "hasOne",
+            "model": "Customer",
+            "foreignKey": "",
+            "onCascadeDelete": false,
+            "templateOptions": {
+                "btnText": "Search customer to make him chef",
+                "searchProp": "email",
+                "create": true,
+                "search": true,
+                "hide": true
+            }
+        },
+        "courses": {
+            "type": "hasMany",
+            "model": "Course",
+            "foreignKey": "",
+            "onCascadeDelete": true,
+            "templateOptions": {
+                "btnText": "Add Courses to chefs",
+                "searchProp": "name",
+                "create": true,
+                "search": true,
+                "hide": true
+            }
+        },
+        "contactChefs": {
+            "type": "hasMany",
+            "model": "ContactChef",
+            "foreignKey": "",
+            "onCascadeDelete": true,
+            "templateOptions": {
+                "btnText": "Add Courses to chefs",
+                "searchProp": "name",
+                "create": true,
+                "search": true,
+                "hide": true
+            }
+        },
+        "popularities": {
+            "type": "hasOne",
+            "model": "Popularity",
+            "foreignKey": ""
+        }
+    },
+    "acls": [],
+    "methods": []
 }

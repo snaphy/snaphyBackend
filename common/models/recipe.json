@@ -119,7 +119,7 @@
       "date": true
     },
     "servings": {
-      "display": false
+      "display": true
     }
   },
   "widgets": [
