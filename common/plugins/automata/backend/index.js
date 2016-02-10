@@ -94,7 +94,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					//console.log(whereProp);
 					if(ctx.query.where.hasOwnProperty(whereProp)){
 						var like = ctx.query.where[whereProp].like;
-						console.log(like, whereProp);
+						//console.log(like, whereProp);
 						if(like){
 							var patt= /\/.*\//;
 							if(patt.test(like)){

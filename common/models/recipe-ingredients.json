@@ -83,7 +83,7 @@
         "type": "input",
         "templateOptions": {
           "type": "number",
-          "label": "Enter the quantity of recipe ingredient",
+          "label": "Enter the quantity of recipe ingredient ",
           "id": "quantity"
         }
       }
@@ -99,7 +99,21 @@
           "id": "recipeMetric"
         }
       }
+    },
+    "requiredQuantity": {
+      "type": "number",
+      "required": true,
+      "template": {
+        "type": "minRecipeDisplay",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter the required minimum quantity  for this recipe",
+          "id": "requiredQuantity",
+          "bindObj": "ingredients"
+        }
+      }
     }
+
   },
   "validations": [],
   "relations": {

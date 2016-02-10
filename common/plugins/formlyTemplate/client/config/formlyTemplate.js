@@ -830,6 +830,48 @@ angular.module($snaphy.getModuleName())
     });
 
 
+    formlyConfig.setType({
+        name: 'minRecipeDisplay',
+        templateUrl: '/formlyTemplate/views/minRecipeDisplay.html',
+        link: function(scope, elem, attrs) {
+            // ID PROPERTY IS NEEDED FOR VALIDATE TO WORK
+            if(scope.options.templateOptions){
+                if(!scope.options.templateOptions.colSize){
+                    scope.options.templateOptions.colSize = 'col-xs-12';
+                }
+            }//if
+
+            var messageObj = $($(elem).find(".showMessage"));
+
+
+            scope.checkValue = function(){
+
+                var ingredient = scope.model[scope.options.templateOptions.bindObj];
+                if($.isEmptyObject(ingredient)){
+                    $(messageObj).html("Error: add ingredient first before adding amount.").show();
+                    scope.model[scope.options.templateOptions.bindObj] = {};
+                    scope.model[scope.options.key] = "";
+                    return false;
+                }
+
+                if( parseInt(ingredient.minimumQuantity) > parseInt(scope.model[scope.options.key]) ){
+                    console.log("display min required quantity error..");
+                    scope.model[scope.options.key] = ingredient.minimumQuantity;
+                    $(messageObj).html("Error: ingredient amount must be greater than minimum required quantity.").show();
+                }else{
+                    $(messageObj).html("").hide();
+                }
+            };
+
+        }//link function..
+    });
+
+
+
+
+
+
+
 
     formlyConfig.setType({
         name: 'youTubeVideo',
