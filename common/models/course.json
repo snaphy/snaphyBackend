@@ -1,0 +1,45 @@
+{
+  "name": "Course",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "courseDuration": {
+      "type": "string",
+      "required": true
+    },
+    "courseFees": {
+      "type": "string"
+    },
+    "courseRecipes": {
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "validations": [],
+  "relations": {
+    "chef": {
+      "type": "belongsTo",
+      "model": "Chef",
+      "foreignKey": ""
+    },
+    "contactChefs": {
+      "type": "hasMany",
+      "model": "ContactChef",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

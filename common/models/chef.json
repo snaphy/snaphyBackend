@@ -1,0 +1,43 @@
+{
+  "name": "Chef",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "geolocation": {
+      "type": "geopoint",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customers": {
+      "type": "hasOne",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "courses": {
+      "type": "hasMany",
+      "model": "Course",
+      "foreignKey": ""
+    },
+    "contactChefs": {
+      "type": "hasMany",
+      "model": "ContactChef",
+      "foreignKey": ""
+    },
+    "popularities": {
+      "type": "hasOne",
+      "model": "Popularity",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

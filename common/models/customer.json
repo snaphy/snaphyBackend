@@ -209,6 +209,16 @@
       "model": "Wishlist",
       "foreignKey": "",
       "onCascadeDelete": true
+    },
+    "chefs": {
+      "type": "hasOne",
+      "model": "Chef",
+      "foreignKey": ""
+    },
+    "contactChefs": {
+      "type": "hasMany",
+      "model": "ContactChef",
+      "foreignKey": ""
     }
   },
   "acls": [],

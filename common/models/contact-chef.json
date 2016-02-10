@@ -1,0 +1,33 @@
+{
+  "name": "ContactChef",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "message": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "chef": {
+      "type": "belongsTo",
+      "model": "Chef",
+      "foreignKey": ""
+    },
+    "course": {
+      "type": "belongsTo",
+      "model": "Course",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

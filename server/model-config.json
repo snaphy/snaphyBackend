@@ -95,5 +95,21 @@
   "EmailInfo": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Chef": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Popularity": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "Course": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "ContactChef": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
