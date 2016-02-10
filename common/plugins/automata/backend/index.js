@@ -87,26 +87,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	var addCaseSensitiveSearch = function(server, modelName){
 		var modelObj = server.models[modelName];
 		modelObj.observe("access", function (ctx, next) {
+			//console.log(ctx.query.where);
 			if(ctx.query.where){
 				for(var whereProp in ctx.query.where){
 					//console.log("\n\n\n");
 					//console.log(whereProp);
 					if(ctx.query.where.hasOwnProperty(whereProp)){
 						var like = ctx.query.where[whereProp].like;
-					//	console.log(like);
+						console.log(like, whereProp);
 						if(like){
-					//		console.log("I am here\n\n\n");
-							var pattern = new RegExp('.*'+like+'.*', "i"); /* case-insensitive RegExp search */
-							//Now modifying the like property..
-							ctx.query.where[whereProp].like = pattern;
+							var patt= /\/.*\//;
+							if(patt.test(like)){
+								//Regex already present..
+								//do nothing..
+
+							}else{
+
+								var pattern = new RegExp(''+like+'.*', "i"); /* case-insensitive RegExp search */
+								//Now modifying the like property..
+							//	console.log(pattern);
+								ctx.query.where[whereProp].like = pattern;
+							}
+
+
 						}
-					}//if
-				}//for
-			}//if
+					}
+				}
+				next();
+			}else{
+				next();
+			}
 
 			//console.log(ctx.query.where);
 
-			next();
+
 		});//observe..
 	};
 

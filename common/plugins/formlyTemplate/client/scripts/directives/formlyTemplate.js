@@ -48,6 +48,7 @@ angular.module($snaphy.getModuleName())
                     var dbService = Database.loadDb(scope.modelName);
                     var whereObj = {};
                     whereObj[scope.searchProperty] = {};
+                
                     whereObj[scope.searchProperty].like = query;
 
                     dbService.find({

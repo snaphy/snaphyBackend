@@ -264,7 +264,61 @@ angular.module($snaphy.getModuleName())
     formlyConfig.setType({
         name: 'objectValue',
         templateUrl: '/formlyTemplate/views/objectTemplate.html',
-        controller: ['$scope', function($scope) {}]
+        controller: ['$scope', function($scope) {
+
+
+        }],
+        link: function(scope, element) {
+            if(scope.model[scope.options.key] === undefined){
+                scope.model[scope.options.key] = {};
+            }
+
+            var updateData = function(modelDataObj, tempModelObj, property){
+                $timeout(function(){
+                    tempModelObj[property] = modelDataObj[property];
+                });
+            };
+
+            scope.objModel = scope.model[scope.options.key] ;
+            scope.$watch('model[options.key]', function(value) {
+                if($.isEmptyObject( scope.model[scope.options.key] )){
+                    scope.objModel = {};
+                }
+
+                for(var modelData in scope.model[scope.options.key]){
+                    if(scope.model[scope.options.key].hasOwnProperty(modelData)){
+                        if(scope.objModel[modelData] !== scope.model[scope.options.key][modelData]){
+                            updateData(scope.model[scope.options.key], scope.objModel, modelData);
+                        }
+                    }
+                }
+            }, true);
+
+
+
+
+            scope.$watch('objModel', function(value) {
+                if(scope.model[scope.options.key] === undefined){
+                    scope.model[scope.options.key] = {};
+                }
+                if(scope.objModel === undefined){
+                    scope.objModel = scope.model[scope.options.key];
+                }
+                for(var modelData in scope.objModel){
+                    if(scope.objModel.hasOwnProperty(modelData)){
+                        if(scope.objModel[modelData] !== scope.model[scope.options.key][modelData]){
+                            //Update the model..
+                            scope.model[scope.options.key][modelData] = scope.objModel[modelData];
+                        }
+                    }
+                }
+
+                $timeout(function(){
+                    scope.objModel = scope.model[scope.options.key];
+                });
+            }, true);
+
+        }
     });
 
 

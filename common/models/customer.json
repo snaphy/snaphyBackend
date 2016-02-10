@@ -1,6 +1,6 @@
 {
   "name": "Customer",
-  "base": "PersistedModel",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -121,7 +121,7 @@
       "template": {
         "type": "input",
         "templateOptions": {
-          "type": "number",
+          "type": "text",
           "label": "Enter  contact number",
           "id": "customerContact"
         }
@@ -226,6 +226,19 @@
       "foreignKey": ""
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": []
 }
