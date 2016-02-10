@@ -64,9 +64,98 @@
 
 
 
+
 <div  class="content">
     <div ui-view class="row">
-        <div class="col-sm-12" ng-class="{'col-lg-8': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
+        <!--Adding Filters-->
+        <!-- Don't load the filters until the data isn't loaded -->
+        <div snaphy-load-filters class="col-lg-12 col-sm-12" ng-if="isFilterPresent() && isDataFetched()">
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">Filters</h3>
+                </div>
+                <div class="block-content ">
+                    <form class="form-horizontal" ng-repeat="(columnName, filter) in schema.filters" >
+                        <filter-date
+                                model-settings="schema"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$date'"
+                                class="col-lg-6 col-sm-6">
+                        </filter-date>
+                        <filter-select
+                                options="{{filter.options}}"
+                                model-settings="schema"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                table-data="dataValues"
+                                filter-options="filter"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$select'"
+                                class="col-lg-6 col-sm-6">
+
+                        </filter-select>
+                        <filter-multi-select
+                                options="{{filter.options}}"
+                                model-settings="schema"
+                                table-data="dataValues"
+                                filter-options="filter"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$multiSelect'"
+                                class="col-lg-6 col-sm-6">
+
+                        </filter-multi-select>
+
+                        <filter-array-objects
+                                options="{{filter.options}}"
+                                model-settings="schema"
+                                table-data="dataValues"
+                                filter-options="filter"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$arrayOfObjects'"
+                                search-prop="{{filter.searchProp}}"
+                                class="col-lg-6 col-sm-6">
+
+                        </filter-array-objects>
+
+                        <filter-radio
+                                options="{{filter.options}}"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                label="{{filter.label}}"
+                                model-settings="schema"
+                                ng-if="filter.type==='$radio'"
+                                class="col-lg-6 col-sm-6">
+                        </filter-radio>
+
+                    </form>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div><!--block-->
+        </div><!--col-md-4-->
+    </div>
+</div>
+
+
+
+<div  class="content">
+    <div ui-view class="row">
+        <div class="col-sm-12" ng-class="{'col-lg-12': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
             <!-- Dynamic Table Full -->
             <div ng-cloak id="automataWidget" class="block">
                 <div class="block-header">
@@ -200,82 +289,7 @@
             <!-- END Dynamic Table Full -->
         </div>
 
-        <!--Adding Filters-->
-        <!-- Don't load the filters until the data isn't loaded -->
-        <div snaphy-load-filters class="col-lg-4 col-sm-12" ng-if="isFilterPresent() && isDataFetched()">
-            <div class="block">
-                <div class="block-header">
-                    <h3 class="block-title">Filters</h3>
-                </div>
-                <div class="block-content block-content-narrow">
-                    <form class="form-horizontal" ng-repeat="(columnName, filter) in schema.filters" >
-                        <filter-date
-                                model-settings="schema"
-                                table-id="automataTable"
-                                column-name="{{columnName}}"
-                                label="{{filter.label}}"
-                                ng-if="filter.type==='$date'">
-                        </filter-date>
-                        <filter-select
-                                options="{{filter.options}}"
-                                model-settings="schema"
-                                table-id="automataTable"
-                                column-name="{{columnName}}"
-                                table-data="dataValues"
-                                filter-options="filter"
-                                get="{{filter.get}}"
-                                label="{{filter.label}}"
-                                ng-if="filter.type==='$select'">
 
-                        </filter-select>
-                        <filter-multi-select
-                                options="{{filter.options}}"
-                                model-settings="schema"
-                                table-data="dataValues"
-                                filter-options="filter"
-                                table-id="automataTable"
-                                column-name="{{columnName}}"
-                                get="{{filter.get}}"
-                                label="{{filter.label}}"
-                                ng-if="filter.type==='$multiSelect'">
-
-                        </filter-multi-select>
-
-                        <filter-array-objects
-                                options="{{filter.options}}"
-                                model-settings="schema"
-                                table-data="dataValues"
-                                filter-options="filter"
-                                table-id="automataTable"
-                                column-name="{{columnName}}"
-                                get="{{filter.get}}"
-                                label="{{filter.label}}"
-                                ng-if="filter.type==='$arrayOfObjects'"
-                                search-prop="{{filter.searchProp}}">
-
-                        </filter-array-objects>
-
-                        <filter-radio
-                                options="{{filter.options}}"
-                                table-id="automataTable"
-                                column-name="{{columnName}}"
-                                label="{{filter.label}}"
-                                model-settings="schema"
-                                ng-if="filter.type==='$radio'">
-                        </filter-radio>
-
-                    </form>
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div><!--block-->
-        </div><!--col-md-4-->
 
     </div><!--row-->
 </div>
