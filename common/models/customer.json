@@ -219,6 +219,11 @@
       "type": "hasMany",
       "model": "ContactChef",
       "foreignKey": ""
+    },
+    "orders": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": ""
     }
   },
   "acls": [],

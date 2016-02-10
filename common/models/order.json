@@ -1,0 +1,32 @@
+{
+  "name": "Order",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "orderDetails": {
+      "type": "[object]",
+      "required": true
+    },
+    "customerAddress": {
+      "type": "string",
+      "required": true
+    },
+    "customerPincode": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
