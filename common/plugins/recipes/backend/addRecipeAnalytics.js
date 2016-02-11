@@ -27,22 +27,30 @@ var init = function(server, databaseObj, helper, packageObj) {
 
     //When a RecipeIngredients is fetched increase the views. in recipe.
     databaseObj.RecipeIngredients.observe('loaded', function(ctx, next) {
-        if (ctx.data === undefined) {
-            console.error("Error recipe data is not present");
+        if (ctx.instance === undefined) {
+            //console.error("Error recipe data is not present");
             return next();
         }
-        var RecipeId = ctx.data.recipeId;
+        var RecipeId = ctx.instance.recipeId;
         //Now increase a recipe views..
         databaseObj.RecipeAnalytic.find({
             where: {
                 recipeId: RecipeId
             }
         }, function(err, recipeAnalyticObj) {
+
             if (err) {
                 console.log("Error fetching recipe analytic data.");
                 console.error(err);
                 next();
             } else {
+                if(recipeAnalyticObj.length){
+                    recipeAnalyticObj = recipeAnalyticObj[0];
+                }else{
+                    console.error("No recipe analytics data model present");
+                    return next();
+                }
+
                 recipeAnalyticObj.totalViews = parseInt(recipeAnalyticObj.totalViews) + 1;
                 //Now save the ingredients..
                 recipeAnalyticObj.save({}, function(err, object) {
@@ -70,10 +78,18 @@ var init = function(server, databaseObj, helper, packageObj) {
                         recipeId: ctx.instance.recipeId
                     }
                 }, function(err, recipeAnalyticObj){
+
                     if(err){
                         console.error("Error finding recipeIngredients data from database..");
                         next();
                         return false;
+                    }
+
+                    if(recipeAnalyticObj.length){
+                        recipeAnalyticObj = recipeAnalyticObj[0];
+                    }else{
+                        console.error("No recipe analytics data model present");
+                        return next();
                     }
 
                     //Now calculate the average ratings..

@@ -1,5 +1,7 @@
 'use strict';
 module.exports = function( server, databaseObj, helper, packageObj) {
+	var recipeAnalytics  = require('./addRecipeAnalytics');
+
 	/**
 	 * Here server is the main app object
 	 * databaseObj is the mapped database from the package.json file
@@ -14,7 +16,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @return {[type]} [description]
 	 */
 	var init = function(){
-
+		//Initialize the analytics..
+		recipeAnalytics.init(server, databaseObj, helper, packageObj);
 	};
 
 
