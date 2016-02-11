@@ -115,5 +115,9 @@
   "Order": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "RecipeAnalytic": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

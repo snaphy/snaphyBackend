@@ -1,0 +1,43 @@
+{
+  "name": "RecipeAnalytic",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "totalViews": {
+      "type": "number",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "lastModified": {
+      "type": "date",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "averageRating": {
+      "type": "number"
+    },
+    "totalComment": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "recipes": {
+      "type": "hasOne",
+      "model": "Recipe",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

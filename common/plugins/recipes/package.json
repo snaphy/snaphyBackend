@@ -26,6 +26,10 @@
     "footerHook":[]
   },
   "databases": {
+      "Recipe": "Recipe",
+      "Comments": "Comments",
+      "RecipeAnalytic": "RecipeAnalytic",
+      "RecipeIngredients": "RecipeIngredients"
   },
   "activate": true,
   "services": {},
@@ -36,6 +40,6 @@
     "url": ""
   },
   "devDependencies": {
-   
+
   }
 }

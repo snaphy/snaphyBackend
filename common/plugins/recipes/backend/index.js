@@ -4,7 +4,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * Here server is the main app object
 	 * databaseObj is the mapped database from the package.json file
 	 * helper object contains all the helpers methods.
-	 * packegeObj contains the packageObj file of your plugin. 
+	 * packegeObj contains the packageObj file of your plugin.
 	 */
 
 	/**
