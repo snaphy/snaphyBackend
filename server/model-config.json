@@ -102,7 +102,7 @@
   },
   "Popularity": {
     "dataSource": "mongodb",
-    "public": false
+    "public": true
   },
   "Course": {
     "dataSource": "mongodb",

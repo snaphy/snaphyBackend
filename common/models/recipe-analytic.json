@@ -36,6 +36,11 @@
       "type": "hasOne",
       "model": "Recipe",
       "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
     }
   },
   "acls": [],

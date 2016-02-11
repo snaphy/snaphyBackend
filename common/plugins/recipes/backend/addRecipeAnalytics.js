@@ -1,16 +1,17 @@
 'use strict';
 var init = function(server, databaseObj, helper, packageObj) {
     //When a recipe is created add a analytics with recipe..
-    databaseObj.Recipe.observe('after save', function(ctx, next) {
+    databaseObj.Recipe.observe('before save', function(ctx, next) {
         if (ctx.isNewInstance) {
             var RecipeAnalytic = databaseObj.RecipeAnalytic;
+            var data = {
+                totalViews: 0,
+                averageRating: 0,
+                totalComment: 0
+            };
             if (ctx.instance) {
                 //Create a RecipeAnalytics..
-                ctx.instance.recipeAnalytics.create({
-                    totalViews: 0,
-                    averageRating: 0,
-                    totalComment: 0
-                }, function(err, analyticsObj) {
+                ctx.instance.recipeAnalytics.create(data, function(err, analyticsObj) {
                     if (err) {
                         console.error(err);
                         return false;
@@ -38,7 +39,6 @@ var init = function(server, databaseObj, helper, packageObj) {
                 recipeId: RecipeId
             }
         }, function(err, recipeAnalyticObj) {
-
             if (err) {
                 console.log("Error fetching recipe analytic data.");
                 console.error(err);
@@ -50,7 +50,6 @@ var init = function(server, databaseObj, helper, packageObj) {
                     console.error("No recipe analytics data model present");
                     return next();
                 }
-
                 recipeAnalyticObj.totalViews = parseInt(recipeAnalyticObj.totalViews) + 1;
                 //Now save the ingredients..
                 recipeAnalyticObj.save({}, function(err, object) {
