@@ -219,7 +219,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method updateById__ingredients definition
-            public void updateById__ingredients(  String ingredientCategoryId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
+            public void updateById__ingredients(  String ingredientCategoryId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
                 
 
 
@@ -303,7 +303,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method create__ingredients definition
-            public void create__ingredients(  String ingredientCategoryId,  hashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
+            public void create__ingredients(  String ingredientCategoryId,  HashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
                 
 
 

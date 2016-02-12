@@ -251,11 +251,12 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientsRepo.get__ingredientCategory( (String)that.getId(), refresh,  new ObjectCallback<IngredientCategory> (){
                                             
@@ -472,11 +473,12 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientsRepo.findById__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -519,11 +521,12 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientsRepo.destroyById__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -555,13 +558,17 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        ingredientsRepo.updateById__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+
+                                        ingredientsRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -602,13 +609,17 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        ingredientsRepo.link__recipes( (String)that.getId(), fk, data,  new ObjectCallback<RecipeIngredients> (){
+
+                                        ingredientsRepo.link__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<RecipeIngredients> (){
                                             
 
                                             
@@ -649,11 +660,12 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientsRepo.unlink__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -685,11 +697,12 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientsRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
                                             
@@ -723,11 +736,12 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientsRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
                                             
@@ -775,13 +789,14 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        ingredientsRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+
+                                        ingredientsRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -822,11 +837,9 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         ingredientsRepo.delete__recipes( (String)that.getId(),  new VoidCallback (){
                                             
@@ -858,11 +871,12 @@ public class Ingredients extends Model {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientsRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             

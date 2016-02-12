@@ -294,7 +294,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__customers definition
-            public void create__customers(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void create__customers(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
@@ -335,7 +335,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method update__customers definition
-            public void update__customers(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void update__customers(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
@@ -445,7 +445,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__popularities definition
-            public void create__popularities(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Popularity> callback){
+            public void create__popularities(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
@@ -486,7 +486,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method update__popularities definition
-            public void update__popularities(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Popularity> callback){
+            public void update__popularities(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
@@ -624,7 +624,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateById__courses definition
-            public void updateById__courses(  String chefId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void updateById__courses(  String chefId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
@@ -734,7 +734,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String chefId,  String fk,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String chefId,  String fk,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
@@ -818,7 +818,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__courses definition
-            public void create__courses(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void create__courses(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
@@ -963,7 +963,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String chefId,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String chefId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 

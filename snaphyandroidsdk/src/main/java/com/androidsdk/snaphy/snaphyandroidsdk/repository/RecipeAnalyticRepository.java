@@ -187,7 +187,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String recipeAnalyticId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String recipeAnalyticId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
@@ -228,7 +228,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method update__recipes definition
-            public void update__recipes(  String recipeAnalyticId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void update__recipes(  String recipeAnalyticId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 

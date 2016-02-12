@@ -129,11 +129,12 @@ public class Popularity extends Model {
                                         //Define methods here..
                                         final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         popularityRepo.get__chefs( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
@@ -176,13 +177,14 @@ public class Popularity extends Model {
                                         //Define methods here..
                                         final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        popularityRepo.create__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
+
+                                        popularityRepo.create__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             
@@ -223,13 +225,14 @@ public class Popularity extends Model {
                                         //Define methods here..
                                         final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        popularityRepo.update__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
+
+                                        popularityRepo.update__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             
@@ -270,11 +273,9 @@ public class Popularity extends Model {
                                         //Define methods here..
                                         final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         popularityRepo.destroy__chefs( (String)that.getId(),  new VoidCallback (){
                                             

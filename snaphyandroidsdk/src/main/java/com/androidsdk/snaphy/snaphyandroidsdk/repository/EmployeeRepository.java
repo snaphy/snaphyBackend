@@ -264,7 +264,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String employeeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            public void updateById__accessTokens(  String employeeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
                 
 
 
@@ -346,7 +346,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__employeeDetails definition
-            public void create__employeeDetails(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void create__employeeDetails(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
                 
 
 
@@ -387,7 +387,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method update__employeeDetails definition
-            public void update__employeeDetails(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void update__employeeDetails(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
                 
 
 
@@ -499,7 +499,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__accessTokens definition
-            public void create__accessTokens(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            public void create__accessTokens(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
                 
 
 

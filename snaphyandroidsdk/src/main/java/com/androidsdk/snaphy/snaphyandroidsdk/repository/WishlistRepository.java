@@ -256,7 +256,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method create__customers definition
-            public void create__customers(  String wishlistId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void create__customers(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
@@ -297,7 +297,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method update__customers definition
-            public void update__customers(  String wishlistId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void update__customers(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
@@ -435,7 +435,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method updateById__recipes definition
-            public void updateById__recipes(  String wishlistId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void updateById__recipes(  String wishlistId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
@@ -621,7 +621,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String wishlistId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 

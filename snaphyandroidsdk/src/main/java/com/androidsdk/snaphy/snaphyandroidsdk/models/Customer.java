@@ -443,11 +443,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.findById__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -490,11 +491,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.destroyById__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -526,13 +528,17 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.updateById__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+
+                                        customerRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -615,11 +621,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
                                             
@@ -667,13 +674,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+
+                                        customerRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -714,11 +722,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         customerRepo.delete__recipes( (String)that.getId(),  new VoidCallback (){
                                             
@@ -750,11 +756,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
@@ -943,11 +950,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.findById__comments( (String)that.getId(), fk,  new ObjectCallback<Comments> (){
                                             
@@ -990,11 +998,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.destroyById__comments( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -1026,13 +1035,17 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.updateById__comments( (String)that.getId(), fk, data,  new ObjectCallback<Comments> (){
+
+                                        customerRepo.updateById__comments( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Comments> (){
                                             
 
                                             
@@ -1117,11 +1130,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.get__comments( (String)that.getId(), filter,  new ListCallback<Comments> (){
                                             
@@ -1169,13 +1183,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.create__comments( (String)that.getId(), data,  new ObjectCallback<Comments> (){
+
+                                        customerRepo.create__comments( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Comments> (){
                                             
 
                                             
@@ -1216,11 +1231,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         customerRepo.delete__comments( (String)that.getId(),  new VoidCallback (){
                                             
@@ -1252,11 +1265,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.count__comments( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
@@ -1410,11 +1424,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.get__wishlists( (String)that.getId(), refresh,  new ObjectCallback<Wishlist> (){
                                             
@@ -1457,13 +1472,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.create__wishlists( (String)that.getId(), data,  new ObjectCallback<Wishlist> (){
+
+                                        customerRepo.create__wishlists( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Wishlist> (){
                                             
 
                                             
@@ -1504,13 +1520,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.update__wishlists( (String)that.getId(), data,  new ObjectCallback<Wishlist> (){
+
+                                        customerRepo.update__wishlists( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Wishlist> (){
                                             
 
                                             
@@ -1551,11 +1568,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         customerRepo.destroy__wishlists( (String)that.getId(),  new VoidCallback (){
                                             
@@ -1756,11 +1771,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.get__chefs( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
@@ -1803,13 +1819,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.create__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
+
+                                        customerRepo.create__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             
@@ -1850,13 +1867,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.update__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
+
+                                        customerRepo.update__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             
@@ -1897,11 +1915,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         customerRepo.destroy__chefs( (String)that.getId(),  new VoidCallback (){
                                             
@@ -2135,11 +2151,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.findById__contactChefs( (String)that.getId(), fk,  new ObjectCallback<ContactChef> (){
                                             
@@ -2182,11 +2199,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.destroyById__contactChefs( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -2218,13 +2236,17 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.updateById__contactChefs( (String)that.getId(), fk, data,  new ObjectCallback<ContactChef> (){
+
+                                        customerRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -2295,11 +2317,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
                                             
@@ -2347,13 +2370,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.create__contactChefs( (String)that.getId(), data,  new ObjectCallback<ContactChef> (){
+
+                                        customerRepo.create__contactChefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -2394,11 +2418,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         customerRepo.delete__contactChefs( (String)that.getId(),  new VoidCallback (){
                                             
@@ -2430,11 +2452,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
@@ -2635,11 +2658,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.findById__orders( (String)that.getId(), fk,  new ObjectCallback<Order> (){
                                             
@@ -2682,11 +2706,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.destroyById__orders( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -2718,13 +2743,17 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.updateById__orders( (String)that.getId(), fk, data,  new ObjectCallback<Order> (){
+
+                                        customerRepo.updateById__orders( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Order> (){
                                             
 
                                             
@@ -2797,11 +2826,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.get__orders( (String)that.getId(), filter,  new ListCallback<Order> (){
                                             
@@ -2849,13 +2879,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        customerRepo.create__orders( (String)that.getId(), data,  new ObjectCallback<Order> (){
+
+                                        customerRepo.create__orders( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Order> (){
                                             
 
                                             
@@ -2896,11 +2927,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         customerRepo.delete__orders( (String)that.getId(),  new VoidCallback (){
                                             
@@ -2932,11 +2961,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         customerRepo.count__orders( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             

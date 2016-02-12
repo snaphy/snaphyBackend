@@ -287,7 +287,7 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String courseId,  String fk,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String courseId,  String fk,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
@@ -371,7 +371,7 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String courseId,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String courseId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 

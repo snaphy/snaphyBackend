@@ -136,11 +136,12 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.get__customers( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
@@ -183,13 +184,14 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        wishlistRepo.create__customers( (String)that.getId(), data,  new ObjectCallback<Customer> (){
+
+                                        wishlistRepo.create__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -230,13 +232,14 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        wishlistRepo.update__customers( (String)that.getId(), data,  new ObjectCallback<Customer> (){
+
+                                        wishlistRepo.update__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -277,11 +280,9 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         wishlistRepo.destroy__customers( (String)that.getId(),  new VoidCallback (){
                                             
@@ -442,11 +443,12 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.findById__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -489,11 +491,12 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.destroyById__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -525,13 +528,17 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        wishlistRepo.updateById__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+
+                                        wishlistRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -572,11 +579,15 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.link__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -619,11 +630,12 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.unlink__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -655,11 +667,12 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
                                             
@@ -693,11 +706,12 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
                                             
@@ -745,13 +759,14 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        wishlistRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+
+                                        wishlistRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -792,11 +807,9 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         wishlistRepo.delete__recipes( (String)that.getId(),  new VoidCallback (){
                                             
@@ -828,11 +841,12 @@ public class Wishlist extends Model {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         wishlistRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             

@@ -670,7 +670,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__cuisines definition
-            public void updateById__cuisines(  String recipeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Cuisines> callback){
+            public void updateById__cuisines(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Cuisines> callback){
                 
 
 
@@ -882,7 +882,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__category definition
-            public void updateById__category(  String recipeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void updateById__category(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Category> callback){
                 
 
 
@@ -1094,7 +1094,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__comments definition
-            public void updateById__comments(  String recipeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void updateById__comments(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
                 
 
 
@@ -1204,7 +1204,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__recipeTags definition
-            public void updateById__recipeTags(  String recipeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void updateById__recipeTags(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
                 
 
 
@@ -1416,7 +1416,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__ingredients definition
-            public void updateById__ingredients(  String recipeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
+            public void updateById__ingredients(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
                 
 
 
@@ -1457,7 +1457,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method link__ingredients definition
-            public void link__ingredients(  String recipeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+            public void link__ingredients(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
                 
 
 
@@ -1628,7 +1628,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__wishlists definition
-            public void updateById__wishlists(  String recipeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void updateById__wishlists(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
                 
 
 
@@ -1812,7 +1812,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__recipeAnalytics definition
-            public void create__recipeAnalytics(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void create__recipeAnalytics(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
@@ -1853,7 +1853,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method update__recipeAnalytics definition
-            public void update__recipeAnalytics(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void update__recipeAnalytics(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
@@ -1965,7 +1965,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__cuisines definition
-            public void create__cuisines(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<Cuisines> callback){
+            public void create__cuisines(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Cuisines> callback){
                 
 
 
@@ -2110,7 +2110,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__category definition
-            public void create__category(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void create__category(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Category> callback){
                 
 
 
@@ -2255,7 +2255,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__comments definition
-            public void create__comments(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void create__comments(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
                 
 
 
@@ -2400,7 +2400,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__recipeTags definition
-            public void create__recipeTags(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void create__recipeTags(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
                 
 
 
@@ -2545,7 +2545,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__ingredients definition
-            public void create__ingredients(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
+            public void create__ingredients(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
                 
 
 
@@ -2690,7 +2690,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__wishlists definition
-            public void create__wishlists(  String recipeId,  hashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void create__wishlists(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
                 
 
 

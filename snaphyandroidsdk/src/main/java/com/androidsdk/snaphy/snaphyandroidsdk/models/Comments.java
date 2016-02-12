@@ -232,11 +232,12 @@ public class Comments extends Model {
                                         //Define methods here..
                                         final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         commentsRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
@@ -364,11 +365,12 @@ public class Comments extends Model {
                                         //Define methods here..
                                         final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         commentsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
                                             

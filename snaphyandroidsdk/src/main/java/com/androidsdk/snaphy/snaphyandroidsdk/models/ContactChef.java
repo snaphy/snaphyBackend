@@ -181,11 +181,12 @@ public class ContactChef extends Model {
                                         //Define methods here..
                                         final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         contactChefRepo.get__chef( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
@@ -323,11 +324,12 @@ public class ContactChef extends Model {
                                         //Define methods here..
                                         final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         contactChefRepo.get__course( (String)that.getId(), refresh,  new ObjectCallback<Course> (){
                                             
@@ -465,11 +467,12 @@ public class ContactChef extends Model {
                                         //Define methods here..
                                         final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         contactChefRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             

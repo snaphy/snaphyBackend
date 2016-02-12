@@ -248,11 +248,12 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         courseRepo.get__chef( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
@@ -418,11 +419,12 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         courseRepo.findById__contactChefs( (String)that.getId(), fk,  new ObjectCallback<ContactChef> (){
                                             
@@ -465,11 +467,12 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         courseRepo.destroyById__contactChefs( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -501,13 +504,17 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        courseRepo.updateById__contactChefs( (String)that.getId(), fk, data,  new ObjectCallback<ContactChef> (){
+
+                                        courseRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -548,11 +555,12 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         courseRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
                                             
@@ -600,13 +608,14 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        courseRepo.create__contactChefs( (String)that.getId(), data,  new ObjectCallback<ContactChef> (){
+
+                                        courseRepo.create__contactChefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -647,11 +656,9 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         courseRepo.delete__contactChefs( (String)that.getId(),  new VoidCallback (){
                                             
@@ -683,11 +690,12 @@ public class Course extends Model {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         courseRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             

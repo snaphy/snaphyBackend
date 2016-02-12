@@ -176,11 +176,12 @@ public class IngredientCategory extends Model {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientCategoryRepo.findById__ingredients( (String)that.getId(), fk,  new ObjectCallback<Ingredients> (){
                                             
@@ -223,11 +224,12 @@ public class IngredientCategory extends Model {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientCategoryRepo.destroyById__ingredients( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -259,13 +261,17 @@ public class IngredientCategory extends Model {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        ingredientCategoryRepo.updateById__ingredients( (String)that.getId(), fk, data,  new ObjectCallback<Ingredients> (){
+
+                                        ingredientCategoryRepo.updateById__ingredients( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
@@ -306,11 +312,12 @@ public class IngredientCategory extends Model {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientCategoryRepo.get__ingredients( (String)that.getId(), filter,  new ListCallback<Ingredients> (){
                                             
@@ -358,13 +365,14 @@ public class IngredientCategory extends Model {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        ingredientCategoryRepo.create__ingredients( (String)that.getId(), data,  new ObjectCallback<Ingredients> (){
+
+                                        ingredientCategoryRepo.create__ingredients( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
@@ -405,11 +413,9 @@ public class IngredientCategory extends Model {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         ingredientCategoryRepo.delete__ingredients( (String)that.getId(),  new VoidCallback (){
                                             
@@ -441,11 +447,12 @@ public class IngredientCategory extends Model {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         ingredientCategoryRepo.count__ingredients( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             

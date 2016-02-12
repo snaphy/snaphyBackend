@@ -232,11 +232,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.get__customers( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
@@ -279,13 +280,14 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.create__customers( (String)that.getId(), data,  new ObjectCallback<Customer> (){
+
+                                        chefRepo.create__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -326,13 +328,14 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.update__customers( (String)that.getId(), data,  new ObjectCallback<Customer> (){
+
+                                        chefRepo.update__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -373,11 +376,9 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         chefRepo.destroy__customers( (String)that.getId(),  new VoidCallback (){
                                             
@@ -571,11 +572,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.findById__courses( (String)that.getId(), fk,  new ObjectCallback<Course> (){
                                             
@@ -618,11 +620,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.destroyById__courses( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -654,13 +657,17 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.updateById__courses( (String)that.getId(), fk, data,  new ObjectCallback<Course> (){
+
+                                        chefRepo.updateById__courses( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Course> (){
                                             
 
                                             
@@ -707,11 +714,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.get__courses( (String)that.getId(), filter,  new ListCallback<Course> (){
                                             
@@ -759,13 +767,14 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.create__courses( (String)that.getId(), data,  new ObjectCallback<Course> (){
+
+                                        chefRepo.create__courses( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Course> (){
                                             
 
                                             
@@ -806,11 +815,9 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         chefRepo.delete__courses( (String)that.getId(),  new VoidCallback (){
                                             
@@ -842,11 +849,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.count__courses( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
@@ -1023,11 +1031,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.findById__contactChefs( (String)that.getId(), fk,  new ObjectCallback<ContactChef> (){
                                             
@@ -1070,11 +1079,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.destroyById__contactChefs( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -1106,13 +1116,17 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.updateById__contactChefs( (String)that.getId(), fk, data,  new ObjectCallback<ContactChef> (){
+
+                                        chefRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -1161,11 +1175,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
                                             
@@ -1213,13 +1228,14 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.create__contactChefs( (String)that.getId(), data,  new ObjectCallback<ContactChef> (){
+
+                                        chefRepo.create__contactChefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -1260,11 +1276,9 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         chefRepo.delete__contactChefs( (String)that.getId(),  new VoidCallback (){
                                             
@@ -1296,11 +1310,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
@@ -1422,11 +1437,12 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         chefRepo.get__popularities( (String)that.getId(), refresh,  new ObjectCallback<Popularity> (){
                                             
@@ -1469,13 +1485,14 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.create__popularities( (String)that.getId(), data,  new ObjectCallback<Popularity> (){
+
+                                        chefRepo.create__popularities( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Popularity> (){
                                             
 
                                             
@@ -1516,13 +1533,14 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        chefRepo.update__popularities( (String)that.getId(), data,  new ObjectCallback<Popularity> (){
+
+                                        chefRepo.update__popularities( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Popularity> (){
                                             
 
                                             
@@ -1563,11 +1581,9 @@ public class Chef extends Model {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         chefRepo.destroy__popularities( (String)that.getId(),  new VoidCallback (){
                                             

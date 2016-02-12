@@ -173,11 +173,12 @@ public class EmployeeDetails extends Model {
                                         //Define methods here..
                                         final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         employeeDetailsRepo.get__employees( (String)that.getId(), refresh,  new ObjectCallback<Employee> (){
                                             
@@ -220,13 +221,14 @@ public class EmployeeDetails extends Model {
                                         //Define methods here..
                                         final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        employeeDetailsRepo.create__employees( (String)that.getId(), data,  new ObjectCallback<Employee> (){
+
+                                        employeeDetailsRepo.create__employees( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Employee> (){
                                             
 
                                             
@@ -267,13 +269,14 @@ public class EmployeeDetails extends Model {
                                         //Define methods here..
                                         final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        employeeDetailsRepo.update__employees( (String)that.getId(), data,  new ObjectCallback<Employee> (){
+
+                                        employeeDetailsRepo.update__employees( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Employee> (){
                                             
 
                                             
@@ -314,11 +317,9 @@ public class EmployeeDetails extends Model {
                                         //Define methods here..
                                         final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         employeeDetailsRepo.destroy__employees( (String)that.getId(),  new VoidCallback (){
                                             

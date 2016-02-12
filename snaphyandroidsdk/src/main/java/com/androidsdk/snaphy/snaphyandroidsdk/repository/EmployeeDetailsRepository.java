@@ -187,7 +187,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method create__employees definition
-            public void create__employees(  String employeeDetailsId,  hashMap<String, Object> data, final ObjectCallback<Employee> callback){
+            public void create__employees(  String employeeDetailsId,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
                 
 
 
@@ -228,7 +228,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method update__employees definition
-            public void update__employees(  String employeeDetailsId,  hashMap<String, Object> data, final ObjectCallback<Employee> callback){
+            public void update__employees(  String employeeDetailsId,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
                 
 
 

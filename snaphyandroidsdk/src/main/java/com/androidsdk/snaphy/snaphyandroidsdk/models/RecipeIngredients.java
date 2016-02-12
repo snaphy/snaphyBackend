@@ -210,11 +210,12 @@ public class RecipeIngredients extends Model {
                                         //Define methods here..
                                         final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeIngredientsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
                                             
@@ -326,11 +327,12 @@ public class RecipeIngredients extends Model {
                                         //Define methods here..
                                         final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeIngredientsRepo.get__ingredients( (String)that.getId(), refresh,  new ObjectCallback<Ingredients> (){
                                             

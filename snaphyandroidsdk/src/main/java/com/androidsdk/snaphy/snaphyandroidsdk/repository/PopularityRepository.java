@@ -187,7 +187,7 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method create__chefs definition
-            public void create__chefs(  String popularityId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void create__chefs(  String popularityId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
@@ -228,7 +228,7 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method update__chefs definition
-            public void update__chefs(  String popularityId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void update__chefs(  String popularityId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 

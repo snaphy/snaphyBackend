@@ -441,7 +441,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String customerId,  String fk,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            public void updateById__accessTokens(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
                 
 
 
@@ -551,7 +551,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__recipes definition
-            public void updateById__recipes(  String customerId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void updateById__recipes(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
@@ -661,7 +661,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__comments definition
-            public void updateById__comments(  String customerId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void updateById__comments(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
                 
 
 
@@ -743,7 +743,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__wishlists definition
-            public void create__wishlists(  String customerId,  hashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void create__wishlists(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
                 
 
 
@@ -784,7 +784,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method update__wishlists definition
-            public void update__wishlists(  String customerId,  hashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void update__wishlists(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
                 
 
 
@@ -894,7 +894,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__chefs definition
-            public void create__chefs(  String customerId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void create__chefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
@@ -935,7 +935,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method update__chefs definition
-            public void update__chefs(  String customerId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void update__chefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
@@ -1073,7 +1073,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String customerId,  String fk,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
@@ -1183,7 +1183,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__orders definition
-            public void updateById__orders(  String customerId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void updateById__orders(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
                 
 
 
@@ -1267,7 +1267,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__accessTokens definition
-            public void create__accessTokens(  String customerId,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            public void create__accessTokens(  String customerId,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
                 
 
 
@@ -1412,7 +1412,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__recipes definition
-            public void create__recipes(  String customerId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
@@ -1557,7 +1557,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__comments definition
-            public void create__comments(  String customerId,  hashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void create__comments(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
                 
 
 
@@ -1702,7 +1702,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String customerId,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
@@ -1847,7 +1847,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__orders definition
-            public void create__orders(  String customerId,  hashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void create__orders(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
                 
 
 

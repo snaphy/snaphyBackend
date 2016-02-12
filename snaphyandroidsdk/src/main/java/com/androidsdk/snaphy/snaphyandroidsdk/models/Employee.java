@@ -337,11 +337,12 @@ public class Employee extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         employeeRepo.get__employeeDetails( (String)that.getId(), refresh,  new ObjectCallback<EmployeeDetails> (){
                                             
@@ -384,13 +385,14 @@ public class Employee extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        employeeRepo.create__employeeDetails( (String)that.getId(), data,  new ObjectCallback<EmployeeDetails> (){
+
+                                        employeeRepo.create__employeeDetails( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<EmployeeDetails> (){
                                             
 
                                             
@@ -431,13 +433,14 @@ public class Employee extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        employeeRepo.update__employeeDetails( (String)that.getId(), data,  new ObjectCallback<EmployeeDetails> (){
+
+                                        employeeRepo.update__employeeDetails( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<EmployeeDetails> (){
                                             
 
                                             
@@ -478,11 +481,9 @@ public class Employee extends com.strongloop.android.loopback.User {
                                         //Define methods here..
                                         final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         employeeRepo.destroy__employeeDetails( (String)that.getId(),  new VoidCallback (){
                                             

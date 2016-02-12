@@ -261,11 +261,12 @@ public class RecipeAnalytic extends Model {
                                         //Define methods here..
                                         final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeAnalyticRepo.get__recipes( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
                                             
@@ -308,13 +309,14 @@ public class RecipeAnalytic extends Model {
                                         //Define methods here..
                                         final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        recipeAnalyticRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+
+                                        recipeAnalyticRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -355,13 +357,14 @@ public class RecipeAnalytic extends Model {
                                         //Define methods here..
                                         final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        recipeAnalyticRepo.update__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+
+                                        recipeAnalyticRepo.update__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -402,11 +405,9 @@ public class RecipeAnalytic extends Model {
                                         //Define methods here..
                                         final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         recipeAnalyticRepo.destroy__recipes( (String)that.getId(),  new VoidCallback (){
                                             

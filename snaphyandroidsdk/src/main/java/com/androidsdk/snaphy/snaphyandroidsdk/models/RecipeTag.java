@@ -163,11 +163,12 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeTagRepo.findById__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -210,11 +211,12 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeTagRepo.destroyById__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -246,13 +248,17 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        recipeTagRepo.updateById__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+
+                                        recipeTagRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -293,11 +299,15 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeTagRepo.link__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -340,11 +350,12 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeTagRepo.unlink__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -376,11 +387,12 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeTagRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
                                             
@@ -414,11 +426,12 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeTagRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
                                             
@@ -466,13 +479,14 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        recipeTagRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+
+                                        recipeTagRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -513,11 +527,9 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         recipeTagRepo.delete__recipes( (String)that.getId(),  new VoidCallback (){
                                             
@@ -549,11 +561,12 @@ public class RecipeTag extends Model {
                                         //Define methods here..
                                         final RecipeTagRepository  recipeTagRepo = restAdapter.createRepository(RecipeTagRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         recipeTagRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             

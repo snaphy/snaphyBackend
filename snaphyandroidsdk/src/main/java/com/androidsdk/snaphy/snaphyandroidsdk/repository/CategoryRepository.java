@@ -251,7 +251,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method updateById__recipes definition
-            public void updateById__recipes(  String categoryId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void updateById__recipes(  String categoryId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
@@ -437,7 +437,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String categoryId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String categoryId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 

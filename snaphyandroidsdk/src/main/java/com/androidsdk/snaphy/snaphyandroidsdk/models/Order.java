@@ -181,11 +181,12 @@ public class Order extends Model {
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         orderRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             

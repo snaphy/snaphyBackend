@@ -163,11 +163,12 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         categoryRepo.findById__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -210,11 +211,12 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         categoryRepo.destroyById__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -246,13 +248,17 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        categoryRepo.updateById__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+
+                                        categoryRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -293,11 +299,15 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         categoryRepo.link__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
@@ -340,11 +350,12 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         categoryRepo.unlink__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
@@ -376,11 +387,12 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         categoryRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
                                             
@@ -414,11 +426,12 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         categoryRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
                                             
@@ -466,13 +479,14 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
 
-                                        categoryRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+
+                                        categoryRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -513,11 +527,9 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
                                         
 
-                                        
+
 
                                         categoryRepo.delete__recipes( (String)that.getId(),  new VoidCallback (){
                                             
@@ -549,11 +561,12 @@ public class Category extends Model {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
-
-
+                                        
+                                        
+                                        
                                         
 
-                                        
+
 
                                         categoryRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
