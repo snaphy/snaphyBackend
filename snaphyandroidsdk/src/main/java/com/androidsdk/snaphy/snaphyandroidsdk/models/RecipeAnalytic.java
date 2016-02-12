@@ -29,13 +29,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeAnalyticRepositor
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-
-        
-    
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +37,18 @@ import java.util.HashMap;
 
 public class RecipeAnalytic extends Model {
 
+
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
 
     private RecipeAnalytic that ;
 
@@ -65,6 +70,8 @@ public class RecipeAnalytic extends Model {
                 /* Adding Getter and Setter methods */
                 public void setTotalViews(double totalViews){
                     this.totalViews = totalViews;
+                    //Update hashMap value..
+                    hashMap.put("totalViews", totalViews);
                 }
 
             
@@ -84,6 +91,8 @@ public class RecipeAnalytic extends Model {
                 /* Adding Getter and Setter methods */
                 public void setAdded(String added){
                     this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
                 }
 
             
@@ -104,6 +113,8 @@ public class RecipeAnalytic extends Model {
                 /* Adding Getter and Setter methods */
                 public void setLastModified(String lastModified){
                     this.lastModified = lastModified;
+                    //Update hashMap value..
+                    hashMap.put("lastModified", lastModified);
                 }
 
             
@@ -125,6 +136,8 @@ public class RecipeAnalytic extends Model {
                 /* Adding Getter and Setter methods */
                 public void setAverageRating(double averageRating){
                     this.averageRating = averageRating;
+                    //Update hashMap value..
+                    hashMap.put("averageRating", averageRating);
                 }
 
             
@@ -145,6 +158,8 @@ public class RecipeAnalytic extends Model {
                 /* Adding Getter and Setter methods */
                 public void setTotalComment(double totalComment){
                     this.totalComment = totalComment;
+                    //Update hashMap value..
+                    hashMap.put("totalComment", totalComment);
                 }
 
             
@@ -154,6 +169,20 @@ public class RecipeAnalytic extends Model {
     
         
             
+            
+                private String priority;
+                /* Adding Getter and Setter methods */
+                public String getPriority(){
+                    return priority;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPriority(String priority){
+                    this.priority = priority;
+                    //Update hashMap value..
+                    hashMap.put("priority", priority);
+                }
+
             
             
             
@@ -402,149 +431,6 @@ public class RecipeAnalytic extends Model {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private Customer  customer ;
-
-                    public Customer getCustomer() {
-                        return customer;
-                    }
-
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
-                    }
-
-
-
-                
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                                        //Define methods here..
-                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        recipeAnalyticRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Customer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

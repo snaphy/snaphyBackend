@@ -61,47 +61,47 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employeeDetails", "GET"), "Employee.prototype.__get__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "GET"), "Employee.prototype.__get__employeeDetails");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employeeDetails", "POST"), "Employee.prototype.__create__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "POST"), "Employee.prototype.__create__employeeDetails");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employeeDetails", "PUT"), "Employee.prototype.__update__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "PUT"), "Employee.prototype.__update__employeeDetails");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employeeDetails", "DELETE"), "Employee.prototype.__destroy__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "DELETE"), "Employee.prototype.__destroy__employeeDetails");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
             
         
             
@@ -145,7 +145,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "Employee.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
             
         
             
@@ -195,14 +195,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method findById__accessTokens definition
-            public void findById__accessTokens(  String id,  String fk, final ObjectCallback<AccessToken> callback){
+            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__accessTokens", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -236,9 +236,9 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String id,  String fk, final VoidCallback callback){
+            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -264,14 +264,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String id,  String fk,  AccessToken data, final ObjectCallback<AccessToken> callback){
+            public void updateById__accessTokens(  String employeeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__accessTokens", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -305,14 +305,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__employeeDetails definition
-            public void get__employeeDetails(  String id,  Boolean refresh, final ObjectCallback<EmployeeDetails> callback){
+            public void get__employeeDetails(  String employeeId,  Boolean refresh, final ObjectCallback<EmployeeDetails> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employeeDetails", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__employeeDetails", ImmutableMap.of("employeeId", employeeId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -346,14 +346,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__employeeDetails definition
-            public void create__employeeDetails(  String id,  EmployeeDetails data, final ObjectCallback<EmployeeDetails> callback){
+            public void create__employeeDetails(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__employeeDetails", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__employeeDetails", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -387,14 +387,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method update__employeeDetails definition
-            public void update__employeeDetails(  String id,  EmployeeDetails data, final ObjectCallback<EmployeeDetails> callback){
+            public void update__employeeDetails(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__employeeDetails", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__employeeDetails", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -428,9 +428,9 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method destroy__employeeDetails definition
-            public void destroy__employeeDetails(  String id, final VoidCallback callback){
+            public void destroy__employeeDetails(  String employeeId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__employeeDetails", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__employeeDetails", ImmutableMap.of("employeeId", employeeId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -456,14 +456,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String id,  HashMap<String, Object> filter, final ListCallback<AccessToken> callback){
+            public void get__accessTokens(  String employeeId,  HashMap<String, Object> filter, final ListCallback<AccessToken> callback){
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__accessTokens", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__accessTokens", ImmutableMap.of("employeeId", employeeId, "filter", filter), new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -499,14 +499,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__accessTokens definition
-            public void create__accessTokens(  String id,  AccessToken data, final ObjectCallback<AccessToken> callback){
+            public void create__accessTokens(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__accessTokens", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__accessTokens", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -540,9 +540,9 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method delete__accessTokens definition
-            public void delete__accessTokens(  String id, final VoidCallback callback){
+            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__delete__accessTokens", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__accessTokens", ImmutableMap.of("employeeId", employeeId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -568,13 +568,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__accessTokens definition
-            public void count__accessTokens(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__accessTokens(  String employeeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__accessTokens", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__accessTokens", ImmutableMap.of("employeeId", employeeId, "where", where), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -981,14 +981,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+            public void updateAttributes(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

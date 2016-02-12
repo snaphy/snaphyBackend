@@ -70,15 +70,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/chef", "GET"), "ContactChef.prototype.__get__chef");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/chef", "GET"), "ContactChef.prototype.__get__chef");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/course", "GET"), "ContactChef.prototype.__get__course");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/course", "GET"), "ContactChef.prototype.__get__course");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customer", "GET"), "ContactChef.prototype.__get__customer");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/customer", "GET"), "ContactChef.prototype.__get__customer");
             
         
             
@@ -122,7 +122,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "ContactChef.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId", "PUT"), "ContactChef.prototype.updateAttributes");
             
         
             
@@ -194,14 +194,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method get__chef definition
-            public void get__chef(  String id,  Boolean refresh, final ObjectCallback<Chef> callback){
+            public void get__chef(  String contactChefId,  Boolean refresh, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__chef", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chef", ImmutableMap.of("contactChefId", contactChefId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -235,14 +235,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method get__course definition
-            public void get__course(  String id,  Boolean refresh, final ObjectCallback<Course> callback){
+            public void get__course(  String contactChefId,  Boolean refresh, final ObjectCallback<Course> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__course", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__course", ImmutableMap.of("contactChefId", contactChefId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -276,14 +276,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method get__customer definition
-            public void get__customer(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
+            public void get__customer(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("contactChefId", contactChefId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -697,14 +697,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateAttributes(  String contactChefId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("contactChefId", contactChefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

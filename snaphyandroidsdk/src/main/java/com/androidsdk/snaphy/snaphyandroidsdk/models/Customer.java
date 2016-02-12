@@ -67,13 +67,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeAnalyticRepository;
-            
-
-        
-    
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,6 +75,18 @@ import java.util.HashMap;
 
 public class Customer extends com.strongloop.android.loopback.User {
 
+
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
 
     private Customer that ;
 
@@ -102,6 +107,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setDate(String date){
                     this.date = date;
+                    //Update hashMap value..
+                    hashMap.put("date", date);
                 }
 
             
@@ -122,6 +129,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setPhoneNumber(String phoneNumber){
                     this.phoneNumber = phoneNumber;
+                    //Update hashMap value..
+                    hashMap.put("phoneNumber", phoneNumber);
                 }
 
             
@@ -142,6 +151,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setEmail(String email){
                     this.email = email;
+                    //Update hashMap value..
+                    hashMap.put("email", email);
                 }
 
             
@@ -162,6 +173,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setFirstName(String firstName){
                     this.firstName = firstName;
+                    //Update hashMap value..
+                    hashMap.put("firstName", firstName);
                 }
 
             
@@ -182,6 +195,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setLastName(String lastName){
                     this.lastName = lastName;
+                    //Update hashMap value..
+                    hashMap.put("lastName", lastName);
                 }
 
             
@@ -202,6 +217,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setPassword(String password){
                     this.password = password;
+                    //Update hashMap value..
+                    hashMap.put("password", password);
                 }
 
             
@@ -224,6 +241,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setProfilePic(HashMap<String, Object> profilePic){
                     this.profilePic = profilePic;
+                    //Update hashMap value..
+                    hashMap.put("profilePic", profilePic);
                 }
 
             
@@ -367,12 +386,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                         for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setRecipes(result);
+
                     }
 
 
@@ -547,12 +565,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -793,15 +805,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
                         
                         
                         
@@ -877,12 +880,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                         for (HashMap<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comments obj1 = commentsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setComments(result);
+
                     }
 
 
@@ -1063,12 +1065,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -1303,15 +1299,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
                         
                         
                         
@@ -1653,21 +1640,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
                         
                         
                         
@@ -2006,21 +1978,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
                         
                         
                         
@@ -2093,12 +2050,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                         for (HashMap<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
                             ContactChef obj1 = contactChefsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setContactChefs(result);
+
                     }
 
 
@@ -2332,12 +2288,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
@@ -2519,15 +2469,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
                         
                         
                         
@@ -2603,12 +2544,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                         for (HashMap<String, Object> obj : orders) {
                             //Also add relation to child type for two way communication..
                             Order obj1 = ordersRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setOrders(result);
+
                     }
 
 
@@ -2850,12 +2790,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
@@ -3029,525 +2963,6 @@ public class Customer extends com.strongloop.android.loopback.User {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                
-                    //Define hasMany, hasManyThrough method here..
-
-                 
-                 
-             
-          
-    
-        
-                
-                
-                    
-                    //Define hasMany relation method here..
-                    private List<RecipeAnalytic>  recipeAnalytics ;
-
-                    public List<RecipeAnalytic> getRecipeAnalytics() {
-                        return recipeAnalytics;
-                    }
-
-                    public void setRecipeAnalytics(List<RecipeAnalytic> recipeAnalytics) {
-                        this.recipeAnalytics = recipeAnalytics;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (RecipeAnalytic obj : recipeAnalytics) {
-                            obj.addRelation(that);
-                        }
-                        */
-                    }
-
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setRecipeAnalytics1(List<HashMap<String, Object>> recipeAnalytics) {
-                        //First create a dummy Repo class object for ..
-                        RecipeAnalyticRepository recipeAnalyticsRepository = new RecipeAnalyticRepository();
-                        List<RecipeAnalytic> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : recipeAnalytics) {
-                            //Also add relation to child type for two way communication..
-                            RecipeAnalytic obj1 = recipeAnalyticsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
-                            result.add(obj1);
-                        }
-                        setRecipeAnalytics(result);
-                    }
-
-
-                    //Adding relation method..
-                    //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<RecipeAnalytic> recipeAnalytics, RecipeAnalytic dummyClassInstance) {
-                        that.setRecipeAnalytics(recipeAnalytics);
-
-                    }
-
-                    //Adding relation method..
-                    //This will add a new data to the list relation object..
-                    public void addRelation(RecipeAnalytic recipeAnalytics) {
-                        try{
-                            that.getRecipeAnalytics().add(recipeAnalytics);
-                        }catch(Exception e){
-                            List< RecipeAnalytic> recipeAnalytics1 = new ArrayList();
-                            //Now add this item to list..
-                            recipeAnalytics1.add(recipeAnalytics);
-                            //Now set data....
-                            that.setRecipeAnalytics(recipeAnalytics1);
-                        }
-                    }
-
-                    
-
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void findById__recipeAnalytics( String fk,  RestAdapter restAdapter, final ObjectCallback<RecipeAnalytic> callback) {
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        customerRepo.findById__recipeAnalytics( (String)that.getId(), fk,  new ObjectCallback<RecipeAnalytic> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(RecipeAnalytic object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroyById__recipeAnalytics( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        customerRepo.destroyById__recipeAnalytics( (String)that.getId(), fk,  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void updateById__recipeAnalytics( String fk,  RecipeAnalytic data,  RestAdapter restAdapter, final ObjectCallback<RecipeAnalytic> callback) {
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        customerRepo.updateById__recipeAnalytics( (String)that.getId(), fk, data,  new ObjectCallback<RecipeAnalytic> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(RecipeAnalytic object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__recipeAnalytics( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<RecipeAnalytic> callback) {
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        customerRepo.get__recipeAnalytics( (String)that.getId(), filter,  new ListCallback<RecipeAnalytic> (){
-                                            
-
-                                            
-
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(List<RecipeAnalytic> object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            RecipeAnalytic obj = new RecipeAnalytic();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (RecipeAnalytic obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
-
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__recipeAnalytics( RecipeAnalytic data,  RestAdapter restAdapter, final ObjectCallback<RecipeAnalytic> callback) {
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        customerRepo.create__recipeAnalytics( (String)that.getId(), data,  new ObjectCallback<RecipeAnalytic> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(RecipeAnalytic object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void delete__recipeAnalytics( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        customerRepo.delete__recipeAnalytics( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void count__recipeAnalytics( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        customerRepo.count__recipeAnalytics( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
                         
                         
                         

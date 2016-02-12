@@ -38,6 +38,18 @@ import java.util.HashMap;
 public class EmployeeDetails extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private EmployeeDetails that ;
 
     public EmployeeDetails (){
@@ -57,6 +69,8 @@ public class EmployeeDetails extends Model {
                 /* Adding Getter and Setter methods */
                 public void setAddress(String address){
                     this.address = address;
+                    //Update hashMap value..
+                    hashMap.put("address", address);
                 }
 
             
@@ -78,6 +92,8 @@ public class EmployeeDetails extends Model {
                 /* Adding Getter and Setter methods */
                 public void setContactNumber(double contactNumber){
                     this.contactNumber = contactNumber;
+                    //Update hashMap value..
+                    hashMap.put("contactNumber", contactNumber);
                 }
 
             

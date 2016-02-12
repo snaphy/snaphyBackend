@@ -48,6 +48,18 @@ import java.util.HashMap;
 public class Ingredients extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Ingredients that ;
 
     public Ingredients (){
@@ -67,6 +79,8 @@ public class Ingredients extends Model {
                 /* Adding Getter and Setter methods */
                 public void setName(String name){
                     this.name = name;
+                    //Update hashMap value..
+                    hashMap.put("name", name);
                 }
 
             
@@ -87,6 +101,8 @@ public class Ingredients extends Model {
                 /* Adding Getter and Setter methods */
                 public void setSellingMetrics(String sellingMetrics){
                     this.sellingMetrics = sellingMetrics;
+                    //Update hashMap value..
+                    hashMap.put("sellingMetrics", sellingMetrics);
                 }
 
             
@@ -108,6 +124,8 @@ public class Ingredients extends Model {
                 /* Adding Getter and Setter methods */
                 public void setMinimumQuantity(double minimumQuantity){
                     this.minimumQuantity = minimumQuantity;
+                    //Update hashMap value..
+                    hashMap.put("minimumQuantity", minimumQuantity);
                 }
 
             
@@ -128,6 +146,8 @@ public class Ingredients extends Model {
                 /* Adding Getter and Setter methods */
                 public void setPrice(double price){
                     this.price = price;
+                    //Update hashMap value..
+                    hashMap.put("price", price);
                 }
 
             
@@ -147,6 +167,9 @@ public class Ingredients extends Model {
                 /* Adding Getter and Setter methods */
                 public void setTags(List<HashMap<String, Object>> tags){
                     this.tags = tags;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("tags", tags);
                 }
 
             
@@ -362,12 +385,11 @@ public class Ingredients extends Model {
                         for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setRecipes(result);
+
                     }
 
 

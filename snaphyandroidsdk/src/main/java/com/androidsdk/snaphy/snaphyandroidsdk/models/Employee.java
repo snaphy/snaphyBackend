@@ -41,6 +41,18 @@ import java.util.HashMap;
 public class Employee extends com.strongloop.android.loopback.User {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Employee that ;
 
     public Employee (){
@@ -60,6 +72,8 @@ public class Employee extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setUsername(String username){
                     this.username = username;
+                    //Update hashMap value..
+                    hashMap.put("username", username);
                 }
 
             
@@ -80,6 +94,8 @@ public class Employee extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setFirstName(String firstName){
                     this.firstName = firstName;
+                    //Update hashMap value..
+                    hashMap.put("firstName", firstName);
                 }
 
             
@@ -100,6 +116,8 @@ public class Employee extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setLastName(String lastName){
                     this.lastName = lastName;
+                    //Update hashMap value..
+                    hashMap.put("lastName", lastName);
                 }
 
             
@@ -120,6 +138,8 @@ public class Employee extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setDate(String date){
                     this.date = date;
+                    //Update hashMap value..
+                    hashMap.put("date", date);
                 }
 
             
@@ -140,6 +160,8 @@ public class Employee extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setEmail(String email){
                     this.email = email;
+                    //Update hashMap value..
+                    hashMap.put("email", email);
                 }
 
             
@@ -160,6 +182,8 @@ public class Employee extends com.strongloop.android.loopback.User {
                 /* Adding Getter and Setter methods */
                 public void setPassword(String password){
                     this.password = password;
+                    //Update hashMap value..
+                    hashMap.put("password", password);
                 }
 
             

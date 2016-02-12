@@ -63,59 +63,59 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "GET"), "Wishlist.prototype.__get__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "GET"), "Wishlist.prototype.__get__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "POST"), "Wishlist.prototype.__create__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "POST"), "Wishlist.prototype.__create__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "PUT"), "Wishlist.prototype.__update__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "PUT"), "Wishlist.prototype.__update__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "DELETE"), "Wishlist.prototype.__destroy__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "DELETE"), "Wishlist.prototype.__destroy__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes/:fk", "GET"), "Wishlist.prototype.__findById__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "GET"), "Wishlist.prototype.__findById__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes/:fk", "DELETE"), "Wishlist.prototype.__destroyById__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "DELETE"), "Wishlist.prototype.__destroyById__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes/:fk", "PUT"), "Wishlist.prototype.__updateById__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "PUT"), "Wishlist.prototype.__updateById__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes/rel/:fk", "PUT"), "Wishlist.prototype.__link__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "PUT"), "Wishlist.prototype.__link__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes/rel/:fk", "DELETE"), "Wishlist.prototype.__unlink__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "DELETE"), "Wishlist.prototype.__unlink__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes/rel/:fk", "HEAD"), "Wishlist.prototype.__exists__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "HEAD"), "Wishlist.prototype.__exists__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "GET"), "Wishlist.prototype.__get__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "GET"), "Wishlist.prototype.__get__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "POST"), "Wishlist.prototype.__create__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "POST"), "Wishlist.prototype.__create__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "DELETE"), "Wishlist.prototype.__delete__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "DELETE"), "Wishlist.prototype.__delete__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes/count", "GET"), "Wishlist.prototype.__count__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/count", "GET"), "Wishlist.prototype.__count__recipes");
             
         
             
@@ -159,7 +159,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "Wishlist.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId", "PUT"), "Wishlist.prototype.updateAttributes");
             
         
             
@@ -215,14 +215,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method get__customers definition
-            public void get__customers(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
+            public void get__customers(  String wishlistId,  Boolean refresh, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customers", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customers", ImmutableMap.of("wishlistId", wishlistId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -256,14 +256,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method create__customers definition
-            public void create__customers(  String id,  Customer data, final ObjectCallback<Customer> callback){
+            public void create__customers(  String wishlistId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__customers", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__customers", ImmutableMap.of("wishlistId", wishlistId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -297,14 +297,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method update__customers definition
-            public void update__customers(  String id,  Customer data, final ObjectCallback<Customer> callback){
+            public void update__customers(  String wishlistId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__customers", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__customers", ImmutableMap.of("wishlistId", wishlistId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -338,9 +338,9 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method destroy__customers definition
-            public void destroy__customers(  String id, final VoidCallback callback){
+            public void destroy__customers(  String wishlistId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__customers", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__customers", ImmutableMap.of("wishlistId", wishlistId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -366,14 +366,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method findById__recipes definition
-            public void findById__recipes(  String id,  String fk, final ObjectCallback<Recipe> callback){
+            public void findById__recipes(  String wishlistId,  String fk, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__recipes", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__recipes", ImmutableMap.of("wishlistId", wishlistId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -407,9 +407,9 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method destroyById__recipes definition
-            public void destroyById__recipes(  String id,  String fk, final VoidCallback callback){
+            public void destroyById__recipes(  String wishlistId,  String fk, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroyById__recipes", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__recipes", ImmutableMap.of("wishlistId", wishlistId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -435,14 +435,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method updateById__recipes definition
-            public void updateById__recipes(  String id,  String fk,  Recipe data, final ObjectCallback<Recipe> callback){
+            public void updateById__recipes(  String wishlistId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__recipes", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__recipes", ImmutableMap.of("wishlistId", wishlistId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -476,14 +476,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method link__recipes definition
-            public void link__recipes(  String id,  String fk,  Recipe data, final ObjectCallback<Recipe> callback){
+            public void link__recipes(  String wishlistId,  String fk, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__link__recipes", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__link__recipes", ImmutableMap.of("wishlistId", wishlistId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -517,9 +517,9 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method unlink__recipes definition
-            public void unlink__recipes(  String id,  String fk, final VoidCallback callback){
+            public void unlink__recipes(  String wishlistId,  String fk, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__unlink__recipes", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__unlink__recipes", ImmutableMap.of("wishlistId", wishlistId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -545,13 +545,13 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method exists__recipes definition
-            public void exists__recipes(  String id,  String fk, final Adapter.JsonObjectCallback  callback ){
+            public void exists__recipes(  String wishlistId,  String fk, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__exists__recipes", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__exists__recipes", ImmutableMap.of("wishlistId", wishlistId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -578,14 +578,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String id,  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String wishlistId,  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("wishlistId", wishlistId, "filter", filter), new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -621,14 +621,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String id,  Recipe data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String wishlistId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("wishlistId", wishlistId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -662,9 +662,9 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method delete__recipes definition
-            public void delete__recipes(  String id, final VoidCallback callback){
+            public void delete__recipes(  String wishlistId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__delete__recipes", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__recipes", ImmutableMap.of("wishlistId", wishlistId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -690,13 +690,13 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method count__recipes definition
-            public void count__recipes(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__recipes(  String wishlistId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__recipes", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__recipes", ImmutableMap.of("wishlistId", wishlistId, "where", where), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1103,14 +1103,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void updateAttributes(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("wishlistId", wishlistId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

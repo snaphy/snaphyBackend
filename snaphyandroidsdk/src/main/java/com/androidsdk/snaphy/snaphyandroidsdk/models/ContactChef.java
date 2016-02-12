@@ -52,6 +52,18 @@ import java.util.HashMap;
 public class ContactChef extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private ContactChef that ;
 
     public ContactChef (){
@@ -71,6 +83,8 @@ public class ContactChef extends Model {
                 /* Adding Getter and Setter methods */
                 public void setMessage(String message){
                     this.message = message;
+                    //Update hashMap value..
+                    hashMap.put("message", message);
                 }
 
             

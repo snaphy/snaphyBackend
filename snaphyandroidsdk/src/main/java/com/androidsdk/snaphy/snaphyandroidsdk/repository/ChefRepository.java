@@ -77,91 +77,91 @@ public class ChefRepository extends ModelRepository<Chef> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "GET"), "Chef.prototype.__get__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "GET"), "Chef.prototype.__get__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "POST"), "Chef.prototype.__create__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "POST"), "Chef.prototype.__create__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "PUT"), "Chef.prototype.__update__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "PUT"), "Chef.prototype.__update__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customers", "DELETE"), "Chef.prototype.__destroy__customers");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "DELETE"), "Chef.prototype.__destroy__customers");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/popularities", "GET"), "Chef.prototype.__get__popularities");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "GET"), "Chef.prototype.__get__popularities");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/popularities", "POST"), "Chef.prototype.__create__popularities");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "POST"), "Chef.prototype.__create__popularities");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/popularities", "PUT"), "Chef.prototype.__update__popularities");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "PUT"), "Chef.prototype.__update__popularities");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/popularities", "DELETE"), "Chef.prototype.__destroy__popularities");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "DELETE"), "Chef.prototype.__destroy__popularities");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/courses/:fk", "GET"), "Chef.prototype.__findById__courses");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "GET"), "Chef.prototype.__findById__courses");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/courses/:fk", "DELETE"), "Chef.prototype.__destroyById__courses");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "DELETE"), "Chef.prototype.__destroyById__courses");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/courses/:fk", "PUT"), "Chef.prototype.__updateById__courses");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "PUT"), "Chef.prototype.__updateById__courses");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/:fk", "GET"), "Chef.prototype.__findById__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "GET"), "Chef.prototype.__findById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/:fk", "DELETE"), "Chef.prototype.__destroyById__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "DELETE"), "Chef.prototype.__destroyById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/:fk", "PUT"), "Chef.prototype.__updateById__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "PUT"), "Chef.prototype.__updateById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/courses", "GET"), "Chef.prototype.__get__courses");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "GET"), "Chef.prototype.__get__courses");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/courses", "POST"), "Chef.prototype.__create__courses");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "POST"), "Chef.prototype.__create__courses");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/courses", "DELETE"), "Chef.prototype.__delete__courses");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "DELETE"), "Chef.prototype.__delete__courses");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/courses/count", "GET"), "Chef.prototype.__count__courses");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/count", "GET"), "Chef.prototype.__count__courses");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs", "GET"), "Chef.prototype.__get__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "GET"), "Chef.prototype.__get__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs", "POST"), "Chef.prototype.__create__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "POST"), "Chef.prototype.__create__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs", "DELETE"), "Chef.prototype.__delete__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "DELETE"), "Chef.prototype.__delete__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/count", "GET"), "Chef.prototype.__count__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/count", "GET"), "Chef.prototype.__count__contactChefs");
             
         
             
@@ -205,7 +205,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "Chef.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId", "PUT"), "Chef.prototype.updateAttributes");
             
         
             
@@ -253,14 +253,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method get__customers definition
-            public void get__customers(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
+            public void get__customers(  String chefId,  Boolean refresh, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customers", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customers", ImmutableMap.of("chefId", chefId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -294,14 +294,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__customers definition
-            public void create__customers(  String id,  Customer data, final ObjectCallback<Customer> callback){
+            public void create__customers(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__customers", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__customers", ImmutableMap.of("chefId", chefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -335,14 +335,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method update__customers definition
-            public void update__customers(  String id,  Customer data, final ObjectCallback<Customer> callback){
+            public void update__customers(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__customers", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__customers", ImmutableMap.of("chefId", chefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -376,9 +376,9 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method destroy__customers definition
-            public void destroy__customers(  String id, final VoidCallback callback){
+            public void destroy__customers(  String chefId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__customers", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__customers", ImmutableMap.of("chefId", chefId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -404,14 +404,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method get__popularities definition
-            public void get__popularities(  String id,  Boolean refresh, final ObjectCallback<Popularity> callback){
+            public void get__popularities(  String chefId,  Boolean refresh, final ObjectCallback<Popularity> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__popularities", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__popularities", ImmutableMap.of("chefId", chefId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -445,14 +445,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__popularities definition
-            public void create__popularities(  String id,  Popularity data, final ObjectCallback<Popularity> callback){
+            public void create__popularities(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__popularities", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__popularities", ImmutableMap.of("chefId", chefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -486,14 +486,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method update__popularities definition
-            public void update__popularities(  String id,  Popularity data, final ObjectCallback<Popularity> callback){
+            public void update__popularities(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__popularities", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__popularities", ImmutableMap.of("chefId", chefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -527,9 +527,9 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method destroy__popularities definition
-            public void destroy__popularities(  String id, final VoidCallback callback){
+            public void destroy__popularities(  String chefId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__popularities", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__popularities", ImmutableMap.of("chefId", chefId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -555,14 +555,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method findById__courses definition
-            public void findById__courses(  String id,  String fk, final ObjectCallback<Course> callback){
+            public void findById__courses(  String chefId,  String fk, final ObjectCallback<Course> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__courses", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__courses", ImmutableMap.of("chefId", chefId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -596,9 +596,9 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method destroyById__courses definition
-            public void destroyById__courses(  String id,  String fk, final VoidCallback callback){
+            public void destroyById__courses(  String chefId,  String fk, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroyById__courses", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__courses", ImmutableMap.of("chefId", chefId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -624,14 +624,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateById__courses definition
-            public void updateById__courses(  String id,  String fk,  Course data, final ObjectCallback<Course> callback){
+            public void updateById__courses(  String chefId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__courses", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__courses", ImmutableMap.of("chefId", chefId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -665,14 +665,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method findById__contactChefs definition
-            public void findById__contactChefs(  String id,  String fk, final ObjectCallback<ContactChef> callback){
+            public void findById__contactChefs(  String chefId,  String fk, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__contactChefs", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__contactChefs", ImmutableMap.of("chefId", chefId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -706,9 +706,9 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method destroyById__contactChefs definition
-            public void destroyById__contactChefs(  String id,  String fk, final VoidCallback callback){
+            public void destroyById__contactChefs(  String chefId,  String fk, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroyById__contactChefs", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__contactChefs", ImmutableMap.of("chefId", chefId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -734,14 +734,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String id,  String fk,  ContactChef data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String chefId,  String fk,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__contactChefs", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__contactChefs", ImmutableMap.of("chefId", chefId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -775,14 +775,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method get__courses definition
-            public void get__courses(  String id,  HashMap<String, Object> filter, final ListCallback<Course> callback){
+            public void get__courses(  String chefId,  HashMap<String, Object> filter, final ListCallback<Course> callback){
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__courses", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__courses", ImmutableMap.of("chefId", chefId, "filter", filter), new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -818,14 +818,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__courses definition
-            public void create__courses(  String id,  Course data, final ObjectCallback<Course> callback){
+            public void create__courses(  String chefId,  hashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__courses", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__courses", ImmutableMap.of("chefId", chefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -859,9 +859,9 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method delete__courses definition
-            public void delete__courses(  String id, final VoidCallback callback){
+            public void delete__courses(  String chefId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__delete__courses", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__courses", ImmutableMap.of("chefId", chefId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -887,13 +887,13 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method count__courses definition
-            public void count__courses(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__courses(  String chefId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__courses", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__courses", ImmutableMap.of("chefId", chefId, "where", where), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -920,14 +920,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method get__contactChefs definition
-            public void get__contactChefs(  String id,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
+            public void get__contactChefs(  String chefId,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__contactChefs", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__contactChefs", ImmutableMap.of("chefId", chefId, "filter", filter), new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -963,14 +963,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String id,  ContactChef data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String chefId,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__contactChefs", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__contactChefs", ImmutableMap.of("chefId", chefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1004,9 +1004,9 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method delete__contactChefs definition
-            public void delete__contactChefs(  String id, final VoidCallback callback){
+            public void delete__contactChefs(  String chefId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__delete__contactChefs", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__contactChefs", ImmutableMap.of("chefId", chefId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1032,13 +1032,13 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method count__contactChefs definition
-            public void count__contactChefs(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__contactChefs(  String chefId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__contactChefs", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__contactChefs", ImmutableMap.of("chefId", chefId, "where", where), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1445,14 +1445,14 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void updateAttributes(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("chefId", chefId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

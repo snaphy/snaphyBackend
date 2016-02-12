@@ -37,13 +37,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PriorityRepository;
-            
-
-        
-    
-
-    
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.CategoryRepository;
             
 
@@ -97,6 +90,18 @@ import java.util.HashMap;
 public class Recipe extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Recipe that ;
 
     public Recipe (){
@@ -116,6 +121,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setName(String name){
                     this.name = name;
+                    //Update hashMap value..
+                    hashMap.put("name", name);
                 }
 
             
@@ -136,6 +143,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setDescription(String description){
                     this.description = description;
+                    //Update hashMap value..
+                    hashMap.put("description", description);
                 }
 
             
@@ -158,6 +167,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setMainImage(HashMap<String, Object> mainImage){
                     this.mainImage = mainImage;
+                    //Update hashMap value..
+                    hashMap.put("mainImage", mainImage);
                 }
 
             
@@ -176,6 +187,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setRecipeType(String recipeType){
                     this.recipeType = recipeType;
+                    //Update hashMap value..
+                    hashMap.put("recipeType", recipeType);
                 }
 
             
@@ -197,6 +210,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setServings(double servings){
                     this.servings = servings;
+                    //Update hashMap value..
+                    hashMap.put("servings", servings);
                 }
 
             
@@ -216,6 +231,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setAdded(String added){
                     this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
                 }
 
             
@@ -236,6 +253,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setStatus(String status){
                     this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
                 }
 
             
@@ -256,6 +275,8 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setYoutubeVideoId(String youtubeVideoId){
                     this.youtubeVideoId = youtubeVideoId;
+                    //Update hashMap value..
+                    hashMap.put("youtubeVideoId", youtubeVideoId);
                 }
 
             
@@ -276,6 +297,9 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setStepsImage(List<HashMap<String, Object>> stepsImage){
                     this.stepsImage = stepsImage;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("stepsImage", stepsImage);
                 }
 
             
@@ -297,16 +321,11 @@ public class Recipe extends Model {
                 /* Adding Getter and Setter methods */
                 public void setStepsDescription(List<HashMap<String, Object>> stepsDescription){
                     this.stepsDescription = stepsDescription;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("stepsDescription", stepsDescription);
                 }
 
-            
-            
-            
-            
-
-        
-    
-        
             
             
             
@@ -556,19 +575,6 @@ public class Recipe extends Model {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
                         
                         
                         
@@ -859,7 +865,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void link__cuisines( String fk,  Cuisines data,  RestAdapter restAdapter, final ObjectCallback<Cuisines> callback) {
+                                    public void link__cuisines( String fk,  RestAdapter restAdapter, final ObjectCallback<Cuisines> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -869,7 +875,7 @@ public class Recipe extends Model {
 
                                         
 
-                                        recipeRepo.link__cuisines( (String)that.getId(), fk, data,  new ObjectCallback<Cuisines> (){
+                                        recipeRepo.link__cuisines( (String)that.getId(), fk,  new ObjectCallback<Cuisines> (){
                                             
 
                                             
@@ -976,14 +982,6 @@ public class Recipe extends Model {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -1345,11 +1343,6 @@ public class Recipe extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -1358,447 +1351,6 @@ public class Recipe extends Model {
                 
                     //Define hasAndBelongsToMany..
 
-                 
-             
-          
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private Priority  priorities ;
-
-                    public Priority getPriorities() {
-                        return priorities;
-                    }
-
-                    public void setPriorities(Priority priorities) {
-                        this.priorities = priorities;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setPriorities(HashMap<String, Object> priorities) {
-                        //First create a dummy Repo class object for customer.
-                        PriorityRepository prioritiesRepository = new PriorityRepository();
-                        Priority priorities1 = prioritiesRepository.createObject(priorities);
-                        setPriorities(priorities1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Priority priorities) {
-                        that.setPriorities(priorities);
-                    }
-
-
-
-                
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__priorities( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
-                                        //Define methods here..
-                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        recipeRepo.get__priorities( (String)that.getId(), refresh,  new ObjectCallback<Priority> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Priority object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__priorities( Priority data,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
-                                        //Define methods here..
-                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        recipeRepo.create__priorities( (String)that.getId(), data,  new ObjectCallback<Priority> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Priority object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void update__priorities( Priority data,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
-                                        //Define methods here..
-                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        recipeRepo.update__priorities( (String)that.getId(), data,  new ObjectCallback<Priority> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Priority object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroy__priorities( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        recipeRepo.destroy__priorities( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
                  
              
           
@@ -1865,14 +1417,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -2019,7 +1563,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void link__category( String fk,  Category data,  RestAdapter restAdapter, final ObjectCallback<Category> callback) {
+                                    public void link__category( String fk,  RestAdapter restAdapter, final ObjectCallback<Category> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -2029,7 +1573,7 @@ public class Recipe extends Model {
 
                                         
 
-                                        recipeRepo.link__category( (String)that.getId(), fk, data,  new ObjectCallback<Category> (){
+                                        recipeRepo.link__category( (String)that.getId(), fk,  new ObjectCallback<Category> (){
                                             
 
                                             
@@ -2485,11 +2029,6 @@ public class Recipe extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -2532,12 +2071,11 @@ public class Recipe extends Model {
                         for (HashMap<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comments obj1 = commentsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setComments(result);
+
                     }
 
 
@@ -2578,14 +2116,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -3083,11 +2613,6 @@ public class Recipe extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -3162,14 +2687,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -3334,7 +2851,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void link__recipeTags( String fk,  RecipeTag data,  RestAdapter restAdapter, final ObjectCallback<RecipeTag> callback) {
+                                    public void link__recipeTags( String fk,  RestAdapter restAdapter, final ObjectCallback<RecipeTag> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -3344,7 +2861,7 @@ public class Recipe extends Model {
 
                                         
 
-                                        recipeRepo.link__recipeTags( (String)that.getId(), fk, data,  new ObjectCallback<RecipeTag> (){
+                                        recipeRepo.link__recipeTags( (String)that.getId(), fk,  new ObjectCallback<RecipeTag> (){
                                             
 
                                             
@@ -3782,11 +3299,6 @@ public class Recipe extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -3829,12 +3341,11 @@ public class Recipe extends Model {
                         for (HashMap<String, Object> obj : ingredients) {
                             //Also add relation to child type for two way communication..
                             Ingredients obj1 = ingredientsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setIngredients(result);
+
                     }
 
 
@@ -3909,14 +3420,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -4529,11 +4032,6 @@ public class Recipe extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -4608,14 +4106,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -4804,7 +4294,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void link__wishlists( String fk,  Wishlist data,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
+                                    public void link__wishlists( String fk,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -4814,7 +4304,7 @@ public class Recipe extends Model {
 
                                         
 
-                                        recipeRepo.link__wishlists( (String)that.getId(), fk, data,  new ObjectCallback<Wishlist> (){
+                                        recipeRepo.link__wishlists( (String)that.getId(), fk,  new ObjectCallback<Wishlist> (){
                                             
 
                                             
@@ -5228,11 +4718,6 @@ public class Recipe extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -5287,14 +4772,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -5587,11 +5064,6 @@ public class Recipe extends Model {
                             
                          
                             
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

@@ -56,31 +56,31 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients/:fk", "GET"), "IngredientCategory.prototype.__findById__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "GET"), "IngredientCategory.prototype.__findById__ingredients");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients/:fk", "DELETE"), "IngredientCategory.prototype.__destroyById__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "DELETE"), "IngredientCategory.prototype.__destroyById__ingredients");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients/:fk", "PUT"), "IngredientCategory.prototype.__updateById__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "PUT"), "IngredientCategory.prototype.__updateById__ingredients");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients", "GET"), "IngredientCategory.prototype.__get__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "GET"), "IngredientCategory.prototype.__get__ingredients");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients", "POST"), "IngredientCategory.prototype.__create__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "POST"), "IngredientCategory.prototype.__create__ingredients");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients", "DELETE"), "IngredientCategory.prototype.__delete__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "DELETE"), "IngredientCategory.prototype.__delete__ingredients");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients/count", "GET"), "IngredientCategory.prototype.__count__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/count", "GET"), "IngredientCategory.prototype.__count__ingredients");
             
         
             
@@ -124,7 +124,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "IngredientCategory.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId", "PUT"), "IngredientCategory.prototype.updateAttributes");
             
         
             
@@ -150,14 +150,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method findById__ingredients definition
-            public void findById__ingredients(  String id,  String fk, final ObjectCallback<Ingredients> callback){
+            public void findById__ingredients(  String ingredientCategoryId,  String fk, final ObjectCallback<Ingredients> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__ingredients", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__ingredients", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -191,9 +191,9 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method destroyById__ingredients definition
-            public void destroyById__ingredients(  String id,  String fk, final VoidCallback callback){
+            public void destroyById__ingredients(  String ingredientCategoryId,  String fk, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroyById__ingredients", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__ingredients", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -219,14 +219,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method updateById__ingredients definition
-            public void updateById__ingredients(  String id,  String fk,  Ingredients data, final ObjectCallback<Ingredients> callback){
+            public void updateById__ingredients(  String ingredientCategoryId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__ingredients", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__ingredients", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -260,14 +260,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method get__ingredients definition
-            public void get__ingredients(  String id,  HashMap<String, Object> filter, final ListCallback<Ingredients> callback){
+            public void get__ingredients(  String ingredientCategoryId,  HashMap<String, Object> filter, final ListCallback<Ingredients> callback){
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__ingredients", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__ingredients", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId, "filter", filter), new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -303,14 +303,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method create__ingredients definition
-            public void create__ingredients(  String id,  Ingredients data, final ObjectCallback<Ingredients> callback){
+            public void create__ingredients(  String ingredientCategoryId,  hashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__ingredients", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__ingredients", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -344,9 +344,9 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method delete__ingredients definition
-            public void delete__ingredients(  String id, final VoidCallback callback){
+            public void delete__ingredients(  String ingredientCategoryId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__delete__ingredients", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__ingredients", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -372,13 +372,13 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method count__ingredients definition
-            public void count__ingredients(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__ingredients(  String ingredientCategoryId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__ingredients", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__ingredients", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId, "where", where), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -785,14 +785,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<IngredientCategory> callback){
+            public void updateAttributes(  String ingredientCategoryId,  HashMap<String, Object> data, final ObjectCallback<IngredientCategory> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("ingredientCategoryId", ingredientCategoryId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

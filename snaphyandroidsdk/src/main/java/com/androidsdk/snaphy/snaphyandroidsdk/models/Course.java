@@ -45,6 +45,18 @@ import java.util.HashMap;
 public class Course extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Course that ;
 
     public Course (){
@@ -64,6 +76,8 @@ public class Course extends Model {
                 /* Adding Getter and Setter methods */
                 public void setName(String name){
                     this.name = name;
+                    //Update hashMap value..
+                    hashMap.put("name", name);
                 }
 
             
@@ -84,6 +98,8 @@ public class Course extends Model {
                 /* Adding Getter and Setter methods */
                 public void setDescription(String description){
                     this.description = description;
+                    //Update hashMap value..
+                    hashMap.put("description", description);
                 }
 
             
@@ -104,6 +120,8 @@ public class Course extends Model {
                 /* Adding Getter and Setter methods */
                 public void setCourseDuration(String courseDuration){
                     this.courseDuration = courseDuration;
+                    //Update hashMap value..
+                    hashMap.put("courseDuration", courseDuration);
                 }
 
             
@@ -124,6 +142,8 @@ public class Course extends Model {
                 /* Adding Getter and Setter methods */
                 public void setCourseFees(String courseFees){
                     this.courseFees = courseFees;
+                    //Update hashMap value..
+                    hashMap.put("courseFees", courseFees);
                 }
 
             
@@ -144,6 +164,9 @@ public class Course extends Model {
                 /* Adding Getter and Setter methods */
                 public void setCourseRecipes(List<String> courseRecipes){
                     this.courseRecipes = courseRecipes;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("courseRecipes", courseRecipes);
                 }
 
             
@@ -342,12 +365,11 @@ public class Course extends Model {
                         for (HashMap<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
                             ContactChef obj1 = contactChefsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setContactChefs(result);
+
                     }
 
 

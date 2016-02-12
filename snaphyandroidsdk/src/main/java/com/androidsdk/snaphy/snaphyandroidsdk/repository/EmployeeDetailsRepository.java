@@ -56,19 +56,19 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employees", "GET"), "EmployeeDetails.prototype.__get__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "GET"), "EmployeeDetails.prototype.__get__employees");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employees", "POST"), "EmployeeDetails.prototype.__create__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "POST"), "EmployeeDetails.prototype.__create__employees");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employees", "PUT"), "EmployeeDetails.prototype.__update__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "PUT"), "EmployeeDetails.prototype.__update__employees");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/employees", "DELETE"), "EmployeeDetails.prototype.__destroy__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "DELETE"), "EmployeeDetails.prototype.__destroy__employees");
             
         
             
@@ -112,7 +112,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "EmployeeDetails.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId", "PUT"), "EmployeeDetails.prototype.updateAttributes");
             
         
             
@@ -146,14 +146,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method get__employees definition
-            public void get__employees(  String id,  Boolean refresh, final ObjectCallback<Employee> callback){
+            public void get__employees(  String employeeDetailsId,  Boolean refresh, final ObjectCallback<Employee> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employees", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -187,14 +187,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method create__employees definition
-            public void create__employees(  String id,  Employee data, final ObjectCallback<Employee> callback){
+            public void create__employees(  String employeeDetailsId,  hashMap<String, Object> data, final ObjectCallback<Employee> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__employees", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -228,14 +228,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method update__employees definition
-            public void update__employees(  String id,  Employee data, final ObjectCallback<Employee> callback){
+            public void update__employees(  String employeeDetailsId,  hashMap<String, Object> data, final ObjectCallback<Employee> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__employees", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -269,9 +269,9 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method destroy__employees definition
-            public void destroy__employees(  String id, final VoidCallback callback){
+            public void destroy__employees(  String employeeDetailsId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__employees", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -677,14 +677,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void updateAttributes(  String employeeDetailsId,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

@@ -38,6 +38,18 @@ import java.util.HashMap;
 public class Order extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Order that ;
 
     public Order (){
@@ -65,6 +77,8 @@ public class Order extends Model {
                 /* Adding Getter and Setter methods */
                 public void setCustomerAddress(String customerAddress){
                     this.customerAddress = customerAddress;
+                    //Update hashMap value..
+                    hashMap.put("customerAddress", customerAddress);
                 }
 
             
@@ -85,6 +99,8 @@ public class Order extends Model {
                 /* Adding Getter and Setter methods */
                 public void setCustomerPincode(String customerPincode){
                     this.customerPincode = customerPincode;
+                    //Update hashMap value..
+                    hashMap.put("customerPincode", customerPincode);
                 }
 
             

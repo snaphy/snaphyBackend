@@ -63,11 +63,11 @@ public class CommentsRepository extends ModelRepository<Comments> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customer", "GET"), "Comments.prototype.__get__customer");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentsId/customer", "GET"), "Comments.prototype.__get__customer");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipe", "GET"), "Comments.prototype.__get__recipe");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentsId/recipe", "GET"), "Comments.prototype.__get__recipe");
             
         
             
@@ -111,7 +111,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "Comments.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentsId", "PUT"), "Comments.prototype.updateAttributes");
             
         
             
@@ -167,14 +167,14 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method get__customer definition
-            public void get__customer(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
+            public void get__customer(  String commentsId,  Boolean refresh, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("commentsId", commentsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -208,14 +208,14 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method get__recipe definition
-            public void get__recipe(  String id,  Boolean refresh, final ObjectCallback<Recipe> callback){
+            public void get__recipe(  String commentsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipe", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__recipe", ImmutableMap.of("commentsId", commentsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -629,14 +629,14 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void updateAttributes(  String commentsId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("commentsId", commentsId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

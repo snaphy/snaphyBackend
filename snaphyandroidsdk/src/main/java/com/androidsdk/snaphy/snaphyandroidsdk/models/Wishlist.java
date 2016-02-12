@@ -45,6 +45,18 @@ import java.util.HashMap;
 public class Wishlist extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Wishlist that ;
 
     public Wishlist (){
@@ -556,7 +568,7 @@ public class Wishlist extends Model {
                         
 
                                     //Write the method here..
-                                    public void link__recipes( String fk,  Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void link__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
@@ -566,7 +578,7 @@ public class Wishlist extends Model {
 
                                         
 
-                                        wishlistRepo.link__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+                                        wishlistRepo.link__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
 
                                             

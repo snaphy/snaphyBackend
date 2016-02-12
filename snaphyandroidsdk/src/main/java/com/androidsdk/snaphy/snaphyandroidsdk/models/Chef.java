@@ -59,6 +59,18 @@ import java.util.HashMap;
 public class Chef extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Chef that ;
 
     public Chef (){
@@ -78,6 +90,8 @@ public class Chef extends Model {
                 /* Adding Getter and Setter methods */
                 public void setAddress(String address){
                     this.address = address;
+                    //Update hashMap value..
+                    hashMap.put("address", address);
                 }
 
             
@@ -106,6 +120,8 @@ public class Chef extends Model {
                 /* Adding Getter and Setter methods */
                 public void setStatus(String status){
                     this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
                 }
 
             
@@ -126,6 +142,8 @@ public class Chef extends Model {
                 /* Adding Getter and Setter methods */
                 public void setAdded(String added){
                     this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
                 }
 
             
@@ -486,12 +504,11 @@ public class Chef extends Model {
                         for (HashMap<String, Object> obj : courses) {
                             //Also add relation to child type for two way communication..
                             Course obj1 = coursesRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setCourses(result);
+
                     }
 
 
@@ -933,12 +950,11 @@ public class Chef extends Model {
                         for (HashMap<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
                             ContactChef obj1 = contactChefsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setContactChefs(result);
+
                     }
 
 

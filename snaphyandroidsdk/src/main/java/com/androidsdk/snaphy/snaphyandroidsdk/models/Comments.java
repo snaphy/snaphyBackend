@@ -45,6 +45,18 @@ import java.util.HashMap;
 public class Comments extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Comments that ;
 
     public Comments (){
@@ -64,6 +76,8 @@ public class Comments extends Model {
                 /* Adding Getter and Setter methods */
                 public void setDate(String date){
                     this.date = date;
+                    //Update hashMap value..
+                    hashMap.put("date", date);
                 }
 
             
@@ -84,6 +98,8 @@ public class Comments extends Model {
                 /* Adding Getter and Setter methods */
                 public void setStatus(String status){
                     this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
                 }
 
             
@@ -104,6 +120,8 @@ public class Comments extends Model {
                 /* Adding Getter and Setter methods */
                 public void setComment(String comment){
                     this.comment = comment;
+                    //Update hashMap value..
+                    hashMap.put("comment", comment);
                 }
 
             
@@ -125,6 +143,8 @@ public class Comments extends Model {
                 /* Adding Getter and Setter methods */
                 public void setRating(double rating){
                     this.rating = rating;
+                    //Update hashMap value..
+                    hashMap.put("rating", rating);
                 }
 
             

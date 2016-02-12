@@ -38,7 +38,10 @@
           "options": [
             "breakfast",
             "lunch",
-            "dinner"
+            "dinner",
+            "snacks",
+            "beverages",
+            "desserts"
           ]
         }
       }

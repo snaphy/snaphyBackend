@@ -37,13 +37,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeAnalytic;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
-
 
 
 
@@ -63,23 +56,19 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "GET"), "RecipeAnalytic.prototype.__get__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "GET"), "RecipeAnalytic.prototype.__get__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "POST"), "RecipeAnalytic.prototype.__create__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "POST"), "RecipeAnalytic.prototype.__create__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "PUT"), "RecipeAnalytic.prototype.__update__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "PUT"), "RecipeAnalytic.prototype.__update__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "DELETE"), "RecipeAnalytic.prototype.__destroy__recipes");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customer", "GET"), "RecipeAnalytic.prototype.__get__customer");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "DELETE"), "RecipeAnalytic.prototype.__destroy__recipes");
             
         
             
@@ -123,29 +112,13 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "RecipeAnalytic.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId", "PUT"), "RecipeAnalytic.prototype.updateAttributes");
             
         
             
         
             
                 contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeAnalytic.getSchema");
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -173,14 +146,14 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String id,  Boolean refresh, final ObjectCallback<Recipe> callback){
+            public void get__recipes(  String recipeAnalyticId,  Boolean refresh, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -214,14 +187,14 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String id,  Recipe data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String recipeAnalyticId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -255,14 +228,14 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method update__recipes definition
-            public void update__recipes(  String id,  Recipe data, final ObjectCallback<Recipe> callback){
+            public void update__recipes(  String recipeAnalyticId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__recipes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -296,9 +269,9 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method destroy__recipes definition
-            public void destroy__recipes(  String id, final VoidCallback callback){
+            public void destroy__recipes(  String recipeAnalyticId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__recipes", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -317,47 +290,6 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
                 
 
             }//Method destroy__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__customer definition
-            public void get__customer(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__customer definition ends here..
 
             
 
@@ -745,14 +677,14 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void updateAttributes(  String recipeAnalyticId,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -817,22 +749,6 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

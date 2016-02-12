@@ -38,6 +38,18 @@ import java.util.HashMap;
 public class Category extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private Category that ;
 
     public Category (){
@@ -57,6 +69,8 @@ public class Category extends Model {
                 /* Adding Getter and Setter methods */
                 public void setName(String name){
                     this.name = name;
+                    //Update hashMap value..
+                    hashMap.put("name", name);
                 }
 
             
@@ -275,7 +289,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void link__recipes( String fk,  Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void link__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
@@ -285,7 +299,7 @@ public class Category extends Model {
 
                                         
 
-                                        categoryRepo.link__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+                                        categoryRepo.link__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
 
                                             

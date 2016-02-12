@@ -89,7 +89,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "EmailInfo.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:emailInfoId", "PUT"), "EmailInfo.prototype.updateAttributes");
             
         
             
@@ -493,14 +493,14 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<EmailInfo> callback){
+            public void updateAttributes(  String emailInfoId,  HashMap<String, Object> data, final ObjectCallback<EmailInfo> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("emailInfoId", emailInfoId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

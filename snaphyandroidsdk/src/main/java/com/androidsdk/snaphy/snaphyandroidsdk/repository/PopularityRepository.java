@@ -56,19 +56,19 @@ public class PopularityRepository extends ModelRepository<Popularity> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/chefs", "GET"), "Popularity.prototype.__get__chefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "GET"), "Popularity.prototype.__get__chefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/chefs", "POST"), "Popularity.prototype.__create__chefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "POST"), "Popularity.prototype.__create__chefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/chefs", "PUT"), "Popularity.prototype.__update__chefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "PUT"), "Popularity.prototype.__update__chefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/chefs", "DELETE"), "Popularity.prototype.__destroy__chefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "DELETE"), "Popularity.prototype.__destroy__chefs");
             
         
             
@@ -112,7 +112,7 @@ public class PopularityRepository extends ModelRepository<Popularity> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "Popularity.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId", "PUT"), "Popularity.prototype.updateAttributes");
             
         
             
@@ -146,14 +146,14 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method get__chefs definition
-            public void get__chefs(  String id,  Boolean refresh, final ObjectCallback<Chef> callback){
+            public void get__chefs(  String popularityId,  Boolean refresh, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__chefs", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chefs", ImmutableMap.of("popularityId", popularityId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -187,14 +187,14 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method create__chefs definition
-            public void create__chefs(  String id,  Chef data, final ObjectCallback<Chef> callback){
+            public void create__chefs(  String popularityId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__chefs", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__chefs", ImmutableMap.of("popularityId", popularityId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -228,14 +228,14 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method update__chefs definition
-            public void update__chefs(  String id,  Chef data, final ObjectCallback<Chef> callback){
+            public void update__chefs(  String popularityId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__chefs", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__chefs", ImmutableMap.of("popularityId", popularityId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -269,9 +269,9 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method destroy__chefs definition
-            public void destroy__chefs(  String id, final VoidCallback callback){
+            public void destroy__chefs(  String popularityId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__chefs", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__chefs", ImmutableMap.of("popularityId", popularityId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -677,14 +677,14 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
+            public void updateAttributes(  String popularityId,  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("popularityId", popularityId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {

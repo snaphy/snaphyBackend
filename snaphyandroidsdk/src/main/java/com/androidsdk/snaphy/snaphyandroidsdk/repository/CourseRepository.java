@@ -63,35 +63,35 @@ public class CourseRepository extends ModelRepository<Course> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/chef", "GET"), "Course.prototype.__get__chef");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/chef", "GET"), "Course.prototype.__get__chef");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/:fk", "GET"), "Course.prototype.__findById__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "GET"), "Course.prototype.__findById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/:fk", "DELETE"), "Course.prototype.__destroyById__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "DELETE"), "Course.prototype.__destroyById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/:fk", "PUT"), "Course.prototype.__updateById__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "PUT"), "Course.prototype.__updateById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs", "GET"), "Course.prototype.__get__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "GET"), "Course.prototype.__get__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs", "POST"), "Course.prototype.__create__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "POST"), "Course.prototype.__create__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs", "DELETE"), "Course.prototype.__delete__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "DELETE"), "Course.prototype.__delete__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/contactChefs/count", "GET"), "Course.prototype.__count__contactChefs");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/count", "GET"), "Course.prototype.__count__contactChefs");
             
         
             
@@ -135,7 +135,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "Course.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId", "PUT"), "Course.prototype.updateAttributes");
             
         
             
@@ -177,14 +177,14 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method get__chef definition
-            public void get__chef(  String id,  Boolean refresh, final ObjectCallback<Chef> callback){
+            public void get__chef(  String courseId,  Boolean refresh, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__chef", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chef", ImmutableMap.of("courseId", courseId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -218,14 +218,14 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method findById__contactChefs definition
-            public void findById__contactChefs(  String id,  String fk, final ObjectCallback<ContactChef> callback){
+            public void findById__contactChefs(  String courseId,  String fk, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__contactChefs", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__contactChefs", ImmutableMap.of("courseId", courseId, "fk", fk), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -259,9 +259,9 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method destroyById__contactChefs definition
-            public void destroyById__contactChefs(  String id,  String fk, final VoidCallback callback){
+            public void destroyById__contactChefs(  String courseId,  String fk, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroyById__contactChefs", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__contactChefs", ImmutableMap.of("courseId", courseId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -287,14 +287,14 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String id,  String fk,  ContactChef data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String courseId,  String fk,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__contactChefs", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__contactChefs", ImmutableMap.of("courseId", courseId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -328,14 +328,14 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method get__contactChefs definition
-            public void get__contactChefs(  String id,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
+            public void get__contactChefs(  String courseId,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__contactChefs", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__contactChefs", ImmutableMap.of("courseId", courseId, "filter", filter), new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -371,14 +371,14 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String id,  ContactChef data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String courseId,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__contactChefs", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__contactChefs", ImmutableMap.of("courseId", courseId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -412,9 +412,9 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method delete__contactChefs definition
-            public void delete__contactChefs(  String id, final VoidCallback callback){
+            public void delete__contactChefs(  String courseId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__delete__contactChefs", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__contactChefs", ImmutableMap.of("courseId", courseId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -440,13 +440,13 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method count__contactChefs definition
-            public void count__contactChefs(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__contactChefs(  String courseId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__contactChefs", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__contactChefs", ImmutableMap.of("courseId", courseId, "where", where), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -853,14 +853,14 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void updateAttributes(  String courseId,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("courseId", courseId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
