@@ -34,6 +34,33 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             });
         })
         .catch(function(err){
+            var where = {};
+            where.or = [];
+            for(var i=0; i< adminUserModel.length; i++ ){
+                var model = adminUserModel[i];
+                where.or.push({
+                    email: model.email
+                });
+            }
+            User.find({
+                where: where
+            }, function(err, users){
+                if(users.length){
+                    //create the admin role
+                    Role.create({
+                        name: 'admin'
+                    }, function(err, role) {
+                        if (err) {
+                            throw err;
+                        }
+                        for(i=0; i< users.length; i++){
+                            //Making this user an admin.
+                            addUserAdmin(role, users[i].id);
+                        }//for loop..
+                    });
+                }
+            });
+
             console.error("Got error");
             console.log(err);
         });

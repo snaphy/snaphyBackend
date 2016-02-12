@@ -29,7 +29,8 @@
       "Recipe": "Recipe",
       "Comments": "Comments",
       "RecipeAnalytic": "RecipeAnalytic",
-      "RecipeIngredients": "RecipeIngredients"
+      "RecipeIngredients": "RecipeIngredients",
+      "User": "Employee"
   },
   "activate": true,
   "services": {},

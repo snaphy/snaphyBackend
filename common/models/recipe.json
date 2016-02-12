@@ -335,19 +335,6 @@
         "create": true
       }
     },
-    "priorities": {
-      "type": "hasOne",
-      "model": "Priority",
-      "foreignKey": "",
-      "onCascadeDelete": true,
-      "templateOptions": {
-        "btnText": "Add Priority",
-        "searchProp": "priority",
-        "create": true,
-        "search": false,
-        "hide": true
-      }
-    },
     "category": {
       "type": "hasAndBelongsToMany",
       "model": "Category",
@@ -400,7 +387,8 @@
     "recipeAnalytics": {
       "type": "hasOne",
       "model": "RecipeAnalytic",
-      "foreignKey": ""
+      "foreignKey": "",
+      "onCascadeDelete": true
     }
   },
   "acls": [],

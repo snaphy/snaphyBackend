@@ -224,11 +224,6 @@
       "type": "hasMany",
       "model": "Order",
       "foreignKey": ""
-    },
-    "recipeAnalytics": {
-      "type": "hasMany",
-      "model": "RecipeAnalytic",
-      "foreignKey": ""
     }
   },
   "acls": [

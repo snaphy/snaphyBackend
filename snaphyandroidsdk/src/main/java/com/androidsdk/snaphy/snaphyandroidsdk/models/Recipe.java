@@ -188,14 +188,14 @@ public class Recipe extends Model {
             
             
             
-                private Double servings;
+                private double servings;
                 /* Adding Getter and Setter methods */
-                public Double getServings(){
+                public double getServings(){
                     return servings;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setServings(Double servings){
+                public void setServings(double servings){
                     this.servings = servings;
                 }
 

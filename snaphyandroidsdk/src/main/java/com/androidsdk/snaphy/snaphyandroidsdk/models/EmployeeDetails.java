@@ -69,14 +69,14 @@ public class EmployeeDetails extends Model {
             
             
             
-                private Double contactNumber;
+                private double contactNumber;
                 /* Adding Getter and Setter methods */
-                public Double getContactNumber(){
+                public double getContactNumber(){
                     return contactNumber;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setContactNumber(Double contactNumber){
+                public void setContactNumber(double contactNumber){
                     this.contactNumber = contactNumber;
                 }
 

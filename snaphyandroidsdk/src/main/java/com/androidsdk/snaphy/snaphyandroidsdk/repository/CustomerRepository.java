@@ -77,6 +77,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeAnalytic;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeAnalyticRepository;
+            
+        
+    
+
 
 
 
@@ -188,6 +195,18 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
         
             
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipeAnalytics/:fk", "GET"), "Customer.prototype.__findById__recipeAnalytics");
+            
+        
+            
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipeAnalytics/:fk", "DELETE"), "Customer.prototype.__destroyById__recipeAnalytics");
+            
+        
+            
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipeAnalytics/:fk", "PUT"), "Customer.prototype.__updateById__recipeAnalytics");
+            
+        
+            
                 contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/accessTokens", "GET"), "Customer.prototype.__get__accessTokens");
             
         
@@ -268,6 +287,22 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
         
             
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipeAnalytics", "GET"), "Customer.prototype.__get__recipeAnalytics");
+            
+        
+            
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipeAnalytics", "POST"), "Customer.prototype.__create__recipeAnalytics");
+            
+        
+            
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipeAnalytics", "DELETE"), "Customer.prototype.__delete__recipeAnalytics");
+            
+        
+            
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipeAnalytics/count", "GET"), "Customer.prototype.__count__recipeAnalytics");
+            
+        
+            
                 contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Customer.create");
             
         
@@ -327,6 +362,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             
                 contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Customer.getSchema");
+            
+        
             
         
             
@@ -1223,6 +1260,116 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
+            //Method findById__recipeAnalytics definition
+            public void findById__recipeAnalytics(  String id,  String fk, final ObjectCallback<RecipeAnalytic> callback){
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__recipeAnalytics", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__recipeAnalytics definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__recipeAnalytics definition
+            public void destroyById__recipeAnalytics(  String id,  String fk, final VoidCallback callback){
+                
+                    invokeStaticMethod("prototype.__destroyById__recipeAnalytics", ImmutableMap.of("id", id, "fk", fk), new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__recipeAnalytics definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__recipeAnalytics definition
+            public void updateById__recipeAnalytics(  String id,  String fk,  RecipeAnalytic data, final ObjectCallback<RecipeAnalytic> callback){
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__recipeAnalytics", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__recipeAnalytics definition ends here..
+
+            
+
+        
+    
+        
             //Method get__accessTokens definition
             public void get__accessTokens(  String id,  HashMap<String, Object> filter, final ListCallback<AccessToken> callback){
                 
@@ -1948,6 +2095,151 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
+            //Method get__recipeAnalytics definition
+            public void get__recipeAnalytics(  String id,  HashMap<String, Object> filter, final ListCallback<RecipeAnalytic> callback){
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__recipeAnalytics", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<RecipeAnalytic> recipeAnalyticList = new ArrayList<RecipeAnalytic>();
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(obj);
+                                        recipeAnalyticList.add(recipeAnalytic);
+                                    }
+                                    callback.onSuccess(recipeAnalyticList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+            }//Method get__recipeAnalytics definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__recipeAnalytics definition
+            public void create__recipeAnalytics(  String id,  RecipeAnalytic data, final ObjectCallback<RecipeAnalytic> callback){
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__recipeAnalytics", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__recipeAnalytics definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__recipeAnalytics definition
+            public void delete__recipeAnalytics(  String id, final VoidCallback callback){
+                
+                    invokeStaticMethod("prototype.__delete__recipeAnalytics", ImmutableMap.of("id", id), new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__recipeAnalytics definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__recipeAnalytics definition
+            public void count__recipeAnalytics(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__recipeAnalytics", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method count__recipeAnalytics definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
             public void create(  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
                 
@@ -2461,6 +2753,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
             
 
+        
+    
         
     
         

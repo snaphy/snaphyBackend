@@ -1,7 +1,7 @@
 'use strict';
 var init = function(server, databaseObj, helper, packageObj) {
     //When a recipe is created add a analytics with recipe..
-    databaseObj.Recipe.observe('before save', function(ctx, next) {
+    databaseObj.Recipe.observe('after save', function(ctx, next) {
         if (ctx.isNewInstance) {
             var RecipeAnalytic = databaseObj.RecipeAnalytic;
             var data = {
@@ -17,6 +17,15 @@ var init = function(server, databaseObj, helper, packageObj) {
                         return false;
                     }
                     //Analytics successfully added to recipe..
+                    //Add analytic for two way communication..
+                    ctx.instance.recipeAnalyticId = analyticsObj.id;
+                    //Resave it..
+                    ctx.instance.save({}, function(err, val){
+                        if(err){
+                            console.error("Data cannot be saved..");
+                            return false;
+                        }
+                    });
                 });
             }
             next();
@@ -32,6 +41,16 @@ var init = function(server, databaseObj, helper, packageObj) {
             //console.error("Error recipe data is not present");
             return next();
         }
+    /*    var loopback = helper.getLoopbackObj();
+        //Check is user is Admin..
+        var login = helper.loadPlugin('login');
+        var currentContext = loopback.getCurrentContext();
+        //first check is the user is not admin..
+        login.isAdmin(server, currentContext, function(err, value){
+            console.log(err);
+            console.log(value);
+        });*/
+
         var RecipeId = ctx.instance.recipeId;
         //Now increase a recipe views..
         databaseObj.RecipeAnalytic.find({

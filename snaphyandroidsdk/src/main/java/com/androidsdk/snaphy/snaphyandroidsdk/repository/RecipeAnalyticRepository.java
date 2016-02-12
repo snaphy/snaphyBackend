@@ -37,6 +37,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeAnalytic;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
+
 
 
 
@@ -69,6 +76,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
         
             
                 contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "DELETE"), "RecipeAnalytic.prototype.__destroy__recipes");
+            
+        
+            
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/customer", "GET"), "RecipeAnalytic.prototype.__get__customer");
             
         
             
@@ -119,6 +130,22 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
         
             
                 contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeAnalytic.getSchema");
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -290,6 +317,47 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
                 
 
             }//Method destroy__recipes definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__customer definition
+            public void get__customer(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__customer definition ends here..
 
             
 
@@ -749,6 +817,22 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

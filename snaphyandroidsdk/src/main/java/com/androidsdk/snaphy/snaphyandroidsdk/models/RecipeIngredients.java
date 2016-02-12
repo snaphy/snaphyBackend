@@ -56,14 +56,14 @@ public class RecipeIngredients extends Model {
             
             
             
-                private Double quantity;
+                private double quantity;
                 /* Adding Getter and Setter methods */
-                public Double getQuantity(){
+                public double getQuantity(){
                     return quantity;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setQuantity(Double quantity){
+                public void setQuantity(double quantity){
                     this.quantity = quantity;
                 }
 
@@ -96,14 +96,14 @@ public class RecipeIngredients extends Model {
             
             
             
-                private Double requiredQuantity;
+                private double requiredQuantity;
                 /* Adding Getter and Setter methods */
-                public Double getRequiredQuantity(){
+                public double getRequiredQuantity(){
                     return requiredQuantity;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setRequiredQuantity(Double requiredQuantity){
+                public void setRequiredQuantity(double requiredQuantity){
                     this.requiredQuantity = requiredQuantity;
                 }
 

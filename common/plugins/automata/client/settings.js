@@ -22,7 +22,8 @@ var settings = {
         "RecipeIngredients",
         "RecipeTag",
         "Wishlist",
-        "Chef"
+        "Chef",
+        "RecipeAnalytic"
     ]
 };
 

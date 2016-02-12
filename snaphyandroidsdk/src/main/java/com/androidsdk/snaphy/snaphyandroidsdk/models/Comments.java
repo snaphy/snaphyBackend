@@ -116,14 +116,14 @@ public class Comments extends Model {
             
             
             
-                private Double rating;
+                private double rating;
                 /* Adding Getter and Setter methods */
-                public Double getRating(){
+                public double getRating(){
                     return rating;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setRating(Double rating){
+                public void setRating(double rating){
                     this.rating = rating;
                 }
 

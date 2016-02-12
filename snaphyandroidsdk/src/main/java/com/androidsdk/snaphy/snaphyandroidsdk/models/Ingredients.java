@@ -99,14 +99,14 @@ public class Ingredients extends Model {
             
             
             
-                private Double minimumQuantity;
+                private double minimumQuantity;
                 /* Adding Getter and Setter methods */
-                public Double getMinimumQuantity(){
+                public double getMinimumQuantity(){
                     return minimumQuantity;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setMinimumQuantity(Double minimumQuantity){
+                public void setMinimumQuantity(double minimumQuantity){
                     this.minimumQuantity = minimumQuantity;
                 }
 
@@ -119,14 +119,14 @@ public class Ingredients extends Model {
             
             
             
-                private Double price;
+                private double price;
                 /* Adding Getter and Setter methods */
-                public Double getPrice(){
+                public double getPrice(){
                     return price;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPrice(Double price){
+                public void setPrice(double price){
                     this.price = price;
                 }
 

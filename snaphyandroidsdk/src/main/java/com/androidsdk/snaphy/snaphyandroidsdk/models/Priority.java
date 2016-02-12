@@ -69,14 +69,14 @@ public class Priority extends Model {
             
             
             
-                private Double totalViews;
+                private double totalViews;
                 /* Adding Getter and Setter methods */
-                public Double getTotalViews(){
+                public double getTotalViews(){
                     return totalViews;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setTotalViews(Double totalViews){
+                public void setTotalViews(double totalViews){
                     this.totalViews = totalViews;
                 }
 
