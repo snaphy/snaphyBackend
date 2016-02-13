@@ -591,6 +591,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     }
 
 
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        
+            //call super method instead..
+            return super.getNameForRestUrl();
+        
+    }
+
+
 
     
 
@@ -601,13 +610,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__accessTokens definition
             public void findById__accessTokens(  String customerId,  String fk, final ObjectCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__accessTokens", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -642,8 +661,18 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroyById__accessTokens definition
             public void destroyById__accessTokens(  String customerId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -670,13 +699,25 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__accessTokens definition
             public void updateById__accessTokens(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__accessTokens", ImmutableMap.of("customerId", customerId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -711,13 +752,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__recipes definition
             public void findById__recipes(  String customerId,  String fk, final ObjectCallback<Recipe> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__recipes", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -752,8 +803,18 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroyById__recipes definition
             public void destroyById__recipes(  String customerId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroyById__recipes", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__recipes", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -780,13 +841,25 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__recipes definition
             public void updateById__recipes(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__recipes", ImmutableMap.of("customerId", customerId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -821,13 +894,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__comments definition
             public void findById__comments(  String customerId,  String fk, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__comments", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__comments", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -862,8 +945,18 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroyById__comments definition
             public void destroyById__comments(  String customerId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroyById__comments", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__comments", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -890,13 +983,25 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__comments definition
             public void updateById__comments(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__comments", ImmutableMap.of("customerId", customerId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__comments", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -931,13 +1036,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__wishlists definition
             public void get__wishlists(  String customerId,  Boolean refresh, final ObjectCallback<Wishlist> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__wishlists", ImmutableMap.of("customerId", customerId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__wishlists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -972,13 +1087,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__wishlists definition
             public void create__wishlists(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__wishlists", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__wishlists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1013,13 +1138,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method update__wishlists definition
             public void update__wishlists(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__wishlists", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__wishlists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1054,8 +1189,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroy__wishlists definition
             public void destroy__wishlists(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroy__wishlists", ImmutableMap.of("customerId", customerId), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__wishlists", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1082,13 +1225,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__chefs definition
             public void get__chefs(  String customerId,  Boolean refresh, final ObjectCallback<Chef> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__chefs", ImmutableMap.of("customerId", customerId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chefs", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1123,13 +1276,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__chefs definition
             public void create__chefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__chefs", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__chefs", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1164,13 +1327,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method update__chefs definition
             public void update__chefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__chefs", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__chefs", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1205,8 +1378,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroy__chefs definition
             public void destroy__chefs(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroy__chefs", ImmutableMap.of("customerId", customerId), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__chefs", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1233,13 +1414,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__contactChefs definition
             public void findById__contactChefs(  String customerId,  String fk, final ObjectCallback<ContactChef> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__contactChefs", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1274,8 +1465,18 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroyById__contactChefs definition
             public void destroyById__contactChefs(  String customerId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroyById__contactChefs", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__contactChefs", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1302,13 +1503,25 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__contactChefs definition
             public void updateById__contactChefs(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__contactChefs", ImmutableMap.of("customerId", customerId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1343,13 +1556,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__orders definition
             public void findById__orders(  String customerId,  String fk, final ObjectCallback<Order> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__orders", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__orders", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1384,8 +1607,18 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroyById__orders definition
             public void destroyById__orders(  String customerId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroyById__orders", ImmutableMap.of("customerId", customerId, "fk", fk), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__orders", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1412,13 +1645,25 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__orders definition
             public void updateById__orders(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__orders", ImmutableMap.of("customerId", customerId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__orders", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1453,13 +1698,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__accessTokens definition
             public void get__accessTokens(  String customerId,  HashMap<String, Object> filter, final ListCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__accessTokens", ImmutableMap.of("customerId", customerId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1496,13 +1751,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__accessTokens definition
             public void create__accessTokens(  String customerId,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__accessTokens", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1537,8 +1802,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method delete__accessTokens definition
             public void delete__accessTokens(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__delete__accessTokens", ImmutableMap.of("customerId", customerId), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1565,12 +1838,22 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count__accessTokens definition
             public void count__accessTokens(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__accessTokens", ImmutableMap.of("customerId", customerId, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1598,13 +1881,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__recipes definition
             public void get__recipes(  String customerId,  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("customerId", customerId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__recipes", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1641,13 +1934,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__recipes definition
             public void create__recipes(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1682,8 +1985,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method delete__recipes definition
             public void delete__recipes(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__delete__recipes", ImmutableMap.of("customerId", customerId), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__recipes", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1710,12 +2021,22 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count__recipes definition
             public void count__recipes(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__recipes", ImmutableMap.of("customerId", customerId, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1743,13 +2064,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__comments definition
             public void get__comments(  String customerId,  HashMap<String, Object> filter, final ListCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__comments", ImmutableMap.of("customerId", customerId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__comments", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1786,13 +2117,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__comments definition
             public void create__comments(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__comments", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__comments", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1827,8 +2168,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method delete__comments definition
             public void delete__comments(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__delete__comments", ImmutableMap.of("customerId", customerId), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__comments", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1855,12 +2204,22 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count__comments definition
             public void count__comments(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__comments", ImmutableMap.of("customerId", customerId, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__comments", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1888,13 +2247,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__contactChefs definition
             public void get__contactChefs(  String customerId,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__contactChefs", ImmutableMap.of("customerId", customerId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__contactChefs", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1931,13 +2300,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__contactChefs definition
             public void create__contactChefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__contactChefs", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1972,8 +2351,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method delete__contactChefs definition
             public void delete__contactChefs(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__delete__contactChefs", ImmutableMap.of("customerId", customerId), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__contactChefs", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2000,12 +2387,22 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count__contactChefs definition
             public void count__contactChefs(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__contactChefs", ImmutableMap.of("customerId", customerId, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2033,13 +2430,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__orders definition
             public void get__orders(  String customerId,  HashMap<String, Object> filter, final ListCallback<Order> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__orders", ImmutableMap.of("customerId", customerId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__orders", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2076,13 +2483,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__orders definition
             public void create__orders(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__orders", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__orders", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2117,8 +2534,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method delete__orders definition
             public void delete__orders(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__delete__orders", ImmutableMap.of("customerId", customerId), new Adapter.Callback() {
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__orders", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2145,12 +2570,22 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count__orders definition
             public void count__orders(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__orders", ImmutableMap.of("customerId", customerId, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__orders", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2178,13 +2613,21 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create definition
             public void create(  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("create", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2219,13 +2662,21 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method createMany definition
             public void createMany(  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("createMany", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2260,13 +2711,21 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method upsert definition
             public void upsert(  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("upsert", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2301,12 +2760,20 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method exists definition
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("exists", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2334,13 +2801,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById definition
             public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findById", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2375,13 +2852,21 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method find definition
             public void find(  HashMap<String, Object> filter, final ListCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("find", ImmutableMap.of("filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2418,13 +2903,21 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findOne definition
             public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findOne", ImmutableMap.of("filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2459,12 +2952,22 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateAll definition
             public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("updateAll", ImmutableMap.of("where", where, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2492,12 +2995,20 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method deleteById definition
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("deleteById", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2525,12 +3036,20 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count definition
             public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("count", ImmutableMap.of("where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2558,13 +3077,23 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateAttributes definition
             public void updateAttributes(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("customerId", customerId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2605,8 +3134,20 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method confirm definition
             public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("confirm", ImmutableMap.of("uid", uid, "token", token, "redirect", redirect), new Adapter.Callback() {
+                        hashMapObject.put("uid", uid);
+                
+                        hashMapObject.put("token", token);
+                
+                        hashMapObject.put("redirect", redirect);
+                
+
+                
+                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2633,8 +3174,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method resetPassword definition
             public void resetPassword(  HashMap<String, Object> options, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("resetPassword", ImmutableMap.of("options", options), new Adapter.Callback() {
+                        hashMapObject.put("options", options);
+                
+
+                
+                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2661,12 +3210,18 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method getSchema definition
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override

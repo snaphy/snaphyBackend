@@ -290,6 +290,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     }
 
 
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        
+            //call super method instead..
+            return super.getNameForRestUrl();
+        
+    }
+
+
 
     
 
@@ -300,13 +309,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__accessTokens definition
             public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -341,8 +360,18 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroyById__accessTokens definition
             public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk), new Adapter.Callback() {
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -369,13 +398,25 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__accessTokens definition
             public void updateById__accessTokens(  String employeeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -410,13 +451,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__employeeDetails definition
             public void get__employeeDetails(  String employeeId,  Boolean refresh, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employeeDetails", ImmutableMap.of("employeeId", employeeId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__employeeDetails", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -451,13 +502,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__employeeDetails definition
             public void create__employeeDetails(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__employeeDetails", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__employeeDetails", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -492,13 +553,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method update__employeeDetails definition
             public void update__employeeDetails(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__employeeDetails", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__employeeDetails", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -533,8 +604,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method destroy__employeeDetails definition
             public void destroy__employeeDetails(  String employeeId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroy__employeeDetails", ImmutableMap.of("employeeId", employeeId), new Adapter.Callback() {
+                        hashMapObject.put("employeeId", employeeId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__employeeDetails", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -561,13 +640,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__accessTokens definition
             public void get__accessTokens(  String employeeId,  HashMap<String, Object> filter, final ListCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("prototype.__get__accessTokens", ImmutableMap.of("employeeId", employeeId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -604,13 +693,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__accessTokens definition
             public void create__accessTokens(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__accessTokens", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -645,8 +744,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method delete__accessTokens definition
             public void delete__accessTokens(  String employeeId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__delete__accessTokens", ImmutableMap.of("employeeId", employeeId), new Adapter.Callback() {
+                        hashMapObject.put("employeeId", employeeId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -673,12 +780,22 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count__accessTokens definition
             public void count__accessTokens(  String employeeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__accessTokens", ImmutableMap.of("employeeId", employeeId, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -706,13 +823,21 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create definition
             public void create(  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("create", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -747,13 +872,21 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method createMany definition
             public void createMany(  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("createMany", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -788,13 +921,21 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method upsert definition
             public void upsert(  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("upsert", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -829,12 +970,20 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method exists definition
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("exists", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -862,13 +1011,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById definition
             public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findById", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -903,13 +1062,21 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method find definition
             public void find(  HashMap<String, Object> filter, final ListCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("find", ImmutableMap.of("filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -946,13 +1113,21 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findOne definition
             public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findOne", ImmutableMap.of("filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -987,12 +1162,22 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateAll definition
             public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("updateAll", ImmutableMap.of("where", where, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1020,12 +1205,20 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method deleteById definition
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("deleteById", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1053,12 +1246,20 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method count definition
             public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("count", ImmutableMap.of("where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1086,13 +1287,23 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateAttributes definition
             public void updateAttributes(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1133,8 +1344,20 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method confirm definition
             public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("confirm", ImmutableMap.of("uid", uid, "token", token, "redirect", redirect), new Adapter.Callback() {
+                        hashMapObject.put("uid", uid);
+                
+                        hashMapObject.put("token", token);
+                
+                        hashMapObject.put("redirect", redirect);
+                
+
+                
+                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1161,8 +1384,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method resetPassword definition
             public void resetPassword(  HashMap<String, Object> options, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("resetPassword", ImmutableMap.of("options", options), new Adapter.Callback() {
+                        hashMapObject.put("options", options);
+                
+
+                
+                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1189,12 +1420,18 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method getSchema definition
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1224,12 +1461,18 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method isAdmin definition
             public void isAdmin( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("isAdmin", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override

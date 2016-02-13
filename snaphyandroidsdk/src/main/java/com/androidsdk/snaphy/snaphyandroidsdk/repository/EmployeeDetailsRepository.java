@@ -58,6 +58,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "GET"), "EmployeeDetails.prototype.__get__employees");
                 
 
@@ -66,6 +67,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "POST"), "EmployeeDetails.prototype.__create__employees");
                 
 
@@ -74,6 +76,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "PUT"), "EmployeeDetails.prototype.__update__employees");
                 
 
@@ -82,6 +85,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "DELETE"), "EmployeeDetails.prototype.__destroy__employees");
                 
 
@@ -90,6 +94,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "POST"), "EmployeeDetails.create");
                 
 
@@ -98,6 +103,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "POST"), "EmployeeDetails.create");
                 
 
@@ -106,6 +112,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "PUT"), "EmployeeDetails.upsert");
                 
 
@@ -114,6 +121,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id/exists", "GET"), "EmployeeDetails.exists");
                 
 
@@ -122,6 +130,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id", "GET"), "EmployeeDetails.findById");
                 
 
@@ -130,6 +139,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "GET"), "EmployeeDetails.find");
                 
 
@@ -138,6 +148,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/findOne", "GET"), "EmployeeDetails.findOne");
                 
 
@@ -146,6 +157,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/update", "POST"), "EmployeeDetails.updateAll");
                 
 
@@ -154,6 +166,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id", "DELETE"), "EmployeeDetails.deleteById");
                 
 
@@ -162,6 +175,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/count", "GET"), "EmployeeDetails.count");
                 
 
@@ -170,6 +184,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId", "PUT"), "EmployeeDetails.prototype.updateAttributes");
                 
 
@@ -180,6 +195,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/getSchema", "POST"), "EmployeeDetails.getSchema");
                 
 
@@ -201,6 +217,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     }
 
 
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        
+            return "EmployeeDetails";
+        
+    }
+
+
 
     
 
@@ -211,13 +235,23 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method get__employees definition
             public void get__employees(  String employeeDetailsId,  Boolean refresh, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__employees", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -252,13 +286,23 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method create__employees definition
             public void create__employees(  String employeeDetailsId,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__employees", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -293,13 +337,23 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method update__employees definition
             public void update__employees(  String employeeDetailsId,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__employees", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -334,8 +388,16 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method destroy__employees definition
             public void destroy__employees(  String employeeDetailsId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("prototype.__destroy__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId), new Adapter.Callback() {
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__employees", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -362,13 +424,21 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method create definition
             public void create(  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("create", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -403,13 +473,21 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method createMany definition
             public void createMany(  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("createMany", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -444,13 +522,21 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method upsert definition
             public void upsert(  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("upsert", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -485,12 +571,20 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method exists definition
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("exists", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -518,13 +612,23 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method findById definition
             public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findById", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -559,13 +663,21 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method find definition
             public void find(  HashMap<String, Object> filter, final ListCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("find", ImmutableMap.of("filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -602,13 +714,21 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method findOne definition
             public void findOne(  HashMap<String, Object> filter, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findOne", ImmutableMap.of("filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -643,12 +763,22 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method updateAll definition
             public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("updateAll", ImmutableMap.of("where", where, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -676,12 +806,20 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method deleteById definition
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("deleteById", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -709,12 +847,20 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method count definition
             public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("count", ImmutableMap.of("where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -742,13 +888,23 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method updateAttributes definition
             public void updateAttributes(  String employeeDetailsId,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -785,12 +941,18 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
             //Method getSchema definition
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override

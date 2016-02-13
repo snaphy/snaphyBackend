@@ -192,6 +192,7 @@
           },
           "bind": true,
           "fullWidth": true,
+          "fileDataSource": "Image",
           "onImageUpdate": {
             "deletePrevious": true
           }

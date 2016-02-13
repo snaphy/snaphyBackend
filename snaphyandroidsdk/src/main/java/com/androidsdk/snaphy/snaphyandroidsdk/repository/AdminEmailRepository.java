@@ -86,6 +86,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     }
 
 
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        
+            //call super method instead..
+            return super.getNameForRestUrl();
+        
+    }
+
+
 
     
 
@@ -96,12 +105,18 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
         
             //Method getSchema definition
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -131,12 +146,24 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
         
             //Method sendMail definition
             public void sendMail(  List<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("to", to);
+                
+                        hashMapObject.put("subject", subject);
+                
+                        hashMapObject.put("html", html);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("sendMail", ImmutableMap.of("to", to, "subject", subject, "html", html), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("sendMail", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -164,12 +191,24 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
         
             //Method sendNotice definition
             public void sendNotice(  List<String> to,  String subject,  HashMap<String, Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("to", to);
+                
+                        hashMapObject.put("subject", subject);
+                
+                        hashMapObject.put("templateOptions", templateOptions);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("sendNotice", ImmutableMap.of("to", to, "subject", subject, "templateOptions", templateOptions), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("sendNotice", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -197,12 +236,18 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
         
             //Method getMailSchema definition
             public void getMailSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getMailSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getMailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override

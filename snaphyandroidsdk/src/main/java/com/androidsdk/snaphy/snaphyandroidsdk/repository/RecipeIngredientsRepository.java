@@ -65,6 +65,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/recipe", "GET"), "RecipeIngredients.prototype.__get__recipe");
                 
 
@@ -73,6 +74,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/ingredients", "GET"), "RecipeIngredients.prototype.__get__ingredients");
                 
 
@@ -81,6 +83,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "POST"), "RecipeIngredients.create");
                 
 
@@ -89,6 +92,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "POST"), "RecipeIngredients.create");
                 
 
@@ -97,6 +101,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "PUT"), "RecipeIngredients.upsert");
                 
 
@@ -105,6 +110,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id/exists", "GET"), "RecipeIngredients.exists");
                 
 
@@ -113,6 +119,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id", "GET"), "RecipeIngredients.findById");
                 
 
@@ -121,6 +128,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "GET"), "RecipeIngredients.find");
                 
 
@@ -129,6 +137,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/findOne", "GET"), "RecipeIngredients.findOne");
                 
 
@@ -137,6 +146,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/update", "POST"), "RecipeIngredients.updateAll");
                 
 
@@ -145,6 +155,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id", "DELETE"), "RecipeIngredients.deleteById");
                 
 
@@ -153,6 +164,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/count", "GET"), "RecipeIngredients.count");
                 
 
@@ -161,6 +173,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId", "PUT"), "RecipeIngredients.prototype.updateAttributes");
                 
 
@@ -171,6 +184,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/getSchema", "POST"), "RecipeIngredients.getSchema");
                 
 
@@ -179,6 +193,14 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
         
         return contract;
+    }
+
+
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        
+            return "RecipeIngredients";
+        
     }
 
 
@@ -192,13 +214,23 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method get__recipe definition
             public void get__recipe(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipe", ImmutableMap.of("recipeIngredientsId", recipeIngredientsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__recipe", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -233,13 +265,23 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method get__ingredients definition
             public void get__ingredients(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Ingredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__ingredients", ImmutableMap.of("recipeIngredientsId", recipeIngredientsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__ingredients", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -274,13 +316,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method create definition
             public void create(  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("create", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -315,13 +365,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method createMany definition
             public void createMany(  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("createMany", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -356,13 +414,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method upsert definition
             public void upsert(  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("upsert", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -397,12 +463,20 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method exists definition
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("exists", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -430,13 +504,23 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method findById definition
             public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<RecipeIngredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findById", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -471,13 +555,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method find definition
             public void find(  HashMap<String, Object> filter, final ListCallback<RecipeIngredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("find", ImmutableMap.of("filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -514,13 +606,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method findOne definition
             public void findOne(  HashMap<String, Object> filter, final ObjectCallback<RecipeIngredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findOne", ImmutableMap.of("filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -555,12 +655,22 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method updateAll definition
             public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("updateAll", ImmutableMap.of("where", where, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -588,12 +698,20 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method deleteById definition
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("deleteById", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -621,12 +739,20 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method count definition
             public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("count", ImmutableMap.of("where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -654,13 +780,23 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method updateAttributes definition
             public void updateAttributes(  String recipeIngredientsId,  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("recipeIngredientsId", recipeIngredientsId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -697,12 +833,18 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method getSchema definition
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override

@@ -134,6 +134,15 @@ public class ContainerRepository extends ModelRepository<Container> {
     }
 
 
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        
+            //call super method instead..
+            return super.getNameForRestUrl();
+        
+    }
+
+
 
     
 
@@ -144,13 +153,19 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method getContainers definition
             public void getContainers( final Adapter.JsonArrayCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("getContainers", null, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("getContainers", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -174,12 +189,20 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method createContainer definition
             public void createContainer(  HashMap<String, Object> options, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("options", options);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("createContainer", ImmutableMap.of("options", options), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("createContainer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -207,8 +230,16 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method destroyContainer definition
             public void destroyContainer(  String container, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("destroyContainer", ImmutableMap.of("container", container), new Adapter.Callback() {
+                        hashMapObject.put("container", container);
+                
+
+                
+                    invokeStaticMethod("destroyContainer", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -235,12 +266,20 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method getContainer definition
             public void getContainer(  String container, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("container", container);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getContainer", ImmutableMap.of("container", container), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getContainer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -268,13 +307,21 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method getFiles definition
             public void getFiles(  String container, final Adapter.JsonArrayCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("container", container);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("getFiles", ImmutableMap.of("container", container), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("getFiles", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -298,12 +345,22 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method getFile definition
             public void getFile(  String container,  String file, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("container", container);
+                
+                        hashMapObject.put("file", file);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getFile", ImmutableMap.of("container", container, "file", file), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getFile", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -331,8 +388,18 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method removeFile definition
             public void removeFile(  String container,  String file, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("removeFile", ImmutableMap.of("container", container, "file", file), new Adapter.Callback() {
+                        hashMapObject.put("container", container);
+                
+                        hashMapObject.put("file", file);
+                
+
+                
+                    invokeStaticMethod("removeFile", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -359,12 +426,22 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method upload definition
             public void upload(  HashMap<String, Object> req,  HashMap<String, Object> res, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("req", req);
+                
+                        hashMapObject.put("res", res);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("upload", ImmutableMap.of("req", req, "res", res), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upload", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -392,8 +469,22 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method download definition
             public void download(  String container,  String file,  HashMap<String, Object> req,  HashMap<String, Object> res, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
                 
-                    invokeStaticMethod("download", ImmutableMap.of("container", container, "file", file, "req", req, "res", res), new Adapter.Callback() {
+                        hashMapObject.put("container", container);
+                
+                        hashMapObject.put("file", file);
+                
+                        hashMapObject.put("req", req);
+                
+                        hashMapObject.put("res", res);
+                
+
+                
+                    invokeStaticMethod("download", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -420,12 +511,18 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method getSchema definition
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override

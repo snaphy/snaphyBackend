@@ -1,119 +1,123 @@
 {
-    "_meta": {
-        "sources": [
-            "loopback/common/models",
-            "loopback/server/models",
-            "../common/models",
-            "./models"
-        ],
-        "mixins": [
-            "loopback/common/mixins",
-            "loopback/server/mixins",
-            "../common/mixins",
-            "./mixins"
-        ]
-    },
-    "User": {
-        "dataSource": "mongodb"
-    },
-    "AccessToken": {
-        "dataSource": "mongodb",
-        "public": false
-    },
-    "ACL": {
-        "dataSource": "mongodb",
-        "public": false
-    },
-    "RoleMapping": {
-        "dataSource": "mongodb",
-        "public": false
-    },
-    "Role": {
-        "dataSource": "mongodb",
-        "public": false
-    },
-    "Employee": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "adminEmail": {
-        "dataSource": "GoogleEmail",
-        "public": true
-    },
-    "Recipe": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "EmployeeDetails": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "container": {
-        "dataSource": "Image",
-        "public": true
-    },
-    "Customer": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Cuisines": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Category": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Comments": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "RecipeTag": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Ingredients": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "IngredientCategory": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "RecipeIngredients": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Wishlist": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "EmailInfo": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Chef": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Popularity": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Course": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "ContactChef": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "Order": {
-        "dataSource": "mongodb",
-        "public": true
-    },
-    "RecipeAnalytic": {
-        "dataSource": "mongodb",
-        "public": true
-    }
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mongodb"
+  },
+  "AccessToken": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "Employee": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "adminEmail": {
+    "dataSource": "GoogleEmail",
+    "public": true
+  },
+  "Recipe": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "EmployeeDetails": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "container": {
+    "dataSource": "Image",
+    "public": true
+  },
+  "Customer": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Cuisines": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Comments": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "RecipeTag": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Ingredients": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "IngredientCategory": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "RecipeIngredients": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Wishlist": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "EmailInfo": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Chef": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Popularity": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Course": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "ContactChef": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Order": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "RecipeAnalytic": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "AmazonImage": {
+    "dataSource": "mongodb",
+    "public": true
+  }
 }

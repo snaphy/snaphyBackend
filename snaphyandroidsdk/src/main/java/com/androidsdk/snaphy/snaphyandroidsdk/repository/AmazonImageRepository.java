@@ -26,40 +26,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.AmazonImage;
 
 //Now import model of related models..
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
 
 
 
 
+public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
-public class ContactChefRepository extends ModelRepository<ContactChef> {
 
-
-    public ContactChefRepository(){
-        super("ContactChef", null, ContactChef.class);
+    public AmazonImageRepository(){
+        super("AmazonImage", null, AmazonImage.class);
     }
 
 
@@ -72,7 +51,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/chef", "GET"), "ContactChef.prototype.__get__chef");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonImage.create");
                 
 
             
@@ -80,7 +59,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/course", "GET"), "ContactChef.prototype.__get__course");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonImage.create");
                 
 
             
@@ -88,7 +67,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/customer", "GET"), "ContactChef.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "AmazonImage.upsert");
                 
 
             
@@ -96,7 +75,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "AmazonImage.exists");
                 
 
             
@@ -104,7 +83,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "AmazonImage.findById");
                 
 
             
@@ -112,7 +91,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "ContactChef.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "AmazonImage.find");
                 
 
             
@@ -120,7 +99,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "ContactChef.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "AmazonImage.findOne");
                 
 
             
@@ -128,7 +107,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "ContactChef.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "AmazonImage.updateAll");
                 
 
             
@@ -136,7 +115,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "ContactChef.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "AmazonImage.deleteById");
                 
 
             
@@ -144,7 +123,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "ContactChef.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "AmazonImage.count");
                 
 
             
@@ -152,31 +131,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "ContactChef.updateAll");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "ContactChef.deleteById");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "ContactChef.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId", "PUT"), "ContactChef.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:amazonImageId", "PUT"), "AmazonImage.prototype.updateAttributes");
                 
 
             
@@ -186,7 +141,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "ContactChef.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "AmazonImage.getSchema");
                 
 
             
@@ -194,51 +149,11 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/upload", "POST"), "AmazonImage.upload");
+                
+
             
         
         return contract;
@@ -262,161 +177,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
     
         
-            //Method get__chef definition
-            public void get__chef(  String contactChefId,  Boolean refresh, final ObjectCallback<Chef> callback){
-
-                //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("contactChefId", contactChefId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__chef", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Chef chef = chefRepo.createObject(result);
-                                    callback.onSuccess(chef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__chef definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__course definition
-            public void get__course(  String contactChefId,  Boolean refresh, final ObjectCallback<Course> callback){
-
-                //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("contactChefId", contactChefId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__course", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__course definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__customer definition
-            public void get__customer(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
-
-                //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("contactChefId", contactChefId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__customer definition ends here..
-
-            
-
-        
-    
-        
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void create(  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
@@ -442,10 +204,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    callback.onSuccess(amazonImage);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -465,7 +227,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void createMany(  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
@@ -491,10 +253,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    callback.onSuccess(amazonImage);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -514,7 +276,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void upsert(  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
@@ -540,10 +302,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    callback.onSuccess(amazonImage);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -604,7 +366,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<ContactChef> callback){
+            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
@@ -632,10 +394,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    callback.onSuccess(amazonImage);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -655,7 +417,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
+            public void find(  HashMap<String, Object> filter, final ListCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
@@ -682,14 +444,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    List<AmazonImage> amazonImageList = new ArrayList<AmazonImage>();
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        ContactChef contactChef = contactChefRepo.createObject(obj);
-                                        contactChefList.add(contactChef);
+                                        AmazonImage amazonImage = amazonImageRepo.createObject(obj);
+                                        amazonImageList.add(amazonImage);
                                     }
-                                    callback.onSuccess(contactChefList);
+                                    callback.onSuccess(amazonImageList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -706,7 +468,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<ContactChef> callback){
+            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
@@ -732,10 +494,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    callback.onSuccess(amazonImage);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -880,13 +642,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String contactChefId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateAttributes(  String amazonImageId,  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("contactChefId", contactChefId);
+                        hashMapObject.put("amazonImageId", amazonImageId);
                 
                         hashMapObject.putAll(data);
                 
@@ -908,10 +670,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    callback.onSuccess(amazonImage);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -973,51 +735,46 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
     
         
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+            //Method upload definition
+            public void upload(  HashMap<String, Object> ctx,  HashMap<String, Object> options, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("options", options);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("upload", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method upload definition ends here..
+
+            
+
         
     
 

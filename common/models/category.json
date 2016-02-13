@@ -30,6 +30,7 @@
     "name": {
       "type": "string",
       "required": true,
+      "index": {"unique": true},
       "template": {
         "type": "selectString",
         "templateOptions": {

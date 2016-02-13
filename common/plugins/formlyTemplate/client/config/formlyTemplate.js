@@ -397,7 +397,8 @@ angular.module($snaphy.getModuleName())
 
 
                 $scope.loadUrl = function(file) {
-                    var url = "/api/containers/" + file.result.container + "/download/" + file.result.name;
+                    //TODO adding medium for small images load..
+                    var url = "/api/containers/" + file.result.container + "/download/medium_" + file.result.name;
                     return url;
                 };
 
@@ -449,11 +450,12 @@ angular.module($snaphy.getModuleName())
 
                         file.upload.then(function(response) {
                             $timeout(function() {
-                                file.result = response.data.result.files.file[0];
+                                //file.result = response.data.result.files.file[0];
+                                file.result = response.data;
                                 if ($scope.model[$scope.options.key] === undefined) {
                                     $scope.model[$scope.options.key] = [];
                                 }
-
+                                //console.log(response);
                                 //Adding data to the model.
                                 $scope.model[$scope.options.key].push(file.result);
                             });
@@ -631,6 +633,9 @@ angular.module($snaphy.getModuleName())
                     uploadUrl = url.upload;
                 }
 
+                //TODO REMOVE this
+                //uploadUrl = "/api/AmazonImages/" +  $scope.options.templateOptions.containerName +  "/upload";
+
 
                 $scope.checkData = function() {
                     if ($scope.file) {
@@ -663,7 +668,7 @@ angular.module($snaphy.getModuleName())
                 };
 
                 $scope.loadUrl = function(file) {
-                    var url = "/api/containers/" + file.result.container + "/download/" + file.result.name;
+                    var url = "/api/containers/" + file.result.container + "/download/medium_" + file.result.name;
                     return url;
                 };
 
@@ -711,13 +716,18 @@ angular.module($snaphy.getModuleName())
                         file.upload = Upload.upload({
                             url: uploadUrl,
                             data: {
-                                file: file
+                                file: file,
+                                container: $scope.options.templateOptions.containerName
                             }
                         });
 
                         file.upload.then(function(response) {
                             $timeout(function() {
-                                file.result = response.data.result.files.file[0];
+                                //file.result = response.data.result.files.file[0];
+                                //console.log(response.result);
+                                file.result = response.data;
+
+
                                 if ($scope.model[$scope.options.key] === undefined) {
                                     $scope.model[$scope.options.key] = {};
                                 }

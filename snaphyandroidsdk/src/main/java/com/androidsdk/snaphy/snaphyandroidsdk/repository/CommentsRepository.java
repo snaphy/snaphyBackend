@@ -65,6 +65,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId/customer", "GET"), "Comments.prototype.__get__customer");
                 
 
@@ -73,6 +74,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId/recipe", "GET"), "Comments.prototype.__get__recipe");
                 
 
@@ -81,6 +83,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/", "POST"), "Comments.create");
                 
 
@@ -89,6 +92,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/", "POST"), "Comments.create");
                 
 
@@ -97,6 +101,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/", "PUT"), "Comments.upsert");
                 
 
@@ -105,6 +110,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/:id/exists", "GET"), "Comments.exists");
                 
 
@@ -113,6 +119,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/:id", "GET"), "Comments.findById");
                 
 
@@ -121,6 +128,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/", "GET"), "Comments.find");
                 
 
@@ -129,6 +137,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/findOne", "GET"), "Comments.findOne");
                 
 
@@ -137,6 +146,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/update", "POST"), "Comments.updateAll");
                 
 
@@ -145,6 +155,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/:id", "DELETE"), "Comments.deleteById");
                 
 
@@ -153,6 +164,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/count", "GET"), "Comments.count");
                 
 
@@ -161,6 +173,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId", "PUT"), "Comments.prototype.updateAttributes");
                 
 
@@ -171,6 +184,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
 
                 
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/getSchema", "POST"), "Comments.getSchema");
                 
 
@@ -214,6 +228,14 @@ public class CommentsRepository extends ModelRepository<Comments> {
     }
 
 
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        
+            return "Comments";
+        
+    }
+
+
 
     
 
@@ -224,13 +246,23 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method get__customer definition
             public void get__customer(  String commentsId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentsId", commentsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("commentsId", commentsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -265,13 +297,23 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method get__recipe definition
             public void get__recipe(  String commentsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentsId", commentsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipe", ImmutableMap.of("commentsId", commentsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__recipe", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -306,13 +348,21 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method create definition
             public void create(  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("create", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -347,13 +397,21 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method createMany definition
             public void createMany(  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("createMany", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -388,13 +446,21 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method upsert definition
             public void upsert(  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("upsert", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -429,12 +495,20 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method exists definition
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("exists", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -462,13 +536,23 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method findById definition
             public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findById", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -503,13 +587,21 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method find definition
             public void find(  HashMap<String, Object> filter, final ListCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
 
                 
-                    invokeStaticMethod("find", ImmutableMap.of("filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -546,13 +638,21 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method findOne definition
             public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("findOne", ImmutableMap.of("filter", filter), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -587,12 +687,22 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method updateAll definition
             public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("updateAll", ImmutableMap.of("where", where, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -620,12 +730,20 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method deleteById definition
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("deleteById", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -653,12 +771,20 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method count definition
             public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("count", ImmutableMap.of("where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -686,13 +812,23 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method updateAttributes definition
             public void updateAttributes(  String commentsId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentsId", commentsId);
+                
+                        hashMapObject.putAll(data);
+                
+
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("commentsId", commentsId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -729,12 +865,18 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method getSchema definition
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
                 
 
 
                 
                     
-                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
