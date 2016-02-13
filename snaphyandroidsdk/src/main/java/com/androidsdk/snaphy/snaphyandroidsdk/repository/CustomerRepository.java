@@ -96,219 +96,435 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "GET"), "Customer.prototype.__findById__accessTokens");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "GET"), "Customer.prototype.__findById__accessTokens");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "DELETE"), "Customer.prototype.__destroyById__accessTokens");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "DELETE"), "Customer.prototype.__destroyById__accessTokens");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "PUT"), "Customer.prototype.__updateById__accessTokens");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "PUT"), "Customer.prototype.__updateById__accessTokens");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "GET"), "Customer.prototype.__findById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "GET"), "Customer.prototype.__findById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "DELETE"), "Customer.prototype.__destroyById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "DELETE"), "Customer.prototype.__destroyById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "PUT"), "Customer.prototype.__updateById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "PUT"), "Customer.prototype.__updateById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "GET"), "Customer.prototype.__findById__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "GET"), "Customer.prototype.__findById__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "DELETE"), "Customer.prototype.__destroyById__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "DELETE"), "Customer.prototype.__destroyById__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "PUT"), "Customer.prototype.__updateById__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "PUT"), "Customer.prototype.__updateById__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "GET"), "Customer.prototype.__get__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "GET"), "Customer.prototype.__get__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "POST"), "Customer.prototype.__create__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "POST"), "Customer.prototype.__create__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "PUT"), "Customer.prototype.__update__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "PUT"), "Customer.prototype.__update__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "DELETE"), "Customer.prototype.__destroy__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "DELETE"), "Customer.prototype.__destroy__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "GET"), "Customer.prototype.__get__chefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "GET"), "Customer.prototype.__get__chefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "POST"), "Customer.prototype.__create__chefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "POST"), "Customer.prototype.__create__chefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "PUT"), "Customer.prototype.__update__chefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "PUT"), "Customer.prototype.__update__chefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "DELETE"), "Customer.prototype.__destroy__chefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "DELETE"), "Customer.prototype.__destroy__chefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "GET"), "Customer.prototype.__findById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "GET"), "Customer.prototype.__findById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "DELETE"), "Customer.prototype.__destroyById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "DELETE"), "Customer.prototype.__destroyById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "PUT"), "Customer.prototype.__updateById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "PUT"), "Customer.prototype.__updateById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "GET"), "Customer.prototype.__findById__orders");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "GET"), "Customer.prototype.__findById__orders");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "DELETE"), "Customer.prototype.__destroyById__orders");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "DELETE"), "Customer.prototype.__destroyById__orders");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "PUT"), "Customer.prototype.__updateById__orders");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "PUT"), "Customer.prototype.__updateById__orders");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "GET"), "Customer.prototype.__get__accessTokens");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "GET"), "Customer.prototype.__get__accessTokens");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "POST"), "Customer.prototype.__create__accessTokens");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "POST"), "Customer.prototype.__create__accessTokens");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "DELETE"), "Customer.prototype.__delete__accessTokens");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "DELETE"), "Customer.prototype.__delete__accessTokens");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/count", "GET"), "Customer.prototype.__count__accessTokens");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/count", "GET"), "Customer.prototype.__count__accessTokens");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "GET"), "Customer.prototype.__get__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "GET"), "Customer.prototype.__get__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "POST"), "Customer.prototype.__create__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "POST"), "Customer.prototype.__create__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "DELETE"), "Customer.prototype.__delete__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "DELETE"), "Customer.prototype.__delete__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/count", "GET"), "Customer.prototype.__count__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/count", "GET"), "Customer.prototype.__count__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "GET"), "Customer.prototype.__get__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "GET"), "Customer.prototype.__get__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "POST"), "Customer.prototype.__create__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "POST"), "Customer.prototype.__create__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "DELETE"), "Customer.prototype.__delete__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "DELETE"), "Customer.prototype.__delete__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/count", "GET"), "Customer.prototype.__count__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/count", "GET"), "Customer.prototype.__count__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "GET"), "Customer.prototype.__get__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "GET"), "Customer.prototype.__get__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "POST"), "Customer.prototype.__create__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "POST"), "Customer.prototype.__create__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "DELETE"), "Customer.prototype.__delete__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "DELETE"), "Customer.prototype.__delete__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/count", "GET"), "Customer.prototype.__count__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/count", "GET"), "Customer.prototype.__count__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "GET"), "Customer.prototype.__get__orders");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "GET"), "Customer.prototype.__get__orders");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "POST"), "Customer.prototype.__create__orders");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "POST"), "Customer.prototype.__create__orders");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "DELETE"), "Customer.prototype.__delete__orders");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "DELETE"), "Customer.prototype.__delete__orders");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/count", "GET"), "Customer.prototype.__count__orders");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/count", "GET"), "Customer.prototype.__count__orders");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Customer.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Customer.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Customer.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Customer.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Customer.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Customer.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Customer.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Customer.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Customer.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Customer.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Customer.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Customer.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Customer.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Customer.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Customer.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Customer.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Customer.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Customer.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Customer.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Customer.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId", "PUT"), "Customer.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId", "PUT"), "Customer.prototype.updateAttributes");
+                
+
             
         
             
@@ -318,15 +534,27 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Customer.confirm");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Customer.confirm");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Customer.resetPassword");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Customer.resetPassword");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Customer.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Customer.getSchema");
+                
+
             
         
             

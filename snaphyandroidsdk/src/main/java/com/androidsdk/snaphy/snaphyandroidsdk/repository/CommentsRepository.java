@@ -63,61 +63,117 @@ public class CommentsRepository extends ModelRepository<Comments> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentsId/customer", "GET"), "Comments.prototype.__get__customer");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId/customer", "GET"), "Comments.prototype.__get__customer");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentsId/recipe", "GET"), "Comments.prototype.__get__recipe");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId/recipe", "GET"), "Comments.prototype.__get__recipe");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Comments.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "POST"), "Comments.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Comments.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "POST"), "Comments.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Comments.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "PUT"), "Comments.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Comments.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:id/exists", "GET"), "Comments.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Comments.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:id", "GET"), "Comments.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Comments.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "GET"), "Comments.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Comments.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/findOne", "GET"), "Comments.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Comments.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/update", "POST"), "Comments.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Comments.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:id", "DELETE"), "Comments.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Comments.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/count", "GET"), "Comments.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentsId", "PUT"), "Comments.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId", "PUT"), "Comments.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Comments.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/getSchema", "POST"), "Comments.getSchema");
+                
+
             
         
             

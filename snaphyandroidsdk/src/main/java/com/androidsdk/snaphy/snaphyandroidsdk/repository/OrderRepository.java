@@ -56,57 +56,109 @@ public class OrderRepository extends ModelRepository<Order> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/customer", "GET"), "Order.prototype.__get__customer");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/customer", "GET"), "Order.prototype.__get__customer");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Order.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Order.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Order.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Order.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Order.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Order.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Order.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Order.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Order.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Order.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Order.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Order.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Order.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Order.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Order.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Order.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId", "PUT"), "Order.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId", "PUT"), "Order.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Order.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Order.getSchema");
+                
+
             
         
             

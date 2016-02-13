@@ -56,93 +56,181 @@ public class CategoryRepository extends ModelRepository<Category> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/:fk", "GET"), "Category.prototype.__findById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/:fk", "GET"), "Category.prototype.__findById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/:fk", "DELETE"), "Category.prototype.__destroyById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/:fk", "DELETE"), "Category.prototype.__destroyById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/:fk", "PUT"), "Category.prototype.__updateById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/:fk", "PUT"), "Category.prototype.__updateById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/rel/:fk", "PUT"), "Category.prototype.__link__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/rel/:fk", "PUT"), "Category.prototype.__link__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/rel/:fk", "DELETE"), "Category.prototype.__unlink__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/rel/:fk", "DELETE"), "Category.prototype.__unlink__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/rel/:fk", "HEAD"), "Category.prototype.__exists__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/rel/:fk", "HEAD"), "Category.prototype.__exists__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes", "GET"), "Category.prototype.__get__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes", "GET"), "Category.prototype.__get__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes", "POST"), "Category.prototype.__create__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes", "POST"), "Category.prototype.__create__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes", "DELETE"), "Category.prototype.__delete__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes", "DELETE"), "Category.prototype.__delete__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/count", "GET"), "Category.prototype.__count__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/recipes/count", "GET"), "Category.prototype.__count__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Category.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Category.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Category.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Category.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Category.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Category.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Category.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Category.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Category.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Category.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Category.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Category.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Category.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Category.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Category.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Category.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Category.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Category.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Category.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Category.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId", "PUT"), "Category.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId", "PUT"), "Category.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Category.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Category.getSchema");
+                
+
             
         
             

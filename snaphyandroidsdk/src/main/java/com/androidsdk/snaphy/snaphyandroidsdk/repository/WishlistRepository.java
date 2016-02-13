@@ -63,109 +63,213 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "GET"), "Wishlist.prototype.__get__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "GET"), "Wishlist.prototype.__get__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "POST"), "Wishlist.prototype.__create__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "POST"), "Wishlist.prototype.__create__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "PUT"), "Wishlist.prototype.__update__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "PUT"), "Wishlist.prototype.__update__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "DELETE"), "Wishlist.prototype.__destroy__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "DELETE"), "Wishlist.prototype.__destroy__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "GET"), "Wishlist.prototype.__findById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "GET"), "Wishlist.prototype.__findById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "DELETE"), "Wishlist.prototype.__destroyById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "DELETE"), "Wishlist.prototype.__destroyById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "PUT"), "Wishlist.prototype.__updateById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/:fk", "PUT"), "Wishlist.prototype.__updateById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "PUT"), "Wishlist.prototype.__link__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "PUT"), "Wishlist.prototype.__link__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "DELETE"), "Wishlist.prototype.__unlink__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "DELETE"), "Wishlist.prototype.__unlink__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "HEAD"), "Wishlist.prototype.__exists__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/rel/:fk", "HEAD"), "Wishlist.prototype.__exists__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "GET"), "Wishlist.prototype.__get__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "GET"), "Wishlist.prototype.__get__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "POST"), "Wishlist.prototype.__create__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "POST"), "Wishlist.prototype.__create__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "DELETE"), "Wishlist.prototype.__delete__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes", "DELETE"), "Wishlist.prototype.__delete__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/count", "GET"), "Wishlist.prototype.__count__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/recipes/count", "GET"), "Wishlist.prototype.__count__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Wishlist.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Wishlist.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Wishlist.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Wishlist.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Wishlist.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Wishlist.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Wishlist.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Wishlist.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Wishlist.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Wishlist.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Wishlist.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Wishlist.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Wishlist.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Wishlist.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Wishlist.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Wishlist.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Wishlist.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Wishlist.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Wishlist.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Wishlist.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId", "PUT"), "Wishlist.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId", "PUT"), "Wishlist.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Wishlist.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Wishlist.getSchema");
+                
+
             
         
             

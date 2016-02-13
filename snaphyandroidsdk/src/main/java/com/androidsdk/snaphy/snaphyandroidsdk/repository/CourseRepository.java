@@ -63,85 +63,165 @@ public class CourseRepository extends ModelRepository<Course> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/chef", "GET"), "Course.prototype.__get__chef");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/chef", "GET"), "Course.prototype.__get__chef");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "GET"), "Course.prototype.__findById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "GET"), "Course.prototype.__findById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "DELETE"), "Course.prototype.__destroyById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "DELETE"), "Course.prototype.__destroyById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "PUT"), "Course.prototype.__updateById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "PUT"), "Course.prototype.__updateById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "GET"), "Course.prototype.__get__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "GET"), "Course.prototype.__get__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "POST"), "Course.prototype.__create__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "POST"), "Course.prototype.__create__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "DELETE"), "Course.prototype.__delete__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "DELETE"), "Course.prototype.__delete__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/count", "GET"), "Course.prototype.__count__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/count", "GET"), "Course.prototype.__count__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Course.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Course.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Course.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Course.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Course.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Course.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Course.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Course.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Course.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Course.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Course.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Course.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Course.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Course.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Course.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Course.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId", "PUT"), "Course.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId", "PUT"), "Course.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Course.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Course.getSchema");
+                
+
             
         
             

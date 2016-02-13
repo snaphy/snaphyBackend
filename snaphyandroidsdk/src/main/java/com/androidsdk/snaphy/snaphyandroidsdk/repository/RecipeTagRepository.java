@@ -56,93 +56,181 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "GET"), "RecipeTag.prototype.__findById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "GET"), "RecipeTag.prototype.__findById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "DELETE"), "RecipeTag.prototype.__destroyById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "DELETE"), "RecipeTag.prototype.__destroyById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "PUT"), "RecipeTag.prototype.__updateById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "PUT"), "RecipeTag.prototype.__updateById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "PUT"), "RecipeTag.prototype.__link__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "PUT"), "RecipeTag.prototype.__link__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "DELETE"), "RecipeTag.prototype.__unlink__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "DELETE"), "RecipeTag.prototype.__unlink__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "HEAD"), "RecipeTag.prototype.__exists__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "HEAD"), "RecipeTag.prototype.__exists__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "GET"), "RecipeTag.prototype.__get__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "GET"), "RecipeTag.prototype.__get__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "POST"), "RecipeTag.prototype.__create__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "POST"), "RecipeTag.prototype.__create__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "DELETE"), "RecipeTag.prototype.__delete__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "DELETE"), "RecipeTag.prototype.__delete__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/count", "GET"), "RecipeTag.prototype.__count__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/count", "GET"), "RecipeTag.prototype.__count__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeTag.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeTag.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeTag.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeTag.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "RecipeTag.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "RecipeTag.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "RecipeTag.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "RecipeTag.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "RecipeTag.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "RecipeTag.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "RecipeTag.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "RecipeTag.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "RecipeTag.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "RecipeTag.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "RecipeTag.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "RecipeTag.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RecipeTag.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RecipeTag.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "RecipeTag.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "RecipeTag.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId", "PUT"), "RecipeTag.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId", "PUT"), "RecipeTag.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeTag.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeTag.getSchema");
+                
+
             
         
             

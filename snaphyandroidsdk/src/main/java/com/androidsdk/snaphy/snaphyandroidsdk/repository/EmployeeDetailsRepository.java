@@ -56,69 +56,133 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "GET"), "EmployeeDetails.prototype.__get__employees");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "GET"), "EmployeeDetails.prototype.__get__employees");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "POST"), "EmployeeDetails.prototype.__create__employees");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "POST"), "EmployeeDetails.prototype.__create__employees");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "PUT"), "EmployeeDetails.prototype.__update__employees");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "PUT"), "EmployeeDetails.prototype.__update__employees");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "DELETE"), "EmployeeDetails.prototype.__destroy__employees");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "DELETE"), "EmployeeDetails.prototype.__destroy__employees");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmployeeDetails.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "POST"), "EmployeeDetails.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmployeeDetails.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "POST"), "EmployeeDetails.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "EmployeeDetails.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "PUT"), "EmployeeDetails.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "EmployeeDetails.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id/exists", "GET"), "EmployeeDetails.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "EmployeeDetails.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id", "GET"), "EmployeeDetails.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "EmployeeDetails.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "GET"), "EmployeeDetails.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "EmployeeDetails.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/findOne", "GET"), "EmployeeDetails.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "EmployeeDetails.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/update", "POST"), "EmployeeDetails.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EmployeeDetails.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id", "DELETE"), "EmployeeDetails.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "EmployeeDetails.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/count", "GET"), "EmployeeDetails.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId", "PUT"), "EmployeeDetails.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId", "PUT"), "EmployeeDetails.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EmployeeDetails.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/getSchema", "POST"), "EmployeeDetails.getSchema");
+                
+
             
         
             

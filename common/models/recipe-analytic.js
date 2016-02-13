@@ -29,8 +29,5 @@ module.exports = function(RecipeAnalytic) {
     });
 
 
-    RecipeAnalytic.afterRemote("**", function(ctx, user, next){
-        //console.log(ctx);
-        next();
-    });
+
 };

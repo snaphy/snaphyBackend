@@ -49,43 +49,83 @@ public class ContainerRepository extends ModelRepository<Container> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "container.getContainers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "container.getContainers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "container.createContainer");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "container.createContainer");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container", "DELETE"), "container.destroyContainer");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container", "DELETE"), "container.destroyContainer");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container", "GET"), "container.getContainer");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container", "GET"), "container.getContainer");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/files", "GET"), "container.getFiles");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/files", "GET"), "container.getFiles");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/files/:file", "GET"), "container.getFile");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/files/:file", "GET"), "container.getFile");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/files/:file", "DELETE"), "container.removeFile");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/files/:file", "DELETE"), "container.removeFile");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/upload", "POST"), "container.upload");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/upload", "POST"), "container.upload");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/download/:file", "GET"), "container.download");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:container/download/:file", "GET"), "container.download");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "container.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "container.getSchema");
+                
+
             
         
             

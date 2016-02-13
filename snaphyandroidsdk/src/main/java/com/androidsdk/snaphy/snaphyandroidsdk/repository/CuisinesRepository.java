@@ -56,93 +56,181 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes/:fk", "GET"), "Cuisines.prototype.__findById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes/:fk", "GET"), "Cuisines.prototype.__findById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes/:fk", "DELETE"), "Cuisines.prototype.__destroyById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes/:fk", "DELETE"), "Cuisines.prototype.__destroyById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes/:fk", "PUT"), "Cuisines.prototype.__updateById__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes/:fk", "PUT"), "Cuisines.prototype.__updateById__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes/rel/:fk", "PUT"), "Cuisines.prototype.__link__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes/rel/:fk", "PUT"), "Cuisines.prototype.__link__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes/rel/:fk", "DELETE"), "Cuisines.prototype.__unlink__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes/rel/:fk", "DELETE"), "Cuisines.prototype.__unlink__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes/rel/:fk", "HEAD"), "Cuisines.prototype.__exists__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes/rel/:fk", "HEAD"), "Cuisines.prototype.__exists__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes", "GET"), "Cuisines.prototype.__get__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes", "GET"), "Cuisines.prototype.__get__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes", "POST"), "Cuisines.prototype.__create__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes", "POST"), "Cuisines.prototype.__create__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes", "DELETE"), "Cuisines.prototype.__delete__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes", "DELETE"), "Cuisines.prototype.__delete__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId/recipes/count", "GET"), "Cuisines.prototype.__count__recipes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId/recipes/count", "GET"), "Cuisines.prototype.__count__recipes");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Cuisines.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/", "POST"), "Cuisines.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Cuisines.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/", "POST"), "Cuisines.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Cuisines.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/", "PUT"), "Cuisines.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Cuisines.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:id/exists", "GET"), "Cuisines.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Cuisines.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:id", "GET"), "Cuisines.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Cuisines.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/", "GET"), "Cuisines.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Cuisines.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/findOne", "GET"), "Cuisines.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Cuisines.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/update", "POST"), "Cuisines.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Cuisines.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:id", "DELETE"), "Cuisines.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Cuisines.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/count", "GET"), "Cuisines.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:cuisinesId", "PUT"), "Cuisines.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/:cuisinesId", "PUT"), "Cuisines.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Cuisines.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/getSchema", "POST"), "Cuisines.getSchema");
+                
+
             
         
             

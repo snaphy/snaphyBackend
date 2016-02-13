@@ -77,141 +77,277 @@ public class ChefRepository extends ModelRepository<Chef> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "GET"), "Chef.prototype.__get__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "GET"), "Chef.prototype.__get__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "POST"), "Chef.prototype.__create__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "POST"), "Chef.prototype.__create__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "PUT"), "Chef.prototype.__update__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "PUT"), "Chef.prototype.__update__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "DELETE"), "Chef.prototype.__destroy__customers");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "DELETE"), "Chef.prototype.__destroy__customers");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "GET"), "Chef.prototype.__get__popularities");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "GET"), "Chef.prototype.__get__popularities");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "POST"), "Chef.prototype.__create__popularities");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "POST"), "Chef.prototype.__create__popularities");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "PUT"), "Chef.prototype.__update__popularities");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "PUT"), "Chef.prototype.__update__popularities");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "DELETE"), "Chef.prototype.__destroy__popularities");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "DELETE"), "Chef.prototype.__destroy__popularities");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "GET"), "Chef.prototype.__findById__courses");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "GET"), "Chef.prototype.__findById__courses");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "DELETE"), "Chef.prototype.__destroyById__courses");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "DELETE"), "Chef.prototype.__destroyById__courses");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "PUT"), "Chef.prototype.__updateById__courses");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/:fk", "PUT"), "Chef.prototype.__updateById__courses");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "GET"), "Chef.prototype.__findById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "GET"), "Chef.prototype.__findById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "DELETE"), "Chef.prototype.__destroyById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "DELETE"), "Chef.prototype.__destroyById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "PUT"), "Chef.prototype.__updateById__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/:fk", "PUT"), "Chef.prototype.__updateById__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "GET"), "Chef.prototype.__get__courses");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "GET"), "Chef.prototype.__get__courses");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "POST"), "Chef.prototype.__create__courses");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "POST"), "Chef.prototype.__create__courses");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "DELETE"), "Chef.prototype.__delete__courses");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses", "DELETE"), "Chef.prototype.__delete__courses");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/count", "GET"), "Chef.prototype.__count__courses");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/courses/count", "GET"), "Chef.prototype.__count__courses");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "GET"), "Chef.prototype.__get__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "GET"), "Chef.prototype.__get__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "POST"), "Chef.prototype.__create__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "POST"), "Chef.prototype.__create__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "DELETE"), "Chef.prototype.__delete__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs", "DELETE"), "Chef.prototype.__delete__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/count", "GET"), "Chef.prototype.__count__contactChefs");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/contactChefs/count", "GET"), "Chef.prototype.__count__contactChefs");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Chef.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Chef.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Chef.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Chef.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Chef.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Chef.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Chef.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Chef.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Chef.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Chef.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Chef.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Chef.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Chef.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Chef.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Chef.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Chef.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId", "PUT"), "Chef.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId", "PUT"), "Chef.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Chef.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Chef.getSchema");
+                
+
             
         
             

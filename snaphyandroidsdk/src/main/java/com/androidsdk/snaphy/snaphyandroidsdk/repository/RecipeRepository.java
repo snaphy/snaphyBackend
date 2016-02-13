@@ -108,301 +108,597 @@ public class RecipeRepository extends ModelRepository<Recipe> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/customer", "GET"), "Recipe.prototype.__get__customer");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/customer", "GET"), "Recipe.prototype.__get__customer");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/:fk", "GET"), "Recipe.prototype.__findById__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/:fk", "GET"), "Recipe.prototype.__findById__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/:fk", "DELETE"), "Recipe.prototype.__destroyById__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/:fk", "DELETE"), "Recipe.prototype.__destroyById__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/:fk", "PUT"), "Recipe.prototype.__updateById__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/:fk", "PUT"), "Recipe.prototype.__updateById__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/rel/:fk", "PUT"), "Recipe.prototype.__link__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/rel/:fk", "PUT"), "Recipe.prototype.__link__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/rel/:fk", "HEAD"), "Recipe.prototype.__exists__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/rel/:fk", "HEAD"), "Recipe.prototype.__exists__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/:fk", "GET"), "Recipe.prototype.__findById__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/:fk", "GET"), "Recipe.prototype.__findById__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/:fk", "DELETE"), "Recipe.prototype.__destroyById__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/:fk", "DELETE"), "Recipe.prototype.__destroyById__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/:fk", "PUT"), "Recipe.prototype.__updateById__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/:fk", "PUT"), "Recipe.prototype.__updateById__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/rel/:fk", "PUT"), "Recipe.prototype.__link__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/rel/:fk", "PUT"), "Recipe.prototype.__link__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/rel/:fk", "HEAD"), "Recipe.prototype.__exists__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/rel/:fk", "HEAD"), "Recipe.prototype.__exists__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/:fk", "GET"), "Recipe.prototype.__findById__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/:fk", "GET"), "Recipe.prototype.__findById__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/:fk", "DELETE"), "Recipe.prototype.__destroyById__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/:fk", "DELETE"), "Recipe.prototype.__destroyById__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/:fk", "PUT"), "Recipe.prototype.__updateById__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/:fk", "PUT"), "Recipe.prototype.__updateById__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/:fk", "GET"), "Recipe.prototype.__findById__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/:fk", "GET"), "Recipe.prototype.__findById__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/:fk", "DELETE"), "Recipe.prototype.__destroyById__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/:fk", "DELETE"), "Recipe.prototype.__destroyById__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/:fk", "PUT"), "Recipe.prototype.__updateById__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/:fk", "PUT"), "Recipe.prototype.__updateById__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/rel/:fk", "PUT"), "Recipe.prototype.__link__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/rel/:fk", "PUT"), "Recipe.prototype.__link__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/rel/:fk", "HEAD"), "Recipe.prototype.__exists__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/rel/:fk", "HEAD"), "Recipe.prototype.__exists__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/:fk", "GET"), "Recipe.prototype.__findById__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/:fk", "GET"), "Recipe.prototype.__findById__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/:fk", "DELETE"), "Recipe.prototype.__destroyById__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/:fk", "DELETE"), "Recipe.prototype.__destroyById__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/:fk", "PUT"), "Recipe.prototype.__updateById__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/:fk", "PUT"), "Recipe.prototype.__updateById__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/rel/:fk", "PUT"), "Recipe.prototype.__link__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/rel/:fk", "PUT"), "Recipe.prototype.__link__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/rel/:fk", "HEAD"), "Recipe.prototype.__exists__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/rel/:fk", "HEAD"), "Recipe.prototype.__exists__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/:fk", "GET"), "Recipe.prototype.__findById__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/:fk", "GET"), "Recipe.prototype.__findById__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/:fk", "DELETE"), "Recipe.prototype.__destroyById__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/:fk", "DELETE"), "Recipe.prototype.__destroyById__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/:fk", "PUT"), "Recipe.prototype.__updateById__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/:fk", "PUT"), "Recipe.prototype.__updateById__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/rel/:fk", "PUT"), "Recipe.prototype.__link__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/rel/:fk", "PUT"), "Recipe.prototype.__link__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/rel/:fk", "DELETE"), "Recipe.prototype.__unlink__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/rel/:fk", "HEAD"), "Recipe.prototype.__exists__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/rel/:fk", "HEAD"), "Recipe.prototype.__exists__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "GET"), "Recipe.prototype.__get__recipeAnalytics");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "GET"), "Recipe.prototype.__get__recipeAnalytics");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "POST"), "Recipe.prototype.__create__recipeAnalytics");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "POST"), "Recipe.prototype.__create__recipeAnalytics");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "PUT"), "Recipe.prototype.__update__recipeAnalytics");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "PUT"), "Recipe.prototype.__update__recipeAnalytics");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "DELETE"), "Recipe.prototype.__destroy__recipeAnalytics");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeAnalytics", "DELETE"), "Recipe.prototype.__destroy__recipeAnalytics");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines", "GET"), "Recipe.prototype.__get__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines", "GET"), "Recipe.prototype.__get__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines", "POST"), "Recipe.prototype.__create__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines", "POST"), "Recipe.prototype.__create__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines", "DELETE"), "Recipe.prototype.__delete__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines", "DELETE"), "Recipe.prototype.__delete__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/count", "GET"), "Recipe.prototype.__count__cuisines");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/cuisines/count", "GET"), "Recipe.prototype.__count__cuisines");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category", "GET"), "Recipe.prototype.__get__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category", "GET"), "Recipe.prototype.__get__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category", "POST"), "Recipe.prototype.__create__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category", "POST"), "Recipe.prototype.__create__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category", "DELETE"), "Recipe.prototype.__delete__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category", "DELETE"), "Recipe.prototype.__delete__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/count", "GET"), "Recipe.prototype.__count__category");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/category/count", "GET"), "Recipe.prototype.__count__category");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments", "GET"), "Recipe.prototype.__get__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments", "GET"), "Recipe.prototype.__get__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments", "POST"), "Recipe.prototype.__create__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments", "POST"), "Recipe.prototype.__create__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments", "DELETE"), "Recipe.prototype.__delete__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments", "DELETE"), "Recipe.prototype.__delete__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/count", "GET"), "Recipe.prototype.__count__comments");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/comments/count", "GET"), "Recipe.prototype.__count__comments");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags", "GET"), "Recipe.prototype.__get__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags", "GET"), "Recipe.prototype.__get__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags", "POST"), "Recipe.prototype.__create__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags", "POST"), "Recipe.prototype.__create__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags", "DELETE"), "Recipe.prototype.__delete__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags", "DELETE"), "Recipe.prototype.__delete__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/count", "GET"), "Recipe.prototype.__count__recipeTags");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/recipeTags/count", "GET"), "Recipe.prototype.__count__recipeTags");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients", "GET"), "Recipe.prototype.__get__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients", "GET"), "Recipe.prototype.__get__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients", "POST"), "Recipe.prototype.__create__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients", "POST"), "Recipe.prototype.__create__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients", "DELETE"), "Recipe.prototype.__delete__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients", "DELETE"), "Recipe.prototype.__delete__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/count", "GET"), "Recipe.prototype.__count__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/ingredients/count", "GET"), "Recipe.prototype.__count__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists", "GET"), "Recipe.prototype.__get__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists", "GET"), "Recipe.prototype.__get__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists", "POST"), "Recipe.prototype.__create__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists", "POST"), "Recipe.prototype.__create__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists", "DELETE"), "Recipe.prototype.__delete__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists", "DELETE"), "Recipe.prototype.__delete__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/count", "GET"), "Recipe.prototype.__count__wishlists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId/wishlists/count", "GET"), "Recipe.prototype.__count__wishlists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Recipe.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Recipe.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Recipe.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Recipe.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Recipe.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Recipe.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Recipe.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Recipe.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Recipe.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Recipe.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Recipe.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Recipe.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Recipe.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Recipe.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Recipe.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Recipe.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Recipe.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Recipe.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Recipe.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Recipe.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId", "PUT"), "Recipe.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeId", "PUT"), "Recipe.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Recipe.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Recipe.getSchema");
+                
+
             
         
             

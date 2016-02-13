@@ -56,81 +56,157 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "GET"), "IngredientCategory.prototype.__findById__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "GET"), "IngredientCategory.prototype.__findById__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "DELETE"), "IngredientCategory.prototype.__destroyById__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "DELETE"), "IngredientCategory.prototype.__destroyById__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "PUT"), "IngredientCategory.prototype.__updateById__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "PUT"), "IngredientCategory.prototype.__updateById__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "GET"), "IngredientCategory.prototype.__get__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "GET"), "IngredientCategory.prototype.__get__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "POST"), "IngredientCategory.prototype.__create__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "POST"), "IngredientCategory.prototype.__create__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "DELETE"), "IngredientCategory.prototype.__delete__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "DELETE"), "IngredientCategory.prototype.__delete__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/count", "GET"), "IngredientCategory.prototype.__count__ingredients");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/count", "GET"), "IngredientCategory.prototype.__count__ingredients");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IngredientCategory.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IngredientCategory.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IngredientCategory.create");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IngredientCategory.create");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "IngredientCategory.upsert");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "IngredientCategory.upsert");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "IngredientCategory.exists");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "IngredientCategory.exists");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "IngredientCategory.findById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "IngredientCategory.findById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "IngredientCategory.find");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "IngredientCategory.find");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "IngredientCategory.findOne");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "IngredientCategory.findOne");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "IngredientCategory.updateAll");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "IngredientCategory.updateAll");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "IngredientCategory.deleteById");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "IngredientCategory.deleteById");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "IngredientCategory.count");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "IngredientCategory.count");
+                
+
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId", "PUT"), "IngredientCategory.prototype.updateAttributes");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId", "PUT"), "IngredientCategory.prototype.updateAttributes");
+                
+
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "IngredientCategory.getSchema");
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "IngredientCategory.getSchema");
+                
+
             
         
             
