@@ -1,2 +1,2 @@
 amazon
- ssh -i "strongloop.pem" root@ec2-52-87-216-221.compute-1.amazonaws.com
+sudo ssh -i "gruberr.pem" ec2-user@ec2-52-23-244-123.compute-1.amazonaws.com

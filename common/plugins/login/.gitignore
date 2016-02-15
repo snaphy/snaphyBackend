@@ -15,6 +15,5 @@
 .project
 .strong-pm
 coverage
-node_modules
+
 npm-debug.log
-client/style/bower_components/
