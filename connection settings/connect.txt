@@ -1,3 +1,10 @@
 amazon
 sudo ssh -i "/usr/gruberr.pem" ec2-user@ec2-52-23-244-123.compute-1.amazonaws.com
 cd fileUpload && npm install && bower install && cd ../
+
+rsync -avL --progress -e "ssh -i /path/to/mykeypair.pem" \
+       ~/Sites/my_site/* \
+       root@ec2-XX-XXX-XXX-XXX.us-west-2.compute.amazonaws.com:/var/www/html/
+sudo rsync -avL --progress -e "ssh -i /usr/gruberr.pem" snaphyBackend ec2-user@ec2-54-209-33-191.compute-1.amazonaws.com:apps/
+
+sudo rsync -avL --progress -e "ssh -i /usr/gruberobins@robins-H61MLV3:~/snaphy$ sudo rsync -avL --exclude='.git/' --progress -e  "ssh -i /usr/gruberr.pem" snaphyBackend ec2-user@ec2-54-209-33-191.compute-1.amazonaws.com:apps/
