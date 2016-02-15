@@ -1,0 +1,43 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "GoogleEmail": {
+    "name": "GoogleEmail",
+    "defaultForType": "mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "aliases": [
+          "Google Mail"
+        ],
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "rohitbasu2050@gmail.com",
+          "pass": "9868371704"
+        }
+      }
+    ]
+  },
+  "mongodb": {
+    "host": "0.0.0.0",
+    "port": 27017,
+    "database": "drugcorner",
+    "password": "12345",
+    "name": "mongodb",
+    "connector": "mongodb",
+    "user": "robins"
+  },
+  "Image": {
+    "name": "Image",
+    "connector": "loopback-component-storage",
+    "provider": "amazon",
+    "key": "YkS4C7TOjaPbzq98fYyLX9Qra7rReNdh31mt76MB",
+    "keyId": "AKIAIONIZOZN6REIYVSQ",
+    "maxFileSize": "10485760"
+  }
+}
