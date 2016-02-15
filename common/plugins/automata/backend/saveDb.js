@@ -56,9 +56,9 @@ var addSaveMethod = function(app, modelName){
         //Now save/update the data..
         modelObj.upsert(data)
         .then(function(dataInstance){
-            console.log(dataInstance);
-            console.log("\n\n\n");
-            console.log("Main data successfully updated");
+            //console.log(dataInstance);
+            //console.log("\n\n\n");
+            //console.log("Main data successfully updated");
             saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation,  callback);
         })
         .catch(function(err){
@@ -298,6 +298,8 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
 };
 
 
+
+
 var upsertManyThrough = function(app, modelObj, relationData, dataInstance, relationName, foriegnKey, relationSchema, callback){
     //now find the current relation schema..
     var hasManyThrough = relationSchema.hasManyThrough;
@@ -321,6 +323,7 @@ var upsertManyThrough = function(app, modelObj, relationData, dataInstance, rela
     }
     else{
         throughModelSchema = hasManyThrough[index];
+        //console.log(throughModelSchema);
         throughModelName   = throughModelSchema.through;
         throughModelObj    = app.models[throughModelName];
         dataInstanceForeignKey = throughModelSchema.whereId;
@@ -347,6 +350,7 @@ var upsertManyThrough = function(app, modelObj, relationData, dataInstance, rela
 };
 
 
+
 /**
  * Delete repeated data of hasManyThrough
  * @param  {[type]}   throughModelObj        [description]
@@ -363,6 +367,7 @@ var deleteRepeatedData = function(throughModelObj, dataInstanceForeignKey, dataI
     //Now check for any repeated data.. and remove it..
     throughModelObj.find(filter)
     .then(function(values){
+
         //Now loop each relation data and check if data present..
         values.forEach(function(element){
             var matchFound = false;
@@ -411,7 +416,7 @@ var upsertHasManyThroughFinal = function(app, modelObj, relationDataObj, dataIns
             throughObj.throughModelObj.upsert(relatedHasManyThroughData)
             .then(function(savedData){
                 console.log("HasMany through Data saved..");
-                console.log(savedData);
+                //console.log(savedData);
             })
             .catch(function(err){
                 callback(err);
@@ -422,10 +427,6 @@ var upsertHasManyThroughFinal = function(app, modelObj, relationDataObj, dataIns
         });
     }
 };
-
-
-
-
 
 
 

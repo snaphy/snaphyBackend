@@ -9,7 +9,7 @@
     "name": {
       "type": "string",
       "required": true,
-      "index": {"unique": true} 
+      "index": {"unique": true}
     },
     "container": {
       "type": "string",
@@ -19,7 +19,7 @@
       "type": "string"
     },
     "url": {
-      "type": "string"
+      "type": "object"
     }
   },
   "validations": [],

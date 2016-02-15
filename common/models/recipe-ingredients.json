@@ -107,7 +107,7 @@
         "type": "minRecipeDisplay",
         "templateOptions": {
           "type": "text",
-          "label": "Enter the required minimum quantity  for this recipe",
+          "label": "Convert the given required recipe ingredient quantity into ",
           "id": "requiredQuantity",
           "bindObj": "ingredients"
         }

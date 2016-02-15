@@ -350,13 +350,7 @@
       "type": "hasMany",
       "model": "Comments",
       "foreignKey": "",
-      "onCascadeDelete": true,
-      "templateOptions": {
-        "btnText": "Add Comment",
-        "searchProp": "comment",
-        "create": true,
-        "search": false
-      }
+      "onCascadeDelete": true
     },
     "recipeTags": {
       "type": "hasAndBelongsToMany",

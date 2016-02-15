@@ -151,7 +151,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/upload", "POST"), "AmazonImage.upload");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getUrl", "POST"), "AmazonImage.getUrl");
                 
 
             
@@ -735,14 +735,16 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
     
         
-            //Method upload definition
-            public void upload(  HashMap<String, Object> ctx,  HashMap<String, Object> options, final Adapter.JsonObjectCallback  callback ){
+            //Method getUrl definition
+            public void getUrl(  String container,  String file,  HashMap<String, Object> options, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ctx", ctx);
+                        hashMapObject.put("container", container);
+                
+                        hashMapObject.put("file", file);
                 
                         hashMapObject.put("options", options);
                 
@@ -752,7 +754,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("upload", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getUrl", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -771,7 +773,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method upload definition ends here..
+            }//Method getUrl definition ends here..
 
             
 
