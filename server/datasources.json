@@ -32,13 +32,6 @@
     "connector": "mongodb",
     "user": "robins"
   },
-  "FileSystem": {
-    "name": "FileSystem",
-    "connector": "loopback-component-storage",
-    "provider": "filesystem",
-    "root": "/home/robins/.storage",
-    "maxFileSize": "10485760"
-  },
   "Image": {
     "name": "Image",
     "connector": "loopback-component-storage",
