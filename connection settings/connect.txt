@@ -1,2 +1,3 @@
 amazon
-sudo ssh -i "gruberr.pem" ec2-user@ec2-52-23-244-123.compute-1.amazonaws.com
+sudo ssh -i "/usr/gruberr.pem" ec2-user@ec2-52-23-244-123.compute-1.amazonaws.com
+cd fileUpload && npm install && bower install && cd ../
