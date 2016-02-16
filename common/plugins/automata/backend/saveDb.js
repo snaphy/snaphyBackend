@@ -53,18 +53,35 @@ var addSaveMethod = function(app, modelName){
         };
 
         var include = addRelation(data, schema.relation, relations);
-        //Now save/update the data..
-        modelObj.upsert(data)
-        .then(function(dataInstance){
-            //console.log(dataInstance);
-            //console.log("\n\n\n");
-            //console.log("Main data successfully updated");
-            saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation,  callback);
-        })
-        .catch(function(err){
-            console.log("Error saving data");
-            callback(err);
-        });
+        if(data.id === undefined){
+            //Now save/update the data..
+            modelObj.create(data)
+            .then(function(dataInstance){
+                //console.log(dataInstance);
+                //console.log("\n\n\n");
+                //console.log("Main data successfully updated");
+                saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation,  callback);
+            })
+            .catch(function(err){
+                console.log("Error saving data");
+                callback(err);
+            });
+        }else{
+            //Now save/update the data..
+            modelObj.upsert(data)
+            .then(function(dataInstance){
+                //console.log(dataInstance);
+                //console.log("\n\n\n");
+                //console.log("Main data successfully updated");
+                saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation,  callback);
+            })
+            .catch(function(err){
+                console.log("Error saving data");
+                callback(err);
+            });
+
+        }
+
 
 
 
@@ -367,16 +384,21 @@ var deleteRepeatedData = function(throughModelObj, dataInstanceForeignKey, dataI
     //Now check for any repeated data.. and remove it..
     throughModelObj.find(filter)
     .then(function(values){
-
+        console.log("finding the repeated data..\n");
+        console.log(values);
+        console.log("===========================================\n");
+        console.log(relationData);
         //Now loop each relation data and check if data present..
         values.forEach(function(element){
             var matchFound = false;
             //Now loop through relationData as well..
             for(var i=0; i<relationData.length; i++){
                 var relatedDataObj = relationData[i];
-                if(relatedDataObj.id === element.id){
-                    matchFound = true;
-                    break;
+                if(relatedDataObj.id){
+                    if(relatedDataObj.id.toString().trim( ) === element.id.toString().trim()){
+                        matchFound = true;
+                        break;
+                    }
                 }
             }
 
