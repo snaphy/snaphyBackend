@@ -57,6 +57,9 @@ var addSaveMethod = function(app, modelName){
             //Now save/update the data..
             console.log("I am creatting");
             console.log(data);
+            if(data.password !== undefined){
+                data.password = data.password.toString().trim();
+            }
             modelObj.create(data)
             .then(function(dataInstance){
 
