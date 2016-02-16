@@ -53,18 +53,14 @@ var addSaveMethod = function(app, modelName){
         };
 
         var include = addRelation(data, schema.relation, relations);
+        if(data.password !== undefined){
+            data.password = data.password.toString().trim();
+        }
         if(data.id === undefined){
             //Now save/update the data..
-            console.log("I am creatting");
-            console.log(data);
-            if(data.password !== undefined){
-                data.password = data.password.toString().trim();
-            }
+
             modelObj.create(data)
             .then(function(dataInstance){
-
-                console.log(dataInstance);
-                //console.log("\n\n\n");
                 console.log("Main data successfully updated");
                 saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation,  callback);
             })
@@ -74,7 +70,7 @@ var addSaveMethod = function(app, modelName){
             });
         }else{
             console.log("I am updatting");
-            console.log(data);
+
             //Now save/update the data..
             modelObj.upsert(data)
             .then(function(dataInstance){
