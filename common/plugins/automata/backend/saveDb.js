@@ -59,9 +59,10 @@ var addSaveMethod = function(app, modelName){
             console.log(data);
             modelObj.create(data)
             .then(function(dataInstance){
-                //console.log(dataInstance);
+
+                console.log(dataInstance);
                 //console.log("\n\n\n");
-                //console.log("Main data successfully updated");
+                console.log("Main data successfully updated");
                 saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation,  callback);
             })
             .catch(function(err){
