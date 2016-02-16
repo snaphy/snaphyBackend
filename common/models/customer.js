@@ -8,17 +8,4 @@ module.exports = function(Customer) {
           next();
         }
     });
-
-    // Customer.beforeRemote("**", function(ctx, user, next){
-    //     console.log(ctx);
-    //     console.log("========================================================================");
-    //     next();
-    // });
-    //
-    //
-    // Customer.afterRemote("**", function(ctx, user, next){
-    //     console.log(ctx);
-    //     console.log("========================================================================");
-    //     next();
-    // });
 };
