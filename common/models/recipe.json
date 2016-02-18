@@ -193,7 +193,8 @@
                     "id": "recipeType",
                     "options": [
                         "veg",
-                        "nonveg"
+                        "nonveg",
+                        "egg"
                     ]
                 }
             }
