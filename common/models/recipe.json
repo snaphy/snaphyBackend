@@ -231,6 +231,7 @@
         "status": {
             "type": "string",
             "required": false,
+            "default":"onhold",
             "template": {
                 "type": "selectString",
                 "templateOptions": {
@@ -373,15 +374,10 @@
     "onLoad": {
         "addWhere": {
             "where": {
-                "status": "publish"
+                "and": [{"status": "publish"}]
             },
             "except": "admin"
-        },
-        "propertyEdit": {
-            "propertyName": "status",
-            "except": "admin"
         }
-
     }
 
 }

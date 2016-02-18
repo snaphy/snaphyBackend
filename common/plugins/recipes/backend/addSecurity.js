@@ -40,14 +40,13 @@ var addOnLoadSecurity = function(app, modelName, verifyRole) {
     var modelObj = app.models[modelName];
     var modelProperties = modelObj.definition.rawProperties;
     var onLoadProp = modelObj.definition.settings.onLoad;
-
-    console.log(onLoadProp);
     if (onLoadProp) {
         //Add access
         addProperty(modelObj, onLoadProp, verifyRole);
-        if(onLoadProp.propertyEdit){
-            addEditSecurity(modelObj, onLoadProp, verifyRole);
-        }
+        //TODO IMPLEMENT THIS IN FUTURE..
+        // if(onLoadProp.propertyEdit){
+        //     addEditSecurity(modelObj, onLoadProp, verifyRole);
+        // }
     }
 };
 
@@ -64,7 +63,6 @@ var addProperty = function(modelObj, onLoadProp, verifyRole) {
                         if(err){
                             return next(err);
                         }else{
-                            console.log("Given value is in role.." + inRole);
                             if(inRole){
                                 next();
                             }else{
@@ -73,6 +71,7 @@ var addProperty = function(modelObj, onLoadProp, verifyRole) {
                         }
                     });
                 }else{
+                    //Add where statement..
                     addWhere(where, ctx, next);
                 }
             }else{
@@ -90,87 +89,46 @@ var addEditSecurity = function(modelObj, onLoadProp, verifyRole){
     modelObj.observe('before save', function addEditSecutity(ctx, next){
         if(onLoadProp){
             if(onLoadProp.propertyEdit){
+
                 if(ctx.instance){
                     checkRestrictedProp(
                         modelObj,
                         onLoadProp.propertyEdit.propertyName,
                         onLoadProp.propertyEdit.except,
-                        ctx.instance,
+                        ctx,
                         ctx.isNewInstance,
                         verifyRole,
                         next
                     );
                 }else{
-                    next();
+                    //console.log(ctx.instance);
+                    //console.log(ctx.data);
+                    checkRestrictedProp(
+                        modelObj,
+                        onLoadProp.propertyEdit.propertyName,
+                        onLoadProp.propertyEdit.except,
+                        ctx,
+                        ctx.isNewInstance,
+                        verifyRole,
+                        next
+                    );
+                    //next();
                 }
             }else{
+
                 next();
             }
         }else{
+
             next();
         }
     });
 };
 
 
-
-var checkRestrictedProp = function(modelObj, propName,  exceptRole, instance, isNew, verifyRole,  next){
-    //Get user role..
-    if(isNew){
-        verifyRole(exceptRole, function(err, inRole){
-            if(err){
-                //return
-                return next(err);
-            }
-            console.log("if user is in " + inRole);
-            if(inRole){
-                next();
-            }else{
-                if(instance[propName]){
-                    //delete given property..
-                    delete instance[propName];
-                }
-                //move to next
-                next();
-            }
-        });
-    }else{
-        verifyRole(exceptRole, function(err, inRole){
-            if(err){
-                //return
-                return next(err);
-            }
-            console.log("if user is in " + inRole);
-            if(inRole){
-                next();
-            }else{
-                //Compare from revious data..
-                modelObj.findById(instance.id, function(err, value){
-                    if(err){
-                        return next(err);
-                    }else{
-                        if(!value){
-                            //Allow in this case..
-                            console.log(value, instance, propName);
-                            console.log("here");
-                            next();
-                        }else{
-                            console.log(value, instance, propName);
-                            if(value[propName].toString() === instance[propName].toString() ){
-                                next();
-                            }else{
-                                console.log("Value updated to default previous value...");
-                                console.log(instance, value);
-                                instance[propName] = value[propName].toString();
-                                next();
-                            }
-                        }
-
-                    }
-                });
-            }
-        });
-    }
+//TODO IMPLEMENT THIS IN FUTURE..
+var checkRestrictedProp = function(modelObj, propName,  exceptRole, ctx, isNew, verifyRole,  next){
+    next();
 };
 
 
@@ -182,14 +140,15 @@ var addWhere = function(where, ctx, next){
     if(ctx.query.where === undefined){
         ctx.query.where = {};
     }
-    console.log(where);
+    //console.log(where);
     for(var whereProp in where){
         if(where.hasOwnProperty(whereProp)){
             //Add where prop..
             ctx.query.where[whereProp] = where[whereProp];
         }
     }
-    console.log(ctx.query.where);
+    //console.log(ctx.query.where);
+    //console.log("================WHERE================");
     next();
 }
 
