@@ -204,8 +204,10 @@
 
                                             <span ng-if="tableConfig.date">
                                                 <!--Display link here..-->
+
                                                 <span
-                                                    data-order="{{getColValue(rowObject, header)}}"
+                                                    data-order="{{dateInSeconds(rowObject, header)}}"
+                                                    data-sort="{{dateInSeconds(rowObject, header)}}"
                                                     data-search="{{getColValue(rowObject, header)}}" >
                                                     {{toJsDate(getColValue(rowObject, header) )| date:'MM/dd/yyyy'}}
                                                 </span>

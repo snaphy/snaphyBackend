@@ -80,6 +80,13 @@ angular.module($snaphy.getModuleName())
         };
 
 
+        $scope.dateInSeconds = function(rowObject, columnHeader){
+            var val = $scope.getColValue(rowObject, columnHeader);
+            var date = new Date(val);
+            return date.getTime();
+        }
+
+
 
         /**
          * change prop like access_level to access only

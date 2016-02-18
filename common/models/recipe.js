@@ -12,6 +12,12 @@ module.exports = function(Recipe) {
 
 
 
+    // Recipe.beforeRemote("*", function(ctx, user, next){
+    //     console.log(ctx);
+    //     console.log("========================BEFORE UPLOAD=============================\n");
+    // });
+
+
 
     Recipe.beforeRemote("find", function(ctx, user, next){
         if(ctx.args){
@@ -25,5 +31,4 @@ module.exports = function(Recipe) {
         }
         next();
     });
-
 };

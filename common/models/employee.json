@@ -236,7 +236,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "staff",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "isAdmin"
     },
@@ -253,5 +253,5 @@
       "property": "save"
     }
   ],
-  "methods": []
+  "methods": {}
 }

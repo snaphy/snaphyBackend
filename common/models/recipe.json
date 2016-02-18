@@ -168,7 +168,6 @@
     },
     "description": {
       "type": "string",
-      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -387,5 +386,5 @@
     }
   },
   "acls": [],
-  "methods": []
+  "methods": {}
 }

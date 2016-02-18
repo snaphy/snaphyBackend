@@ -182,6 +182,7 @@
     },
     "status": {
       "type": "string",
+      "default":"onhold",
       "template": {
         "type": "selectString",
         "templateOptions": {
@@ -250,5 +251,5 @@
     }
   },
   "acls": [],
-  "methods": []
+  "methods": {}
 }
