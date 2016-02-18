@@ -141,8 +141,8 @@ module.exports = function(server, databaseObj, helper, packageObj) {
             Role = server.models.Role;
             RoleMapping = server.models.RoleMapping;
             var currentContext = loopback.getCurrentContext();
-            var app = this.app;
-            isAdmin(app, role, currentContext, callback);
+            var app = server;
+            isInRole(app, role, currentContext, callback);
         },
 
 

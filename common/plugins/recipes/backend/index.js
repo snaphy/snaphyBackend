@@ -19,6 +19,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	var init = function(){
 		//Initialize the analytics..
 		recipeAnalytics.init(server, databaseObj, helper, packageObj);
+		addSecurity.init(server, databaseObj, helper, packageObj);
 	};
 
 
