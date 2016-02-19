@@ -4,7 +4,7 @@ var init = function(server, databaseObj, helper, packageObj) {
     var login = helper.loadPlugin('login');
     //Now load plugin role checking method..
     var verifyRole = login.verifyRole;
-    addModelSecurity(server, databaseObj, helper, packageObj, verifyRole);
+    //addModelSecurity(server, databaseObj, helper, packageObj, verifyRole);
 
 };
 
