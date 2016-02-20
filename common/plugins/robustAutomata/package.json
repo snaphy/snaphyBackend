@@ -1,0 +1,44 @@
+{
+  "name": "robustAutomata",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "Plugin for allowing server side processing of datatable making it more robust",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "routeExposure": "/robustAutomata",
+  "staticFiles": {
+    "css": {
+        "exampleCss" : "/robustAutomata/style/example.css"
+      },
+    "js": {
+      "robustAutomataRoute": "/robustAutomata/scripts/routes/robustAutomata.js",
+      "robustAutomataController": "/robustAutomata/scripts/controllers/robustAutomata.js",
+      "robustAutomataServices": "/robustAutomata/scripts/services/robustAutomata.js"
+    },
+    "moduleDependencies":{
+        "smart-table": "/robustAutomata/style/bower_components/angular-smart-table/dist/smart-table.min.js"
+
+    },
+    "settings": "/robustAutomata/settings.js"
+  },
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  },
+  "databases": {
+      "Recipe": "Recipe"
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+
+  }
+}

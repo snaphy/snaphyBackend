@@ -3,8 +3,8 @@ module.exports = function(RecipeIngredients) {
     //     console.log(ctx);
     //     next();
     // });
-    // 
-    // RecipeIngredients.observe("loaded", function(ctx, next){
+
+    // RecipeIngredients.afterRemote("**", function(ctx, user, next){
     //     console.log("====================================");
     //     console.log(ctx);
     //     console.log("===============After loaded==============");

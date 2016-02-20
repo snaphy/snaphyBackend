@@ -88,21 +88,35 @@
         }
       }
     },
+    "halfQuantity":{
+        "type": "string",
+        "required": true,
+        "template": {
+          "type": "selectString",
+          "templateOptions": {
+            "type": "string",
+            "label": "Enter the half quantity of recipe ingredient",
+            "id": "halfQuantity",
+            "options": ["1/8", "1/4", "1/3", "3/8", "1/2", "5/8", "2/3", "3/4", "7/8", "0"]
+          }
+        }
+    },
+
     "recipeMetric": {
       "type": "string",
       "required": true,
       "template": {
-        "type": "input",
+        "type": "selectString",
         "templateOptions": {
           "type": "text",
           "label": "Enter the recipe metric like tablespoon, pinch, bowl etc",
-          "id": "recipeMetric"
+          "id": "recipeMetric",
+          "options": ["piece", "slice", "stick", "clove", "package", "leaf", "bunch", "sprig", "handful", "pinch", "kg", "grams", "litre", "cl", "ml", "lb", "oz", "tsp", "tbsp", "cup"]
         }
       }
     },
     "requiredQuantity": {
       "type": "number",
-      "required": true,
       "template": {
         "type": "minRecipeDisplay",
         "templateOptions": {

@@ -1,0 +1,10 @@
+{
+  "name": "robustAutomata",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular-smart-table": "~2.1.7"
+  },
+  "devDependencies": {},
+  "appPath": "client",
+  "moduleName": "robustAutomata"
+}

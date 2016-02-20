@@ -96,12 +96,7 @@
           "type": "text",
           "label": "Enter selling metrics like kg/gm/litre",
           "id": "sellingMetrics",
-          "options": [
-            "kg",
-            "gm",
-            "litre",
-            "ml"
-          ]
+          "options": ["kg", "dozen", "piece", "grams", "litre", "package", "ml" ]
         }
       }
     },
