@@ -6,7 +6,24 @@
 /*$snaphy*/
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
-   "defaultTemplate": true
+   "defaultTemplate": true,
+   loadDatabases: [
+       "Employee",
+       "EmployeeDetails",
+       "Recipe",
+       "Comments",
+       "Category",
+       "Customer",
+       "Cuisines",
+       "IngredientCategory",
+       "Ingredients",
+       "Priority",
+       "RecipeIngredients",
+       "RecipeTag",
+       "Wishlist",
+       "Chef",
+       "RecipeAnalytic"
+   ]
 
 };
 

@@ -6,63 +6,159 @@ angular.module($snaphy.getModuleName())
     //
     .factory('Resource', ['$q', '$filter', '$timeout', 'Database', function($q, $filter, $timeout, Database) {
 
-        //this would be the service to call your server, a standard bridge between your model an $http
+        //---------------------------------------------STORE GLOBAL VARIABLE-------------------------------------------------------
+        var schema = {};
 
-        // the database (normally on your server)
-        var randomsItems = [];
+        //-------------------------------------------------------------------------------------------------------------------------
 
-        function createRandomItem(id) {
-            var heroes = ['Batman', 'Superman', 'Robin', 'Thor', 'Hulk', 'Niki Larson', 'Stark', 'Bob Leponge'];
-            return {
-                id: id,
-                name: heroes[Math.floor(Math.random() * 7)],
-                recipeType: Math.floor(Math.random() * 1000),
-                servings: Math.floor(Math.random() * 10000)
-            };
+        //Copying one object to another..
+        var extend = function(original, context, key) {
+            for (key in context) {
+                if (context.hasOwnProperty(key)) {
+                    if (Object.prototype.toString.call(context[key]) === '[object Object]') {
+                        original[key] = extend(original[key] || {}, context[key]);
+                    } else {
+                        original[key] = context[key];
+                    }
+                }
+            }
+            return original;
+        };
 
-        }
+        /**
+         * Get absolute schema with two callback success and error also populate schema global variable..
+         * @param  {[type]} databaseName [description]
+         * @param  {[type]} success      [description]
+         * @param  {[type]} error        [description]
+         * @return {[type]}              [description]
+         */
+        var getSchema = function(databaseName, success, error) {
+            var dbService = Database.loadDb(databaseName);
+            if ($.isEmptyObject(schema)) {
+                dbService.getAbsoluteSchema({}, {}, function(values) {
+                    extend(schema, values.schema);
+                    if (success) {
+                        success(schema);
+                    }
+                }, function(httpResp) {
+                    if (error) {
+                        error(httpResp);
+                    }
+                });
+            } else {
+                success(schema);
+            }
+        };
 
-        for (var i = 0; i < 1000; i++) {
-            randomsItems.push(createRandomItem(i));
-        }
 
 
-        //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
-        //in our case, it actually performs the logic which would happened in the server
-        function getPage(start, number, params) {
-            console.log(start, number, params);
-            var recipe = Database.getDb("robustAutomata", "Recipe");
+
+        var fetchHasManyThrough = function(element, hasManyThrough) {
+            if (hasManyThrough) {
+                hasManyThrough.forEach(function(relationObj) {
+                    //Fetch the data from the server..
+                    var throughModelName = relationObj.through;
+                    var throughModelService = Database.loadDb(throughModelName);
+                    var filter = {};
+
+                    filter.include = filter.include || [];
+                    filter.include.push(relationObj.throughModelRelation);
+                    filter.where = {};
+                    filter.where[relationObj.whereId] = element.id;
+
+                    //Now fetch..
+                    throughModelService.find({
+                        filter: filter
+                    }, function(relatedDataValue) {
+                        console.log("Related hasManyThrough data fetched successfully.");
+                        element[relationObj.relationName] = relatedDataValue;
+                    }, function() {
+                        console.error("error fetching hasManyThrough data");
+                    });
+                });
+            }
+        };
+
+
+
+        var getFilterObj = function(dataSchema, dbService, filterObj) {
+            //var filterObj = {};
+            filterObj.include = filterObj.include || [];
+            if (dataSchema.relations.belongsTo) {
+                if (dataSchema.relations.belongsTo.length) {
+                    dataSchema.relations.belongsTo.forEach(function(relationName) {
+                        filterObj.include.push(relationName);
+                    });
+                }
+            }
+
+            if (dataSchema.relations.hasAndBelongsToMany) {
+                if (dataSchema.relations.hasAndBelongsToMany.length) {
+                    dataSchema.relations.hasAndBelongsToMany.forEach(function(relationName) {
+                        filterObj.include.push(relationName);
+                    });
+                }
+            }
+
+            if (dataSchema.relations.hasMany) {
+                if (dataSchema.relations.hasMany.length) {
+                    dataSchema.relations.hasMany.forEach(function(relationName) {
+                        filterObj.include.push(relationName);
+                    });
+                }
+            }
+
+
+            if (dataSchema.relations.hasOne) {
+                if (dataSchema.relations.hasOne.length) {
+                    dataSchema.relations.hasOne.forEach(function(relationName) {
+                        filterObj.include.push(relationName);
+                    });
+                }
+            }
+            return filterObj;
+        };
+
+
+
+        //{where: {or: [{title: 'My Post'}, {content: 'Hello'}]}}
+        var getPage = function(start, number, params, database) {
+            var dbService = Database.loadDb(database);
             var object = {};
             var filter = {};
             var where = {};
+            //where.or = []
             //Prepare filter..
             var skip = start;
             var limit = number;
             var orderBy = [];
+            var deferred = $q.defer();
 
+            //Add the necessary include in the filter..
+            getFilterObj(schema, dbService, filter);
 
-
-
-            if(params.sort){
-                if(params.sort.predicate){
+            //Now  prepare the sort and filter and orderBy function..
+            if (params.sort) {
+                if (params.sort.predicate) {
                     var sort = params.sort.predicate;
                     var reverse = params.sort.reverse;
-                    reverse = reverse? "DESC" : "ASC";
+                    reverse = reverse ? "DESC" : "ASC";
                     orderBy.push("" + sort + " " + reverse);
                 }
             }
 
             filter.order = orderBy;
-            if(params.search){
-                if(params.search.predicateObject){
-                    for(var property in params.search.predicateObject){
-                        if(params.search.predicateObject.hasOwnProperty(property)){
+            if (params.search) {
+                if (params.search.predicateObject) {
+                    for (var property in params.search.predicateObject) {
+                        if (params.search.predicateObject.hasOwnProperty(property)) {
                             var like = params.search.predicateObject[property];
                             //add to where property..
                             //where: {title: {like: 'M.+st'}}}
                             where[property] = {
-                                "like" : like
+                                "like": like
                             };
+                            //where.or.push({property: {"like" : like} });
                         }
                     }
                 }
@@ -75,51 +171,54 @@ angular.module($snaphy.getModuleName())
 
             console.log(object);
 
-            var deferred = $q.defer();
+
             //predicateObject
 
-            recipe.find(object, function(value, respHeader){
-                recipe.count(filter, function(count, respHeader){
+            dbService.find(object, function(values, respHeader) {
+                dbService.count(filter, function(count, respHeader) {
                     console.log(count);
                     //Value retrived..
-                    console.log(value);
-                    deferred.resolve({
-                        data: value,
-                        numberOfPages: Math.ceil(count.count / number)
+                    console.log(values);
+                    //prepare another collection for the given element..
+                    var dataValues = [];
+                    //fetch hasManyThrough for the data..
+                    values.forEach(function(element) {
+                        if (schema.relations) {
+                            if (!$.isEmptyObject(schema.relations.hasManyThrough)) {
+                                //TODO CHECK AND VERIFY IF hasManyThrough relation is actually working or not..
+                                //Now fetch the data of hasManyThrough from server..
+                                fetchHasManyThrough(element, schema.relations.hasManyThrough);
+                            }
+                        }
+                        //setting the value of the data successfully fetched..
+                        dataValues.push(element);
                     });
-                }, function(httpResponse){
+
+                    //Now resolve the promise..
+                    deferred.resolve({
+                        data: dataValues,
+                        numberOfPages: Math.ceil(count.count / number),
+                        count: count.count
+                    });
+                }, function(httpResponse) {
+                    //Error counting values
                     console.error(httpResponse);
                 });
 
-            }, function(httpResponse){
-                //Error occured..
+            }, function(httpResponse) {
+                //Error occured..in fetching data..
                 console.error(httpResponse);
             });
 
 
-            // //console.log(deferred);
-            // var filtered = params.search.predicateObject ? $filter('filter')(randomsItems, params.search.predicateObject) : randomsItems;
-            //
-            // if (params.sort.predicate) {
-            //     filtered = $filter('orderBy')(filtered, params.sort.predicate, params.sort.reverse);
-            // }
-            //
-            // var result = filtered.slice(start, start + number);
-            //
-            // $timeout(function() {
-            //     //note, the server passes the information about the data set size
-            //     deferred.resolve({
-            //         data: result,
-            //         numberOfPages: Math.ceil(filtered.length / number)
-            //     });
-            // }, 1500);
 
 
             return deferred.promise;
         }
 
         return {
-            getPage: getPage
+            getPage: getPage,
+            getSchema: getSchema
         };
 
     }]);

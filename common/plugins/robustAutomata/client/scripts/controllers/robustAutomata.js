@@ -3,32 +3,624 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for robustAutomataControl ..
-.controller('robustAutomataControl', ['$scope', '$stateParams', 'Database', 'Resource',
-    function($scope, $stateParams, Database, Resource) {
+.controller('robustAutomataControl', ['$scope', '$stateParams', 'Database', 'Resource', '$timeout', 'SnaphyTemplate', '$state',
+    function($scope, $stateParams, Database, Resource, $timeout, SnaphyTemplate, $state) {
         //Checking if default templating feature is enabled..
-        var defaultTemplate = $snaphy.loadSettings('robustAutomata', "defaultTemplate");
-        $snaphy.setDefaultTemplate(defaultTemplate);
-        //Use Database.getDb(pluginName, PluginDatabaseName) to get the Database Resource.
 
+
+        //------------------------------------------------------GLOBAL VARIABLE SPACE----------------------------------------------------------
         var ctrl = $scope;
-
+        //Storing an instance of table values..
+        $scope.rowListValues = $scope.rowListValues || [];
+        //Schema of the database
+        $scope.schema = $scope.schema || {};
+        /*Data for save form modal*/
+        $scope.saveFormData = $scope.saveFormData || {};
+        //Initializing scope //for array..
+        $scope.dataValues = $scope.dataValues || [];
+        //contains backup of the data..
+        var backupData = backupData || {};
+        var dataFetched = dataFetched || false;
+        //get the current state name..
+        var currentState = $state.current.name;
+        $scope.currentState = currentState;
+        var defaultTemplate = $snaphy.loadSettings('robustAutomata', "defaultTemplate");
+        $scope.databasesList = $snaphy.loadSettings('robustAutomata', "loadDatabases");
+        $snaphy.setDefaultTemplate(defaultTemplate);
         $scope.displayed = [];
+        $scope.pagesReturned ;
+        //--------------------------------------------------------------------------------------------------------------------------------------
 
-        $scope.callServer = function callServer(tableState) {
+
+
+
+        $scope.toJsDate = function(str) {
+            if (!str) {
+                return null;
+            }
+            return new Date(str);
+        };
+
+
+
+
+        $scope.getCurrentState = function() {
+            return $state.current.name;
+        };
+
+
+
+        $scope.goToParentState = function() {
+            if ($scope.$parent.currentState) {
+                $state.go($scope.$parent.currentState);
+            }
+        };
+
+
+        $scope.checkIfParentState = function() {
+            if ($scope.databasesList) {
+                for (var i = 0; i < $scope.databasesList.length; i++) {
+                    var state = $scope.databasesList[i];
+                    if (state.toLowerCase().trim() === $state.current.name.toLowerCase().trim()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+
+
+        $scope.checkType = function(rowObject, columnHeader) {
+            var colValue = $scope.getColValue(rowObject, columnHeader);
+            return Object.prototype.toString.call(colValue);
+        };
+
+        $scope.getColValue = function(rowObject, columnHeader) {
+            var key = $scope.getKey(rowObject, columnHeader);
+
+            return key !== undefined ? rowObject[key] : null;
+        };
+
+
+        $scope.dateInSeconds = function(rowObject, columnHeader) {
+            var val = $scope.getColValue(rowObject, columnHeader);
+            var date = new Date(val);
+            return date.getTime();
+        }
+
+
+
+        /**
+         * change prop like access_level to access only
+         * Get the key or the relationship name.
+         * @param rowObject
+         * @param columnHeader
+         * @returns {*}
+         */
+        $scope.getKey = function(rowObject, columnHeader) {
+            var keyName;
+            if (rowObject) {
+                if (rowObject[columnHeader] !== undefined) {
+                    keyName = columnHeader;
+                } else {
+                    //Its a relational header properties name... map the header.. replace `customer_name` to name
+                    var patt = /\.[A-Z0-9a-z]+$/;
+                    keyName = columnHeader.replace(patt, '');
+                }
+            }
+            return keyName;
+        };
+
+
+        /**
+         * change prop like access-level to level only
+         * Get the model properties name on the case of belongsTo or hasOne relationships..
+         * @param columnHeader
+         */
+        $scope.getColumnKey = function(columnHeader) {
+            //var keyName;
+            var patt = /^[A-Z0-9a-z-$]+\./;
+            return columnHeader.replace(patt, '');
+        };
+
+
+
+        //TO be used in tables..
+        $scope.getRelationColumnValue = function(rowObject, header, colKey) {
+            var colValue = $scope.getColValue(rowObject, header);
+            var isBelongToRelation = header !== colKey;
+            var hasOneRelationPropName = $scope.getColumnKey(header);
+            return (isBelongToRelation) ? colValue[hasOneRelationPropName] : colValue;
+        };
+
+
+
+
+        $scope.getRelationColumnType = function(rowObject, header, colKey, initialColumnType) {
+            var colValue = $scope.getRelationColumnValue(rowObject, header, colKey);
+            var hasOneRelationPropName = $scope.getColumnKey(header);
+            var isBelongToRelation = header !== colKey;
+            return (isBelongToRelation) ? $scope.checkType(colValue, hasOneRelationPropName) : initialColumnType;
+        };
+
+
+
+        /**
+         * Find model property for the table configuration from the config file
+         * @param  {object} configModelTableObj [description]
+         * @param  {string} propertyName        [description]
+         * @return {object}                     [description]
+         */
+        $scope.findModelPropertyTableConfig = function(configModelTableObj, propertyName) {
+            //get the property parameters..
+            var ModalpropertyObj = configModelTableObj;
+            if (ModalpropertyObj === undefined) {
+                return null;
+            }
+            if (ModalpropertyObj[propertyName] !== undefined) {
+                return ModalpropertyObj[propertyName];
+            }
+            return null;
+        };
+
+
+        /**
+         * Return the params for ui-sref for onClick
+         * @param params
+         * @param rowObject
+         * @returns {*}
+         */
+        $scope.getParams = function(params, rowObject) {
+            for (var key in params) {
+                if (params.hasOwnProperty(key)) {
+                    params[key] = rowObject[key];
+                }
+            }
+            return params;
+        };
+
+
+
+        /**
+         * Event listener for adding reset button to the filters. To be called when reset button is called..
+         */
+        var resetFilterList = [];
+        $scope.addResetMethod = function(func) {
+            resetFilterList.push(func);
+        };
+
+
+
+
+
+        var resetSavedForm = function(form) {
+
+            $scope.saveFormData = {};
+            if (form) {
+                form.$setPristine();
+            }
+        };
+
+
+
+        $scope.resetSavedForm = resetSavedForm;
+
+
+        $scope.enableButton = function(form) {
+            try {
+                if (form.$dirty) {
+                    if ($.isEmptyObject(form.$error)) {
+                        return true;
+                    }
+                } else {
+                    return false;
+                }
+            } catch (err) {
+                //disable button
+                return true;
+            }
+        };
+
+
+
+        /**
+         * For resetting all filter on reset button click..
+         */
+        $scope.resetAll = function(tableId) {
+            //Removing the # tag from id if placed. to avoid duplicity of #
+            tableId = tableId.replace(/^\#/, '');
+            tableId = '#' + tableId;
+            for (var i = 0; i < resetFilterList.length; i++) {
+                //Now call each method..
+                resetFilterList[i]();
+            }
+
+            //Now redraw the table..
+            //Getting the instance of the table..
+            var table = $(tableId).DataTable();
+            //Now redraw the tables..
+            table.draw();
+        };
+
+
+
+
+        /**
+         * Initialize the edit form data from editing the form.
+         * @param  {[type]} data [description]
+         * @return {[type]}           [description]
+         */
+        $scope.prepareDataForEdit = function(data, form) {
+            //console.log(form);
+            //First reset the previous data..
+            resetSavedForm(form);
+            //Firsst create a backup of the the data in case of rollback changes/cancel
+            backupData = angular.copy(data);
+            $scope.saveFormData = data;
+        };
+
+
+        /**
+         * Method for deleting data from database..
+         * @param  {[type]} rowObject [description]
+         * @return {[type]}           [description]
+         */
+        $scope.deleteData = function(formStructure, data) {
+            //get the model service..
+            var baseDatabase = Database.loadDb(formStructure.model);
+            $scope.dialog = {
+                message: "Do you want to delete the data?",
+                title: "Confirm Delete",
+                onCancel: function() {
+                    /*Do nothing..*/
+                    //Reset the disloag bar..
+                    $scope.dialog.show = false;
+                },
+                onConfirm: function() {
+                    var mainArrayIndex = getArrayIndex($scope.dataValues, data.id);
+                    var oldDeletedData = $scope.dataValues[mainArrayIndex];
+                    //console.log(data);
+
+                    //Reset the disloag bar..
+                    $scope.dialog.show = false;
+                    baseDatabase.deleteById({
+                        id: data.id
+                    }, function() {
+                        /*Delete the data from the database..*/
+                        SnaphyTemplate.notify({
+                            message: "Data successfully deleted.",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
+                    }, function() {
+                        $timeout(function() {
+                            //Attach the data again..
+                            $scope.dataValues.push(oldDeletedData);
+                        }, 10);
+
+                        //console.error(respHeader);
+                        SnaphyTemplate.notify({
+                            message: "Error deleting data.",
+                            type: 'danger',
+                            icon: 'fa fa-times',
+                            align: 'right'
+                        });
+                    });
+                    //Now delete the data..
+                    $scope.dataValues.splice(mainArrayIndex, 1);
+
+                },
+                show: true
+            };
+
+        };
+
+
+
+        /**
+         * For finding array index of the data of array of objects with properties id..
+         * @return {[type]} [description]
+         */
+        var getArrayIndex = function(arrayData, id) {
+            for (var i = 0; i < arrayData.length; i++) {
+                var element = arrayData[i];
+                if (element.id.toString().trim() === id.toString().trim()) {
+                    return i;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Method  for checking if the automata form is valid.
+         * @param  {[type]} schema template schema object with property fields showing all the fields.
+         * @return {[type]}        [description]
+         */
+        $scope.isValid = function(form) {
+            try {
+                //TODO Removing find alternate for  form.$dirty
+                if (form.validate()) {
+                    if ($.isEmptyObject(form.$error)) {
+                        return true;
+                    }
+                }
+            } catch (err) {
+                return false;
+            }
+
+            return false;
+        };
+
+
+
+        //Method for rollbackchanges is eror occured..
+        $scope.rollBackChanges = function() {
+            if (!$.isEmptyObject(backupData)) {
+                $scope.dataValues.forEach(function(data, index) {
+                    if (data.id === backupData.id && !$.isEmptyObject(backupData)) {
+                        //rollback changes..
+                        $scope.dataValues[index] = backupData;
+                        //Reset backup data..
+                        backupData = {};
+                        return false;
+                    }
+                });
+            }
+        };
+
+
+
+
+        /**
+         * Check if to display the properties of the table or not.
+         * schema {
+         * 	tables:{
+         * 		username:{
+         * 			"display": false
+         * 		}
+         * 	}
+         * }
+         */
+        $scope.displayProperties = function(schema, header) {
+            //First convert the header to optimal type..
+            header = header.replace(/\./, "_");
+            if (schema.tables) {
+                if (schema.tables[header]) {
+                    if (schema.tables[header].display !== undefined) {
+                        if (!schema.tables[header].display) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        };
+
+
+
+        $scope.resetBackup = function() {
+            backupData = {};
+            $scope.saveFormData = {};
+        };
+
+
+
+
+        /**
+         * Model for storing the model structure..
+         * @param formStructure
+         * @param formModel
+         * @param formID refrencing to the id attribute of the  form.
+         */
+        $scope.saveForm = function(formStructure, formData, formModel, goBack, modelInstance) {
+            if (!$scope.isValid(formData)) {
+                SnaphyTemplate.notify({
+                    message: "Error data is Invalid.",
+                    type: 'danger',
+                    icon: 'fa fa-times',
+                    align: 'right'
+                });
+
+                //If edit was going on revert back..
+                if (formModel.id) {
+                    $scope.rollBackChanges();
+                }
+            } else {
+                //Now save the model..
+                var baseDatabase = Database.loadDb(formStructure.model);
+
+                var schema = {
+                    "relation": $scope.schema.relations
+                };
+
+                var requestData = {
+                    data: formModel,
+                    schema: schema
+                };
+
+                //create a copy of the data..
+                var savedData = angular.copy(formModel);
+                var positionNewData;
+                var update;
+                if (formModel.id) {
+                    update = true;
+
+                } else {
+                    positionNewData = $scope.dataValues.length;
+                    //First add to the table..
+                    $scope.dataValues.push(savedData);
+                    update = false;
+                }
+
+
+                //Now save||update the database with baseDatabase method.
+                baseDatabase.save({}, requestData, function(baseModel) {
+                    if (!update) {
+                        //Now update the form with id.
+                        $scope.dataValues[positionNewData].id = baseModel.data.id;
+                    }
+                    SnaphyTemplate.notify({
+                        message: "Data successfully saved.",
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        align: 'right'
+                    });
+                }, function() {
+                    //console.log("Error saving data to server");
+                    //console.error(respHeader);
+                    if (update) {
+                        $scope.rollBackChanges();
+                    } else {
+                        //remove the form added data..
+                        if (positionNewData > -1) {
+                            $scope.dataValues.splice(positionNewData, 1);
+                        }
+                    }
+
+                    //console.error(respHeader);
+                    SnaphyTemplate.notify({
+                        message: "Error saving data.",
+                        type: 'danger',
+                        icon: 'fa fa-times',
+                        align: 'right'
+                    });
+                });
+
+                //Now reset the form..
+                resetSavedForm(formData);
+                closeModel(goBack, modelInstance);
+
+            }
+        }; //saveForm
+
+
+        // Used in  the automata to get the table values..
+        $scope.getTagInfo = function(tableSchema, colKey, rowObject, header) {
+            var tableConfig = $scope.findModelPropertyTableConfig(tableSchema, colKey);
+            var colValue = $scope.getColValue(rowObject, header);
+            return tableConfig.tag[colValue];
+        };
+
+
+
+        //Goback or close the model..
+        var closeModel = function(goBack, modelInstance) {
+            if (goBack) {
+                if (modelInstance) {
+                    //close the model..
+                    $(modelInstance).modal('hide');
+                } else {
+                    //go back to parent state..
+                    $scope.goToParentState();
+                }
+            }
+        };
+
+
+
+
+        /**
+         * Checking if the data is fetched return a boolean
+         * @return {Boolean} [description]
+         */
+        $scope.isDataFetched = function() {
+            if (dataFetched && $scope.schema.header) {
+                return true;
+            }
+            return false;
+        };
+
+
+        //checking if the filters is present in the data..
+        $scope.isFilterPresent = function() {
+            if ($scope.schema.filters) {
+                for (var filterName in $scope.schema.filters) {
+                    if ($scope.schema.filters.hasOwnProperty(filterName)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+
+
+        var addRelationDummyValue = function(relationArr, element, value) {
+            relationArr.forEach(function(rel) {
+                //if relationtype is hasManyThrough
+                if (Object.prototype.toString.call(rel) === "[object Object]") {
+                    if (rel.relationName) {
+                        element[rel.relationName] = value;
+                    }
+                } else {
+                    if (!element[rel]) {
+                        element[rel] = value;
+                    }
+                }
+            });
+            return element;
+        };
+
+
+
+        //Initialize default names of the current state..
+        var init = function() {
+            for (var i = 0; i < $scope.databasesList.length; i++) {
+                if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim()) {
+                    $scope.tableTitle = currentState + ' ' + 'Data';
+                    $scope.currentState = currentState;
+                    $scope.title = currentState + ' Console';
+                    $scope.description = "Data management console.";
+                    break;
+                }
+            }
+        };
+
+
+
+        var getDatabase = function(databaseName, tableState){
+            if (!$scope.stCtrl && ctrl) {
+                $scope.stCtrl = ctrl;
+            }
+            if (!tableState && $scope.stCtrl) {
+                $scope.stCtrl.pipe();
+                return;
+            }
 
             $scope.isLoading = true;
-
             var pagination = tableState.pagination;
-
             var start = pagination.start || 0; // This is NOT the page number, but the index of item in the list that you want to use to display the table.
             var number = pagination.number || 10; // Number of entries showed per page.
 
-            Resource.getPage(start, number, tableState).then(function(result) {
-                
-                $scope.displayed = result.data;
-                tableState.pagination.numberOfPages = result.numberOfPages; //set the number of pages so the pagination can update
-                $scope.isLoading = false;
+            //First get the schema..
+            Resource.getSchema(databaseName, function(schema) {
+                //Populate the schema..
+                $scope.schema = schema;
+                Resource.getPage(start, number, tableState, databaseName, schema).then(function(result) {
+                    $scope.displayed = result.data;
+                    tableState.pagination.numberOfPages = result.numberOfPages; //set the number of pages so the pagination can update
+                    $scope.pagesReturned = result.numberOfPages;
+                    $scope.totalResults = result.count;
+                    $scope.isLoading = false;
+                });
+            }, function(httpResp){
+                console.error(httpResp);
             });
+        }
+
+        $scope.refreshData = function(tableState, ctrl) {
+            for (var i = 0; i < $scope.databasesList.length; i++) {
+                if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim()) {
+                    getDatabase($scope.databasesList[i], tableState);
+                    break;
+                }
+            }
         };
+
+
+        //Only load if the current scope is automata
+        init();
+
+
     } //controller function..
 ]);

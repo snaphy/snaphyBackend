@@ -73,12 +73,48 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			callback(null, schema);
 		};
 
+
+		modelObj.getAbsoluteSchema = function(callback) {
+			//Now form the schema and send it to the client..
+			var relations = modelObj.definition.settings.relations;
+			var filters   = modelObj.definition.settings.filters;
+			var tables    = modelObj.definition.settings.tables;
+			var widgets   = modelObj.definition.settings.widgets;
+
+			/**
+			 * Now form the desired schema and return it.
+			 */
+			var header = addPropToHeader(app, modelName, ''),
+			//Get template structure..
+			schema = generateTemplateStr(app, modelName);
+			//Now recursively add relations to the models...
+			addNestedModelRelation(app, header, schema, relations, modelName, true);
+
+			//Now add filters and tables and headers to the model
+			schema.header  = header;
+			schema.filters = filters;
+			schema.tables  = tables;
+			schema.widgets  = widgets;
+
+			callback(null, schema);
+		};
+
 		//Now registering the method `getSchema`
 		modelObj.remoteMethod(
 				'getSchema',
 				{
 					returns: {arg: 'schema', type: 'object'},
 					description: "Send the schema of the model requested."
+				}
+		);
+
+
+		//Now registering the method `getAbsoluteSchema` required for robust automata plugin..
+		modelObj.remoteMethod(
+				'getAbsoluteSchema',
+				{
+					returns: {arg: 'schema', type: 'object'},
+					description: "Send the absolute schema of the model requested."
 				}
 		);
 	};
@@ -133,7 +169,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @param schema
 	 * @param relations
      */
-	var addNestedModelRelation = function(app, header, schema, relations, rootModelName){
+	var addNestedModelRelation = function(app, header, schema, relations, rootModelName, absoluteSchema){
 		//Now adding  prop of belongTo and hasMany method to the header and schema respectfully...
 		for(var relationName in relations){
 			if(relations.hasOwnProperty(relationName)){
@@ -244,8 +280,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					schema.fields.push(nestedSchema);
 				}
 				if((relationObj.type === 'hasOne' || relationObj.type === 'belongsTo') && relationObj.templateOptions !== undefined){
-					//Now add its properties to the header..
-					header = addPropToHeader(app, relationObj.model, relationName,  header);
+					if(absoluteSchema){
+						//Now add its properties to the header..
+						header = addPropToHeader(app, relationObj.model, relationName,  header, true);
+					}else{
+						//Now add its properties to the header..
+						header = addPropToHeader(app, relationObj.model, relationName,  header);
+					}
+
 					if(relationObj.type === "hasOne"){
 						schema.relations.hasOne.push(relationName);
 					}else{
@@ -299,7 +341,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @param header
      * @returns {*|Array}
      */
-	var addPropToHeader = function(app, modelName, prefix,  header){
+	var addPropToHeader = function(app, modelName, prefix,  header, absoluteSchema){
 		header = header || [];
 		var modelObj = app.models[modelName],
 		modelProperties = modelObj.definition.rawProperties,
@@ -324,7 +366,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 							//Add key to the header..
 							header.push(key);
 						}else{
-							header.push(prefix + '_' + key);
+							if(absoluteSchema){
+								header.push(prefix + '.' + key);
+							}else{
+								header.push(prefix + '_' + key);
+							}
+
 						}
 
 					}

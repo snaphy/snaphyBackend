@@ -1,4 +1,316 @@
-<table class="table" st-pipe="callServer" st-table="displayed">
+<!-- Page Header -->
+<div class="content bg-gray-lighter">
+    <div class="row items-push">
+        <div class="col-sm-7">
+            <h1 class="page-heading">
+                {{title}} <small>{{description}}</small>
+            </h1>
+        </div>
+        <div class="col-sm-5 text-right hidden-xs">
+            <ol ng-if="!checkIfParentState()" class="breadcrumb push-10-t">
+                <li>Manage Data</li>
+                <li ><a class="link-effect" ui-sref="{{$parent.currentState}}">{{title}}</a></li>
+                <li>Save Data</a></li>
+            </ol>
+            <ol ng-if="checkIfParentState()" class="breadcrumb push-10-t">
+                <li>Manage Data</li>
+                <li ><a class="link-effect" ui-sref="{{currentState}}">{{title}}</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!-- END Page Header -->
+
+
+<!--ADD WIDGETS -->
+<!-- Page Content -->
+<div ng-if="checkIfParentState()" class="content">
+    <!-- Simple Vertical Tiles -->
+    <div class="row" ng-if="isDataFetched()">
+
+      <snaphy-widget-added  ng-cloak class="col-sm-6 col-lg-3"
+        ng-repeat="widget in schema.widgets"
+        label="{{widget.label}}"
+        model="{{schema.model}}"
+        icon="{{widget.icon}}"
+        prop-obj="widget.propObj"
+        model-values="dataValues"
+        fetch-locally="widget.fetchLocally"
+        >
+      </snaphy-widget-added>
+
+
+        <div class="col-sm-6 col-lg-3">
+            <a class="block block-bordered block-link-hover3" style="cursor:pointer" ng-click="resetSavedForm(schema.form)"   >
+                <table class="block-table text-center">
+                    <tbody>
+                        <tr>
+                            <td data-toggle="modal" data-target="#addDataModal" style="width: 50%;">
+                                <div class="h1 font-w700"><span class="h2 text-muted">+</span></div>
+                                <div class="h5 text-muted text-uppercase push-5-t">Add {{schema.model}}</div>
+                            </td>
+                            <td ui-sref="{{currentState}}.save" class="bg-gray-lighter border-l" style="width: 50%;">
+                                <div class="push-30 push-30-t">
+                                    <i class="si si-note fa-3x text-black-op"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div ng-if="checkIfParentState()"  class="content">
+    <div  class="row">
+        <!--Adding Filters-->
+        <!-- Don't load the filters until the data isn't loaded -->
+        <div snaphy-load-filters class="col-lg-12 col-sm-12" ng-if="isFilterPresent() && isDataFetched()">
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">Filters</h3>
+                </div>
+                <div class="block-content ">
+                    <form class="form-horizontal" ng-repeat="(columnName, filter) in schema.filters" >
+                        <filter-date
+                                model-settings="schema"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$date'"
+                                class="col-lg-6 col-sm-6">
+                        </filter-date>
+                        <filter-select
+                                options="{{filter.options}}"
+                                model-settings="schema"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                table-data="dataValues"
+                                filter-options="filter"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$select'"
+                                class="col-lg-6 col-sm-6">
+
+                        </filter-select>
+                        <filter-multi-select
+                                options="{{filter.options}}"
+                                model-settings="schema"
+                                table-data="dataValues"
+                                filter-options="filter"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$multiSelect'"
+                                class="col-lg-6 col-sm-6">
+
+                        </filter-multi-select>
+
+                        <filter-array-objects
+                                options="{{filter.options}}"
+                                model-settings="schema"
+                                table-data="dataValues"
+                                filter-options="filter"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                get="{{filter.get}}"
+                                label="{{filter.label}}"
+                                ng-if="filter.type==='$arrayOfObjects'"
+                                search-prop="{{filter.searchProp}}"
+                                class="col-lg-6 col-sm-6">
+
+                        </filter-array-objects>
+
+                        <filter-radio
+                                options="{{filter.options}}"
+                                table-id="automataTable"
+                                column-name="{{columnName}}"
+                                label="{{filter.label}}"
+                                model-settings="schema"
+                                ng-if="filter.type==='$radio'"
+                                class="col-lg-6 col-sm-6">
+                        </filter-radio>
+
+                    </form>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div><!--block-->
+        </div><!--col-md-4-->
+    </div>
+</div>
+
+
+<div  class="content">
+    <div ui-view class="row">
+        <div class="col-sm-12" ng-class="{'col-lg-12': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
+            <!-- Dynamic Table Full -->
+            <div ng-cloak id="automataWidget" class="block">
+                <div class="block-header">
+                    <ul class="block-options">
+                        <li>
+                            <button ng-click="refreshData()" type="button" data-toggle="block-option"  ><i class="si si-refresh"></i></button>
+                        </li>
+                    </ul>
+                    <h3 class="block-title">{{tableTitle}}</h3>
+                </div>
+                <div class="block-content">
+                    <div snaphy-load-datatable class="table-responsive" style="overflow-x: hidden;">
+                        <table
+                        st-pipe="refreshData" st-table="displayed"
+                        id="automataTable"
+                        class="table table-bordered table-striped js-dataTable-full">
+                        <thead>
+                            <tr>
+                                <th
+                                    ng-if = "displayProperties(schema, header)"
+                                    ng-repeat="header in schema.header"
+                                    st-sort="{{header}}">
+                                    {{header | removeDot}}
+                                </th>
+                                <th class="text-center" style="width: 10%;">Actions</th>
+                            </tr>
+
+                            <!-- <tr>
+                                <th ng-if = "displayProperties(schema, header)" ng-repeat="header in schema.header">
+                                    <input st-search="{{header}}" />
+                                </th>
+                            </tr> -->
+                        </thead>
+
+                        <tbody ng-show="!isLoading">
+                            <tr ng-if="rowObject" ng-repeat="(rowId, rowObject) in displayed">
+                                <!--Populating the table values and binding header with columnVal-->
+                                <td ng-if   = "displayProperties(schema, header)"
+                                    ng-init = "colType = checkType(rowObject, header);
+                                               colValue    = getColValue(rowObject, header);
+                                               colKey      = getKey(rowObject, header);
+                                               tableConfig = findModelPropertyTableConfig(schema.tables, colKey);"
+                                    ng-repeat="header in schema.header" >
+
+                                    <span data-sort="{{getColValue(rowObject, header)}}"  data-filter="{{getColValue(rowObject, header)}}" ng-if="colType === '[object String]'">
+                                        <span ng-if="tableConfig.onClick !== undefined">
+                                            <!--Display link here..-->
+                                            <a ui-sref="{{tableConfig.onClick.state}}({{getParams(tableConfig.onClick.params, rowObject)}})">{{getColValue(rowObject, header)}}</a>
+                                        </span>
+
+                                        <span ng-if="tableConfig.date">
+                                            <!--Display link here..-->
+
+                                            <span
+                                                data-order="{{dateInSeconds(rowObject, header)}}"
+                                                data-sort="{{dateInSeconds(rowObject, header)}}"
+                                                data-search="{{getColValue(rowObject, header)}}" >
+                                                {{toJsDate(getColValue(rowObject, header) )| date:'MM/dd/yyyy'}}
+                                            </span>
+                                        </span>
+
+                                        <span ng-init="labelType = tableConfig.tag[getColValue(rowObject, header)]" ng-if="tableConfig.tag !== undefined">
+                                            <span ng-if="getTagInfo(schema.tables, colKey, rowObject, header) !== undefined" class="label" ng-class="getTagInfo(schema.tables, colKey, rowObject, header)" >{{getColValue(rowObject, header)}}</span>
+                                            <span ng-if="getTagInfo(schema.tables, colKey, rowObject, header) === undefined" class="label label-default">{{getColValue(rowObject, header)}}</span>
+                                        </span>
+                                        <span ng-if="tableConfig.tag === undefined && tableConfig.onClick === undefined && !tableConfig.date">
+                                            {{getColValue(rowObject, header)}}
+                                        </span>
+                                    </span>
+                                    <span ng-if="colType === '[object Number]'">
+                                        <!--Do string populated work here...-->
+                                        {{getColValue(rowObject, header)}}
+                                    </span>
+                                    <span ng-if="colType === '[object Array]'">
+                                        <!--Do string populated work here...-->
+                                        <!-- {{getColValue(rowObject, header)}} -->
+                                        <ul>
+                                            <li ng-repeat="arrayData in getColValue(rowObject, header)">
+                                                <span ng-if="checkType(getColValue(rowObject, header), $index)  === '[object Object]'">
+                                                    <ul style="padding-left: 0px;">
+                                                        <li ng-repeat="(key, arrValue) in arrayData">
+                                                            {{arrValue}}
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                                <span ng-if="checkType(getColValue(rowObject, header), $index)  !== '[object Object]'">
+                                                    {{arrayData}}
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                    <span ng-init="colType = getRelationColumnType (rowObject, header, colKey, colType);
+                                          colValue = getRelationColumnValue(rowObject, header, colKey);"
+                                          ng-if="colType === '[object Object]'">
+                                        <!--Do string populated work here...-->
+                                        <ul ng-if="colType === '[object Object]'">
+                                            <li style="margin-top: 10px;" ng-init="objColType = checkType(colValue, key);" ng-repeat="(key, value) in colValue">
+                                                <span  ng-if="checkType(colValue, key) === '[object Object]'">
+                                                    <ul>
+                                                        <li ng-repeat="(nestedKey, nestedValue) in getColValue(colValue, key)">
+                                                            <small><strong>{{nestedKey | capitalize}}</strong></small>: <span>{{nestedValue}}</span>
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                                <span ng-if="objColType !== '[object Object]'">
+                                                   <small><strong>{{key | capitalize }}</strong></small>: {{getColValue(colValue, key)}}
+                                                </span>
+
+                                            </li>
+                                        </ul>
+                                        <span ng-if="colType !== '[object Object]'">
+                                                {{getRelationColumnValue(rowObject, header, colKey)}}
+                                        </span>
+                                    </span>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody ng-show="isLoading">
+                            <tr>
+                                <td colspan="4" class="text-center">Loading ...
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr >
+                                <td   colspan="{{schema.header.length/2}}" >
+                                    <span class="text-left" style="vertical-align: middle;">
+                                        Total {{totalResults}} results | {{pagesReturned}} Pages.
+                                    </span>
+                                </td>
+
+                                <td colspan="{{schema.header.length/2}}"   class="text-right" st-pagination="" st-items-by-page="10" ></td>
+
+                            </tr>
+
+                        </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div><!--div.block-->
+            <!-- END Dynamic Table Full -->
+        </div>
+    </div><!--row-->
+</div> <!-- content-->
+
+
+
+
+
+
+
+
+
+
+
+<!-- <table class="table" st-pipe="refreshData" st-table="displayed">
     <thead>
         <tr>
             <th st-sort="id">Id</th>
@@ -32,4 +344,4 @@
             <td class="text-center" st-pagination="" st-items-by-page="10" colspan="4"></td>
         </tr>
     </tfoot>
-</table>
+</table> -->

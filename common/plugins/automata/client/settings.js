@@ -9,21 +9,7 @@
 var settings = {
     "defaultTemplate": true,
     loadDatabases: [
-        "Employee",
-        "EmployeeDetails",
-        "Recipe",
-        "Comments",
-        "Category",
-        "Customer",
-        "Cuisines",
-        "IngredientCategory",
-        "Ingredients",
-        "Priority",
-        "RecipeIngredients",
-        "RecipeTag",
-        "Wishlist",
-        "Chef",
-        "RecipeAnalytic"
+    
     ]
 };
 

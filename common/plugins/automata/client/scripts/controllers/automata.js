@@ -119,7 +119,7 @@ angular.module($snaphy.getModuleName())
          */
         $scope.getColumnKey = function(columnHeader) {
             //var keyName;
-            var patt = /^[A-Z0-9a-z-]+\_/;
+            var patt = /^[A-Z0-9a-z-$]+\_/;
             return columnHeader.replace(patt, '');
         };
 
