@@ -7,6 +7,7 @@
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
    "defaultTemplate": true,
+   "tablePanelId": "#automataWidget",
    loadDatabases: [
        "Employee",
        "EmployeeDetails",

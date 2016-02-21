@@ -75,27 +75,24 @@
                 </div>
                 <div class="block-content ">
                     <form class="form-horizontal" ng-repeat="(columnName, filter) in schema.filters" >
-                        <filter-date
+                        <robust-filter-date
                                 model-settings="schema"
-                                table-id="automataTable"
                                 column-name="{{columnName}}"
                                 label="{{filter.label}}"
                                 ng-if="filter.type==='$date'"
                                 class="col-lg-6 col-sm-6">
-                        </filter-date>
-                        <filter-select
+                        </robust-filter-date>
+                        <robust-filter-select
                                 options="{{filter.options}}"
                                 model-settings="schema"
-                                table-id="automataTable"
                                 column-name="{{columnName}}"
-                                table-data="dataValues"
                                 filter-options="filter"
                                 get="{{filter.get}}"
                                 label="{{filter.label}}"
                                 ng-if="filter.type==='$select'"
                                 class="col-lg-6 col-sm-6">
 
-                        </filter-select>
+                        </robust-filter-select>
                         <filter-multi-select
                                 options="{{filter.options}}"
                                 model-settings="schema"
@@ -139,7 +136,7 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button ng-click="resetAll('automataTable')" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
+                                <button ng-click="resetAll()" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -159,17 +156,14 @@
                 <div class="block-header">
                     <ul class="block-options">
                         <li>
-                            <button ng-click="refreshData()" type="button" data-toggle="block-option" data-action="refresh_toggle"  ><i class="si si-refresh"></i></button>
+                            <button ng-click="resetTable()" type="button" data-toggle="block-option" data-action="refresh_toggle"  ><i class="si si-refresh"></i></button>
                         </li>
                     </ul>
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
-                <div class="block-content">
+                <div st-pipe="refreshData"   st-table="displayed" class="block-content">
                     <div  class="table-responsive" style="overflow-x: hidden;">
-                        <table
-                        st-pipe="refreshData" st-table="displayed"
-                        id="automataTable"
-                        class="table table-bordered  table-striped js-dataTable-full">
+                        <table id="automataTable" class="table table-bordered  table-striped js-dataTable-full">
                         <thead>
                             <tr>
                                 <th
@@ -186,6 +180,7 @@
                                     <input st-search="{{header}}" />
                                 </th>
                             </tr>
+
                         </thead>
 
                         <tbody ng-show="!isLoading">
@@ -286,22 +281,15 @@
                                 </td>
                             </tr>
                         </tbody>
-
-                            <!--
-                        <tfoot>
-                            <tr >
-                                <td   colspan="{{schema.header.length/2}}" >
-                                    <span class="text-left" style="vertical-align: middle;">
-                                        Total {{totalResults}} results | {{pagesReturned}} Pages.
-                                    </span>
-                                </td>
-
-                                <td colspan="{{schema.header.length/2}}"   class="text-right" st-pagination="" st-items-by-page="10" ></td>
-
-                            </tr>
-
-                        </tfoot> -->
                         </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <span class="text-left text-muted" style="vertical-align: middle;"> Total {{totalResults}} results | {{pagesReturned}} Pages.</span>
+                        </div>
+                        <div  class="col-md-6">
+                            <span st-pagination="" st-items-by-page="10" class="text-right" style="vertical-align: middle;"></span>
+                        </div>
                     </div>
                 </div>
             </div><!--div.block-->
@@ -309,49 +297,3 @@
         </div>
     </div><!--row-->
 </div> <!-- content-->
-
-
-
-
-
-
-
-
-
-
-
-<!-- <table class="table" st-pipe="refreshData" st-table="displayed">
-    <thead>
-        <tr>
-            <th st-sort="id">Id</th>
-            <th st-sort="name">Name</th>
-            <th st-sort="recipeType">Recipe Type</th>
-            <th st-sort="servings">Servings</th>
-        </tr>
-        <tr>
-            <th><input st-search="id"/></th>
-            <th><input st-search="name"/></th>
-            <th><input st-search="recipeType"/></th>
-            <th><input st-search="servings"/></th>
-        </tr>
-    </thead>
-    <tbody ng-show="!isLoading">
-        <tr ng-repeat="row in displayed">
-            <td>{{row.id}}</td>
-            <td>{{row.name}}</td>
-            <td>{{row.recipeType}}</td>
-            <td>{{row.servings}}</td>
-        </tr>
-    </tbody>
-    <tbody ng-show="isLoading">
-        <tr>
-            <td colspan="4" class="text-center">Loading ...
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td class="text-center" st-pagination="" st-items-by-page="10" colspan="4"></td>
-        </tr>
-    </tfoot>
-</table> -->

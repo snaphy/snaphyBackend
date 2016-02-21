@@ -83,11 +83,37 @@ angular.module($snaphy.getModuleName())
 
         var getFilterObj = function(dataSchema, dbService, filterObj) {
             //var filterObj = {};
+            /*
+                Multiple include syntax..
+                visit for more info.. https://github.com/strongloop/loopback/issues/735
+                [
+                  {
+                    relation: 'owner', // include the owner object
+                    scope: { // further filter the owner object
+                      fields: ['username', 'email'], // only show two fields
+                      include: { // include orders for the owner
+                        relation: 'orders',
+                        where: {orderId: 5} // only select order with id 5
+                      }
+                    }
+                  },
+                  {
+                    relation: 'thanks', // include the thank object
+                    scope: { // further filter the owner object
+                      fields: ['username']
+                    }
+                  }
+                ]
+
+             */
             filterObj.include = filterObj.include || [];
             if (dataSchema.relations.belongsTo) {
                 if (dataSchema.relations.belongsTo.length) {
                     dataSchema.relations.belongsTo.forEach(function(relationName) {
-                        filterObj.include.push(relationName);
+                        var includeObj = {
+                            "relation": relationName
+                        }
+                        filterObj.include.push(includeObj);
                     });
                 }
             }
@@ -95,7 +121,10 @@ angular.module($snaphy.getModuleName())
             if (dataSchema.relations.hasAndBelongsToMany) {
                 if (dataSchema.relations.hasAndBelongsToMany.length) {
                     dataSchema.relations.hasAndBelongsToMany.forEach(function(relationName) {
-                        filterObj.include.push(relationName);
+                        var includeObj = {
+                            "relation": relationName
+                        }
+                        filterObj.include.push(includeObj);
                     });
                 }
             }
@@ -103,7 +132,10 @@ angular.module($snaphy.getModuleName())
             if (dataSchema.relations.hasMany) {
                 if (dataSchema.relations.hasMany.length) {
                     dataSchema.relations.hasMany.forEach(function(relationName) {
-                        filterObj.include.push(relationName);
+                        var includeObj = {
+                            "relation": relationName
+                        }
+                        filterObj.include.push(includeObj);
                     });
                 }
             }
@@ -112,7 +144,10 @@ angular.module($snaphy.getModuleName())
             if (dataSchema.relations.hasOne) {
                 if (dataSchema.relations.hasOne.length) {
                     dataSchema.relations.hasOne.forEach(function(relationName) {
-                        filterObj.include.push(relationName);
+                        var includeObj = {
+                            "relation": relationName
+                        }
+                        filterObj.include.push(includeObj);
                     });
                 }
             }
@@ -122,17 +157,19 @@ angular.module($snaphy.getModuleName())
 
 
         //{where: {or: [{title: 'My Post'}, {content: 'Hello'}]}}
-        var getPage = function(start, number, params, database) {
+        var getPage = function(start, number, params, database, schema,  filterObj) {
             var dbService = Database.loadDb(database);
             var object = {};
-            var filter = {};
-            var where = {};
+            var filter = filterObj || {};
+            var where = filterObj.where || {};
             //where.or = []
             //Prepare filter..
             var skip = start;
             var limit = number;
             var orderBy = [];
             var deferred = $q.defer();
+            //track which related model has where filter ..
+            var relatedModelWhereFilter = [];
 
             //Add the necessary include in the filter..
             getFilterObj(schema, dbService, filter);
@@ -149,16 +186,55 @@ angular.module($snaphy.getModuleName())
 
             filter.order = orderBy;
             if (params.search) {
+
                 if (params.search.predicateObject) {
                     for (var property in params.search.predicateObject) {
                         if (params.search.predicateObject.hasOwnProperty(property)) {
-                            var like = params.search.predicateObject[property];
-                            //add to where property..
-                            //where: {title: {like: 'M.+st'}}}
-                            where[property] = {
-                                "like": like
-                            };
-                            //where.or.push({property: {"like" : like} });
+                            if (typeof params.search.predicateObject[property] != 'object') {
+                                var like = params.search.predicateObject[property];
+                                //add to where property..
+                                //where: {title: {like: 'M.+st'}}}
+                                where[property] = {
+                                    "like": like
+                                };
+                                //where.or.push({property: {"like" : like} });
+                            }else{
+                                //add to realted data..
+                                //{ customer: {email: "robins"} }
+                                if(filter.include === undefined){
+                                    filter.include = [];
+                                }
+                                if(filter.include.length){
+                                    for(var i=0; i<filter.include.length; i++){
+                                        var includeProp = filter.include[i];
+                                        if(includeProp.relation === property){
+                                            //Add relation name for tracking..
+                                            relatedModelWhereFilter.push(property);
+                                            //Now insert the where...
+                                            var relationObj = params.search.predicateObject[property];
+                                            //var like = params.search.predicateObject[property];
+                                            for(var prop in relationObj){
+                                                if(relationObj.hasOwnProperty(prop)){
+                                                    var likeValue = relationObj[prop];
+
+                                                    includeProp.scope = includeProp.scope || {};
+                                                    includeProp.scope.where = includeProp.scope.where || {};
+                                                    // includeProp.scope.where[prop] = {
+                                                    //     "like": likeValue
+                                                    // };
+                                                    includeProp.scope.where[prop] = {
+                                                        "like": likeValue
+                                                    };
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+
+
+                            }
+
                         }
                     }
                 }
@@ -176,9 +252,9 @@ angular.module($snaphy.getModuleName())
 
             dbService.find(object, function(values, respHeader) {
                 dbService.count(filter, function(count, respHeader) {
-                    console.log(count);
-                    //Value retrived..
-                    console.log(values);
+                     console.log(count);
+                    // //Value retrived..
+                    // console.log(values);
                     //prepare another collection for the given element..
                     var dataValues = [];
                     //fetch hasManyThrough for the data..
@@ -190,8 +266,26 @@ angular.module($snaphy.getModuleName())
                                 fetchHasManyThrough(element, schema.relations.hasManyThrough);
                             }
                         }
-                        //setting the value of the data successfully fetched..
-                        dataValues.push(element);
+
+                        if(relatedModelWhereFilter.length){
+                            var found = true;
+                            relatedModelWhereFilter.forEach(function(relationName){
+                                if(element[relationName] === undefined){
+                                    found = false;
+                                }
+                            }); //END loop
+
+                            //TODO COUNT IN CASE OF RELATED MODE DATA FILTER NOT IMPLEMENTED..
+
+                            //Only add element if data is found..
+                            if(found){
+                                dataValues.push(element);
+                            }
+                        }else{
+                            //setting the value of the data successfully fetched..
+                            dataValues.push(element);
+                        }
+
                     });
 
                     //Now resolve the promise..

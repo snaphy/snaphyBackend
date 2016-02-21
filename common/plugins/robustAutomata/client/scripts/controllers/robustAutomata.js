@@ -26,6 +26,8 @@ angular.module($snaphy.getModuleName())
         $scope.currentState = currentState;
         var defaultTemplate = $snaphy.loadSettings('robustAutomata', "defaultTemplate");
         $scope.databasesList = $snaphy.loadSettings('robustAutomata', "loadDatabases");
+        //Id for tablePanel
+        var tablePanelId = $snaphy.loadSettings('robustAutomata', "tablePanelId");
         $snaphy.setDefaultTemplate(defaultTemplate);
         $scope.displayed = [];
         $scope.pagesReturned ;
@@ -226,20 +228,13 @@ angular.module($snaphy.getModuleName())
         /**
          * For resetting all filter on reset button click..
          */
-        $scope.resetAll = function(tableId) {
-            //Removing the # tag from id if placed. to avoid duplicity of #
-            tableId = tableId.replace(/^\#/, '');
-            tableId = '#' + tableId;
+        $scope.resetAll = function() {
             for (var i = 0; i < resetFilterList.length; i++) {
                 //Now call each method..
                 resetFilterList[i]();
             }
-
-            //Now redraw the table..
-            //Getting the instance of the table..
-            var table = $(tableId).DataTable();
-            //Now redraw the tables..
-            table.draw();
+            $scope.resetTable();
+            //$scope.refreshData();
         };
 
 
@@ -578,7 +573,7 @@ angular.module($snaphy.getModuleName())
 
 
 
-        var getDatabase = function(databaseName, tableState){
+        var getDatabase = function(databaseName, tableState, ctrl){
             if (!$scope.stCtrl && ctrl) {
                 $scope.stCtrl = ctrl;
             }
@@ -591,30 +586,58 @@ angular.module($snaphy.getModuleName())
             var pagination = tableState.pagination;
             var start = pagination.start || 0; // This is NOT the page number, but the index of item in the list that you want to use to display the table.
             var number = pagination.number || 10; // Number of entries showed per page.
+            //Add the loading bar..
+            if (tablePanelId) {
+                $timeout(function() {
+                    //Now hide remove the refresh widget..
+                    $(tablePanelId).addClass('block-opt-refresh');
+                }, 200);
+            }
 
             //First get the schema..
             Resource.getSchema(databaseName, function(schema) {
                 //Populate the schema..
                 $scope.schema = schema;
-                Resource.getPage(start, number, tableState, databaseName, schema).then(function(result) {
+                $scope.filterObj = $scope.filterObj || {};
+
+                Resource.getPage(start, number, tableState, databaseName, schema, $scope.filterObj).then(function(result) {
                     $scope.displayed = result.data;
                     tableState.pagination.numberOfPages = result.numberOfPages; //set the number of pages so the pagination can update
                     $scope.pagesReturned = result.numberOfPages;
                     $scope.totalResults = result.count;
                     $scope.isLoading = false;
+                    dataFetched = true;
+                    if (tablePanelId) {
+                        $timeout(function() {
+                            //Now hide remove the refresh widget..
+                            $(tablePanelId).removeClass('block-opt-refresh');
+                        }, 200);
+                    }
                 });
             }, function(httpResp){
                 console.error(httpResp);
+                if (tablePanelId) {
+                    $timeout(function() {
+                        //Now hide remove the refresh widget..
+                        $(tablePanelId).removeClass('block-opt-refresh');
+                    }, 200);
+                }
             });
         }
 
         $scope.refreshData = function(tableState, ctrl) {
             for (var i = 0; i < $scope.databasesList.length; i++) {
                 if (currentState.toLowerCase().trim() === $scope.databasesList[i].toLowerCase().trim()) {
-                    getDatabase($scope.databasesList[i], tableState);
+                    getDatabase($scope.databasesList[i], tableState, ctrl);
                     break;
                 }
             }
+        };
+
+        $scope.resetTable = function(){
+            //reset the table filters
+            $scope.filterObj.where = {};
+            $scope.refreshData();
         };
 
 

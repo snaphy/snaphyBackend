@@ -372,7 +372,7 @@ angular.module($snaphy.getModuleName())
                     $.fn.DataTable.ext.search.push(
                         function(settings, data, dataIndex) {
                             // check if current table is part of the allow list
-                            if ($.inArray(settings.nTable.getAttribute('id'), allowFilter) == -1) {
+                            if ($.inArray(settings.nTable.getAttribute('id'), allowFilter) === -1) {
                                 // if not table should be ignored
                                 return true;
                             }

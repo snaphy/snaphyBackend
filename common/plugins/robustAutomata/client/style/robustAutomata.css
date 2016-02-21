@@ -6,3 +6,8 @@
 .st-sort-descent:before{
     content: '\25BC';
 }
+
+
+.pagination>li {
+    cursor: pointer;
+}

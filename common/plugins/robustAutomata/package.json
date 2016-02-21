@@ -14,7 +14,8 @@
             "robustAutomataRoute": "/robustAutomata/scripts/routes/robustAutomata.js",
             "robustAutomataController": "/robustAutomata/scripts/controllers/robustAutomata.js",
             "robustAutomataServices": "/robustAutomata/scripts/services/robustAutomata.js",
-            "robustAutomataFilters": "/robustAutomata/scripts/filters/robustAutomata.js"
+            "robustAutomataFilters": "/robustAutomata/scripts/filters/robustAutomata.js",
+            "robustAutomataDirectives": "/robustAutomata/scripts/directives/robustAutomata.js"
         },
         "moduleDependencies": {
             "smart-table": "/robustAutomata/style/bower_components/angular-smart-table/dist/smart-table.min.js"

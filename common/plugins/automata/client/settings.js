@@ -9,7 +9,7 @@
 var settings = {
     "defaultTemplate": true,
     loadDatabases: [
-    
+
     ]
 };
 
