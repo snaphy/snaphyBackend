@@ -8,7 +8,7 @@
     "routeExposure": "/robustAutomata",
     "staticFiles": {
         "css": {
-            "exampleCss": "/robustAutomata/style/example.css"
+            "exampleCss": "/robustAutomata/style/robustAutomata.css"
         },
         "js": {
             "robustAutomataRoute": "/robustAutomata/scripts/routes/robustAutomata.js",

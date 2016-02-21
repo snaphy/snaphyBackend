@@ -159,17 +159,17 @@
                 <div class="block-header">
                     <ul class="block-options">
                         <li>
-                            <button ng-click="refreshData()" type="button" data-toggle="block-option"  ><i class="si si-refresh"></i></button>
+                            <button ng-click="refreshData()" type="button" data-toggle="block-option" data-action="refresh_toggle"  ><i class="si si-refresh"></i></button>
                         </li>
                     </ul>
                     <h3 class="block-title">{{tableTitle}}</h3>
                 </div>
                 <div class="block-content">
-                    <div snaphy-load-datatable class="table-responsive" style="overflow-x: hidden;">
+                    <div  class="table-responsive" style="overflow-x: hidden;">
                         <table
                         st-pipe="refreshData" st-table="displayed"
                         id="automataTable"
-                        class="table table-bordered table-striped js-dataTable-full">
+                        class="table table-bordered  table-striped js-dataTable-full">
                         <thead>
                             <tr>
                                 <th
@@ -181,11 +181,11 @@
                                 <th class="text-center" style="width: 10%;">Actions</th>
                             </tr>
 
-                            <!-- <tr>
+                             <tr>
                                 <th ng-if = "displayProperties(schema, header)" ng-repeat="header in schema.header">
                                     <input st-search="{{header}}" />
                                 </th>
-                            </tr> -->
+                            </tr>
                         </thead>
 
                         <tbody ng-show="!isLoading">
@@ -270,14 +270,24 @@
                                     </span>
 
                                 </td>
-                            </tr>
-                        </tbody>
-                        <tbody ng-show="isLoading">
-                            <tr>
-                                <td colspan="4" class="text-center">Loading ...
+                                <!-- For adding table edit and delete options. -->
+                                <td  class="text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#addDataModal" title="Edit Data" ng-click="prepareDataForEdit(rowObject, schema.form)"><i class="fa fa-pencil"></i></button>
+                                        <button
+                                        class="btn btn-xs btn-default"
+                                        type="button"
+                                        data-toggle="tooltip"
+                                        title="Remove Data"
+                                        ng-click="deleteData(schema, rowObject)">
+                                        <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
+
+                            <!--
                         <tfoot>
                             <tr >
                                 <td   colspan="{{schema.header.length/2}}" >
@@ -290,7 +300,7 @@
 
                             </tr>
 
-                        </tfoot>
+                        </tfoot> -->
                         </table>
                     </div>
                 </div>
