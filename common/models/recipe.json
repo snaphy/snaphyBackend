@@ -35,19 +35,25 @@
                 "name": "rejected"
             }]
         },
-        "priorities_priority": {
+        "servings": {
             "type": "$multiSelect",
-            "label": "Select recipe by priority",
+            "label": "Select recipe servings",
             "getOptionsFromColumn": false,
             "options": [{
                 "id": "1",
-                "name": "normal"
+                "name": "1"
             }, {
                 "id": "2",
-                "name": "medium"
+                "name": "2"
             }, {
                 "id": "3",
-                "name": "high"
+                "name": "3"
+            },{
+                "id": "4",
+                "name": "4"
+            },{
+                "id": "5",
+                "name": "5"
             }]
         }
     },

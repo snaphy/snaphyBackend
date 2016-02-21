@@ -598,9 +598,9 @@ angular.module($snaphy.getModuleName())
             Resource.getSchema(databaseName, function(schema) {
                 //Populate the schema..
                 $scope.schema = schema;
-                $scope.filterObj = $scope.filterObj || {};
+                $scope.where = $scope.where || {};
 
-                Resource.getPage(start, number, tableState, databaseName, schema, $scope.filterObj).then(function(result) {
+                Resource.getPage(start, number, tableState, databaseName, schema, $scope.where).then(function(result) {
                     $scope.displayed = result.data;
                     tableState.pagination.numberOfPages = result.numberOfPages; //set the number of pages so the pagination can update
                     $scope.pagesReturned = result.numberOfPages;
@@ -635,8 +635,9 @@ angular.module($snaphy.getModuleName())
         };
 
         $scope.resetTable = function(){
+            
             //reset the table filters
-            $scope.filterObj.where = {};
+            $scope.where = {};
             $scope.refreshData();
         };
 

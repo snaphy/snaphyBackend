@@ -93,20 +93,19 @@
                                 class="col-lg-6 col-sm-6">
 
                         </robust-filter-select>
-                        <filter-multi-select
+                        <robust-filter-multi-select
                                 options="{{filter.options}}"
                                 model-settings="schema"
-                                table-data="dataValues"
                                 filter-options="filter"
-                                table-id="automataTable"
                                 column-name="{{columnName}}"
                                 get="{{filter.get}}"
                                 label="{{filter.label}}"
                                 ng-if="filter.type==='$multiSelect'"
                                 class="col-lg-6 col-sm-6">
 
-                        </filter-multi-select>
-
+                        </robust-filter-multi-select>
+<!-- TODO Array filter scheduled for later -->
+<!--
                         <filter-array-objects
                                 options="{{filter.options}}"
                                 model-settings="schema"
@@ -120,17 +119,16 @@
                                 search-prop="{{filter.searchProp}}"
                                 class="col-lg-6 col-sm-6">
 
-                        </filter-array-objects>
+                        </filter-array-objects> -->
 
-                        <filter-radio
+                        <robust-filter-radio
                                 options="{{filter.options}}"
-                                table-id="automataTable"
                                 column-name="{{columnName}}"
                                 label="{{filter.label}}"
                                 model-settings="schema"
                                 ng-if="filter.type==='$radio'"
                                 class="col-lg-6 col-sm-6">
-                        </filter-radio>
+                        </robust-filter-radio>
 
                     </form>
                     <form class="form-horizontal">
@@ -156,7 +154,7 @@
                 <div class="block-header">
                     <ul class="block-options">
                         <li>
-                            <button ng-click="resetTable()" type="button" data-toggle="block-option" data-action="refresh_toggle"  ><i class="si si-refresh"></i></button>
+                            <button ng-click="resetAll()" type="button" data-toggle="block-option" data-action="refresh_toggle"  ><i class="si si-refresh"></i></button>
                         </li>
                     </ul>
                     <h3 class="block-title">{{tableTitle}}</h3>
