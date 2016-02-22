@@ -31,6 +31,8 @@ angular.module($snaphy.getModuleName())
         $snaphy.setDefaultTemplate(defaultTemplate);
         $scope.displayed = [];
         $scope.pagesReturned ;
+        //Inline search data object
+        $scope.inlineSearch = {} ;
         //--------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -88,7 +90,38 @@ angular.module($snaphy.getModuleName())
             var val = $scope.getColValue(rowObject, columnHeader);
             var date = new Date(val);
             return date.getTime();
-        }
+        };
+
+
+        $scope.addWhereQuery = function(model, columnName, filterType){
+            $scope.where = $scope.where  || {};
+            if(filterType === "select"){
+                //console.log("select", columnName, model);
+                if(model){
+                    $scope.where[columnName] = model;
+                }
+            }else if (filterType === "number") {
+                //console.log("select", columnName, model);
+                if(model){
+                    $scope.where[columnName] = model;
+                }
+            }
+            else if (filterType === "date") {
+                console.log("select", columnName, model);
+                if(model){
+                    //TODO CHANGE HERE TO NOT RESET EVERYTIME..
+                    $scope.where.and = [];
+                    var obj = {};
+                    obj[columnName] = {"gte" : new Date(model) };
+                    $scope.where.and.push(obj);
+                }
+            }else{
+
+            }
+            console.info("modifed where", $scope.where);
+            //Now redraw the table..
+            $scope.refreshData();
+        };
 
 
 
@@ -111,6 +144,70 @@ angular.module($snaphy.getModuleName())
                 }
             }
             return keyName;
+        };
+
+
+
+        //Check if to show the text filter..
+        $scope.showFilterType = function(header, schema){
+            if(schema.tables){
+                var keyName = header.replace(/\./, "_");
+                if(schema.tables[keyName]){
+                    var tableProp = schema.tables[keyName];
+                    if(tableProp.search){
+                        return tableProp.search;
+                    }
+                }
+            }
+
+            return null;
+        };
+
+
+        $scope.getOptions = function(header, schema){
+            if(schema.tables){
+                var keyName = header.replace(/\./, "_");
+                if(schema.tables[keyName]){
+                    var tableProp = schema.tables[keyName];
+                    if(tableProp.search === "select"){
+                        if(tableProp.options){
+                            return tableProp.options;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        //Example addInlineFilterResetMethod('#automataTable', 'number', inlineSearch, header)
+        $scope.addInlineFilterResetMethod = function(tableId, type, modelObj, columnName){
+            if(type === "select"){
+                var element = $(tableId);
+                //Now add a Reset method to the filter..
+                $scope.addResetMethod(function(){
+                    console.log("Resetting select");
+                    if(modelObj[columnName]){
+                        modelObj[columnName] = null;
+                    }
+                    //Now reinitialize the
+                    setTimeout(function() {
+                        $($(element).find('select')).select2('val', 'All');
+                    }, 0);
+                });
+            }else if (type === "text" || type === "number" || type === "date") {
+                $scope.addResetMethod(function(){
+                    $timeout(function(){
+                        //$($(element).find('input')).val("");
+                        console.log("Resetting ", type);
+                        if(modelObj[columnName]){
+                            modelObj[columnName] = null;
+                        }
+                    });
+                });
+            }else{
+                //Do nothing..
+            }
         };
 
 
@@ -233,6 +330,7 @@ angular.module($snaphy.getModuleName())
                 //Now call each method..
                 resetFilterList[i]();
             }
+
             $scope.resetTable();
             //$scope.refreshData();
         };
@@ -599,6 +697,7 @@ angular.module($snaphy.getModuleName())
                 Resource.getSchema(databaseName, function(schema) {
                     //Populate the schema..
                     $scope.schema = schema;
+                    console.log(schema);
                     $scope.where = $scope.where || {};
 
                     Resource.getPage(start, number, tableState, databaseName, schema, $scope.where).then(function(result) {
@@ -638,6 +737,22 @@ angular.module($snaphy.getModuleName())
                             $(tablePanelId).removeClass('block-opt-refresh');
                         }, 200);
                     }
+                },function(httpResp){
+                    console.error(httpResp);
+                    if (tablePanelId) {
+                        $timeout(function() {
+                            //Now hide remove the refresh widget..
+                            $(tablePanelId).removeClass('block-opt-refresh');
+                        }, 200);
+                    }
+
+                    //console.error(respHeader);
+                    SnaphyTemplate.notify({
+                        message: "Error occured. Please click on the reset button to go back to normal.",
+                        type: 'danger',
+                        icon: 'fa fa-times',
+                        align: 'right'
+                    });
                 });
             }
         }

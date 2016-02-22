@@ -307,11 +307,13 @@ angular.module($snaphy.getModuleName())
                         count: count.count
                     });
                 }, function(httpResponse) {
+                    deferred.reject( httpResponse );
                     //Error counting values
                     console.error(httpResponse);
                 });
 
             }, function(httpResponse) {
+                deferred.reject( httpResponse );
                 //Error occured..in fetching data..
                 console.error(httpResponse);
             });

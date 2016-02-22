@@ -111,10 +111,23 @@
             "display": false
         },
         "added": {
-            "date": true
+            "date": true,
+            "search": "date"
         },
         "servings": {
-            "display": true
+            "display": true,
+            "search": "number"
+        },
+        "name":{
+            "search": "text"
+        },
+        "recipeType":{
+            "search": "select",
+            "options": ["veg", "nonveg"]
+        },
+        "status":{
+            "search": "select",
+            "options": ["publish", "onhold", "rejected"]
         }
     },
     "widgets": [{
@@ -361,7 +374,8 @@
             "templateOptions": {
                 "btnText": "Add Ingredients",
                 "searchProp": "name",
-                "create": false
+                "create": false,
+                "hide":false
             }
         },
         "wishlists": {
