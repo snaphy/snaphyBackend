@@ -26,6 +26,26 @@ angular.module($snaphy.getModuleName())
 
     .config(function ($validatorProvider) {
         $validatorProvider.addMethod("regex", function (value, element) {
-            return regexpr.test(value);
+            return RegExp.test(value);
         }, "Please enter a valid data.");
+    })
+
+    /**
+     *http://stackoverflow.com/questions/2901125/jquery-validate-required-select
+      // configure your validation
+      $("form").validate({
+       rules: {
+        SelectName: { valueNotEquals: "default" }
+       },
+       messages: {
+        SelectName: { valueNotEquals: "Please select an item!" }
+       }
+      });
+     * @param  {[type]} function ($validatorProvider [description]
+     * @return {[type]}          [description]
+     */
+    .config(function ($validatorProvider) {
+        $validatorProvider.addMethod("valueNotEquals", function (value, element, arg) {
+            return arg !== value;
+        },  "Please select some value");
     });

@@ -324,10 +324,10 @@
                 "minlength": 5
             },
             "recipeType": {
-                "required": true
+                "valueNotEquals": ""
             },
             "servings": {
-                "required": true
+                "valueNotEquals": ""
             }
 
         },
@@ -337,10 +337,10 @@
                 "minlength": "Minimum permitted recipe length is atleast 5"
             },
             "recipeType": {
-                "required": "Recipe name is required"
+                "valueNotEquals": "Please select a recipe type"
             },
             "servings": {
-                "required": "Recipe servings is required"
+                "valueNotEquals": "Please select recipe servings"
             }
         }
     },

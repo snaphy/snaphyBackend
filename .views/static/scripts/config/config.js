@@ -110,6 +110,7 @@ angular.module($snaphy.getModuleName())
             '<div ng-class="options.templateOptions.colSize">'+
             '<div class="form-material" ng-class="options.templateOptions.color">'+
             '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">'+
+            '<option value=""></option>'+
             '<option value="{{option}}" ng-repeat="option in options.templateOptions.options">{{option | uppercase}}</option>'+
             '</select>'+
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>'+
