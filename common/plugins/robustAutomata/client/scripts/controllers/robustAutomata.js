@@ -17,7 +17,7 @@ angular.module($snaphy.getModuleName())
         /*Data for save form modal*/
         $scope.saveFormData = $scope.saveFormData || {};
         //Initializing scope //for array..
-        $scope.dataValues = $scope.dataValues || [];
+        //$scope.displayed = $scope.displayed || [];
         //contains backup of the data..
         var backupData = backupData || {};
         var dataFetched = dataFetched || false;
@@ -30,9 +30,9 @@ angular.module($snaphy.getModuleName())
         var tablePanelId = $snaphy.loadSettings('robustAutomata', "tablePanelId");
         $snaphy.setDefaultTemplate(defaultTemplate);
         $scope.displayed = [];
-        $scope.pagesReturned ;
+        $scope.pagesReturned = null ;
         //Inline search data object
-        $scope.inlineSearch = {} ;
+        $scope.inlineSearch = {};
         //--------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -370,8 +370,8 @@ angular.module($snaphy.getModuleName())
                     $scope.dialog.show = false;
                 },
                 onConfirm: function() {
-                    var mainArrayIndex = getArrayIndex($scope.dataValues, data.id);
-                    var oldDeletedData = $scope.dataValues[mainArrayIndex];
+                    var mainArrayIndex = getArrayIndex($scope.displayed, data.id);
+                    var oldDeletedData = $scope.displayed[mainArrayIndex];
                     //console.log(data);
 
                     //Reset the disloag bar..
@@ -389,7 +389,7 @@ angular.module($snaphy.getModuleName())
                     }, function() {
                         $timeout(function() {
                             //Attach the data again..
-                            $scope.dataValues.push(oldDeletedData);
+                            $scope.displayed.push(oldDeletedData);
                         }, 10);
 
                         //console.error(respHeader);
@@ -401,7 +401,7 @@ angular.module($snaphy.getModuleName())
                         });
                     });
                     //Now delete the data..
-                    $scope.dataValues.splice(mainArrayIndex, 1);
+                    $scope.displayed.splice(mainArrayIndex, 1);
 
                 },
                 show: true
@@ -450,10 +450,10 @@ angular.module($snaphy.getModuleName())
         //Method for rollbackchanges is eror occured..
         $scope.rollBackChanges = function() {
             if (!$.isEmptyObject(backupData)) {
-                $scope.dataValues.forEach(function(data, index) {
+                $scope.displayed.forEach(function(data, index) {
                     if (data.id === backupData.id && !$.isEmptyObject(backupData)) {
                         //rollback changes..
-                        $scope.dataValues[index] = backupData;
+                        $scope.displayed[index] = backupData;
                         //Reset backup data..
                         backupData = {};
                         return false;
@@ -540,9 +540,9 @@ angular.module($snaphy.getModuleName())
                     update = true;
 
                 } else {
-                    positionNewData = $scope.dataValues.length;
+                    positionNewData = $scope.displayed.length;
                     //First add to the table..
-                    $scope.dataValues.push(savedData);
+                    $scope.displayed.push(savedData);
                     update = false;
                 }
 
@@ -551,7 +551,7 @@ angular.module($snaphy.getModuleName())
                 baseDatabase.save({}, requestData, function(baseModel) {
                     if (!update) {
                         //Now update the form with id.
-                        $scope.dataValues[positionNewData].id = baseModel.data.id;
+                        $scope.displayed[positionNewData].id = baseModel.data.id;
                     }
                     SnaphyTemplate.notify({
                         message: "Data successfully saved.",
@@ -567,7 +567,7 @@ angular.module($snaphy.getModuleName())
                     } else {
                         //remove the form added data..
                         if (positionNewData > -1) {
-                            $scope.dataValues.splice(positionNewData, 1);
+                            $scope.displayed.splice(positionNewData, 1);
                         }
                     }
 
