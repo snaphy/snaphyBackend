@@ -295,3 +295,63 @@
         </div>
     </div><!--row-->
 </div> <!-- content-->
+
+
+
+
+<!-- Fade In Modal -->
+<div on-modal-close class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent remove-margin-b">
+                <div class="block-header bg-primary-dark">
+                    <ul class="block-options">
+                        <li>
+                            <button  data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                        </li>
+                    </ul>
+                    <h3 class="block-title">{{tableTitle}}</h3>
+                </div>
+                <div ng-if="schema.validations" class="block-content block-content-narrow">
+                    <!-- {{saveFormData}}  -->
+                    <form name="schema.form" ng-validate="schema.validations" novalidate  class="form-horizontal">
+                        <formly-form   model="saveFormData" fields="schema.fields">
+
+                        </formly-form>
+                    </form>
+                </div><!--block-content-->
+            </div>
+            <!-- ng disabled removed as now ng-disabled="!enableButton(schema.form)" -->
+            <div class="modal-footer">
+                <button data-target="#addDataModal"  class="btn btn-sm btn-default "  type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-sm btn-default "  style="margin-right:20px;" type="button" ng-click="resetSavedForm(schema.form)">Reset data</button>
+                <button
+
+                    class="btn btn-sm btn-default"
+                    ng-click="saveForm(schema, schema.form,  saveFormData, true, '#addDataModal')">
+                        <i class="fa fa-save"></i>
+                        Save
+                </button>
+                <button
+
+                    type="submit"
+                    class="btn btn-sm bg-primary-dark"
+                    style="color:#fff;"
+                    ng-click="saveForm(schema, schema.form, saveFormData, false)" >
+                        <i class="fa fa-save"></i>
+                        Save and add another
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- For showing dialog box -->
+<snaphy-dialog
+    message="{{dialog.message}}"
+    table-title="{{dialog.title}}"
+    on-cancel="dialog.onCancel()"
+    on-confirm="dialog.onConfirm()"
+    show-dialog="dialog.show">
+</snaphy-dialog>
