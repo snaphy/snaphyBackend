@@ -119,5 +119,9 @@
   "AmazonImage": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "CompanyInfo": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

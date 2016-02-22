@@ -146,9 +146,9 @@
 </div>
 
 
-<div  class="content">
+<div class="content">
     <div ui-view class="row">
-        <div class="col-sm-12" ng-class="{'col-lg-12': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
+        <div ng-if="checkIfParentState()" class="col-sm-12" ng-class="{'col-lg-12': isFilterPresent(), 'col-lg-12': !isFilterPresent() }">
             <!-- Dynamic Table Full -->
             <div ng-cloak id="automataWidget" class="block">
                 <div class="block-header">

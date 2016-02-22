@@ -486,7 +486,7 @@ angular.module($snaphy.getModuleName())
                                 //between: [today, tomorrow]
                                 //console.log("today count ", [today.toISOString(), tomorrow.toISOString()]);
                                 var fromObj = {};
-                                fromObj[propObj.dateProp] = {"gte": today.subtract(1, 'days').toISOString()};
+                                fromObj[propObj.dateProp] = {"gte": moment().startOf('day').toISOString()};
                                 propObj.where.and.push(fromObj);
                                 var toObj = {};
                                 toObj[propObj.dateProp] = {"lte": tomorrow.toISOString()};

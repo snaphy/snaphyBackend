@@ -1,0 +1,33 @@
+{
+  "name": "CompanyInfo",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "html": {
+      "type": "string",
+      "required": true
+    },
+    "edited": {
+      "type": "date",
+      "default": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getInfo"
+    }
+  ],
+  "methods": {}
+}

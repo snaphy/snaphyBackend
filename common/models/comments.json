@@ -182,7 +182,7 @@
     },
     "status": {
       "type": "string",
-      "default":"onhold",
+      "default": "onhold",
       "template": {
         "type": "selectString",
         "templateOptions": {

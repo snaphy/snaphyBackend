@@ -13,7 +13,7 @@ angular.module($snaphy.getModuleName())
         //Storing an instance of table values..
         $scope.rowListValues = $scope.rowListValues || [];
         //Schema of the database
-        $scope.schema = {};
+        $scope.schema = $scope.schema  || {};
         /*Data for save form modal*/
         $scope.saveFormData = $scope.saveFormData || {};
         //Initializing scope //for array..
@@ -186,7 +186,7 @@ angular.module($snaphy.getModuleName())
                 var element = $(tableId);
                 //Now add a Reset method to the filter..
                 $scope.addResetMethod(function(){
-                    console.log("Resetting select");
+                    //console.log("Resetting select");
                     if(modelObj[columnName]){
                         modelObj[columnName] = null;
                     }
@@ -199,7 +199,7 @@ angular.module($snaphy.getModuleName())
                 $scope.addResetMethod(function(){
                     $timeout(function(){
                         //$($(element).find('input')).val("");
-                        console.log("Resetting ", type);
+                        //console.log("Resetting ", type);
                         if(modelObj[columnName]){
                             modelObj[columnName] = null;
                         }
