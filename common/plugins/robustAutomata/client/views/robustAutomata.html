@@ -28,16 +28,15 @@
     <!-- Simple Vertical Tiles -->
     <div class="row" ng-if="isDataFetched()">
 
-      <robust-widget-added  ng-cloak class="col-sm-6 col-lg-3"
+        <robust-widget-added  ng-cloak class="col-sm-6 col-lg-3"
         ng-repeat="widget in schema.widgets"
         label="{{widget.label}}"
         model="{{schema.model}}"
         icon="{{widget.icon}}"
         prop-obj="widget.propObj"
         model-values="displayed"
-        fetch-locally="widget.fetchLocally"
-        >
-    </robust-widget-added>
+        fetch-locally="widget.fetchLocally">
+        </robust-widget-added>
 
 
         <div class="col-sm-6 col-lg-3">
@@ -91,7 +90,6 @@
                                 label="{{filter.label}}"
                                 ng-if="filter.type==='$select'"
                                 class="col-lg-6 col-sm-6">
-
                         </robust-filter-select>
                         <robust-filter-multi-select
                                 options="{{filter.options}}"
@@ -102,24 +100,23 @@
                                 label="{{filter.label}}"
                                 ng-if="filter.type==='$multiSelect'"
                                 class="col-lg-6 col-sm-6">
-
                         </robust-filter-multi-select>
+
 <!-- TODO Array filter scheduled for later -->
 <!--
-                        <filter-array-objects
-                                options="{{filter.options}}"
-                                model-settings="schema"
-                                table-data="dataValues"
-                                filter-options="filter"
-                                table-id="automataTable"
-                                column-name="{{columnName}}"
-                                get="{{filter.get}}"
-                                label="{{filter.label}}"
-                                ng-if="filter.type==='$arrayOfObjects'"
-                                search-prop="{{filter.searchProp}}"
-                                class="col-lg-6 col-sm-6">
-
-                        </filter-array-objects> -->
+    <filter-array-objects
+            options="{{filter.options}}"
+            model-settings="schema"
+            table-data="dataValues"
+            filter-options="filter"
+            table-id="automataTable"
+            column-name="{{columnName}}"
+            get="{{filter.get}}"
+            label="{{filter.label}}"
+            ng-if="filter.type==='$arrayOfObjects'"
+            search-prop="{{filter.searchProp}}"
+            class="col-lg-6 col-sm-6">
+    </filter-array-objects> -->
 
                         <robust-filter-radio
                                 options="{{filter.options}}"

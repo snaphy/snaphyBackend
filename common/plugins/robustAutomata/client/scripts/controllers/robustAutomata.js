@@ -514,7 +514,7 @@ angular.module($snaphy.getModuleName())
          * @param formID refrencing to the id attribute of the  form.
          */
         $scope.saveForm = function(formStructure, formData, formModel, goBack, modelInstance) {
-            if(ImageUploadingTracker.isUploadInProgress){
+            if(ImageUploadingTracker.isUploadInProgress()){
                 SnaphyTemplate.notify({
                     message: "Wait!! Image uploading is in progress. Please wait till the image is uploaded.",
                     type: 'danger',
@@ -618,7 +618,7 @@ angular.module($snaphy.getModuleName())
         var closeModel = function(goBack, modelInstance) {
             //Reset the image upload if any...
             ImageUploadingTracker.resetTracker();
-            
+
             if (goBack) {
                 if (modelInstance) {
                     //close the model..

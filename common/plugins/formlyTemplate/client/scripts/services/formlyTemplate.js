@@ -7,10 +7,10 @@ angular.module($snaphy.getModuleName())
         var totalImageUpload = totalImageUpload || 0;
 
         var isUploadInProgress = function(){
-            if(totalImageUpload){
-                return true;
-            }else{
+            if(totalImageUpload === 0){
                 return false;
+            }else{
+                return true;
             }
         };
 
