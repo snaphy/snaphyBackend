@@ -3,8 +3,8 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for robustAutomataControl ..
-.controller('robustAutomataControl', ['$scope', '$stateParams', 'Database', 'Resource', '$timeout', 'SnaphyTemplate', '$state',
-    function($scope, $stateParams, Database, Resource, $timeout, SnaphyTemplate, $state) {
+.controller('robustAutomataControl', ['$scope', '$stateParams', 'Database', 'Resource', '$timeout', 'SnaphyTemplate', '$state', 'ImageUploadingTracker',
+    function($scope, $stateParams, Database, Resource, $timeout, SnaphyTemplate, $state, ImageUploadingTracker) {
         //Checking if default templating feature is enabled..
 
 
@@ -33,6 +33,7 @@ angular.module($snaphy.getModuleName())
         $scope.pagesReturned = null ;
         //Inline search data object
         $scope.inlineSearch = {};
+        //$scope.ImageUploadingTracker = ImageUploadingTracker;
         //--------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -44,7 +45,6 @@ angular.module($snaphy.getModuleName())
             }
             return new Date(str);
         };
-
 
 
 
@@ -293,7 +293,9 @@ angular.module($snaphy.getModuleName())
 
 
         var resetSavedForm = function(form) {
-
+            //TODO POSSIBILITY FOR ERROR
+            //reset the tracking bar..
+            ImageUploadingTracker.resetTracker();
             $scope.saveFormData = {};
             if (form) {
                 form.$setPristine();
@@ -326,6 +328,10 @@ angular.module($snaphy.getModuleName())
          * For resetting all filter on reset button click..
          */
         $scope.resetAll = function() {
+            //TODO POSSIBILITY FOR ERROR
+            //reset the tracking bar..
+            ImageUploadingTracker.resetTracker();
+
             for (var i = 0; i < resetFilterList.length; i++) {
                 //Now call each method..
                 resetFilterList[i]();
@@ -347,6 +353,7 @@ angular.module($snaphy.getModuleName())
             //console.log(form);
             //First reset the previous data..
             resetSavedForm(form);
+
             //Firsst create a backup of the the data in case of rollback changes/cancel
             backupData = angular.copy(data);
             $scope.saveFormData = data;
@@ -447,7 +454,7 @@ angular.module($snaphy.getModuleName())
 
 
 
-        //Method for rollbackchanges is eror occured..
+        //Method for rollbackchanges is error occured..
         $scope.rollBackChanges = function() {
             if (!$.isEmptyObject(backupData)) {
                 $scope.displayed.forEach(function(data, index) {
@@ -507,6 +514,16 @@ angular.module($snaphy.getModuleName())
          * @param formID refrencing to the id attribute of the  form.
          */
         $scope.saveForm = function(formStructure, formData, formModel, goBack, modelInstance) {
+            if(ImageUploadingTracker.isUploadInProgress){
+                SnaphyTemplate.notify({
+                    message: "Wait!! Image uploading is in progress. Please wait till the image is uploaded.",
+                    type: 'danger',
+                    icon: 'fa fa-times',
+                    align: 'right'
+                });
+                return false;
+            }
+
             if (!$scope.isValid(formData)) {
                 SnaphyTemplate.notify({
                     message: "Error data is Invalid.",
@@ -599,6 +616,9 @@ angular.module($snaphy.getModuleName())
 
         //Goback or close the model..
         var closeModel = function(goBack, modelInstance) {
+            //Reset the image upload if any...
+            ImageUploadingTracker.resetTracker();
+            
             if (goBack) {
                 if (modelInstance) {
                     //close the model..

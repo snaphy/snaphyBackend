@@ -339,8 +339,8 @@ angular.module($snaphy.getModuleName())
             };
 
         },
-        controller: ['$scope', 'Upload', '$timeout', '$http', 'Database', 'SnaphyTemplate',
-            function($scope, Upload, $timeout, $http, Database, SnaphyTemplate) {
+        controller: ['$scope', 'Upload', '$timeout', '$http', 'Database', 'SnaphyTemplate', 'ImageUploadingTracker',
+            function($scope, Upload, $timeout, $http, Database, SnaphyTemplate, ImageUploadingTracker) {
                 //Initialize the model..
                 $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
                 $scope.files = [];
@@ -433,6 +433,9 @@ angular.module($snaphy.getModuleName())
 
 
                 $scope.uploadFiles = function($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event) {
+                    //Increment tracker..TODO CHECK HERE FOR ERROR POSIBILITY.
+                    ImageUploadingTracker.incrementTracker();
+
                     //First initialize progress bar to zero..
                     $scope.addValue(0);
                     var file = $newFiles[0];
@@ -459,6 +462,10 @@ angular.module($snaphy.getModuleName())
                                 //Adding data to the model.
                                 $scope.model[$scope.options.key].push(file.result);
                             });
+
+                            //Decrement tracker..TODO CHECK HERE FOR ERROR POSIBILITY.
+                            ImageUploadingTracker.decrementTracker();
+
                             SnaphyTemplate.notify({
                                 message: "Image successfully saved to server.",
                                 type: 'success',
@@ -468,6 +475,8 @@ angular.module($snaphy.getModuleName())
 
                         }, function(response) {
                             if (response.status > 0) {
+                                //Decrement tracker..TODO CHECK HERE FOR ERROR POSIBILITY.
+                                ImageUploadingTracker.decrementTracker();
                                 SnaphyTemplate.notify({
                                     message: "Error saving image to server. Please remove that image and try again.",
                                     type: 'danger',
@@ -611,8 +620,9 @@ angular.module($snaphy.getModuleName())
         },
 
 
-        controller: ['$scope', 'Upload', '$timeout', '$http', 'Database', 'SnaphyTemplate',
-            function($scope, Upload, $timeout, $http, Database, SnaphyTemplate) {
+        controller: ['$scope', 'Upload', '$timeout', '$http', 'Database', 'SnaphyTemplate', 'ImageUploadingTracker',
+            function($scope, Upload, $timeout, $http, Database, SnaphyTemplate, ImageUploadingTracker) {
+
                 //Initialize the model..
                 $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || {};
                 $scope.file = {};
@@ -667,6 +677,7 @@ angular.module($snaphy.getModuleName())
                     return false;
                 };
 
+
                 $scope.loadUrl = function(file) {
                     var url = "/api/containers/" + file.result.container + "/download/medium_" + file.result.name;
                     return url;
@@ -703,7 +714,9 @@ angular.module($snaphy.getModuleName())
                     if ($newFiles === null) {
                         return false;
                     }
-                    //console.log($files);
+
+                    //Increment tracker..TODO CHECK HERE FOR ERROR POSIBILITY.
+                    ImageUploadingTracker.incrementTracker();
 
                     //First initialize progress bar to zero..
                     $scope.addValue(0);
@@ -722,6 +735,7 @@ angular.module($snaphy.getModuleName())
                         });
 
                         file.upload.then(function(response) {
+
                             $timeout(function() {
                                 //file.result = response.data.result.files.file[0];
                                 //console.log(response.result);
@@ -734,6 +748,8 @@ angular.module($snaphy.getModuleName())
                                 //Adding data to the model.
                                 $scope.model[$scope.options.key] = file.result;
                             });
+                            //decrement the tracker..
+                            ImageUploadingTracker.decrementTracker();
                             SnaphyTemplate.notify({
                                 message: "Image successfully saved to server.",
                                 type: 'success',
@@ -741,6 +757,8 @@ angular.module($snaphy.getModuleName())
                                 align: 'right'
                             });
                         }, function(response) {
+                            //decrement the tracker..
+                            ImageUploadingTracker.decrementTracker();
                             if (response.status > 0) {
                                 SnaphyTemplate.notify({
                                     message: "Error saving image to server. Please remove the image and try again.",
