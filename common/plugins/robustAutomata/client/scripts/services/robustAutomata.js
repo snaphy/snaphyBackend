@@ -34,8 +34,9 @@ angular.module($snaphy.getModuleName())
          */
         var getSchema = function(databaseName, success, error) {
             var dbService = Database.loadDb(databaseName);
-            if ($.isEmptyObject(schema)) {
+            //if ($.isEmptyObject(schema)) {
                 dbService.getAbsoluteSchema({}, {}, function(values) {
+                    schema = {};
                     extend(schema, values.schema);
                     if (success) {
                         success(schema);
@@ -45,9 +46,9 @@ angular.module($snaphy.getModuleName())
                         error(httpResp);
                     }
                 });
-            } else {
-                success(schema);
-            }
+            //} else {
+            //    success(schema);
+            //}
         };
 
 

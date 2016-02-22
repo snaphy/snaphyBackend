@@ -13,7 +13,7 @@ angular.module($snaphy.getModuleName())
         //Storing an instance of table values..
         $scope.rowListValues = $scope.rowListValues || [];
         //Schema of the database
-        $scope.schema = $scope.schema || {};
+        $scope.schema = {};
         /*Data for save form modal*/
         $scope.saveFormData = $scope.saveFormData || {};
         //Initializing scope //for array..
@@ -593,14 +593,39 @@ angular.module($snaphy.getModuleName())
                     $(tablePanelId).addClass('block-opt-refresh');
                 }, 200);
             }
+            if ($.isEmptyObject($scope.schema )) {
 
-            //First get the schema..
-            Resource.getSchema(databaseName, function(schema) {
-                //Populate the schema..
-                $scope.schema = schema;
-                $scope.where = $scope.where || {};
+                //First get the schema..
+                Resource.getSchema(databaseName, function(schema) {
+                    //Populate the schema..
+                    $scope.schema = schema;
+                    $scope.where = $scope.where || {};
 
-                Resource.getPage(start, number, tableState, databaseName, schema, $scope.where).then(function(result) {
+                    Resource.getPage(start, number, tableState, databaseName, schema, $scope.where).then(function(result) {
+                        $scope.displayed = result.data;
+                        tableState.pagination.numberOfPages = result.numberOfPages; //set the number of pages so the pagination can update
+                        $scope.pagesReturned = result.numberOfPages;
+                        $scope.totalResults = result.count;
+                        $scope.isLoading = false;
+                        dataFetched = true;
+                        if (tablePanelId) {
+                            $timeout(function() {
+                                //Now hide remove the refresh widget..
+                                $(tablePanelId).removeClass('block-opt-refresh');
+                            }, 200);
+                        }
+                    });
+                }, function(httpResp){
+                    console.error(httpResp);
+                    if (tablePanelId) {
+                        $timeout(function() {
+                            //Now hide remove the refresh widget..
+                            $(tablePanelId).removeClass('block-opt-refresh');
+                        }, 200);
+                    }
+                });
+            }else{
+                Resource.getPage(start, number, tableState, databaseName, $scope.schema, $scope.where).then(function(result) {
                     $scope.displayed = result.data;
                     tableState.pagination.numberOfPages = result.numberOfPages; //set the number of pages so the pagination can update
                     $scope.pagesReturned = result.numberOfPages;
@@ -614,15 +639,7 @@ angular.module($snaphy.getModuleName())
                         }, 200);
                     }
                 });
-            }, function(httpResp){
-                console.error(httpResp);
-                if (tablePanelId) {
-                    $timeout(function() {
-                        //Now hide remove the refresh widget..
-                        $(tablePanelId).removeClass('block-opt-refresh');
-                    }, 200);
-                }
-            });
+            }
         }
 
         $scope.refreshData = function(tableState, ctrl) {
@@ -635,7 +652,7 @@ angular.module($snaphy.getModuleName())
         };
 
         $scope.resetTable = function(){
-            
+
             //reset the table filters
             $scope.where = {};
             $scope.refreshData();

@@ -428,6 +428,132 @@ angular.module($snaphy.getModuleName())
     }]) //filterDate directive
 
 // TODO Array filter scheduled for later
+//
+//
+//
+.directive('robustWidgetAdded', ['Database', '$timeout', function(Database, $timeout) {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            'label': '@label',
+            'model': '@model',
+            'icon': '@icon',
+            'propObj': '=propObj',
+            'modelValues': '=modelValues',
+            'fetchLocally': '=fetchLocally'
+        },
+        template: '<div>' +
+            '<a class="block block-bordered block-link-hover3" style="cursor:pointer" >' +
+            '<table class="block-table text-center">' +
+            '<tbody>' +
+            '<tr>' +
+            '<td class="bg-gray-lighter border-r" style="width: 50%;">' +
+            '<div class="push-30 push-30-t">' +
+            '<i ng-class="icon" class="fa-3x text-black-op si"></i>' +
+            '</div>' +
+            '</td>' +
+            '<td style="width: 50%;">' +
+            '<div class="h1 font-w700"><span class="h2 text-muted">+</span> {{value}}</div>' +
+            '<div class="h5 text-muted text-uppercase push-5-t">{{label}}</div>' +
+            '</td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>' +
+            '</a>' +
+            '</div>',
+        link: function(scope, iElement, iAttrs) {
+                /**
+                 * Format of the propObj should be
+                 * {
+                 * 		type: '$today'|| '$week' || '$allTime',
+                 * 		where:{
+                 * 			'email': 'robinskumar73'
+                 * 		},
+                 * 		dateProp: 'date'
+                 * }
+                 */
+                var loadWidgets = (function() {
+                    var prepareWhereObj = function(propObj) {
+                        var today, tomorrow, weekStartDate;
+                        //{"where": {and: [{"epoch_time": {"gte":1450717674}},{"epoch_time": {"lte":1459407675}}]} }
+                        today = moment().startOf('day');
+                        var tmrwString =  moment(moment().startOf('day')).add(1, 'days').toISOString();
+                        if (propObj.type.trim() === "$today") {
+                            tomorrow = moment(today).add(1, 'days');
+                            if (propObj.dateProp) {
+                                propObj.where.and = [];
+                                //between: [today, tomorrow]
+                                //console.log("today count ", [today.toISOString(), tomorrow.toISOString()]);
+                                var fromObj = {};
+                                fromObj[propObj.dateProp] = {"gte": today.subtract(1, 'days').toISOString()};
+                                propObj.where.and.push(fromObj);
+                                var toObj = {};
+                                toObj[propObj.dateProp] = {"lte": tomorrow.toISOString()};
+                                propObj.where.and.push(toObj);
+                            } //if
+                            else {
+                                console.error("Error:  `dateProp` property name is needed in  the widget filter.");
+                            }
+                        } else if (propObj.type.trim() === "$week") {
+                            weekStartDate = today.subtract(7, 'days');
+                            if (propObj.dateProp) {
+                                propObj.where.and = [];
+                                var fromObj = {};
+                                fromObj[propObj.dateProp] = {"gte": weekStartDate.toISOString()};
+                                propObj.where.and.push(fromObj);
+                                var toObj = {};
+                                toObj[propObj.dateProp] = {"lte": tmrwString  };
+                                propObj.where.and.push(toObj);
+                            } //if
+                            else {
+                                console.error("Error:  `dateProp` property name is needed in  the widget filter.");
+                            }
+                        } //else if
+                        else {
+                            //  Do nothing
+                        }
+                        console.log(propObj.where);
+                        return propObj.where;
+                    };
+
+                    var fetchDataFromServer = function() {
+                        var where = prepareWhereObj(scope.propObj);
+                        var modelService = Database.loadDb(scope.model);
+                        //Now fetch the data from the server..
+                        modelService.count({
+                            where: where
+                        }, function(value, responseHeaders) {
+                            $timeout(function(){
+                                console.log(value);
+                                //Now populate the value..
+                                scope.value = value.count;
+                            });
+
+                        }, function(respHeader) {
+                            console.error("Error fetching widget data from the server.");
+                        }); //modelService
+                    };
+
+                    //Now initialize the directive..
+                    var init = function() {
+                            // watch for local data change..
+                            scope.$watch('modelValues.length', function() {
+                                fetchDataFromServer();
+                            });
+                    };
+                    //Now finally return the init method.
+                    return init;
+                })();
+
+
+                //Now finally load the widgets..
+                loadWidgets();
+
+            } //link..
+    }; //return ..
+}])
+
 
 
 .directive('snaphyLoadFilters', ['$timeout', function($timeout) {

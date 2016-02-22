@@ -28,16 +28,16 @@
     <!-- Simple Vertical Tiles -->
     <div class="row" ng-if="isDataFetched()">
 
-      <snaphy-widget-added  ng-cloak class="col-sm-6 col-lg-3"
+      <robust-widget-added  ng-cloak class="col-sm-6 col-lg-3"
         ng-repeat="widget in schema.widgets"
         label="{{widget.label}}"
         model="{{schema.model}}"
         icon="{{widget.icon}}"
         prop-obj="widget.propObj"
-        model-values="dataValues"
+        model-values="displayed"
         fetch-locally="widget.fetchLocally"
         >
-      </snaphy-widget-added>
+    </robust-widget-added>
 
 
         <div class="col-sm-6 col-lg-3">
