@@ -117,6 +117,12 @@ angular.module($snaphy.getModuleName())
             };
 
 
+            if($scope.to.init === true){
+                //Add a new field..
+                $scope.addNew();
+            }
+
+
             $scope.toggleShow = function(){
                 $scope.hide = !$scope.hide;
                 return $scope.hide;
@@ -192,8 +198,20 @@ angular.module($snaphy.getModuleName())
                 formState: $scope.formState
             };
 
+            //console.log($scope.to);
+
+            /*$scope.initialize = function(to){
+                if(to.init){
+                    //Initialize one ..
+                    console.log("Initialize");
+                    $scope.addNew();
+                }
+            };
+*/
             var methods = (function() {
                 function init() {
+
+
                     //Initialize the methods..
                     if ($scope.model[$scope.options.key] === undefined) {
                         addNew();

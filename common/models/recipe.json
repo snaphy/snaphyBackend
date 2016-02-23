@@ -388,7 +388,8 @@
       "templateOptions": {
         "btnText": "Add Cuisines",
         "searchProp": "name",
-        "create": true
+        "create": false,
+        "search": true
       }
     },
     "category": {
@@ -427,7 +428,8 @@
         "btnText": "Add Ingredients",
         "searchProp": "name",
         "create": false,
-        "hide": false
+        "hide": false,
+        "init" : true
       }
     },
     "wishlists": {

@@ -186,6 +186,19 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 							nestedSchema.key = relationName;
 							nestedSchema.templateOptions = {};
 							nestedSchema.templateOptions.btnText = relationObj.templateOptions.btnText;
+							if(relationObj.templateOptions.searchProp){
+								nestedSchema.templateOptions.searchProp = relationObj.templateOptions.searchProp;
+							}
+							if(relationObj.templateOptions.create){
+								nestedSchema.templateOptions.create = relationObj.templateOptions.create;
+							}
+							if(relationObj.templateOptions.hide){
+								nestedSchema.templateOptions.hide = relationObj.templateOptions.hide;
+							}
+							if(relationObj.templateOptions.init){
+								nestedSchema.templateOptions.init = relationObj.templateOptions.init;
+							}
+
 							nestedSchema.templateOptions.model = relationObj.through;
 
 							var throughRelationName;
