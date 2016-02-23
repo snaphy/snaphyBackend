@@ -1,187 +1,275 @@
 {
-  "name": "RecipeIngredients",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "filters": {
-    "recipeMetric": {
-      "type": "$select",
-      "label": "Select the recipe metric",
-      "getOptionsFromColumn": true
-    }
-  },
-  "validationsBackend": {
-    "rules": {
-      "quantity": {
-        "required": true,
-        "minlength": "1",
-        "maxlength": "5",
-        "number": true
-      },
-      "recipeMetric": {
-        "required": true,
-        "minlength": 2
-      }
+    "name": "RecipeIngredients",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "messages": {
-      "quantity": {
-        "required": "Ingredient quantity  is required",
-        "minlength": "Minimum permitted length is atleast 1",
-        "number": "quantity must be a number"
-      },
-      "recipeMetric": {
-        "required": "Recipe Metrics is required",
-        "minlength": "Minimum permitted length is atleast 2"
-      }
-    }
-  },
-  "tables": {
-    "recipe_description": {
-      "display": false
-    },
-    "recipe_mainImage": {
-      "display": false
-    },
-    "recipe_recipeType": {
-      "display": false
-    },
-    "recipe_servings": {
-      "display": false
-    },
-    "recipe_status": {
-      "display": false
-    },
-    "recipe_youtubeVideoId": {
-      "display": false
-    },
-    "recipe_stepsImage": {
-      "display": false
-    },
-    "recipe_stepsDescription": {
-      "display": false
-    },
-    "ingredients_sellingMetrics": {
-      "display": false
-    },
-    "ingredients_tags": {
-      "display": false
-    },
-    "ingredients_minimumQuantity": {
-      "display": false
-    },
-    "ingredients_price": {
-      "display": false
-    }
-  },
-  "properties": {
-    "quantity": {
-      "type": "number",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "number",
-          "label": "Enter the quantity of recipe ingredient ",
-          "id": "quantity"
+    "filters": {
+        "recipeMetric": {
+            "type": "$select",
+            "label": "Select the recipe metric",
+            "getOptionsFromColumn": true,
+            "options": [{
+                "name": "piece",
+                "id": 0
+            }, {
+                "name": "slice",
+                "id": 1
+            }, {
+                "name": "stick",
+                "id": 2
+            }, {
+                "name": "clove",
+                "id": 3
+            }, {
+                "name": "package",
+                "id": 4
+            }, {
+                "name": "leaf",
+                "id": 5
+            }, {
+                "name": "bunch",
+                "id": 6
+            }, {
+                "name": "sprig",
+                "id": 7
+            }, {
+                "name": "handful",
+                "id": 8
+            }, {
+                "name": "pinch",
+                "id": 9
+            }, {
+                "name": "kg",
+                "id": 9
+            }, {
+                "name": "grams",
+                "id": 10
+            }, {
+                "name": "litre",
+                "id": 11
+            }, {
+                "name": "cl",
+                "id": "12"
+            }, {
+                "name": "ml",
+                "id": 13
+            }, {
+                "name": "lb",
+                "id": 14
+            }, {
+                "name": "oz",
+                "id": 15
+            }, {
+                "name": "tsp",
+                "id": 16
+            }, {
+                "name": "tbsp",
+                "id": 17
+            }, {
+                "name": "cup",
+                "id": 18
+            }]
         }
-      }
     },
-    "halfQuantity": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "type": "string",
-          "label": "Enter the half quantity of recipe ingredient",
-          "id": "halfQuantity",
-          "options": [
-            "1/8",
-            "1/4",
-            "1/3",
-            "3/8",
-            "1/2",
-            "5/8",
-            "2/3",
-            "3/4",
-            "7/8",
-            "0"
-          ]
+    "validationsBackend": {
+        "rules": {
+            "quantity": {
+                "required": true,
+                "minlength": "1",
+                "maxlength": "5",
+                "number": true
+            },
+            "recipeMetric": {
+                "required": true,
+                "minlength": 2,
+                "valueNotEquals": ""
+            },
+            "requiredQuantity": {
+                "required": true,
+                "minlength": "1",
+                "maxlength": "7",
+                "number": true
+            }
+        },
+        "messages": {
+            "quantity": {
+                "required": "Ingredient quantity  is required",
+                "minlength": "Minimum permitted length is atleast 1",
+                "number": "quantity must be a number"
+            },
+            "recipeMetric": {
+                "required": "Recipe Metrics is required",
+                "minlength": "Minimum permitted length is atleast 2",
+                "valueNotEquals": "Please select a recipe metric"
+            },
+            "requiredQuantity": {
+                "required": "You must convert the given quantity to its average quantity required",
+                "minlength": "Minimum permitted length is atleast 1",
+                "number": "quantity must be a number"
+            }
         }
-      }
     },
-    "recipeMetric": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter the recipe metric like tablespoon, pinch, bowl etc",
-          "id": "recipeMetric",
-          "options": [
-            "piece",
-            "slice",
-            "stick",
-            "clove",
-            "package",
-            "leaf",
-            "bunch",
-            "sprig",
-            "handful",
-            "pinch",
-            "kg",
-            "grams",
-            "litre",
-            "cl",
-            "ml",
-            "lb",
-            "oz",
-            "tsp",
-            "tbsp",
-            "cup"
-          ]
+    "tables": {
+        "recipe_description": {
+            "display": false
+        },
+        "recipe_mainImage": {
+            "display": false
+        },
+        "recipe_recipeType": {
+            "display": false
+        },
+        "recipe_servings": {
+            "display": false
+        },
+        "recipe_status": {
+            "display": false
+        },
+        "recipe_youtubeVideoId": {
+            "display": false
+        },
+        "recipe_stepsImage": {
+            "display": false
+        },
+        "recipe_stepsDescription": {
+            "display": false
+        },
+        "ingredients_sellingMetrics": {
+            "display": false
+        },
+        "ingredients_tags": {
+            "display": false
+        },
+        "ingredients_minimumQuantity": {
+            "display": false
+        },
+        "ingredients_price": {
+            "display": false
+        },
+        "quantity": {
+            "search": "number"
+        },
+        "halfQuantity": {
+            "search": "select",
+            "options": ["1/8", "1/4", "1/3", "3/8", "1/2", "5/8", "2/3", "3/4", "7/8", "0"]
+        },
+        "recipeMetric": {
+            "search": "select",
+            "options": ["piece", "slice", "stick", "clove", "package", "leaf", "bunch", "sprig", "handful", "pinch", "kg", "grams", "litre", "cl", "ml", "lb", "oz", "tsp", "tbsp", "cup"]
+        },
+        "requiredQuantity": {
+            "search": "number"
         }
-      }
     },
-    "requiredQuantity": {
-      "type": "number",
-      "template": {
-        "type": "minRecipeDisplay",
-        "templateOptions": {
-          "type": "text",
-          "label": "Convert the given required recipe ingredient quantity into ",
-          "id": "requiredQuantity",
-          "bindObj": "ingredients"
+    "properties": {
+        "quantity": {
+            "type": "number",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "number",
+                    "label": "Enter the quantity of recipe ingredient ",
+                    "id": "quantity"
+                }
+            }
+        },
+        "halfQuantity": {
+            "type": "string",
+            "default": "0",
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "type": "string",
+                    "label": "Enter the half quantity of recipe ingredient",
+                    "id": "halfQuantity",
+                    "options": [
+                        "1/8",
+                        "1/4",
+                        "1/3",
+                        "3/8",
+                        "1/2",
+                        "5/8",
+                        "2/3",
+                        "3/4",
+                        "7/8",
+                        "0"
+                    ]
+                }
+            }
+        },
+        "recipeMetric": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter the recipe metric like tablespoon, pinch, bowl etc",
+                    "id": "recipeMetric",
+                    "options": [
+                        "piece",
+                        "slice",
+                        "stick",
+                        "clove",
+                        "package",
+                        "leaf",
+                        "bunch",
+                        "sprig",
+                        "handful",
+                        "pinch",
+                        "kg",
+                        "grams",
+                        "litre",
+                        "cl",
+                        "ml",
+                        "lb",
+                        "oz",
+                        "tsp",
+                        "tbsp",
+                        "cup"
+                    ]
+                }
+            }
+        },
+        "requiredQuantity": {
+            "type": "number",
+            "template": {
+                "type": "minRecipeDisplay",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Convert the given required recipe ingredient quantity into ",
+                    "id": "requiredQuantity",
+                    "bindObj": "ingredients"
+                }
+            }
         }
-      }
-    }
-  },
-  "validations": [],
-  "relations": {
-    "recipe": {
-      "type": "belongsTo",
-      "model": "Recipe",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Recipe",
-        "searchProp": "name",
-        "create": false
-      }
     },
-    "ingredients": {
-      "type": "belongsTo",
-      "model": "Ingredients",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Ingredient",
-        "searchProp": "name",
-        "create": true
-      }
-    }
-  },
-  "acls": [],
-  "methods": {}
+    "validations": [],
+    "relations": {
+        "recipe": {
+            "type": "belongsTo",
+            "model": "Recipe",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Recipe",
+                "searchProp": "name",
+                "create": false
+            }
+        },
+        "ingredients": {
+            "type": "belongsTo",
+            "model": "Ingredients",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Ingredient",
+                "searchProp": "name",
+                "create": true
+            }
+        }
+    },
+    "acls": [],
+    "methods": {}
 }

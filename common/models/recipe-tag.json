@@ -34,6 +34,7 @@
     }
   },
   "validations": [],
+  
   "relations": {
     "recipes": {
       "type": "hasAndBelongsToMany",

@@ -1,257 +1,246 @@
 {
-  "name": "Employee",
-  "base": "User",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "tables": {
-    "username": {
-      "onClick": {
-        "state": "dashboard",
-        "params": {
-          "username": "username"
+    "name": "Employee",
+    "base": "User",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "tables": {
+        "username": {
+            "search": "text",
+            "onClick": {
+                "state": "dashboard",
+                "params": {
+                    "username": "username"
+                }
+            }
+        },
+        "email": {
+            "tag": {},
+            "search": "text"
+        },
+        "firstName": {
+            "search": "text"
+        },
+        "lastName": {
+            "search": "text"
+        },
+        "employeeDetailsId": {
+            "display": false
+        },
+        "date": {
+            "search": "date"
         }
-      }
     },
-    "email": {
-      "tag": {
-        "Pending": "label-warning"
-      }
-    },
-    "employeeDetailsId": {
-      "display": false
-    }
-  },
-  "filters": {
-    "email": {
-      "type": "$multiSelect",
-      "get": "/api/email",
-      "label": "Select multiple columns",
-      "options": [
-        {
-          "id": 5,
-          "name": "sinu@gmail.com"
+    "filters": {},
+    "widgets": [{
+        "label": "User Added",
+        "icon": "si-users",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$allTime",
+            "where": {},
+            "dateProp": "date"
         }
-      ],
-      "getOptionsFromColumn": true
-    }
-  },
-  "widgets": [
-    {
-      "label": "User Added",
-      "icon": "si-users",
-      "fetchLocally": true,
-      "propObj": {
-        "type": "$allTime",
-        "where": {},
-        "dateProp": "date"
-      }
-    },
-    {
-      "label": "User Added In A Week",
-      "fetchLocally": true,
-      "icon": "si-users",
-      "propObj": {
-        "type": "$week",
-        "where": {},
-        "dateProp": "date"
-      }
-    },
-    {
-      "label": "User Added Today",
-      "icon": "si-speedometer",
-      "fetchLocally": true,
-      "propObj": {
-        "type": "$today",
-        "where": {},
-        "dateProp": "date"
-      }
-    }
-  ],
-  "validationsBackend": {
-    "rules": {
-      "username": {
-        "required": true,
-        "minlength": "3"
-      },
-      "firstName": {
-        "required": true,
-        "minlength": "3"
-      },
-      "LastName": {
-        "required": true,
-        "minlength": "3"
-      },
-      "password": {
-        "required": true,
-        "minlength": "5"
-      },
-      "email": {
-        "required": true
-      }
-    },
-    "messages": {
-      "username": {
-        "required": "Username is required",
-        "minlength": "Minimum permitted length is atleast 3"
-      },
-      "password": {
-        "required": "Password is required",
-        "minlength": "Password must be of atleast 5 characters"
-      },
-      "email": {
-        "required": "Email is required."
-      },
-      "firstName": {
-        "required": "First Name is required",
-        "minlength": "Minimum permitted length is atleast 3"
-      },
-      "LastName": {
-        "required": "Last Name is required",
-        "minlength": "Minimum permitted length is atleast 3"
-      }
-    }
-  },
-  "hidden": [
-    "password"
-  ],
-  "properties": {
-    "username": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter Username",
-          "id": "Username"
+    }, {
+        "label": "User Added In A Week",
+        "fetchLocally": true,
+        "icon": "si-users",
+        "propObj": {
+            "type": "$week",
+            "where": {},
+            "dateProp": "date"
         }
-      }
-    },
-    "firstName": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter First Name",
-          "id": "firstName"
+    }, {
+        "label": "User Added Today",
+        "icon": "si-speedometer",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$today",
+            "where": {},
+            "dateProp": "date"
         }
-      }
-    },
-    "lastName": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter Last Name",
-          "id": "LastName"
+    }],
+    "validationsBackend": {
+        "rules": {
+            "username": {
+                "required": true,
+                "minlength": "3"
+            },
+            "firstName": {
+                "required": true,
+                "minlength": "3"
+            },
+            "LastName": {
+                "required": true,
+                "minlength": "3"
+            },
+            "password": {
+                "required": true,
+                "minlength": "5"
+            },
+            "email": {
+                "required": true
+            }
+        },
+        "messages": {
+            "username": {
+                "required": "Username is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            },
+            "password": {
+                "required": "Password is required",
+                "minlength": "Password must be of atleast 5 characters"
+            },
+            "email": {
+                "required": "Email is required."
+            },
+            "firstName": {
+                "required": "First Name is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            },
+            "LastName": {
+                "required": "Last Name is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            }
         }
-      }
     },
-    "date": {
-      "type": "date",
-      "required": false,
-      "defaultFn": "now"
-    },
-    "email": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "email",
-          "label": "Email address",
-          "id": "email_"
+    "hidden": [
+        "password"
+    ],
+    "properties": {
+        "username": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter Username",
+                    "id": "Username"
+                }
+            }
+        },
+        "firstName": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter First Name",
+                    "id": "firstName"
+                }
+            }
+        },
+        "lastName": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter Last Name",
+                    "id": "LastName"
+                }
+            }
+        },
+        "date": {
+            "type": "date",
+            "required": false,
+            "defaultFn": "now",
+            "template": {
+                "type": "dummy"
+            }
+        },
+        "email": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "email",
+                    "label": "Email address",
+                    "id": "email_"
+                }
+            }
+        },
+        "password": {
+            "type": "string",
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "password",
+                    "label": "Enter Password",
+                    "id": "password_"
+                }
+            }
         }
-      }
     },
-    "password": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "password",
-          "label": "Enter Password",
-          "id": "password_"
+    "validations": [],
+    "relations": {
+        "employeeDetails": {
+            "type": "hasOne",
+            "model": "EmployeeDetails",
+            "foreignKey": "",
+            "onCascadeDelete": true,
+            "templateOptions": {
+                "searchProp": "address",
+                "create": true,
+                "search": false,
+                "btnText": "Add Employee Details"
+            }
         }
-      }
-    }
-  },
-  "validations": [],
-  "relations": {
-    "employeeDetails": {
-      "type": "hasOne",
-      "model": "EmployeeDetails",
-      "foreignKey": "",
-      "onCascadeDelete": true,
-      "templateOptions": {
-        "searchProp": "address",
-        "create": true,
-        "search": false,
-        "btnText": "Add Employee Details"
-      }
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
     },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "staff",
-      "permission": "ALLOW",
-      "property": "find"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "staff",
-      "permission": "ALLOW",
-      "property": "findById"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "staff",
-      "permission": "ALLOW",
-      "property": "findOne"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "create"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "isAdmin"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "getSchema"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "save"
-    }
-  ],
-  "methods": {}
+    "acls": [{
+        "accessType": "*",
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "DENY"
+    }, {
+        "accessType": "*",
+        "principalType": "ROLE",
+        "principalId": "admin",
+        "permission": "ALLOW"
+    }, {
+        "accessType": "EXECUTE",
+        "principalType": "ROLE",
+        "principalId": "staff",
+        "permission": "ALLOW",
+        "property": "find"
+    }, {
+        "accessType": "EXECUTE",
+        "principalType": "ROLE",
+        "principalId": "staff",
+        "permission": "ALLOW",
+        "property": "findById"
+    }, {
+        "accessType": "EXECUTE",
+        "principalType": "ROLE",
+        "principalId": "staff",
+        "permission": "ALLOW",
+        "property": "findOne"
+    }, {
+        "accessType": "EXECUTE",
+        "principalType": "ROLE",
+        "principalId": "admin",
+        "permission": "ALLOW",
+        "property": "create"
+    }, {
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "ALLOW",
+        "property": "isAdmin"
+    }, {
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "ALLOW",
+        "property": "getSchema"
+    }, {
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "ALLOW",
+        "property": "save"
+    }],
+    "methods": {}
 }

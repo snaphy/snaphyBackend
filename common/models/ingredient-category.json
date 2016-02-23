@@ -1,51 +1,56 @@
 {
-  "name": "IngredientCategory",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "validationsBackend": {
-    "rules": {
-      "name": {
-        "required": true,
-        "minlength": 3
-      }
+    "name": "IngredientCategory",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "messages": {
-      "name": {
-        "required": "Category name is required",
-        "minlength": "Minimum permitted length is atleast 3"
-      }
-    }
-  },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter ingredients category",
-          "id": "categoryName"
+    "validationsBackend": {
+        "rules": {
+            "name": {
+                "required": true,
+                "minlength": 3
+            }
+        },
+        "messages": {
+            "name": {
+                "required": "Category name is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            }
         }
-      }
-    }
-  },
-  "validations": [],
-  "relations": {
-    "ingredients": {
-      "type": "hasMany",
-      "model": "Ingredients",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Ingredients",
-        "searchProp": "name",
-        "create": true
-      }
-    }
-  },
-  "acls": [],
-  "methods": {}
+    },
+    "tables": {
+        "name": {
+            "search": "text"
+        }
+    },
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter ingredients category",
+                    "id": "categoryName"
+                }
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "ingredients": {
+            "type": "hasMany",
+            "model": "Ingredients",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Ingredients",
+                "searchProp": "name",
+                "create": true
+            }
+        }
+    },
+    "acls": [],
+    "methods": {}
 }

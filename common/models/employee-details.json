@@ -8,6 +8,7 @@
   "properties": {
     "address": {
       "type": "string",
+      "required": "true",
       "template": {
         "type": "textarea",
         "templateOptions": {
@@ -19,6 +20,7 @@
     },
     "contactNumber": {
       "type": "number",
+      "required":true,
       "template": {
         "type": "input",
         "templateOptions": {

@@ -1,46 +1,51 @@
 {
-  "name": "Cuisines",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "validationsBackend": {
-    "rules": {
-      "name": {
-        "required": true,
-        "minlength": "3"
-      }
+    "name": "Cuisines",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "messages": {
-      "name": {
-        "required": "cuisines name is required",
-        "minlength": "Minimum permitted length is atleast 3"
-      }
-    }
-  },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter cuisine name",
-          "id": "cuisinesName"
+    "validationsBackend": {
+        "rules": {
+            "name": {
+                "required": true,
+                "minlength": "3"
+            }
+        },
+        "messages": {
+            "name": {
+                "required": "cuisines name is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            }
         }
-      }
-    }
-  },
-  "validations": [],
-  "relations": {
-    "recipes": {
-      "type": "hasAndBelongsToMany",
-      "model": "Recipe",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": {}
+    },
+    "tables": {
+        "name": {
+            "search": "text"
+        }
+    },
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter cuisine name",
+                    "id": "cuisinesName"
+                }
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "recipes": {
+            "type": "hasAndBelongsToMany",
+            "model": "Recipe",
+            "foreignKey": ""
+        }
+    },
+    "acls": [],
+    "methods": {}
 }
