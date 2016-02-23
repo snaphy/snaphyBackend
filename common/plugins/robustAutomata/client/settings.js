@@ -23,7 +23,10 @@ var settings = {
        "RecipeTag",
        "Wishlist",
        "Chef",
-       "RecipeAnalytic"
+       "RecipeAnalytic",
+       "Popularity",
+       "Order",
+       "Course"
    ]
 
 };

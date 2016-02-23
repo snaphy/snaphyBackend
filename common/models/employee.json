@@ -29,7 +29,8 @@
             "display": false
         },
         "date": {
-            "search": "date"
+            "search": "date",
+            "date": true
         }
     },
     "filters": {},
