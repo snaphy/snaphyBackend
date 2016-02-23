@@ -20,7 +20,7 @@
     },
     "contactNumber": {
       "type": "number",
-      "required":true,
+      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -48,8 +48,8 @@
   "acls": [
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY",
+      "principalId": "$staff",
+      "permission": "ALLOW",
       "property": "save"
     },
     {
@@ -57,6 +57,12 @@
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "save"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "staff",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}

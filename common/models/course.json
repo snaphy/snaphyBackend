@@ -1,153 +1,155 @@
 {
-    "name": "Course",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "Course",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": 5
+      },
+      "courseDuration": {
+        "required": true
+      },
+      "courseFees": {
+        "number": true
+      },
+      "customers_email": {
+        "required": true,
+        "email": true
+      }
     },
-    "validationsBackend": {
-        "rules": {
-            "name": {
-                "required": true,
-                "minlength": 5
-            },
-            "courseDuration": {
-                "required": true
-            },
-            "courseFees": {
-                "number": true
-            },
-            "customers_email": {
-                "required": true,
-                "email": true
-            }
-        },
-        "messages": {
-            "name": {
-                "required": "Course name is required",
-                "minlength": "Course name must be of atleast 5 word"
-            },
-            "courseDuration": {
-                "required": "Course duration is required"
-            },
-            "courseFees": {
-                "number": "Course fees must be in number."
-            },
-            "customers_email": {
-                "required": "email is required"
-            }
+    "messages": {
+      "name": {
+        "required": "Course name is required",
+        "minlength": "Course name must be of atleast 5 word"
+      },
+      "courseDuration": {
+        "required": "Course duration is required"
+      },
+      "courseFees": {
+        "number": "Course fees must be in number."
+      },
+      "customers_email": {
+        "required": "email is required"
+      }
+    }
+  },
+  "tables": {
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "customer_firstName": {
+      "display": false
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_profilePic": {
+      "display": false
+    },
+    "customer_password": {
+      "display": false
+    },
+    "customer_date": {
+      "display": false
+    },
+    "name": {
+      "search": "text"
+    },
+    "courseDuration": {
+      "search": "text"
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter course name",
+          "id": "courseName"
         }
+      }
     },
-    "tables": {
-        "customer_phoneNumber": {
-            "display": false
-        },
-        "customer_firstName": {
-            "display": false
-        },
-        "customer_lastName": {
-            "display": false
-        },
-        "customer_profilePic": {
-            "display": false
-        },
-        "customer_password": {
-            "display": false
-        },
-        "customer_date": {
-            "display": false
-        },
-        "name": {
-            "search":"text"
-        },
-        "courseDuration":{
-            "search": "text"
+    "description": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter course description",
+          "id": "courseDescription"
         }
+      }
     },
-    "properties": {
-        "name": {
-            "type": "string",
-            "required": true,
-            "template": {
-                "type": "input",
-                "templateOptions": {
-                    "type": "text",
-                    "label": "Enter course name",
-                    "id": "courseName"
-                }
-            }
-        },
-        "description": {
-            "type": "string",
-            "required": true,
-            "template": {
-                "type": "input",
-                "templateOptions": {
-                    "type": "text",
-                    "label": "Enter course description",
-                    "id": "courseDescription"
-                }
-            }
-        },
-        "courseDuration": {
-            "type": "string",
-            "required": true,
-            "template": {
-                "type": "input",
-                "templateOptions": {
-                    "type": "text",
-                    "label": "Enter course duration",
-                    "id": "courseDuration"
-                }
-            }
-        },
-        "courseFees": {
-            "type": "number",
-            "template": {
-                "type": "input",
-                "templateOptions": {
-                    "type": "number",
-                    "label": "Enter course fee",
-                    "id": "courseFees"
-                }
-            }
-        },
-        "courseRecipes": {
-            "type": [
-                "string"
-            ],
-            "template": {
-                "type": "arrayValue",
-                "templateOptions": {
-                    "btnText": "Add course recipes",
-                    "name": "recipe",
-                    "fields": [{
-                        "type": "input",
-                        "key": "name",
-                        "templateOptions": {
-                            "type": "text",
-                            "label": "Enter recipe name"
-                        }
-                    }]
-                }
-            }
+    "courseDuration": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter course duration",
+          "id": "courseDuration"
         }
+      }
     },
-    "validations": [],
-    "relations": {
-        "customer": {
-            "type": "belongsTo",
-            "model": "Customer",
-            "foreignKey": "",
-            "templateOptions": {
-                "btnText": "Add Customer",
-                "searchProp": "email",
-                "create": false,
-                "search": true,
-                "hide": false
-            }
+    "courseFees": {
+      "type": "number",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "label": "Enter course fee",
+          "id": "courseFees"
         }
+      }
     },
-    "acls": [],
-    "methods": {}
+    "courseRecipes": {
+      "type": [
+        "string"
+      ],
+      "template": {
+        "type": "arrayValue",
+        "templateOptions": {
+          "btnText": "Add course recipes",
+          "name": "recipe",
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter recipe name"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "create": false,
+        "search": true,
+        "hide": false
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

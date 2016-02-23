@@ -1,29 +1,29 @@
 {
-    "name": "Popularity",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
-    },
-    "tables": {
-        "popularity": {
-            "search": "number"
-        }
-    },
-    "properties": {
-        "popularity": {
-            "type": "number",
-            "default": 0
-        }
-    },
-    "validations": [],
-    "relations": {
-        "chefs": {
-            "type": "hasOne",
-            "model": "Chef",
-            "foreignKey": ""
-        }
-    },
-    "acls": [],
-    "methods": {}
+  "name": "Popularity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "tables": {
+    "popularity": {
+      "search": "number"
+    }
+  },
+  "properties": {
+    "popularity": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "chefs": {
+      "type": "hasOne",
+      "model": "Chef",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

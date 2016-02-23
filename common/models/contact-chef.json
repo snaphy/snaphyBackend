@@ -1,47 +1,47 @@
 {
-    "name": "ContactChef",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "ContactChef",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "tables": {
+    "message": {
+      "display": true
     },
-    "tables": {
-        "message": {
-            "display": true
-        },
-        "customer_phoneNumber": {
-            "display": false
-        },
-        "customer_firstName": {
-            "display": true
-        },
-        "customer_lastName": {
-            "display": false
-        },
-        "customer_profilePic": {
-            "display": false
-        },
-        "customer_password": {
-            "display": false
-        },
-        "customer_date": {
-            "display": false
-        }
+    "customer_phoneNumber": {
+      "display": false
     },
-    "properties": {
-        "message": {
-            "type": "string",
-            "required": true
-        }
+    "customer_firstName": {
+      "display": true
     },
-    "validations": [],
-    "relations": {
-        "customer": {
-            "type": "belongsTo",
-            "model": "Customer",
-            "foreignKey": ""
-        }
+    "customer_lastName": {
+      "display": false
     },
-    "acls": [],
-    "methods": {}
+    "customer_profilePic": {
+      "display": false
+    },
+    "customer_password": {
+      "display": false
+    },
+    "customer_date": {
+      "display": false
+    }
+  },
+  "properties": {
+    "message": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

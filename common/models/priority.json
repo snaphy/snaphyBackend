@@ -1,121 +1,129 @@
 {
-    "name": "Priority",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "Priority",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "validationsBackend": {
+    "rules": {
+      "priority": {
+        "required": true
+      }
     },
-    "validationsBackend": {
-        "rules": {
-            "priority": {
-                "required": true
-            }
+    "messages": {
+      "priority": {
+        "required": "Priority is required"
+      }
+    }
+  },
+  "tables": {
+    "priority": {
+      "tag": {
+        "medium": "label-warning",
+        "normal": "label-primary",
+        "high": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "high",
+        "normal",
+        "medium"
+      ]
+    },
+    "recipes_description": {
+      "display": false
+    },
+    "recipes_mainImage": {
+      "display": false
+    },
+    "recipes_recipeType": {
+      "display": false
+    },
+    "recipes_servings": {
+      "display": false
+    },
+    "recipes_status": {
+      "display": false
+    },
+    "recipes_youtubeVideoId": {
+      "display": false
+    },
+    "recipes_stepsImage": {
+      "display": false
+    },
+    "recipes_stepsDescription": {
+      "display": false
+    },
+    "recipes_added": {
+      "date": true
+    },
+    "totalViews": {
+      "search": "number",
+      "display": true
+    }
+  },
+  "filters": {
+    "priority": {
+      "type": "$select",
+      "label": "Select recipes by priority",
+      "getOptionsFromColumn": false,
+      "options": [
+        {
+          "id": "1",
+          "name": "normal"
         },
-        "messages": {
-            "priority": {
-                "required": "Priority is required"
-            }
+        {
+          "id": "2",
+          "name": "medium"
+        },
+        {
+          "id": "3",
+          "name": "high"
         }
-    },
-    "tables": {
-        "priority": {
-            "tag": {
-                "medium": "label-warning",
-                "normal": "label-primary",
-                "high": "label-danger"
-            },
-            "search": "select",
-            "options": ["high", "normal", "medium"]
-        },
-        "recipes_description": {
-            "display": false
-        },
-        "recipes_mainImage": {
-            "display": false
-        },
-        "recipes_recipeType": {
-            "display": false
-        },
-        "recipes_servings": {
-            "display": false
-        },
-        "recipes_status": {
-            "display": false
-        },
-        "recipes_youtubeVideoId": {
-            "display": false
-        },
-        "recipes_stepsImage": {
-            "display": false
-        },
-        "recipes_stepsDescription": {
-            "display": false
-        },
-        "recipes_added": {
-            "date": true
-        },
-        "totalViews":{
-            "search": "number",
-            "display":true
+      ]
+    }
+  },
+  "properties": {
+    "priority": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Select priority for a recipe",
+          "id": "recipePriorityType",
+          "options": [
+            "normal",
+            "medium",
+            "high"
+          ]
         }
+      }
     },
-    "filters": {
-        "priority": {
-            "type": "$select",
-            "label": "Select recipes by priority",
-            "getOptionsFromColumn": false,
-            "options": [{
-                "id": "1",
-                "name": "normal"
-            }, {
-                "id": "2",
-                "name": "medium"
-            }, {
-                "id": "3",
-                "name": "high"
-            }]
-        }
+    "totalViews": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "recipes": {
+      "type": "hasOne",
+      "model": "Recipe",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Recipe",
+        "searchProp": "name",
+        "create": false
+      }
     },
-    "properties": {
-        "priority": {
-            "type": "string",
-            "required": true,
-            "template": {
-                "type": "selectString",
-                "templateOptions": {
-                    "label": "Select priority for a recipe",
-                    "id": "recipePriorityType",
-                    "options": [
-                        "normal",
-                        "medium",
-                        "high"
-                    ]
-                }
-            }
-        },
-        "totalViews": {
-            "type": "number",
-            "default":0
-        }
-    },
-    "validations": [],
-    "relations": {
-        "recipes": {
-            "type": "hasOne",
-            "model": "Recipe",
-            "foreignKey": "",
-            "templateOptions": {
-                "btnText": "Add Recipe",
-                "searchProp": "name",
-                "create": false
-            }
-        },
-        "recipeAnalytics": {
-            "type": "hasOne",
-            "model": "RecipeAnalytic",
-            "foreignKey": ""
-        }
-    },
-    "acls": [],
-    "methods": {}
+    "recipeAnalytics": {
+      "type": "hasOne",
+      "model": "RecipeAnalytic",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
 }
