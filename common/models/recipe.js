@@ -17,15 +17,15 @@ module.exports = function(Recipe) {
             //console.log(ctx.instance);
             next();
         }
-        console.log(ctx.instance);
-        console.log("=======================BEFORE SAVE===============================");
+    /*    console.log(ctx.instance);
+        console.log("=======================BEFORE SAVE===============================");*/
 
     });
 
     Recipe.observe('after save', function(ctx, next) {
-        console.log(ctx.instance);
+        /*console.log(ctx.instance);
         console.log("=========================AFTER SAVE=======================================");
-        next();
+        next();*/
     });
 
 

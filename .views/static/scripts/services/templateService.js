@@ -5,7 +5,7 @@ angular.module($snaphy.getModuleName())
 
 //Define a service for fetching database..
 .factory('SnaphyTemplate', [function(){
-
+    
     //Contain plugin UI related templated..
     /**
      * Bootstrap notify plugin http://bootstrap-notify.remabledesigns.com/

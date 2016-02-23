@@ -6,6 +6,8 @@ angular.module($snaphy.getModuleName())
 .controller('robustAutomataControl', ['$scope', '$stateParams', 'Database', 'Resource', '$timeout', 'SnaphyTemplate', '$state', 'ImageUploadingTracker',
     function($scope, $stateParams, Database, Resource, $timeout, SnaphyTemplate, $state, ImageUploadingTracker) {
         //Checking if default templating feature is enabled..
+        //
+
 
 
         //------------------------------------------------------GLOBAL VARIABLE SPACE----------------------------------------------------------
@@ -51,6 +53,14 @@ angular.module($snaphy.getModuleName())
         $scope.getCurrentState = function() {
             return $state.current.name;
         };
+
+
+        $scope.scroll = function(){
+            //Scroll
+            $timeout(function(){
+                App.layout('side_scroll_off');
+            }, 10)
+        }
 
 
 
