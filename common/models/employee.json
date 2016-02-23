@@ -238,6 +238,12 @@
         "permission": "ALLOW",
         "property": "getSchema"
     }, {
+    }, {
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "ALLOW",
+        "property": "getAbsoluteSchema"
+    }, {
         "principalType": "ROLE",
         "principalId": "$everyone",
         "permission": "ALLOW",
