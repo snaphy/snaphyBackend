@@ -217,6 +217,19 @@
             "type": "hasMany",
             "model": "Order",
             "foreignKey": ""
+        },
+        "courses": {
+          "type": "hasMany",
+          "model": "Course",
+          "foreignKey": "",
+          "onCascadeDelete": true,
+          "templateOptions": {
+            "btnText": "Add Courses to chefs",
+            "searchProp": "name",
+            "create": true,
+            "search": true,
+            "hide": false
+          }
         }
     },
     "acls": [{

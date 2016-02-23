@@ -1,60 +1,69 @@
 {
-  "name": "Category",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "tables": {
-    "name": {
-      "tag": {
-        "breakfast": "label-warning",
-        "dinner": "label-primary",
-        "lunch": "label-danger"
-      }
-    }
-  },
-  "validationsBackend": {
-    "rules": {
-      "name": {
-        "required": true
-      }
+    "name": "Category",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "messages": {
-      "name": {
-        "required": "Category is required"
-      }
-    }
-  },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "label": "Enter recipe category name",
-          "id": "recipeServings",
-          "options": [
-            "breakfast",
-            "lunch",
-            "dinner",
-            "snacks",
-            "beverages",
-            "desserts"
-          ]
+    "tables": {
+        "name": {
+            "tag": {
+                "breakfast": "label-warning",
+                "dinner": "label-primary",
+                "lunch": "label-danger"
+            },
+            "search": "select",
+            "options": [
+                "breakfast",
+                "lunch",
+                "dinner",
+                "snacks",
+                "beverages",
+                "desserts"
+            ]
         }
-      }
-    }
-  },
-  "validations": [],
-  "relations": {
-    "recipes": {
-      "type": "hasAndBelongsToMany",
-      "model": "Recipe",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": {}
+    },
+    "validationsBackend": {
+        "rules": {
+            "name": {
+                "required": true
+            }
+        },
+        "messages": {
+            "name": {
+                "required": "Category is required"
+            }
+        }
+    },
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "Enter recipe category name",
+                    "id": "recipeServings",
+                    "options": [
+                        "breakfast",
+                        "lunch",
+                        "dinner",
+                        "snacks",
+                        "beverages",
+                        "desserts"
+                    ]
+                }
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "recipes": {
+            "type": "hasAndBelongsToMany",
+            "model": "Recipe",
+            "foreignKey": ""
+        }
+    },
+    "acls": [],
+    "methods": {}
 }
