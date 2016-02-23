@@ -2,7 +2,6 @@ module.exports = function(Recipe) {
     Recipe.observe('before save', function(ctx, next) {
         if (ctx.isNewInstance) {
             //Add default status value..
-            //console.log(" i am here too");
             if (ctx.instance) {
                 //console.log(" i am here inside");
                 ctx.instance.added = new Date();
