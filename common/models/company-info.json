@@ -16,7 +16,7 @@
     },
     "edited": {
       "type": "date",
-      "default": "now"
+      "defaultFn": "now"
     }
   },
   "validations": [],

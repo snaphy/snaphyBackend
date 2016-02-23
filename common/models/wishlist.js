@@ -7,16 +7,17 @@ module.exports = function(Wishlist) {
     //     next();
     // });
 
-    // Wishlist.afterRemote("**", function(ctx, user, next){
-    //     console.log("===============================AFTER====================================");
-    //     console.log(ctx);
-    //     console.log("===============================AFTER END====================================");
-    //     next();
-    // });
-    //
-    // Wishlist.observe('before save', function(ctx, next){
-    //     console.log("========================before save=====================================");
-    //     console.log(ctx);
-    //     next();
-    // });
+    Wishlist.afterRemote("**", function(ctx, user, next){
+        console.log("===============================AFTER====================================");
+        console.log(ctx);
+        console.log("===============================AFTER END====================================");
+        next();
+    });
+
+    Wishlist.observe('before save', function(ctx, next){
+        console.log("========================before save=====================================");
+        console.log(ctx);
+        console.log("========================before save end=====================================");
+        next();
+    });
 };

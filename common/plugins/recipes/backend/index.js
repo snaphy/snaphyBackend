@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function( server, databaseObj, helper, packageObj) {
 	var recipeAnalytics  = require('./addRecipeAnalytics');
-	var addSecurity  = require('./addSecurity');
+	//var addSecurity  = require('./addSecurity');
 
 	/**
 	 * Here server is the main app object
