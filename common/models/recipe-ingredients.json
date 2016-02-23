@@ -103,8 +103,6 @@
         "number": true
       },
       "recipeMetric": {
-        "required": true,
-        "minlength": 2,
         "valueNotEquals": ""
       },
       "requiredQuantity": {
@@ -121,8 +119,6 @@
         "number": "quantity must be a number"
       },
       "recipeMetric": {
-        "required": "Recipe Metrics is required",
-        "minlength": "Minimum permitted length is atleast 2",
         "valueNotEquals": "Please select a recipe metric"
       },
       "requiredQuantity": {
