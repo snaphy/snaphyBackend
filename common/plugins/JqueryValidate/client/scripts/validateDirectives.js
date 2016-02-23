@@ -51,14 +51,3 @@ angular.module($snaphy.getModuleName())
         return arg !== value;
     }, "Please select some value");
 })
-
-
-/*$.validator.addMethod('lessThanEqual', function(value, element, param) {
-    return this.optional(element) || parseInt(value) <= parseInt($(param).val());
-}, "The value {0} must be less than {1}");*/
-//http://stackoverflow.com/questions/1260984/jquery-validate-less-than
-.config(function($validatorProvider) {
-    $validatorProvider.addMethod("lessThanEqual", function(value, element, param) {
-        return this.optional(element) || parseInt(value) <= parseInt($(param).val());
-    }, "The value {0} must be less than {1}");
-});

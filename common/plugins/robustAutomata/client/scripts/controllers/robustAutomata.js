@@ -310,6 +310,12 @@ angular.module($snaphy.getModuleName())
             if (form) {
                 form.$setPristine();
             }
+            //Also reset the validator..
+            //var validator = form.validate();
+            //console.log(form);
+            //console.log(form.resetForm());
+            //validator.resetForm();
+            //var validator = $(form).validate();
         };
 
 

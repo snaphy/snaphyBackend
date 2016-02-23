@@ -10,40 +10,12 @@ module.exports = function(Recipe) {
                     ctx.instance.status = "onhold";
                 }
             }
-
-            //console.log(ctx.instance);
             next();
         } else {
             //console.log(ctx.instance);
             next();
         }
-    /*    console.log(ctx.instance);
-        console.log("=======================BEFORE SAVE===============================");*/
-
     });
-
-    Recipe.observe('after save', function(ctx, next) {
-        /*console.log(ctx.instance);
-        console.log("=========================AFTER SAVE=======================================");
-        next();*/
-    });
-
-
-
-    // Recipe.beforeRemote("*", function(ctx, user, next) {
-    //     console.log(ctx);
-    //     console.log("========================BEFORE UPLOAD=============================\n");
-    //     next();
-    // });
-    //
-    //
-    // Recipe.afterRemote("*", function(ctx, user, next) {
-    //     console.log(ctx);
-    //     console.log("========================AFTER UPLOAD=============================\n");
-    //     next();
-    // });
-
-
 
 
     Recipe.beforeRemote("find", function(ctx, user, next) {
