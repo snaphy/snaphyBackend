@@ -114,7 +114,7 @@
     },
     "courseRecipes": {
       "type": [
-        "string"
+        "object"
       ],
       "template": {
         "type": "arrayValue",

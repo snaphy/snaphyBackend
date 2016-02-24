@@ -1,460 +1,450 @@
 {
-  "name": "Recipe",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "filters": {
-    "recipeType": {
-      "type": "$radio",
-      "label": "Select recipe type",
-      "options": [
-        {
-          "id": 1,
-          "name": "veg"
+    "name": "Recipe",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "filters": {
+        "recipeType": {
+            "type": "$radio",
+            "label": "Select recipe type",
+            "options": [{
+                "id": 1,
+                "name": "veg"
+            }, {
+                "id": 2,
+                "name": "nonveg"
+            }, {
+                "id": 3,
+                "name": "egg"
+            }]
         },
-        {
-          "id": 2,
-          "name": "nonveg"
+        "added": {
+            "type": "$date",
+            "label": "Recipe added between"
         },
-        {
-          "id": 3,
-          "name": "egg"
-        }
-      ]
-    },
-    "added": {
-      "type": "$date",
-      "label": "Recipe added between"
-    },
-    "status": {
-      "type": "$select",
-      "label": "Select recipe status",
-      "options": [
-        {
-          "id": 1,
-          "name": "publish"
+        "status": {
+            "type": "$select",
+            "label": "Select recipe status",
+            "options": [{
+                "id": 1,
+                "name": "publish"
+            }, {
+                "id": 2,
+                "name": "onhold"
+            }, {
+                "id": 3,
+                "name": "rejected"
+            }]
         },
-        {
-          "id": 2,
-          "name": "onhold"
+        "servings": {
+            "type": "$multiSelect",
+            "label": "Select recipe servings",
+            "getOptionsFromColumn": false,
+            "options": [{
+                "id": "1",
+                "name": "1"
+            }, {
+                "id": "2",
+                "name": "2"
+            }, {
+                "id": "3",
+                "name": "3"
+            }, {
+                "id": "4",
+                "name": "4"
+            }, {
+                "id": "5",
+                "name": "5"
+            }]
+        }
+    },
+    "tables": {
+        "mainImage": {
+            "display": false
         },
-        {
-          "id": 3,
-          "name": "rejected"
-        }
-      ]
-    },
-    "servings": {
-      "type": "$multiSelect",
-      "label": "Select recipe servings",
-      "getOptionsFromColumn": false,
-      "options": [
-        {
-          "id": "1",
-          "name": "1"
+        "recipeSteps": {
+            "display": false
         },
-        {
-          "id": "2",
-          "name": "2"
+        "stepsImage": {
+            "display": false
         },
-        {
-          "id": "3",
-          "name": "3"
+        "stepsDescription": {
+            "display": false
         },
-        {
-          "id": "4",
-          "name": "4"
+        "description": {
+            "display": false
         },
-        {
-          "id": "5",
-          "name": "5"
+        "status": {
+            "search": "select",
+            "options": [
+                "publish",
+                "onhold",
+                "rejected"
+            ]
+        },
+        "employee_firstName": {
+            "display": false
+        },
+        "employee_email": {
+            "display": false
+        },
+        "employee_lastName": {
+            "display": false
+        },
+        "youtubeVideoId": {
+            "display": false
+        },
+        "customer_phoneNumber": {
+            "display": false
+        },
+        "customer_firstName": {
+            "display": false
+        },
+        "customer_lastName": {
+            "display": false
+        },
+        "customer_profilePic": {
+            "display": false
+        },
+        "customer_password": {
+            "display": false
+        },
+        "customer_date": {
+            "display": false
+        },
+        "added": {
+            "date": true,
+            "search": "date"
+        },
+        "servings": {
+            "display": true,
+            "search": "number"
+        },
+        "name": {
+            "search": "text"
+        },
+        "cuisinesName": {
+            "search": "text"
+        },
+        "recipeType": {
+            "search": "select",
+            "options": [
+                "veg",
+                "nonveg",
+                "egg"
+            ]
         }
-      ]
-    }
-  },
-  "tables": {
-    "mainImage": {
-      "display": false
     },
-    "recipeSteps": {
-      "display": false
-    },
-    "stepsImage": {
-      "display": false
-    },
-    "stepsDescription": {
-      "display": false
-    },
-    "description": {
-      "display": false
-    },
-    "status": {
-      "search": "select",
-      "options": [
-        "publish",
-        "onhold",
-        "rejected"
-      ]
-    },
-    "employee_firstName": {
-      "display": false
-    },
-    "employee_email": {
-      "display": false
-    },
-    "employee_lastName": {
-      "display": false
-    },
-    "youtubeVideoId": {
-      "display": false
-    },
-    "customer_phoneNumber": {
-      "display": false
-    },
-    "customer_firstName": {
-      "display": false
-    },
-    "customer_lastName": {
-      "display": false
-    },
-    "customer_profilePic": {
-      "display": false
-    },
-    "customer_password": {
-      "display": false
-    },
-    "customer_date": {
-      "display": false
-    },
-    "added": {
-      "date": true,
-      "search": "date"
-    },
-    "servings": {
-      "display": true,
-      "search": "number"
-    },
-    "name": {
-      "search": "text"
-    },
-    "recipeType": {
-      "search": "select",
-      "options": [
-        "veg",
-        "nonveg",
-        "egg"
-      ]
-    }
-  },
-  "widgets": [
-    {
-      "label": "Total Recipes Added",
-      "icon": "si-bar-chart",
-      "fetchLocally": true,
-      "propObj": {
-        "type": "$allTime",
-        "where": {},
-        "dateProp": "added"
-      }
-    },
-    {
-      "label": "Recipe Added In A Week",
-      "fetchLocally": true,
-      "icon": "si-calendar",
-      "propObj": {
-        "type": "$week",
-        "where": {},
-        "dateProp": "added"
-      }
-    },
-    {
-      "label": "Recipe Added Today",
-      "icon": "si-graph",
-      "fetchLocally": true,
-      "propObj": {
-        "type": "$today",
-        "where": {},
-        "dateProp": "added"
-      }
-    }
-  ],
-  "onLoad": {
-    "addWhere": {
-      "where": {
-        "and": [
-          {
-            "status": "publish"
-          }
-        ]
-      },
-      "except": "admin"
-    }
-  },
-  "validationsBackend": {
-    "rules": {
-      "name": {
-        "required": true,
-        "minlength": 5
-      },
-      "recipeType": {
-        "valueNotEquals": ""
-      },
-      "servings": {
-        "valueNotEquals": ""
-      }
-    },
-    "messages": {
-      "name": {
-        "required": "Recipe name is required",
-        "minlength": "Minimum permitted recipe length is atleast 5"
-      },
-      "recipeType": {
-        "valueNotEquals": "Please select a recipe type"
-      },
-      "servings": {
-        "valueNotEquals": "Please select recipe servings"
-      }
-    }
-  },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter name of recipe",
-          "id": "recipeName"
+    "widgets": [{
+        "label": "Total Recipes Added",
+        "icon": "si-bar-chart",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$allTime",
+            "where": {},
+            "dateProp": "added"
         }
-      }
-    },
-    "description": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "label": "Enter description"
+    }, {
+        "label": "Recipe Added In A Week",
+        "fetchLocally": true,
+        "icon": "si-calendar",
+        "propObj": {
+            "type": "$week",
+            "where": {},
+            "dateProp": "added"
         }
-      }
-    },
-    "mainImage": {
-      "type": "object",
-      "required": false,
-      "template": {
-        "type": "singleFileUpload",
-        "templateOptions": {
-          "label": "Add recipe cover image",
-          "containerName": "gruberr-recipes",
-          "containerModel": "Container",
-          "url": {
-            "upload": "",
-            "delete": ""
-          },
-          "bind": true,
-          "fullWidth": true,
-          "fileDataSource": "Image",
-          "onImageUpdate": {
-            "deletePrevious": true
-          }
+    }, {
+        "label": "Recipe Added Today",
+        "icon": "si-graph",
+        "fetchLocally": true,
+        "propObj": {
+            "type": "$today",
+            "where": {},
+            "dateProp": "added"
         }
-      }
-    },
-    "recipeType": {
-      "type": "string",
-      "required": false,
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "label": "Select recipe type",
-          "id": "recipeType",
-          "options": [
-            "veg",
-            "nonveg",
-            "egg"
-          ]
+    }],
+    "onLoad": {
+        "addWhere": {
+            "where": {
+                "and": [{
+                    "status": "publish"
+                }]
+            },
+            "except": "admin"
         }
-      }
     },
-    "servings": {
-      "type": "number",
-      "required": false,
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "label": "Select recipe servings",
-          "id": "recipeServings",
-          "options": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"
-          ]
-        }
-      }
-    },
-    "added": {
-      "type": "date",
-      "defaultFn": "now",
-      "template": {
-        "type": "dummy"
-      }
-    },
-    "status": {
-      "type": "string",
-      "required": false,
-      "default": "onhold",
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "label": "Change recipe status",
-          "id": "recipeStatus",
-          "options": [
-            "publish",
-            "onhold",
-            "rejected"
-          ]
-        }
-      }
-    },
-    "youtubeVideoId": {
-      "type": "string",
-      "required": false,
-      "template": {
-        "type": "youTubeVideo",
-        "templateOptions": {
-          "label": "Add recipe youtube video url",
-          "id": "youTubeVideo"
-        }
-      }
-    },
-    "stepsImage": {
-      "type": [
-        "object"
-      ],
-      "required": false,
-      "template": {
-        "type": "multipleFileUpload",
-        "templateOptions": {
-          "label": "Add recipe image steps",
-          "containerName": "gruberr-recipes",
-          "containerModel": "Container",
-          "url": {
-            "upload": "",
-            "delete": ""
-          },
-          "bind": true
-        }
-      }
-    },
-    "stepsDescription": {
-      "type": [
-        "object"
-      ],
-      "required": false,
-      "template": {
-        "type": "arrayValue",
-        "templateOptions": {
-          "btnText": "Add recipe steps",
-          "name": "step",
-          "fields": [
-            {
-              "type": "input",
-              "key": "name",
-              "templateOptions": {
-                "type": "text",
-                "label": "Enter recipes steps"
-              }
+    "validationsBackend": {
+        "rules": {
+            "name": {
+                "required": true,
+                "minlength": 5
+            },
+            "recipeType": {
+                "valueNotEquals": ""
+            },
+            "servings": {
+                "valueNotEquals": ""
+            },
+            "cuisinesName": {
+                "required": true,
+                "minlength": "3"
             }
-          ]
+        },
+        "messages": {
+            "name": {
+                "required": "Recipe name is required",
+                "minlength": "Minimum permitted recipe length is atleast 5"
+            },
+            "recipeType": {
+                "valueNotEquals": "Please select a recipe type"
+            },
+            "servings": {
+                "valueNotEquals": "Please select recipe servings"
+            },
+            "cuisinesName": {
+                "required": "cuisines name is required",
+                "minlength": "Minimum permitted length is atleast 3"
+            }
         }
-      }
-    }
-  },
-  "validations": [],
-  "relations": {
-    "customer": {
-      "type": "belongsTo",
-      "model": "Customer",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Customer",
-        "searchProp": "email",
-        "create": false
-      }
     },
-    "cuisines": {
-      "type": "hasAndBelongsToMany",
-      "model": "Cuisines",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Cuisines",
-        "searchProp": "name",
-        "create": false,
-        "search": true
-      }
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter name of recipe",
+                    "id": "recipeName"
+                }
+            }
+        },
+        "description": {
+            "type": "string",
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter description"
+                }
+            }
+        },
+        "mainImage": {
+            "type": "object",
+            "required": false,
+            "template": {
+                "type": "singleFileUpload",
+                "templateOptions": {
+                    "label": "Add recipe cover image",
+                    "containerName": "gruberr-recipes",
+                    "containerModel": "Container",
+                    "url": {
+                        "upload": "",
+                        "delete": ""
+                    },
+                    "bind": true,
+                    "fullWidth": true,
+                    "fileDataSource": "Image",
+                    "onImageUpdate": {
+                        "deletePrevious": true
+                    }
+                }
+            }
+        },
+        "recipeType": {
+            "type": "string",
+            "required": false,
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "Select recipe type",
+                    "id": "recipeType",
+                    "options": [
+                        "veg",
+                        "nonveg",
+                        "egg"
+                    ]
+                }
+            }
+        },
+        "servings": {
+            "type": "number",
+            "required": false,
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "Select recipe servings",
+                    "id": "recipeServings",
+                    "options": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10"
+                    ]
+                }
+            }
+        },
+        "cuisinesName": {
+            "type": "string",
+            "required": false,
+            "template": {
+                "type": "input",
+                "templateOptions": {
+                    "type": "text",
+                    "label": "Enter cuisine name",
+                    "id": "cuisinesName"
+                }
+            }
+        },
+        "added": {
+            "type": "date",
+            "defaultFn": "now",
+            "template": {
+                "type": "dummy"
+            }
+        },
+        "status": {
+            "type": "string",
+            "required": false,
+            "default": "onhold",
+            "template": {
+                "type": "selectString",
+                "templateOptions": {
+                    "label": "Change recipe status",
+                    "id": "recipeStatus",
+                    "options": [
+                        "publish",
+                        "onhold",
+                        "rejected"
+                    ]
+                }
+            }
+        },
+        "youtubeVideoId": {
+            "type": "string",
+            "required": false,
+            "template": {
+                "type": "youTubeVideo",
+                "templateOptions": {
+                    "label": "Add recipe youtube video url",
+                    "id": "youTubeVideo"
+                }
+            }
+        },
+        "stepsImage": {
+            "type": [
+                "object"
+            ],
+            "required": false,
+            "template": {
+                "type": "multipleFileUpload",
+                "templateOptions": {
+                    "label": "Add recipe image steps",
+                    "containerName": "gruberr-recipes",
+                    "containerModel": "Container",
+                    "url": {
+                        "upload": "",
+                        "delete": ""
+                    },
+                    "bind": true
+                }
+            }
+        },
+        "stepsDescription": {
+            "type": [
+                "object"
+            ],
+            "required": false,
+            "template": {
+                "type": "arrayValue",
+                "templateOptions": {
+                    "btnText": "Add recipe steps",
+                    "name": "step",
+                    "fields": [{
+                        "type": "input",
+                        "key": "name",
+                        "templateOptions": {
+                            "type": "text",
+                            "label": "Enter recipes steps"
+                        }
+                    }]
+                }
+            }
+        }
     },
-    "category": {
-      "type": "hasAndBelongsToMany",
-      "model": "Category",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Category",
-        "searchProp": "name",
-        "create": false
-      }
+    "validations": [],
+    "relations": {
+        "customer": {
+            "type": "belongsTo",
+            "model": "Customer",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Customer",
+                "searchProp": "email",
+                "create": false
+            }
+        },
+        "category": {
+            "type": "hasAndBelongsToMany",
+            "model": "Category",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Category",
+                "searchProp": "name",
+                "create": false
+            }
+        },
+        "comments": {
+            "type": "hasMany",
+            "model": "Comments",
+            "foreignKey": "",
+            "onCascadeDelete": true
+        },
+        "recipeTags": {
+            "type": "hasAndBelongsToMany",
+            "model": "RecipeTag",
+            "foreignKey": "",
+            "templateOptions": {
+                "btnText": "Add Tags",
+                "searchProp": "name",
+                "create": true
+            }
+        },
+        "ingredients": {
+            "type": "hasMany",
+            "model": "Ingredients",
+            "foreignKey": "",
+            "onCascadeDelete": true,
+            "through": "RecipeIngredients",
+            "templateOptions": {
+                "btnText": "Add Ingredients",
+                "searchProp": "name",
+                "create": false,
+                "hide": false,
+                "init": true
+            }
+        },
+        "wishlists": {
+            "type": "hasAndBelongsToMany",
+            "model": "Wishlist",
+            "foreignKey": ""
+        },
+        "recipeAnalytics": {
+            "type": "hasOne",
+            "model": "RecipeAnalytic",
+            "foreignKey": "",
+            "onCascadeDelete": true
+        }
     },
-    "comments": {
-      "type": "hasMany",
-      "model": "Comments",
-      "foreignKey": "",
-      "onCascadeDelete": true
-    },
-    "recipeTags": {
-      "type": "hasAndBelongsToMany",
-      "model": "RecipeTag",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Tags",
-        "searchProp": "name",
-        "create": true
-      }
-    },
-    "ingredients": {
-      "type": "hasMany",
-      "model": "Ingredients",
-      "foreignKey": "",
-      "onCascadeDelete": true,
-      "through": "RecipeIngredients",
-      "templateOptions": {
-        "btnText": "Add Ingredients",
-        "searchProp": "name",
-        "create": false,
-        "hide": false,
-        "init": true
-      }
-    },
-    "wishlists": {
-      "type": "hasAndBelongsToMany",
-      "model": "Wishlist",
-      "foreignKey": ""
-    },
-    "recipeAnalytics": {
-      "type": "hasOne",
-      "model": "RecipeAnalytic",
-      "foreignKey": "",
-      "onCascadeDelete": true
-    }
-  },
-  "acls": [],
-  "methods": {}
+    "acls": [],
+    "methods": {}
 }

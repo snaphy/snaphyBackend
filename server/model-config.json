@@ -56,10 +56,6 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "Cuisines": {
-    "dataSource": "mongodb",
-    "public": true
-  },
   "Category": {
     "dataSource": "mongodb",
     "public": true
