@@ -315,7 +315,7 @@
       "templateOptions": {
         "btnText": "Add Ingredient",
         "searchProp": "name",
-        "create": true
+        "create": false
       }
     },
     "orderDetails": {

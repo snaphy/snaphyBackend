@@ -8,7 +8,12 @@
   "properties": {
     "requiredQuantity": {
       "type": "number",
-      "required": true
+      "required": true,
+      "templateOptions": {
+        "type": "number",
+        "label": "Enter ingredient quantity",
+        "id": "orderQuantity"
+      }
     }
   },
   "validations": [],
@@ -16,12 +21,24 @@
     "order": {
       "type": "belongsTo",
       "model": "Order",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Order",
+        "searchProp": "id",
+        "create": false
+      }
     },
     "recipeIngredients": {
       "type": "hasOne",
       "model": "RecipeIngredients",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "readOnly": "true",
+        "searchProp": "id",
+        "includeRelatedModel": true,
+        "create": true,
+        "btnText": "Add Order Details"
+      }
     }
   },
   "acls": [],

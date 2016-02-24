@@ -316,9 +316,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					belongsToSchema.templateOptions.model      = relationObj.model;
 					belongsToSchema.templateOptions.foreignKey = relationObj.foreignKey === "" ? relationName + 'Id' : relationObj.foreignKey;
 					//Now add nested schema to the relational model.
-					generateTemplateStr(app, relationObj.model, belongsToSchema.templateOptions);
-
-					if(belongsToSchema.templateOptions.includeRelatedModel){
+					var relatedSchema = generateTemplateStr(app, relationObj.model, belongsToSchema.templateOptions);
+					/*if(belongsToSchema.templateOptions.includeRelatedModel){
 						//Now if model-> related model -> related model (belongTo data is requested)
 						//If some related mode of related model is requested too.. then in this case.. call this method..
 						//TODO THIS CONDITION MAY LEADS TO INFINITE LOOP OF CYCLIC ERROR ..AVOID..
@@ -327,8 +326,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 						var relatedModelObj = app.models[relationObj.model];
 						var relatedModelRelations = relatedModelObj.definition.settings.relations;
 						var relatedHeader = addPropToHeader(app, relationObj.model, '');
-
-						belongsToSchema.templateOptions.relations = belongsToSchema.templateOptions.relations || {
+						console.log(relatedSchema);
+						relatedSchema.relations = relatedSchema.relations || {
 							hasMany:[],
 							belongsTo:[],
 							hasManyThrough:[],
@@ -336,11 +335,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 							hasOne:[]
 						};
 						//add schema
-						addNestedModelRelation(app, relatedHeader, belongsToSchema.templateOptions, relatedModelRelations, relationObj.model);
-					}
-					//console.log(belongsToSchema);
+						addNestedModelRelation(app, relatedHeader, relatedSchema, relatedModelRelations, relationObj.model);
+					}*/
+
+
+
+
 					//Now add this to the schema..
-					schema.fields.push(belongsToSchema);
+					schema.fields.push(belongsToSchema.templateOptions);
 				}
 
 			}
@@ -439,7 +441,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		schema.fields   = [];
 		var modelObj    = app.models[modelName],
 		modelProperties = modelObj.definition.rawProperties,
-		validationObj  = modelObj.definition.settings.validationsBackend;
+		validationObj   = modelObj.definition.settings.validationsBackend;
 		var newValidationObj = {
 			rules:{},
 			messages:{}

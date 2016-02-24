@@ -26,6 +26,7 @@ var settings = {
        "RecipeAnalytic",
        "Popularity",
        "Order",
+       'OrderDetail',
        "Course"
    ]
 

@@ -155,6 +155,13 @@
     }
   },
   "properties": {
+    "id": {
+        "type": "string",
+        "id": true,
+        "template": {
+          "type": "dummy"
+        }
+    },
     "added": {
       "type": "date",
       "defaultFn": "now",
