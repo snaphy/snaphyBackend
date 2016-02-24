@@ -317,6 +317,11 @@
         "searchProp": "name",
         "create": true
       }
+    },
+    "orderDetails": {
+      "type": "hasOne",
+      "model": "OrderDetail",
+      "foreignKey": ""
     }
   },
   "acls": [],

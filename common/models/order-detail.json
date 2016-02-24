@@ -1,0 +1,29 @@
+{
+  "name": "OrderDetail",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "requiredQuantity": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": ""
+    },
+    "recipeIngredients": {
+      "type": "hasOne",
+      "model": "RecipeIngredients",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

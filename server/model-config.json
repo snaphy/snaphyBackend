@@ -123,5 +123,9 @@
   "CompanyInfo": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "OrderDetail": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

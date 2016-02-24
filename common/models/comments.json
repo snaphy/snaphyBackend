@@ -161,7 +161,10 @@
       "rating": {
         "required": "true",
         "number": true,
-        "range": [1, 5],
+        "range": [
+          1,
+          5
+        ],
         "valueNotEquals": ""
       }
     },
@@ -222,7 +225,13 @@
         "templateOptions": {
           "label": "Select rating for recipe",
           "id": "recipeRating",
-          "options": ["1", "2", "3", "4", "5"]
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
         }
       }
     }

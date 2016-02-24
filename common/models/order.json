@@ -77,6 +77,10 @@
         {
           "id": 3,
           "name": "prepared"
+        },
+        {
+          "id": 4,
+          "name": "new order"
         }
       ]
     },
@@ -94,15 +98,13 @@
       "display": true,
       "search": "number"
     },
-    "geolocation": {
-      "display": false
-    },
     "status": {
       "search": "select",
       "options": [
         "delivered",
         "cancelled",
-        "prepared"
+        "prepared",
+        "new order"
       ]
     },
     "added": {
@@ -160,10 +162,6 @@
         "type": "dummy"
       }
     },
-    "orderDetails": {
-      "type": "[object]",
-      "required": true
-    },
     "customerAddress": {
       "type": "string",
       "required": true,
@@ -174,7 +172,7 @@
       }
     },
     "customerPincode": {
-      "type": "string",
+      "type": "number",
       "required": true,
       "templateOptions": {
         "type": "text",
@@ -185,6 +183,7 @@
     "status": {
       "type": "string",
       "required": false,
+      "default": "new order",
       "template": {
         "type": "selectString",
         "templateOptions": {
@@ -193,36 +192,8 @@
           "options": [
             "delivered",
             "cancelled",
-            "prepared"
-          ]
-        }
-      }
-    },
-    "geolocation": {
-      "type": "geopoint",
-      "required": true,
-      "template": {
-        "type": "objectValue",
-        "templateOptions": {
-          "fields": [
-            {
-              "type": "input",
-              "key": "lat",
-              "templateOptions": {
-                "type": "text",
-                "label": "Enter latitude",
-                "id": "latitude"
-              }
-            },
-            {
-              "type": "input",
-              "key": "lng",
-              "templateOptions": {
-                "type": "text",
-                "label": "Enter longitude",
-                "id": "longitude"
-              }
-            }
+            "prepared",
+            "new order"
           ]
         }
       }
@@ -233,6 +204,11 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
+      "foreignKey": ""
+    },
+    "orderDetails": {
+      "type": "hasMany",
+      "model": "OrderDetail",
       "foreignKey": ""
     }
   },
