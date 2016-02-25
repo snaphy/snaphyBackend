@@ -104,6 +104,10 @@
     "dataSource": "mongodb",
     "public": true
   },
+  "Cuisines": {
+    "dataSource": "mongodb",
+    "public": true
+  },
   "Order": {
     "dataSource": "mongodb",
     "public": true

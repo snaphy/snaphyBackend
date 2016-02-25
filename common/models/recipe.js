@@ -18,10 +18,13 @@ module.exports = function(Recipe) {
 
 
     Recipe.beforeRemote("find", function(ctx, user, next) {
+        //console.log(ctx.args.filter.where);
         if (ctx.args) {
             if (ctx.args.filter) {
                 if (ctx.args.filter.where) {
+
                     if (typeof ctx.args.filter.where === "string") {
+
                         ctx.args.filter.where = JSON.parse(ctx.args.filter.where);
                     }
                 }
