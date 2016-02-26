@@ -60,7 +60,7 @@ var requestOtp = function(server, databaseObj, helper, packageObj) {
 
 var orderValidation = function(server, databaseObj, helper, packageObj) {
     var Order = databaseObj.Order;
-    Order.orderWithOTP = function(order, code, callback) {
+    Order.orderWithOTP = function(order, orderDetails, code, callback) {
         var err = new Error('Sorry, but that verification code does not work!');
         err.statusCode = 401;
         err.code = 'LOGIN_FAILED';
@@ -86,9 +86,29 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                     //Now save the order..
                     Order.create()
                     .then(function(orderInstance) {
-                        callback(null, orderInstance);
-                    })
-                    .catch(function(error) {
+                        console.log("Now saving order details..");
+                        console.log(orderDetails);
+                        console.log(order);
+                        //callback(null, orderInstance);
+                        //Now save the orderDetails of the order..
+                        //Now add orderId to each orders..
+                        for(var i=0; i<orderDetails.length; i++){
+                            //Add id property to each order..
+                            var orderDetailObj = orderDetails[i];
+                            orderDetailObj.customerId = orderInstance.id;
+                        }
+                        //Now save orderDetails finally..
+                        orderInstance.orderDetails.create(orderDetails, function(err, savedOrderDetails) {
+                            if(err){
+                                callback(err);
+                            }else{
+                                //Now savedOrderDetails
+                                callback(order);
+                                console.log("Order details saved successfully..");
+                                //TODO SEND EMAIL TO USER...
+                            }
+                        });
+                    }).catch(function(error) {
                         callback(error);
                     });
                 }
@@ -106,6 +126,7 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
        {
            accepts:[
                {arg:'order', type:'object', required:true},
+               {arg:'orderDetails', type:'array', required:true},
                 {arg:'code', type:'string', required:true},
            ],
            description: "Order by OTP verification of  Gruberr App",
