@@ -1,6 +1,6 @@
 module.exports = function(Recipe) {
     Recipe.observe('before save', function(ctx, next) {
-        if (ctx.isNewInstance) {
+        if (ctx.isNewInstance){
             //Add default status value..
             if (ctx.instance) {
                 //console.log(" i am here inside");
@@ -11,22 +11,23 @@ module.exports = function(Recipe) {
             }
             next();
         } else {
-            //console.log(ctx.instance);
             next();
         }
     });
 
 
     Recipe.beforeRemote("find", function(ctx, user, next) {
-        //console.log(ctx.args.filter.where);
         if (ctx.args) {
             if (ctx.args.filter) {
                 if (ctx.args.filter.where) {
+                    try{
+                        if (typeof ctx.args.filter.where === "string") {
+                            ctx.args.filter.where = JSON.parse(ctx.args.filter.where);
+                        }
+                    }catch(err){
 
-                    if (typeof ctx.args.filter.where === "string") {
-
-                        ctx.args.filter.where = JSON.parse(ctx.args.filter.where);
                     }
+
                 }
             }
         }

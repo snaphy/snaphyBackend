@@ -8,39 +8,42 @@
   "routeExposure": "/recipes",
   "staticFiles": {
     "css": {
-        "exampleCss" : "/recipes/style/example.css"
-      },
+      "exampleCss": "/recipes/style/example.css"
+    },
     "js": {
       "recipesRoute": "/recipes/scripts/routes/recipes.js",
       "recipesController": "/recipes/scripts/controllers/recipes.js"
     },
-    "moduleDependencies":{
-
-    },
+    "moduleDependencies": {},
     "settings": "/recipes/settings.js"
   },
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
     "headerHook": [],
-    "footerHook":[]
+    "footerHook": []
   },
+  "SECRET_CODE": "GRUBERR_ORDER_VERIFICATION",
   "databases": {
-      "Recipe": "Recipe",
-      "Comments": "Comments",
-      "RecipeAnalytic": "RecipeAnalytic",
-      "RecipeIngredients": "RecipeIngredients",
-      "User": "Employee"
+    "Recipe": "Recipe",
+    "Comments": "Comments",
+    "RecipeAnalytic": "RecipeAnalytic",
+    "RecipeIngredients": "RecipeIngredients",
+    "User": "Employee",
+    "Order": "Order"
   },
   "activate": true,
   "services": {},
-  "dependencies": {},
+  "dependencies": {
+    "async": "^1.5.2",
+    "https": "^1.0.0",
+    "lodash": "^4.5.1",
+    "speakeasy": "^2.0.0"
+  },
   "optionalDependencies": {},
   "repository": {
     "type": "",
     "url": ""
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
