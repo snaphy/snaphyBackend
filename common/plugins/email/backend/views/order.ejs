@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>
+        <%= title%>
+    </title>
+</head>
+
+<body>
+    <p style="text-align: center;"><strong><%= title%></strong></p>
+
+    <p style="text-align: center;">&nbsp;</p>
+
+    <p>Gruberr OrderId:<%= order.id %></p>
+
+    <p>Customer Name: <%= order.customer.firstName %>  <%= order.customer.lastName %></p>
+
+    <p>Customer Phone Number: <%= order.phoneNumber %></p>
+
+    <p>Customer Address: <%= order.customerAddress %></p>
+
+    <p>Customer Pincode: <%= order.pincode %> </p>
+
+    <p>&nbsp;</p>
+    <table border="1" cellpadding="1" cellspacing="1" style="width:100%">
+    	<tbody>
+    		<tr>
+    			<td>Ingredient Name</td>
+    			<td>Unit</td>
+    			<td>Quantity</td>
+    			<td>Price</td>
+    			<td>Ingredient Category</td>
+    		</tr>
+            <% order.orderDetails.forEach(function(orderDetail){ %>
+                <tr>
+        			<td><%= orderDetail.recipeIngredients.ingredients.name %></td>
+        			<td><%= orderDetail.recipeIngredients.ingredients.sellingMetrics %></td>
+        			<td><%= orderDetail.requiredQuantity %></td>
+        			<td><%= orderDetail.recipeIngredients.ingredients.price %></td>
+        			<td><%= orderDetail.recipeIngredients.ingredients.ingredientCategory.name %></td>
+        		</tr>
+            <% }) %>
+    	</tbody>
+    </table>
+
+    <p>&nbsp;</p>
+
+    <p>Designed and maintained by <a href="http://www.snaphy.com">snaphy</a></p>
+</body>
+
+</html>
