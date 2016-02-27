@@ -66,8 +66,9 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
             err.statusCode = 401;
             err.code = 'LOGIN_FAILED';
             if (order) {
+                console.log(order, orderDetails, code);
                 if (order.phoneNumber) {
-                    var number = order.phoneNumber;
+                    var number = order.phoneNumber.toString();
                     var patt = /\+\d{12,12}/;
                     var match = number.match(patt);
                     if (!match) {
@@ -81,41 +82,41 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                     console.log("Actual code " + actualCode);
                     console.log("Given code " + code);
                     //If Actual code doesn't matches the provoded code..
-                    if (actualCode !== code) {
+                    if (actualCode.toString() !== code.toString()) {
                         callback(err);
                     } else {
                         //Now save the order..
-                        Order.create()
-                            .then(function(orderInstance) {
-                                console.log("Now saving order details..");
-                                console.log(orderDetails);
-                                console.log(order);
-                                //callback(null, orderInstance);
-                                //Now save the orderDetails of the order..
-                                //Now add orderId to each orders..
-                                for (var i = 0; i < orderDetails.length; i++) {
-                                    //Add id property to each order..
-                                    var orderDetailObj = orderDetails[i];
-                                    orderDetailObj.customerId = orderInstance.id;
+                        Order.create(order)
+                        .then(function(orderInstance) {
+                            console.log("Now saving order details..");
+                            console.log(orderDetails);
+                            console.log(order);
+                            //callback(null, orderInstance);
+                            //Now save the orderDetails of the order..
+                            //Now add orderId to each orders..
+                            for (var i = 0; i < orderDetails.length; i++) {
+                                //Add id property to each order..
+                                var orderDetailObj = orderDetails[i];
+                                orderDetailObj.customerId = orderInstance.id;
+                            }
+                            //Now save orderDetails finally..
+                            orderInstance.orderDetails.create(orderDetails, function(err, savedOrderDetails) {
+                                if (err) {
+                                    callback(err);
+                                } else {
+                                    //Now savedOrderDetails
+                                    callback(order);
+                                    console.log("Order details saved successfully..");
+                                    //TODO SEND EMAIL TO USER...
+                                    //
+                                    //          SEND EMAIL HERE ONLY..
+                                    //
+                                    //
                                 }
-                                //Now save orderDetails finally..
-                                orderInstance.orderDetails.create(orderDetails, function(err, savedOrderDetails) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        //Now savedOrderDetails
-                                        callback(order);
-                                        console.log("Order details saved successfully..");
-                                        //TODO SEND EMAIL TO USER...
-                                        //
-                                        //          SEND EMAIL HERE ONLY..
-                                        //
-                                        //
-                                    }
-                                });
-                            }).catch(function(error) {
-                                callback(error);
                             });
+                        }).catch(function(error) {
+                            callback(error);
+                        });
                     }
                 } else {
                     callback(err)
@@ -134,7 +135,7 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                     required: true
                 }, {
                     arg: 'orderDetails',
-                    type: 'array',
+                    type: "array",
                     required: true
                 }, {
                     arg: 'code',
