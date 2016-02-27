@@ -1,255 +1,271 @@
 {
-    "name": "Order",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "Order",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "widgets": [
+    {
+      "label": "Total orders",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
     },
-    "widgets": [{
-        "label": "Total orders",
-        "icon": "si-bar-chart",
-        "fetchLocally": true,
-        "propObj": {
-            "type": "$allTime",
-            "where": {},
-            "dateProp": "added"
-        }
-    }, {
-        "label": "Cancelled Orders",
-        "icon": "si-bar-chart",
-        "fetchLocally": true,
-        "propObj": {
-            "type": "$allTime",
-            "where": {
-                "status": "cancelled"
-            },
-            "dateProp": "added"
-        }
-    }, {
-        "label": "Delivered Orders",
-        "icon": "si-bar-chart",
-        "fetchLocally": true,
-        "propObj": {
-            "type": "$allTime",
-            "where": {
-                "status": "delivered"
-            },
-            "dateProp": "added"
-        }
-    }, {
-        "label": "Today Orders",
-        "icon": "si-bar-chart",
-        "fetchLocally": true,
-        "propObj": {
-            "type": "$today",
-            "where": {},
-            "dateProp": "added"
-        }
-    }, {
-        "label": "This week Orders",
-        "icon": "si-bar-chart",
-        "fetchLocally": true,
-        "propObj": {
-            "type": "$week",
-            "where": {},
-            "dateProp": "added"
-        }
-    }],
-    "filters": {
-        "status": {
-            "type": "$select",
-            "label": "Select recipe type",
-            "options": [{
-                "id": 1,
-                "name": "delivered"
-            }, {
-                "id": 2,
-                "name": "cancelled"
-            }, {
-                "id": 3,
-                "name": "prepared"
-            }, {
-                "id": 4,
-                "name": "new order"
-            }]
+    {
+      "label": "Cancelled Orders",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {
+          "status": "cancelled"
         },
-        "added": {
-            "type": "$date",
-            "label": "select order between"
-        }
+        "dateProp": "added"
+      }
     },
-    "tables": {
-        "customerAddress": {
-            "display": true,
-            "search": "text"
+    {
+      "label": "Delivered Orders",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {
+          "status": "delivered"
         },
-        "customerPincode": {
-            "display": true,
-            "search": "number"
-        },
-        "status": {
-            "search": "select",
-            "options": [
-                "delivered",
-                "cancelled",
-                "prepared",
-                "new order"
-            ]
-        },
-        "added": {
-            "search": "date"
-        },
-        "customer_phoneNumber": {
-            "display": false
-        },
-        "customer_firstName": {
-            "display": false
-        },
-        "customer_lastName": {
-            "display": false
-        },
-        "customer_profilePic": {
-            "display": false
-        },
-        "customer_password": {
-            "display": false
-        },
-        "customer_date": {
-            "display": false
-        }
+        "dateProp": "added"
+      }
     },
-    "validationsBackend": {
-        "rules": {
-            "customerAddress": {
-                "required": true,
-                "minlength": 10
-            },
-            "customerPincode": {
-                "required": true,
-                "minlength": 6,
-                "maxlength": 6,
-                "number": true
-            }
-        },
-        "messages": {
-            "address": {
-                "required": "Address is required",
-                "minlength": "Address must be atleast 10 word in length"
-            },
-            "customerPincode": {
-                "required": "Customer pincode is required",
-                "minlength": "Minimum permitted length is atleast 6",
-                "number": "Pincode number must be a number"
-            }
-        }
+    {
+      "label": "Today Orders",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$today",
+        "where": {},
+        "dateProp": "added"
+      }
     },
-    "properties": {
-        "id": {
-            "type": "string",
-            "id": true,
-            "template": {
-                "type": "dummy"
-            }
+    {
+      "label": "This week Orders",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$week",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "filters": {
+    "status": {
+      "type": "$select",
+      "label": "Select recipe type",
+      "options": [
+        {
+          "id": 1,
+          "name": "delivered"
         },
-        "added": {
-            "type": "date",
-            "defaultFn": "now",
-            "template": {
-                "type": "dummy"
-            }
+        {
+          "id": 2,
+          "name": "cancelled"
         },
-        "customerAddress": {
-            "type": "string",
-            "required": true,
-            "templateOptions": {
+        {
+          "id": 3,
+          "name": "prepared"
+        },
+        {
+          "id": 4,
+          "name": "new order"
+        }
+      ]
+    },
+    "added": {
+      "type": "$date",
+      "label": "select order between"
+    }
+  },
+  "tables": {
+    "customerAddress": {
+      "display": true,
+      "search": "text"
+    },
+    "customerPincode": {
+      "display": true,
+      "search": "number"
+    },
+    "status": {
+      "search": "select",
+      "options": [
+        "delivered",
+        "cancelled",
+        "prepared",
+        "new order"
+      ]
+    },
+    "added": {
+      "search": "date"
+    },
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "customer_firstName": {
+      "display": false
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_profilePic": {
+      "display": false
+    },
+    "customer_password": {
+      "display": false
+    },
+    "customer_date": {
+      "display": false
+    }
+  },
+  "validationsBackend": {
+    "rules": {
+      "customerAddress": {
+        "required": true,
+        "minlength": 10
+      },
+      "customerPincode": {
+        "required": true,
+        "minlength": 6,
+        "maxlength": 6,
+        "number": true
+      }
+    },
+    "messages": {
+      "address": {
+        "required": "Address is required",
+        "minlength": "Address must be atleast 10 word in length"
+      },
+      "customerPincode": {
+        "required": "Customer pincode is required",
+        "minlength": "Minimum permitted length is atleast 6",
+        "number": "Pincode number must be a number"
+      }
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "id": true,
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "added": {
+      "type": "date",
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "customerAddress": {
+      "type": "string",
+      "required": true,
+      "templateOptions": {
+        "type": "text",
+        "label": "Enter order address",
+        "id": "orderAddress"
+      }
+    },
+    "customerPincode": {
+      "type": "number",
+      "required": true,
+      "templateOptions": {
+        "type": "text",
+        "label": "Enter order pincode",
+        "id": "orderPincode"
+      }
+    },
+    "phoneNumber": {
+      "type": "number",
+      "required": true,
+      "templateOptions": {
+        "type": "number",
+        "label": "Enter order phoneNumber",
+        "id": "orderPincode"
+      }
+    },
+    "staticIngredients": {
+      "type": [
+        "object"
+      ],
+      "required": false,
+      "template": {
+        "type": "arrayValue",
+        "templateOptions": {
+          "btnText": "Add ingredients",
+          "name": "ingredients",
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
                 "type": "text",
-                "label": "Enter order address",
-                "id": "orderAddress"
-            }
-        },
-        "customerPincode": {
-            "type": "number",
-            "required": true,
-            "templateOptions": {
+                "label": "Enter ingredients name"
+              }
+            },
+            {
+              "type": "input",
+              "key": "quantity",
+              "templateOptions": {
                 "type": "text",
-                "label": "Enter order pincode",
-                "id": "orderPincode"
+                "label": "Enter ingredients quantity"
+              }
             }
-        },
-        "phoneNumber": {
-            "type": "number",
-            "required": true,
-            "templateOptions": {
-                "type": "number",
-                "label": "Enter order phoneNumber",
-                "id": "orderPincode"
-            }
-        },
-        "staticIngredients": {
-            "type": [
-                "object"
-            ],
-            "required": false,
-            "template": {
-                "type": "arrayValue",
-                "templateOptions": {
-                    "btnText": "Add ingredients",
-                    "name": "ingredients",
-                    "fields": [{
-                        "type": "input",
-                        "key": "name",
-                        "templateOptions": {
-                            "type": "text",
-                            "label": "Enter ingredients name"
-                        }
-                    },{
-                        "type": "input",
-                        "key": "quantity",
-                        "templateOptions": {
-                            "type": "text",
-                            "label": "Enter ingredients quantity"
-                        }
-                    }]
-                }
-            }
-        },
-        "status": {
-            "type": "string",
-            "required": false,
-            "default": "new order",
-            "template": {
-                "type": "selectString",
-                "templateOptions": {
-                    "label": "Change order status.",
-                    "id": "orderStatus",
-                    "options": [
-                        "delivered",
-                        "cancelled",
-                        "prepared",
-                        "new order"
-                    ]
-                }
-            }
+          ]
         }
+      }
     },
-    "validations": [],
-    "relations": {
-        "customer": {
-            "type": "belongsTo",
-            "model": "Customer",
-            "foreignKey": ""
-        },
-        "orderDetails": {
-            "type": "hasMany",
-            "model": "OrderDetail",
-            "foreignKey": ""
+    "status": {
+      "type": "string",
+      "required": false,
+      "default": "new order",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Change order status.",
+          "id": "orderStatus",
+          "options": [
+            "delivered",
+            "cancelled",
+            "prepared",
+            "new order"
+          ]
         }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
     },
-    "acls": [{
+    "orderDetails": {
+      "type": "hasMany",
+      "model": "OrderDetail",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
-    }],
-    "methods": {}
+    }
+  ],
+  "methods": {}
 }

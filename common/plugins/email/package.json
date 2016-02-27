@@ -26,48 +26,49 @@
         "headerHook": [],
         "footerHook": []
     },
-    "databases": {
-    },
+    "databases": {},
     "mailConfig": [{
         "emailModel": "adminEmail",
-        "emailLabel":"Send Info",
-        "label":"Send Mail To Users",
+        "emailLabel": "Send Info",
+        "label": "Send Mail To Users",
         "from": "'Rohit Basu' <rohitbasu2050@gmail.com>",
         "assosiatedUsers": ["Customer"],
         "templates": {
             "sendNotice": {
                 "label": "Send notice to users",
                 "templatePath": "backend/views/notice.ejs",
-                "properties":[
-                    {
-                        "key": "title",
-                        "type": "input",
-                        "templateOptions": {
-                          "type": "text",
-                          "label": "Enter notice title",
-                          "id": "noticeTitle"
-                        }
-                    },
-                    {
-                        "key": "subject",
-                        "type": "input",
-                        "templateOptions": {
-                          "type": "text",
-                          "label": "Enter subject for notice",
-                          "id": "noticeSubject"
-                        }
-                    },
-                    {
-                        "key": "website",
-                        "type": "input",
-                        "templateOptions": {
-                          "type": "text",
-                          "label": "Enter company website",
-                          "id": "noticeWebsite"
-                        }
+                "properties": [{
+                    "key": "title",
+                    "type": "input",
+                    "templateOptions": {
+                        "type": "text",
+                        "label": "Enter notice title",
+                        "id": "noticeTitle"
                     }
-                ]
+                }, {
+                    "key": "subject",
+                    "type": "input",
+                    "templateOptions": {
+                        "type": "text",
+                        "label": "Enter subject for notice",
+                        "id": "noticeSubject"
+                    }
+                }, {
+                    "key": "website",
+                    "type": "input",
+                    "templateOptions": {
+                        "type": "text",
+                        "label": "Enter company website",
+                        "id": "noticeWebsite"
+                    }
+                }]
+            },
+
+            "sendOrder": {
+                "label": "Send order email to users.",
+                "templatePath": "backend/views/order.ejs"
             }
+
         }
     }],
     "activate": true,

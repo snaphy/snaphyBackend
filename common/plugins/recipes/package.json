@@ -24,6 +24,7 @@
     "footerHook": []
   },
   "SECRET_CODE": "GRUBERR_ORDER_VERIFICATION",
+  "phoneNumber": "+919953242338",
   "databases": {
     "Recipe": "Recipe",
     "Comments": "Comments",

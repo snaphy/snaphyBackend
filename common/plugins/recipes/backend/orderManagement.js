@@ -1,7 +1,11 @@
-'use strict';
+(function(){
+    'use strict';
+})();
+/*global require, console, module*/
 var speakeasy = require("speakeasy");
 var sendMessage = require("./otpMessage");
-var notp = require('notp');
+var async = require("async");
+
 var init = function(server, databaseObj, helper, packageObj) {
     requestOtp(server, databaseObj, helper, packageObj);
     orderValidation(server, databaseObj, helper, packageObj);
@@ -12,8 +16,9 @@ var requestOtp = function(server, databaseObj, helper, packageObj) {
     var Order = databaseObj.Order;
     Order.requestOtp = function(number, fn) {
             //matching the number..
-            var patt = /\+\d{12,12}/;
-            var match = number.match(patt);
+            var patt = /\+\d{12,12}/,
+            match = number.match(patt);
+
             if (!match) {
                 number = "+91" + number;
             }
@@ -26,6 +31,7 @@ var requestOtp = function(server, databaseObj, helper, packageObj) {
                 length: 4,
                 step: 300
             });
+
             console.log('Sending code for verification process : ' + code);
             var message = "Verification code for Gruberr application is : " + code;
             // [TODO] hook into your favorite SMS API and send your user their code!
@@ -39,7 +45,7 @@ var requestOtp = function(server, databaseObj, helper, packageObj) {
             });
             //Calling the callback.. function..
             fn(null, "message send Successfully");
-        } //requestCode function..
+    };//requestCode function..
 
 
     Order.remoteMethod(
@@ -57,22 +63,25 @@ var requestOtp = function(server, databaseObj, helper, packageObj) {
             description: "Request code for OTP verification of  Gruberr App",
         }
     );
-}
+},
 
 
 
 
-var orderValidation = function(server, databaseObj, helper, packageObj) {
-    var Order = databaseObj.Order;
+orderValidation = function(server, databaseObj, helper, packageObj) {
+    var Order = databaseObj.Order,
+    mail = helper.loadPlugin('email');
+
     Order.orderWithOTP = function(order, orderDetails, code, callback) {
             var err = new Error('Sorry, but that verification code does not work!');
             err.statusCode = 401;
             err.code = 'LOGIN_FAILED';
             if (order) {
                 if (order.phoneNumber) {
-                    var number = order.phoneNumber.toString();
-                    var patt = /\+\d{12,12}/;
-                    var match = number.match(patt);
+                    var number = order.phoneNumber.toString(),
+                    patt = /\+\d{12,12}/,
+                    match = number.match(patt);
+
                     if (!match) {
                         number = "+91" + number;
                     }
@@ -84,11 +93,9 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                     });
 
 
-                    console.log("Actual code " + actualCode);
-                    console.log("Given code " + code);
                     //If Actual code doesn't matches the provoded code..
                     if (actualCode.toString() !== code.toString()) {
-                        console.log("Error matching");
+                        console.error("Error matching");
                         callback(err);
                     } else {
                         //Now save the order..
@@ -96,9 +103,6 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                         .then(function(orderInstance) {
                             console.log("Now saving order details..");
 
-                            //console.log(order);
-                            //callback(null, orderInstance);
-                            //Now save the orderDetails of the order..
                             //Now add orderId to each orders..
                             for (var i = 0; i < orderDetails.length; i++) {
                                 //Add id property to each order..
@@ -108,7 +112,23 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                                     delete orderDetailObj.id;
                                 }
                             }
-                            //console.log(orderDetails);
+
+
+                            /*mail.adminEmail.sendOrder(" 'Rohit Basu' <rohitbasu2050@gmail.com>", "info@snaphy.com", "Hey this is a subject",
+                             {
+                             'title': 'this is a test title',
+                             'order': {
+
+                             }
+                             }, function(err, send){
+                             if(err){
+                             console.error(err);
+                             }else{
+                             console.log(send);
+                             }
+
+                             });*/
+
 
                             //Now save orderDetails finally..
                             orderInstance.orderDetails.create(orderDetails, function(err, savedOrderDetails) {
@@ -116,15 +136,68 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                                     console.error(err);
                                     callback(err);
                                 } else {
-                                    //Now savedOrderDetails
-                                    callback(null, savedOrderDetails);
-                                    console.log(savedOrderDetails);
-                                    console.log("Order details saved successfully..");
-                                    //TODO SEND EMAIL TO USER...
-                                    //
-                                    //          SEND EMAIL HERE ONLY..
-                                    //
-                                    //
+                                    callback(null, []);
+
+                                    //Now fetch the ingredients from recipeIngredients...
+                                    var RecipeIngredients = server.models.RecipeIngredients;
+
+                                    var recipeIngredientsId = [];
+                                    savedOrderDetails.forEach(function(orderDetail){
+                                        if(orderDetail.recipeIngredientsId){
+                                            recipeIngredientsId.push(orderDetail.recipeIngredientsId);
+                                        }
+                                    });
+
+                                    order.orderDetails = savedOrderDetails;
+
+                                    RecipeIngredients.find({
+                                        where:{
+                                            id:{
+                                                inq: recipeIngredientsId
+                                            }
+                                        },
+                                        include:["ingredients"]
+                                    })
+                                        .then(function(values){
+                                            //console.log(values);
+                                            //Now add recipeIngredients value to the orderDetails.
+                                            if(values){
+                                                for(var j=0; j< values.length; j++){
+                                                    var ingredientsObj = values[j];
+                                                    for(var i= 0; i < savedOrderDetails.length; i++ ){
+                                                        var orderDetail = savedOrderDetails[i];
+                                                        if(orderDetail.id){
+                                                            if(ingredientsObj.id.toString().trim() === orderDetail.recipeIngredientsId.toString().trim()){
+                                                                order.orderDetails[i].recipeIngredient = ingredientsObj;
+                                                                //console.log(order.orderDetails[i].recipeIngredient );
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                //Now find the customer for order..
+                                                var Customer = server.models.Customer;
+                                                Customer.findById(order.customerId, function(err, customer){
+                                                    if(err){
+                                                        console.error(err);
+                                                    }else{
+                                                        if(customer){
+                                                            //Now attach customer to the order..
+                                                            order.customer = customer;
+                                                           console.log(order);
+                                                        }
+
+                                                    }
+
+                                                });
+                                            }
+                                        })
+                                        .catch(function(err){
+                                            console.error(err);
+                                        });
+
+
                                 }
                             });
                         }).catch(function(error) {
@@ -163,10 +236,10 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                 }
             }
         ); //remoteMethod
-}
+};
 
 
 
 module.exports = {
     init: init
-}
+};

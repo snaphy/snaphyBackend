@@ -127,5 +127,9 @@
   "OrderDetail": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "counters": {
+    "dataSource": "mongodb",
+    "public": false
   }
 }
