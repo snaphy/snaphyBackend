@@ -1,6 +1,7 @@
 'use strict';
 var speakeasy = require("speakeasy");
 var sendMessage = require("./otpMessage");
+var notp = require('notp');
 var init = function(server, databaseObj, helper, packageObj) {
     requestOtp(server, databaseObj, helper, packageObj);
     orderValidation(server, databaseObj, helper, packageObj);
@@ -17,11 +18,13 @@ var requestOtp = function(server, databaseObj, helper, packageObj) {
                 number = "+91" + number;
             }
 
+            //var code = notp.totp.gen(key, opt)
+
             // Note that you’ll want to change the secret to something a lot more secure!
             var code = speakeasy.totp({
                 key: packageObj.SECRET_CODE + number,
                 length: 4,
-                step: 120
+                step: 300
             });
             console.log('Sending code for verification process : ' + code);
             var message = "Verification code for Gruberr application is : " + code;
@@ -66,7 +69,6 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
             err.statusCode = 401;
             err.code = 'LOGIN_FAILED';
             if (order) {
-                console.log(order, orderDetails, code);
                 if (order.phoneNumber) {
                     var number = order.phoneNumber.toString();
                     var patt = /\+\d{12,12}/;
@@ -74,38 +76,49 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                     if (!match) {
                         number = "+91" + number;
                     }
+
                     var actualCode = speakeasy.totp({
-                        key: packageObj.SECRET_CODE + number,
+                        key: packageObj.SECRET_CODE + number.toString(),
                         length: 4,
-                        step: 120
+                        step: 300
                     });
+
+
                     console.log("Actual code " + actualCode);
                     console.log("Given code " + code);
                     //If Actual code doesn't matches the provoded code..
                     if (actualCode.toString() !== code.toString()) {
+                        console.log("Error matching");
                         callback(err);
                     } else {
                         //Now save the order..
                         Order.create(order)
                         .then(function(orderInstance) {
                             console.log("Now saving order details..");
-                            console.log(orderDetails);
-                            console.log(order);
+
+                            //console.log(order);
                             //callback(null, orderInstance);
                             //Now save the orderDetails of the order..
                             //Now add orderId to each orders..
                             for (var i = 0; i < orderDetails.length; i++) {
                                 //Add id property to each order..
                                 var orderDetailObj = orderDetails[i];
-                                orderDetailObj.customerId = orderInstance.id;
+                                orderDetailObj.orderId = orderInstance.id;
+                                if(orderDetailObj.id){
+                                    delete orderDetailObj.id;
+                                }
                             }
+                            //console.log(orderDetails);
+
                             //Now save orderDetails finally..
                             orderInstance.orderDetails.create(orderDetails, function(err, savedOrderDetails) {
                                 if (err) {
+                                    console.log(err);
                                     callback(err);
                                 } else {
                                     //Now savedOrderDetails
-                                    callback(order);
+                                    callback(null, orderDetails);
+                                    console.log(orderDetails);
                                     console.log("Order details saved successfully..");
                                     //TODO SEND EMAIL TO USER...
                                     //
@@ -115,6 +128,7 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                                 }
                             });
                         }).catch(function(error) {
+                            console.log(error);
                             callback(error);
                         });
                     }
@@ -148,7 +162,7 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                     type: 'object'
                 }
             }
-        ) //remoteMethod
+        ); //remoteMethod
 }
 
 

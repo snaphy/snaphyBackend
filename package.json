@@ -23,6 +23,7 @@
     "loopback-component-storage": "^1.6.1",
     "loopback-connector-mongodb": "^1.13.2",
     "loopback-datasource-juggler": "^2.19.0",
+    "notp": "^2.0.3",
     "pmx": "^0.6.0",
     "serve-favicon": "^2.0.1"
   },
