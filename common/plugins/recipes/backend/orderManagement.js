@@ -113,12 +113,12 @@ var orderValidation = function(server, databaseObj, helper, packageObj) {
                             //Now save orderDetails finally..
                             orderInstance.orderDetails.create(orderDetails, function(err, savedOrderDetails) {
                                 if (err) {
-                                    console.log(err);
+                                    console.error(err);
                                     callback(err);
                                 } else {
                                     //Now savedOrderDetails
-                                    callback(null, orderDetails);
-                                    console.log(orderDetails);
+                                    callback(null, savedOrderDetails);
+                                    console.log(savedOrderDetails);
                                     console.log("Order details saved successfully..");
                                     //TODO SEND EMAIL TO USER...
                                     //
