@@ -114,21 +114,9 @@ orderValidation = function(server, databaseObj, helper, packageObj) {
                             }
 
 
-                            /*mail.adminEmail.sendOrder(" 'Rohit Basu' <rohitbasu2050@gmail.com>", "info@snaphy.com", "Hey this is a subject",
-                             {
-                             'title': 'this is a test title',
-                             'order': {
 
-                             }
-                             }, function(err, send){
-                             if(err){
-                             console.error(err);
-                             }else{
-                             console.log(send);
-                             }
 
-                             });*/
-
+                            var newOrderDetailObj = [];
 
                             //Now save orderDetails finally..
                             orderInstance.orderDetails.create(orderDetails, function(err, savedOrderDetails) {
@@ -137,6 +125,19 @@ orderValidation = function(server, databaseObj, helper, packageObj) {
                                     callback(err);
                                 } else {
                                     callback(null, []);
+                                    console.log("Order saved successfully\n");
+
+
+                                    //Send new order message..
+                                    var phoneNumber = packageObj.phoneNumber;
+                                    var message = "A new order has arrived \n order id: " + orderInstance.id;
+                                    sendMessage.send(message, phoneNumber, function(err, data) {
+                                        if (err) {
+                                            console.error(err);
+                                        }
+
+                                    });
+
 
                                     //Now fetch the ingredients from recipeIngredients...
                                     var RecipeIngredients = server.models.RecipeIngredients;
@@ -148,8 +149,8 @@ orderValidation = function(server, databaseObj, helper, packageObj) {
                                         }
                                     });
 
-                                    order.orderDetails = savedOrderDetails;
 
+                                    order.orderDetails = savedOrderDetails;
                                     RecipeIngredients.find({
                                         where:{
                                             id:{
@@ -158,46 +159,71 @@ orderValidation = function(server, databaseObj, helper, packageObj) {
                                         },
                                         include:["ingredients"]
                                     })
-                                        .then(function(values){
-                                            //console.log(values);
-                                            //Now add recipeIngredients value to the orderDetails.
-                                            if(values){
-                                                for(var j=0; j< values.length; j++){
-                                                    var ingredientsObj = values[j];
-                                                    for(var i= 0; i < savedOrderDetails.length; i++ ){
-                                                        var orderDetail = savedOrderDetails[i];
-                                                        if(orderDetail.id){
-                                                            if(ingredientsObj.id.toString().trim() === orderDetail.recipeIngredientsId.toString().trim()){
-                                                                order.orderDetails[i].recipeIngredient = ingredientsObj;
-                                                                //console.log(order.orderDetails[i].recipeIngredient );
-                                                                break;
-                                                            }
+                                    .then(function(values){
+                                        //console.log(values);
+                                        //Now add recipeIngredients value to the orderDetails.
+                                        if(values){
+                                            for(var j=0; j< values.length; j++){
+                                                var ingredientsObj = values[j];
+                                                for(var i= 0; i < savedOrderDetails.length; i++ ){
+                                                    var orderDetail = savedOrderDetails[i];
+                                                    if(orderDetail.id && orderDetail.recipeIngredientsId ){
+                                                        if(ingredientsObj.id.toString().trim() === orderDetail.recipeIngredientsId.toString().trim()){
+                                                            //order.orderDetails[i].recipeIngredient = ingredientsObj;
+                                                            var orderDetailObj = order.orderDetails[i];
+                                                            //orderDetailObj.recipeIngredient  = ingredientsObj;
+                                                            newOrderDetailObj.push({
+                                                                id: orderDetailObj.id,
+                                                                requiredQuantity: orderDetailObj.requiredQuantity,
+                                                                recipeIngredientsId: orderDetailObj.recipeIngredientsId,
+                                                                orderId: orderDetailObj.orderId,
+                                                                recipeIngredients: ingredientsObj
+                                                            });
+
+                                                            break;
                                                         }
                                                     }
                                                 }
+                                            }
 
-                                                //Now find the customer for order..
-                                                var Customer = server.models.Customer;
-                                                Customer.findById(order.customerId, function(err, customer){
-                                                    if(err){
-                                                        console.error(err);
-                                                    }else{
-                                                        if(customer){
-                                                            //Now attach customer to the order..
-                                                            order.customer = customer;
-                                                           console.log(order);
-                                                        }
 
+
+                                            //Now find the customer for order..
+                                            var Customer = server.models.Customer;
+                                            Customer.findById(order.customerId, function(err, customer){
+                                                if(err){
+                                                    console.error(err);
+                                                }else{
+                                                    if(customer) {
+                                                        //Now attach customer to the order..
+                                                        order.customer = customer;
+                                                        order.id = orderInstance.id;
+                                                        //Now send email.. to server..
+                                                        mail.adminEmail.sendOrder(" 'Gruberr' <rohitbasu2050@gmail.com>", packageObj.newOrderMail, "A new order has arrived.",
+                                                            {
+                                                                'title': 'Gruberr Ingredients',
+                                                                'order': order,
+                                                                'orderDetails': newOrderDetailObj
+                                                            }, function(err, send){
+                                                                if(err){
+
+                                                                    console.error(err);
+                                                                }else{
+
+                                                                    console.log(send);
+                                                                }
+
+                                                            });
                                                     }
 
-                                                });
-                                            }
-                                        })
-                                        .catch(function(err){
-                                            console.error(err);
-                                        });
+                                                }
 
-
+                                            });
+                                        }
+                                    })
+                                    .catch(function(err){
+                                        console.error(err);
+                                    });
                                 }
                             });
                         }).catch(function(error) {
@@ -206,13 +232,13 @@ orderValidation = function(server, databaseObj, helper, packageObj) {
                         });
                     }
                 } else {
-                    callback(err)
+                    callback(err);
                 }
             } else {
                 callback(err);
             }
 
-        } //registerWithOTP
+        }; //registerWithOTP
 
     Order.remoteMethod(
             'orderWithOTP', {
@@ -237,6 +263,10 @@ orderValidation = function(server, databaseObj, helper, packageObj) {
             }
         ); //remoteMethod
 };
+
+
+
+
 
 
 

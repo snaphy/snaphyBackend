@@ -7,37 +7,36 @@
 </head>
 
 <body>
-    <p style="text-align: center;"><strong><%= title%></strong></p>
 
-    <p style="text-align: center;">&nbsp;</p>
+    <p style="text-align:center"><strong><%= title%></strong></p>
 
-    <p>Gruberr OrderId:<%= order.id %></p>
+    <p style="text-align:center">&nbsp;</p>
 
-    <p>Customer Name: <%= order.customer.firstName %>  <%= order.customer.lastName %></p>
+    <p><strong>Gruberr OrderId:</strong><%- order.id %></p>
 
-    <p>Customer Phone Number: <%= order.phoneNumber %></p>
+    <p><strong>Customer Name:</strong> <%= order.customer.firstName %> <%= order.customer.lastName %></p>
 
-    <p>Customer Address: <%= order.customerAddress %></p>
+    <p><strong>Customer Contact:</strong> <%= order.phoneNumber %></p>
 
-    <p>Customer Pincode: <%= order.pincode %> </p>
+    <p><strong>Customer Address:</strong> <%= order.customerAddress %></p>
+
+    <p><strong>Customer Pincode: </strong><%= order.customerPincode %></p>
 
     <p>&nbsp;</p>
     <table border="1" cellpadding="1" cellspacing="1" style="width:100%">
     	<tbody>
     		<tr>
-    			<td>Ingredient Name</td>
-    			<td>Unit</td>
-    			<td>Quantity</td>
-    			<td>Price</td>
-    			<td>Ingredient Category</td>
+                <td style="text-align: center;"><strong>Ingredient Name</strong>
+                <td style="text-align: center;"><strong>Quantity Unit</strong></td>
+                <td style="text-align: center;"><strong>Unit</strong></td>
+                <td style="text-align: center;"> <strong>Price</strong></td>
     		</tr>
-            <% order.orderDetails.forEach(function(orderDetail){ %>
+            <% orderDetails.forEach(function(orderDetail){ %>
                 <tr>
-        			<td><%= orderDetail.recipeIngredients.ingredients.name %></td>
-        			<td><%= orderDetail.recipeIngredients.ingredients.sellingMetrics %></td>
-        			<td><%= orderDetail.requiredQuantity %></td>
-        			<td><%= orderDetail.recipeIngredients.ingredients.price %></td>
-        			<td><%= orderDetail.recipeIngredients.ingredients.ingredientCategory.name %></td>
+        			<td style="text-align: center;"><%= orderDetail.recipeIngredients.ingredients().name %></td>
+                    <td style="text-align: center;"><%= orderDetail.requiredQuantity %></td>
+                    <td style="text-align: center;"><%= orderDetail.recipeIngredients.ingredients().minimumQuantity %> <%= orderDetail.recipeIngredients.ingredients().sellingMetrics %></td>
+        			<td style="text-align: center;"><%= orderDetail.recipeIngredients.ingredients().price %></td>
         		</tr>
             <% }) %>
     	</tbody>

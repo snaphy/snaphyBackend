@@ -24,9 +24,9 @@ var settings = {
        "Wishlist",
        "Chef",
        "RecipeAnalytic",
-       "Popularity",
-       "Order",
-       'OrderDetail',
+       //"Popularity",
+      /* "Order",
+       'OrderDetail',*/
        "Course"
    ]
 

@@ -24,7 +24,8 @@
     "footerHook": []
   },
   "SECRET_CODE": "GRUBERR_ORDER_VERIFICATION",
-  "phoneNumber": "+919953242338",
+  "phoneNumber": "+918860111340",
+  "newOrderMail": "gupta_yogesh24@yahoo.com",
   "databases": {
     "Recipe": "Recipe",
     "Comments": "Comments",
