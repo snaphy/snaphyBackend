@@ -275,6 +275,13 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "loginWithGoogle"
     }
   ],
   "methods": {}
