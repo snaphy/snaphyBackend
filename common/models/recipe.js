@@ -1,5 +1,6 @@
 module.exports = function(Recipe) {
     Recipe.observe('before save', function(ctx, next) {
+
         if (ctx.isNewInstance){
             //Add default status value..
             if (ctx.instance) {
@@ -11,6 +12,7 @@ module.exports = function(Recipe) {
             }
             next();
         } else {
+
             next();
         }
     });
