@@ -8,8 +8,8 @@
   "properties": {
     "FbUserId": {
       "type": "string",
-      "required": true,
-      "id":true
+      "id": true,
+      "required": true
     },
     "token": {
       "type": "string",
@@ -17,9 +17,13 @@
     },
     "expires": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "userId": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
       "type": "string",
       "required": true
     }

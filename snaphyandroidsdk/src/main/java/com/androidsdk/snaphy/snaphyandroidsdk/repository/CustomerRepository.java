@@ -84,6 +84,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+            
+        
+    
+
 
 
 
@@ -306,6 +313,38 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "PUT"), "Customer.prototype.__updateById__orders");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "GET"), "Customer.prototype.__get__facebookAccessToken");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "POST"), "Customer.prototype.__create__facebookAccessToken");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "PUT"), "Customer.prototype.__update__facebookAccessToken");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "DELETE"), "Customer.prototype.__destroy__facebookAccessToken");
                 
 
             
@@ -624,6 +663,24 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Customer.getAbsoluteSchema");
+                
+
+            
+        
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithGoogle", "POST"), "Customer.loginWithGoogle");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithFb", "POST"), "Customer.loginWithFb");
                 
 
             
@@ -1905,6 +1962,195 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
             }//Method updateById__orders definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__facebookAccessToken definition
+            public void get__facebookAccessToken(  String customerId,  Boolean refresh, final ObjectCallback<FacebookAccessToken> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    callback.onSuccess(facebookAccessToken);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__facebookAccessToken definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__facebookAccessToken definition
+            public void create__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    callback.onSuccess(facebookAccessToken);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__facebookAccessToken definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__facebookAccessToken definition
+            public void update__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    callback.onSuccess(facebookAccessToken);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method update__facebookAccessToken definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__facebookAccessToken definition
+            public void destroy__facebookAccessToken(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__facebookAccessToken", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__facebookAccessToken definition ends here..
 
             
 
@@ -3678,6 +3924,90 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
             }//Method getAbsoluteSchema definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+            //Method loginWithGoogle definition
+            public void loginWithGoogle(  String accessToken, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("accessToken", accessToken);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("loginWithGoogle", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method loginWithGoogle definition ends here..
+
+            
+
+        
+    
+        
+            //Method loginWithFb definition
+            public void loginWithFb(  String external_access_token, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("external_access_token", external_access_token);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("loginWithFb", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method loginWithFb definition ends here..
 
             
 

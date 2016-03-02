@@ -74,6 +74,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -675,6 +682,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -881,6 +896,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -1228,6 +1246,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1426,6 +1452,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -1792,6 +1821,17 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
                         
                         
                         
@@ -2155,6 +2195,17 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
                         
                         
                         
@@ -2515,6 +2566,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2697,6 +2756,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -3068,6 +3130,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -3242,6 +3312,9 @@ public class Customer extends com.strongloop.android.loopback.User {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
                         
                         
                         
@@ -3597,6 +3670,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -3822,12 +3903,389 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
 
                 
                     //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+                
+                    //Define belongsTo relation method here..
+                    private FacebookAccessToken  facebookAccessToken ;
+
+                    public FacebookAccessToken getFacebookAccessToken() {
+                        return facebookAccessToken;
+                    }
+
+                    public void setFacebookAccessToken(FacebookAccessToken facebookAccessToken) {
+                        this.facebookAccessToken = facebookAccessToken;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setFacebookAccessToken(Map<String, Object> facebookAccessToken) {
+                        //First create a dummy Repo class object for customer.
+                        FacebookAccessTokenRepository facebookAccessTokenRepository = new FacebookAccessTokenRepository();
+                        FacebookAccessToken facebookAccessToken1 = facebookAccessTokenRepository.createObject(facebookAccessToken);
+                        setFacebookAccessToken(facebookAccessToken1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setFacebookAccessToken(HashMap<String, Object> facebookAccessToken) {
+                        //First create a dummy Repo class object for customer.
+                        FacebookAccessTokenRepository facebookAccessTokenRepository = new FacebookAccessTokenRepository();
+                        FacebookAccessToken facebookAccessToken1 = facebookAccessTokenRepository.createObject(facebookAccessToken);
+                        setFacebookAccessToken(facebookAccessToken1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(FacebookAccessToken facebookAccessToken) {
+                        that.setFacebookAccessToken(facebookAccessToken);
+                    }
+
+
+
+                
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__facebookAccessToken( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.get__facebookAccessToken( (String)that.getId(), refresh,  new ObjectCallback<FacebookAccessToken> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(FacebookAccessToken object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__facebookAccessToken( FacebookAccessToken data,  RestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.create__facebookAccessToken( (String)that.getId(), data.convertMap(),  new ObjectCallback<FacebookAccessToken> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(FacebookAccessToken object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void update__facebookAccessToken( FacebookAccessToken data,  RestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.update__facebookAccessToken( (String)that.getId(), data.convertMap(),  new ObjectCallback<FacebookAccessToken> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(FacebookAccessToken object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroy__facebookAccessToken( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+
+
+
+                                        customerRepo.destroy__facebookAccessToken( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
 
                  
                  

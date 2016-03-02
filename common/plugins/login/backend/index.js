@@ -47,32 +47,30 @@ module.exports = function(server, databaseObj, helper, packageObj) {
                     User.find({
                         where: where
                     }, function(err, users) {
-                        if (users.length) {
-                            //create the admin role
-                            Role.create({
-                                name: 'admin'
-                            }, function(err, role) {
-                                if (err) {
-                                    throw err;
-                                }
-                                for (i = 0; i < users.length; i++) {
-                                    //Making this user an admin..
-                                    console.log(users[0]);
-                                    addUserAdmin(role, users[0].id);
-                                } //for loop..
-                            });
+                        if(!err){
+                            if (users.length) {
+                                //create the admin role
+                                Role.create({
+                                    name: 'admin'
+                                }, function(err, role) {
+                                    if (err) {
+                                        throw err;
+                                    }
+                                    for (i = 0; i < users.length; i++) {
+                                        //Making this user an admin..
+                                        console.log(users[0]);
+                                        addUserAdmin(role, users[0].id);
+                                    } //for loop..
+                                });
+                            }
                         }
+
                     });
 
                     console.error("Got error");
                     console.log(err);
 
                 });
-            // User.create(adminUserModel, function(err, users){
-            //
-            //
-            // });
-
 
             //TODO MODIFY THIS METHOD TO PROVIDE RUNTIME ACCESS AND MODIFICATION TO USER.
             addStaffResolver();

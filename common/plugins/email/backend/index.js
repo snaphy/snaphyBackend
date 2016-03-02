@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-})()
+})();
 
 module.exports = function(server, databaseObj, helper, packageObj) {
     var fs = require('fs');
@@ -22,12 +22,13 @@ module.exports = function(server, databaseObj, helper, packageObj) {
 					console.error(err);
 					return false;
 				}
+
 				console.log(send);
 				//Dont wait for callback..
-				////We dont need to do anything in calse email sending fails..
+				////We dont need to do anything in case email sending fails..
 			});
 			callback(null, "Successfully send email.");
-		}
+		};
 
 		//Now registering the method `getSchema`
         mailInstance.remoteMethod(
@@ -68,6 +69,7 @@ module.exports = function(server, databaseObj, helper, packageObj) {
             callback(null, "Successfully send email.");
 
         };
+
 
 		//Now registering the method `getSchema`
         mailModel.remoteMethod(
@@ -204,7 +206,6 @@ module.exports = function(server, databaseObj, helper, packageObj) {
 		 * @param callback
 		 */
 		modelObj.getMailSchema = function(callback) {
-
 			callback(null, modelConfigData);
 		};
 
@@ -218,7 +219,6 @@ module.exports = function(server, databaseObj, helper, packageObj) {
 				description: "Send the mail schema of the to the browser."
 			}
 		);
-
 	};
 
 
@@ -231,7 +231,6 @@ module.exports = function(server, databaseObj, helper, packageObj) {
 		mailModel.forEach(function(modelConfigData){
 			addRestMethod(modelConfigData);
 		});
-
     };
 
 

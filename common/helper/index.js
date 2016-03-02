@@ -2,6 +2,8 @@
     'use strict';
 })();
 
+/*global require, module*/
+
 
 module.exports = function(server) {
   var loopback = require('loopback');

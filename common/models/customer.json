@@ -114,7 +114,7 @@
     },
     "phoneNumber": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -238,7 +238,8 @@
     "facebookAccessToken": {
       "type": "hasOne",
       "model": "FacebookAccessToken",
-      "foreignKey": ""
+      "foreignKey": "",
+      "onCascadeDelete": true
     }
   },
   "acls": [
@@ -253,6 +254,27 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "loginWithFb"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "create"
     }
   ],
   "methods": {}
