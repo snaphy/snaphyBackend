@@ -72,12 +72,7 @@ var handleHasOne = function(app, modelObj, foreignKey, relationProp, relationNam
                     //Remove the related model..
 
                     deleteHasOneFinally(modelInstance, foreignKey, relatedModelObj, next);
-                    // modelInstance[relationName].destroy(function(err) {
-                    //     if(err) {
-                    //         throw err;
-                    //     }
-                    //     console.log("related data hasOne " + relationName + " deleted too");
-                    // });
+
                 });
 
             })

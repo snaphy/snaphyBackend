@@ -15,13 +15,18 @@ var async = require('async');
 var addSaveMethod = function(app, modelName) {
     var modelObj = app.models[modelName];
     var modelRelationSchema = modelObj.definition.settings.relations;
+
+
     /**
      * Remote method for saving data with its depedencies
      * @param  {array} data   Adding data object containing model data.
+     * @param  {array} schema schema of model.
+     * @param  {object} callback loopback callback.
      * @example
      * data:
      * 	{
      * 		name: '1',
+     *
      * 		age: '19',
      * 		recipes:[{name : kabab}],
      * 		details:{
@@ -72,8 +77,6 @@ var addSaveMethod = function(app, modelName) {
                     callback(err);
                 });
         } else {
-            //console.log("I am updatting");
-
             //Now save/update the data..
             modelObj.upsert(data)
                 .then(function(dataInstance) {
@@ -534,6 +537,7 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                             }
                         }
                         if (!idFound) {
+                            //TODO DELETE FROM HASANDBELONG TO MANY ..
                             destroyHasManyRel(
                                 dataInstance,
                                 relationName,
@@ -638,11 +642,18 @@ var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relati
     relatedModelClass.upsert(relationData, function(err, data) {
         if (err) {
             console.log("\n\n\nGot error");
-            throw err;
+            return callback(err);
         }
 
+        //ADDING REFRENCE IN THE TABLE TO SUPPORT ADVANCED FILTER
+        //MONGO SUPPORT FOR ADVANCED FILTER..
+        //add id of relation in array in each of data..
+        //data[relationName] = data[relationName] || [];
+        //data[relationName].push(dataInstance.id);
+
         dataInstance[relationName].add(data)
-            .then(function() {
+            .then(function(savedData) {
+                //Now save the instance of data in the dataInstance
                 console.log("Link successfully added to hasAndBelongsToMany relationship.");
             })
             .catch(function(err) {
