@@ -43,7 +43,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 request(url, function (error, response, data) {
                     if (!error && response.statusCode === 200) {
                         if(data){
-                            data = JSON.parse(data);
+                            try{
+                                data = JSON.parse(data);
+                            }
+                            catch (err){
+                                console.log(err);
+                                return callback(defaultError);
+                            }
+
                             console.log("Printing the User info obtained from google..\n")
                             console.log(data);
                             //Now create user and login..
@@ -65,7 +72,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 };
                             }
 
-                            console.log(userData);
+                            //console.log(userData);
 
                             createUserOrLogin(server, userData, packageObj, User, databaseObj, accessToken, data.sub, "google", callback);
                         }else{
