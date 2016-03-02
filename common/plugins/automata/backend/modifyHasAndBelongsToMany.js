@@ -37,12 +37,13 @@ var handleRelation = function(app, modelObj, foreignKey, relationProp, relationN
 
     }
     else if(relationType === "hasManyThrough"){
-        //We are concerned with hasManyThrough relation only ...
-        //Now create a new method.. connect and disconnect
+
 
     }
     else if(relationType === "hasAndBelongsToMany"){
-
+        //We are concerned with hasManyThrough relation only ...
+        //Now create a new method.. connect and disconnect
+        connect (app, modelObj, foreignKey, relationProp, relationName, modelName);
     }
     else{
         // Do nothing..
@@ -64,9 +65,10 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
      });
      */
 
-    modelObj.prototype["__connect__" + relationName.toLowerCase()] = function(id, fk, callback){
+    modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
+
                 //Now adding main model instance..
                 var relatedModel = app.models[relationProp.model];
                 relatedModel.findById(fk, {})
@@ -80,7 +82,7 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
                                  * NOW DO SOMETHING HERE TOO...
                                  *
                                  */
-
+                                callback(null, savedData);
 
                             })
                             .catch(function(err){
@@ -96,7 +98,15 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
                 console.error(err);
                 return callback(err);
             });
+
     };
+
+    //modelObj.prototype[relationName] = modelObj.prototype[relationName] || {};
+
+
+    //modelObj.prototype[relationName].connect = modelObj.prototype["__connect__" + relationName];
+    //console.log(modelObj.prototype[relationName].connect);
+    //modelObj['prototype.__connect__' + relationName.toLowerCase()]
 
 
         //Now registering the method `getSchema`

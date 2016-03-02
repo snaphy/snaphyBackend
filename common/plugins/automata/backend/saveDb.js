@@ -645,20 +645,26 @@ var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relati
             return callback(err);
         }
 
-        //ADDING REFRENCE IN THE TABLE TO SUPPORT ADVANCED FILTER
-        //MONGO SUPPORT FOR ADVANCED FILTER..
-        //add id of relation in array in each of data..
-        //data[relationName] = data[relationName] || [];
-        //data[relationName].push(dataInstance.id);
 
-        dataInstance[relationName].add(data)
+        var connect = dataInstance["__connect__" + relationName];
+        connect(dataInstance.id, data.id, function(err, values){
+            if(err){
+                console.log(err);
+            }else{
+                //Now save the instance of data in the dataInstance
+                console.log("Link successfully added to hasAndBelongsToMany relationship.");
+                console.log(values);
+            }
+        });
+
+        /*dataInstance[relationName].add(data)
             .then(function(savedData) {
                 //Now save the instance of data in the dataInstance
                 console.log("Link successfully added to hasAndBelongsToMany relationship.");
             })
             .catch(function(err) {
                 callback(err);
-            });
+            });*/
 
     });
 };
