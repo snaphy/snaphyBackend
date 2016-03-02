@@ -1,0 +1,12 @@
+{
+  "name": "multilogin",
+  "version": "1.0.0",
+  "dependencies": {
+  
+  },
+  "devDependencies": {
+    
+  },
+  "appPath": "client",
+  "moduleName": "multilogin"
+}

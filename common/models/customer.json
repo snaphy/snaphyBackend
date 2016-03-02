@@ -234,6 +234,11 @@
         "search": true,
         "hide": false
       }
+    },
+    "facebookAccessToken": {
+      "type": "hasOne",
+      "model": "FacebookAccessToken",
+      "foreignKey": ""
     }
   },
   "acls": [

@@ -1,0 +1,37 @@
+{
+  "name": "FacebookAccessToken",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "FbUserId": {
+      "type": "string",
+      "required": true,
+      "id":true
+    },
+    "token": {
+      "type": "string",
+      "required": true
+    },
+    "expires": {
+      "type": "date",
+      "required": true
+    },
+    "userId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

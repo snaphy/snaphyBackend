@@ -1,0 +1,118 @@
+{
+  "name": "Example",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "totalOrders": {
+      "type": "number"
+    },
+  
+    "area": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string",
+      "required": false
+    },
+    "address": {
+      "type": "string",
+      "required": false
+    },
+    "contactNo": {
+      "type": "string",
+      "required": true,
+      "index": {"unique": true}
+    },
+    "lastOrder": {
+      "type": "date"
+    },
+    "totalIssues": {
+      "type": "number"
+    },
+    "birthDate": {
+      "type": "date",
+      "required": false
+    },
+    "deviceType": {
+      "type": "object",
+      "required": false
+    },
+    "cancelledOrders": {
+      "type": "number"
+    },
+    "totalSales": {
+      "type": "number"
+    },
+    "returnedOrders": {
+      "type": "number"
+    },
+    "totalReturnedCost": {
+      "type": "number"
+    },
+    "minDeliveryTime": {
+      "type": "number"
+    },
+    "maxDeliveryTime": {
+      "type": "number"
+    },
+    "totalSavings": {
+      "type": "number"
+    },
+    "pinCode": {
+      "type": "number"
+    },
+    "location": {
+      "type": "geopoint",
+      "required": false
+    }
+  },
+  "validations": [
+  ],
+  "relations": {
+    "orders": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": ""
+    },
+    "retailerBills": {
+      "type": "hasMany",
+      "model": "retailerBill",
+      "foreignKey": ""
+    },
+    "customerEmails": {
+      "type": "hasMany",
+      "model": "CustomerEmail",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "requestCode"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "registerWithOTP"
+    }
+  ],
+  "methods": []
+}
