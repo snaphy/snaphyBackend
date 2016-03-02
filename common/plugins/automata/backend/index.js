@@ -2,6 +2,7 @@
 module.exports = function( server, databaseObj, helper, packageObj) {
 	var saveRemoteMethod = require('./saveDb');
 	var onDelete = require('./cascadingDelete');
+	var modifyHasAndBelongsToMany = require("./modifyHasAndBelongsToMany");
 	/**
 	 * Here server is the main app object
 	 * databaseObj is the mapped database from the package.json file
@@ -31,6 +32,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			saveRemoteMethod.addSaveMethod(server, Model.modelName);
 			addCaseSensitiveSearch (server, Model.modelName);
 			onDelete.onCascadeDelete(server, Model.modelName);
+			modifyHasAndBelongsToMany.modifyRelation(server, Model.modelName);
 		});
 
 	};
