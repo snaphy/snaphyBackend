@@ -49,6 +49,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 userData.lastName = data.family_name;
 
                                 var profileUrl = data.picture;
+                                console.log(profileUrl);
 
                                 createUserOrLogin(server, res, packageObj, User, databaseObj, accessToken, profileUrl, "google", callback);
                             }
@@ -87,9 +88,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
     var addUserFbLogin = function(server, databaseObj, helper, packageObj){
+
         var User = databaseObj.User;
         //Now defining a method login with access token
         User.loginWithFb = function (accessToken, cb) {
+            console.log("i am here");
             FB.setAccessToken(accessToken);
             FB.api('me', {fields: ['id', 'name', "first_name", "last_name", "email"]}, function (res) {
                 if(!res || res.error) {
@@ -102,8 +105,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
                 var profileUrl = "https://graph.facebook.com/"+ res.id +"/picture?width=500&height=500";
 
-                console.log("Printing the User info obtained from facebook..\n");
-                console.log(res);
+                console.log(profileUrl);
 
                 //Now create user and login..
                 createUserOrLogin(server, res, packageObj, User, databaseObj, accessToken, profileUrl, "facebook", cb);
@@ -170,7 +172,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 //User is not created using facebook signup but through other method...link the user
                                 return console.error(err);
                             }
-                            console.log("Real data access tokens", accessToken);
+
                             //callback(null, accessToken);
                             //Now Storing value in the server..
                         });
@@ -202,7 +204,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 return callback(error);
             }else{
                 token.__data.user = userInstance;
-                console.log(token);
+                //console.log(token);
                 //Now add the token to the callback function..
                 callback(null,  token);
                 //Now save the user to AccessToken model..
@@ -211,7 +213,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     "FbUserId": data.id,
                     "token": thirdPartyAccessToken,
                     "expires": new Date(token.ttl),
-                    "type": type
+                    "type": type,
+                    "userId": userInstance.id
                 };
 
                 console.log("updating values...");
