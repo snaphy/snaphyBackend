@@ -562,11 +562,14 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                         //relationData[foriegnKey] = dataInstance.id;
                         upsertHasManyFinal(relatedModelClass, relationData, dataInstance, relationName, callback);
                     }
-                    if (manyType === 'hasAndBelongsToMany') {
 
-                        upserthasAndBelongsToManyFinal(dataInstance, relationName, relationData, relatedModelClass, callback);
-                    }
                 });
+
+                //Changed add all the list instead for hasAndBelongToMany ...
+                if (manyType === 'hasAndBelongsToMany') {
+                    upserthasAndBelongsToManyFinal(dataInstance, relationName, relationDataArr, relatedModelClass, callback);
+                }
+
                 return callback();
             }
         ], function(err, results){
@@ -638,37 +641,54 @@ var upsertHasManyFinal = function(relatedModelClass, relationData, dataInstance,
 };
 
 
-var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relationData, relatedModelClass, callback) {
+var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relationDataArr, relatedModelClass, callback) {
+
+    var series = [];
+    var relatedDataId = [];
+    relationDataArr.forEach(function(relationData, index){
+        var data = relationDataArr[index];
+        series.push(function(callback){
+            dataUpsert(relatedModelClass, data, relatedDataId, callback);
+        });
+    });
+
+    //Now save the data in series..
+    async.series(series, function(err){
+        if(err){
+            callback(err);
+        }else{
+            //Now send the callback
+            var connect = dataInstance["__connect__" + relationName];
+            connect(dataInstance.id, relatedDataId, function(err, values){
+                if(err){
+                    console.log(err);
+                }else{
+                    //Now save the instance of data in the dataInstance
+                    console.log("Link successfully added to hasAndBelongsToMany relationship.");
+                    //console.log(values);
+                }
+            });
+        }
+    });
+};
+
+
+
+var dataUpsert = function(relatedModelClass, relationData, relatedDataId, callback){
     relatedModelClass.upsert(relationData, function(err, data) {
         if (err) {
             console.log("\n\n\nGot error");
             return callback(err);
-        }
-
-
-        var connect = dataInstance["__connect__" + relationName];
-        connect(dataInstance.id, data.id, function(err, values){
-            if(err){
-                console.log(err);
-            }else{
-                //Now save the instance of data in the dataInstance
-                console.log("Link successfully added to hasAndBelongsToMany relationship.");
-                console.log(values);
+        }else{
+            console.log(data);
+            if(data){
+                relatedDataId.push(data.id);
             }
-        });
-
-        /*dataInstance[relationName].add(data)
-            .then(function(savedData) {
-                //Now save the instance of data in the dataInstance
-                console.log("Link successfully added to hasAndBelongsToMany relationship.");
-            })
-            .catch(function(err) {
-                callback(err);
-            });*/
-
+            //return async callback..
+            callback();
+        }
     });
-};
-
+}
 
 
 

@@ -1,5 +1,5 @@
 (function(){'use strict';})();
-
+var async = require('async');
 
 //Modify mongodb relation addition for adding data to hasAndBelongToMany..
 /**
@@ -38,7 +38,6 @@ var handleRelation = function(app, modelObj, foreignKey, relationProp, relationN
     }
     else if(relationType === "hasManyThrough"){
 
-
     }
     else if(relationType === "hasAndBelongsToMany"){
         //We are concerned with hasManyThrough relation only ...
@@ -65,29 +64,39 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
      });
      */
 
+    //HERE fk is the list of foreign keys..
     modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
-
                 //Now adding main model instance..
                 var relatedModel = app.models[relationProp.model];
-                relatedModel.findById(fk, {})
-                    .then(function(relatedModelInstance){
-                        //Now add data..
-                        mainModelInstance[relationName].add(relatedModelInstance)
-                            .then(function(savedData){
-                                //Now save the instance of data in the dataInstance
-                                console.log("Link successfully added to hasAndBelongsToMany relationship.");
-                                /**
-                                 * NOW DO SOMETHING HERE TOO...
-                                 *
-                                 */
-                                callback(null, savedData);
-
-                            })
-                            .catch(function(err){
-                                return callback(err);
+                //Find the list of related models..
+                relatedModel.find({
+                    where:{
+                        id: {
+                            inq: fk
+                        }
+                    }
+                })
+                    .then(function(relatedModelInstanceArr){
+                        var series = [];
+                        //Now prepare a series function..
+                        relatedModelInstanceArr.forEach(function(relatedModelInstance){
+                            series.push(function(callback){
+                                connectEachData (app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback);
                             });
+                        });
+
+                        //Now save the data in series..
+                        async.series(series, function(err){
+                            if(err){
+                                callback(err);
+                            }else{
+                                //Now send the callback
+                                callback(null, {});
+                            }
+                            console.log("data saved successfully..");
+                        });
                     })
                     .catch(function(err){
                         console.error(err);
@@ -123,7 +132,7 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
                 "description": "PersistedModel id"
             }, {
                 "arg": "fk",
-                "type": "any",
+                "type": "array",
                 "description": "Foreign key for cuisines",
                 "required": true,
                 "http": {
@@ -142,6 +151,104 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
             description: "Connect two hasAndBelongMany Data together..."
         }
     );
+};
+
+
+//Connect each data in series..
+var connectEachData = function(app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback){
+    var relatedModel = app.models[relationProp.model];
+    //Now add data..
+    mainModelInstance[relationName].add(relatedModelInstance)
+        .then(function(savedData){
+            //Now save the instance of data in the dataInstance
+            console.log("Link successfully added to hasAndBelongsToMany relationship.");
+            /**
+             * NOW DO SOMETHING HERE TOO...
+             * Now add this values to each models..
+             *by inserting a _ character as suffix..
+             */
+            var relatedModelRelationName;
+            var relatedModelRelationProp;
+            mainModelInstance[relationName+"_"] = mainModelInstance[relationName+"_"] || [];
+            //first check if related data is already not present..
+            var found = false;
+            for(var i=0; i< mainModelInstance[relationName+"_"].length; i++){
+                var id = mainModelInstance[relationName+"_"][i];
+                if(id){
+                    id = id.toString();
+                    if(id === relatedModelInstance.id.toString()){
+                        found = true;
+                        break;
+                    }
+                }
+
+            }
+
+            //Only store refrences if data is not found..
+            if(!found){
+                mainModelInstance[relationName + "_"].push(relatedModelInstance.id.toString());
+                mainModelInstance.save({}, function(err, value){
+                    if(err){
+                        callback(err);
+                    }else{
+                        //Now also add data to related data..
+                        //Now the related model name..relation name
+                        var relatedModelRelationObj = relatedModel.definition.settings.relations;
+                        for(var relatedRelationName in relatedModelRelationObj){
+                            if(relatedModelRelationObj.hasOwnProperty(relatedRelationName)){
+                                var relatedRelationProp = relatedModelRelationObj[relatedRelationName];
+                                if(relatedRelationProp.model === modelName){
+
+                                    relatedModelRelationName = relatedRelationName;
+                                    relatedModelRelationProp = relatedRelationProp;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(relatedModelRelationName){
+                            relatedModelInstance[relatedModelRelationName + "_"] = relatedModelInstance[relatedModelRelationName + "_"] || [];
+                            var relatedIdFound = false;
+                            console.log("=====RELATED DATA=============", relatedModelInstance=====ID=====", mainModelInstance.id);
+                            for(var j=0; j < relatedModelInstance[relatedModelRelationName + "_"].length; j++){
+                                var id = relatedModelInstance[relatedModelRelationName + "_"][j];
+                                if(id.toString() === mainModelInstance.id.toString()){
+                                    relatedIdFound = true;
+                                    break;
+                                }
+                            }
+                            //Only save if the relatedId is not found..
+                            if(!relatedIdFound){
+                                //Now add data to this model too..
+                                relatedModelInstance[relatedModelRelationName + "_"].push(mainModelInstance.id.toString());
+                                //Now save the data..
+                                relatedModelInstance.save({}, function(err, value){
+                                    if(err){
+                                        console.error(err);
+                                        callback(err);
+                                    }else{
+                                        //console.info("saving related value", value);
+                                        //Do nothing.. return async callback..success..
+                                        callback();
+                                    }
+                                });
+                            }else{
+                                callback(new Error("Bad data"));
+                            }
+                        }else{
+                            callback(new Error("Bad data"));
+                        }
+                    }
+
+                });
+            }else{
+                ////Now send the callback
+                callback();
+            }
+        })
+        .catch(function(err){
+            return callback(err);
+        });
 };
 
 
