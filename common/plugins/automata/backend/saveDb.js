@@ -664,7 +664,7 @@ var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relati
                     console.log(err);
                 }else{
                     //Now save the instance of data in the dataInstance
-                    console.log("Link successfully added to hasAndBelongsToMany relationship.");
+                    //console.log("Link successfully added to hasAndBelongsToMany relationship.");
                     //console.log(values);
                 }
             });
@@ -680,7 +680,7 @@ var dataUpsert = function(relatedModelClass, relationData, relatedDataId, callba
             console.log("\n\n\nGot error");
             return callback(err);
         }else{
-            console.log(data);
+            //console.log(data);
             if(data){
                 relatedDataId.push(data.id);
             }

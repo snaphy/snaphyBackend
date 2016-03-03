@@ -1,5 +1,6 @@
 (function(){'use strict';})();
 var async = require('async');
+var _ = require('lodash');
 
 //Modify mongodb relation addition for adding data to hasAndBelongToMany..
 /**
@@ -161,7 +162,6 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
     mainModelInstance[relationName].add(relatedModelInstance)
         .then(function(savedData){
             //Now save the instance of data in the dataInstance
-            console.log("Link successfully added to hasAndBelongsToMany relationship.");
             /**
              * NOW DO SOMETHING HERE TOO...
              * Now add this values to each models..
@@ -171,80 +171,55 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
             var relatedModelRelationProp;
             mainModelInstance[relationName+"_"] = mainModelInstance[relationName+"_"] || [];
             //first check if related data is already not present..
-            var found = false;
-            for(var i=0; i< mainModelInstance[relationName+"_"].length; i++){
-                var id = mainModelInstance[relationName+"_"][i];
-                if(id){
-                    id = id.toString();
-                    if(id === relatedModelInstance.id.toString()){
-                        found = true;
-                        break;
+
+            mainModelInstance[relationName + "_"].push(relatedModelInstance.id.toString());
+            //Now remove the duplicates..
+            //Using lodash unique..
+            mainModelInstance[relationName + "_"] = _.uniq(mainModelInstance[relationName + "_"]);
+
+            mainModelInstance.save({}, function(err, value){
+                if(err){
+                    callback(err);
+                }else{
+                    //Now also add data to related data..
+                    //Now the related model name..relation name
+                    var relatedModelRelationObj = relatedModel.definition.settings.relations;
+                    for(var relatedRelationName in relatedModelRelationObj){
+                        if(relatedModelRelationObj.hasOwnProperty(relatedRelationName)){
+                            var relatedRelationProp = relatedModelRelationObj[relatedRelationName];
+                            if(relatedRelationProp.model === modelName){
+                                relatedModelRelationName = relatedRelationName;
+                                relatedModelRelationProp = relatedRelationProp;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(relatedModelRelationName){
+                        relatedModelInstance[relatedModelRelationName + "_"] = relatedModelInstance[relatedModelRelationName + "_"] || [];
+                        //Now add data to this model too..
+                        relatedModelInstance[relatedModelRelationName + "_"].push(mainModelInstance.id.toString());
+                        //Now remove the duplicates...
+                        relatedModelInstance[relatedModelRelationName + "_"] = _.uniq(relatedModelInstance[relatedModelRelationName + "_"]);
+                        //Now save the data..
+                        relatedModelInstance.save({}, function(err, value){
+                            if(err){
+                                console.error(err);
+                                callback(err);
+                            }else{
+                                //console.info("saving related value", value);
+                                //Do nothing.. return async callback..success..
+                                callback();
+                            }
+                        });
+
+                    }else{
+                        callback(new Error("Bad data"));
                     }
                 }
 
-            }
+            });
 
-            //Only store refrences if data is not found..
-            if(!found){
-                mainModelInstance[relationName + "_"].push(relatedModelInstance.id.toString());
-                mainModelInstance.save({}, function(err, value){
-                    if(err){
-                        callback(err);
-                    }else{
-                        //Now also add data to related data..
-                        //Now the related model name..relation name
-                        var relatedModelRelationObj = relatedModel.definition.settings.relations;
-                        for(var relatedRelationName in relatedModelRelationObj){
-                            if(relatedModelRelationObj.hasOwnProperty(relatedRelationName)){
-                                var relatedRelationProp = relatedModelRelationObj[relatedRelationName];
-                                if(relatedRelationProp.model === modelName){
-
-                                    relatedModelRelationName = relatedRelationName;
-                                    relatedModelRelationProp = relatedRelationProp;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if(relatedModelRelationName){
-                            relatedModelInstance[relatedModelRelationName + "_"] = relatedModelInstance[relatedModelRelationName + "_"] || [];
-                            var relatedIdFound = false;
-                            console.log("=====RELATED DATA=============", relatedModelInstance=====ID=====", mainModelInstance.id);
-                            for(var j=0; j < relatedModelInstance[relatedModelRelationName + "_"].length; j++){
-                                var id = relatedModelInstance[relatedModelRelationName + "_"][j];
-                                if(id.toString() === mainModelInstance.id.toString()){
-                                    relatedIdFound = true;
-                                    break;
-                                }
-                            }
-                            //Only save if the relatedId is not found..
-                            if(!relatedIdFound){
-                                //Now add data to this model too..
-                                relatedModelInstance[relatedModelRelationName + "_"].push(mainModelInstance.id.toString());
-                                //Now save the data..
-                                relatedModelInstance.save({}, function(err, value){
-                                    if(err){
-                                        console.error(err);
-                                        callback(err);
-                                    }else{
-                                        //console.info("saving related value", value);
-                                        //Do nothing.. return async callback..success..
-                                        callback();
-                                    }
-                                });
-                            }else{
-                                callback(new Error("Bad data"));
-                            }
-                        }else{
-                            callback(new Error("Bad data"));
-                        }
-                    }
-
-                });
-            }else{
-                ////Now send the callback
-                callback();
-            }
         })
         .catch(function(err){
             return callback(err);
