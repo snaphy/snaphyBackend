@@ -289,7 +289,7 @@ var upsertHasOne = function(app, modelObj, relationData, dataInstance, relationN
         var mainModel = dataInstance[relationName].build(relationData);
         modelObj.upsert(mainModel)
             .then(function(result) {
-                //Now add the result to the dataInstance
+                /*//Now add the result to the dataInstance
                 //Now add this relation to the parent as well..
                 if (result) {
                     var parentData = result[parentRelationName].build(dataInstance);
@@ -302,7 +302,7 @@ var upsertHasOne = function(app, modelObj, relationData, dataInstance, relationN
                             console.log("error occured in hasOne parent upsert");
                             console.error(err);
                         });
-                }
+                }*/
             })
             .catch(function(err) {
                 console.log("Error saving data");
