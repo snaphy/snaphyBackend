@@ -235,6 +235,12 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
 };
 
 
+var connectEachData = function(app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback) {
+
+};
+
+
+
 
 var disconnect = function(app, modelObj, foreignKey, relationProp, relationName, modelName){
 
@@ -247,7 +253,7 @@ var disconnect = function(app, modelObj, foreignKey, relationProp, relationName,
                 relatedModel.findById(fk, {})
                     .then(function(relatedModelInstance){
                        //Now remove the data and also remove the data from each other model..
-                        
+
 
                     })
                     .catch(function(err){
