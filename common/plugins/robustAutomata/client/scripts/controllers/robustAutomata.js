@@ -266,7 +266,7 @@ angular.module($snaphy.getModuleName())
                         $($(element).find('select')).select2('val', 'All');
                     }, 0);
                 });
-            }else if (type === "text" || type === "number" || type === "date") {
+            }else if (type === "text" || type === "number" || type === "date" || type === 'related') {
                 $scope.addResetMethod(function(){
                     $timeout(function(){
                         //$($(element).find('input')).val("");
