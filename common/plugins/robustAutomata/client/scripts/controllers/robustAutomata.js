@@ -103,18 +103,22 @@ angular.module($snaphy.getModuleName())
         };
 
 
-        $scope.addWhereQuery = function(model, columnName, filterType){
+        $scope.addWhereQuery = function(model, columnName, filterType, schema){
             $scope.where = $scope.where  || {};
             if(filterType === "select"){
                 //console.log("select", columnName, model);
                 if(model){
                     $scope.where[columnName] = model;
                 }
+                //Now redraw the table..
+                $scope.refreshData();
             }else if (filterType === "number") {
                 //console.log("select", columnName, model);
                 if(model){
                     $scope.where[columnName] = model;
                 }
+                //Now redraw the table..
+                $scope.refreshData();
             }
             else if (filterType === "date") {
                 console.log("select", columnName, model);
@@ -125,12 +129,69 @@ angular.module($snaphy.getModuleName())
                     obj[columnName] = {"gte" : new Date(model) };
                     $scope.where.and.push(obj);
                 }
+                //Now redraw the table..
+                $scope.refreshData();
+            }else if(filterType === "related"){
+                if(model){
+                    //First find the data....
+                    if(schema.tables){
+                        var keyName = columnName.replace(/\./, "_");
+                        if(schema.tables[keyName]){
+                            var tableProp = schema.tables[keyName];
+                            var modelName = tableProp.relatedModel;
+                            var foreignKey = tableProp.foreignKey;
+                            var searchProp = tableProp.propertyName;
+                            //Now first find the related values then add where query..
+                            var dbService = Database.loadDb(modelName);
+                            var filter = {};
+                            filter.where = {};
+                            filter.limit = 7;
+                            filter.where[searchProp] = {
+                                like : model
+                            };
+
+                            dbService.find({
+                                filter: filter
+                            }, function(values){
+                                console.log(values);
+                                //get the ids list..
+                                if(values){
+                                    if(values.length){
+                                        var idList = [];
+                                        for(var i=0; i<values.length; i++){
+                                            //Collect the ids
+                                            var data = values[i];
+                                            idList.push(data.id);
+                                        }
+
+                                        //now prepare the where query..
+                                        if(idList.length){
+                                            //PREPARE THE WHERE QUERY..
+                                            $scope.where[foreignKey] = {
+                                                inq: idList
+                                            };
+                                            
+                                            //Now redraw the table..
+                                            $scope.refreshData();
+                                        }
+
+
+                                    }
+                                }
+                            }, function(err){
+                                console.error(err);
+                            });
+
+                        }
+                    }
+
+                }
+
             }else{
 
             }
             console.info("modifed where", $scope.where);
-            //Now redraw the table..
-            $scope.refreshData();
+
         };
 
 

@@ -208,6 +208,15 @@
                                         type="number"
                                         ng-init="addInlineFilterResetMethod('#automataTable', 'number', inlineSearch, header)"
                                     />
+                                    <!--HANDLING FOR SPECIAL RELATED CASE MODEL SEARCH..-->
+                                    <input
+                                        ng-model="inlineSearch[header]"
+                                        ng-change="addWhereQuery(inlineSearch[header], header, 'related', schema)"
+                                        class="form-control"
+                                        ng-if="showFilterType(header, schema) === 'related'"
+                                        type="related"
+                                        ng-init="addInlineFilterResetMethod('#automataTable', 'related', inlineSearch, header)"
+                                    />
                                 </th>
                                 <!--<button ng-click="resetAll()" class="btn btn-minw btn-default pull-right" type="button">Reset</button>-->
                                 <th class="text-center" style="width: 10%;">

@@ -114,7 +114,7 @@ angular.module($snaphy.getModuleName())
                     dataSchema.relations.belongsTo.forEach(function(relationName) {
                         var includeObj = {
                             "relation": relationName
-                        }
+                        };
                         filterObj.include.push(includeObj);
                     });
                 }
@@ -125,7 +125,7 @@ angular.module($snaphy.getModuleName())
                     dataSchema.relations.hasAndBelongsToMany.forEach(function(relationName) {
                         var includeObj = {
                             "relation": relationName
-                        }
+                        };
                         filterObj.include.push(includeObj);
                     });
                 }
@@ -136,7 +136,7 @@ angular.module($snaphy.getModuleName())
                     dataSchema.relations.hasMany.forEach(function(relationName) {
                         var includeObj = {
                             "relation": relationName
-                        }
+                        };
                         filterObj.include.push(includeObj);
                     });
                 }
@@ -148,7 +148,7 @@ angular.module($snaphy.getModuleName())
                     dataSchema.relations.hasOne.forEach(function(relationName) {
                         var includeObj = {
                             "relation": relationName
-                        }
+                        };
                         filterObj.include.push(includeObj);
                     });
                 }
