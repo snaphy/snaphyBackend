@@ -525,6 +525,10 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                     if(oldDataArr.length === 0){
                         return callback();
                     }
+
+                    //Related model id that has been removed..
+                    var deletedIdList = [];
+
                     oldDataArr.forEach(function(dataObj, index) {
                         var idFound = false;
                         //Now loop over relationDataArr
@@ -537,6 +541,7 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                             }
                         }
                         if (!idFound) {
+                            deletedIdList.push(dataObj.id);
                             //TODO DELETE FROM HASANDBELONG TO MANY ..
                             destroyHasManyRel(
                                 dataInstance,
@@ -549,6 +554,24 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                         }
 
                     });
+
+                    //Now destroy hasAndBelongsToMany data type..
+                    if (manyType !== "hasMany") {
+                        //Changed now call new disconnect method...
+                        var disconnect = dataInstance["__disconnect__" + relationName];
+                        if(deletedIdList.length){
+                            disconnect(dataInstance.id, deletedIdList, function(err, value){
+                                if(err){
+                                    console.log(err);
+                                }else{
+                                    //Now save the instance of data in the dataInstance
+                                    console.log("Link successfully removed to hasAndBelongsToMany relationship.");
+                                    //console.log(values);
+                                }
+                            });
+                        }
+                    }
+
                     //Call the call back..
                     return callback();
                 });
@@ -598,7 +621,6 @@ var destroyHasManyRel = function(
     relationDataArr,
     relatedModelClass,
     callback) {
-    //console.log("I am here");
     async.series([
         function(callback) {
             if (manyType === "hasMany") {
@@ -612,7 +634,7 @@ var destroyHasManyRel = function(
                         callback(err);
                     });
             } else {
-                //Dont delete just remove.. the data..
+               /* //Dont delete just remove.. the data..
                 dataInstance[relationName].remove(dataObj)
                     .then(function() {
                         console.log('unused hasAndBelongsToMany link data removed');
@@ -620,7 +642,7 @@ var destroyHasManyRel = function(
                     })
                     .catch(function(err) {
                         callback(err);
-                    });
+                    });*/
             }
         }
     ]);

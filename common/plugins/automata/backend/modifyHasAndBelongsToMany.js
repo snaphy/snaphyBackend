@@ -235,7 +235,84 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
 };
 
 
-var connectEachData = function(app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback) {
+var disconnectEachData = function(app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback) {
+    var relatedModel = app.models[relationProp.model];
+
+    /**
+     * dataInstance[relationName].remove(dataObj)
+     .then(function() {
+            console.log('unused hasAndBelongsToMany link data removed');
+            callback();
+        })
+    .catch(function(err) {
+            callback(err);
+        });
+     */
+    mainModelInstance[relationName].remove(relatedModelInstance)
+        .then(function(){
+            //Now remove the related data too from each models..
+            if(mainModelInstance[relationName + "_"]){
+                //Now remove the related data refrence from mainModel
+                _.remove(mainModelInstance[relationName + "_"], function(id){
+                    return id.toString() === relatedModelInstance.id.toString();
+                });
+
+
+                //Now further save the model..
+                mainModelInstance.save({}, function(err,  value){
+                    if(err){
+                        console.error(err);
+                    }else{
+                        console.log("Successfully remove ref of hasAndBelongsToMany from main model");
+                    }
+                });
+
+                //Now also remove the main model id refrence from related model ..
+                var relatedModelRelationName;
+                var relatedModelRelationProp;
+                //Now also add data to related data..
+                //Now the related model name..relation name
+                var relatedModelRelationObj = relatedModel.definition.settings.relations;
+                for(var relatedRelationName in relatedModelRelationObj){
+                    if(relatedModelRelationObj.hasOwnProperty(relatedRelationName)){
+                        var relatedRelationProp = relatedModelRelationObj[relatedRelationName];
+                        if(relatedRelationProp.model === modelName){
+                            relatedModelRelationName = relatedRelationName;
+                            relatedModelRelationProp = relatedRelationProp;
+                            break;
+                        }
+                    }
+                }
+
+                if(relatedModelRelationName){
+                    //Now also remove the ref of main model..
+                    if(relatedModelInstance[relatedModelRelationName + "_"]){
+                        //Now remove the related data refrence from mainModel
+                        _.remove(relatedModelInstance[relatedModelRelationName + "_"], function(id){
+                            return id.toString() === mainModelInstance.id.toString();
+                        });
+
+                        //Now further save the model..
+                        relatedModelInstance.save({}, function(err,  value){
+                            if(err){
+                                console.error(err);
+                            }else{
+                                console.log("Successfully remove ref of hasAndBelongsToMany from related model too");
+                            }
+                        });
+                    }
+                }
+
+
+            }
+
+            //finally return the callback..
+            callback(null, {});
+
+        })
+        .catch(function(err){
+            callback(err);
+        });
 
 };
 
@@ -250,10 +327,33 @@ var disconnect = function(app, modelObj, foreignKey, relationProp, relationName,
                 //Now adding main model instance..
                 var relatedModel = app.models[relationProp.model];
                 //Find the list of related models..
-                relatedModel.findById(fk, {})
-                    .then(function(relatedModelInstance){
-                       //Now remove the data and also remove the data from each other model..
+                relatedModel.find({
+                        where:{
+                            id: {
+                                inq: fk
+                            }
+                        }
+                    })
+                    .then(function(relatedModelInstanceArr){
+                        var series = [];
+                        //Now prepare a series function..
+                        relatedModelInstanceArr.forEach(function(relatedModelInstance){
+                            series.push(function(callback){
+                                //Now remove the data and also remove the data from each other model..
+                                disconnectEachData(app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback);
+                            });
+                        });
 
+                        //Now save the data in series..
+                        async.series(series, function(err){
+                            if(err){
+                                callback(err);
+                            }else{
+                                //Now send the callback
+                                callback(null, {});
+                            }
+                            console.log("data deleted successfully..");
+                        });
 
                     })
                     .catch(function(err){
@@ -283,7 +383,7 @@ var disconnect = function(app, modelObj, foreignKey, relationProp, relationName,
                 "description": "PersistedModel id"
             }, {
                 "arg": "fk",
-                "type": "string",
+                "type": "array",
                 "description": "Foreign key for cuisines",
                 "required": true,
                 "http": {
