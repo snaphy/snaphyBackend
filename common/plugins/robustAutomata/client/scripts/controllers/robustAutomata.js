@@ -170,7 +170,7 @@ angular.module($snaphy.getModuleName())
                                             $scope.where[foreignKey] = {
                                                 inq: idList
                                             };
-                                            
+
                                             //Now redraw the table..
                                             $scope.refreshData();
                                         }
