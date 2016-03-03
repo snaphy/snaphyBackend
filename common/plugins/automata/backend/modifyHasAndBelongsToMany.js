@@ -44,6 +44,7 @@ var handleRelation = function(app, modelObj, foreignKey, relationProp, relationN
         //We are concerned with hasManyThrough relation only ...
         //Now create a new method.. connect and disconnect
         connect (app, modelObj, foreignKey, relationProp, relationName, modelName);
+        disconnect (app, modelObj, foreignKey, relationProp, relationName, modelName);
     }
     else{
         // Do nothing..
@@ -51,7 +52,15 @@ var handleRelation = function(app, modelObj, foreignKey, relationProp, relationN
 };
 
 
-
+/**
+ * Connect various has many relationship
+ * @param app
+ * @param modelObj
+ * @param foreignKey
+ * @param relationProp
+ * @param relationName
+ * @param modelName
+ */
 var connect = function(app, modelObj, foreignKey, relationProp, relationName, modelName){
 
     /**
@@ -66,6 +75,12 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
      */
 
     //HERE fk is the list of foreign keys..
+    /**
+     *
+     * @param id
+     * @param fk ["String"] array of related data id that is about to be attached.
+     * @param callback
+     */
     modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
@@ -111,15 +126,8 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
 
     };
 
-    //modelObj.prototype[relationName] = modelObj.prototype[relationName] || {};
 
-
-    //modelObj.prototype[relationName].connect = modelObj.prototype["__connect__" + relationName];
-    //console.log(modelObj.prototype[relationName].connect);
-    //modelObj['prototype.__connect__' + relationName.toLowerCase()]
-
-
-        //Now registering the method `getSchema`
+    //Now registering the method `getSchema`
     modelObj.remoteMethod(
         'prototype.__connect__' + relationName.toLowerCase(),
         {
@@ -225,6 +233,71 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
             return callback(err);
         });
 };
+
+
+
+var disconnect = function(app, modelObj, foreignKey, relationProp, relationName, modelName){
+
+    modelObj.prototype["__disconnect__" + relationName] = function(id, fk, callback) {
+        modelObj.findById(id, {})
+            .then(function(mainModelInstance){
+                //Now adding main model instance..
+                var relatedModel = app.models[relationProp.model];
+                //Find the list of related models..
+                relatedModel.findById(fk, {})
+                    .then(function(relatedModelInstance){
+                       //Now remove the data and also remove the data from each other model..
+                        
+
+                    })
+                    .catch(function(err){
+                        console.error(err);
+                        return callback(err);
+                    });
+            })
+            .catch(function(err){
+                console.error(err);
+                return callback(err);
+            });
+
+    };
+
+
+    //Now registering the method `getSchema`
+    modelObj.remoteMethod(
+        'prototype.__disconnect__' + relationName.toLowerCase(),
+        {
+            "accepts": [{
+                "arg": "id",
+                "type": "any",
+                "required": true,
+                "http": {
+                    "source": "path"
+                },
+                "description": "PersistedModel id"
+            }, {
+                "arg": "fk",
+                "type": "string",
+                "description": "Foreign key for cuisines",
+                "required": true,
+                "http": {
+                    "source": "path"
+                }
+            }],
+            "returns": [{
+                "arg": relationName.toLowerCase(),
+                "type": "object",
+                "root": true
+            }],
+            "routes": [{
+                "path": "/:id/connect/" +  relationName.toLowerCase()  + "/rel/:fk",
+                "verb": "put"
+            }],
+            description: "Connect two hasAndBelongMany Data together..."
+        }
+    );
+};
+
 
 
 
