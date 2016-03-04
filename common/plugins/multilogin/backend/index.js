@@ -241,6 +241,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 return callback(error);
             }else{
                 token.__data.user = userInstance;
+                console.log(token);
                 callback(null,  token);
                 //Now save the user to AccessToken model..
                 data = {
