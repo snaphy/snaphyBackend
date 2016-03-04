@@ -127,9 +127,11 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
     };
 
 
+    modelObj["__connect__" + relationName] = modelObj.prototype["__connect__" + relationName];
+
     //Now registering the method `getSchema`
     modelObj.remoteMethod(
-        'prototype.__connect__' + relationName.toLowerCase(),
+        '__connect__' + relationName,
         {
             "accepts": [{
                 "arg": "id",
@@ -368,10 +370,11 @@ var disconnect = function(app, modelObj, foreignKey, relationProp, relationName,
 
     };
 
+    modelObj["__disconnect__" + relationName] = modelObj.prototype["__disconnect__" + relationName];
 
     //Now registering the method `getSchema`
     modelObj.remoteMethod(
-        'prototype.__disconnect__' + relationName.toLowerCase(),
+        '__disconnect__' + relationName,
         {
             "accepts": [{
                 "arg": "id",
