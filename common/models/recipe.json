@@ -387,6 +387,10 @@
       }
     }
   },
+  "hidden": [
+    "category_",
+    "cuisines_"
+  ],
   "validations": [],
   "relations": {
     "customer": {

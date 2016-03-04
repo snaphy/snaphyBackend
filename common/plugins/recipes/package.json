@@ -29,6 +29,7 @@
   "databases": {
     "Recipe": "Recipe",
     "Comments": "Comments",
+    "Category": "Category",
     "RecipeAnalytic": "RecipeAnalytic",
     "RecipeIngredients": "RecipeIngredients",
     "User": "Employee",
