@@ -4,6 +4,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var FB = require('fb');
     //var util = require("./utils");
     var https = require('https');
+    var request = require('request');
+
     /**
      * Here server is the main app object
      * databaseObj is the mapped database from the package.json file
