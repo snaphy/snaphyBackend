@@ -344,6 +344,9 @@
         }
       }
     },
+    "cuisines_": {
+      "type": ["string"]
+    },
     "stepsImage": {
       "type": [
         "object"
@@ -387,10 +390,6 @@
       }
     }
   },
-  "hidden": [
-    "category_",
-    "cuisines_"
-  ],
   "validations": [],
   "relations": {
     "customer": {

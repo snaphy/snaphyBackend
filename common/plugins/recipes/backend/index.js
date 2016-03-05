@@ -32,7 +32,7 @@ module.exports = function(server, databaseObj, helper, packageObj) {
         var Category = databaseObj.Category;
 
         Recipe.findCategoryRecipes = function(categoryId, myfilter, callback){
-            //console.log("============ORIGINAL FILTER============", myfilter);
+            //console.log(myfilter.where.cuisines_);
             //first fetch the category..
             Category.findById(categoryId, {})
                 .then(function(categoryInstance){
@@ -43,10 +43,27 @@ module.exports = function(server, databaseObj, helper, packageObj) {
                         }
 
                         //Add category ref in my filter..
-                        myfilter.where.category_ = categoryInstance.id;
+                        myfilter.where["category_"] = categoryInstance.id.toString();
+                        if(myfilter.where){
+                            if(myfilter.where["cuisines_"]){
+                                if(myfilter.where["cuisines_"].inq){
+                                    if(myfilter.where["cuisines_"].inq.length){
+                                        var cuisinesIds = myfilter.where["cuisines_"].inq;
+                                        var cuisinesIdList = [];
+                                        cuisinesIds.forEach(function(cuisinesId){
+                                            cuisinesIdList.push(cuisinesId.toString());
+                                        });
+                                        myfilter.where["cuisines_"].inq = cuisinesIdList;
+                                    }
+                                }
+                            }
+                        }
+
+                        //console.log(myfilter.where.cuisines_);
+
                         Recipe.find(myfilter)
                             .then(function(recipes){
-                                console.log(myfilter.where);
+                                //console.log(myfilter);
                                 //console.log(recipes);
                                 callback(null, recipes);
                             })
@@ -60,6 +77,7 @@ module.exports = function(server, databaseObj, helper, packageObj) {
                     }
                 })
                 .catch(function(err){
+
                     console.error(err);
                     callback(err);
                 });
@@ -71,12 +89,12 @@ module.exports = function(server, databaseObj, helper, packageObj) {
                 accepts:[ {
                     arg: 'categoryId',
                     type: 'string',
-                    required: true
+
                 },
                 {
                     arg: 'filter',
                     type: 'object',
-                    required: true
+
                 }],
                 returns: {
                     arg: 'data',

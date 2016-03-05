@@ -101,9 +101,6 @@
       }
     }
   },
-  "hidden": [
-    "password"
-  ],
   "properties": {
     "date": {
       "type": "string",

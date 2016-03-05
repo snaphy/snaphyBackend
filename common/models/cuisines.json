@@ -38,9 +38,6 @@
       }
     }
   },
-  "hidden": [
-    "recipes_"
-  ],
   "validations": [],
   "relations": {
     "recipes": {

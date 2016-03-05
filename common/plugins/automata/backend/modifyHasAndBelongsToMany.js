@@ -82,6 +82,7 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
      * @param callback
      */
     modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
+
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
                 //Now adding main model instance..
@@ -168,9 +169,11 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
 //Connect each data in series..
 var connectEachData = function(app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback){
     var relatedModel = app.models[relationProp.model];
+    //console.log(relatedModelInstance.name);
     //Now add data..
     mainModelInstance[relationName].add(relatedModelInstance)
         .then(function(savedData){
+
             //Now save the instance of data in the dataInstance
             /**
              * NOW DO SOMETHING HERE TOO...
@@ -179,6 +182,8 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
              */
             var relatedModelRelationName;
             var relatedModelRelationProp;
+
+            //console.log("Related model name", relationName+"_", mainModelInstance[relationName+"_"]);
             mainModelInstance[relationName+"_"] = mainModelInstance[relationName+"_"] || [];
             //first check if related data is already not present..
 
@@ -186,11 +191,12 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
             //Now remove the duplicates..
             //Using lodash unique..
             mainModelInstance[relationName + "_"] = _.uniq(mainModelInstance[relationName + "_"]);
-
+            console.log(mainModelInstance[relationName + "_"],relationName + "_",  relatedModelInstance.id);
             mainModelInstance.save({}, function(err, value){
                 if(err){
                     callback(err);
                 }else{
+                    console.log("=====AFTER========", value[relationName + "_"], relatedModelInstance.id);
                     //Now also add data to related data..
                     //Now the related model name..relation name
                     var relatedModelRelationObj = relatedModel.definition.settings.relations;
