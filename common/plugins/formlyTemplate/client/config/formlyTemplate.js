@@ -888,7 +888,6 @@ angular.module($snaphy.getModuleName())
             scope.to.format = scope.to.format || "mm/dd/yyyy";
             scope.to.id = scope.to.id || "date_" + getRandom();
             scope.to.placeholder = scope.to.placeholder || "Enter date";
-            scope.to.label = scope.to.label  || scope.to.placeholder;
 
         }
     });

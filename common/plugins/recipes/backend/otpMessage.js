@@ -35,7 +35,7 @@ var send = function(message, number, callback){
 	    // handle errors somewhow
 	    callback(err, null);
 	});
-}
+};
 
 
 
@@ -43,4 +43,4 @@ var send = function(message, number, callback){
 
 module.exports = {
 	send: send
-}
+};
