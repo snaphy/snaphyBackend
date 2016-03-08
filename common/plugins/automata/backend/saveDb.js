@@ -333,7 +333,8 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
             })
             .catch(function(err) {
                 console.log("Error updating belongsTo data relationship.");
-                callback(err);
+                console.log(err);
+                //callback(err);
             });
     }
 };

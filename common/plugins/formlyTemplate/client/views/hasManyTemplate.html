@@ -7,16 +7,19 @@
     </div>
     <div>
         <div class="row">
-            <strong style="margin-left:2px;" class="col-xs-12 col-md-12"><small>Add {{to.model}}</small></strong>
+            <strong style="margin-left:2px;" class="col-xs-12 col-md-12">
+                <small ng-if="to.label">{{to.label}}</small>
+                <small ng-if="!to.label">Add {{to.model}}</small>
+            </strong>
         </div>
         <div ng-if="!hide" style="margin-top:10px;">
             <div class="row">
                 <div ng-if="showSearch()" class="col-md-9 col-xs-12">
                     <multi-search
-                        placeholder="{{placeholder}}"
-                        model-name="{{to.model}}"
-                        search-property="{{to.searchProp}}"
-                        value="model[options.key]">
+                            placeholder="{{placeholder}}"
+                            model-name="{{to.model}}"
+                            search-property="{{to.searchProp}}"
+                            value="model[options.key]">
                     </multi-search>
                 </div>
                 <!--if init === true then initialize on field in advance-->

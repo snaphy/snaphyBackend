@@ -876,6 +876,25 @@ angular.module($snaphy.getModuleName())
     });
 
 
+    //Date template..
+    formlyConfig.setType({
+        name: 'date',
+        templateUrl:'/formlyTemplate/views/date.html',
+        link: function(scope, elem, attrs){
+            var getRandom = function(){
+                return Math.floor((Math.random()*6)+1);
+            };
+
+            scope.to.format = scope.to.format || "mm/dd/yyyy";
+            scope.to.id = scope.to.id || "date_" + getRandom();
+            scope.to.placeholder = scope.to.placeholder || "Enter date";
+            scope.to.label = scope.to.label  || scope.to.placeholder;
+
+        }
+    });
+
+
+
     formlyConfig.setType({
         name: 'minRecipeDisplay',
         templateUrl: '/formlyTemplate/views/minRecipeDisplay.html',
@@ -904,17 +923,6 @@ angular.module($snaphy.getModuleName())
 
 
             scope.checkValue = function(){
-                //setTimeout(function () {
-                // if( parseInt(ingredient.minimumQuantity) > parseInt(scope.model[scope.options.key]) ){
-                //     console.log("display min required quantity error..");
-                //     $timeout(function(){
-                //         scope.model[scope.options.key] = ingredient.minimumQuantity;
-                //         $(messageObj).html("Error: ingredient amount must be greater than minimum required quantity.").show();
-                //     });
-                // }else{
-                //     $(messageObj).html("").hide();
-                // }
-                // //}, 800);
 
             };
         }//link function..

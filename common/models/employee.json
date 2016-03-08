@@ -250,7 +250,6 @@
       "permission": "ALLOW",
       "property": "getSchema"
     },
-    {},
     {
       "principalType": "ROLE",
       "principalId": "$everyone",

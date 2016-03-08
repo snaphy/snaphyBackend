@@ -82,9 +82,11 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
      * @param callback
      */
     modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
+        console.log("Connecting", relationName);
 
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
+                console.log(mainModelInstance);
                 //Now adding main model instance..
                 var relatedModel = app.models[relationProp.model];
                 //Find the list of related models..
@@ -103,6 +105,7 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
                                 connectEachData (app, modelObj, foreignKey, relationProp, relationName, modelName, mainModelInstance, relatedModelInstance, callback);
                             });
                         });
+
 
                         //Now save the data in series..
                         async.series(series, function(err){
@@ -124,7 +127,6 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
                 console.error(err);
                 return callback(err);
             });
-
     };
 
 
@@ -191,12 +193,12 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
             //Now remove the duplicates..
             //Using lodash unique..
             mainModelInstance[relationName + "_"] = _.uniq(mainModelInstance[relationName + "_"]);
-            console.log(mainModelInstance[relationName + "_"],relationName + "_",  relatedModelInstance.id);
+            //console.log(mainModelInstance[relationName + "_"],relationName + "_",  relatedModelInstance.id);
             mainModelInstance.save({}, function(err, value){
                 if(err){
                     callback(err);
                 }else{
-                    console.log("=====AFTER========", value[relationName + "_"], relatedModelInstance.id);
+
                     //Now also add data to related data..
                     //Now the related model name..relation name
                     var relatedModelRelationObj = relatedModel.definition.settings.relations;
