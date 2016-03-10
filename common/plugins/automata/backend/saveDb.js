@@ -166,7 +166,9 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
     //console.log(relations.hasManyThrough.ingredients);
     //console.log("=====================ABOVE WAS RELATION DATA=========================");
     //Now run a loop of the model schema..
+    console.log(relations);
     for (var relationsType in relations) {
+
         if (relations.hasOwnProperty(relationsType)) {
             var relationData = relations[relationsType];
             //Now check if the modelData is empty or not.
@@ -223,6 +225,7 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
  * @return {[type]}                     [description]
  */
 var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, modelRelationSchema, promises, modelName, relationSchema, callback) {
+    //First store all the data
     for (var relationName in relationDataObj) {
         if (relationDataObj.hasOwnProperty(relationName)) {
             var relationData = relationDataObj[relationName];
