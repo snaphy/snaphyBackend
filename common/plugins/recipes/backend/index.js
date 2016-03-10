@@ -32,79 +32,38 @@ module.exports = function(server, databaseObj, helper, packageObj) {
         var Category = databaseObj.Category;
 
         Recipe.findCategoryRecipes = function(categoryId, recipeFilter, cuisinesId, callback){
-            //console.log(myfilter.where.cuisines_);
-            //first fetch the category..
+           // where: {"recipes_.5698e49c53196bcc07fd7db7": true}
+            var filter;
+            if(recipeFilter){
+                filter = recipeFilter || {};
+            }
 
-            console.log(categoryId, recipeFilter, cuisinesId);
+            filter.where = filter.where || {};
 
-            Category.findById(categoryId, {})
-                .then(function(categoryInstance){
-                    categoryInstance.recipes({
-                        include: "cuisines"
-                    })
-                        .then(function(recipesList){
-                            if(recipesList){
-                                if(recipesList.length){
-                                    if(cuisinesId) {
-                                        if(cuisinesId.length){
-                                            var filterValue = _.filter(recipesList, function (recipe) {
-                                                var JSONRecipe = recipe.toJSON();
+            if(categoryId){
+                filter.where["category_." + categoryId] = true;
+            }
 
-                                                if (JSONRecipe.cuisines){
-                                                    var JSONCuisines = JSONRecipe.cuisines.toJSON();
-                                                    console.log("i ammm");
-                                                    if (JSONCuisines.length) {
-                                                        var found = false;
+            //console.log(cuisinesId);
 
-                                                        for (var i = 0; i < JSONRecipe.cuisines.length; i++) {
-                                                            var cuisineObj = JSONRecipe.cuisines[i];
-                                                            console.log("i am hereee", recipe.cuisines);
-                                                            if(cuisineObj){
-                                                                for (var j = 0; j < cuisinesId.length; j++) {
-                                                                    var targetId = cuisinesId[j];
-                                                                    //console.log(targetId, cuisineObj.id);
-                                                                    if (targetId.toString() === cuisineObj.id.toString()) {
-                                                                        found = true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            }
+            if(cuisinesId){
+                if(cuisinesId.length){
+                    cuisinesId.forEach(function(id){
+                        //console.log("I am here");
+                        filter.where["cuisines_." + id] = true;
+                    });
+                }
+            }
 
-                                                            if (found) {
-                                                                break;
-                                                            }
-                                                        }
-                                                        return found;
-                                                    } else {
-                                                        return false;
-                                                    }
+            //console.log(filter);
 
-                                                } else {
-                                                    return false;
-                                                }
-                                            });
-
-                                            console.log("Now returnning\n");
-                                            callback(null, filterValue);
-                                        }else{
-                                            return callback(null, recipesList);
-                                        }
-                                    }else{
-                                        return callback(null, recipesList);
-                                    }
-                                }else{
-                                    callback(null, []);
-                                }
-                            }else{
-                                callback(null, []);
-                            }
-                        })
-                        .catch(function(err){
-                            console.error(err);
-                        });
+            Recipe.find(filter)
+                .then(function(recipeList){
+                    /*console.log("============================");
+                    console.log(recipeList);*/
+                    callback(null, recipeList);
                 })
                 .catch(function(err){
-
                     console.error(err);
                     callback(err);
                 });

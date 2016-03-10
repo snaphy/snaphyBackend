@@ -14,7 +14,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @return {[type]} [description]
 	 */
 	var init = function(){
-		
+		/*server.models.Cuisines.find({
+            where: {"recipes_.5698e49c53196bcc07fd7db7": true}
+        }, function(err, data){
+			if(err){
+				console.log(err);
+			}else{
+				console.log("================CHECKING DUMMY CUISINES CLAUSE==========5698e49c53196bcc07fd7db7=============");
+				console.log(data);
+			}
+		});*/
 	};
 
 
