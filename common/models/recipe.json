@@ -78,6 +78,15 @@
     "mainImage": {
       "display": false
     },
+    "category_": {
+      "display": false
+    },
+    "cuisines_": {
+      "display": false
+    },
+    "recipeTags_": {
+      "display": false
+    },
     "recipeSteps": {
       "display": false
     },
@@ -346,7 +355,13 @@
       }
     },
     "cuisines_": {
-      "type": ["string"]
+      "type": "object"
+    },
+    "category_": {
+      "type": "object"
+    },
+    "recipeTags_":{
+      "type":"object"
     },
     "stepsImage": {
       "type": [
@@ -391,6 +406,7 @@
       }
     }
   },
+  "hidden":["cuisines_", "recipeTags_", "category_"],
   "validations": [],
   "relations": {
     "customer": {
@@ -437,7 +453,7 @@
       "templateOptions": {
         "btnText": "Add Tags",
         "searchProp": "name",
-        "create": true
+        "create": false
       }
     },
     "ingredients": {

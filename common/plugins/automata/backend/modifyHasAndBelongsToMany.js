@@ -82,11 +82,9 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
      * @param callback
      */
     modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
-        console.log("Connecting", relationName);
 
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
-                console.log(mainModelInstance);
                 //Now adding main model instance..
                 var relatedModel = app.models[relationProp.model];
                 //Find the list of related models..
@@ -199,17 +197,13 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
              * }
              * @type {boolean}
              */
-            mainModelInstance[relationName + "_"][relatedModelInstance.id.toString()] = true;
-            //Now remove the duplicates..
-            //Using lodash unique..
-            //mainModelInstance[relationName + "_"] = _.uniq(mainModelInstance[relationName + "_"]);
-            //console.log(mainModelInstance[relationName + "_"],relationName + "_",  relatedModelInstance.id);
-            mainModelInstance.save({}, function(err, value){
+            mainModelInstance[relationName + "_"][relatedModelInstance.id] = true;
+            //Now just updating the given relation attribute in the model..
+            //persistedModel.updateAttribute(name, value, callback)
+            mainModelInstance.updateAttribute(relationName + "_", mainModelInstance[relationName + "_"], function(err, updatedData){
                 if(err){
                     callback(err);
                 }else{
-
-                    //Now also add data to related data..
                     //Now the related model name..relation name
                     var relatedModelRelationObj = relatedModel.definition.settings.relations;
                     for(var relatedRelationName in relatedModelRelationObj){
@@ -224,34 +218,31 @@ var connectEachData = function(app, modelObj, foreignKey, relationProp, relation
                     }
 
                     if(relatedModelRelationName){
+                        //If relation value is in instance of array the change it to object..
                         if(relatedModelRelationName[relatedModelRelationName+"_"] instanceof Array){
                             relatedModelRelationName[relatedModelRelationName+"_"] =  {};
                         }
 
                         relatedModelInstance[relatedModelRelationName + "_"] = relatedModelInstance[relatedModelRelationName + "_"] || {};
                         //Now add data to this model too..
-                        relatedModelInstance[relatedModelRelationName + "_"][mainModelInstance.id.toString()] = true;
-                        //Now remove the duplicates...
-                        //relatedModelInstance[relatedModelRelationName + "_"] = _.uniq(relatedModelInstance[relatedModelRelationName + "_"]);
-                        //Now save the data..
-                        relatedModelInstance.save({}, function(err, value){
+                        relatedModelInstance[relatedModelRelationName + "_"][mainModelInstance.id] = true;
+
+                        //Now updating the property.. of the related value..
+                        relatedModelInstance.updateAttribute(relatedModelRelationName + "_", relatedModelInstance[relatedModelRelationName + "_"], function(err, value){
                             if(err){
                                 console.error(err);
                                 callback(err);
                             }else{
-                                //console.info("saving related value", value);
+                                console.info("saving related value", value);
                                 //Do nothing.. return async callback..success..
                                 callback();
                             }
                         });
-
                     }else{
                         callback(new Error("Bad data"));
                     }
                 }
-
             });
-
         })
         .catch(function(err){
             return callback(err);
@@ -277,11 +268,14 @@ var disconnectEachData = function(app, modelObj, foreignKey, relationProp, relat
             //Now remove the related data too from each models..
             if(mainModelInstance[relationName + "_"]){
                 //Now remove the related data refrence from mainModel
-                _.omit(mainModelInstance[relationName + "_"], [relatedModelInstance.id.toString()]);
+                console.log("===========BEFORE DELETE========", mainModelInstance[relationName + "_"]);
+                //remove the given instance..
+                delete mainModelInstance[relationName + "_"][relatedModelInstance.id];
+                //_.omit(mainModelInstance[relationName + "_"], [relatedModelInstance.id]);
+                console.log("===========AFTER DELETE========", mainModelInstance[relationName + "_"]);
 
-
-                //Now further save the model..
-                mainModelInstance.save({}, function(err,  value){
+                //persistedModel.updateAttribute(name, value, callback)
+                mainModelInstance.updateAttribute(relationName + "_", mainModelInstance[relationName + "_"], function(err, value){
                     if(err){
                         console.error(err);
                     }else{
@@ -289,7 +283,8 @@ var disconnectEachData = function(app, modelObj, foreignKey, relationProp, relat
                     }
                 });
 
-                //Now also remove the main model id refrence from related model ..
+
+                //Now also remove the main model id reference from related model ..
                 var relatedModelRelationName;
                 var relatedModelRelationProp;
                 //Now also add data to related data..
@@ -309,13 +304,10 @@ var disconnectEachData = function(app, modelObj, foreignKey, relationProp, relat
                 if(relatedModelRelationName){
                     //Now also remove the ref of main model..
                     if(relatedModelInstance[relatedModelRelationName + "_"]){
-                        //Now remove the related data refrence from mainModel
-                        _.remove(relatedModelInstance[relatedModelRelationName + "_"], function(id){
-                            return id.toString() === mainModelInstance.id.toString();
-                        });
-
-                        //Now further save the model..
-                        relatedModelInstance.save({}, function(err,  value){
+                        //Remove the related data.....
+                        delete relatedModelInstance[relatedModelRelationName + "_"][mainModelInstance.id];
+                        //persistedModel.updateAttribute(name, value, callback)
+                        relatedModelInstance.updateAttribute(relatedModelRelationName + "_", relatedModelInstance[relatedModelRelationName + "_"], function(err, value){
                             if(err){
                                 console.error(err);
                             }else{
@@ -385,7 +377,6 @@ var disconnect = function(app, modelObj, foreignKey, relationProp, relationName,
                 console.error(err);
                 return callback(err);
             });
-
     };
 
     modelObj["__disconnect__" + relationName] = modelObj.prototype["__disconnect__" + relationName];

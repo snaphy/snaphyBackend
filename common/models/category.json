@@ -36,6 +36,9 @@
     }
   },
   "properties": {
+    "recipes_":{
+      "type":"object"
+    },
     "name": {
       "type": "string",
       "required": true,
@@ -56,6 +59,7 @@
       }
     }
   },
+  "hidden":["recipes_"],
   "validations": [],
   "relations": {
     "recipes": {

@@ -69,7 +69,6 @@ var addSaveMethod = function(app, modelName) {
 
             modelObj.create(data)
                 .then(function(dataInstance) {
-                    console.log("Main data successfully updated");
                     saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation, callback);
                 })
                 .catch(function(err) {
@@ -80,9 +79,6 @@ var addSaveMethod = function(app, modelName) {
             //Now save/update the data..
             modelObj.upsert(data)
                 .then(function(dataInstance) {
-                    //console.log(dataInstance);
-                    //console.log("\n\n\n");
-                    //console.log("Main data successfully updated");
                     saveDataRelations(app, dataInstance, relations, modelRelationSchema, modelName, include, schema.relation, callback);
                 })
                 .catch(function(err) {
@@ -163,10 +159,6 @@ var addRelation = function(dataObj, relationSchema, localRelationObj) {
  */
 var saveDataRelations = function(app, dataInstance, relations, modelRelationSchema, modelName, include, relationSchema, callback) {
     var promises = [];
-    //console.log(relations.hasManyThrough.ingredients);
-    //console.log("=====================ABOVE WAS RELATION DATA=========================");
-    //Now run a loop of the model schema..
-    console.log(relations);
     for (var relationsType in relations) {
 
         if (relations.hasOwnProperty(relationsType)) {
@@ -189,7 +181,6 @@ var saveDataRelations = function(app, dataInstance, relations, modelRelationSche
     //TODO HasManyThrough data not fetched during promise. Must be fetched.
     Promise.all(promises).then(function() {
         var modelObj = app.models[modelName];
-        //console.log("All done");
         modelObj.findById(dataInstance.id, {
             include: include
         }, function(err, value) {
@@ -230,8 +221,6 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
         if (relationDataObj.hasOwnProperty(relationName)) {
             var relationData = relationDataObj[relationName];
             var relatedModelName = modelRelationSchema[relationName].model;
-            //console.log(modelRelationSchema[relationName]);
-            //Now just upsert the relation..
             var modelObj = app.models[relatedModelName];
 
             //get the foriegnKey.
@@ -241,7 +230,6 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
             }
 
             if (relationsType === 'belongsTo') {
-                //console.log(relationData);
                 //Upsert belongs to relations and attach the relation to the
                 promises.push(upsertBelongsTo(modelObj, relationData, dataInstance, relationName, foriegnKey, callback));
             } //if
@@ -256,13 +244,9 @@ var saveOrUpdate = function(app, dataInstance, relationsType, relationDataObj, m
             else if (relationsType === 'hasAndBelongsToMany') {
                 promises.push(upsertTypeMany(modelObj, relationData, dataInstance, relationName, foriegnKey, 'hasAndBelongsToMany', callback));
             } else if (relationsType === 'hasManyThrough') {
-
-                //console.log("========================BEFORE SENDING TO HASMANYTHROUGH===========================");
-                //console.log(relationData);
                 promises.push(upsertManyThrough(app, modelObj, relationData, dataInstance, relationName, foriegnKey, relationSchema, callback));
             } else {
-                //Do nothing
-                //console.log('I am inside do nothing case. I dont know what to do.');
+
             }
         } //if
     } //for in loop.
@@ -284,33 +268,6 @@ var upsertHasOne = function(app, modelObj, relationData, dataInstance, relationN
                 parentRelationName = relationObj;
             }
         }
-    }
-
-
-
-    if (!_.isEmpty(relationData)) {
-        var mainModel = dataInstance[relationName].build(relationData);
-        modelObj.upsert(mainModel)
-            .then(function(result) {
-                /*//Now add the result to the dataInstance
-                //Now add this relation to the parent as well..
-                if (result) {
-                    var parentData = result[parentRelationName].build(dataInstance);
-                    //Now update the parent data..
-                    parentObj.upsert(parentData)
-                        .then(function() {
-                            console.log("Data Successfully updated in parent hasOne");
-                        })
-                        .catch(function(err) {
-                            console.log("error occured in hasOne parent upsert");
-                            console.error(err);
-                        });
-                }*/
-            })
-            .catch(function(err) {
-                console.log("Error saving data");
-                callback(err);
-            });
     }
 };
 
@@ -337,7 +294,6 @@ var upsertBelongsTo = function(modelObj, relationData, dataInstance, relationNam
             .catch(function(err) {
                 console.log("Error updating belongsTo data relationship.");
                 console.log(err);
-                //callback(err);
             });
     }
 };
@@ -367,7 +323,6 @@ var upsertManyThrough = function(app, modelObj, relationData, dataInstance, rela
         return false;
     } else {
         throughModelSchema = hasManyThrough[index];
-        //console.log(throughModelSchema);
         throughModelName = throughModelSchema.through;
         throughModelObj = app.models[throughModelName];
         dataInstanceForeignKey = throughModelSchema.whereId;
@@ -502,7 +457,6 @@ var upsertHasManyThroughFinal = function(app, modelObj, relationDataObj, dataIns
                 throughObj.throughModelObj.upsert(relatedHasManyThroughData)
                     .then(function(savedData) {
                         console.log("HasMany through Data saved..");
-                        //console.log(savedData);
                     })
                     .catch(function(err) {
                         callback(err);
@@ -522,8 +476,6 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
     try {
         async.series([
             function(callback) {
-                //console.log("saving hasMany");
-                //first get the old data and check if any old data is deleted from new data..
                 dataInstance[relationName]({}, function(err, oldDataArr) {
                     var deletedDataId = [];
                     if(oldDataArr.length === 0){
@@ -570,7 +522,6 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                                 }else{
                                     //Now save the instance of data in the dataInstance
                                     console.log("Link successfully removed to hasAndBelongsToMany relationship.");
-                                    //console.log(values);
                                 }
                             });
                         }
@@ -581,8 +532,6 @@ var upsertTypeMany = function(relatedModelClass, relationDataArr, dataInstance, 
                 });
             },
             function(callback) {
-                //console.log("inside saving");
-                //add foriegnKey
                 relationDataArr.forEach(function(relationData) {
 
                     if (manyType === 'hasMany') {
@@ -637,16 +586,6 @@ var destroyHasManyRel = function(
                     .catch(function(err) {
                         callback(err);
                     });
-            } else {
-               /* //Dont delete just remove.. the data..
-                dataInstance[relationName].remove(dataObj)
-                    .then(function() {
-                        console.log('unused hasAndBelongsToMany link data removed');
-                        callback();
-                    })
-                    .catch(function(err) {
-                        callback(err);
-                    });*/
             }
         }
     ]);
@@ -665,6 +604,7 @@ var upsertHasManyFinal = function(relatedModelClass, relationData, dataInstance,
             callback(err);
         });
 };
+
 
 
 var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relationDataArr, relatedModelClass, callback) {
@@ -690,8 +630,7 @@ var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relati
                     console.log(err);
                 }else{
                     //Now save the instance of data in the dataInstance
-                    //console.log("Link successfully added to hasAndBelongsToMany relationship.");
-                    //console.log(values);
+                    console.log("Link successfully added to hasAndBelongsToMany relationship.");
                 }
             });
         }
@@ -701,20 +640,21 @@ var upserthasAndBelongsToManyFinal = function(dataInstance, relationName, relati
 
 
 var dataUpsert = function(relatedModelClass, relationData, relatedDataId, callback){
-    relatedModelClass.upsert(relationData, function(err, data) {
-        if (err) {
-            console.log("\n\n\nGot error");
-            return callback(err);
-        }else{
-            //console.log(data);
+    relatedModelClass.upsert(relationData)
+        .then(function(data){
+            data = data || relationData;
             if(data){
                 relatedDataId.push(data.id);
             }
             //return async callback..
             callback();
-        }
-    });
-}
+        })
+        .catch(function(err){
+            console.log("\n\n\nGot error");
+            return callback(err);
+        });
+    //});
+};
 
 
 

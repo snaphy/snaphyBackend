@@ -31,8 +31,12 @@
           "id": "recipeTag"
         }
       }
+    },
+    "recipes_":{
+      "type":"object"
     }
   },
+  "hidden":["recipes_"],
   "validations": [],
   "relations": {
     "recipes": {
