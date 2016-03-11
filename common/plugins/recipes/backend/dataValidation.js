@@ -65,7 +65,7 @@ var checkChefLimit = function(Recipe, Chef, instance, server, next, callback){
                     if(chefObj.length){
                         chefObj = chefObj[0];
                         if(chefObj.status === EXPIRED){
-                            next(getErrorObj("Error your chef plan has been expired. Please renew your plan before adding recipe."));
+                            next(getChefExpiredErrorObj("Error your chef plan has been expired. Please renew your plan before adding recipe."));
                         }else{
                             //Now everything is normal ..just call the callback and proceed to next...
                             callback();
@@ -157,6 +157,18 @@ var getErrorObj = function(message) {
     // If not return 400 response which means unauthroized.
     var err = new Error(message);
     err.status = 400;
+    return err;
+};
+
+
+
+
+
+var getChefExpiredErrorObj = function(message) {
+    message = message || "Data chef data expired";
+    // If not return 420 response which means unauthroized.
+    var err = new Error(message);
+    err.status = 420;
     return err;
 };
 
