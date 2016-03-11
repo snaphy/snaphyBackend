@@ -6,7 +6,7 @@
 
 //Expired status..
 var EXPIRED = "expired";
-var moment = require("moment");
+//var moment = require("moment");
 //Add chefs validation
 var init = function(server, databaseObj, helper, packageObj) {
     checkChefRecipeLimit(server, databaseObj, helper, packageObj);
@@ -39,12 +39,37 @@ var checkChefRecipeLimit = function(server, databaseObj, helper, packageObj){
 
 
 var formatData = function(instance){
+    if(instance.name){
+        instance.name = capitalizeEachWord(instance.name);
+    }
+
+    if(instance.description){
+        instance.description = capitalize(instance.description);
+    }
+
+    if(instance.recipeType){
+        instance.recipeType = instance.recipeType.toLowerCase();
+    }
+
+    if(instance.status){
+        instance.status = instance.status.toLowerCase();
+    }
+
+
+    if(instance.stepsDescription){
+        if(instance.stepsDescription.length){
+            instance.stepsDescription.forEach(function(steps, index){
+                instance.stepsDescription[index] = capitalize(steps);
+            });
+        }
+    }
+
 
 };
 
 
 var validate = function(instance, callback, next){
-
+  //TODO ADD VALIDATION IF NEEDED..
 };
 
 
@@ -82,7 +107,8 @@ var checkChefLimit = function(Recipe, Chef, instance, server, next, callback){
                 next(err);
             });
     }else{
-        next();
+        //Pass if customerId is not present..
+        callback();
     }
 };
 
@@ -170,6 +196,17 @@ var getChefExpiredErrorObj = function(message) {
     var err = new Error(message);
     err.status = 420;
     return err;
+};
+
+
+var capitalize = function(text) {
+    if (text) {
+        if (text.length === 1) {
+            return text.toUpperCase();
+        } else {
+            return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+        }
+    }
 };
 
 
