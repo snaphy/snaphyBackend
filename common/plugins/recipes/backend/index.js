@@ -1,5 +1,6 @@
-'use strict';
-
+(function(){
+    'use strict';
+})();
 /*
 global require, console
  */
@@ -11,6 +12,8 @@ module.exports = function(server, databaseObj, helper, packageObj) {
     var _ = require("lodash");
     var orderManagement = require("./orderManagement");
     var chefCourseValidation = require("./chefsCourseExpiry");
+    var dataValidation = require("./dataValidation");
+
     /**
      * Here server is the main app object
      * databaseObj is the mapped database from the package.json file
@@ -29,6 +32,7 @@ module.exports = function(server, databaseObj, helper, packageObj) {
         recipeAnalytics.init(server, databaseObj, helper, packageObj);
         orderManagement.init(server, databaseObj, helper, packageObj);
         chefCourseValidation.init(server, databaseObj, helper, packageObj);
+        dataValidation.init(server, databaseObj, helper, packageObj);
         addRecipeFilter();
     };
 

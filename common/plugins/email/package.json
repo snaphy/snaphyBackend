@@ -104,6 +104,15 @@
                           "label": "Enter company mail",
                           "id": "companyMail"
                         }
+                      },
+                      {
+                        "type": "input",
+                        "key": "website",
+                        "templateOptions": {
+                          "type": "text",
+                          "label": "Enter company website",
+                          "id": "companyWebsite"
+                        }
                       }
                     ]
                   }
