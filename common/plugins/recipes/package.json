@@ -36,6 +36,11 @@
     "Order": "Order",
     "Chef": "Chef"
   },
+  "company":{
+    "email": "rohitbasu2050@gmail.com",
+    "name": "Gruberr",
+    "website": "http://www.gruberr.com"
+  },
   "activate": true,
   "services": {},
   "dependencies": {

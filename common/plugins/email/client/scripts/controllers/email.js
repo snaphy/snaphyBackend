@@ -208,7 +208,7 @@ angular.module($snaphy.getModuleName())
                         user.selected = false;
                     });
                 }
-            }
+            };
 
             //Checkbox onclick box method..
             $scope.toggleChecked = function(user){

@@ -44,35 +44,69 @@ var checkExpiryRecurrenceRule = function(server, databaseObj, helper, packageObj
         })
             .then(function(chefs){
                 //Now get the chefs list and send mail to all the users
-
+                sendExpiryMail(server, packageObj, chefs);
+                /*
+                 Employee.updateAll({managerId: 'x001'}, {managerId: 'x002'}, function(err, info) {
+                 ...
+                 });
+                 */
+                //Now check if any chefs is expired..and update its value..
+                Chef.updateAll(where, {
+                    status: EXPIRED
+                }, function(err, info) {
+                    if (err) {
+                        //log error..
+                        console.error(err);
+                    } else {
+                        console.info(info);
+                    }
+                });
             })
             .catch(function(err){
                 console.error(err);
             });
 
-        /*
-         Employee.updateAll({managerId: 'x001'}, {managerId: 'x002'}, function(err, info) {
-         ...
-         });
-         */
-        //Now check if any chefs is expired..
-        Chef.updateAll(where, {
-            status: EXPIRED
-        }, function(err, info) {
-            if (err) {
-                //log error..
-                console.error(err);
-            } else {
-                console.info(info);
-            }
-        });
+
     });
 
 };
 
-//Send expiry mail to the users..
-var sendMail = function(chefList){
 
+
+//Send expiry mail to the users..
+var sendExpiryMail = function(server, packageObj, chefList){
+    if(chefList){
+        if(chefList.length){
+            chefList.forEach(function(chef){
+                if(chef.customer()){
+                    sendMail(server, packageObj, chef);
+                }
+            });
+        }
+    }
+};
+
+
+var sendMail = function(server, packageObj, chef){
+    var customer = chef.customer();
+    if(customer.email){
+        var title = "Expiry notice for " + packageObj.company.name + " chef";
+        //Send expiry notice to all chefs who has expired..
+        server.models.adminEmail.expiryNotice(customer.email, title,
+            {
+                'title': title,
+                'company':packageObj.company
+            }, function(err, send){
+                if(err){
+
+                    console.error(err);
+                }else{
+                    console.log("Successfully send expiry mail to ");
+                    console.log(send);
+                }
+
+            });
+    }
 };
 
 

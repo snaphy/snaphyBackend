@@ -60,7 +60,7 @@ var requestOtp = function(server, databaseObj, helper, packageObj) {
                 type: 'string',
                 required: true
             },
-            description: "Request code for OTP verification of  Gruberr App",
+            description: "Request code for OTP verification of  Gruberr App"
         }
     );
 },
@@ -201,7 +201,7 @@ orderValidation = function(server, databaseObj, helper, packageObj) {
                                                         order.id = orderInstance.id;
                                                         //Warning dont import email module..
                                                         //Now send email.. to server..
-                                                        server.models.adminEmail.sendOrder(" 'Rohit Basu' <rohitbasu2050@gmail.com>", packageObj.newOrderMail, "A new order has arrived.",
+                                                        server.models.adminEmail.sendOrder(packageObj.newOrderMail, "A new order has arrived.",
                                                             {
                                                                 'title': 'Gruberr Ingredients',
                                                                 'order': order,

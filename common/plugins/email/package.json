@@ -67,6 +67,48 @@
             "sendOrder": {
                 "label": "Send order email to users.",
                 "templatePath": "backend/views/order.ejs"
+            },
+            "expiryNotice":{
+              "label":"Send Expiry notice to chefs.",
+              "templatePath": "backend/views/expiryNotice.ejs",
+              "properties":[
+                {
+                  "key": "title",
+                  "type": "input",
+                  "templateOptions": {
+                      "type": "text",
+                      "label": "Enter  title",
+                      "id": "expiryTitle"
+                  }
+                },
+                {
+                  "key": "company",
+                  "type": "objectValue",
+                  "templateOptions": {
+                    "fields":
+                    [
+                      {
+                        "type": "input",
+                        "key": "name",
+                        "templateOptions": {
+                          "type": "text",
+                          "label": "Enter company name",
+                          "id": "companyName"
+                        }
+                      },
+                      {
+                        "type": "input",
+                        "key": "email",
+                        "templateOptions": {
+                          "type": "text",
+                          "label": "Enter company mail",
+                          "id": "companyMail"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
             }
 
         }

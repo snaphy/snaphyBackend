@@ -10,7 +10,7 @@
       "type": "$date",
       "label": "Chef added between"
     },
-    "customers_email": {
+    "customer_email": {
       "type": "$select",
       "label": "Search chef by customer email.",
       "getOptionsFromColumn": true,
@@ -37,22 +37,22 @@
     }
   },
   "tables": {
-    "customers_phoneNumber": {
+    "customer_phoneNumber": {
       "display": false
     },
-    "customers_firstName": {
+    "customer_firstName": {
       "display": true
     },
-    "customers_lastName": {
+    "customer_lastName": {
       "display": true
     },
-    "customers_profilePic": {
+    "customer_profilePic": {
       "display": false
     },
-    "customers_password": {
+    "customer_password": {
       "display": false
     },
-    "customers_date": {
+    "customer_date": {
       "display": false
     },
     "geolocation": {
@@ -115,7 +115,7 @@
       "address": {
         "required": true
       },
-      "customers_email": {
+      "customer_email": {
         "required": true,
         "email": true
       }
@@ -124,7 +124,7 @@
       "address": {
         "required": "Address is required"
       },
-      "customers_email": {
+      "customer_email": {
         "required": "email is required"
       }
     }
@@ -220,7 +220,7 @@
   },
   "validations": [],
   "relations": {
-    "customers": {
+    "customer": {
       "type": "belongsTo",
       "model": "Customer",
       "foreignKey": "",
