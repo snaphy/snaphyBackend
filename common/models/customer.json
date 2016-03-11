@@ -207,7 +207,8 @@
     "chefs": {
       "type": "hasOne",
       "model": "Chef",
-      "foreignKey": ""
+      "foreignKey": "",
+      "onCascadeDelete": true
     },
     "contactChefs": {
       "type": "hasMany",

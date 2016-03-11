@@ -19,7 +19,7 @@
   "validations": [],
   "relations": {
     "chefs": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "Chef",
       "foreignKey": ""
     }

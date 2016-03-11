@@ -1,10 +1,16 @@
 'use strict';
+
+/*
+global require, console
+ */
+
 module.exports = function(server, databaseObj, helper, packageObj) {
     var recipeAnalytics = require('./addRecipeAnalytics');
     //var addSecurity  = require('./addSecurity');
     //var async = require('async');
     var _ = require("lodash");
     var orderManagement = require("./orderManagement");
+    var chefCourseValidation = require("./chefsCourseExpiry");
     /**
      * Here server is the main app object
      * databaseObj is the mapped database from the package.json file
@@ -22,6 +28,7 @@ module.exports = function(server, databaseObj, helper, packageObj) {
         //Initialize the analytics..
         recipeAnalytics.init(server, databaseObj, helper, packageObj);
         orderManagement.init(server, databaseObj, helper, packageObj);
+        chefCourseValidation.init(server, databaseObj, helper, packageObj);
         addRecipeFilter();
     };
 
@@ -29,7 +36,6 @@ module.exports = function(server, databaseObj, helper, packageObj) {
 
     var addRecipeFilter = function(){
         var Recipe = databaseObj.Recipe;
-        var Category = databaseObj.Category;
 
         Recipe.findCategoryRecipes = function(categoryId, recipeFilter, cuisinesId, callback){
            // where: {"recipes_.5698e49c53196bcc07fd7db7": true}
@@ -49,7 +55,6 @@ module.exports = function(server, databaseObj, helper, packageObj) {
             if(cuisinesId){
                 if(cuisinesId.length){
                     cuisinesId.forEach(function(id){
-                        //console.log("I am here");
                         filter.where["cuisines_." + id] = true;
                     });
                 }
@@ -59,8 +64,7 @@ module.exports = function(server, databaseObj, helper, packageObj) {
 
             Recipe.find(filter)
                 .then(function(recipeList){
-                    /*console.log("============================");
-                    console.log(recipeList);*/
+
                     callback(null, recipeList);
                 })
                 .catch(function(err){

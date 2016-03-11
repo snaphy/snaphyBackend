@@ -234,6 +234,11 @@
       }
     }
   },
+  "hidden": [
+    "cuisines_",
+    "recipeTags_",
+    "category_"
+  ],
   "properties": {
     "name": {
       "type": "string",
@@ -360,8 +365,8 @@
     "category_": {
       "type": "object"
     },
-    "recipeTags_":{
-      "type":"object"
+    "recipeTags_": {
+      "type": "object"
     },
     "stepsImage": {
       "type": [
@@ -406,7 +411,6 @@
       }
     }
   },
-  "hidden":["cuisines_", "recipeTags_", "category_"],
   "validations": [],
   "relations": {
     "customer": {

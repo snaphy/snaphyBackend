@@ -24,6 +24,9 @@
       "search": "text"
     }
   },
+  "hidden": [
+    "recipes_"
+  ],
   "properties": {
     "name": {
       "type": "string",
@@ -37,11 +40,10 @@
         }
       }
     },
-    "recipes_":{
-      "type":"object"
+    "recipes_": {
+      "type": "object"
     }
   },
-  "hidden":["recipes_"],
   "validations": [],
   "relations": {
     "recipes": {

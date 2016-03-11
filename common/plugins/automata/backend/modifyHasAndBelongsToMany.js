@@ -267,13 +267,9 @@ var disconnectEachData = function(app, modelObj, foreignKey, relationProp, relat
         .then(function(){
             //Now remove the related data too from each models..
             if(mainModelInstance[relationName + "_"]){
-                console.log("I am here");
-                //Now remove the related data refrence from mainModel
-                console.log("===========BEFORE DELETE========", mainModelInstance[relationName + "_"]);
+
                 //remove the given instance..
                 delete mainModelInstance[relationName + "_"][relatedModelInstance.id];
-                //_.omit(mainModelInstance[relationName + "_"], [relatedModelInstance.id]);
-                console.log("===========AFTER DELETE========", mainModelInstance[relationName + "_"]);
 
                 //persistedModel.updateAttribute(name, value, callback)
                 mainModelInstance.updateAttribute(relationName + "_", mainModelInstance[relationName + "_"], function(err, value){

@@ -31,7 +31,7 @@
         },
         {
           "id": 3,
-          "name": "rejected"
+          "name": "expired"
         }
       ]
     }
@@ -58,11 +58,19 @@
     "geolocation": {
       "display": false
     },
+    "added": {
+      "date": true,
+      "search": "date"
+    },
+    "expiryDate": {
+      "date": true,
+      "search": "date"
+    },
     "status": {
       "tag": {
-        "rejected": "label-warning",
+        "expired": "label-danger",
         "allow": "label-primary",
-        "onhold": "label-danger"
+        "onhold": "label-warning"
       }
     }
   },
@@ -174,7 +182,7 @@
           "options": [
             "allow",
             "onhold",
-            "rejected"
+            "expired"
           ]
         }
       }
@@ -185,12 +193,35 @@
       "template": {
         "type": "dummy"
       }
+    },
+    "allowedRecipes": {
+      "type": "number",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "label": "Enter total allowed recipes",
+          "id": "allowedRecipes"
+        }
+      }
+    },
+    "expiryDate": {
+      "type": "date",
+      "required": true,
+      "template": {
+        "type": "date",
+        "templateOptions": {
+          "label": "Add chefs expiry date.",
+          "placeholder":"Enter expiry date"
+        }
+      }
     }
   },
   "validations": [],
   "relations": {
     "customers": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "Customer",
       "foreignKey": "",
       "onCascadeDelete": false,
@@ -205,7 +236,8 @@
     "popularities": {
       "type": "hasOne",
       "model": "Popularity",
-      "foreignKey": ""
+      "foreignKey": "",
+      "onCascadeDelete": true
     }
   },
   "acls": [],
