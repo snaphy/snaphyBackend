@@ -100,6 +100,11 @@
       "display": false
     },
     "status": {
+      "tag": {
+        "label-primary": "publish",
+        "label-warning": "onhold",
+        "label-danger": "rejected"
+      },
       "search": "select",
       "options": [
         "publish",
@@ -484,11 +489,6 @@
       "model": "RecipeAnalytic",
       "foreignKey": "",
       "onCascadeDelete": true
-    },
-    "dummyIngredients": {
-      "type": "hasOne",
-      "model": "DummyIngredient",
-      "foreignKey": ""
     }
   },
   "acls": [],

@@ -294,6 +294,17 @@
           "bindObj": "ingredients"
         }
       }
+    },
+    "dummyIngredientName":{
+      "type":"string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter Dummy Ingredient name. Later convert this to ingredient before publishing.",
+          "id": "dummyRecipeIngredient"
+        }
+      }
     }
   },
   "validations": [],
