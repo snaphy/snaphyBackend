@@ -129,7 +129,7 @@ var recipeAfterSave = function(server, databaseObj, helper, packageObj){
 
         //Check if chef can add recipe..
         //if(ctx.isNewInstance){
-            checkRecipesLimit(Recipe, Chef, instance);
+            checkRecipesLimit(Recipe, Chef, instance, server, packageObj);
         //}
 
         //Call the next middleware..
@@ -140,10 +140,11 @@ var recipeAfterSave = function(server, databaseObj, helper, packageObj){
 
 
 
-var checkRecipesLimit = function(Recipe, Chef, instance){
+var checkRecipesLimit = function(Recipe, Chef, instance, server, packageObj){
     if(instance.customerId){
         //Now first get the customerId..
         Chef.find({
+                include: "customer",
                 where:{
                     customerId: instance.customerId
                 }
@@ -163,6 +164,8 @@ var checkRecipesLimit = function(Recipe, Chef, instance){
                                         if(err){
                                             console.error(err);
                                         }
+                                        //Now sending expiry mail to the chef..
+                                        sendMail(server, packageObj, chefObj);
                                     });
                                 }
                             })
@@ -177,6 +180,31 @@ var checkRecipesLimit = function(Recipe, Chef, instance){
             })
             .catch(function(err){
                 console.error(err);
+            });
+    }
+};
+
+
+
+//Send expiry mail..
+var sendMail = function(server, packageObj, chef){
+    var customer = chef.customer();
+    if(customer.email){
+        var title = "Expiry notice for " + packageObj.company.name + " chef";
+        //Send expiry notice to all chefs who has expired..
+        server.models.adminEmail.expiryNotice(customer.email, title,
+            {
+                'title': title,
+                'company':packageObj.company
+            }, function(err, send){
+                if(err){
+
+                    console.error(err);
+                }else{
+                    console.log("Successfully send expiry mail to ");
+                    console.log(send);
+                }
+
             });
     }
 };
