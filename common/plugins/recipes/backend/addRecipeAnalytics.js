@@ -79,13 +79,13 @@ var init = function(server, databaseObj, helper, packageObj) {
 
     //When a comment is created increment ratings and comment value..of analytics..
     databaseObj.Comments.observe('before save', function(ctx, next) {
-        ctx
-        if (ctx.isNewInstance) {
-            if(ctx.instance){
+        var instance = ctx.instance || ctx.data;
+        if(instance){
+            if(instance.recipeId){
                 //Now increment comment and ratings value..
                 databaseObj.RecipeAnalytic.find({
                     where:{
-                        recipeId: ctx.instance.recipeId
+                        recipeId: instance.recipeId
                     }
                 }, function(err, recipeAnalyticObj){
 
@@ -102,17 +102,22 @@ var init = function(server, databaseObj, helper, packageObj) {
                         return next();
                     }
 
-                    //Now calculate the average ratings..
-                    var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating) )
-                    //now increment comment..
-                    recipeAnalyticObj.totalComment  =  parseInt(recipeAnalyticObj.totalComment) + 1;
-                    //Now add this comment rating..
-                    if(ctx.instance.rating !== undefined){
-                        totalRating = totalRating + parseInt(ctx.instance.rating);
-                        //Now calculate average. rating..
-                        var avgRating = totalRating / recipeAnalyticObj.totalComment;
-                        recipeAnalyticObj.averageRating = avgRating;
-                    }//if
+                    if(ctx.isNewInstance){
+                        //Now calculate the average ratings..
+                        var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating) )
+                        //now increment comment..
+                        recipeAnalyticObj.totalComment  =  parseInt(recipeAnalyticObj.totalComment) + 1;
+                        //Now add this comment rating..
+                        if(ctx.instance.rating !== undefined){
+                            totalRating = totalRating + parseInt(instance.rating);
+                            //Now calculate average. rating..
+                            recipeAnalyticObj.averageRating = totalRating / recipeAnalyticObj.totalComment;;
+                        }//if
+
+                    }else{
+
+                    }
+
 
                     //Now save the data..
                     recipeAnalyticObj.save({}, function(err, obj){
@@ -128,9 +133,6 @@ var init = function(server, databaseObj, helper, packageObj) {
                     //Now call the next middleware..
                     next();
                 });// find RecipeAnalytic
-
-            }else{
-                next();
             }
         }else{
             next();
