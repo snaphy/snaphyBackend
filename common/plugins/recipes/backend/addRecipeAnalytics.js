@@ -111,7 +111,7 @@ var init = function(server, databaseObj, helper, packageObj) {
                         if(ctx.instance.rating !== undefined){
                             totalRating = totalRating + parseInt(instance.rating);
                             //Now calculate average. rating..
-                            recipeAnalyticObj.averageRating = totalRating / recipeAnalyticObj.totalComment;;
+                            recipeAnalyticObj.averageRating = totalRating / recipeAnalyticObj.totalComment;
                         }//if
 
                     }else{
