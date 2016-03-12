@@ -18,9 +18,9 @@ var init = function(server, databaseObj, helper, packageObj) {
                     }
                     //Analytics successfully added to recipe..
                     //Add analytic for two way communication..
-                    ctx.instance.recipeAnalyticId = analyticsObj.id;
+                    //ctx.instance.recipeAnalyticId = analyticsObj.id;
                     //Resave it..
-                    ctx.instance.save({}, function(err, val){
+                    ctx.instance.updateAttribute('recipeAnalyticId', analyticsObj.id, function(err, val){
                         if(err){
                             console.error("Data cannot be saved..");
                             return false;
@@ -114,6 +114,18 @@ var init = function(server, databaseObj, helper, packageObj) {
                             //Now calculate average. rating..
                             averageRating = totalRating / recipeAnalyticObj.totalComment;
                         }//if
+                        //updateAttributes({name: 'value'}, cb)
+                        //Now save the data..
+                        recipeAnalyticObj.updateAttributes({averageRating: averageRating, totalComment: totalComment}, function(err, obj){
+                            if(err){
+                                console.error("Error in Recipe analytics total comment and rating incrementing..");
+
+                            }else{
+                                //done incrementing value..
+                                console.log("Avg ratings updated for new .");
+                            }
+                        });
+
 
                     }else{
                         //First find the previous value..
@@ -131,6 +143,18 @@ var init = function(server, databaseObj, helper, packageObj) {
                                             totalRating = totalRating + parseInt(instance.rating);
                                             //Now calculate average. rating..
                                             averageRating = totalRating / recipeAnalyticObj.totalComment;
+                                            //updateAttributes({name: 'value'}, cb)
+                                            //Now save the data..
+                                            recipeAnalyticObj.updateAttributes({averageRating: averageRating, totalComment: totalComment}, function(err, obj){
+                                                if(err){
+                                                    console.error("Error in Recipe analytics total comment and rating incrementing..");
+
+                                                }else{
+                                                    //done incrementing value..
+                                                    console.log("Avg ratings updated.");
+                                                }
+                                            });
+
                                         }//if
                                     }
                                 }
@@ -140,22 +164,11 @@ var init = function(server, databaseObj, helper, packageObj) {
                             });
                     }
 
-                    //updateAttributes({name: 'value'}, cb)
-                    //Now save the data..
-                    recipeAnalyticObj.updateAttributes({averageRating: averageRating, totalComment: totalComment}, function(err, obj){
-                        if(err){
-                            console.error("Error in Recipe analytics total comment and rating incrementing..");
-
-                        }else{
-                            //done incrementing value..
-                            console.log("Avg ratings updated.");
-                        }
-                    });
-
-                    //Now call the next middleware..
-                    next();
                 });// find RecipeAnalytic
             }
+
+            //Now call the next middleware..
+            next();
         }else{
             next();
         }

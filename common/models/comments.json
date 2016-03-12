@@ -140,6 +140,13 @@
     "recipe_stepsDescription": {
       "display": false
     },
+    "recipe_name":{
+      "display": true,
+      "search": "related",
+      "relatedModel": "Recipe",
+      "foreignKey": "recipeId",
+      "propertyName": "name"
+    },
     "status": {
       "search": "select",
       "options": [

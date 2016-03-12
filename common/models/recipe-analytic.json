@@ -126,6 +126,13 @@
     "recipes_added": {
       "display": false
     },
+    "recipes_name":{
+      "display": true,
+      "search": "related",
+      "relatedModel": "Recipe",
+      "foreignKey": "recipeId",
+      "propertyName": "name"
+    },
     "added": {
       "date": true,
       "search": "date"
