@@ -35,46 +35,50 @@ var init = function(server, databaseObj, helper, packageObj) {
     });
 
 
-    //When a RecipeIngredients is fetched increase the views. in recipe.
-    databaseObj.RecipeIngredients.observe('loaded', function(ctx, next) {
+
+ /*   //When a RecipeIngredients is fetched increase the views. in recipe.
+    databaseObj.Recipe.observe('access', function(ctx, next) {
         if (ctx.instance === undefined) {
             //console.error("Error recipe data is not present");
             return next();
         }
 
-        var RecipeId = ctx.instance.recipeId;
-        //Now increase a recipe views..
-        databaseObj.RecipeAnalytic.find({
-            where: {
-                recipeId: RecipeId
-            }
-        }, function(err, recipeAnalyticObj) {
-            if (err) {
-                console.log("Error fetching recipe analytic data.");
-                console.error(err);
-                next();
-            } else {
-                if(recipeAnalyticObj.length){
-                    recipeAnalyticObj = recipeAnalyticObj[0];
-                }else{
-                    console.error("No recipe analytics data model present");
-                    return next();
+        var RecipeId = ctx.instance.id;
+        if(RecipeId){
+            //Now increase a recipe views..
+            databaseObj.RecipeAnalytic.find({
+                where: {
+                    recipeId: RecipeId
                 }
-                recipeAnalyticObj.totalViews = parseInt(recipeAnalyticObj.totalViews) + 1;
-                //Now save the ingredients..
-                recipeAnalyticObj.updateAttribute('totalViews', recipeAnalyticObj.totalViews,  function(err, object) {
-                    if (err) {
-                        console.log("Error fetching recipe ingredients data.");
-                        console.error(err);
-
+            }, function(err, recipeAnalyticObj) {
+                if (err) {
+                    console.log("Error fetching recipe analytic data.");
+                    console.error(err);
+                    next();
+                } else {
+                    if(recipeAnalyticObj.length){
+                        recipeAnalyticObj = recipeAnalyticObj[0];
+                    }else{
+                        console.error("No recipe analytics data model present");
+                        return next();
                     }
-                    //Successfully increased views..
+                    recipeAnalyticObj.totalViews = parseInt(recipeAnalyticObj.totalViews) + 1;
+                    //Now save the ingredients..
+                    recipeAnalyticObj.updateAttribute('totalViews', recipeAnalyticObj.totalViews,  function(err, object) {
+                        if (err) {
+                            console.log("Error fetching recipe ingredients data.");
+                            console.error(err);
 
-                });
-                next();
-            }
-        });
-    }); //loaded
+                        }
+                        //Successfully increased views..
+
+                    });
+
+                }
+            });
+        }
+        next();
+    }); //loaded*/
 
 
     //When a comment is created increment ratings and comment value..of analytics..
@@ -215,7 +219,7 @@ var init = function(server, databaseObj, helper, packageObj) {
     });
 
 
-}
+};
 
 
 
