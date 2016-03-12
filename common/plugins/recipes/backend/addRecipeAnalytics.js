@@ -122,6 +122,12 @@ var init = function(server, databaseObj, helper, packageObj) {
                             .then(function(value){
                                 if(value){
                                     if(value.status === "publish"){
+                                        totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating));
+                                        //now increment comment..
+                                        totalComment  =  parseInt(recipeAnalyticObj.totalComment);
+                                        //remove its previous rating..
+                                        totalRating = totalRating - value.rating;
+                                        //Now add current rating..
 
                                     }
                                 }
