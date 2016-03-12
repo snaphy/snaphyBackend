@@ -145,6 +145,14 @@ var init = function(server, databaseObj, helper, packageObj) {
                                                 //Count the total comments..
                                                 databaseObj.Comments.count({recipeId: instance.recipeId, status: "publish"})
                                                     .then(function(number){
+                                                        var commentIsNew = false;
+                                                        //If comment is old..but recipeId is added later to the comment..
+                                                        if(number > recipeAnalyticObj.totalComment ){
+                                                            number = number - 1;
+                                                            commentIsNew = true;
+                                                        }
+                                                        //Now substractng current comment from list..
+
                                                         var totalRating = 0;
                                                         if(recipeAnalyticObj.averageRating){
                                                             totalRating = parseInt(number) * parseInt(recipeAnalyticObj.averageRating);
@@ -154,10 +162,17 @@ var init = function(server, databaseObj, helper, packageObj) {
 
                                                         //now increment comment..
                                                         totalComment  =  parseInt(number);
-                                                        if(totalRating){
+                                                        if(totalRating && commentIsNew === false){
                                                             //remove its previous rating..
                                                             totalRating = totalRating - value.rating;
                                                         }
+
+                                                        if(commentIsNew === true){
+                                                            //Also increment the comment.. if comment is new..
+                                                            totalComment = totalComment + 1;
+                                                        }
+
+
 
                                                         //Now add current rating..
                                                         totalRating = totalRating + parseInt(instance.rating);
@@ -179,7 +194,7 @@ var init = function(server, databaseObj, helper, packageObj) {
                                                         console.error(err);
                                                     });
                                             }
-                                            
+
                                         }//if
                                     }
                                 }
