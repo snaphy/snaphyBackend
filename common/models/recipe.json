@@ -101,9 +101,9 @@
     },
     "status": {
       "tag": {
-        "label-primary": "publish",
-        "label-warning": "onhold",
-        "label-danger": "rejected"
+        "publish":"label-primary",
+        "onhold": "label-warning",
+        "rejected": "label-danger"
       },
       "search": "select",
       "options": [
@@ -476,6 +476,7 @@
         "searchProp": "name",
         "create": false,
         "hide": false,
+        "show":true,
         "init": true
       }
     },
