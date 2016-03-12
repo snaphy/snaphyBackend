@@ -101,32 +101,33 @@ var init = function(server, databaseObj, helper, packageObj) {
                         console.error("No recipe analytics data model present");
                         return next();
                     }
-
+                    var averageRating;
+                    var totalComment;
                     if(ctx.isNewInstance){
                         //Now calculate the average ratings..
                         var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating) )
                         //now increment comment..
-                        recipeAnalyticObj.totalComment  =  parseInt(recipeAnalyticObj.totalComment) + 1;
+                        totalComment  =  parseInt(recipeAnalyticObj.totalComment) + 1;
                         //Now add this comment rating..
                         if(ctx.instance.rating !== undefined){
                             totalRating = totalRating + parseInt(instance.rating);
                             //Now calculate average. rating..
-                            recipeAnalyticObj.averageRating = totalRating / recipeAnalyticObj.totalComment;
+                            averageRating = totalRating / recipeAnalyticObj.totalComment;
                         }//if
 
                     }else{
 
                     }
 
-
+                    //updateAttributes({name: 'value'}, cb)
                     //Now save the data..
-                    recipeAnalyticObj.save({}, function(err, obj){
+                    recipeAnalyticObj.updateAttributes({averageRating: averageRating, totalComment: totalComment}, function(err, obj){
                         if(err){
                             console.error("Error in Recipe analytics total comment and rating incrementing..");
 
                         }else{
                             //done incrementing value..
-                            //
+                            console.log("Avg ratings updated.");
                         }
                     });
 
