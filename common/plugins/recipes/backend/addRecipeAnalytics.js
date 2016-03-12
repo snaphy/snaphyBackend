@@ -117,7 +117,18 @@ var init = function(server, databaseObj, helper, packageObj) {
                         }//if
 
                     }else{
-                        
+                        //First find the previous value..
+                        databaseObj.Comments.findById(instance.id, {})
+                            .then(function(value){
+                                if(value){
+                                    if(value.status === "publish"){
+
+                                    }
+                                }
+                            })
+                            .catch(function(err){
+                                console.error(err);
+                            });
                     }
 
                     //updateAttributes({name: 'value'}, cb)
