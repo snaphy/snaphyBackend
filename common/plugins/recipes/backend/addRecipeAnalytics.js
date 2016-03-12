@@ -101,8 +101,8 @@ var init = function(server, databaseObj, helper, packageObj) {
                         console.error("No recipe analytics data model present");
                         return next();
                     }
-                    var averageRating;
-                    var totalComment;
+                    var averageRating = 0;
+                    var totalComment = 0;
                     if(ctx.isNewInstance){
                         //Now calculate the average ratings..
                         var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating));
@@ -144,11 +144,20 @@ var init = function(server, databaseObj, helper, packageObj) {
                                             //Count the total comments..
                                             databaseObj.Comments.count({recipeId: instance.recipeId, status: "publish"})
                                                 .then(function(number){
-                                                    var totalRating = parseInt(number) * parseInt(recipeAnalyticObj.averageRating);
+                                                    var totalRating = 0;
+                                                    if(recipeAnalyticObj.averageRating){
+                                                        totalRating = parseInt(number) * parseInt(recipeAnalyticObj.averageRating);
+                                                    }else{
+                                                        totalRating = parseInt(number);
+                                                    }
+
                                                     //now increment comment..
                                                     totalComment  =  parseInt(number);
-                                                    //remove its previous rating..
-                                                    totalRating = totalRating - value.rating;
+                                                    if(totalRating){
+                                                        //remove its previous rating..
+                                                        totalRating = totalRating - value.rating;
+                                                    }
+
                                                     //Now add current rating..
                                                     totalRating = totalRating + parseInt(instance.rating);
                                                     //Now calculate average. rating..
