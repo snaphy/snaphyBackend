@@ -85,8 +85,7 @@ var init = function(server, databaseObj, helper, packageObj) {
                 //Now increment comment and ratings value..
                 databaseObj.RecipeAnalytic.find({
                     where:{
-                        recipeId: instance.recipeId,
-                        "status": "publish"
+                        recipeId: instance.recipeId
                     }
                 }, function(err, recipeAnalyticObj){
 
