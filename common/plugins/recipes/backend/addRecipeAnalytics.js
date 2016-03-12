@@ -106,7 +106,7 @@ var init = function(server, databaseObj, helper, packageObj) {
                     if(ctx.isNewInstance){
                         //Now calculate the average ratings..
                         var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating));
-                        databaseObj.Comments.count({where:{recipeId: instance.recipeId, status: "publish"}})
+                        databaseObj.Comments.count({recipeId: instance.recipeId, status: "publish"})
                             .then(function(number){
                                 //now increment comment..
                                 totalComment  =  number + 1;
@@ -142,7 +142,7 @@ var init = function(server, databaseObj, helper, packageObj) {
                                     if(value.status === "publish"){
                                         if(instance.rating !== undefined){
                                             //Count the total comments..
-                                            databaseObj.Comments.count({where:{recipeId: instance.recipeId, status: "publish"}})
+                                            databaseObj.Comments.count({recipeId: instance.recipeId, status: "publish"})
                                                 .then(function(number){
                                                     var totalRating = parseInt(number) * parseInt(recipeAnalyticObj.averageRating);
                                                     //now increment comment..
