@@ -1,0 +1,35 @@
+{
+  "name": "DummyIngredient",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "quantity": {
+      "type": "number",
+      "required": true
+    },
+    "halfQuantity": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "recipe": {
+      "type": "belongsTo",
+      "model": "Recipe",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

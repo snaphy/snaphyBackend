@@ -140,7 +140,7 @@
     "recipe_stepsDescription": {
       "display": false
     },
-    "recipe_name":{
+    "recipe_name": {
       "display": true,
       "search": "related",
       "relatedModel": "Recipe",

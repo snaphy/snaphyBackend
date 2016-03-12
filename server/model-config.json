@@ -135,5 +135,9 @@
   "FacebookAccessToken": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "DummyIngredient": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

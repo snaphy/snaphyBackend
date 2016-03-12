@@ -484,6 +484,11 @@
       "model": "RecipeAnalytic",
       "foreignKey": "",
       "onCascadeDelete": true
+    },
+    "dummyIngredients": {
+      "type": "hasOne",
+      "model": "DummyIngredient",
+      "foreignKey": ""
     }
   },
   "acls": [],

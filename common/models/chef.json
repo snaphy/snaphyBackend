@@ -213,7 +213,7 @@
         "type": "date",
         "templateOptions": {
           "label": "Add chefs expiry date.",
-          "placeholder":"Enter expiry date"
+          "placeholder": "Enter expiry date"
         }
       }
     }

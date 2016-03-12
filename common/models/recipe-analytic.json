@@ -126,7 +126,7 @@
     "recipes_added": {
       "display": false
     },
-    "recipes_name":{
+    "recipes_name": {
       "display": true,
       "search": "related",
       "relatedModel": "Recipe",
@@ -179,14 +179,14 @@
     },
     "averageRating": {
       "type": "number",
-      "default":0,
+      "default": 0,
       "template": {
         "type": "dummy"
       }
     },
     "totalComment": {
       "type": "number",
-      "default":0,
+      "default": 0,
       "template": {
         "type": "dummy"
       }
