@@ -62,7 +62,7 @@ var init = function(server, databaseObj, helper, packageObj) {
                 }
                 recipeAnalyticObj.totalViews = parseInt(recipeAnalyticObj.totalViews) + 1;
                 //Now save the ingredients..
-                recipeAnalyticObj.save({}, function(err, object) {
+                recipeAnalyticObj.updateAttribute('totalViews', recipeAnalyticObj.totalViews,  function(err, object) {
                     if (err) {
                         console.log("Error fetching recipe ingredients data.");
                         console.error(err);
@@ -78,7 +78,8 @@ var init = function(server, databaseObj, helper, packageObj) {
 
 
     //When a comment is created increment ratings and comment value..of analytics..
-    databaseObj.Comments.observe('after save', function(ctx, next) {
+    databaseObj.Comments.observe('before save', function(ctx, next) {
+        ctx
         if (ctx.isNewInstance) {
             if(ctx.instance){
                 //Now increment comment and ratings value..
@@ -143,4 +144,4 @@ var init = function(server, databaseObj, helper, packageObj) {
 
 module.exports = {
     init: init
-}
+};
