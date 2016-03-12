@@ -59,7 +59,13 @@ var formatData = function(instance){
     if(instance.stepsDescription){
         if(instance.stepsDescription.length){
             instance.stepsDescription.forEach(function(steps, index){
-                instance.stepsDescription[index] = capitalize(steps);
+                if(steps.name){
+                    if(steps.name.length > 1){
+                        instance.stepsDescription[index].name = capitalize(steps.name);
+                    }
+                }
+
+
             });
         }
     }
@@ -70,6 +76,7 @@ var formatData = function(instance){
 
 var validate = function(instance, callback, next){
   //TODO ADD VALIDATION IF NEEDED..
+    callback();
 };
 
 

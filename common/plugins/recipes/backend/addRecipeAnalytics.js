@@ -41,15 +41,6 @@ var init = function(server, databaseObj, helper, packageObj) {
             //console.error("Error recipe data is not present");
             return next();
         }
-    /*    var loopback = helper.getLoopbackObj();
-        //Check is user is Admin..
-        var login = helper.loadPlugin('login');
-        var currentContext = loopback.getCurrentContext();
-        //first check is the user is not admin..
-        login.isAdmin(server, currentContext, function(err, value){
-            console.log(err);
-            console.log(value);
-        });*/
 
         var RecipeId = ctx.instance.recipeId;
         //Now increase a recipe views..

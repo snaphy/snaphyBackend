@@ -172,12 +172,14 @@
     },
     "averageRating": {
       "type": "number",
+      "default":0,
       "template": {
         "type": "dummy"
       }
     },
     "totalComment": {
       "type": "number",
+      "default":0,
       "template": {
         "type": "dummy"
       }
