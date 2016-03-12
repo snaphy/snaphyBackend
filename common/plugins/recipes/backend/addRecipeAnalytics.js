@@ -106,18 +106,18 @@ var init = function(server, databaseObj, helper, packageObj) {
                     var totalComment;
                     if(ctx.isNewInstance){
                         //Now calculate the average ratings..
-                        var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating) )
+                        var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating));
                         //now increment comment..
                         totalComment  =  parseInt(recipeAnalyticObj.totalComment) + 1;
                         //Now add this comment rating..
-                        if(ctx.instance.rating !== undefined){
+                        if(instance.rating !== undefined){
                             totalRating = totalRating + parseInt(instance.rating);
                             //Now calculate average. rating..
                             averageRating = totalRating / recipeAnalyticObj.totalComment;
                         }//if
 
                     }else{
-
+                        
                     }
 
                     //updateAttributes({name: 'value'}, cb)
