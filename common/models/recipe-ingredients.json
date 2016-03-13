@@ -110,6 +110,14 @@
         "minlength": "1",
         "maxlength": "7",
         "number": true
+      },
+      "recipe":{
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "ingredients":{
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -125,6 +133,14 @@
         "required": "You must convert the given quantity to its average quantity required",
         "minlength": "Minimum permitted length is atleast 1",
         "number": "quantity must be a number"
+      },
+      "recipe":{
+        "required": "Recipe name is required",
+        "valueNotEquals": "Recipe name is required"
+      },
+      "ingredients":{
+        "required": "Ingredients name is required",
+        "valueNotEquals": "Ingredients name is required"
       }
     }
   },
@@ -167,6 +183,26 @@
     },
     "quantity": {
       "search": "number"
+    },
+    "dummyIngredientName":{
+      "search":"text"
+    },
+    "recipe_name": {
+      "display": true,
+      "search": "related",
+      "relatedModel": "Recipe",
+      "foreignKey": "recipeId",
+      "propertyName": "name"
+    },
+    "ingredients_name": {
+      "display": true,
+      "search": "related",
+      "relatedModel": "Ingredients",
+      "foreignKey": "ingredientsId",
+      "propertyName": "name"
+    },
+    "recipe_added":{
+      "display": false
     },
     "halfQuantity": {
       "search": "select",
@@ -316,7 +352,8 @@
       "templateOptions": {
         "btnText": "Add Recipe",
         "searchProp": "name",
-        "create": false
+        "create": false,
+        "id":"RecipeId"
       }
     },
     "ingredients": {
@@ -326,7 +363,8 @@
       "templateOptions": {
         "btnText": "Add Ingredient",
         "searchProp": "name",
-        "create": false
+        "create": false,
+        "id":"IngredientId"
       }
     },
     "orderDetails": {

@@ -184,14 +184,16 @@
       "templateOptions": {
         "btnText": "Add Ingredient Category",
         "searchProp": "name",
-        "create": true
+        "create": true,
+        "id":"ingredientsCategory"
       }
     },
     "recipes": {
       "type": "hasMany",
       "model": "Recipe",
       "foreignKey": "",
-      "through": "RecipeIngredients"
+      "through": "RecipeIngredients",
+      "id":"recipeId"
     }
   },
   "acls": [],

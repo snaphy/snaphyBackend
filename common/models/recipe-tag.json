@@ -22,6 +22,12 @@
   "hidden": [
     "recipes_"
   ],
+  "tables":{
+    "name": {
+      "search": "text",
+      "tag": {}
+    }
+  },
   "properties": {
     "name": {
       "type": "string",

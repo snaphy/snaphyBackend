@@ -5,24 +5,45 @@
   "options": {
     "validateUpsert": true
   },
+  "validationsBackend": {
+    "rules": {
+      "customer":{
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "customer":{
+        "required": "Please add chef of this recipe",
+        "valueNotEquals": "Please add chef of this recipe"
+      }
+    }
+  },
   "tables": {
-    "customers_phoneNumber": {
+    "customer_phoneNumber": {
       "display": false
     },
-    "customers_firstName": {
+    "customer_firstName": {
       "display": false
     },
-    "customers_lastName": {
+    "customer_lastName": {
       "display": false
     },
-    "customers_profilePic": {
+    "customer_profilePic": {
       "display": false
     },
-    "customers_password": {
+    "customer_password": {
       "display": false
     },
-    "customers_date": {
+    "customer_date": {
       "display": false
+    },
+    "customer_email": {
+      "display": true,
+      "search": "related",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "email"
     }
   },
   "properties": {
@@ -36,14 +57,15 @@
   },
   "validations": [],
   "relations": {
-    "customers": {
-      "type": "hasOne",
+    "customer": {
+      "type": "belongsTo",
       "model": "Customer",
       "foreignKey": "",
       "templateOptions": {
         "btnText": "Add Customer",
         "searchProp": "email",
-        "create": false
+        "create": false,
+        "id": "customerIdName"
       }
     },
     "recipes": {

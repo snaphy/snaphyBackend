@@ -79,6 +79,10 @@
       },
       "priority": {
         "required": true
+      },
+      "recipe":{
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -88,6 +92,10 @@
       },
       "priority": {
         "required": "priority name is required"
+      },
+      "recipe":{
+        "required": "Recipe is required",
+        "valueNotEquals": "Recipe is required"
       }
     }
   },
@@ -97,36 +105,37 @@
         "medium": "label-warning",
         "normal": "label-primary",
         "high": "label-danger"
-      }
+      },
+      "search": "text"
     },
-    "recipes_description": {
+    "recipe_description": {
       "display": false
     },
-    "recipes_mainImage": {
+    "recipe_mainImage": {
       "display": false
     },
-    "recipes_recipeType": {
+    "recipe_recipeType": {
       "display": false
     },
-    "recipes_servings": {
+    "recipe_servings": {
       "display": false
     },
-    "recipes_status": {
+    "recipe_status": {
       "display": false
     },
-    "recipes_youtubeVideoId": {
+    "recipe_youtubeVideoId": {
       "display": false
     },
-    "recipes_stepsImage": {
+    "recipe_stepsImage": {
       "display": false
     },
-    "recipes_stepsDescription": {
+    "recipe_stepsDescription": {
       "display": false
     },
-    "recipes_added": {
+    "recipe_added": {
       "display": false
     },
-    "recipes_name": {
+    "recipe_name": {
       "display": true,
       "search": "related",
       "relatedModel": "Recipe",
@@ -211,8 +220,8 @@
   },
   "validations": [],
   "relations": {
-    "recipes": {
-      "type": "hasOne",
+    "recipe": {
+      "type": "belongsTo",
       "model": "Recipe",
       "foreignKey": "",
       "onCascadeDelete": false,
@@ -221,7 +230,8 @@
         "searchProp": "name",
         "create": false,
         "search": true,
-        "hide": false
+        "hide": false,
+        "id":"RecipeId"
       }
     }
   },
