@@ -23,7 +23,7 @@ angular.module($snaphy.getModuleName())
             jQuery(e).closest('.form-group').removeClass('has-error');
             jQuery(e).closest('.help-block').remove();
         },
-
+        //http://stackoverflow.com/questions/22697276/selectize-js-jquery-validation
         //the default ignore selector is ':hidden', the following selectors restore the default behaviour when using selectize.js
         //:hidden:not([class~=selectized]) | selects all hidden elements, but not the original selects/inputs hidden by selectize
         //:hidden > .selectized | to restore the behaviour of the default selector, the original selects/inputs are only validated if their parent is visible
