@@ -1,6 +1,6 @@
 
 <!-- Page Header -->
-<div snaphy-load-template class="content bg-gray-lighter">
+<div snaphy-load-template ng-init="init()" class="content bg-gray-lighter">
   <div class="row items-push">
     <div class="col-sm-7">
       <h1 class="page-heading">
@@ -17,12 +17,13 @@
 </div>
 <!-- END Page Header -->
 
+
 <!-- Page Content -->
-<div snaphy-load-template class="content">
+<div snaphy-load-template  class="content">
   <!-- My Block -->
-  <div class="block">
+  <div ng-repeat="schema in schemaArray" class="block">
     <div class="block-header">
-      <h3 class="block-title">My Block</h3>
+      <h3 class="block-title">{{schema.model}}</h3>
     </div>
     <div class="block-content">
 

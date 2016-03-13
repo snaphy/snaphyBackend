@@ -15,8 +15,16 @@ angular.module($snaphy.getModuleName())
         $scope.schemaArray = [];
         var dataFetched = false;
         //Load the constructor ...for dashboard..
-        var init = function(){
-
+        //Call this constructor at ui loadin dashboard.html page..
+        $scope.init = function(){
+            //now fetching schemas..
+            if($scope.databasesList){
+                if($scope.databasesList.length){
+                    $scope.databasesList.forEach(function(databaseName){
+                        getDatabase(databaseName);
+                    });
+                }
+            }
         };
 
 
