@@ -34,7 +34,9 @@
     "RecipeIngredients": "RecipeIngredients",
     "User": "Employee",
     "Order": "Order",
-    "Chef": "Chef"
+    "Chef": "Chef",
+    "ContactChef":"ContactChef",
+    "Customer": "Customer"
   },
   "company":{
     "email": "rohitbasu2050@gmail.com",

@@ -12,6 +12,33 @@ var init = function(server, databaseObj, helper, packageObj) {
 };
 
 
+/*
+
+var contactChef = function(server, databaseObj, helper, packageObj){
+    var ContactChef = databaseObj.ContactChef;
+    ContactChef.observe('before save', function(ctx, next) {
+        var instance = ctx.instance || ctx.data;
+        if (ctx.isNewInstance) {
+            if(instance){
+                if(instance.customerId){
+                    databaseObj.Customer.findById(instance.customerId)
+                        .then(function(customerInstance){
+                            //Now send sms to ..
+                        })
+                        .catch(function(err){
+                            console.error(err);
+                        });
+                }
+            }
+            next();
+        }else{
+            next();
+        }
+    });
+};
+*/
+
+
 var requestOtp = function(server, databaseObj, helper, packageObj) {
     var Order = databaseObj.Order;
     Order.requestOtp = function(number, fn) {
