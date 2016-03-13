@@ -4,7 +4,7 @@ angular.module($snaphy.getModuleName())
     //Define your services here..
     //
     //
-    .factory('Resource', ['$q', '$filter', '$timeout', 'Database', function($q, $filter, $timeout, Database) {
+    .factory('Resource', ['$q', '$filter', '$timeout', 'Database', 'SnaphyTemplate', function($q, $filter, $timeout, Database, SnaphyTemplate) {
 
         //---------------------------------------------STORE GLOBAL VARIABLE-------------------------------------------------------
         var schema = {};

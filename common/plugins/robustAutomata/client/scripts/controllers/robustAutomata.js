@@ -852,7 +852,7 @@ angular.module($snaphy.getModuleName())
                     });
                 });
             }
-        }
+        };
 
         $scope.refreshData = function(tableState, ctrl) {
             for (var i = 0; i < $scope.databasesList.length; i++) {
