@@ -36,46 +36,74 @@ angular.module($snaphy.getModuleName())
     var employeeRole = $snaphy.loadSettings('login', "employeeRole");
     var redirectOtherWise = $snaphy.loadSettings('login', 'onLoginRedirectState');
     var databasesList = $snaphy.loadSettings('robustAutomata', "loadDatabases");
+    var ignoreList = $snaphy.loadSettings('robustAutomata', "ignore");
 
 
     //Loading states at run time.
     databasesList.forEach(function(stateName) {
-        //Add states at run time..
-        runtimeStates.addState(stateName,  {
-            url: '/' + stateName.toLowerCase().trim(),
-            templateUrl: '/robustAutomata/views/robustAutomata.html',
-            controller: 'robustAutomataControl',
-
-            //Only allow authenticated users here
-            data: {
-                permissions: {
-                    only: [employeeRole],
-                    redirectTo: redirectOtherWise
+        //Check if routes dont belongs in the main list
+        if(ignoreList){
+            if(ignoreList.length){
+                var ignore = false;
+                for(var i=0; i<ignoreList.length; i++){
+                    var ignoreState = ignoreList[i];
+                    if(ignoreState === stateName){
+                        ignore = true;
+                        break;
+                    }
                 }
-            }
-        });
 
-
-
-        //Add another state for saving users..
-        //Add states at run time..
-        runtimeStates.addState(stateName + '.save', {
-            url         : '/' + stateName.toLowerCase().trim() + '/saveData',
-            templateUrl : '/robustAutomata/views/saveData.html',
-            controller  : 'robustAutomataControl',
-            parent      : stateName,
-
-            //Only allow authenticated users here
-            data        : {
-                permissions: {
-                    only: ['parentState'],
-                    redirectTo: stateName
+                if(ignore === false){
+                    addState(stateName, runtimeStates, redirectOtherWise, employeeRole);
                 }
+            }else{
+                addState(stateName, runtimeStates, redirectOtherWise, employeeRole);
             }
-        });
+        }else{
+            addState(stateName, runtimeStates, redirectOtherWise, employeeRole);
+        }
 
 
     });
 
 
 }]);
+
+
+//Method for adding runtime states..
+var addState = function(stateName, runtimeStates, redirectOtherWise, employeeRole){
+    //Add states at run time..
+    runtimeStates.addState(stateName,  {
+        url: '/' + stateName.toLowerCase().trim(),
+        templateUrl: '/robustAutomata/views/robustAutomata.html',
+        controller: 'robustAutomataControl',
+
+        //Only allow authenticated users here
+        data: {
+            permissions: {
+                only: [employeeRole],
+                redirectTo: redirectOtherWise
+            }
+        }
+    });
+
+
+
+    //Add another state for saving users..
+    //Add states at run time..
+    runtimeStates.addState(stateName + '.save', {
+        url         : '/' + stateName.toLowerCase().trim() + '/saveData',
+        templateUrl : '/robustAutomata/views/saveData.html',
+        controller  : 'robustAutomataControl',
+        parent      : stateName,
+
+        //Only allow authenticated users here
+        data        : {
+            permissions: {
+                only: ['parentState'],
+                redirectTo: stateName
+            }
+        }
+    });
+
+};

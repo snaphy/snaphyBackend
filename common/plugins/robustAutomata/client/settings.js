@@ -9,25 +9,28 @@ var settings = {
    "defaultTemplate": true,
    "tablePanelId": "#automataWidget",
    loadDatabases: [
-       "Employee",
-       "EmployeeDetails",
+       "Order",
        "Recipe",
+       "RecipeAnalytic",
        "Comments",
        "Category",
        "Customer",
        "Cuisines",
+       "Employee",
+       "EmployeeDetails",
        "IngredientCategory",
        "Ingredients",
        "RecipeIngredients",
        "RecipeTag",
        "Wishlist",
        "Chef",
-       "RecipeAnalytic",
        //"Popularity",
-      /* "Order",
-       'OrderDetail',*/
+       /*'OrderDetail',*/
        "Course"
-   ]
+   ],
+    "ignore":[
+        "Order"
+    ]
 
 };
 

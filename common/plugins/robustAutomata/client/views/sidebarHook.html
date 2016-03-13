@@ -4,7 +4,7 @@
         <a class="nav-submenu" ng-click="scroll()" data-toggle="nav-submenu" style="cursor:pointer;"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Manage Data</span></a>
         <ul>
             <li ng-repeat="state in databasesList">
-                <a ui-sref="{{state}}">{{state | capitalize}}</a>
+                <a ng-if="!isIgnoreState(state)" ui-sref="{{state}}">{{state | capitalize}}</a>
             </li>
         </ul>
     </li>

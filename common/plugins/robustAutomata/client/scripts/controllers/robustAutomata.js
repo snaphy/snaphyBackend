@@ -28,6 +28,7 @@ angular.module($snaphy.getModuleName())
         $scope.currentState = currentState;
         var defaultTemplate = $snaphy.loadSettings('robustAutomata', "defaultTemplate");
         $scope.databasesList = $snaphy.loadSettings('robustAutomata', "loadDatabases");
+        var ignoreList = $snaphy.loadSettings('robustAutomata', "ignore");
         //Id for tablePanel
         var tablePanelId = $snaphy.loadSettings('robustAutomata', "tablePanelId");
         $snaphy.setDefaultTemplate(defaultTemplate);
@@ -63,6 +64,29 @@ angular.module($snaphy.getModuleName())
             $timeout(function(){
                 App.layout('side_scroll_off');
             }, 10);
+        };
+
+
+        $scope.isIgnoreState = function(state){
+            //Check if routes dont belongs in the main list
+            if(ignoreList){
+                if(ignoreList.length){
+                    var ignore = false;
+                    for(var i=0; i<ignoreList.length; i++){
+                        var ignoreState = ignoreList[i];
+                        if(ignoreState === state){
+                            ignore = true;
+                            break;
+                        }
+                    }
+                    return ignore;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
         };
 
 

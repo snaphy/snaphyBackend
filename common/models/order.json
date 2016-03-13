@@ -17,30 +17,6 @@
       }
     },
     {
-      "label": "Cancelled Orders",
-      "icon": "si-bar-chart",
-      "fetchLocally": true,
-      "propObj": {
-        "type": "$allTime",
-        "where": {
-          "status": "cancelled"
-        },
-        "dateProp": "added"
-      }
-    },
-    {
-      "label": "Delivered Orders",
-      "icon": "si-bar-chart",
-      "fetchLocally": true,
-      "propObj": {
-        "type": "$allTime",
-        "where": {
-          "status": "delivered"
-        },
-        "dateProp": "added"
-      }
-    },
-    {
       "label": "Today Orders",
       "icon": "si-bar-chart",
       "fetchLocally": true,
