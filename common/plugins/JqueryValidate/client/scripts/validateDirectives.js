@@ -50,4 +50,4 @@ angular.module($snaphy.getModuleName())
     $validatorProvider.addMethod("valueNotEquals", function(value, element, arg) {
         return arg !== value;
     }, "Please select some value");
-})
+});

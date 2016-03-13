@@ -224,6 +224,9 @@
       },
       "servings": {
         "valueNotEquals": ""
+      },
+      "customer":{
+        "required": true
       }
     },
     "messages": {
@@ -236,6 +239,9 @@
       },
       "servings": {
         "valueNotEquals": "Please select recipe servings"
+      },
+      "customer":{
+        "required": true
       }
     }
   },
@@ -425,7 +431,8 @@
       "templateOptions": {
         "btnText": "Add Customer",
         "searchProp": "email",
-        "create": false
+        "create": false,
+        "id": "customerName"
       }
     },
     "cuisines": {
