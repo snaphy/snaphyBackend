@@ -7,13 +7,18 @@
     <div ng-if="!hide" style="margin-top:10px;">
         <div class="row" ng-if="!showCreate()"  style="text-align:center">
             <div ng-if="showSearch()" class="col-md-9 col-xs-12 cleanBtnCornerRight">
-                {{options.templateOptions.id}}
-                <autocomplete
-                    placeholder="{{placeholder}}"
-                    model-name="{{to.model}}"
-                    search-property="{{to.searchProp}}"
-                    value="model[options.key]" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}">
-                </autocomplete>
+                <div class="form-group">
+                    <div ng-class="options.templateOptions.colSize">
+                        <div style="margin-left: 10px;" class="form-material" ng-class="options.templateOptions.color">
+                            <autocomplete
+                                placeholder="{{placeholder}}"
+                                model-name="{{to.model}}"
+                                search-property="{{to.searchProp}}"
+                                value="model[options.key]" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}">
+                            </autocomplete>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div ng-if="to.create" class="AddNewButton col-md-3 col-xs-12 cleanBtnCornerLeft">
                 <button type="button"  style="height:36px;"   class="btn btn-md btn-default" ng-click="forceDisplay()" >{{to.btnText}}</button>

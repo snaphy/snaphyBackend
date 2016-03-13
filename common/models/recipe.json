@@ -242,7 +242,8 @@
         "valueNotEquals": "Please select recipe servings"
       },
       "customer":{
-        "required": true
+        "required": "Please add chef of this recipe",
+        "valueNotEquals": "Please add chef of this recipe"
       }
     }
   },

@@ -16,7 +16,7 @@ angular.module($snaphy.getModuleName())
                 //Contains the value of the data.. that needs to be updated.
                 "value"          : "=value"
             },
-            template: '<select   ng-transclude></select>' ,
+            template: '<select   ng-transclude><option value=""></option></select>' ,
             link: function(scope, iElm, iAttrs, controller) {
                 if(!scope.modelName || !scope.searchProperty){
                     console.error("Error >>> searchProperty and modelName attributes are required");
