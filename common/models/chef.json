@@ -53,7 +53,8 @@
         "number": "Latitude must be a number"
       },
       "longitude":{
-        "required": "Longitude is required"
+        "required": "Longitude is required",
+        "number": "Longitude must be a number"
       }
     }
   },
@@ -62,10 +63,18 @@
       "display": false
     },
     "customer_firstName": {
-      "display": true
+      "display": true,
+      "search": "related",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
     },
     "customer_lastName": {
-      "display": true
+      "display": true,
+      "search": "related",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "lastName"
     },
     "customer_profilePic": {
       "display": false
@@ -90,12 +99,23 @@
       "date": true,
       "search": "date"
     },
+    "allowedRecipes":{
+      "search":"number"
+    },
+    "customer_email": {
+      "display": true,
+      "search": "related",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "email"
+    },
     "status": {
       "tag": {
         "expired": "label-danger",
         "allow": "label-primary",
         "onhold": "label-warning"
-      }
+      },
+      "search":"text"
     }
   },
   "widgets": [
