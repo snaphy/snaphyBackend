@@ -147,6 +147,13 @@
       "foreignKey": "recipeId",
       "propertyName": "name"
     },
+    "customer_email": {
+      "display": true,
+      "search": "related",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "email"
+    },
     "status": {
       "search": "select",
       "options": [
@@ -173,6 +180,14 @@
           5
         ],
         "valueNotEquals": ""
+      },
+      "recipe":{
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "customer":{
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -185,6 +200,14 @@
         "number": "Rating must be a number",
         "range": "Rating must be in range of 1-5",
         "valueNotEquals": "Please select recipe servings"
+      },
+      "recipe": {
+        "required": "Recipe is required",
+        "valueNotEquals": "Recipe is required"
+      },
+      "customer": {
+        "required": "Customer is required",
+        "valueNotEquals":  "Customer is required"
       }
     }
   },
@@ -252,7 +275,8 @@
       "templateOptions": {
         "btnText": "Add Customer",
         "searchProp": "email",
-        "create": false
+        "create": false,
+        "id":"customerId"
       }
     },
     "recipe": {
@@ -262,7 +286,8 @@
       "templateOptions": {
         "btnText": "Add Recipe",
         "searchProp": "name",
-        "create": false
+        "create": false,
+        "id":"recipeId"
       }
     }
   },
