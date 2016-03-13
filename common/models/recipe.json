@@ -226,7 +226,8 @@
         "valueNotEquals": ""
       },
       "customer":{
-        "required": true
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -432,7 +433,7 @@
         "btnText": "Add Customer",
         "searchProp": "email",
         "create": false,
-        "id": "customerName"
+        "id": "customerIdName"
       }
     },
     "cuisines": {

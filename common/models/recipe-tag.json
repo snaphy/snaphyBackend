@@ -44,12 +44,7 @@
     "recipes": {
       "type": "hasAndBelongsToMany",
       "model": "Recipe",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Recipe",
-        "searchProp": "name",
-        "create": false
-      }
+      "foreignKey": ""
     }
   },
   "acls": [],

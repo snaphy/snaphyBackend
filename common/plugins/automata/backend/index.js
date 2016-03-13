@@ -449,7 +449,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		for(var propertyName in modelProperties){
 			if(modelProperties.hasOwnProperty(propertyName)){
 				var propObj = modelProperties[propertyName].template;
-
 				if(propObj !== undefined){
 					propObj.key = propertyName;
 					//also add the validation to the object..
@@ -465,13 +464,43 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 								newValidationObj.messages[validationName] = validationMessages;
 							}
 						}
-
 					}catch(err){
 						// Do nothing
 						// Validation is not defined in the model definition
 					}
 
 					schema.fields.push(propObj);
+				}
+			}
+		}//for-in
+
+
+        var modelRelation = modelObj.definition.settings.relations;
+        for(var relationName in modelRelation){
+			if(modelRelation.hasOwnProperty(relationName)){
+				var relationObj = modelProperties[relationName].template;
+				if(relationObj !== undefined){
+					relationObj.key = relationName;
+					//also add the validation to the object..
+					try{
+						var validationRules = validationObj.rules[relationName];
+						var validationMessages = validationObj.messages[relationName];
+
+						if(relationObj.templateOptions && validationRules){
+							if(relationObj.templateOptions.id){
+								var validationName = relationObj.templateOptions.id;
+								//Get the validation object..
+								newValidationObj.rules[validationName] = validationRules;
+								newValidationObj.messages[validationName] = validationMessages;
+							}
+						}
+
+					}catch(err){
+						// Do nothing
+						// Validation is not defined in the model definition
+					}
+
+					schema.fields.push(relationObj);
 				}
 			}
 		}//for-in

@@ -7,11 +7,12 @@
     <div ng-if="!hide" style="margin-top:10px;">
         <div class="row" ng-if="!showCreate()"  style="text-align:center">
             <div ng-if="showSearch()" class="col-md-9 col-xs-12 cleanBtnCornerRight">
+                {{options.templateOptions.id}}
                 <autocomplete
                     placeholder="{{placeholder}}"
                     model-name="{{to.model}}"
                     search-property="{{to.searchProp}}"
-                    value="model[options.key]">
+                    value="model[options.key]" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}">
                 </autocomplete>
             </div>
             <div ng-if="to.create" class="AddNewButton col-md-3 col-xs-12 cleanBtnCornerLeft">
