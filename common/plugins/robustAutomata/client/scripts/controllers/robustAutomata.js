@@ -106,6 +106,26 @@ angular.module($snaphy.getModuleName())
         };
 
 
+        //Method for getting branch.io key..details..
+        $scope.getBranchIOKey = function(model){
+            console.log(model);
+            $scope.dialog = {
+                message: "id : " + model.id,
+                title: "Branch.IO link generation.",
+                onCancel: function() {
+                    /*Do nothing..*/
+                    //Reset the disloag bar..
+                    $scope.dialog.show = false;
+                },
+                onConfirm: function() {
+                    //Reset the disloag bar..
+                    $scope.dialog.show = false;
+                },
+                show: true
+            };
+        };
+
+
         $scope.addWhereQuery = function(model, columnName, filterType, schema){
             $scope.where = $scope.where  || {};
             if(filterType === "select"){

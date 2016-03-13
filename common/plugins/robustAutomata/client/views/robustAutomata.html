@@ -172,7 +172,7 @@
                                     st-sort="{{header}}">
                                     {{header | removeDot}}
                                 </th>
-                                <th ng-if="ifRecipeState()" class="text-center" style="width: 10%;">Get Branch.Io Key</th>
+                                <th ng-if="ifRecipeState()" style="width: 10%;">Get Branch.Io Key</th>
                                 <th class="text-center" style="width: 10%;">Actions</th>
                             </tr>
 
@@ -224,6 +224,7 @@
                                         ng-init="addInlineFilterResetMethod('#automataTable', 'related', inlineSearch, header)"
                                     />
                                 </th>
+                                 <th ng-if="ifRecipeState()" class="text-center" style="width: 10%;"></th>
                                 <!--<button ng-click="resetAll()" class="btn btn-minw btn-default pull-right" type="button">Reset</button>-->
                                 <th class="text-center" style="width: 10%;">
                                     <!-- Clear ui variables.. -->
@@ -318,7 +319,7 @@
                                    <!--================================BRANCH.IO INTREGATION FOR RECIPE========================================-->
                                 <!--Faciliates branch.io integration..-->
                                 <td ng-if="ifRecipeState()" >
-                                    <a style="cursor:pointer;" class="link-effect" ng-click="getBranchIOKey()" >Get Branch.io Key</a>
+                                    <a style="cursor:pointer;" class="link-effect" ng-click="getBranchIOKey(rowObject)" >Get Branch.io Key</a>
                                 </td>
 
                                 <!-- For adding table edit and delete options. -->
