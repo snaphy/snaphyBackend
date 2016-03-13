@@ -236,6 +236,10 @@
       "cuisines":{
         "required": true,
         "valueNotEquals": ""
+      },
+      "category":{
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
