@@ -59,8 +59,8 @@ angular.module($snaphy.getModuleName())
             //Scroll
             $timeout(function(){
                 App.layout('side_scroll_off');
-            }, 10)
-        }
+            }, 10);
+        };
 
 
 
@@ -249,7 +249,7 @@ angular.module($snaphy.getModuleName())
             }
 
             return null;
-        }
+        };
 
         //Example addInlineFilterResetMethod('#automataTable', 'number', inlineSearch, header)
         $scope.addInlineFilterResetMethod = function(tableId, type, modelObj, columnName){
