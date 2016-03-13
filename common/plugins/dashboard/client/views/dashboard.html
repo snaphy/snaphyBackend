@@ -22,27 +22,27 @@
   <!-- My Block -->
   <div class="block">
     <div class="block-header">
-      <ul class="block-options">
-        <li>
-          <button type="button"><i class="si si-settings"></i></button>
-        </li>
-        <li>
-          <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-        </li>
-        <li>
-          <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-        </li>
-        <li>
-          <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
-        </li>
-        <li>
-          <button type="button" data-toggle="block-option" data-action="close"><i class="si si-close"></i></button>
-        </li>
-      </ul>
       <h3 class="block-title">My Block</h3>
     </div>
     <div class="block-content">
-      <p>...</p>
+
+      <!--ADD WIDGETS -->
+      <!-- Page Content -->
+      <div  class="content">
+        <!-- Simple Vertical Tiles -->
+        <div class="row" >
+
+          <robust-widget-added  ng-cloak class="col-sm-6 col-lg-3"
+                                ng-repeat="widget in schema.widgets"
+                                label="{{widget.label}}"
+                                model="{{schema.model}}"
+                                icon="{{widget.icon}}"
+                                prop-obj="widget.propObj"
+                                model-values="displayed"
+                                fetch-locally="widget.fetchLocally">
+          </robust-widget-added>
+        </div>
+      </div>
     </div>
   </div>
   <!-- END My Block -->

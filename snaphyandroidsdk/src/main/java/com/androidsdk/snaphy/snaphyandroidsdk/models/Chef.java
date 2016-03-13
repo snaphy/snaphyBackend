@@ -187,6 +187,43 @@ public class Chef extends Model {
             
             
             
+                private double allowedRecipes;
+                /* Adding Getter and Setter methods */
+                public double getAllowedRecipes(){
+                    return allowedRecipes;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAllowedRecipes(double allowedRecipes){
+                    this.allowedRecipes = allowedRecipes;
+                    //Update hashMap value..
+                    hashMap.put("allowedRecipes", allowedRecipes);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+            
+                private String expiryDate;
+                /* Adding Getter and Setter methods */
+                public String getExpiryDate(){
+                    return expiryDate;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setExpiryDate(String expiryDate){
+                    this.expiryDate = expiryDate;
+                    //Update hashMap value..
+                    hashMap.put("expiryDate", expiryDate);
+                }
+
+            
+            
             
             
 
@@ -221,35 +258,35 @@ public class Chef extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Customer  customers ;
+                    private Customer  customer ;
 
-                    public Customer getCustomers() {
-                        return customers;
+                    public Customer getCustomer() {
+                        return customer;
                     }
 
-                    public void setCustomers(Customer customers) {
-                        this.customers = customers;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomers(Map<String, Object> customers) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customersRepository = new CustomerRepository();
-                        Customer customers1 = customersRepository.createObject(customers);
-                        setCustomers(customers1);
+                    public void setCustomer(Customer customer) {
+                        this.customer = customer;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomers(HashMap<String, Object> customers) {
+                    public void setCustomer(Map<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customersRepository = new CustomerRepository();
-                        Customer customers1 = customersRepository.createObject(customers);
-                        setCustomers(customers1);
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customers) {
-                        that.setCustomers(customers);
+                    public void addRelation(Customer customer) {
+                        that.setCustomer(customer);
                     }
 
 
@@ -270,7 +307,7 @@ public class Chef extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__customers( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -281,7 +318,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.get__customers( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        chefRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -315,136 +352,6 @@ public class Chef extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-
-                                    //Write the method here..
-                                    public void create__customers( Customer data,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                                        //Define methods here..
-                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        chefRepo.create__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Customer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void update__customers( Customer data,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                                        //Define methods here..
-                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        chefRepo.update__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Customer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroy__customers( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
-                                        
-                                        
-
-
-
-                                        chefRepo.destroy__customers( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
                          
                             
                          
@@ -453,10 +360,6 @@ public class Chef extends Model {
                             
                          
                             
-                        
-                        
-                        
-                        
                         
                         
                         
@@ -538,12 +441,6 @@ public class Chef extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
                             
                         
 
@@ -723,10 +620,6 @@ public class Chef extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
                         
                         
                         

@@ -68,31 +68,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "GET"), "Chef.prototype.__get__customers");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "POST"), "Chef.prototype.__create__customers");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "PUT"), "Chef.prototype.__update__customers");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customers", "DELETE"), "Chef.prototype.__destroy__customers");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customer", "GET"), "Chef.prototype.__get__customer");
                 
 
             
@@ -249,14 +225,6 @@ public class ChefRepository extends ModelRepository<Chef> {
         
             
         
-            
-        
-            
-        
-            
-        
-            
-        
         return contract;
     }
 
@@ -278,8 +246,8 @@ public class ChefRepository extends ModelRepository<Chef> {
 
     
         
-            //Method get__customers definition
-            public void get__customers(  String chefId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__customer definition
+            public void get__customer(  String chefId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -296,7 +264,7 @@ public class ChefRepository extends ModelRepository<Chef> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -322,145 +290,7 @@ public class ChefRepository extends ModelRepository<Chef> {
 
                 
 
-            }//Method get__customers definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__customers definition
-            public void create__customers(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chefId", chefId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__customers", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__customers definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__customers definition
-            public void update__customers(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chefId", chefId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__customers", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method update__customers definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__customers definition
-            public void destroy__customers(  String chefId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("chefId", chefId);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroy__customers", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroy__customers definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
@@ -1200,14 +1030,6 @@ public class ChefRepository extends ModelRepository<Chef> {
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

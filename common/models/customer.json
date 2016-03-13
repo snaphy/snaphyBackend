@@ -186,12 +186,7 @@
       "type": "hasMany",
       "model": "Recipe",
       "foreignKey": "",
-      "onCascadeDelete": true,
-      "templateOptions": {
-        "btnText": "Add Recipe",
-        "searchProp": "name",
-        "create": false
-      }
+      "onCascadeDelete": true
     },
     "comments": {
       "type": "hasMany",

@@ -167,6 +167,29 @@ public class RecipeIngredients extends Model {
         
             
             
+                private String dummyIngredientName;
+                /* Adding Getter and Setter methods */
+                public String getDummyIngredientName(){
+                    return dummyIngredientName;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDummyIngredientName(String dummyIngredientName){
+                    this.dummyIngredientName = dummyIngredientName;
+                    //Update hashMap value..
+                    hashMap.put("dummyIngredientName", dummyIngredientName);
+                }
+
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
             
             
             

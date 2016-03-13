@@ -96,6 +96,14 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/expiryNotice", "POST"), "adminEmail.expiryNotice");
+                
+
+            
+        
+            
+
+                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getMailSchema", "POST"), "adminEmail.getMailSchema");
                 
 
@@ -331,6 +339,51 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                 
 
             }//Method sendOrder definition ends here..
+
+            
+
+        
+    
+        
+            //Method expiryNotice definition
+            public void expiryNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("to", to);
+                
+                        hashMapObject.put("subject", subject);
+                
+                        hashMapObject.put("templateOptions", templateOptions);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("expiryNotice", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method expiryNotice definition ends here..
 
             
 

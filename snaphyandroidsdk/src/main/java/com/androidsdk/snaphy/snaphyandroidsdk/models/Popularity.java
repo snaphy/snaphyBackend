@@ -99,6 +99,15 @@ public class Popularity extends Model {
 
         
     
+        
+            
+            
+            
+            
+            
+
+        
+    
 
 
     
@@ -189,136 +198,6 @@ public class Popularity extends Model {
 
                                                     }
                                                 
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
-                                        //Define methods here..
-                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        popularityRepo.create__chefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<Chef> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Chef object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void update__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
-                                        //Define methods here..
-                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        popularityRepo.update__chefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<Chef> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Chef object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroy__chefs( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
-                                        
-                                        
-
-
-
-                                        popularityRepo.destroy__chefs( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
                                             
 
 

@@ -35,6 +35,11 @@
     "type": "",
     "url": ""
   },
+  "pluginDepedencies": {
+    "automata": "^1.0.0",
+    "login": "^1.0.0",
+    "robustAutomata":"^1.0.0"
+  },
   "devDependencies": {
    
   }
