@@ -93,6 +93,24 @@ angular.module($snaphy.getModuleName())
                 }
             };
 
+
+            $scope.getName = function(){
+                if($scope.to.name){
+                    return $scope.to.name;
+                }
+                return $scope.getId();
+            };
+
+
+            $scope.getId = function(){
+                if($scope.to.id){
+                    return $scope.to.id;
+                }
+                //fetch a random id..
+                $scope.to.id = getRandomInt();
+                return $scope.to.id;
+            };
+
         }
     });
 
@@ -178,13 +196,11 @@ angular.module($snaphy.getModuleName())
                     if (field.templateOptions && field.templateOptions.fields) {
                         addRandomIds(field.templateOptions.fields);
                     }
-                    field.id = field.id || (field.key + '_' + index + '_' + unique + getRandomInt(0, 9999));
+                    field.id = field.id || (field.key + '_' + index + '_' + unique + getRandomInt());
                 });
             }
 
-            function getRandomInt(min, max) {
-                return Math.floor(Math.random() * (max - min)) + min;
-            }
+
         }
     });
 
@@ -269,6 +285,15 @@ angular.module($snaphy.getModuleName())
                 };
 
             })();
+
+
+            $scope.getName = function(){
+                if($scope.to.name){
+                    return $scope.to.name;
+                }
+                return $scope.getId();
+            };
+
 
             $scope.addNew = methods.addNew;
             $scope.copyFields = methods.copyFields;
@@ -976,6 +1001,13 @@ angular.module($snaphy.getModuleName())
 
         }//link function..
     });
+
+
+    function getRandomInt() {
+        var min = 10000;
+        var max = 99999;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
 
 }]);

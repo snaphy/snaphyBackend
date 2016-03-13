@@ -441,7 +441,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		schema.fields   = [];
 		var modelObj    = app.models[modelName],
 		modelProperties = modelObj.definition.rawProperties,
-		validationObj  = modelObj.definition.settings.validationsBackend;
+		validationObj  = modelObj.definition.settings.validationsBackend,
+        complexValidation  = modelObj.definition.settings.complexValidation;
 		var newValidationObj = {
 			rules:{},
 			messages:{}
@@ -505,6 +506,25 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				}
 			}
 		}//for-in
+
+
+        //Now also add custom validation for facilitating array type validation or other complex validation..
+        //Just copy direct validation in this case..
+        if(complexValidation){
+            if(complexValidation.rules){
+                for(var key in complexValidation.rules){
+                    if(complexValidation.rules.hasOwnProperty(key)){
+                        newValidationObj.rules[key] = complexValidation.rules[key];
+                        if(complexValidation.messages[key]){
+                            newValidationObj.messages[key] = complexValidation.messages[key];
+                        }
+
+                    }
+                }
+            }
+        }
+
+
 		//Now adding validation obj..
 		schema.validations = newValidationObj;
 		return schema;

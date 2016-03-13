@@ -201,18 +201,6 @@
       }
     }
   ],
-  "onLoad": {
-    "addWhere": {
-      "where": {
-        "and": [
-          {
-            "status": "publish"
-          }
-        ]
-      },
-      "except": "admin"
-    }
-  },
   "validationsBackend": {
     "rules": {
       "name": {
@@ -268,6 +256,18 @@
       "category":{
         "required": "Please add a cuisines for this recipe",
         "valueNotEquals": "Please add a cuisines for this recipe"
+      }
+    }
+  },
+  "complexValidation":{
+    "rules": {
+      "steps[]": {
+        "required": true
+      }
+    },
+    "messages":{
+      "steps[]":{
+        "required": "Steps is required"
       }
     }
   },
@@ -440,10 +440,23 @@
               "key": "name",
               "templateOptions": {
                 "type": "text",
-                "label": "Enter recipes steps"
+                "label": "Enter recipes steps",
+                "name": "step[]"
               }
             }
-          ]
+          ],
+          "validation":{
+            "rules": {
+              "steps[]": {
+                "required": true
+              }
+            },
+            "messages":{
+              "steps[]":{
+                "required": "Steps is required"
+              }
+            }
+          }
         }
       }
     }

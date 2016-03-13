@@ -15,14 +15,14 @@
                                 placeholder="{{placeholder}}"
                                 model-name="{{to.model}}"
                                 search-property="{{to.searchProp}}"
-                                value="model[options.key]" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}">
+                                value="model[options.key]" name="{{getName()}}" id="{{getId()}}">
                             </autocomplete>
                             <autocomplete
                                 ng-if="!options.templateOptions.id"
                                 placeholder="{{placeholder}}"
                                 model-name="{{to.model}}"
                                 search-property="{{to.searchProp}}"
-                                value="model[options.key]" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}">
+                                value="model[options.key]" name="{{getName()}}" id="{{getId()}}">
                             </autocomplete>
                         </div>
                     </div>

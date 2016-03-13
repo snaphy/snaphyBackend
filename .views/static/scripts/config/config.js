@@ -14,7 +14,7 @@ angular.module($snaphy.getModuleName())
         template: '<div  class="form-group">' +
             '<div  ng-class="[options.templateOptions.colSize, options.templateOptions.color]">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<input  class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">' +
+            '<input  class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class" name="{{getName()}}" id="{{getId()}}" ng-model="model[options.key]">' +
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>' +
             '</div>' +
             '</div>' +
@@ -27,6 +27,23 @@ angular.module($snaphy.getModuleName())
                         scope.options.templateOptions.colSize = 'col-xs-12';
                     }
                 } //if
+
+                scope.getName = function(){
+                    if(scope.to.name){
+                        return scope.to.name;
+                    }
+                    return scope.getId();
+                };
+
+
+                scope.getId = function(){
+                    if(scope.to.id){
+                        return scope.to.id;
+                    }
+                    //fetch a random id..
+                    scope.to.id = getRandomInt();
+                    return scope.to.id;
+                };
             } //link function..
     });
 
@@ -37,7 +54,7 @@ angular.module($snaphy.getModuleName())
         template: '<div class="form-group">' +
             '<div ng-class="options.templateOptions.colSize">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" ng-model="model[options.key]" rows="{{options.templateOptions.row}}"></textarea>' +
+            '<textarea type="{{options.templateOptions.type}}" name="{{getName()}}" id="{{getId()}}"  ng-class="options.templateOptions.class" class="form-control" ng-model="model[options.key]" rows="{{options.templateOptions.row}}"></textarea>' +
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>' +
             '</div>' +
             '</div>' +
@@ -51,6 +68,23 @@ angular.module($snaphy.getModuleName())
             if ($scope.options.templateOptions.colSize === undefined) {
                 $scope.options.templateOptions.colSize = "col-sm-12";
             }
+
+            $scope.getName = function(){
+                if($scope.to.name){
+                    return $scope.to.name;
+                }
+                return $scope.getId();
+            };
+
+
+            $scope.getId = function(){
+                if($scope.to.id){
+                    return $scope.to.id;
+                }
+                //fetch a random id..
+                $scope.to.id = getRandomInt();
+                return $scope.to.id;
+            };
         }
     });
 
@@ -62,7 +96,7 @@ angular.module($snaphy.getModuleName())
         template: '<div class="form-group">' +
             '<div ng-class="options.templateOptions.colSize">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-change="convertToString(model[options.key])" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">' +
+            '<select type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class" name="{{getName()}}" id="{{getId()}}"  ng-change="convertToString(model[options.key])" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">' +
             '<option value=""></option>' +
             '<option value="{{option.id}}" ng-repeat="option in options.templateOptions.options">{{option.name}}</option>' +
             '</select>' +
@@ -106,6 +140,23 @@ angular.module($snaphy.getModuleName())
                     }
                 }
             );
+
+            $scope.getName = function(){
+                if($scope.to.name){
+                    return $scope.to.name;
+                }
+                return $scope.getId();
+            };
+
+
+            $scope.getId = function(){
+                if($scope.to.id){
+                    return $scope.to.id;
+                }
+                //fetch a random id..
+                $scope.to.id = getRandomInt();
+                return $scope.to.id;
+            };
         }
     });
 
@@ -117,7 +168,7 @@ angular.module($snaphy.getModuleName())
         template: '<div class="form-group">' +
             '<div ng-class="options.templateOptions.colSize">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}"   ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">' +
+            '<select type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class" name="{{getName()}}" id="{{getId()}}"   ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">' +
             '<option value=""></option>' +
             '<option value="{{option}}" ng-repeat="option in options.templateOptions.options">{{option | uppercase}}</option>' +
             '</select>' +
@@ -152,6 +203,7 @@ angular.module($snaphy.getModuleName())
                 });
             }
 
+
             $scope.$watch("model[options.key]",
                 function() {
                     if($scope.model[$scope.options.key] !== undefined){
@@ -160,8 +212,34 @@ angular.module($snaphy.getModuleName())
                     }
                 }
             );
+
+
+
+            $scope.getName = function(){
+                if($scope.to.name){
+                    return $scope.to.name;
+                }
+                return $scope.getId();
+            };
+
+
+            $scope.getId = function(){
+                if($scope.to.id){
+                    return $scope.to.id;
+                }
+                //fetch a random id..
+                $scope.to.id = getRandomInt();
+                return $scope.to.id;
+            };
         }
 
     });
+
+
+    function getRandomInt() {
+        var min = 10000;
+        var max = 99999;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
 }]); //End Run

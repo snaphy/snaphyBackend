@@ -16,7 +16,7 @@ angular.module($snaphy.getModuleName())
 
         var getValue = function(){
             return totalImageUpload;
-        }
+        };
 
         var incrementTracker = function(){
             totalImageUpload++;
