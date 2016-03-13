@@ -26,7 +26,8 @@ var settings = {
        "Chef",
        //"Popularity",
        /*'OrderDetail',*/
-       "Course"
+       "Course",
+       "ContactChef"
    ],
     "ignore":[
         "Order"

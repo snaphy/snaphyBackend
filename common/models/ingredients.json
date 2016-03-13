@@ -24,6 +24,10 @@
       "sellingMetrics": {
         "required": true,
         "valueNotEquals": ""
+      },
+      "ingredientCategory":{
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -42,6 +46,10 @@
       "sellingMetrics": {
         "required": "Selling Metrics is required",
         "valueNotEquals": "Please select a selling metrics."
+      },
+      "ingredientCategory":{
+        "required": "Ingredient Category is required",
+        "valueNotEquals": "Ingredient Category is required"
       }
     }
   },
@@ -73,6 +81,13 @@
   "tables": {
     "name": {
       "search": "text"
+    },
+    "ingredientCategory_name": {
+      "display": true,
+      "search": "related",
+      "relatedModel": "IngredientCategory",
+      "foreignKey": "ingredientCategoryId",
+      "propertyName": "name"
     },
     "sellingMetrics": {
       "search": "select",
@@ -192,8 +207,7 @@
       "type": "hasMany",
       "model": "Recipe",
       "foreignKey": "",
-      "through": "RecipeIngredients",
-      "id":"recipeId"
+      "through": "RecipeIngredients"
     }
   },
   "acls": [],

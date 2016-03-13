@@ -43,12 +43,7 @@
     "ingredients": {
       "type": "hasMany",
       "model": "Ingredients",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Ingredients",
-        "searchProp": "name",
-        "create": true
-      }
+      "foreignKey": ""
     }
   },
   "acls": [],

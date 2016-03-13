@@ -7,13 +7,7 @@
   },
   "tables": {
     "username": {
-      "search": "text",
-      "onClick": {
-        "state": "dashboard",
-        "params": {
-          "username": "username"
-        }
-      }
+      "search": "text"
     },
     "email": {
       "tag": {},
@@ -193,7 +187,8 @@
         "searchProp": "address",
         "create": true,
         "search": false,
-        "btnText": "Add Employee Details"
+        "btnText": "Add Employee Details",
+        "id":"employeeDetail"
       }
     }
   },

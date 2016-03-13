@@ -5,6 +5,64 @@
   "options": {
     "validateUpsert": true
   },
+
+  "validationsBackend": {
+    "rules": {
+      "address": {
+        "required": true,
+        "minlength": 5
+      },
+      "category":{
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "contactNumber": {
+        "required": true,
+        "minlength": "10",
+        "maxlength": "10",
+        "number": true
+      },
+      "employee":{
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "address": {
+        "required": "Address  is required",
+        "minlength": "Minimum permitted address length is atleast 5"
+      },
+      "contactNumber":{
+        "required": "Contact number is required",
+        "minlength": "Minimum length of contact number is 10",
+        "number": "Contact number must be a number"
+      },
+      "employee":{
+        "required": "Please add a employee for this contact",
+        "valueNotEquals": "Please add a employee for this contact"
+      }
+    }
+  },
+  "tables":{
+    "employee_email": {
+      "display": true,
+      "search": "related",
+      "relatedModel": "Employee",
+      "foreignKey": "employeeId",
+      "propertyName": "email"
+    },
+    "employee_date": {
+      "display": false
+    },
+    "contactNumber": {
+      "display": true,
+      "search": "text"
+    },
+    "address": {
+      "display": true,
+      "search": "text"
+    }
+  },
   "properties": {
     "address": {
       "type": "string",
@@ -19,7 +77,7 @@
       }
     },
     "contactNumber": {
-      "type": "number",
+      "type": "string",
       "required": true,
       "template": {
         "type": "input",
@@ -33,15 +91,16 @@
   },
   "validations": [],
   "relations": {
-    "employees": {
-      "type": "hasOne",
+    "employee": {
+      "type": "belongsTo",
       "model": "Employee",
       "foreignKey": "",
       "templateOptions": {
         "searchProp": "email",
         "create": false,
         "search": true,
-        "btnText": "Add Employee "
+        "btnText": "Add Employee ",
+        "id":"employeeName"
       }
     }
   },

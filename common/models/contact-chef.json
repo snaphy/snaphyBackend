@@ -5,15 +5,66 @@
   "options": {
     "validateUpsert": true
   },
+  "widgets": [
+    {
+      "label": "Total Chef Contacted",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    },
+    {
+      "label": "Chef contacted In A Week",
+      "fetchLocally": true,
+      "icon": "si-calendar",
+      "propObj": {
+        "type": "$week",
+        "where": {},
+        "dateProp": "added"
+      }
+    },
+    {
+      "label": "Chef contacted Today",
+      "icon": "si-graph",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$today",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "validationsBackend": {
+    "rules": {
+      "message": {
+        "required": true,
+        "minlength": 5
+      },
+      "customer":{
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "message": {
+        "required": "Message is required",
+        "minlength": "Message should be of atleast 5 length"
+      },
+      "customer":{
+        "required": "Customer is required",
+        "valueNotEquals": "Please add customer name"
+      }
+    }
+  },
   "tables": {
     "message": {
       "display": true
     },
     "customer_phoneNumber": {
       "display": false
-    },
-    "customer_firstName": {
-      "display": true
     },
     "customer_lastName": {
       "display": false
@@ -26,12 +77,44 @@
     },
     "customer_date": {
       "display": false
+    },
+    "customer_email":{
+      "display": true,
+      "search": "related",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "email"
+    },
+    "customer_firstName":{
+      "display": true,
+      "search": "related",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
+    },
+    "added": {
+      "date": true
     }
   },
   "properties": {
     "message": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter message",
+          "id": "contactChefMessage"
+        }
+      }
+    },
+    "added": {
+      "type": "date",
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
     }
   },
   "validations": [],
@@ -39,7 +122,13 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "create": false,
+        "id": "customerIdName"
+      }
     }
   },
   "acls": [],
