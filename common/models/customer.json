@@ -59,6 +59,12 @@
     },
     "lastName": {
       "search": "text"
+    },
+    "email":{
+      "search":"text"
+    },
+    "phoneNumber":{
+      "search":"text"
     }
   },
   "validationsBackend": {
@@ -223,9 +229,10 @@
       "templateOptions": {
         "btnText": "Add Courses to chefs",
         "searchProp": "name",
-        "create": true,
+        "create": false,
         "search": true,
-        "hide": false
+        "hide": false,
+        "courseId": "courseId"
       }
     },
     "facebookAccessToken": {
