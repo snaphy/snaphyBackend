@@ -108,20 +108,33 @@ angular.module($snaphy.getModuleName())
 
         //Method for getting branch.io key..details..
         $scope.getBranchIOKey = function(model){
-            console.log(model);
-            $scope.dialog = {
-                message: "id : " + model.id,
+            //console.log(model);
+            var imageUrl;
+            if(model.mainImage){
+                if(model.mainImage.url){
+                    if(model.mainImage.url.unSignedUrl){
+                        imageUrl = model.mainImage.url.unSignedUrl;
+                    }
+                }
+            }
+            var link = {};
+            link.id =  model.id;
+
+            if(imageUrl){
+                link.url = imageUrl;
+            }
+
+
+
+            $scope.info = {
                 title: "Branch.IO link generation.",
                 onCancel: function() {
                     /*Do nothing..*/
                     //Reset the disloag bar..
-                    $scope.dialog.show = false;
+                    $scope.info.show = false;
                 },
-                onConfirm: function() {
-                    //Reset the disloag bar..
-                    $scope.dialog.show = false;
-                },
-                show: true
+                show: true,
+                link: link
             };
         };
 

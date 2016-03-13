@@ -415,3 +415,19 @@
     on-confirm="dialog.onConfirm()"
     show-dialog="dialog.show">
 </snaphy-dialog>
+<!-- For showing dialog box -->
+
+
+<!--For displaying information related stuffs..-->
+<snaphy-info-box
+    table-title="{{info.title}}"
+    on-cancel="info.onCancel()"
+    show-dialog="info.show">
+    <ul>
+        <li><strong>id</strong>: <strong>{{info.link.id}}</strong></li>
+        <li ng-if="info.link.url"><strong>Recipe Url</strong>: <a href="{{info.link.url}}">{{info.link.url}}</a></li>
+    </ul>
+</snaphy-info-box>
+
+
+
