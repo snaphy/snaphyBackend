@@ -48,6 +48,9 @@ angular.module($snaphy.getModuleName())
             return new Date(str);
         };
 
+        $scope.ifRecipeState = function(){
+            return $scope.getCurrentState() === "Recipe";
+        };
 
 
         $scope.getCurrentState = function() {
