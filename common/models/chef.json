@@ -36,6 +36,27 @@
       ]
     }
   },
+  "complexValidation":{
+    "rules": {
+      "latitude": {
+        "required": true,
+        "number": true
+      },
+      "longitude": {
+        "required": true,
+        "number": true
+      }
+    },
+    "messages":{
+      "latitude":{
+        "required": "Latitude is required",
+        "number": "Latitude must be a number"
+      },
+      "longitude":{
+        "required": "Longitude is required"
+      }
+    }
+  },
   "tables": {
     "customer_phoneNumber": {
       "display": false
@@ -57,6 +78,9 @@
     },
     "geolocation": {
       "display": false
+    },
+    "address":{
+      "search":"text"
     },
     "added": {
       "date": true,
@@ -113,19 +137,38 @@
   "validationsBackend": {
     "rules": {
       "address": {
-        "required": true
-      },
-      "customer_email": {
         "required": true,
-        "email": true
+        "minlength": 5
+      },
+      "expiryDate":{
+        "required":true,
+        "date":true
+      },
+      "customer": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "allowedRecipes":{
+        "required":true,
+        "number":true
       }
     },
     "messages": {
       "address": {
-        "required": "Address is required"
+        "required": "Address is required",
+        "minlength": "Address should be atleast 5 word length"
       },
-      "customer_email": {
-        "required": "email is required"
+      "customer": {
+        "required": "Customer is required",
+        "valueNotEquals": "Address is required"
+      },
+      "expiryDate":{
+        "required":"Date is required",
+        "date":"Date must be valid mm/dd/yy"
+      },
+      "allowedRecipes":{
+        "required":"You must enter the total allowed recipes.",
+        "number":"Allowed recipes must be a number"
       }
     }
   },
@@ -213,7 +256,8 @@
         "type": "date",
         "templateOptions": {
           "label": "Add chefs expiry date.",
-          "placeholder": "Enter expiry date"
+          "placeholder": "Enter expiry date",
+          "id":"expiryDate"
         }
       }
     }
@@ -230,7 +274,8 @@
         "searchProp": "email",
         "create": false,
         "search": true,
-        "hide": false
+        "hide": false,
+        "id":"customer"
       }
     },
     "popularities": {
