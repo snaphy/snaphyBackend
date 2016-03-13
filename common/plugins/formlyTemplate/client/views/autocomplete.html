@@ -11,6 +11,14 @@
                     <div ng-class="options.templateOptions.colSize">
                         <div style="margin-left: 10px;" class="form-material" ng-class="options.templateOptions.color">
                             <autocomplete
+                                ng-if="options.templateOptions.id"
+                                placeholder="{{placeholder}}"
+                                model-name="{{to.model}}"
+                                search-property="{{to.searchProp}}"
+                                value="model[options.key]" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}">
+                            </autocomplete>
+                            <autocomplete
+                                ng-if="!options.templateOptions.id"
                                 placeholder="{{placeholder}}"
                                 model-name="{{to.model}}"
                                 search-property="{{to.searchProp}}"

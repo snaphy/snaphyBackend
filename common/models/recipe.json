@@ -228,6 +228,14 @@
       "customer":{
         "required": true,
         "valueNotEquals": ""
+      },
+      "recipeTags":{
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "cuisines":{
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -244,6 +252,18 @@
       "customer":{
         "required": "Please add chef of this recipe",
         "valueNotEquals": "Please add chef of this recipe"
+      },
+      "recipeTags":{
+        "required": "Please add recipe tags for this recipe",
+        "valueNotEquals": "Please add recipe tags for this recipe"
+      },
+      "cuisines":{
+        "required": "Please add a cuisines for this recipe",
+        "valueNotEquals": "Please add a cuisines for this recipe"
+      },
+      "category":{
+        "required": "Please add a cuisines for this recipe",
+        "valueNotEquals": "Please add a cuisines for this recipe"
       }
     }
   },
@@ -445,7 +465,8 @@
         "btnText": "Add Cuisines",
         "searchProp": "name",
         "create": false,
-        "search": true
+        "search": true,
+        "id":"RecipeCuisinesId"
       }
     },
     "category": {
@@ -455,7 +476,8 @@
       "templateOptions": {
         "btnText": "Add Category",
         "searchProp": "name",
-        "create": false
+        "create": false,
+        "id":"RecipeCategoryId"
       }
     },
     "comments": {
@@ -471,7 +493,8 @@
       "templateOptions": {
         "btnText": "Add Tags",
         "searchProp": "name",
-        "create": false
+        "create": false,
+        "id":"IDRecipeTags"
       }
     },
     "ingredients": {
