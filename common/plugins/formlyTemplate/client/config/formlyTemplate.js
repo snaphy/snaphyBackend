@@ -28,6 +28,15 @@ angular.module($snaphy.getModuleName())
             };
 
 
+            $scope.getLabel = function(){
+                if($scope.to.label){
+                    return $scope.to.label;
+                }else{
+                    return "Add " + $scope.to.model;
+                }
+            };
+
+
 
             $scope.isHidden = function(){
                 return $scope.hide;

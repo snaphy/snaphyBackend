@@ -3,7 +3,7 @@
         <strong  class="col-xs-12 col-md-12 showRelatedData"><small><a ng-click="toggleShow()">{{showOrHide()}} related data</a></small></strong>
     </div>
     <!-- <hr style="border-color:#ddd;"> -->
-    <strong style="margin-left:2px; margin-top:3px;"><small>Add {{to.model}}</small></strong>
+    <strong style="margin-left:2px; margin-top:3px;"><small>{{getLabel()}}</small></strong>
     <div ng-if="!hide" style="margin-top:10px;">
         <div class="row" ng-if="!showCreate()"  style="text-align:center">
             <div ng-if="showSearch()" class="col-md-9 col-xs-12 cleanBtnCornerRight">
