@@ -21,7 +21,7 @@
 <!-- Page Content -->
 <div snaphy-load-template  class="content">
   <!-- My Block -->
-  <div ng-repeat="schema in schemaArray" class="block">
+  <div ng-if="schema.widgets.length" ng-repeat="schema in schemaArray" class="block">
     <div class="block-header">
       <h3 class="block-title">{{schema.model}}</h3>
     </div>

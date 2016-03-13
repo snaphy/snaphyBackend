@@ -18,7 +18,6 @@ var settings = {
        "Cuisines",
        "IngredientCategory",
        "Ingredients",
-       "Priority",
        "RecipeIngredients",
        "RecipeTag",
        "Wishlist",
