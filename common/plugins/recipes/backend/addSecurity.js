@@ -150,11 +150,11 @@ var addWhere = function(where, ctx, next){
     //console.log(ctx.query.where);
     //console.log("================WHERE================");
     next();
-}
+};
 
 
 
 
 module.exports = {
     init: init
-}
+};
