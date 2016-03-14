@@ -273,9 +273,21 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "requestOtp"
+    },
+    {
       "principalType": "ROLE",
       "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "orderWithOTP"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
       "permission": "ALLOW"
     }
   ],
