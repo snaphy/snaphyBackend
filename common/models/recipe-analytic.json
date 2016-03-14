@@ -80,7 +80,7 @@
       "priority": {
         "required": true
       },
-      "recipe":{
+      "recipe": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -93,7 +93,7 @@
       "priority": {
         "required": "priority name is required"
       },
-      "recipe":{
+      "recipe": {
         "required": "Recipe is required",
         "valueNotEquals": "Recipe is required"
       }
@@ -231,7 +231,7 @@
         "create": false,
         "search": true,
         "hide": false,
-        "id":"RecipeId"
+        "id": "RecipeId"
       }
     }
   },

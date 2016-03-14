@@ -25,7 +25,7 @@
         "required": true,
         "valueNotEquals": ""
       },
-      "ingredientCategory":{
+      "ingredientCategory": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -47,7 +47,7 @@
         "required": "Selling Metrics is required",
         "valueNotEquals": "Please select a selling metrics."
       },
-      "ingredientCategory":{
+      "ingredientCategory": {
         "required": "Ingredient Category is required",
         "valueNotEquals": "Ingredient Category is required"
       }
@@ -200,7 +200,7 @@
         "btnText": "Add Ingredient Category",
         "searchProp": "name",
         "create": true,
-        "id":"ingredientsCategory"
+        "id": "ingredientsCategory"
       }
     },
     "recipes": {

@@ -181,11 +181,11 @@
         ],
         "valueNotEquals": ""
       },
-      "recipe":{
+      "recipe": {
         "required": true,
         "valueNotEquals": ""
       },
-      "customer":{
+      "customer": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -207,7 +207,7 @@
       },
       "customer": {
         "required": "Customer is required",
-        "valueNotEquals":  "Customer is required"
+        "valueNotEquals": "Customer is required"
       }
     }
   },
@@ -276,7 +276,7 @@
         "btnText": "Add Customer",
         "searchProp": "email",
         "create": false,
-        "id":"customerId"
+        "id": "customerId"
       }
     },
     "recipe": {
@@ -287,7 +287,7 @@
         "btnText": "Add Recipe",
         "searchProp": "name",
         "create": false,
-        "id":"recipeId"
+        "id": "recipeId"
       }
     }
   },

@@ -5,14 +5,13 @@
   "options": {
     "validateUpsert": true
   },
-
   "validationsBackend": {
     "rules": {
       "address": {
         "required": true,
         "minlength": 5
       },
-      "category":{
+      "category": {
         "required": true,
         "valueNotEquals": ""
       },
@@ -22,7 +21,7 @@
         "maxlength": "10",
         "number": true
       },
-      "employee":{
+      "employee": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -32,18 +31,18 @@
         "required": "Address  is required",
         "minlength": "Minimum permitted address length is atleast 5"
       },
-      "contactNumber":{
+      "contactNumber": {
         "required": "Contact number is required",
         "minlength": "Minimum length of contact number is 10",
         "number": "Contact number must be a number"
       },
-      "employee":{
+      "employee": {
         "required": "Please add a employee for this contact",
         "valueNotEquals": "Please add a employee for this contact"
       }
     }
   },
-  "tables":{
+  "tables": {
     "employee_email": {
       "display": true,
       "search": "related",
@@ -100,7 +99,7 @@
         "create": false,
         "search": true,
         "btnText": "Add Employee ",
-        "id":"employeeName"
+        "id": "employeeName"
       }
     }
   },

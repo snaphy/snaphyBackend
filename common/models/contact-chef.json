@@ -43,11 +43,11 @@
         "required": true,
         "minlength": 5
       },
-      "customer":{
+      "customer": {
         "required": true,
         "valueNotEquals": ""
       },
-      "chef":{
+      "chef": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -57,11 +57,11 @@
         "required": "Message is required",
         "minlength": "Message should be of atleast 5 length"
       },
-      "customer":{
+      "customer": {
         "required": "Customer is required",
         "valueNotEquals": "Please add customer name"
       },
-      "chef":{
+      "chef": {
         "required": "Chef name is required",
         "valueNotEquals": "Please add Chef name"
       }
@@ -86,14 +86,14 @@
     "customer_date": {
       "display": false
     },
-    "customer_email":{
+    "customer_email": {
       "display": true,
       "search": "related",
       "relatedModel": "Customer",
       "foreignKey": "customerId",
       "propertyName": "email"
     },
-    "customer_firstName":{
+    "customer_firstName": {
       "display": true,
       "search": "related",
       "relatedModel": "Customer",
@@ -115,14 +115,14 @@
     "chef_date": {
       "display": false
     },
-    "chef_email":{
+    "chef_email": {
       "display": true,
       "search": "related",
       "relatedModel": "Customer",
       "foreignKey": "customerId",
       "propertyName": "email"
     },
-    "chef_firstName":{
+    "chef_firstName": {
       "display": true,
       "search": "related",
       "relatedModel": "Customer",
@@ -163,7 +163,7 @@
       "templateOptions": {
         "btnText": "Add Chef",
         "searchProp": "email",
-        "label":"Add chef",
+        "label": "Add chef",
         "create": false,
         "id": "chefIdName"
       }

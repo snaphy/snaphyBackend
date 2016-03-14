@@ -22,7 +22,7 @@
   "hidden": [
     "recipes_"
   ],
-  "tables":{
+  "tables": {
     "name": {
       "search": "text",
       "tag": {}

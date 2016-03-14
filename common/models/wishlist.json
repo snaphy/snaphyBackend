@@ -7,13 +7,13 @@
   },
   "validationsBackend": {
     "rules": {
-      "customer":{
+      "customer": {
         "required": true,
         "valueNotEquals": ""
       }
     },
     "messages": {
-      "customer":{
+      "customer": {
         "required": "Please add chef of this recipe",
         "valueNotEquals": "Please add chef of this recipe"
       }

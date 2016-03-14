@@ -60,11 +60,11 @@
     "lastName": {
       "search": "text"
     },
-    "email":{
-      "search":"text"
+    "email": {
+      "search": "text"
     },
-    "phoneNumber":{
-      "search":"text"
+    "phoneNumber": {
+      "search": "text"
     }
   },
   "validationsBackend": {

@@ -188,7 +188,7 @@
         "create": true,
         "search": false,
         "btnText": "Add Employee Details",
-        "id":"employeeDetail"
+        "id": "employeeDetail"
       }
     }
   },

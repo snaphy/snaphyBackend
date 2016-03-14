@@ -111,11 +111,11 @@
         "maxlength": "7",
         "number": true
       },
-      "recipe":{
+      "recipe": {
         "required": true,
         "valueNotEquals": ""
       },
-      "ingredients":{
+      "ingredients": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -134,11 +134,11 @@
         "minlength": "Minimum permitted length is atleast 1",
         "number": "quantity must be a number"
       },
-      "recipe":{
+      "recipe": {
         "required": "Recipe name is required",
         "valueNotEquals": "Recipe name is required"
       },
-      "ingredients":{
+      "ingredients": {
         "required": "Ingredients name is required",
         "valueNotEquals": "Ingredients name is required"
       }
@@ -184,8 +184,8 @@
     "quantity": {
       "search": "number"
     },
-    "dummyIngredientName":{
-      "search":"text"
+    "dummyIngredientName": {
+      "search": "text"
     },
     "recipe_name": {
       "display": true,
@@ -201,7 +201,7 @@
       "foreignKey": "ingredientsId",
       "propertyName": "name"
     },
-    "recipe_added":{
+    "recipe_added": {
       "display": false
     },
     "halfQuantity": {
@@ -331,8 +331,8 @@
         }
       }
     },
-    "dummyIngredientName":{
-      "type":"string",
+    "dummyIngredientName": {
+      "type": "string",
       "template": {
         "type": "input",
         "templateOptions": {
@@ -353,7 +353,7 @@
         "btnText": "Add Recipe",
         "searchProp": "name",
         "create": false,
-        "id":"RecipeId"
+        "id": "RecipeId"
       }
     },
     "ingredients": {
@@ -364,7 +364,7 @@
         "btnText": "Add Ingredient",
         "searchProp": "name",
         "create": false,
-        "id":"IngredientId"
+        "id": "IngredientId"
       }
     },
     "orderDetails": {
