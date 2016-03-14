@@ -179,7 +179,7 @@
         "type": "singleFileUpload",
         "templateOptions": {
           "label": "Add customer profile image",
-          "containerName": "gruberr-recipes",
+          "containerName": "gruberr-recipes-snaphy",
           "containerModel": "Container",
           "bind": true
         }

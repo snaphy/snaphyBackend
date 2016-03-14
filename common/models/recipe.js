@@ -27,7 +27,7 @@ module.exports = function(Recipe) {
                             ctx.args.filter.where = JSON.parse(ctx.args.filter.where);
                         }
                     }catch(err){
-
+                        console.log(err);
                     }
 
                 }

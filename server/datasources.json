@@ -36,8 +36,8 @@
     "name": "Image",
     "connector": "loopback-component-storage",
     "provider": "amazon",
-    "key": "YkS4C7TOjaPbzq98fYyLX9Qra7rReNdh31mt76MB",
-    "keyId": "AKIAIONIZOZN6REIYVSQ",
+    "key": "TqrAWbNacHXhwOJg+i3/qodl3KbnW8A8eEy9KXB4",
+    "keyId": "AKIAJJF4NWPYZOH3E5UQ",
     "maxFileSize": "10485760"
   }
 }

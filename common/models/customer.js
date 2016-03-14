@@ -17,8 +17,9 @@ module.exports = function(Customer) {
                 if (ctx.args.filter.include) {
                     try{
                         if (typeof ctx.args.filter.include === "string") {
+                            //console.log(ctx.args.filter.include);
                             ctx.args.filter.include = JSON.parse(ctx.args.filter.include);
-                            console.log(ctx.args.filter.include);
+
                         }
                     }catch(err){
                         console.error(err);
