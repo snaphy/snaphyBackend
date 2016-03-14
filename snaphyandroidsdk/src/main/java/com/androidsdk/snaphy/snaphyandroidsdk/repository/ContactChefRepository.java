@@ -37,6 +37,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
+
 
 
 
@@ -57,6 +64,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
     public RestContract createContract() {
         RestContract contract = super.createContract();
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/chef", "GET"), "ContactChef.prototype.__get__chef");
+                
+
+            
         
             
 
@@ -209,6 +224,57 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
 
 
+    
+        
+            //Method get__chef definition
+            public void get__chef(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("contactChefId", contactChefId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__chef", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__chef definition ends here..
+
+            
+
+        
     
         
             //Method get__customer definition

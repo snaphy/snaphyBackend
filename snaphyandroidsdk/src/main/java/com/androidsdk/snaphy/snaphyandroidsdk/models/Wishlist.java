@@ -94,35 +94,35 @@ public class Wishlist extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Customer  customers ;
+                    private Customer  customer ;
 
-                    public Customer getCustomers() {
-                        return customers;
+                    public Customer getCustomer() {
+                        return customer;
                     }
 
-                    public void setCustomers(Customer customers) {
-                        this.customers = customers;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomers(Map<String, Object> customers) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customersRepository = new CustomerRepository();
-                        Customer customers1 = customersRepository.createObject(customers);
-                        setCustomers(customers1);
+                    public void setCustomer(Customer customer) {
+                        this.customer = customer;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomers(HashMap<String, Object> customers) {
+                    public void setCustomer(Map<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customersRepository = new CustomerRepository();
-                        Customer customers1 = customersRepository.createObject(customers);
-                        setCustomers(customers1);
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customers) {
-                        that.setCustomers(customers);
+                    public void addRelation(Customer customer) {
+                        that.setCustomer(customer);
                     }
 
 
@@ -143,7 +143,7 @@ public class Wishlist extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__customers( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
@@ -154,7 +154,7 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.get__customers( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        wishlistRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -173,136 +173,6 @@ public class Wishlist extends Model {
 
                                                     }
                                                 
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__customers( Customer data,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                                        //Define methods here..
-                                        final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        wishlistRepo.create__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Customer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void update__customers( Customer data,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                                        //Define methods here..
-                                        final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        wishlistRepo.update__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Customer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroy__customers( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
-                                        
-                                        
-
-
-
-                                        wishlistRepo.destroy__customers( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
                                             
 
 
@@ -479,12 +349,6 @@ public class Wishlist extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
                             
                         
 

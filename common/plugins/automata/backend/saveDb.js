@@ -269,6 +269,31 @@ var upsertHasOne = function(app, modelObj, relationData, dataInstance, relationN
             }
         }
     }
+
+    if (!_.isEmpty(relationData)) {
+        var mainModel = dataInstance[relationName].build(relationData);
+        modelObj.upsert(mainModel)
+            .then(function(result) {
+                //Now add the result to the dataInstance
+                 //Now add this relation to the parent as well..
+                 if (result) {
+                 var parentData = result[parentRelationName].build(dataInstance);
+                 //Now update the parent data..
+                 parentObj.upsert(parentData)
+                 .then(function() {
+                 console.log("Data Successfully updated in parent hasOne");
+                 })
+                 .catch(function(err) {
+                 console.log("error occured in hasOne parent upsert");
+                 console.error(err);
+                 });
+                 }
+            })
+            .catch(function(err) {
+                console.log("Error saving data");
+                callback(err);
+            });
+    }
 };
 
 

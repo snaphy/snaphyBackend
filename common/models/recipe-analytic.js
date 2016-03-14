@@ -20,6 +20,7 @@ module.exports = function(RecipeAnalytic) {
                         ctx.args.filter.order = JSON.parse(ctx.args.filter.order);
                     }catch(error){
                         //Do nothing..
+                        console.log(error);
                     }
 
                 }

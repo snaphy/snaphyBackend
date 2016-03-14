@@ -62,34 +62,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "GET"), "EmployeeDetails.prototype.__get__employees");
-                
-
-            
-        
-            
-
-                
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "POST"), "EmployeeDetails.prototype.__create__employees");
-                
-
-            
-        
-            
-
-                
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "PUT"), "EmployeeDetails.prototype.__update__employees");
-                
-
-            
-        
-            
-
-                
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employees", "DELETE"), "EmployeeDetails.prototype.__destroy__employees");
+                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employee", "GET"), "EmployeeDetails.prototype.__get__employee");
                 
 
             
@@ -245,8 +218,8 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
     
         
-            //Method get__employees definition
-            public void get__employees(  String employeeDetailsId,  Boolean refresh, final ObjectCallback<Employee> callback){
+            //Method get__employee definition
+            public void get__employee(  String employeeDetailsId,  Boolean refresh, final ObjectCallback<Employee> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -263,7 +236,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employees", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__employee", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -289,145 +262,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method get__employees definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__employees definition
-            public void create__employees(  String employeeDetailsId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__employees", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__employees definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__employees definition
-            public void update__employees(  String employeeDetailsId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__employees", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method update__employees definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__employees definition
-            public void destroy__employees(  String employeeDetailsId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroy__employees", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroy__employees definition ends here..
+            }//Method get__employee definition ends here..
 
             
 

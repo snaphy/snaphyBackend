@@ -304,14 +304,6 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             
         
-            
-        
-            
-        
-            
-        
-            
-        
         return contract;
     }
 
@@ -1512,14 +1504,6 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         
