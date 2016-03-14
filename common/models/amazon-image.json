@@ -60,13 +60,13 @@
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     }
   ],

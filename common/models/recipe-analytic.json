@@ -262,19 +262,26 @@
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$authenticated",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property":"save"
     },
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     }],
   "methods": {}

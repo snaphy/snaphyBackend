@@ -250,12 +250,6 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    },
-    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
@@ -267,21 +261,20 @@
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
-      "property": "logout"
+      "property": "loginUser"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "create"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "ALLOW",
-      "property": "create"
+      "principalId": "$everyone",
+      "permission": "ALLOW"
     },
     {
       "accessType": "EXECUTE",
