@@ -12,3 +12,13 @@ sudo rsync -avL --progress -e "ssh -i /usr/grube
 robins@robins-H61MLV3:~/snaphy$ sudo rsync -avL --exclude='.git/' --progress -e  "ssh -i /usr/gruberr.pem" snaphyBackend ec2-user@ec2-54-209-33-191.compute-1.amazonaws.com:apps/
 
 db.Recipe.aggregate([ {$lookup:{ from: "RecipeIngredients", localField: "id",  foreignField: "recipeId",    as: "RecipeList" } } ])
+
+
+
+This is the default index.html page that is distributed with nginx on the Amazon Linux AMI. It is located in /usr/share/nginx/html.
+
+You should now put your content in a location of your choice and edit the root configuration directive in the nginx configuration file /etc/nginx/nginx.conf.
+
+
+//For error like 403 forbidden nginx
+http://stackoverflow.com/questions/6795350/nginx-403-forbidden-for-all-files
