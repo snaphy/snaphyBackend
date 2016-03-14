@@ -721,6 +721,14 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             
         
+            
+        
+            
+        
+            
+        
+            
+        
         return contract;
     }
 
@@ -3967,6 +3975,14 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

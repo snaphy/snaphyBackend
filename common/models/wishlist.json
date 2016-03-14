@@ -7,7 +7,7 @@
   },
   "validationsBackend": {
     "rules": {
-      "customer": {
+      "customers": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -20,25 +20,25 @@
     }
   },
   "tables": {
-    "customer_phoneNumber": {
+    "customers_phoneNumber": {
       "display": false
     },
-    "customer_firstName": {
+    "customers_firstName": {
       "display": false
     },
-    "customer_lastName": {
+    "customers_lastName": {
       "display": false
     },
-    "customer_profilePic": {
+    "customers_profilePic": {
       "display": false
     },
-    "customer_password": {
+    "customers_password": {
       "display": false
     },
-    "customer_date": {
+    "customers_date": {
       "display": false
     },
-    "customer_email": {
+    "customers_email": {
       "display": true,
       "search": "related",
       "relatedModel": "Customer",
@@ -57,8 +57,8 @@
   },
   "validations": [],
   "relations": {
-    "customer": {
-      "type": "belongsTo",
+    "customers": {
+      "type": "hasOne",
       "model": "Customer",
       "foreignKey": "",
       "templateOptions": {

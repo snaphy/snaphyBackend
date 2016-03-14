@@ -68,7 +68,31 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customer", "GET"), "Wishlist.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "GET"), "Wishlist.prototype.__get__customers");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "POST"), "Wishlist.prototype.__create__customers");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "PUT"), "Wishlist.prototype.__update__customers");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:wishlistId/customers", "DELETE"), "Wishlist.prototype.__destroy__customers");
                 
 
             
@@ -330,8 +354,8 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String wishlistId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__customers definition
+            public void get__customers(  String wishlistId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -348,7 +372,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customers", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -374,7 +398,145 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
                 
 
-            }//Method get__customer definition ends here..
+            }//Method get__customers definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__customers definition
+            public void create__customers(  String wishlistId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("wishlistId", wishlistId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__customers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__customers definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__customers definition
+            public void update__customers(  String wishlistId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("wishlistId", wishlistId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__customers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method update__customers definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__customers definition
+            public void destroy__customers(  String wishlistId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("wishlistId", wishlistId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__customers", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__customers definition ends here..
 
             
 

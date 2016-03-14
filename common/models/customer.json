@@ -197,7 +197,8 @@
     "comments": {
       "type": "hasMany",
       "model": "Comments",
-      "foreignKey": ""
+      "foreignKey": "",
+      "onCascadeDelete": true
     },
     "wishlists": {
       "type": "hasOne",
