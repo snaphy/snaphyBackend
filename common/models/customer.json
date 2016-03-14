@@ -271,6 +271,12 @@
       "property": "create"
     },
     {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getAbsoluteSchema"
+    },
+    {
       "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$everyone",

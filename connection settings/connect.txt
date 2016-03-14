@@ -7,6 +7,8 @@ rsync -avL --progress -e "ssh -i /path/to/mykeypair.pem" \
        root@ec2-XX-XXX-XXX-XXX.us-west-2.compute.amazonaws.com:/var/www/html/
 sudo rsync -avL --progress -e "ssh -i /usr/gruberr.pem" snaphyBackend ec2-user@ec2-54-209-33-191.compute-1.amazonaws.com:apps/
 
-sudo rsync -avL --progress -e "ssh -i /usr/gruberobins@robins-H61MLV3:~/snaphy$ sudo rsync -avL --exclude='.git/' --progress -e  "ssh -i /usr/gruberr.pem" snaphyBackend ec2-user@ec2-54-209-33-191.compute-1.amazonaws.com:apps/
+sudo rsync -avL --progress -e "ssh -i /usr/grube
+
+robins@robins-H61MLV3:~/snaphy$ sudo rsync -avL --exclude='.git/' --progress -e  "ssh -i /usr/gruberr.pem" snaphyBackend ec2-user@ec2-54-209-33-191.compute-1.amazonaws.com:apps/
 
 db.Recipe.aggregate([ {$lookup:{ from: "RecipeIngredients", localField: "id",  foreignField: "recipeId",    as: "RecipeList" } } ])
