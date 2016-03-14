@@ -24,8 +24,8 @@
     "footerHook": []
   },
   "SECRET_CODE": "GRUBERR_ORDER_VERIFICATION",
-  "phoneNumber": "+919953242338",
-  "newOrderMail": "info@snaphy.com",
+  "phoneNumber": "+918860111340",
+  "newOrderMail": "gupta_yogesh24@yahoo.com",
   "databases": {
     "Recipe": "Recipe",
     "Comments": "Comments",
@@ -39,7 +39,7 @@
     "Customer": "Customer"
   },
   "company":{
-    "email": "rohitbasu2050@gmail.com",
+    "email": "gruberr2015@gmail.com",
     "name": "Gruberr",
     "website": "http://www.gruberr.com"
   },

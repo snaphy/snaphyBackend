@@ -7,7 +7,7 @@
 
 
 ##NOTE automata has been broken two places
-1) at Recipe state checking for branch.io key remove later.
+1) at Recipe state checking for branch.io key remove later. 
 
 ####Written by Robins Gupta
 

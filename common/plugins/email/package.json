@@ -31,7 +31,7 @@
         "emailModel": "adminEmail",
         "emailLabel": "Send Info",
         "label": "Send Mail To Users",
-        "from": "'Rohit Basu' <rohitbasu2050@gmail.com>",
+        "from": "'Food Recipe' <gruberr2015@gmail.com>",
         "assosiatedUsers": ["Customer"],
         "templates": {
             "sendNotice": {

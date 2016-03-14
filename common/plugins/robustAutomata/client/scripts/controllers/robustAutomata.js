@@ -29,6 +29,7 @@ angular.module($snaphy.getModuleName())
         var defaultTemplate = $snaphy.loadSettings('robustAutomata', "defaultTemplate");
         $scope.databasesList = $snaphy.loadSettings('robustAutomata', "loadDatabases");
         var ignoreList = $snaphy.loadSettings('robustAutomata', "ignore");
+        var errorList = $snaphy.loadSettings('robustAutomata', "failedSaveStatus");
         //Id for tablePanel
         var tablePanelId = $snaphy.loadSettings('robustAutomata', "tablePanelId");
         $snaphy.setDefaultTemplate(defaultTemplate);
@@ -213,7 +214,7 @@ angular.module($snaphy.getModuleName())
                             dbService.find({
                                 filter: filter
                             }, function(values){
-                                console.log(values);
+                                //console.log(values);
                                 //get the ids list..
                                 if(values){
                                     if(values.length){
@@ -250,7 +251,6 @@ angular.module($snaphy.getModuleName())
             }else{
 
             }
-            console.info("modifed where", $scope.where);
 
         };
 
@@ -717,7 +717,7 @@ angular.module($snaphy.getModuleName())
                         icon: 'fa fa-check',
                         align: 'right'
                     });
-                }, function() {
+                }, function(err) {
                     //console.log("Error saving data to server");
                     //console.error(respHeader);
                     if (update) {
@@ -729,13 +729,51 @@ angular.module($snaphy.getModuleName())
                         }
                     }
 
-                    //console.error(respHeader);
-                    SnaphyTemplate.notify({
-                        message: "Error saving data.",
-                        type: 'danger',
-                        icon: 'fa fa-times',
-                        align: 'right'
-                    });
+                    //THen show error with respect to error list..
+                    if(errorList){
+                        var foundObj;
+                        if(errorList.length){
+                            errorList.forEach(function(statusObj){
+                                //console.log(statusObj);
+                                if(statusObj.code.toString() === err.status.toString()){
+                                    foundObj = statusObj;
+                                }
+                            });
+                            if(foundObj){
+                                //console.error(respHeader);
+                                SnaphyTemplate.notify({
+                                    message: foundObj.message,
+                                    type: 'danger',
+                                    icon: 'fa fa-times',
+                                    align: 'right'
+                                });
+                            }else{
+                                //console.error(respHeader);
+                                SnaphyTemplate.notify({
+                                    message: "Error saving data.",
+                                    type: 'danger',
+                                    icon: 'fa fa-times',
+                                    align: 'right'
+                                });
+                            }
+                        }else{
+                            //console.error(respHeader);
+                            SnaphyTemplate.notify({
+                                message: "Error saving data.",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+                            });
+                        }
+                    }else{
+                        //console.error(respHeader);
+                        SnaphyTemplate.notify({
+                            message: "Error saving data.",
+                            type: 'danger',
+                            icon: 'fa fa-times',
+                            align: 'right'
+                        });
+                    }
                 });
 
                 //Now reset the form..
@@ -858,7 +896,7 @@ angular.module($snaphy.getModuleName())
                 Resource.getSchema(databaseName, function(schema) {
                     //Populate the schema..
                     $scope.schema = schema;
-                    console.log(schema);
+                    //console.log(schema);
                     $scope.where = $scope.where || {};
 
                     Resource.getPage(start, number, tableState, databaseName, schema, $scope.where).then(function(result) {
