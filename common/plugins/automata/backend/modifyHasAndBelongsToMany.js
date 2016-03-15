@@ -323,7 +323,7 @@ var disconnectEachData = function(app, modelObj, foreignKey, relationProp, relat
 
 var disconnect = function(app, modelObj, foreignKey, relationProp, relationName, modelName){
 
-    modelObj.prototype["__disconnect__" + relationName] = function(id, fk, callback) {
+    modelObj["__disconnect__" + relationName] = function(id, fk, callback) {
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
                 //Now adding main model instance..
@@ -369,7 +369,9 @@ var disconnect = function(app, modelObj, foreignKey, relationProp, relationName,
             });
     };
 
-    modelObj["__disconnect__" + relationName] = modelObj.prototype["__disconnect__" + relationName];
+    modelObj.prototype["__disconnect__" + relationName] = function(id, fk, callback){
+        modelObj["__disconnect__" + relationName](id, fk, callback);
+    };
 
     //Now registering the method `getSchema`
     modelObj.remoteMethod(
