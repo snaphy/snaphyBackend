@@ -63,38 +63,19 @@ var handleRelation = function(app, modelObj, foreignKey, relationProp, relationN
  */
 var connect = function(app, modelObj, foreignKey, relationProp, relationName, modelName){
 
-    /**
-     dataInstance[relationName].add(data)
-     .then(function(savedData) {
-          //Now save the instance of data in the dataInstance
-          console.log("Link successfully added to hasAndBelongsToMany relationship.");
-     })
-     .catch(function(err) {
-                callback(err);
-     });
-     */
-
-    //HERE fk is the list of foreign keys..
-    /**
-     *
-     * @param id
-     * @param fk ["String"] array of related data id that is about to be attached.
-     * @param callback
-     */
-    modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
-
+    modelObj["__connect__" + relationName] = function(id, fk, callback){
         modelObj.findById(id, {})
             .then(function(mainModelInstance){
                 //Now adding main model instance..
                 var relatedModel = app.models[relationProp.model];
                 //Find the list of related models..
                 relatedModel.find({
-                    where:{
-                        id: {
-                            inq: fk
+                        where:{
+                            id: {
+                                inq: fk
+                            }
                         }
-                    }
-                })
+                    })
                     .then(function(relatedModelInstanceArr){
                         var series = [];
                         //Now prepare a series function..
@@ -127,8 +108,30 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
             });
     };
 
+    /**
+     dataInstance[relationName].add(data)
+     .then(function(savedData) {
+          //Now save the instance of data in the dataInstance
+          console.log("Link successfully added to hasAndBelongsToMany relationship.");
+     })
+     .catch(function(err) {
+                callback(err);
+     });
+     */
 
-    modelObj["__connect__" + relationName] = modelObj.prototype["__connect__" + relationName];
+    //HERE fk is the list of foreign keys..
+    /**
+     *
+     * @param id
+     * @param fk ["String"] array of related data id that is about to be attached.
+     * @param callback
+     */
+    modelObj.prototype["__connect__" + relationName] = function(id, fk, callback){
+        modelObj["__connect__" + relationName](id, fk, callback);
+    };
+
+
+    //modelObj["__connect__" + relationName] = modelObj.prototype["__connect__" + relationName];
 
     //Now registering the method `getSchema`
     modelObj.remoteMethod(
@@ -137,28 +140,17 @@ var connect = function(app, modelObj, foreignKey, relationProp, relationName, mo
             "accepts": [{
                 "arg": "id",
                 "type": "any",
-                "required": true,
-                "http": {
-                    "source": "path"
-                },
                 "description": "PersistedModel id"
             }, {
                 "arg": "fk",
                 "type": "array",
-                "description": "Foreign key for cuisines",
-                "required": true,
-                "http": {
-                    "source": "path"
-                }
+                "description": "Foreign key for cuisines"
+
             }],
             "returns": [{
                 "arg": relationName.toLowerCase(),
                 "type": "object",
                 "root": true
-            }],
-            "routes": [{
-                "path": "/:id/connect/" +  relationName.toLowerCase()  + "/rel/:fk",
-                "verb": "put"
             }],
             description: "Connect two hasAndBelongMany Data together..."
         }
@@ -386,32 +378,21 @@ var disconnect = function(app, modelObj, foreignKey, relationProp, relationName,
             "accepts": [{
                 "arg": "id",
                 "type": "any",
-                "required": true,
-                "http": {
-                    "source": "path"
-                },
                 "description": "PersistedModel id"
             }, {
                 "arg": "fk",
                 "type": "array",
-                "description": "Foreign key for cuisines",
-                "required": true,
-                "http": {
-                    "source": "path"
-                }
+                "description": "Foreign key for cuisines"
             }],
             "returns": [{
                 "arg": relationName.toLowerCase(),
                 "type": "object",
                 "root": true
             }],
-            "routes": [{
-                "path": "/:id/connect/" +  relationName.toLowerCase()  + "/rel/:fk",
-                "verb": "put"
-            }],
             description: "Connect two hasAndBelongMany Data together..."
         }
     );
+
 };
 
 
