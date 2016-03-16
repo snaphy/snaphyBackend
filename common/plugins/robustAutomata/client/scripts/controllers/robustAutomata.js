@@ -182,7 +182,7 @@ angular.module($snaphy.getModuleName())
                 $scope.refreshData();
             }
             else if (filterType === "date") {
-                console.log("select", columnName, model);
+                //console.log("select", columnName, model);
                 if(model){
                     //TODO CHANGE HERE TO NOT RESET EVERYTIME..
                     $scope.where.and = [];

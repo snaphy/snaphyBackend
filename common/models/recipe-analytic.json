@@ -135,6 +135,9 @@
     "recipes_added": {
       "display": false
     },
+    "status":{
+      "display": false
+    },
     "recipes_name": {
       "display": true,
       "search": "related",
@@ -193,6 +196,12 @@
         "type": "dummy"
       }
     },
+    "status": {
+      "type": "string",
+      "template": {
+        "type": "dummy"
+      }
+    },
     "totalComment": {
       "type": "number",
       "default": 0,
@@ -219,6 +228,7 @@
     }
   },
   "validations": [],
+  "hidden": ["status"],
   "relations": {
     "recipes": {
       "type": "hasOne",
