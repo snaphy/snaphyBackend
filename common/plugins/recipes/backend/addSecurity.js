@@ -34,7 +34,7 @@ var addModelSecurity = function(server, databaseObj, helper, packageObj, verifyR
         //adding security..
         addOnLoadSecurity(server, Model.modelName, verifyRole);
     });
-}
+};
 
 var addOnLoadSecurity = function(app, modelName, verifyRole) {
     var modelObj = app.models[modelName];

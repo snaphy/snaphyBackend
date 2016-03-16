@@ -148,36 +148,38 @@ var init = function(server, databaseObj, helper, packageObj) {
                     var averageRating = 0;
                     var totalComment = 0;
                     if(ctx.isNewInstance){
-                        //Now calculate the average ratings..
-                        var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating));
-                        databaseObj.Comments.count({recipeId: instance.recipeId, status: "publish"})
-                            .then(function(number){
-                                //now increment comment..
-                                totalComment  =  number + 1;
-                                //Now add this comment rating..
-                                if(instance.rating !== undefined){
-                                    totalRating = totalRating + parseInt(instance.rating);
-                                    //Now calculate average. rating..
-                                    averageRating = totalRating / totalComment;
-                                }//if
-                                //updateAttributes({name: 'value'}, cb)
-                                //Now save the data..
-                                recipeAnalyticObj.updateAttributes({averageRating: averageRating, totalComment: totalComment}, function(err, obj){
-                                    if(err){
-                                        console.error("Error in Recipe analytics total comment and rating incrementing..");
+                        if(instance.status !== "onhold" && instance.status !== "rejected"){
+                            //Now calculate the average ratings..
+                            var totalRating = (parseInt(recipeAnalyticObj.totalComment) * parseInt(recipeAnalyticObj.averageRating));
+                            databaseObj.Comments.count({recipeId: instance.recipeId, status: "publish"})
+                                .then(function(number){
+                                    //now increment comment..
+                                    totalComment  =  number;
+                                    //Now add this comment rating..
+                                    if(instance.rating !== undefined){
+                                        totalRating = totalRating + parseInt(instance.rating);
+                                        //Now calculate average. rating..
+                                        averageRating = totalRating / totalComment;
+                                    }//if
+                                    //updateAttributes({name: 'value'}, cb)
+                                    //Now save the data..
+                                    recipeAnalyticObj.updateAttributes({averageRating: averageRating, totalComment: totalComment}, function(err, obj){
+                                        if(err){
+                                            console.error("Error in Recipe analytics total comment and rating incrementing..");
 
-                                    }else{
-                                        //done incrementing value..
-                                        console.log("Avg ratings updated for new .");
-                                    }
+                                        }else{
+                                            //done incrementing value..
+                                            console.log("Avg ratings updated for new .");
+                                        }
+                                    });
+                                })
+                                .catch(function(err){
+                                    console.error(err);
                                 });
+                        }else{
+                            //Do nothing in this case..
 
-                            })
-                            .catch(function(err){
-                                console.error(err);
-                            });
-
-
+                        }
                     }else{
                         //First find the previous value..
                         databaseObj.Comments.findById(instance.id, {})

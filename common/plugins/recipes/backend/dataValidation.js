@@ -103,10 +103,11 @@ var checkChefLimit = function(Recipe, Chef, instance, server, next, callback){
                             callback();
                         }
                     }else{
-                        next(getErrorObj("Error given customer is not an authorized chef. Only Chef can upload recipes."));
+                        callback();
+                        //next(getErrorObj("Error given customer is not an authorized chef. Only Chef can upload recipes."));
                     }
                 }else{
-                    next(getErrorObj("Error given customer is not an authorized chef. Only Chef can upload recipes."));
+                    next(getErrorObj("Error given customer is not an authorized chef. Only Chef can upload recipes...."));
                 }
             })
             .catch(function(err){
