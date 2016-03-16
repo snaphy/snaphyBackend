@@ -25,7 +25,7 @@ module.exports = function(RecipeAnalytic) {
                         console.log(error);
                     }
                 }
-                if(ctx.args.filter.include){
+                /*if(ctx.args.filter.include){
                     //include recipe with only publish recipe..
                     ctx.args.filter.include = {
                         relation: "recipes",
@@ -36,7 +36,7 @@ module.exports = function(RecipeAnalytic) {
                         }
                     };
                     console.log(ctx.args.filter.include);
-                }
+                }*/
 
             }
         }

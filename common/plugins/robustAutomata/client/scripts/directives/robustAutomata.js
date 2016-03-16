@@ -513,7 +513,7 @@ angular.module($snaphy.getModuleName())
                         else {
                             //  Do nothing
                         }
-                        console.log(propObj.where);
+                        //console.log(propObj.where);
                         return propObj.where;
                     };
 
@@ -525,7 +525,7 @@ angular.module($snaphy.getModuleName())
                             where: where
                         }, function(value, responseHeaders) {
                             $timeout(function(){
-                                console.log(value);
+                                //console.log(value);
                                 //Now populate the value..
                                 scope.value = value.count;
                             });
