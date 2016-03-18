@@ -30,7 +30,8 @@
     "password": "12345",
     "name": "mongodb",
     "connector": "mongodb",
-    "user": "robins"
+    "user": "robins",
+    "connectionTimeout": 1000000
   },
   "Image": {
     "name": "Image",
