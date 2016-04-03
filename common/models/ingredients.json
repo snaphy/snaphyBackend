@@ -210,12 +210,13 @@
       "through": "RecipeIngredients"
     }
   },
-  "acls": [{
-    "accessType": "*",
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "DENY"
-  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
     {
       "accessType": "*",
       "principalType": "ROLE",
@@ -251,6 +252,7 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
-    }],
+    }
+  ],
   "methods": {}
 }

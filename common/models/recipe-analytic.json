@@ -135,7 +135,7 @@
     "recipes_added": {
       "display": false
     },
-    "status":{
+    "status": {
       "display": false
     },
     "recipes_name": {
@@ -163,6 +163,9 @@
       "search": "number"
     }
   },
+  "hidden": [
+    "status"
+  ],
   "properties": {
     "totalViews": {
       "type": "number",
@@ -228,7 +231,6 @@
     }
   },
   "validations": [],
-  "hidden": ["status"],
   "relations": {
     "recipes": {
       "type": "hasOne",
@@ -245,12 +247,13 @@
       }
     }
   },
-  "acls": [{
-    "accessType": "*",
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "DENY"
-  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
     {
       "accessType": "*",
       "principalType": "ROLE",
@@ -280,7 +283,7 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property":"save"
+      "property": "save"
     },
     {
       "accessType": "READ",
@@ -293,6 +296,7 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
-    }],
+    }
+  ],
   "methods": {}
 }
