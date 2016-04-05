@@ -1,3 +1,6 @@
 [submodule "common/plugins/fileUpload"]
 	path = common/plugins/fileUpload
 	url = https://github.com/snaphyPlugins/fileUpload
+[submodule "common/plugins/aboutUs"]
+	path = common/plugins/aboutUs
+	url = git@github.com:snaphyPlugins/aboutUs.git
