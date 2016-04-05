@@ -4,3 +4,6 @@
 [submodule "common/plugins/aboutUs"]
 	path = common/plugins/aboutUs
 	url = git@github.com:snaphyPlugins/aboutUs.git
+[submodule "common/plugins/angularSdk"]
+	path = common/plugins/angularSdk
+	url = git@github.com:snaphyPlugins/angularSdk
