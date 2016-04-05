@@ -1,0 +1,3 @@
+[submodule "common/plugins/fileUpload"]
+	path = common/plugins/fileUpload
+	url = https://github.com/snaphyPlugins/fileUpload
