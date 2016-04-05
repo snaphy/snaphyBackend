@@ -17,5 +17,3 @@
 coverage
 node_modules
 npm-debug.log
-common/plugins/fileUpload/.git
-common/plugins/fileUpload/.gitignore
