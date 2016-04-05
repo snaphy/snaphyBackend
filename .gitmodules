@@ -7,3 +7,36 @@
 [submodule "common/plugins/angularSdk"]
 	path = common/plugins/angularSdk
 	url = git@github.com:snaphyPlugins/angularSdk
+[submodule "common/plugins/automata"]
+	path = common/plugins/automata
+	url = git@github.com:snaphyPlugins/automata
+[submodule "common/plugins/dashboard"]
+	path = common/plugins/dashboard
+	url = git@github.com:snaphyPlugins/dashboard
+[submodule "common/plugins/email"]
+	path = common/plugins/email
+	url = git@github.com:snaphyPlugins/email
+[submodule "common/plugins/errorPages"]
+	path = common/plugins/errorPages
+	url = git@github.com:snaphyPlugins/errorPages
+[submodule "common/plugins/footer"]
+	path = common/plugins/footer
+	url = git@github.com:snaphyPlugins/footer
+[submodule "common/plugins/formlyTemplate"]
+	path = common/plugins/formlyTemplate
+	url = git@github.com:snaphyPlugins/formlyTemplate
+[submodule "common/plugins/JqueryValidate"]
+	path = common/plugins/JqueryValidate
+	url = https://github.com/snaphyPlugins/jqueryValidation
+[submodule "common/plugins/login"]
+	path = common/plugins/login
+	url = https://github.com/snaphyPlugins/login
+[submodule "common/plugins/multilogin"]
+	path = common/plugins/multilogin
+	url = https://github.com/snaphyPlugins/multilogin
+[submodule "common/plugins/recipes"]
+	path = common/plugins/recipes
+	url = https://github.com/snaphyPlugins/recipes
+[submodule "common/plugins/robustAutomata"]
+	path = common/plugins/robustAutomata
+	url = https://github.com/snaphyPlugins/robustAutomata
