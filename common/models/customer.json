@@ -253,12 +253,6 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
     },
@@ -301,6 +295,12 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "loginWithGoogle"
+    },
+    {
+        "accessType": "*",
+        "principalType": "ROLE",
+        "principalId": "admin",
+        "permission": "ALLOW"
     }
   ],
   "methods": {}
