@@ -22,3 +22,7 @@ You should now put your content in a location of your choice and edit the root c
 
 //For error like 403 forbidden nginx
 http://stackoverflow.com/questions/6795350/nginx-403-forbidden-for-all-files
+
+
+Import data..
+mongoexport --db drugcorner --collection traffic -u robins -p 12345 --out gruberr.json
