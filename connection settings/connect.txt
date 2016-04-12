@@ -26,3 +26,7 @@ http://stackoverflow.com/questions/6795350/nginx-403-forbidden-for-all-files
 
 Import data..
 mongoexport --db drugcorner --collection traffic -u robins -p 12345 --out gruberr.json
+
+ssh -i "/usr/gruberr.pem" ec2-user@ec2-54-255-166-216.ap-southeast-1.compute.amazonaws.com
+
+sudo rsync -avL --progress -e "ssh -i /usr/gruberr.pem" snaphyBackend ec2-user@ec2-54-255-166-216.ap-southeast-1.compute.amazonaws.com:apps/
