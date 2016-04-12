@@ -1,5 +1,8 @@
 amazon
 sudo ssh -i "/usr/gruberr.pem" ec2-user@ec2-54-209-33-191.compute-1.amazonaws.com
+
+sudo yum install ImageMagick
+
 cd fileUpload && npm install && bower install && cd ../
 
 rsync -avL --progress -e "ssh -i /path/to/mykeypair.pem" \
