@@ -109,7 +109,7 @@
   },
   "properties": {
     "date": {
-      "type": "string",
+      "type": "date",
       "defaultFn": "now",
       "template": {
         "type": "dummy"

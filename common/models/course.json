@@ -17,9 +17,13 @@
       "courseFees": {
         "number": true
       },
-      "customers_email": {
+      "description":{
+         "required": true,
+         "minlength": 5
+      },
+      "customer": {
         "required": true,
-        "email": true
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -30,11 +34,16 @@
       "courseDuration": {
         "required": "Course duration is required"
       },
+      "description":{
+         "required": "Course description is required",
+         "minlength": "Minimum length of course description is atleast 5"
+      },
       "courseFees": {
         "number": "Course fees must be in number."
       },
-      "customers_email": {
-        "required": "email is required"
+      "customer": {
+        "required": "email is required",
+        "valueNotEquals": "email is required"
       }
     }
   },
@@ -146,7 +155,8 @@
         "searchProp": "email",
         "create": false,
         "search": true,
-        "hide": false
+        "hide": false,
+        "id": "email_"
       }
     }
   },
