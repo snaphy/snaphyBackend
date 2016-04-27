@@ -285,6 +285,12 @@
       "property": "orderWithOTP"
     },
     {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "orderWithoutOTP"
+    },
+    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$everyone",
