@@ -17,9 +17,9 @@
       "courseFees": {
         "number": true
       },
-      "description":{
-         "required": true,
-         "minlength": 5
+      "description": {
+        "required": true,
+        "minlength": 5
       },
       "customer": {
         "required": true,
@@ -34,9 +34,9 @@
       "courseDuration": {
         "required": "Course duration is required"
       },
-      "description":{
-         "required": "Course description is required",
-         "minlength": "Minimum length of course description is atleast 5"
+      "description": {
+        "required": "Course description is required",
+        "minlength": "Minimum length of course description is atleast 5"
       },
       "courseFees": {
         "number": "Course fees must be in number."

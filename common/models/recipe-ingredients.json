@@ -80,16 +80,60 @@
           "id": 15
         },
         {
-          "name": "tsp",
+          "name": "teaspoon",
           "id": 16
         },
         {
-          "name": "tbsp",
+          "name": "tablespoon",
           "id": 17
         },
         {
           "name": "cup",
           "id": 18
+        },
+        {
+          "name": "as per taste",
+          "id": 19
+        },
+        {
+          "name": "as per mood",
+          "id": 20
+        },
+        {
+          "name":"as per choice",
+          "id":21
+        },
+        {
+          "name":"glass",
+          "id":22
+        },
+        {
+          "name":"ounce",
+          "id":23
+        },
+        {
+          "name":"chopped",
+          "id":24
+        },
+        {
+           "name":"slice",
+          "id":25
+        },
+        {
+          "name":"mixed",
+          "id":26
+        },
+        {
+          "name": "paste",
+          "id":27
+        },
+        {
+          "name":"paste",
+          "id":28
+        },
+        {
+          "name": "minced",
+          "id":29
         }
       ]
     }
@@ -239,9 +283,19 @@
         "ml",
         "lb",
         "oz",
-        "tsp",
-        "tbsp",
-        "cup"
+        "teaspoon",
+        "tablespoon",
+        "cup",
+        "as per taste",
+        "as per mood",
+        "as per choice",
+        "glass",
+        "ounce",
+        "chopped",
+        "slice",
+        "mixed",
+        "paste",
+        "minced"
       ]
     },
     "requiredQuantity": {
@@ -312,9 +366,19 @@
             "ml",
             "lb",
             "oz",
-            "tsp",
-            "tbsp",
-            "cup"
+            "teaspoon",
+            "tablespoon",
+            "cup",
+            "as per taste",
+            "as per mood",
+            "as per choice",
+            "glass",
+            "ounce",
+            "chopped",
+            "slice",
+            "mixed",
+            "paste",
+            "minced"
           ]
         }
       }
