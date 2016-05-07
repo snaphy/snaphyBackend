@@ -65,7 +65,7 @@
         },
         {
           "name": "cl",
-          "id": "12"
+          "id": 12
         },
         {
           "name": "ml",
@@ -116,24 +116,20 @@
           "id":24
         },
         {
-           "name":"slice",
+          "name":"mixed",
           "id":25
         },
         {
-          "name":"mixed",
+          "name": "paste",
           "id":26
         },
         {
-          "name": "paste",
+          "name":"paste",
           "id":27
         },
         {
-          "name":"paste",
-          "id":28
-        },
-        {
           "name": "minced",
-          "id":29
+          "id":28
         }
       ]
     }
@@ -292,7 +288,6 @@
         "glass",
         "ounce",
         "chopped",
-        "slice",
         "mixed",
         "paste",
         "minced"
@@ -375,7 +370,6 @@
             "glass",
             "ounce",
             "chopped",
-            "slice",
             "mixed",
             "paste",
             "minced"
