@@ -1,6 +1,6 @@
 module.exports = function(Recipe) {
     Recipe.observe('before save', function(ctx, next) {
-
+        console.log("Recipe is getting saved: " + ctx.instance);
         if (ctx.isNewInstance){
             //Add default status value..
             if (ctx.instance) {
