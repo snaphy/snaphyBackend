@@ -55,8 +55,7 @@ module.exports = function(Customer) {
     if(!credentials.ttl){
           credentials.ttl = 31536000;  
     }
-    console.log("I am here\n\n", credentials);
-
+    
 
     var self = this;
     if (typeof include === 'function') {
