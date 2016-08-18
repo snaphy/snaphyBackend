@@ -11,8 +11,7 @@ module.exports = function(Comments) {
 
 
     Comments.updateComment = function(data, callback){
-    	console.log("Updating comment");
-        console.log(data);
+    
     	if (data === undefined) {
             callback('Error: model data or model cannot be empty');
             return false;
@@ -23,11 +22,10 @@ module.exports = function(Comments) {
         	if(err){
         		return callback(err);
         	}else{
-        		console.log("inside Updating comment");
-        		console.log(commentObj);
+        	
         		commentObj.updateAttributes({
-        			comment: commentObj.comment,
-        			rating: commentObj.rating
+        			comment: data.comment,
+        			rating: data.rating
         		}, function(err, successObj){
         			if(err){
         				return callback(err);
