@@ -52,6 +52,9 @@ module.exports = function(Customer) {
    */
 
   Customer.login = function(credentials, include, fn) {
+    if(!credentials.ttl){
+          credentials.ttl = 31536000;  
+    }
     console.log("I am here\n\n", credentials);
 
 
