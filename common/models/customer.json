@@ -290,7 +290,7 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "get__chefs"
+      "property": "__get__chefs"
     }
   ],
   "methods": {}
