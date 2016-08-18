@@ -11,12 +11,13 @@ module.exports = function(Comments) {
 
 
     Comments.updateComment = function(data, callback){
+    	console.log("Updating comment");
+        console.log(data);
     	if (data === undefined) {
             callback('Error: model data or model cannot be empty');
             return false;
         }
-        console.log("Updating comment");
-        console.log(data);
+  
         var app = this.app;
         Comments.findById(data.id, {}, function(err, commentObj){
         	if(err){
