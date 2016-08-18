@@ -31,6 +31,9 @@ module.exports = function(Customer) {
     });
 
 
+    
+
+
 /**
     Overridding the default method of login to handle the ..token validity to 1 year from 14 days.
 **/

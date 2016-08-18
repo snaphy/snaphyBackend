@@ -315,6 +315,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getAbsoluteSchema"
+    }, 
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "updateComment"
     },
     {
       "accessType": "WRITE",
