@@ -31,10 +31,6 @@ module.exports = function(Customer) {
     });
 
 
-    Customer.beforeRemote("*.*", function(ctx, user, next) {
-        console.log("Login request.");
-        console.log(ctx.body);
-        next();
-    });
+
 
 };
