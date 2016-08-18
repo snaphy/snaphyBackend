@@ -36,6 +36,12 @@ module.exports = function(Recipe) {
         next();
     });
 
+    Recipe.beforeRemote("**", function(ctx, user, next) {
+        console.log(ctx.req);
+        console.log("\n\n\t\t\tUser data", user);
+        next();
+    });
+
 
 
 
