@@ -15,12 +15,15 @@ module.exports = function(Comments) {
             callback('Error: model data or model cannot be empty');
             return false;
         }
-
+        console.log("Updating comment");
+        console.log(data);
         var app = this.app;
         Comments.findById(data.id, {}, function(err, commentObj){
         	if(err){
         		return callback(err);
         	}else{
+        		console.log("inside Updating comment");
+        		console.log(commentObj);
         		commentObj.updateAttributes({
         			comment: commentObj.comment,
         			rating: commentObj.rating
