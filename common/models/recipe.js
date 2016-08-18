@@ -37,6 +37,8 @@ module.exports = function(Recipe) {
     });
 
     Recipe.beforeRemote("*.*", function(ctx, user, next) {
+        console.log(ctx.req);
+        console.log("\n\n\n\n");
         console.log(ctx.req.body);
         console.log("Access Token: " + ctx.req.accessToken);
         console.log("\n\n\t\t\tUser data", user);
