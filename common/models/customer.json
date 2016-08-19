@@ -244,13 +244,11 @@
     }
   },
   "acls": [
-    
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "ALLOW",
-      "property": "loginWithFb"
+      "principalId": "staff",
+      "permission": "ALLOW"
     },
     {
       "accessType": "EXECUTE",
@@ -258,6 +256,20 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "loginUser"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "loginWithGoogle"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "loginWithFb"
     },
     {
       "accessType": "EXECUTE",
@@ -272,13 +284,7 @@
       "permission": "ALLOW",
       "property": "getAbsoluteSchema"
     },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "ALLOW",
-      "property": "loginWithGoogle"
-    },
+    
     {
       "accessType": "*",
       "principalType": "ROLE",
@@ -291,6 +297,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "__get__chefs"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "count"
     }
   ],
   "methods": {}

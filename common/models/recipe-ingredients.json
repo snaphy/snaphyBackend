@@ -300,7 +300,7 @@
   "properties": {
     "quantity": {
       "type": "number",
-      "required": true,
+      "default": 0,
       "template": {
         "type": "input",
         "templateOptions": {
