@@ -251,6 +251,12 @@
       "permission": "ALLOW"
     },
     {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
@@ -285,12 +291,6 @@
       "property": "getAbsoluteSchema"
     },
     
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
-    },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
