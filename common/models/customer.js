@@ -33,18 +33,9 @@ module.exports = function(Customer) {
 
 
     Customer.beforeRemote("findById", function(ctx, user, next) {
-        console.log("i am here");
-        console.log("ctx");
+        console.log(ctx.body);
         next();
     });
-
-    Customer.beforeRemote("*.findById", function(ctx, user, next) {
-        console.log("i am here too..");
-        console.log("ctx");
-        next();
-    });
-
-
 
 
     
