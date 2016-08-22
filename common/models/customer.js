@@ -32,7 +32,7 @@ module.exports = function(Customer) {
 
 
 
-    Customer.beforeRemote("*.*", function(ctx, user, next) {
+    Customer.beforeRemote("**", function(ctx, user, next) {
         console.log("ctx");
         next();
     });
