@@ -33,7 +33,7 @@ module.exports = function(Customer) {
 
 
     Customer.beforeRemote("findById", function(ctx, user, next) {
-        console.log(ctx.body);
+        console.log(ctx);
         next();
     });
 
