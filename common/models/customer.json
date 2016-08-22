@@ -266,14 +266,14 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "loginWithGoogle"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "loginWithFb"
     },
