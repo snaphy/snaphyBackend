@@ -271,14 +271,14 @@
       "property": "loginWithGoogle"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "loginWithFb"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
@@ -292,7 +292,7 @@
       "property": "create"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
