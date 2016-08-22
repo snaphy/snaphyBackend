@@ -297,6 +297,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "findCurrentUser"
+    }, 
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "verifyUser"
     },
     {
       "principalType": "ROLE",
@@ -305,21 +312,21 @@
       "property": "getAbsoluteSchema"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "staff",
       "permission": "ALLOW",
       "property": "find"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "staff",
       "permission": "ALLOW",
       "property": "findById"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "staff",
       "permission": "ALLOW",

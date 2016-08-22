@@ -32,7 +32,14 @@ module.exports = function(Customer) {
 
 
 
-    Customer.beforeRemote("**", function(ctx, user, next) {
+    Customer.beforeRemote("findById", function(ctx, user, next) {
+        console.log("i am here");
+        console.log("ctx");
+        next();
+    });
+
+    Customer.beforeRemote("*.findById", function(ctx, user, next) {
+        console.log("i am here too..");
         console.log("ctx");
         next();
     });
@@ -167,3 +174,34 @@ module.exports = function(Customer) {
   };
 
 };
+
+
+/*Customer.verifyUser = function(userId, callback){
+  console.log(userId);
+  Customer.findById(userId, {}, function(err, data){
+    if(err){
+      console.error(err);
+      return callback(err);
+    }
+    else{
+      callback(data);
+    }
+  })
+};
+
+
+Customer.remoteMethod(
+            'verifyUser',
+            {
+                description: 'Logins a user by authenticating it with google',
+                accepts: [
+                    { arg: 'userId', type: 'string', required: true, http: { source:'form'} }
+                ],
+                returns: {
+                    arg: 'customer', type: 'object', root: true
+                },
+                http: {verb: 'post'}
+            }
+
+        );
+*/
