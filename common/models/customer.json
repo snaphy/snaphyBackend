@@ -314,21 +314,21 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "staff",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "find"
     },
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "staff",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "findById"
     },
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "staff",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "findOne"
     },
